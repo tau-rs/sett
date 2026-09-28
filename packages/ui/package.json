@@ -1,19 +1,26 @@
 {
   "name": "@tau-rs/sett",
   "version": "0.1.0",
-  "description": "sett · Lit web components for tau-rs developer tools",
+  "description": "sett \u00b7 Lit web components for tau-rs developer tools",
   "license": "MIT",
   "type": "module",
-  "files": ["dist", "custom-elements.json"],
+  "files": [
+    "custom-elements.json",
+    "dist"
+  ],
   "main": "./dist/sett.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/sett.js" },
-    "./custom-elements.json": "./custom-elements.json"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/sett.js"
+    },
+    "./custom-elements.json": "./custom-elements.json",
+    "./editor.css": "./dist/editor.css"
   },
   "customElements": "custom-elements.json",
   "scripts": {
-    "build": "tsc -p tsconfig.json && vite build && cem analyze --litelement --globs 'src/**/*.ts' --exclude 'src/**/*.stories.ts' --exclude 'src/**/*.test.ts'",
+    "build": "tsc -p tsconfig.json && vite build && cp src/editor/editor.css dist/editor.css && cem analyze --litelement --globs 'src/**/*.ts' --exclude 'src/**/*.stories.ts' --exclude 'src/**/*.test.ts'",
     "test": "vitest run"
   },
   "dependencies": {

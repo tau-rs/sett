@@ -99,6 +99,27 @@
   --sett-session-pl-main: #8E3AA6;
   --sett-session-pl-sub: #B77BC8;
   --sett-session-pl-bg: #F3E7F7;
+  --sett-syntax-keyword: #005A95;
+  --sett-syntax-string: #126133;
+  --sett-syntax-constant: #774B15;
+  --sett-syntax-type: #00616C;
+  --sett-syntax-function: #893861;
+  --sett-syntax-macro: #844224;
+  --sett-syntax-attribute: #005E86;
+  --sett-syntax-comment: #8A9AA3;
+  --sett-editor-line: #E9EDEF;
+  --sett-editor-selection: #E3EEFB;
+  --sett-editor-occurrence: #E1E7EA;
+  --sett-editor-find: #FBF2DE;
+  --sett-editor-indent-guide: #E1E7EA;
+  --sett-editor-bracket: #CBD4D9;
+  --sett-editor-underline-error: #B23A33;
+  --sett-editor-underline-warning: #B87A0E;
+  --sett-editor-underline-hint: #1F5FA8;
+  --sett-editor-hint-bg: #E9EDEF;
+  --sett-editor-hint-ink: #8A9AA3;
+  --sett-editor-gutter-you: #1F5FA8;
+  --sett-editor-witness: #E3EEFB;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -152,6 +173,27 @@
     --sett-session-pl-main: #B266C8;
     --sett-session-pl-sub: #CD9BDB;
     --sett-session-pl-bg: #321A3A;
+    --sett-syntax-keyword: #79B5F1;
+    --sett-syntax-string: #7DBF8F;
+    --sett-syntax-constant: #DAA773;
+    --sett-syntax-type: #38C2CB;
+    --sett-syntax-function: #EA98BD;
+    --sett-syntax-macro: #E8A07F;
+    --sett-syntax-attribute: #46BEE5;
+    --sett-syntax-comment: #7C8C95;
+    --sett-editor-line: #22303A;
+    --sett-editor-selection: #1E3350;
+    --sett-editor-occurrence: #28353D;
+    --sett-editor-find: #3D3116;
+    --sett-editor-indent-guide: #28353D;
+    --sett-editor-bracket: #33434C;
+    --sett-editor-underline-error: #E0665C;
+    --sett-editor-underline-warning: #E0A63A;
+    --sett-editor-underline-hint: #5B95E0;
+    --sett-editor-hint-bg: #22303A;
+    --sett-editor-hint-ink: #7C8C95;
+    --sett-editor-gutter-you: #5B95E0;
+    --sett-editor-witness: #1E3350;
   }
 }
 [data-theme="dark"] {
@@ -205,6 +247,27 @@
   --sett-session-pl-main: #B266C8;
   --sett-session-pl-sub: #CD9BDB;
   --sett-session-pl-bg: #321A3A;
+  --sett-syntax-keyword: #79B5F1;
+  --sett-syntax-string: #7DBF8F;
+  --sett-syntax-constant: #DAA773;
+  --sett-syntax-type: #38C2CB;
+  --sett-syntax-function: #EA98BD;
+  --sett-syntax-macro: #E8A07F;
+  --sett-syntax-attribute: #46BEE5;
+  --sett-syntax-comment: #7C8C95;
+  --sett-editor-line: #22303A;
+  --sett-editor-selection: #1E3350;
+  --sett-editor-occurrence: #28353D;
+  --sett-editor-find: #3D3116;
+  --sett-editor-indent-guide: #28353D;
+  --sett-editor-bracket: #33434C;
+  --sett-editor-underline-error: #E0665C;
+  --sett-editor-underline-warning: #E0A63A;
+  --sett-editor-underline-hint: #5B95E0;
+  --sett-editor-hint-bg: #22303A;
+  --sett-editor-hint-ink: #7C8C95;
+  --sett-editor-gutter-you: #5B95E0;
+  --sett-editor-witness: #1E3350;
 }
 [data-theme="light"] {
   --sett-color-bg: #F3F5F6;
@@ -257,4 +320,25 @@
   --sett-session-pl-main: #8E3AA6;
   --sett-session-pl-sub: #B77BC8;
   --sett-session-pl-bg: #F3E7F7;
+  --sett-syntax-keyword: #005A95;
+  --sett-syntax-string: #126133;
+  --sett-syntax-constant: #774B15;
+  --sett-syntax-type: #00616C;
+  --sett-syntax-function: #893861;
+  --sett-syntax-macro: #844224;
+  --sett-syntax-attribute: #005E86;
+  --sett-syntax-comment: #8A9AA3;
+  --sett-editor-line: #E9EDEF;
+  --sett-editor-selection: #E3EEFB;
+  --sett-editor-occurrence: #E1E7EA;
+  --sett-editor-find: #FBF2DE;
+  --sett-editor-indent-guide: #E1E7EA;
+  --sett-editor-bracket: #CBD4D9;
+  --sett-editor-underline-error: #B23A33;
+  --sett-editor-underline-warning: #B87A0E;
+  --sett-editor-underline-hint: #1F5FA8;
+  --sett-editor-hint-bg: #E9EDEF;
+  --sett-editor-hint-ink: #8A9AA3;
+  --sett-editor-gutter-you: #1F5FA8;
+  --sett-editor-witness: #E3EEFB;
 }

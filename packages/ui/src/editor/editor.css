@@ -1,0 +1,61 @@
+/* sett · editor decoration layer. Plain CSS for Monaco/Theia decorations; tokens only.
+   Apply these class names through the editor's decoration API. */
+
+/* syntax (semantic token → class), for themes that map classes rather than JSON */
+.sett-syn-keyword   { color: var(--sett-syntax-keyword); }
+.sett-syn-string    { color: var(--sett-syntax-string); }
+.sett-syn-constant  { color: var(--sett-syntax-constant); }
+.sett-syn-type      { color: var(--sett-syntax-type); font-weight: var(--sett-font-weight-medium); }
+.sett-syn-function  { color: var(--sett-syntax-function); }
+.sett-syn-macro     { color: var(--sett-syntax-macro); }
+.sett-syn-attribute { color: var(--sett-syntax-attribute); }
+.sett-syn-comment   { color: var(--sett-syntax-comment); }
+.sett-syn-definition { color: var(--sett-syntax-keyword); font-weight: var(--sett-font-weight-medium); }
+
+/* surfaces */
+.sett-ed-line       { background: var(--sett-editor-line); }
+.sett-ed-selection  { background: var(--sett-editor-selection); }
+.sett-ed-occurrence { background: var(--sett-editor-occurrence); border-radius: var(--sett-radius-item); }
+.sett-ed-find       { background: var(--sett-editor-find); border-radius: var(--sett-radius-item); }
+.sett-ed-indent     { color: var(--sett-editor-indent-guide); }
+.sett-ed-bracket    { box-shadow: inset 0 0 0 var(--sett-stroke-hair) var(--sett-editor-bracket); border-radius: var(--sett-radius-item); }
+
+/* gutter: a change bar per line, in the author's colour */
+.sett-gutter-bar         { border-left: var(--sett-stroke-frame) solid transparent; }
+.sett-gutter-bar--you    { border-left-color: var(--sett-editor-gutter-you); }
+.sett-gutter-bar--session { border-left-color: var(--_session, var(--sett-session-yk-main)); }
+.sett-gutter-glyph { display: inline-block; width: var(--sett-space-3); text-align: center; font-family: var(--sett-font-sans); font-size: var(--sett-font-size-xs); color: var(--sett-color-mute); }
+.sett-gutter-glyph--finding::before { content: var(--sett-glyph-finding); color: var(--sett-color-bad); }
+.sett-gutter-glyph--warning::before { content: var(--sett-glyph-finding); color: var(--sett-color-sug); }
+.sett-gutter-glyph--planned::before { content: "\25C7"; color: var(--sett-color-sug); }
+.sett-gutter-glyph--witness::before { content: "\25C6"; color: var(--sett-color-sel); }
+
+/* spans */
+.sett-span-finding { text-decoration: underline wavy var(--sett-editor-underline-error); text-underline-offset: var(--sett-space-1); }
+.sett-span-warning { text-decoration: underline wavy var(--sett-editor-underline-warning); text-underline-offset: var(--sett-space-1); }
+.sett-span-hint    { text-decoration: underline dotted var(--sett-editor-underline-hint); text-underline-offset: var(--sett-space-1); }
+.sett-span-witness { background: var(--sett-editor-witness); border-radius: var(--sett-radius-item); }
+.sett-sym-external { color: var(--sett-color-ink2); font-style: italic; }
+
+/* hints: rust-analyzer's and arch's, one shape. The declaration's counts are right-aligned. */
+.sett-hint { display: inline-block; font-family: var(--sett-font-sans); font-size: var(--sett-font-size-xs); line-height: var(--sett-size-tag); padding: 0 var(--sett-space-1); border-radius: var(--sett-radius-item); background: var(--sett-editor-hint-bg); color: var(--sett-editor-hint-ink); margin: 0 var(--sett-space-1); vertical-align: baseline; white-space: nowrap; }
+.sett-hints { margin-left: auto; padding-left: var(--sett-space-4); font-family: var(--sett-font-sans); font-size: var(--sett-font-size-xs); color: var(--sett-color-mute); white-space: nowrap; }
+.sett-hints > * { margin-left: var(--sett-space-2); cursor: pointer; }
+.sett-hints > *:hover { color: var(--sett-color-ink2); text-decoration: underline; }
+.sett-hints .sett-hint--planned { color: var(--sett-color-sug); }
+.sett-hints .sett-hint--finding { color: var(--sett-color-bad); }
+.sett-hints .sett-hint--session { color: var(--_session, var(--sett-session-yk-main)); }
+.sett-hints .sett-hint--blame   { color: var(--sett-color-mute); }
+
+/* overview ruler marks */
+.sett-ruler-mark { position: absolute; left: var(--sett-space-1); right: var(--sett-space-1); height: var(--sett-space-1); border-radius: var(--sett-radius-item); }
+.sett-ruler-mark--error   { background: var(--sett-editor-underline-error); }
+.sett-ruler-mark--warning { background: var(--sett-editor-underline-warning); }
+.sett-ruler-mark--you     { background: var(--sett-editor-gutter-you); }
+.sett-ruler-mark--session { background: var(--_session, var(--sett-session-yk-main)); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* the one motion the editor adds: a ring on the hunk of the agent's last edit when it lands */
+  .sett-gutter-bar--landed { animation: sett-item-pulse var(--sett-motion-item-pulse) var(--sett-motion-ease) 1; }
+  @keyframes sett-item-pulse { from { box-shadow: 0 0 0 0 var(--_session, var(--sett-session-yk-main)); } to { box-shadow: 0 0 0 var(--sett-space-2) transparent; } }
+}

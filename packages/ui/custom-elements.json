@@ -41,6 +41,30 @@
         },
         {
           "kind": "js",
+          "name": "SettChip",
+          "declaration": {
+            "name": "SettChip",
+            "module": "./chip/sett-chip.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ChipKind",
+          "declaration": {
+            "name": "ChipKind",
+            "module": "./chip/sett-chip.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ChipState",
+          "declaration": {
+            "name": "ChipState",
+            "module": "./chip/sett-chip.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "sessionOrder",
           "declaration": {
             "name": "sessionOrder",
@@ -91,6 +115,169 @@
           "declaration": {
             "name": "sessionStyles",
             "module": "src/session.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/chip/sett-chip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent\ndoor first and bold, manual door second and plain (P-1); `me-first` swaps\nthem. A done chip keeps full contrast, its label turns ok with ✓ and it gains\na plain `dismiss` verb. Never animates.",
+          "name": "SettChip",
+          "cssParts": [
+            {
+              "description": "the kind label (a sett-tag)",
+              "name": "label"
+            },
+            {
+              "description": "the verbs group",
+              "name": "verbs"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the fact, lowercase",
+              "name": ""
+            },
+            {
+              "description": "a mono count or identifier after the fact, e.g. `· 2`",
+              "name": "count"
+            },
+            {
+              "description": "the agent door verb (an `<a>`)",
+              "name": "agent"
+            },
+            {
+              "description": "the manual door verb (an `<a>`)",
+              "name": "manual"
+            },
+            {
+              "description": "further verbs, in order",
+              "name": "verb"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "ChipKind"
+              },
+              "default": "'git'",
+              "description": "what the chip is about",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "ChipState"
+              },
+              "default": "'normal'",
+              "description": "normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓)",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the agent kind; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "meFirst",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the \"me first\" setting: manual door first and bold",
+              "attribute": "me-first",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "dismiss",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-dismiss",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the done chip's dismiss verb is used"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "ChipKind"
+              },
+              "default": "'git'",
+              "description": "what the chip is about",
+              "fieldName": "kind"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "ChipState"
+              },
+              "default": "'normal'",
+              "description": "normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓)",
+              "fieldName": "state"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the agent kind; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "me-first",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the \"me first\" setting: manual door first and bold",
+              "fieldName": "meFirst"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-chip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettChip",
+          "declaration": {
+            "name": "SettChip",
+            "module": "src/chip/sett-chip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-chip",
+          "declaration": {
+            "name": "SettChip",
+            "module": "src/chip/sett-chip.ts"
           }
         }
       ]

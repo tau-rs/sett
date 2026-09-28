@@ -41,7 +41,10 @@ describe('thread family', () => {
     expect(hb.shadowRoot.querySelector('textarea')).not.toBeNull();
     expect(hb.shadowRoot.querySelector('button').textContent).toBe('hand back');
     let detail: any; hb.addEventListener('sett-send', (e: any) => (detail = e.detail));
-    hb.shadowRoot.querySelector('textarea').value = 'moved the tx';
+    expect(hb.shadowRoot.querySelector('button').disabled).toBe(true);
+    const ta = hb.shadowRoot.querySelector('textarea');
+    ta.value = 'moved the tx'; ta.dispatchEvent(new Event('input')); await hb.updateComplete;
+    expect(hb.shadowRoot.querySelector('button').disabled).toBe(false);
     hb.shadowRoot.querySelector('button').click();
     expect(detail).toEqual({ text: 'moved the tx', mode: 'handback' });
   });

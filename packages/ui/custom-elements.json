@@ -334,6 +334,46 @@
             "name": "RowKind",
             "module": "./card/sett-card.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettButton",
+          "declaration": {
+            "name": "SettButton",
+            "module": "./button/sett-button.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettSplitButton",
+          "declaration": {
+            "name": "SettSplitButton",
+            "module": "./button/sett-button.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettGatedButton",
+          "declaration": {
+            "name": "SettGatedButton",
+            "module": "./button/sett-button.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ButtonVariant",
+          "declaration": {
+            "name": "ButtonVariant",
+            "module": "./button/sett-button.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ButtonSize",
+          "declaration": {
+            "name": "ButtonSize",
+            "module": "./button/sett-button.js"
+          }
         }
       ]
     },
@@ -437,6 +477,317 @@
           "declaration": {
             "name": "dotStyles",
             "module": "src/status.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/button/sett-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A button. Grid metrics, lowercase, tokens only. A disabled primary is a\ndashed blue outline at full contrast, never a faded fill.",
+          "name": "SettButton",
+          "cssParts": [
+            {
+              "description": "the native button",
+              "name": "button"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the label",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'default'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'md'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'default'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-button",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The planner's accept: the main verb plus a ▾ that opens a list (the driver)\nunder it, an anchored disclosure like the selector's.",
+          "name": "SettSplitButton",
+          "slots": [
+            {
+              "description": "the main verb",
+              "name": ""
+            },
+            {
+              "description": "a sett-menu shown while open",
+              "name": "menu"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "onDocClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "close"
+            },
+            {
+              "kind": "field",
+              "name": "toggle"
+            },
+            {
+              "kind": "field",
+              "name": "press"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "/ sett-close"
+            },
+            {
+              "name": "sett-close",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "description": "the main verb was pressed",
+              "name": "sett-press"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-split-button",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The merge: a primary button that stays visibly primary while blocked, with\nits reason under it. Blocked = dashed blue outline; reasons are pills, each a\nlink to what unblocks it.",
+          "name": "SettGatedButton",
+          "slots": [
+            {
+              "description": "the verb",
+              "name": ""
+            },
+            {
+              "description": "pills or words under the button",
+              "name": "reason"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "blocked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "blocked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "press",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "when open and pressed",
+              "name": "sett-press"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "blocked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "blocked"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-gated-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettButton",
+          "declaration": {
+            "name": "SettButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-button",
+          "declaration": {
+            "name": "SettButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettSplitButton",
+          "declaration": {
+            "name": "SettSplitButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-split-button",
+          "declaration": {
+            "name": "SettSplitButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettGatedButton",
+          "declaration": {
+            "name": "SettGatedButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-gated-button",
+          "declaration": {
+            "name": "SettGatedButton",
+            "module": "src/button/sett-button.ts"
           }
         }
       ]
@@ -970,6 +1321,95 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/pill/sett-pill.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Status pill: the one way a blocked or waiting state is written wherever its\nsubject is named (selector, menu row, gated button reason, session-card row).\nMono, 11 px, never animates.",
+          "name": "SettPill",
+          "cssParts": [
+            {
+              "description": "the pill box",
+              "name": "pill"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the label, lowercase",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "PillKind"
+              },
+              "default": "'default'",
+              "description": "colour role. `sug` amber for asks/planned/waiting, `bad`, `ok`, `sel`, or `session` (see `session`).",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id (yk tl mg cy ol sn pl) when kind is `session`; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "PillKind"
+              },
+              "default": "'default'",
+              "description": "colour role. `sug` amber for asks/planned/waiting, `bad`, `ok`, `sel`, or `session` (see `session`).",
+              "fieldName": "kind"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id (yk tl mg cy ol sn pl) when kind is `session`; unknown ids fall back to yk",
+              "fieldName": "session"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-pill",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettPill",
+          "declaration": {
+            "name": "SettPill",
+            "module": "src/pill/sett-pill.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-pill",
+          "declaration": {
+            "name": "SettPill",
+            "module": "src/pill/sett-pill.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/menu/sett-menu.ts",
       "declarations": [
         {
@@ -1204,95 +1644,6 @@
           "declaration": {
             "name": "SettMenuItem",
             "module": "src/menu/sett-menu.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/pill/sett-pill.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Status pill: the one way a blocked or waiting state is written wherever its\nsubject is named (selector, menu row, gated button reason, session-card row).\nMono, 11 px, never animates.",
-          "name": "SettPill",
-          "cssParts": [
-            {
-              "description": "the pill box",
-              "name": "pill"
-            }
-          ],
-          "slots": [
-            {
-              "description": "the label, lowercase",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "kind",
-              "type": {
-                "text": "PillKind"
-              },
-              "default": "'default'",
-              "description": "colour role. `sug` amber for asks/planned/waiting, `bad`, `ok`, `sel`, or `session` (see `session`).",
-              "attribute": "kind",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id (yk tl mg cy ol sn pl) when kind is `session`; unknown ids fall back to yk",
-              "attribute": "session",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "kind",
-              "type": {
-                "text": "PillKind"
-              },
-              "default": "'default'",
-              "description": "colour role. `sug` amber for asks/planned/waiting, `bad`, `ok`, `sel`, or `session` (see `session`).",
-              "fieldName": "kind"
-            },
-            {
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id (yk tl mg cy ol sn pl) when kind is `session`; unknown ids fall back to yk",
-              "fieldName": "session"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-pill",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettPill",
-          "declaration": {
-            "name": "SettPill",
-            "module": "src/pill/sett-pill.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-pill",
-          "declaration": {
-            "name": "SettPill",
-            "module": "src/pill/sett-pill.ts"
           }
         }
       ]
@@ -2015,7 +2366,7 @@
         {
           "kind": "variable",
           "name": "buttonStyles",
-          "default": "css` button { font: inherit; font-size: var(--sett-font-size-md); line-height: var(--sett-space-4); padding: var(--sett-space-1) var(--sett-space-2); color: var(--sett-color-ink); background: var(--sett-color-paper); border: var(--sett-stroke-hair) solid var(--sett-color-line); border-radius: var(--sett-radius-chip); cursor: pointer; text-transform: lowercase; white-space: nowrap; } button:hover { background: var(--sett-color-well); } button:focus-visible { outline: none; box-shadow: 0 0 0 var(--sett-stroke-lit) var(--sett-color-sel); } button.primary { background: var(--sett-color-sel); color: var(--sett-color-paper); border-color: var(--sett-color-sel); } button.quiet { border-color: transparent; background: transparent; color: var(--sett-color-ink2); } button:disabled { opacity: var(--sett-map-faded-opacity); cursor: not-allowed; } `",
+          "default": "css` button { font: inherit; font-size: var(--sett-font-size-md); line-height: var(--sett-space-4); padding: var(--sett-space-1) var(--sett-space-2); color: var(--sett-color-ink); background: var(--sett-color-paper); border: var(--sett-stroke-hair) solid var(--sett-color-line); border-radius: var(--sett-radius-chip); cursor: pointer; text-transform: lowercase; white-space: nowrap; } button:hover { background: var(--sett-color-well); } button:focus-visible { outline: none; box-shadow: 0 0 0 var(--sett-stroke-lit) var(--sett-color-sel); } button.primary { background: var(--sett-color-sel); color: var(--sett-color-paper); border-color: var(--sett-color-sel); } button.quiet { border-color: transparent; background: transparent; color: var(--sett-color-ink2); } button:disabled { cursor: not-allowed; background: transparent; border-style: dashed; color: var(--sett-color-mute); border-color: var(--sett-color-line); } button.primary:disabled { color: var(--sett-color-sel); border-color: var(--sett-color-sel); } `",
           "description": "buttons inside thread parts: grid metrics, lowercase, tokens only"
         }
       ],
@@ -2628,6 +2979,15 @@
                 "text": "string | undefined"
               },
               "attribute": "session"
+            },
+            {
+              "kind": "field",
+              "name": "empty",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "true"
             },
             {
               "kind": "method",

@@ -19,5 +19,6 @@ export const buttonStyles = css`
   button:focus-visible { outline: none; box-shadow: 0 0 0 var(--sett-stroke-lit) var(--sett-color-sel); }
   button.primary { background: var(--sett-color-sel); color: var(--sett-color-paper); border-color: var(--sett-color-sel); }
   button.quiet { border-color: transparent; background: transparent; color: var(--sett-color-ink2); }
-  button:disabled { opacity: var(--sett-map-faded-opacity); cursor: not-allowed; }
+  button:disabled { cursor: not-allowed; background: transparent; border-style: dashed; color: var(--sett-color-mute); border-color: var(--sett-color-line); }
+  button.primary:disabled { color: var(--sett-color-sel); border-color: var(--sett-color-sel); }
 `;

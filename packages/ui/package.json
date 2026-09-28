@@ -1,0 +1,12 @@
+{
+  "name": "@tau-rs/sett",
+  "version": "0.1.0",
+  "private": false,
+  "description": "sett · ui (Phase 2, not started)",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'ui: nothing to build yet'",
+    "test": "echo 'ui: nothing to test yet'"
+  }
+}

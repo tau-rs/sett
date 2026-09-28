@@ -1,0 +1,25 @@
+{
+  "name": "@tau-rs/sett-tokens",
+  "version": "0.1.0",
+  "description": "sett design tokens (DTCG 2025.10) built to css, ts and rust",
+  "license": "MIT",
+  "type": "module",
+  "files": ["dist", "src"],
+  "main": "./dist/tokens.js",
+  "types": "./dist/tokens.d.ts",
+  "exports": {
+    ".": { "types": "./dist/tokens.d.ts", "import": "./dist/tokens.js" },
+    "./sett.css": "./dist/sett.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./tokens.ts": "./dist/tokens.ts"
+  },
+  "scripts": {
+    "build": "node build.mjs && tsc -p tsconfig.build.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.5.5",
+    "typescript": "^5.9.0",
+    "vitest": "^5.0.2"
+  }
+}

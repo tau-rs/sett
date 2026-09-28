@@ -1,0 +1,11 @@
+[package]
+name = "sett-tokens"
+version = "0.1.0"
+edition = "2021"
+description = "sett design tokens as constants; the same numbers as sett.css"
+license = "MIT"
+repository = "https://github.com/tau-rs/sett"
+include = ["rust/**", "dist/tokens.rs", "Cargo.toml"]
+
+[lib]
+path = "rust/lib.rs"

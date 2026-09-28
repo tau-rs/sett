@@ -1,0 +1,17 @@
+{
+  "name": "sett",
+  "private": true,
+  "version": "0.1.0",
+  "description": "sett · design system for tau-rs developer tools",
+  "license": "MIT",
+  "packageManager": "pnpm@10.14.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test && pnpm lint:design && pnpm check:hex",
+    "lint:design": "design.md lint DESIGN.md",
+    "check:hex": "sh scripts/check-no-hex.sh"
+  },
+  "devDependencies": {
+    "@google/design.md": "^0.4.0"
+  }
+}

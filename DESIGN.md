@@ -78,7 +78,7 @@ sett styles developer tools that put a map or a document at the centre and keep 
 
 ## Motion
 
-Only three things move: the live frame (session gradient, 6 s rotate), the waiting frame (amber pulse, 1.6 s), and one 700 ms ring on a map item whose facts changed. `prefers-reduced-motion` stills all of them. No hover transitions, no fades, no slide-ins. Content never moves; only the border does.
+Only three things move: the live frame (session gradient, 6 s rotate), the waiting frame (amber pulse, 1.6 s), and one 700 ms ring on a map item whose facts changed. `prefers-reduced-motion` stills all of them. One more use of the waiting-frame pulse is allowed: the session dot pulses while its session is working, wherever that dot sits (selector, menu row, session card). Pills and tags never animate; the gradient never leaves the frame. No hover transitions, no fades, no slide-ins. Content never moves; only the border does.
 
 ## Rules the components encode
 

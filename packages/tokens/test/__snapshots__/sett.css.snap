@@ -30,6 +30,10 @@
   --sett-stroke-hair: 1px;
   --sett-stroke-lit: 1.6px;
   --sett-stroke-frame: 3px;
+  --sett-size-pill: 16px;
+  --sett-size-tag: 15px;
+  --sett-pad-pill: 7px;
+  --sett-pad-tag: 5px;
   --sett-motion-frame-rotate: 6s;
   --sett-motion-frame-pulse: 1.6s;
   --sett-motion-item-pulse: 700ms;

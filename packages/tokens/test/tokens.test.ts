@@ -27,7 +27,7 @@ describe('sett.css', () => {
 describe('tokens.json', () => {
   const j = JSON.parse(dist('tokens.json'));
   it('counts every token per source file', () => {
-    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 45, light: 50, dark: 50 });
+    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 49, light: 50, dark: 50 });
   });
   it('light and dark define the same paths in the same order', () => {
     expect(j.light.map((t: { name: string }) => t.name)).toEqual(j.dark.map((t: { name: string }) => t.name));

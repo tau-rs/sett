@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>arch · design system · V1</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== 0 · tokens (identical to arch-tokens.css) ===== */
+/* arch · design tokens · V1
+   generated from arch-tokens.json — edit the JSON, not this file.
+   Light is the default; dark applies with prefers-color-scheme or data-theme="dark".
+   Map values are duplicated in the JSON for canvas/WebGL; keep both in sync. */
+:root{
+  --sans:'IBM Plex Sans', system-ui, sans-serif;--mono:'IBM Plex Mono', ui-monospace, monospace;
+  --fs-xs:10.5px;--fs-sm:11px;--fs-md:11.5px;--fs-base:12px;--fs-lg:12.5px;--fs-xl:13px;--fs-h:14px;
+  --fs-map:10px;--lh-ui:1.45;--lh-code:1.65;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;
+  --r-item:3px;--r-chip:4px;--r-card:6px;--r-node:8px;--r-pane:10px;--r-pill:10px;
+  --w-hair:1px;--w-lit:1.6px;--w-frame:3px;
+  --t-frame:6s;--t-pulse:1.6s;--t-item:700ms;--t-zoom:220ms;--ease:cubic-bezier(.2,.7,.2,1);
+  --bg:#F3F5F6;--paper:#FFFFFF;--well:#E9EDEF;--ink:#17242B;--ink2:#4A5B64;--mute:#8A9AA3;--line:#CBD4D9;--line2:#E1E7EA;--sel:#1F5FA8;--selBg:#E3EEFB;--selInk:#0C447C;--ok:#2E7D5B;--okBg:#E3F2EA;--bad:#B23A33;--badBg:#FBE7E5;--sug:#B87A0E;--sugBg:#FBF2DE;--shadow:0 8px 24px rgba(0,0,0,.12);--map-paper:#F7F6F2;--map-grid:#EEECE6;--map-item:#F1EFE8;--map-itemStroke:#888780;--map-itemInk:#2C2C2A;--map-areaStroke:#B4B2A9;--map-areaInk:#5F5E5A;--map-link:#888780;--map-linkLit:#1F5FA8;--map-external:#E7E5DE;--map-fadedOpacity:0.3;--s-yk:#6B5BD2;--s-yk-sub:#9C8FE8;--s-yk-bg:#EEEBFB;--s-tl:#1D9E75;--s-tl-sub:#5FC3A3;--s-tl-bg:#E1F5EE;--s-mg:#B8378F;--s-mg-sub:#D57AB9;--s-mg-bg:#F9E6F3;--s-cy:#1B8FA6;--s-cy-sub:#62B9CB;--s-cy-bg:#E0F3F7;--s-ol:#6E8B1E;--s-ol-sub:#A3B95C;--s-ol-bg:#EEF3DC;--s-sn:#B0562B;--s-sn-sub:#D28E6E;--s-sn-bg:#F9EAE2;--s-pl:#8E3AA6;--s-pl-sub:#B77BC8;--s-pl-bg:#F3E7F7
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141B1F;--paper:#1B2429;--well:#22303A;--ink:#E6EDF0;--ink2:#B3C0C7;--mute:#7C8C95;--line:#33434C;--line2:#28353D;--sel:#5B95E0;--selBg:#1E3350;--selInk:#BFD8F7;--ok:#4DB388;--okBg:#1D3A2E;--bad:#E0665C;--badBg:#45231F;--sug:#E0A63A;--sugBg:#3D3116;--shadow:0 8px 24px rgba(0,0,0,.45);--map-paper:#1C1F22;--map-grid:#23272B;--map-item:#2A2D2B;--map-itemStroke:#6E6D66;--map-itemInk:#E6E3DA;--map-areaStroke:#4E4D47;--map-areaInk:#A6A49A;--map-link:#7A7972;--map-linkLit:#5B95E0;--map-external:#232624;--map-fadedOpacity:0.3;--s-yk:#9284E8;--s-yk-sub:#B6ABF2;--s-yk-bg:#2C2748;--s-tl:#3DBD92;--s-tl-sub:#7AD4B6;--s-tl-bg:#16352B;--s-mg:#D65FB0;--s-mg-sub:#E58FCB;--s-mg-bg:#3B1C31;--s-cy:#45B0C6;--s-cy-sub:#84CDDB;--s-cy-bg:#143036;--s-ol:#9DB53E;--s-ol-sub:#C0D27A;--s-ol-bg:#272F12;--s-sn:#D3784E;--s-sn-sub:#E3A88C;--s-sn-bg:#3A2218;--s-pl:#B266C8;--s-pl-sub:#CD9BDB;--s-pl-bg:#321A3A}}
+:root[data-theme="dark"]{--bg:#141B1F;--paper:#1B2429;--well:#22303A;--ink:#E6EDF0;--ink2:#B3C0C7;--mute:#7C8C95;--line:#33434C;--line2:#28353D;--sel:#5B95E0;--selBg:#1E3350;--selInk:#BFD8F7;--ok:#4DB388;--okBg:#1D3A2E;--bad:#E0665C;--badBg:#45231F;--sug:#E0A63A;--sugBg:#3D3116;--shadow:0 8px 24px rgba(0,0,0,.45);--map-paper:#1C1F22;--map-grid:#23272B;--map-item:#2A2D2B;--map-itemStroke:#6E6D66;--map-itemInk:#E6E3DA;--map-areaStroke:#4E4D47;--map-areaInk:#A6A49A;--map-link:#7A7972;--map-linkLit:#5B95E0;--map-external:#232624;--map-fadedOpacity:0.3;--s-yk:#9284E8;--s-yk-sub:#B6ABF2;--s-yk-bg:#2C2748;--s-tl:#3DBD92;--s-tl-sub:#7AD4B6;--s-tl-bg:#16352B;--s-mg:#D65FB0;--s-mg-sub:#E58FCB;--s-mg-bg:#3B1C31;--s-cy:#45B0C6;--s-cy-sub:#84CDDB;--s-cy-bg:#143036;--s-ol:#9DB53E;--s-ol-sub:#C0D27A;--s-ol-bg:#272F12;--s-sn:#D3784E;--s-sn-sub:#E3A88C;--s-sn-bg:#3A2218;--s-pl:#B266C8;--s-pl-sub:#CD9BDB;--s-pl-bg:#321A3A}
+
+/* the only motion in the product */
+@keyframes arch-frame-rotate{from{background-position:0% 50%}to{background-position:300% 50%}}
+@keyframes arch-frame-pulse{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes arch-item-pulse{0%{box-shadow:0 0 0 0 var(--pulse-color,var(--sug))}100%{box-shadow:0 0 0 8px transparent}}
+@media (prefers-reduced-motion:reduce){
+  .frame.live{animation:none;background:var(--frame-color,var(--s-yk))}
+  .frame.waiting::before{animation:none;opacity:1}
+}
+
+
+/* ===== 1 · base ===== */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:var(--fs-xl);line-height:var(--lh-ui)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 52px)}
+a{color:var(--sel)}
+button{font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:4px 10px;cursor:pointer;line-height:1.3}
+button:hover{background:var(--well)}
+button:focus-visible,[tabindex]:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--sel);outline-offset:1px}
+button.primary{background:var(--sel);color:#fff;border-color:var(--sel)}button.primary:hover{filter:brightness(1.08)}
+button.quiet{border-color:transparent;background:transparent;color:var(--ink2)}
+button.sm{font-size:var(--fs-md);padding:2px 8px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.m{font-family:var(--mono)}
+.mute{color:var(--mute)}.ink2{color:var(--ink2)}
+.sep{color:var(--mute)}
+input,textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:5px 8px}
+textarea{resize:none}
+.dot{width:8px;height:8px;border-radius:4px;display:inline-block;flex:none;background:var(--mute)}
+.dot.ok{background:var(--ok)}.dot.sug{background:var(--sug)}.dot.sel{background:var(--sel)}.dot.bad{background:var(--bad)}.dot.s{background:var(--sc,var(--s-yk))}
+/* status pill: the one way a blocked/waiting state is written wherever its subject is named */
+.pill{display:inline-block;font-family:var(--mono);font-size:var(--fs-sm);border:1px solid var(--line);border-radius:var(--r-pill);padding:0 7px;line-height:16px;color:var(--ink2);white-space:nowrap}
+.pill.a{background:var(--sugBg);border-color:transparent;color:var(--sug)}
+.pill.b{background:var(--badBg);border-color:transparent;color:var(--bad)}
+.pill.g{background:var(--okBg);border-color:transparent;color:var(--ok)}
+.pill.c{background:var(--selBg);border-color:transparent;color:var(--sel)}
+.pill.s{background:var(--sc-bg,var(--s-yk-bg));border-color:transparent;color:var(--sc,var(--s-yk))}
+/* small badge / tag (10.5 px, radius 3) */
+.tag{font-family:var(--sans);font-size:var(--fs-xs);padding:0 5px;border-radius:var(--r-item);background:var(--well);color:var(--ink2);line-height:15px;white-space:nowrap}
+.tag.a{background:var(--sugBg);color:var(--sug)}.tag.b{background:var(--badBg);color:var(--bad)}.tag.g{background:var(--okBg);color:var(--ok)}.tag.c{background:var(--selBg);color:var(--sel)}.tag.s{background:var(--sc-bg,var(--s-yk-bg));color:var(--sc,var(--s-yk))}
+.tag.m{font-family:var(--mono)}
+
+/* ===== 2 · chip (Actions strip) ===== */
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:var(--r-chip);padding:2px 8px;font-size:var(--fs-base);background:var(--paper);line-height:18px;white-space:nowrap}
+.chip .k{font-size:var(--fs-xs);padding:0 5px;border-radius:var(--r-item);line-height:15px;background:var(--well);color:var(--ink2)}
+.chip .k.git{background:var(--selBg);color:var(--sel)}
+.chip .k.agent{background:var(--sc-bg,var(--s-yk-bg));color:var(--sc,var(--s-yk))}
+.chip .k.finding{background:var(--badBg);color:var(--bad)}
+.chip .k.review{background:var(--sugBg);color:var(--sug)}
+.chip .k.pipeline{background:var(--okBg);color:var(--ok)}
+.chip .k.tree{background:var(--well);color:var(--ink2)}
+.chip .n{font-family:var(--mono);color:var(--ink2)}
+.chip a{color:var(--sel);cursor:pointer;text-decoration:none}
+.chip a.p{font-weight:600}
+.chip.blocking{border-color:var(--bad)}
+.chip.blocking .k{background:var(--badBg);color:var(--bad)}
+.chip.waiting{border-color:var(--sug);background:var(--sugBg)}
+.chip.done{opacity:.55}
+
+/* ===== 3 · frame ===== */
+.frame{position:relative;padding:var(--w-frame);border-radius:var(--r-pane);background:var(--line2)}
+.frame>.inner{background:var(--paper);border-radius:calc(var(--r-pane) - var(--w-frame));overflow:hidden;position:relative;z-index:1}
+.frame.editing{background:var(--sel)}
+.frame.collision{background:var(--bad)}
+.frame.focus{background:var(--sug)}
+.frame.live{background:linear-gradient(120deg,var(--frame-color,var(--s-yk)),var(--frame-sub,var(--s-yk-sub)),var(--frame-color,var(--s-yk)),var(--frame-sub,var(--s-yk-sub)),var(--frame-color,var(--s-yk)));background-size:300% 100%;animation:arch-frame-rotate var(--t-frame) linear infinite}
+.frame.waiting{background:var(--sugBg)}
+.frame.waiting::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--sug);animation:arch-frame-pulse var(--t-pulse) ease-in-out infinite}
+
+/* ===== 4 · selector ===== */
+.selector{display:inline-flex;align-items:center;gap:6px;padding:2px 9px;border:1px solid var(--line);border-radius:5px;background:var(--paper);font-family:var(--mono);font-size:var(--fs-lg);cursor:pointer;line-height:20px}
+.selector .car{color:var(--mute);font-family:var(--sans)}
+.selector .pill{margin-left:2px}
+.menu{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);font-size:var(--fs-lg);min-width:280px}
+.menu h6{margin:0;padding:8px 12px 2px;font-size:var(--fs-xs);color:var(--mute);font-weight:500}
+.menu .i{display:flex;gap:8px;align-items:center;padding:5px 12px;cursor:pointer}.menu .i:hover{background:var(--well)}.menu .i.on{background:var(--selBg)}
+.menu .i .r{margin-left:auto;color:var(--ink2);font-size:var(--fs-md)}
+
+/* ===== 5 · session card ===== */
+.scard{--sc:var(--s-yk);--sc-bg:var(--s-yk-bg);border:1px solid var(--line);border-left:3px solid var(--sc);border-radius:var(--r-card);padding:6px 8px;font-size:var(--fs-md);background:var(--paper)}
+.scard .h{display:flex;gap:6px;align-items:center;font-weight:500;margin-bottom:4px}
+.scard .h b{color:var(--sc);font-weight:500}
+.scard .h .n{margin-left:auto;font-family:var(--mono);font-weight:400;color:var(--ink2);font-size:var(--fs-sm)}
+.scard .e{display:flex;gap:5px;align-items:center;padding:1px 0;font-family:var(--mono);font-size:var(--fs-sm);color:var(--ink2);white-space:nowrap;overflow:hidden}
+.scard .e .g{width:12px;text-align:center;font-family:var(--sans);flex:none;color:var(--mute)}
+.scard .e .g.done{color:var(--ok)}.scard .e .g.run{color:var(--sc)}.scard .e .g.paused,.scard .e .g.asks{color:var(--sug)}.scard .e .g.hand{color:var(--sel)}.scard .e .g.dev{color:var(--bad)}
+.scard .e .w{margin-left:auto;font-family:var(--sans);font-size:var(--fs-xs);color:var(--mute);overflow:hidden;text-overflow:ellipsis;max-width:52%}
+.scard .e.on{color:var(--ink);background:var(--selBg);margin:0 -8px;padding:1px 8px}
+.scard .e.sub{padding-left:14px;color:var(--sc-sub,var(--s-yk-sub))}
+.scard .foot{margin-top:4px;font-size:var(--fs-xs);color:var(--mute);display:flex;gap:6px}
+.scard .foot a{margin-left:auto;cursor:pointer}
+
+/* ===== 6 · thread pane ===== */
+.thread{--sc:var(--s-yk);--sc-sub:var(--s-yk-sub);--sc-bg:var(--s-yk-bg);display:flex;flex-direction:column;min-height:0;font-size:var(--fs-lg);border-top:3px solid var(--sc);background:var(--paper)}
+.thread.framer,.thread.fixer{border-top-color:var(--sel)}
+.thread.planner{border-top-color:var(--sug)}
+.thread .hd{padding:7px 12px;border-bottom:1px solid var(--line2);display:flex;gap:8px;align-items:baseline;font-size:var(--fs-md);color:var(--mute)}
+.thread .hd b{font-family:var(--mono);color:var(--ink);font-weight:500;font-size:var(--fs-xl)}.thread .hd .r{margin-left:auto}
+.msgs{flex:1;overflow:auto;padding:10px 12px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.msg{padding:6px 10px;border-radius:var(--r-node);background:var(--well);line-height:var(--lh-ui);max-width:94%;border:1px solid transparent}
+.msg.me{background:var(--selBg);align-self:flex-end}
+.msg.ag{background:transparent;border-color:var(--sc);border-left-width:3px}
+.msg.sub{background:transparent;border-color:var(--sc-sub);border-left-width:3px}
+.msg .who{font-size:var(--fs-xs);color:var(--mute);margin-bottom:2px}
+.msg.ag .who{color:var(--sc)}.msg.sub .who{color:var(--sc-sub)}
+.tool{font-family:var(--mono);font-size:var(--fs-sm);color:var(--ink2);background:var(--well);border-radius:var(--r-chip);padding:4px 8px;line-height:1.6;margin-top:4px}
+.changed{display:inline-block;font-size:var(--fs-sm);margin-top:5px;padding:1px 6px;border-radius:var(--r-chip);background:var(--okBg);color:var(--ok)}
+.changed.none{background:var(--well);color:var(--mute)}
+.qblock{border:1px dashed var(--sug);background:var(--sugBg);border-radius:var(--r-node);padding:8px 10px;line-height:var(--lh-ui)}
+.qblock .opts{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.qblock .opts button{text-align:left;font-size:var(--fs-base);padding:3px 8px;display:flex;gap:8px}
+.qblock .opts button .e{margin-left:auto;color:var(--mute);font-size:var(--fs-sm);font-family:var(--mono)}
+.qblock .later{margin-top:6px;font-size:var(--fs-sm);color:var(--ink2)}
+.devcard{border:1px solid var(--bad);background:var(--badBg);border-radius:var(--r-node);padding:8px 10px;font-size:var(--fs-lg)}
+.devcard b{font-weight:600;color:var(--bad)}
+.devcard .reason{margin:4px 0 6px;color:var(--ink2)}
+.devcard .typ{display:grid;gap:4px}
+.devcard .typ button{text-align:left;font-size:var(--fs-base);display:flex;gap:8px;align-items:baseline}
+.devcard .typ button i{font-style:normal;font-size:var(--fs-xs);color:var(--mute);width:96px;flex:none}
+.verbs{display:flex;align-items:center;gap:8px;padding:6px 10px;border-top:1px solid var(--line2);font-size:var(--fs-md);background:var(--well)}
+.verbs .st{display:flex;align-items:center;gap:6px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.verbs .ac{margin-left:auto;display:flex;gap:4px;flex:none}
+.verbs .ac button{font-size:var(--fs-sm);padding:2px 8px;white-space:nowrap}
+.verbs .ac button.g{width:26px;padding:2px 0;text-align:center;position:relative}
+.verbs .ac button.g[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:26px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-size:var(--fs-xs);padding:2px 7px;border-radius:var(--r-item);white-space:nowrap;font-family:var(--sans)}
+.composer{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--line2)}
+.composer input{flex:1;font-size:var(--fs-lg)}
+
+/* ===== 7 · map primitives (DOM/SVG demo; WebGL takes the same values from tokens.json) ===== */
+svg.map{font-family:var(--mono);font-size:var(--fs-map);display:block}
+svg.map .area{fill:none;stroke:var(--map-areaStroke);stroke-dasharray:3 3;rx:6}
+svg.map .area.sug{stroke:var(--sug)}
+svg.map .area.editing{stroke:var(--sel);stroke-dasharray:none}
+svg.map .area-h{font-family:var(--sans);fill:var(--map-areaInk);font-size:var(--fs-map)}
+svg.map .item{fill:var(--map-item);stroke:var(--map-itemStroke);stroke-width:1;rx:3}
+svg.map .item.port{rx:9}
+svg.map .item.ext{fill:var(--map-external);stroke-dasharray:2 2}
+svg.map .item.sel{fill:var(--selBg);stroke:var(--sel);stroke-width:var(--w-lit)}
+svg.map .item.lit{stroke:var(--ink);stroke-width:var(--w-lit)}
+svg.map .item.planned{fill:var(--sugBg);stroke:var(--sug);stroke-dasharray:3 2}
+svg.map .item.s{fill:var(--sc-bg,var(--s-yk-bg));stroke:var(--sc,var(--s-yk))}
+svg.map .item.sub{fill:var(--sc-bg,var(--s-yk-bg));stroke:var(--sc-sub,var(--s-yk-sub))}
+svg.map .item.finding{stroke:var(--bad)}
+svg.map .item.ghost{opacity:.35;stroke-dasharray:2 2}
+svg.map .lbl{fill:var(--map-itemInk)}
+svg.map .lbl.sel{fill:var(--selInk)}
+svg.map g.faded{opacity:var(--map-fadedOpacity)}
+svg.map .link{fill:none;stroke:var(--map-link);stroke-width:1.1}
+svg.map .link.lit{stroke:var(--map-linkLit);stroke-width:var(--w-lit)}
+svg.map .link.unresolved{stroke:var(--sug);stroke-dasharray:3 3}
+svg.map .link.smell{stroke-dasharray:4 3}
+svg.map .link.planned{stroke:var(--sug);stroke-dasharray:3 2}
+svg.map .link.s{stroke:var(--sc,var(--s-yk))}
+svg.map .link.finding{stroke:var(--bad)}
+svg.map .fpill{fill:var(--badBg);stroke:var(--bad);stroke-width:.8;rx:6}
+svg.map .fpill-t{fill:var(--bad);font-size:8.5px;font-family:var(--sans)}
+svg.map .chipf{fill:var(--paper);stroke:var(--map-itemStroke);rx:8}
+svg.map .chipf.unit{stroke-width:1.4;stroke:var(--ink2)}
+svg.map .chipf-t{fill:var(--map-itemInk);font-family:var(--sans);font-size:var(--fs-map);font-weight:500}
+svg.map .chipf-n{fill:var(--mute)}
+svg.map .socket{fill:var(--paper);stroke:var(--map-itemStroke);stroke-width:1}
+svg.map .socket.in{fill:var(--selBg);stroke:var(--sel)}
+svg.map .selbox{fill:none;stroke:var(--sel);stroke-dasharray:4 3;stroke-width:1}
+svg.map .handle{fill:var(--paper);stroke:var(--sel);stroke-width:1}
+svg.map .bd{fill:var(--bad)}svg.map .bd-t{fill:#fff;font-size:8px;font-family:var(--sans);font-weight:600}
+svg.map .bs{fill:var(--sc,var(--s-yk))}
+.mapbg{background:var(--map-paper);border:1px solid var(--line2);border-radius:var(--r-card);position:relative;overflow:hidden}
+/* DOM overlays on the map */
+.apill{position:absolute;display:inline-flex;white-space:nowrap;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-pill);box-shadow:var(--shadow);font-size:var(--fs-md);overflow:hidden;z-index:3}
+.apill span{padding:3px 10px;cursor:pointer;border-right:1px solid var(--line2)}.apill span:last-child{border-right:0}.apill span:hover{background:var(--well)}.apill span.p{color:var(--sel);font-weight:500}
+.tray{position:absolute;left:12px;bottom:12px;width:180px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-pane);box-shadow:var(--shadow);z-index:3;font-size:var(--fs-base)}
+.tray .th{display:flex;align-items:center;gap:6px;padding:6px 10px;border-bottom:1px solid var(--line2);font-weight:500}
+.tray .th .n{font-family:var(--mono);font-size:var(--fs-sm);color:var(--sug);background:var(--sugBg);border-radius:var(--r-pill);padding:0 6px}
+.tray .th .c{margin-left:auto;color:var(--mute);font-size:var(--fs-sm);font-weight:400}
+.tray .ti{display:flex;flex-direction:column;gap:4px;padding:8px 10px}
+.tray .ti span{font-family:var(--mono);font-size:var(--fs-sm);border:1px solid var(--sug);background:var(--sugBg);color:var(--sug);border-radius:5px;padding:2px 7px;cursor:grab}
+.tray .foot{padding:5px 10px;border-top:1px solid var(--line2);font-size:var(--fs-sm);color:var(--mute)}
+.wb{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:2px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-node);padding:3px;box-shadow:var(--shadow);z-index:3}
+.wb span{width:26px;height:24px;display:grid;place-items:center;border-radius:var(--r-chip);color:var(--ink2);font-size:var(--fs-xl);cursor:pointer;position:relative}
+.wb span:hover{background:var(--well)}.wb span.on{background:var(--selBg);color:var(--sel)}
+.wb span.gap{width:1px;background:var(--line2);margin:2px 3px}
+.wb span[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:30px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-size:var(--fs-xs);padding:2px 7px;border-radius:var(--r-item);white-space:nowrap;font-family:var(--sans)}
+.zoomc{position:absolute;right:12px;bottom:12px;display:flex;align-items:center;gap:2px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-node);padding:2px;box-shadow:var(--shadow);font-size:var(--fs-sm);z-index:3}
+.zoomc span{padding:2px 7px;border-radius:var(--r-chip);cursor:pointer;color:var(--ink2)}.zoomc span:hover{background:var(--well)}.zoomc b{font-family:var(--mono);font-weight:500;padding:0 4px}
+.minimap{position:absolute;right:12px;top:12px;width:132px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-card);padding:4px;z-index:3}
+.minimap .vp{position:absolute;border:1px solid var(--sel);background:color-mix(in srgb,var(--sel) 12%,transparent);border-radius:2px}
+.legend{display:flex;gap:14px;font-size:var(--fs-md);color:var(--ink2);padding:6px 12px;border-top:1px solid var(--line2);flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:middle;margin-right:4px;border:1px solid var(--map-itemStroke);background:var(--map-item)}
+
+/* ===== 8 · editor & inlays ===== */
+.code{font-family:var(--mono);font-size:var(--fs-md);line-height:var(--lh-code);padding:6px 0;background:var(--paper)}
+.ln{display:flex;white-space:nowrap;overflow:hidden;padding:0 10px}
+.ln .n{width:24px;text-align:right;color:var(--mute);margin-right:10px;flex:none}
+.ln .t{color:var(--ink2)}.ln .k{color:var(--sel)}.ln .c{color:var(--mute)}
+.ln.hl{background:var(--selBg)}.ln.hl .t{color:var(--ink)}
+.ln.add{background:var(--okBg)}.ln.del{background:var(--badBg)}
+.ln.s{background:var(--sc-bg,var(--s-yk-bg))}
+.ln.lens .t{font-family:var(--sans);font-size:var(--fs-xs);color:var(--mute)}.ln.lens a{margin-right:10px;color:var(--ink2);text-decoration:none;cursor:pointer}.ln.lens a.w{color:var(--bad)}
+.inlay{display:inline-block;font-family:var(--sans);font-size:var(--fs-xs);line-height:15px;padding:0 5px;border-radius:var(--r-item);margin-left:8px;background:var(--well);color:var(--mute);vertical-align:1px}
+.inlay.witness{background:var(--selBg);color:var(--sel)}
+.inlay.planned{background:var(--sugBg);color:var(--sug);border:1px dashed var(--sug);line-height:13px}
+.inlay.you{background:var(--sel);color:#fff}
+.inlay.session{background:var(--sc-bg,var(--s-yk-bg));color:var(--sc,var(--s-yk))}
+.inlay.finding{background:var(--badBg);color:var(--bad)}
+.inlay.xrepo{background:var(--well);color:var(--ink2);font-family:var(--mono)}
+
+/* ===== 9 · cards ===== */
+.card{border:1px solid var(--line);border-radius:var(--r-card);padding:8px 10px;background:var(--paper);font-size:var(--fs-base)}
+.card h5{margin:0 0 5px;font-size:var(--fs-base);font-weight:600;display:flex;gap:8px;align-items:center}
+.card h5 .r{margin-left:auto;font-weight:400}
+.card .acts{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.card.fix{border-style:dashed;border-color:var(--sel)}.card.fix h5{color:var(--sel)}
+.card.delta{border-color:var(--sug)}
+.row{display:flex;gap:8px;align-items:center;font-size:var(--fs-base);padding:2px 0;color:var(--ink2)}
+.row b{font-weight:500;color:var(--ink)}
+.row .r{margin-left:auto;font-family:var(--mono);font-size:var(--fs-sm);color:var(--mute);white-space:nowrap}
+.row .g{width:14px;text-align:center;flex:none}
+.row .g.ok{color:var(--ok)}.row .g.bad{color:var(--bad)}.row .g.sug{color:var(--sug)}.row .g.mute{color:var(--mute)}
+.row .src{color:var(--sel);font-size:var(--fs-sm);cursor:pointer;margin-left:auto;white-space:nowrap}
+.row .src+.r{margin-left:6px}
+.pipe{display:flex;gap:2px;margin:4px 0}
+.pipe span{flex:1;height:6px;border-radius:2px;background:var(--well)}
+.pipe span.ok{background:var(--ok)}.pipe span.bad{background:var(--bad)}.pipe span.run{background:var(--sug)}
+.result{border:1px solid var(--ok);background:var(--okBg);border-radius:var(--r-card);padding:8px 10px;font-size:var(--fs-base)}
+.result b{color:var(--ok);font-weight:600}
+.impact .row{font-family:var(--mono);font-size:var(--fs-md)}
+.impact .row .k{font-family:var(--sans)}
+
+/* ===== 10 · split button · gated button ===== */
+.split{display:inline-flex}
+.split button{border-radius:0}
+.split button:first-child{border-radius:5px 0 0 5px}
+.split button.dd{border-radius:0 5px 5px 0;padding:4px 7px;border-left:1px solid rgba(255,255,255,.35)}
+.split button.dd.plain{border-left-color:transparent;margin-left:-1px}
+.gated{display:inline-flex;flex-direction:column;align-items:flex-start;gap:3px}
+.gated .reason{font-size:var(--fs-sm);color:var(--ink2);display:flex;gap:6px;align-items:center}
+.gated .reason .pill{line-height:15px}
+
+/* ===== 11 · tabs & switches ===== */
+.tabbar{display:flex;align-items:stretch;border-bottom:1px solid var(--line2);background:var(--well);font-size:var(--fs-base);height:32px}
+.tabbar .t{display:flex;align-items:center;gap:8px;padding:0 12px;border-right:1px solid var(--line2);color:var(--ink2);cursor:pointer;white-space:nowrap}
+.tabbar .t.on{background:var(--paper);color:var(--ink);box-shadow:inset 0 2px 0 var(--sel)}
+.tabbar .t.f{font-family:var(--mono);font-size:var(--fs-md)}
+.tabbar .t .x{color:var(--mute);font-size:10px}
+.tabbar .t .dirty{width:6px;height:6px;border-radius:3px;background:var(--sel);display:inline-block}
+.tabbar .t.pin{padding-left:10px;font-weight:500}
+.tabbar .sp{flex:1}
+.tabbar .r{display:flex;align-items:center;gap:10px;padding:0 10px;color:var(--mute);font-size:var(--fs-sm)}
+.seg{display:inline-flex;gap:2px;background:var(--well);border-radius:var(--r-card);padding:2px;font-size:var(--fs-md)}
+.seg span{padding:2px 10px;border-radius:var(--r-chip);color:var(--ink2);cursor:pointer;white-space:nowrap}
+.seg span.on{background:var(--paper);color:var(--ink);font-weight:500}
+.seg span.off{opacity:.4;cursor:default}
+.seg.fill{display:flex}.seg.fill span{flex:1;text-align:center}
+.ovl{display:inline-flex;gap:6px;font-size:var(--fs-sm)}
+.ovl span{display:inline-flex;align-items:center;gap:4px;padding:1px 7px;border:1px solid var(--line);border-radius:var(--r-pill);color:var(--ink2);cursor:pointer}
+.ovl span i{width:8px;height:8px;border-radius:2px;display:inline-block;border:1px solid currentColor}
+.ovl span.on{border-color:var(--ink2);color:var(--ink)}.ovl span.on i{background:currentColor}
+
+/* ===== 12 · shell (fixed layout, for composed screens) ===== */
+.shell{background:var(--paper);overflow:hidden;font-size:var(--fs-xl)}
+.shell .top{display:flex;align-items:center;gap:12px;padding:7px 14px;border-bottom:1px solid var(--line2)}
+.shell .top .brand{font-weight:600}.shell .top .lbl{color:var(--mute)}
+.shell .top .right{margin-left:auto;display:flex;gap:10px;align-items:center;color:var(--ink2)}
+.shell .strip{display:flex;align-items:center;gap:10px;padding:6px 14px;border-bottom:1px solid var(--line2);font-size:var(--fs-base);color:var(--ink2);min-height:38px;flex-wrap:wrap}
+.shell .strip .bn{font-family:var(--mono);color:var(--ink);font-weight:500}
+.shell .body{display:grid;grid-template-columns:220px minmax(0,1fr) 330px;height:var(--bodyh,560px)}
+.shell .left{border-right:1px solid var(--line2);padding:10px 8px;font-size:var(--fs-lg);overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.shell .center{display:flex;flex-direction:column;min-width:0}
+.shell .right{border-left:1px solid var(--line2);display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.shell .status{display:flex;gap:16px;padding:6px 14px;border-top:1px solid var(--line2);font-size:var(--fs-base);color:var(--ink2)}
+.shell .status .r{margin-left:auto}
+.tree{font-size:var(--fs-lg)}
+.tr{padding:2px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:var(--r-chip);display:flex;align-items:center;gap:6px}
+.tr.d{color:var(--ink);font-weight:500}.tr.f{padding-left:20px;color:var(--ink2);font-family:var(--mono);font-size:var(--fs-md)}.tr.on{background:var(--selBg);color:var(--sel)}
+.tr .mk{margin-left:auto;font-family:var(--mono);font-size:var(--fs-xs);padding:0 4px;border-radius:var(--r-item)}
+.tr .mk.M{color:var(--sel);background:var(--selBg)}.tr .mk.s{color:var(--sc,var(--s-yk));background:var(--sc-bg,var(--s-yk-bg))}.tr .mk.p{color:var(--sug);background:var(--sugBg)}
+.back{display:flex;align-items:center;gap:6px;padding:2px 6px 6px;margin-bottom:6px;font-size:var(--fs-base);color:var(--ink2);cursor:pointer;border-bottom:1px solid var(--line2)}
+.back b{font-family:var(--mono);font-weight:500;color:var(--ink)}
+.mapin{position:relative;flex:1;min-height:0;overflow:hidden;background:var(--map-paper)}
+.mapin .scroll{position:absolute;inset:0;overflow:auto}
+.funnel{display:flex;align-items:center;gap:0;font-size:var(--fs-md)}
+.funnel span{padding:3px 12px 3px 16px;background:var(--well);color:var(--ink2);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,0 100%,8px 50%);margin-left:-6px}
+.funnel span:first-child{margin-left:0;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,0 100%);padding-left:12px}
+.funnel span.done{background:var(--okBg);color:var(--ok)}.funnel span.on{background:var(--sel);color:#fff}
+
+/* ===== docs chrome (this page only, not part of the system) ===== */
+.doc{max-width:1280px;margin:0 auto;padding:0 20px 80px}
+.dochd{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line2);display:flex;align-items:center;gap:14px;padding:10px 20px;margin:0 -20px 24px;font-size:var(--fs-lg)}
+.dochd .t{font-weight:600;font-size:var(--fs-h)}
+.dochd nav{display:flex;gap:10px;flex-wrap:wrap;color:var(--ink2)}
+.dochd nav a{color:inherit;text-decoration:none}.dochd nav a:hover{color:var(--sel)}
+.dochd .theme{margin-left:auto}
+h2{font-size:var(--fs-h);font-weight:600;margin:40px 0 6px;padding-top:6px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:baseline}
+h2 small{font-weight:400;color:var(--mute);font-size:var(--fs-base)}
+h3{font-size:var(--fs-xl);font-weight:600;margin:22px 0 6px}
+p.lead{color:var(--ink2);max-width:76ch;margin:0 0 14px;font-size:var(--fs-xl)}
+.spec{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-card);padding:14px 16px;display:grid;gap:10px}
+.demo{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-card);padding:14px 16px}
+.demo .cap{font-size:var(--fs-sm);color:var(--mute);margin:8px 0 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ex{display:flex;flex-direction:column;gap:6px;font-size:var(--fs-base)}
+.ex .st{font-size:var(--fs-sm);color:var(--mute);font-family:var(--mono)}
+.sw{display:flex;gap:10px;align-items:center;font-size:var(--fs-base)}
+.sw i{width:28px;height:28px;border-radius:var(--r-card);border:1px solid var(--line2);flex:none}
+.sw .m{color:var(--ink2);font-size:var(--fs-sm)}
+.sw .nm{width:64px;color:var(--ink)}
+.trow{display:flex;gap:12px;align-items:baseline;padding:4px 0;border-bottom:1px solid var(--line2)}
+.trow .k{font-family:var(--mono);font-size:var(--fs-sm);color:var(--mute);width:120px;flex:none}
+.rule{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:6px 0;border-bottom:1px solid var(--line2);font-size:var(--fs-lg)}
+.rule b{font-weight:500}
+.rule .no{color:var(--bad)}.rule .yes{color:var(--ok)}
+.note{border-left:3px solid var(--sel);background:var(--paper);padding:10px 14px;border-radius:0 var(--r-card) var(--r-card) 0;font-size:var(--fs-lg);max-width:86ch}
+.note ol{margin:6px 0 0;padding-left:18px}.note li{margin:4px 0}
+.cmp{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.stack{display:grid;gap:8px}
+kbd{font-family:var(--mono);font-size:var(--fs-xs);border:1px solid var(--line);border-radius:3px;padding:0 4px;background:var(--well)}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}.shell .body{grid-template-columns:1fr;height:auto}.shell .left,.shell .right{border:0;border-top:1px solid var(--line2)}.dochd nav{display:none}}
+</style></head>
+<body>
+<div class="doc">
+<div class="dochd"><span class="t">arch · design system</span><span class="mute">V1 · for the Theia build</span>
+<nav><a href="#tokens">tokens</a><a href="#chip">chip</a><a href="#frame">frame</a><a href="#selector">selector</a><a href="#scard">session card</a><a href="#thread">thread</a><a href="#map">map</a><a href="#inlays">inlays</a><a href="#cards">cards</a><a href="#buttons">buttons</a><a href="#tabs">tabs</a><a href="#rules">rules</a><a href="#screens">screens</a><a href="#changes">changes</a></nav>
+<div class="theme seg"><span data-t="light">light</span><span data-t="system" class="on">system</span><span data-t="dark">dark</span></div></div>
+
+<p class="lead">Every arch screen is built from what is on this page: one tokens file (CSS variables, light and dark, mirrored as plain values in <span class="m">arch-tokens.json</span> for the canvas), eleven components with all their states, five rules, and two screens rebuilt from the components to prove they cover the reference pages. The shell, the map anatomy and the frame are fixed by the product spec; this page styles them, it does not redesign them.</p>
+
+<!-- ============ TOKENS ============ -->
+<h2 id="tokens">tokens <small>arch-tokens.css · arch-tokens.json</small></h2>
+<p class="lead">Two surfaces, two palettes. The chrome (panes, chips, cards) is cool grey on white; the map is warm paper with warm-grey items so it reads as the document at the centre and never competes with the chrome around it. Semantic colours are used as fills and text; session colours are used as outlines, dots and borders, so the two sets can coexist at 12 px.</p>
+
+<div class="grid2">
+<div class="spec">
+<h3 style="margin-top:0">chrome</h3>
+<div class="sw"><i style="background:var(--bg)"></i><span class="nm">bg</span><span class="m" data-var="--bg"></span><span class="mute">window background, behind the frame</span></div>
+<div class="sw"><i style="background:var(--paper)"></i><span class="nm">paper</span><span class="m" data-var="--paper"></span><span class="mute">panes, cards, chips</span></div>
+<div class="sw"><i style="background:var(--well)"></i><span class="nm">well</span><span class="m" data-var="--well"></span><span class="mute">tab bar, segmented switches, tool blocks</span></div>
+<div class="sw"><i style="background:var(--ink)"></i><span class="nm">ink</span><span class="m" data-var="--ink"></span><span class="mute">text</span></div>
+<div class="sw"><i style="background:var(--ink2)"></i><span class="nm">ink2</span><span class="m" data-var="--ink2"></span><span class="mute">secondary text, labels</span></div>
+<div class="sw"><i style="background:var(--mute)"></i><span class="nm">mute</span><span class="m" data-var="--mute"></span><span class="mute">hints, counts, line numbers</span></div>
+<div class="sw"><i style="background:var(--line)"></i><span class="nm">line</span><span class="m" data-var="--line"></span><span class="mute">borders of controls and cards</span></div>
+<div class="sw"><i style="background:var(--line2)"></i><span class="nm">line2</span><span class="m" data-var="--line2"></span><span class="mute">pane separators, row rules, idle frame</span></div>
+</div>
+<div class="spec">
+<h3 style="margin-top:0">semantic</h3>
+<div class="sw"><i style="background:var(--sel)"></i><i style="background:var(--selBg)"></i><span class="nm">sel</span><span class="m" data-var="--sel"></span><span class="mute">selection · your work · links · editing frame</span></div>
+<div class="sw"><i style="background:var(--ok)"></i><i style="background:var(--okBg)"></i><span class="nm">ok</span><span class="m" data-var="--ok"></span><span class="mute">done · passed · added lines</span></div>
+<div class="sw"><i style="background:var(--bad)"></i><i style="background:var(--badBg)"></i><span class="nm">bad</span><span class="m" data-var="--bad"></span><span class="mute">finding · deviation · collision · removed lines</span></div>
+<div class="sw"><i style="background:var(--sug)"></i><i style="background:var(--sugBg)"></i><span class="nm">sug</span><span class="m" data-var="--sug"></span><span class="mute">suggested · planned · waiting · focus frame</span></div>
+<div class="sw"><i style="background:var(--s-yk)"></i><i style="background:var(--s-yk-bg)"></i><span class="nm">yk</span><span class="m" data-var="--s-yk"></span><span class="mute">first session colour (Yokohama in the mocks)</span></div>
+<h3>map</h3>
+<div class="sw"><i style="background:var(--map-paper)"></i><span class="nm">paper</span><span class="m" data-var="--map-paper"></span><span class="mute">map background</span></div>
+<div class="sw"><i style="background:var(--map-item);border-color:var(--map-itemStroke)"></i><span class="nm">item</span><span class="m" data-var="--map-item"></span><span class="mute">fill · stroke <span data-var="--map-itemStroke"></span> · ink <span data-var="--map-itemInk"></span></span></div>
+<div class="sw"><i style="background:transparent;border:1px dashed var(--map-areaStroke)"></i><span class="nm">area</span><span class="m" data-var="--map-areaStroke"></span><span class="mute">dashed box · header ink <span data-var="--map-areaInk"></span></span></div>
+<div class="sw"><i style="background:var(--map-external)"></i><span class="nm">external</span><span class="m" data-var="--map-external"></span><span class="mute">crates outside the repo</span></div>
+</div>
+</div>
+
+<h3>session palette <small class="mute" style="font-weight:400">seven, each with a sub-agent shade and a tint · assign in this order</small></h3>
+<div class="spec">
+<div class="grid" id="sessions"></div>
+<div class="cap mute" style="font-size:var(--fs-sm)">The 12 px test: the same seven as dots, card borders and message borders, in the sizes they are actually used. Sessions are always named next to their colour; colour is the redundant code, not the only one.</div>
+<div class="cmp" id="sesstest"></div>
+</div>
+
+<div class="grid2" style="margin-top:12px">
+<div class="spec">
+<h3 style="margin-top:0">type</h3>
+<div class="trow"><span class="k">sans</span><span>IBM Plex Sans · UI, prose, labels, area headers on the map</span></div>
+<div class="trow"><span class="k">mono</span><span class="m">IBM Plex Mono · identifiers, code, branch names, map labels, counts</span></div>
+<div class="trow"><span class="k">xs 10.5</span><span style="font-size:var(--fs-xs)">tags, hints, inlays, session-card who · never below this in the chrome</span></div>
+<div class="trow"><span class="k">sm 11</span><span style="font-size:var(--fs-sm)">pills, verbs in bars, tool blocks, legends</span></div>
+<div class="trow"><span class="k">md 11.5</span><span style="font-size:var(--fs-md)">code, session-card rows, small controls</span></div>
+<div class="trow"><span class="k">base 12</span><span style="font-size:var(--fs-base)">chips, cards, rows, thread text</span></div>
+<div class="trow"><span class="k">lg 12.5</span><span style="font-size:var(--fs-lg)">left pane, right pane, composer</span></div>
+<div class="trow"><span class="k">xl 13</span><span style="font-size:var(--fs-xl)">top bar, thread header names, selection name</span></div>
+<div class="trow"><span class="k">h 14</span><span style="font-size:var(--fs-h);font-weight:600">pane headings only · nothing on a screen is larger</span></div>
+<div class="trow"><span class="k">map 10</span><span class="m" style="font-size:var(--fs-map)">map labels · one size · never scales with zoom (folding handles scale)</span></div>
+<div class="trow"><span class="k">weights</span><span>400 body · 500 names and active tabs · 600 headings and primary links · no bold identifiers</span></div>
+</div>
+<div class="spec">
+<h3 style="margin-top:0">spacing · radius · stroke</h3>
+<div class="trow"><span class="k">grid</span><span>4 px · paddings 2/4 (rows) · 6/8 (chips, cards) · 8/12 (pane sections) · 14 (top bar)</span></div>
+<div class="trow"><span class="k">r-item 3</span><span>tags, inlays, map items, state glyph backgrounds</span></div>
+<div class="trow"><span class="k">r-chip 4</span><span>chips, segmented switch options, tool blocks, tree rows</span></div>
+<div class="trow"><span class="k">r-card 6</span><span>cards, menus, panes' inner blocks, segmented switch wells</span></div>
+<div class="trow"><span class="k">r-node 8</span><span>messages, question and deviation blocks, whiteboard toolbar</span></div>
+<div class="trow"><span class="k">r-pane 10</span><span>the frame, the tray; pills are 10 too (full round at 16 px height)</span></div>
+<div class="trow"><span class="k">strokes</span><span>1 hairline · 1.6 lit (selected item and its links) · 3 the frame</span></div>
+<h3>motion</h3>
+<div class="trow"><span class="k">frame rotate 6 s</span><span>linear, infinite, a gradient of the session colour and its sub shade</span></div>
+<div class="trow"><span class="k">frame pulse 1.6 s</span><span>ease-in-out, amber opacity .45 → 1 → .45</span></div>
+<div class="trow"><span class="k">item pulse 700 ms</span><span>one ring on a map item when its facts changed; never repeats</span></div>
+<div class="trow"><span class="k">zoom 220 ms</span><span>V2 semantic zoom between levels, same easing everywhere</span></div>
+<div class="trow"><span class="k">reduced motion</span><span>frame becomes a still session colour; the wait becomes a still amber</span></div>
+<div class="trow"><span class="k">nothing else</span><span>no hover transitions, no fades, no slide-ins; content never moves</span></div>
+</div>
+</div>
+
+<!-- ============ CHIP ============ -->
+<h2 id="chip">1 · chip <small>Actions strip · right pane · session bar</small></h2>
+<p class="lead">One known problem, one chip: a kind tag, the fact in mono where it is a number or a name, then the links separated by <span class="m">·</span>. The first link is the manual door and is the only bold thing in the chip. A chip that blocks the merge has a red border; a chip that waits on you turns amber; a chip that is settled dims and stays until the strip refreshes.</p>
+<div class="demo">
+<div class="grid">
+<div class="ex"><span class="st">git · normal</span><div><span class="chip"><span class="k git">git</span>behind main <span class="n">· 2</span><span class="sep">·</span><a class="p">Update myself</a><span class="sep">·</span><a>with Yokohama</a></span></div></div>
+<div class="ex"><span class="st">agent · waiting</span><div><span class="chip waiting"><span class="k agent">agent</span>Yokohama asks <span class="n">· 2</span><span class="sep">·</span><a class="p">Answer</a><span class="sep">·</span><a>later</a></span></div></div>
+<div class="ex"><span class="st">finding · blocking</span><div><span class="chip blocking"><span class="k finding">finding</span>rule <span class="n">no-http-in-domain</span><span class="sep">·</span><a class="p">fix myself</a><span class="sep">·</span><a>with Yokohama</a><span class="sep">·</span><a>allow</a></span></div></div>
+<div class="ex"><span class="st">review · normal</span><div><span class="chip"><span class="k review">review</span>2 remarks open<span class="sep">·</span><a class="p">Review</a><span class="sep">·</span><a>send back</a></span></div></div>
+<div class="ex"><span class="st">pipeline · blocking</span><div><span class="chip blocking"><span class="k pipeline">pipeline</span>tests failed <span class="n">· 3</span><span class="sep">·</span><a class="p">Open log</a><span class="sep">·</span><a>rerun</a><span class="sep">·</span><a>fix with Yokohama</a></span></div></div>
+<div class="ex"><span class="st">working tree · normal</span><div><span class="chip"><span class="k tree">tree</span>1 uncommitted<span class="sep">·</span><a class="p">Commit</a><span class="sep">·</span><a>discard</a></span></div></div>
+<div class="ex"><span class="st">done · settled this session</span><div><span class="chip done"><span class="k git">git</span>updated to main<span class="sep">·</span><a>Review the resolution</a></span></div></div>
+<div class="ex"><span class="st">agent · another session's colour</span><div><span class="chip" style="--sc:var(--s-tl);--sc-bg:var(--s-tl-bg)"><span class="k agent">agent</span>Lyon paused <span class="n">· 4/6</span><span class="sep">·</span><a class="p">Resume</a><span class="sep">·</span><a>step in</a></span></div></div>
+</div>
+<div class="cap">Order in the strip: what blocks the merge, then what waits on you, then housekeeping; the strip shows three, the right pane all of them under those three headings. The tag colour follows the kind; the border follows the state.</div>
+</div>
+
+<!-- ============ FRAME ============ -->
+<h2 id="frame">2 · frame <small>the only animation in the product</small></h2>
+<p class="lead">A 3 px border around the body. Its colour says who owns the branch right now; its motion says whether they are moving. The content inside never changes with it. Set <span class="m">--frame-color</span> and <span class="m">--frame-sub</span> to the session's colour and sub shade.</p>
+<div class="demo">
+<div class="grid" id="frames"></div>
+<div class="cap">idle grey still · live: session gradient rotates, 6 s · waiting: amber pulse, 1.6 s, the agent has a question · editing: blue still, your uncommitted work · collision: red still, two sets of edits on one file · focus: amber still, a plan is being shaped. With reduced motion, live becomes the still session colour and waiting a still amber.</div>
+</div>
+
+<!-- ============ SELECTOR ============ -->
+<h2 id="selector">3 · selector <small>top bar · branch</small></h2>
+<p class="lead">The branch name in mono, a dot for its state, a caret, and, when the branch is not simply yours, a state pill. The pill is the same pill that names a blocked state anywhere else.</p>
+<div class="demo">
+<div class="cmp">
+<span class="selector"><span class="dot ok"></span>main<span class="car">▾</span></span>
+<span class="selector"><span class="dot sel"></span>feat/refund<span class="car">▾</span></span>
+<span class="selector"><span class="dot s"></span>feat/refund<span class="pill s">planning</span><span class="car">▾</span></span>
+<span class="selector"><span class="dot s" style="animation:arch-frame-pulse var(--t-pulse) infinite"></span>feat/refund<span class="pill s">working</span><span class="car">▾</span></span>
+<span class="selector"><span class="dot sug"></span>feat/refund<span class="pill a">asks · 2</span><span class="car">▾</span></span>
+<span class="selector"><span class="dot mute" style="background:var(--mute)"></span>feat/refund<span class="pill">paused</span><span class="car">▾</span></span>
+<span class="selector"><span class="dot ok"></span>feat/refund<span class="pill g">done</span><span class="car">▾</span></span>
+<span class="selector"><span class="dot bad"></span>feat/refund<span class="pill b">collision</span><span class="car">▾</span></span>
+</div>
+<div style="margin-top:12px" class="cmp">
+<div class="menu" style="width:320px">
+<h6>needs you</h6>
+<div class="i"><span class="dot sug"></span><span class="m">feat/refund</span><span class="pill a">asks · 2</span><span class="r">Yokohama</span></div>
+<h6>working</h6>
+<div class="i on"><span class="dot s" style="--sc:var(--s-tl)"></span><span class="m">feat/webhook-retry</span><span class="pill s" style="--sc:var(--s-tl);--sc-bg:var(--s-tl-bg)">working</span><span class="r">Lyon · 4/6</span></div>
+<h6>waiting to merge</h6>
+<div class="i"><span class="dot ok"></span><span class="m">fix/pg-timeout</span><span class="pill g">done</span><span class="r">you</span></div>
+<h6>saved plans · main</h6>
+<div class="i"><span class="dot sug"></span><span class="m">plan · order-history</span><span class="r">3 elements</span></div>
+<div class="i"><span class="dot ok"></span><span class="m">main</span><span class="r">up to date</span></div>
+</div>
+<div class="ex" style="max-width:38ch"><span class="st">menu · grouped by what it needs from you</span><span class="ink2">The same groups as the repo screen's tree: needs you · working · waiting to merge · saved plans · main. Each row: dot, name, pill when it has a state, who or how far on the right. Group titles are lowercase, 10.5 px, mute.</span></div>
+</div>
+</div>
+
+<!-- ============ SESSION CARD ============ -->
+<h2 id="scard">4 · session card <small>pinned at the top of the left pane while a session owns the branch</small></h2>
+<p class="lead">Header: session name in its colour, the driver, then <span class="m">n/m</span>. One row per plan element, with its glyph, its name in mono, and who is on it. Sub-agents are indented rows in the sub shade. The foot links to the thread. It never leaves while the branch has a session, whatever the centre shows.</p>
+<div class="demo">
+<div class="grid">
+<div class="ex"><span class="st">running · element 3 of 6 · sub-agent active</span>
+<div class="scard" style="width:240px"><div class="h"><span class="dot s"></span><b>Yokohama</b><span class="mute">claude code</span><span class="n">3/6</span></div>
+<div class="e"><span class="g done">✓</span>RefundRequest<span class="w">Yokohama</span></div>
+<div class="e"><span class="g done">✓</span>Refunds · port<span class="w">Yokohama</span></div>
+<div class="e on"><span class="g run">●</span>PgRefundRepo<span class="w">sub · store</span></div>
+<div class="e sub"><span class="g run">●</span>tests/refund.rs<span class="w">sub · tests</span></div>
+<div class="e"><span class="g">·</span>refund() in api<span class="w"></span></div>
+<div class="e"><span class="g">·</span>webhook · refund<span class="w"></span></div>
+<div class="foot">started 14 min ago<a>thread ›</a></div></div></div>
+<div class="ex"><span class="st">asks · paused · stepped in · deviation</span>
+<div class="scard" style="width:240px;--sc:var(--s-tl);--sc-bg:var(--s-tl-bg);--sc-sub:var(--s-tl-sub)"><div class="h"><span class="dot s"></span><b>Lyon</b><span class="mute">codex</span><span class="n">4/6</span></div>
+<div class="e"><span class="g done">✓</span>RetryPolicy<span class="w">Lyon</span></div>
+<div class="e"><span class="g asks">!</span>WebhookQueue<span class="w">asks · 2</span></div>
+<div class="e"><span class="g paused">⏸</span>PgQueue<span class="w">paused mid-edit</span></div>
+<div class="e"><span class="g hand">✋</span>retry() in api<span class="w">you</span></div>
+<div class="e"><span class="g dev">≠</span>HttpNotifier<span class="w">deviation</span></div>
+<div class="e"><span class="g">·</span>tests<span class="w"></span></div>
+<div class="foot">paused 2 min ago<a>thread ›</a></div></div></div>
+<div class="ex"><span class="st">glyphs · one per state · sans, 12 px wide column</span>
+<div class="stack" style="font-size:var(--fs-base)">
+<div class="row"><span class="g ok">✓</span>done · realized in the files</div>
+<div class="row"><span class="g" style="color:var(--s-yk)">●</span>running · in the session's colour</div>
+<div class="row"><span class="g sug">⏸</span>paused · by you or by a deviation</div>
+<div class="row"><span class="g" style="color:var(--sel)">✋</span>stepped in · you took this element</div>
+<div class="row"><span class="g bad">≠</span>deviation · off the plan, waiting for a decision</div>
+<div class="row"><span class="g sug">!</span>asks · a batched question waits</div>
+<div class="row"><span class="g mute">·</span>pending · not started</div>
+</div></div>
+</div>
+</div>
+
+<!-- ============ THREAD ============ -->
+<h2 id="thread">5 · thread pane <small>framer · planner · session · fixer</small></h2>
+<p class="lead">One pane shape for every conversation. The top border carries who you talk to: blue for the framer and the fixer (tools, not agents), amber for the planner (a plan is being shaped), the session's colour for a session. Messages from you sit right on blue; agent messages are outlined in the session colour, sub-agents in its sub shade, and each names who wrote it. Every agent reply ends with a <span class="m">changed · what</span> or <span class="m">no change</span> line. Verbs live in the fixed bar above the composer, in the same spot in every mode.</p>
+<div class="demo">
+<div class="grid2">
+<div class="thread" style="height:700px;border:1px solid var(--line);border-top-width:3px;border-radius:var(--r-card)">
+<div class="hd"><b>Yokohama</b><span>claude code · PgRefundRepo</span><span class="r">session</span></div>
+<div class="msgs">
+<div class="msg me"><div class="who">you · 14:02</div>Add refunds for paid orders. Keep the payments port; a refund is a new port method, not a new client.</div>
+<div class="msg ag"><div class="who">Yokohama</div>Plan accepted. Starting with the domain: RefundRequest, then the port. I will not touch payments_http.rs until the port is settled.<div class="tool">read domain/order.rs · 1–120<br>read domain/ports.rs<br>arch reach OrderRepo · depth 1</div><span class="changed">changed · RefundRequest added · Refunds port added</span></div>
+<div class="msg sub"><div class="who">sub · store</div>Implementing PgRefundRepo. The existing PgOrderRepo uses a sqlx transaction; reusing it.<div class="tool">edit store/pg.rs · +38 −2</div><span class="changed none">no change on the map yet · saves on the next step</span></div>
+<div class="qblock"><b>Yokohama asks · 2</b><div class="mute" style="font-size:var(--fs-sm)">one question, with what each option changes</div>
+<div style="margin-top:4px">Refund a partially shipped order?</div>
+<div class="opts"><button>refuse · refund only unshipped<span class="e">no map change</span></button><button>allow · new Partial status<span class="e">+1 item in domain</span></button><button>ask the payments provider first<span class="e">+1 link api → payments</span></button></div>
+<div class="later">later · leaves it waiting, no nagging</div></div>
+<div class="devcard"><b>≠ deviation</b> · HttpNotifier<div class="reason">Yokohama: refund confirmations need an email; there is no notifier port, so I called reqwest from api directly.</div>
+<div class="typ"><button><i>back on the plan</i>revert the call · do it through a port</button><button><i>update the plan</i>absorb: add a Notifier port as element 7</button><button><i>not this change</i>carve out as a follow-up intention · revert here</button><button class="quiet"><i>discuss</i>not a decision · how you get to one</button></div></div>
+</div>
+<div class="verbs"><span class="st"><span class="dot s"></span>running · PgRefundRepo</span><span class="ac"><button class="sm g" data-tip="pause">⏸</button><button class="sm g" data-tip="step in">✋</button><button class="sm g" data-tip="stop">⏹</button><button class="sm quiet">driver ▾</button></span></div>
+<div class="composer"><input placeholder="tell Yokohama…"><button class="sm primary">Send</button></div>
+</div>
+<div class="stack">
+<div class="thread planner" style="border:1px solid var(--line);border-top:3px solid var(--sug);border-radius:var(--r-card)">
+<div class="hd"><b>planner</b><span>shaping · 3 elements</span><span class="r">plan</span></div>
+<div class="msgs" style="max-height:140px"><div class="msg me"><div class="who">intention</div>Add refunds for paid orders.</div><div class="msg ag" style="border-color:var(--sug)"><div class="who" style="color:var(--sug)">planner</div>Three elements, in the columns the map already has. One question below.<span class="changed">changed · 3 elements drafted</span></div></div>
+<div class="verbs"><span class="st">draft · 1 question open</span><span class="ac"><span class="split"><button class="sm primary">Accept · delegate to Yokohama</button><button class="sm primary dd">▾</button></span><button class="sm">Save plan</button><button class="sm quiet">Discard</button></span></div>
+<div class="composer"><input placeholder="answer, or say how…"><button class="sm primary">Send</button></div>
+</div>
+<div class="thread framer" style="border:1px solid var(--line);border-top:3px solid var(--sel);border-radius:var(--r-card)">
+<div class="hd"><b>ask</b><span>orderly · main</span><span class="r">framer</span></div>
+<div class="msgs" style="max-height:150px"><div class="msg me">who calls OrderRepo::save outside api?</div><div class="tool">arch reach OrderRepo::save · incoming · all<br>arch why store::PgOrderRepo</div><div class="msg ag" style="border-color:var(--sel)"><div class="who" style="color:var(--sel)">answer · 2 witnesses</div>Nobody outside api. Two callers, both in service.rs. <span class="tag m c">service.rs:61</span> <span class="tag m c">service.rs:88</span></div></div>
+<div class="verbs"><span class="st">judgement · none needed</span><span class="ac"><button class="sm">make it so ›</button><button class="sm quiet">copy</button></span></div>
+<div class="composer"><input placeholder="ask the repo…  ⌘K"><button class="sm primary">Ask</button></div>
+</div>
+<div class="ex"><span class="st">fixer · same pane, blue top, verbs = the finding's three doors</span><div class="verbs" style="border:1px solid var(--line);border-radius:var(--r-card)"><span class="st"><span class="tag b">⚠</span>no-http-in-domain · 1 site</span><span class="ac"><button class="sm primary">fix myself</button><button class="sm">with Yokohama</button><button class="sm quiet">allow…</button></span></div></div>
+</div>
+</div>
+</div>
+
+<!-- ============ MAP ============ -->
+<h2 id="map">6 · map primitives <small>drawn here as SVG; the product draws items and links in WebGL from the same values</small></h2>
+<p class="lead">Positions come from facts; every state on this page only paints. Items are 18 px tall boxes with a 10 px mono label that never scales; ports are the same box with round ends; externals are dashed. Selection is blue at 1.6 px, lit is ink at 1.6 px, faded is opacity .3 on the whole group. Overlays stack by one rule: outline = session, fill = plan or finding.</p>
+<div class="demo">
+<div class="mapbg" style="padding:12px">
+<svg class="map" viewBox="0 0 760 250" style="width:760px;max-width:100%;height:auto" role="img"><title>Map primitives</title>
+<defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="context-stroke"/></marker></defs>
+<rect class="area" x="6" y="6" width="176" height="238" rx="6"/><text class="area-h" x="12" y="20">api · driving</text>
+<rect class="area sug" x="192" y="6" width="176" height="238" rx="6"/><text class="area-h" x="198" y="20" style="fill:var(--sug)">domain · suggested</text>
+<rect class="area editing" x="378" y="6" width="176" height="238" rx="6"/><text class="area-h" x="384" y="20" style="fill:var(--sel)">store · editing</text>
+<rect class="area" x="564" y="6" width="190" height="238" rx="6"/><text class="area-h" x="570" y="20">outbound</text>
+<!-- items column 1 -->
+<rect class="item" x="14" y="32" width="160" height="18"/><text class="lbl" x="19" y="44.5">normal · pay()</text>
+<rect class="item sel" x="14" y="58" width="160" height="18"/><text class="lbl sel" x="19" y="70.5">selected · close()</text>
+<rect class="item lit" x="14" y="84" width="160" height="18"/><text class="lbl" x="19" y="96.5">lit · handle_webhook()</text>
+<g class="faded"><rect class="item" x="14" y="110" width="160" height="18"/><text class="lbl" x="19" y="122.5">faded · router</text></g>
+<rect class="item planned" x="14" y="136" width="160" height="18"/><text class="lbl" x="19" y="148.5" style="fill:var(--sug)">planned · refund()</text>
+<rect class="item finding" x="14" y="162" width="160" height="18"/><text class="lbl" x="19" y="174.5">finding · notify()</text>
+<circle class="bd" cx="170" cy="164" r="6"/><text class="bd-t" x="167.5" y="167">1</text>
+<rect class="item ghost" x="14" y="188" width="160" height="18"/><text class="lbl" x="19" y="200.5">ghost · cfg(feature)</text>
+<!-- column 2 -->
+<rect class="item port" x="200" y="32" width="160" height="18"/><text class="lbl" x="209" y="44.5">port · OrderRepo</text>
+<rect class="item port sel" x="200" y="58" width="160" height="18"/><text class="lbl sel" x="209" y="70.5">port · selected</text>
+<rect class="item s" x="200" y="84" width="160" height="18"/><text class="lbl" x="205" y="96.5">touched · Yokohama</text>
+<rect class="item sub" x="200" y="110" width="160" height="18"/><text class="lbl" x="205" y="122.5">sub-agent · store</text>
+<rect class="item s" x="200" y="136" width="160" height="18" style="--sc:var(--s-tl);--sc-bg:var(--s-tl-bg)"/><text class="lbl" x="205" y="148.5">touched · Lyon</text>
+<rect class="item s" x="200" y="162" width="160" height="18" style="fill:var(--sugBg)"/><text class="lbl" x="205" y="174.5" style="fill:var(--sug)">planned + session outline</text>
+<rect class="item s" x="200" y="188" width="160" height="18" style="fill:var(--badBg)"/><text class="lbl" x="205" y="200.5" style="fill:var(--bad)">finding + session outline</text>
+<!-- column 3 -->
+<rect class="item" x="386" y="32" width="160" height="18"/><text class="lbl" x="391" y="44.5">PgOrderRepo</text>
+<rect class="item" x="386" y="84" width="160" height="18"/><text class="lbl" x="391" y="96.5">PaymentsHttp</text>
+<rect class="item planned" x="386" y="136" width="160" height="18"/><text class="lbl" x="391" y="148.5" style="fill:var(--sug)">PgRefundRepo</text>
+<rect class="selbox" x="380" y="78" width="172" height="82"/><rect class="handle" x="377" y="75" width="6" height="6"/><rect class="handle" x="549" y="75" width="6" height="6"/><rect class="handle" x="377" y="157" width="6" height="6"/><rect class="handle" x="549" y="157" width="6" height="6"/>
+<!-- sockets V2 (on a folded chip) -->
+<rect class="chipf" x="386" y="188" width="160" height="22"/><text class="chipf-t" x="398" y="203">tests</text><text class="chipf-n lbl" x="470" y="203">· 41</text>
+<circle class="socket in" cx="386" cy="199" r="4"/><circle class="socket" cx="546" cy="199" r="4"/>
+<!-- column 4 -->
+<rect class="item ext" x="572" y="32" width="174" height="18"/><text class="lbl" x="577" y="44.5">external · postgres · sqlx</text>
+<rect class="item ext" x="572" y="84" width="174" height="18"/><text class="lbl" x="577" y="96.5">external · payments · http</text>
+<rect class="chipf unit" x="572" y="136" width="174" height="22"/><text class="chipf-t" x="584" y="151">unit · billing</text><text class="chipf-n lbl" x="672" y="151">· 3 crates</text><circle class="bs" cx="738" cy="141" r="4"/>
+<rect class="chipf" x="572" y="166" width="174" height="22"/><text class="chipf-t" x="584" y="181">notify</text><text class="chipf-n lbl" x="632" y="181">· 12 items</text><circle class="bd" cx="736" cy="171" r="6"/><text class="bd-t" x="733.5" y="174">2</text>
+<!-- links -->
+<path class="link" d="M174,41 H190 V41 H198" marker-end="url(#ar)"/>
+<path class="link lit" d="M174,67 H186 V67 H198" marker-end="url(#ar)"/>
+<path class="link unresolved" d="M174,93 H186 V119 H198" marker-end="url(#ar)"/>
+<path class="link planned" d="M174,145 H198" marker-end="url(#ar)"/>
+<path class="link s" d="M360,93 H384" marker-end="url(#ar)"/>
+<path class="link smell" d="M384,41 H364" marker-end="url(#ar)"/>
+<path class="link" d="M546,41 H570" marker-end="url(#ar)"/>
+<path class="link finding" d="M546,93 H570" marker-end="url(#ar)"/><rect class="fpill" x="548" y="76" width="22" height="12"/><text class="fpill-t" x="552" y="85">⚠ 1</text>
+<path class="link" d="M368,145 H384" marker-end="url(#ar)"/>
+</svg>
+<div class="apill" style="left:392px;top:63px"><span class="p">Ask</span><span>Reach</span><span>Open pg.rs</span><span>Sub-area…</span></div>
+</div>
+<div class="legend"><span><i></i>item</span><span><i style="border-radius:5px"></i>port</span><span><i style="border-style:dashed;background:var(--map-external)"></i>external</span><span><i style="background:var(--selBg);border-color:var(--sel)"></i>selected</span><span><i style="background:var(--sugBg);border-color:var(--sug);border-style:dashed"></i>planned</span><span><i style="background:var(--s-yk-bg);border-color:var(--s-yk)"></i>touched by Yokohama</span><span><i style="background:var(--s-yk-bg);border-color:var(--s-yk-sub)"></i>its sub-agent</span><span><i style="border-color:var(--bad)"></i>finding</span><span><i style="opacity:.35"></i>faded · other profile</span></div>
+<div class="cap">Links: solid grey normal; blue 1.6 lit when their item is selected; amber dashed for an unresolved path (dyn, spawn); a longer dash for a right-to-left smell; amber dashed for planned; session-coloured when a session added it; red with a ⚠ pill when a finding sits on it. Folded areas are chips with a count and badges; units are the same chip with a heavier stroke. Sockets (V2) sit on a chip's edges: blue when a link comes in. The selection box has four handles and the action pill above it.</div>
+<div class="cmp" style="margin-top:12px;position:relative;height:150px;background:var(--map-paper);border:1px solid var(--line2);border-radius:var(--r-card)">
+<div class="tray" style="left:12px;bottom:12px"><div class="th">Unplaced <span class="n">3</span><span class="c">hide ›</span></div><div class="ti"><span>fn audit_log</span><span>struct Retry</span><span>mod metrics</span></div><div class="foot">drag onto an area or a chip</div></div>
+<div class="wb"><span data-tip="select · V">⬚</span><span data-tip="draw an area · A" class="on">▭</span><span data-tip="sub-area from selection">⊟</span><span class="gap"></span><span data-tip="undo · ⌘Z">↶</span><span data-tip="redo">↷</span><span class="gap"></span><span data-tip="keep · one change in Changes" style="color:var(--sel);font-weight:600">Keep</span></div>
+<div class="zoomc"><span>−</span><b>100%</b><span>+</span><span>fit ⇧1</span></div>
+<div class="minimap" style="height:74px"><svg viewBox="0 0 124 66" style="width:100%;height:100%;display:block"><rect x="2" y="2" width="28" height="62" rx="2" fill="none" stroke="var(--map-areaStroke)" stroke-dasharray="2 2"/><rect x="33" y="2" width="28" height="62" rx="2" fill="none" stroke="var(--map-areaStroke)" stroke-dasharray="2 2"/><rect x="64" y="2" width="28" height="62" rx="2" fill="none" stroke="var(--map-areaStroke)" stroke-dasharray="2 2"/><rect x="95" y="2" width="27" height="62" rx="2" fill="none" stroke="var(--map-areaStroke)" stroke-dasharray="2 2"/><rect x="5" y="8" width="22" height="4" fill="var(--map-itemStroke)" opacity=".5"/><rect x="36" y="8" width="22" height="4" fill="var(--s-yk)"/><rect x="36" y="16" width="22" height="4" fill="var(--map-itemStroke)" opacity=".5"/><rect x="67" y="8" width="22" height="4" fill="var(--map-itemStroke)" opacity=".5"/></svg><div class="vp" style="left:30px;top:6px;width:60px;height:40px"></div></div>
+</div>
+<div class="cap">Whiteboard toolbar (bottom centre, tooltips on hover, ⌘Z undoes everything until Keep), the unplaced tray (bottom left, amber because unplaced means suggested), the zoom control (bottom right, fit is ⇧1 / ⇧2), the minimap (top right, only when the map exceeds the viewport). All four are DOM on top of the canvas.</div>
+</div>
+
+<!-- ============ INLAYS ============ -->
+<h2 id="inlays">7 · editor inlays <small>10.5 px, sans, after the line</small></h2>
+<p class="lead">The editor is rust-analyzer's; arch adds a lens line above an item and small inlays at the end of a line. Six kinds, one shape.</p>
+<div class="demo">
+<div class="code" style="border:1px solid var(--line2);border-radius:var(--r-card)">
+<div class="ln"><span class="n">1</span><span class="t c">//! @arch area: domain</span></div>
+<div class="ln lens"><span class="n"></span><span class="t"><a>2 callers</a><a>1 impl</a><a>reach</a><a>ask</a><a class="w">⚠ 1 finding</a></span></div>
+<div class="ln hl"><span class="n">5</span><span class="t"><span class="k">pub trait</span> OrderRepo: Send + Sync {<span class="inlay witness">witness · why</span></span></div>
+<div class="ln"><span class="n">6</span><span class="t">  <span class="k">async fn</span> get(&amp;self, id: OrderId) -&gt; Result&lt;Option&lt;Order&gt;, StoreError&gt;;</span></div>
+<div class="ln"><span class="n">7</span><span class="t">  <span class="k">async fn</span> save(&amp;self, o: &amp;Order) -&gt; Result&lt;(), StoreError&gt;;<span class="inlay">2 callers</span></span></div>
+<div class="ln"><span class="n">8</span><span class="t">  <span class="c">// planned here</span><span class="inlay planned">planned · refund(&amp;self, o) → Result&lt;RefundId&gt;</span></span></div>
+<div class="ln s"><span class="n">9</span><span class="t">  <span class="k">async fn</span> refund(&amp;self, o: &amp;Order) -&gt; Result&lt;RefundId, StoreError&gt;;<span class="inlay session">Yokohama · editing</span></span></div>
+<div class="ln add"><span class="n">10</span><span class="t">  <span class="k">async fn</span> list(&amp;self, q: &amp;Query) -&gt; Result&lt;Vec&lt;Order&gt;, StoreError&gt;;<span class="inlay you">you</span></span></div>
+<div class="ln"><span class="n">11</span><span class="t">}</span></div>
+<div class="ln"><span class="n">12</span><span class="t"><span class="k">use</span> reqwest::Client;<span class="inlay finding">⚠ no-http-in-domain</span></span></div>
+<div class="ln"><span class="n">13</span><span class="t"><span class="k">use</span> billing::Invoice;<span class="inlay xrepo">↗ billing · other repo</span></span></div>
+</div>
+<div class="cap">witness (blue) opens the fact that answers a question · planned (dashed amber) marks the exact site of a plan element · session (session tint) names who is editing this line right now · you (solid blue) marks your stepped-in edits on a session's branch · finding (red) sits on the offending line · cross-repo (mono, grey) says the item lives in another repo. Line tints: blue selected, green added, red removed, session tint while the agent types there.</div>
+</div>
+
+<!-- ============ CARDS ============ -->
+<h2 id="cards">8 · cards <small>fix · plan delta · impact · merge checklist · pipeline · result · what's new</small></h2>
+<p class="lead">One card shape at radius 6, a 12 px heading with a state on the right, rows of <span class="m">glyph · fact · source link</span>. Cards never have buttons of their own except the fix card and the delta, whose verbs are the pair <span class="m">manual · agent</span>.</p>
+<div class="demo"><div class="grid">
+<div class="card fix"><h5>fix · no-http-in-domain<span class="r tag b">1 site</span></h5><div class="row"><span class="g bad">⚠</span>domain/notify.rs:12 uses reqwest<span class="src">why ›</span></div><div class="row"><span class="g mute">→</span>move the call behind a Notifier port in api</div><div class="acts"><button class="sm primary">fix myself</button><button class="sm">with Yokohama</button><button class="sm quiet">allow this site…</button></div></div>
+<div class="card delta"><h5>plan delta<span class="r tag a">3 elements</span></h5><div class="row"><span class="g sug">+</span><b class="m">RefundRequest</b> · domain<span class="r">new</span></div><div class="row"><span class="g sug">+</span><b class="m">Refunds</b> · port<span class="r">new</span></div><div class="row"><span class="g sug">~</span><b class="m">PaymentsHttp</b> · +refund()<span class="r">changed</span></div><div class="row"><span class="g mute">·</span>keeps: OrderRepo, Payments<span class="r">unchanged</span></div><div class="acts"><span class="split"><button class="sm primary">Accept · delegate to Yokohama</button><button class="sm primary dd">▾</button></span><button class="sm">Save plan</button></div></div>
+<div class="card impact"><h5>impact · save() changed<span class="r tag c">2 feel it</span></h5><div class="row"><span class="g k mute">▸</span>api::pay<span class="src">service.rs:61</span></div><div class="row"><span class="g k mute">▸</span>api::close<span class="src">service.rs:88</span></div><div class="row"><span class="g k mute">·</span>store::PgOrderRepo <span class="tag">impl</span><span class="src">pg.rs:14</span></div></div>
+<div class="card"><h5>merge checklist<span class="r pill b">2 blocking</span></h5><div class="row"><span class="g ok">✓</span>up to date with main<span class="src">git</span></div><div class="row"><span class="g bad">✕</span>tests · 3 failed<span class="src">pipeline ›</span></div><div class="row"><span class="g bad">⚠</span>1 finding · no-http-in-domain<span class="src">findings ›</span></div><div class="row"><span class="g sug">·</span>2 remarks open<span class="src">review ›</span></div><div class="row"><span class="g ok">✓</span>plan realized · 6/6<span class="src">session</span></div></div>
+<div class="card"><h5>pipeline · #418<span class="r tag a">running · 2/4</span></h5><div class="pipe"><span class="ok"></span><span class="ok"></span><span class="run"></span><span></span></div><div class="row"><span class="g ok">✓</span>check<span class="r">41 s</span></div><div class="row"><span class="g ok">✓</span>clippy<span class="r">1 m 02</span></div><div class="row"><span class="g sug">●</span>test<span class="r">running</span></div><div class="row"><span class="g mute">·</span>build image<span class="r"></span></div></div>
+<div class="result"><b>✓ merged</b> · feat/refund → main<div class="row" style="color:var(--ink)"><span class="g ok">·</span>3 commits · 9 files · +412 −38</div><div class="row" style="color:var(--ink)"><span class="g ok">·</span>map: 3 items added, 1 changed · 2 sessions feel it</div><div class="row"><span class="g mute">·</span>branch archived · thread kept<span class="src">repo ›</span></div></div>
+<div class="card"><h5>what's new · main moved<span class="r tag c">2 commits</span></h5><div class="row"><span class="g mute">◦</span><span class="m" style="font-size:var(--fs-sm)">a41f2c</span> pg: pool size from env<span class="r">Mara · 2 h</span></div><div class="row"><span class="g mute">◦</span><span class="m" style="font-size:var(--fs-sm)">9c07e1</span> webhook: idempotency key<span class="r">Lyon · 5 h</span></div><div class="row"><span class="g sug">→</span>touches PgOrderRepo, which this branch changed<span class="src">impact ›</span></div></div>
+</div></div>
+
+<!-- ============ BUTTONS ============ -->
+<h2 id="buttons">9 · split button · gated button</h2>
+<p class="lead">The split button is the planner's Accept: the primary verb plus a ▾ that picks the driver; Save plan is the manual path beside it, Discard is quiet. The gated button is the merge: it stays visibly primary but disabled, with its reason line under it as pills, each a link to what unblocks it.</p>
+<div class="demo"><div class="cmp" style="align-items:flex-start;gap:28px">
+<div class="ex"><span class="st">split · agent first (default)</span><div><span class="split"><button class="primary">Accept · delegate to Yokohama</button><button class="primary dd">▾</button></span> <button>Save plan</button> <button class="quiet">Discard</button></div></div>
+<div class="ex"><span class="st">split · "me first" setting</span><div><button class="primary">Save plan · do it myself</button> <span class="split"><button>Accept · delegate</button><button class="dd plain">▾</button></span> <button class="quiet">Discard</button></div></div>
+<div class="ex"><span class="st">gated · blocked</span><div class="gated"><button class="primary" disabled>Merge into main</button><span class="reason">blocked by <span class="pill b">tests · 3 failed</span><span class="pill b">1 finding</span><span class="pill a">2 remarks</span></span></div></div>
+<div class="ex"><span class="st">gated · open</span><div class="gated"><button class="primary">Merge into main</button><span class="reason">everything green · 3 commits · description drafted from the plan</span></div></div>
+<div class="ex"><span class="st">hand back · disabled until the note is written</span><div class="gated"><button class="primary" disabled>Hand back to Yokohama</button><span class="reason">write what you changed and why first</span></div></div>
+</div></div>
+
+<!-- ============ TABS ============ -->
+<h2 id="tabs">10 · tabs and switches</h2>
+<p class="lead">The centre tab bar is VS Code's: Map pinned first and unclosable, file tabs in mono, a dot for a dirty file, shortcuts on the right. Panes switch views with a segmented control in a well. The map has a level switch and overlay toggles in the same bar.</p>
+<div class="demo stack">
+<div class="tabbar" style="border:1px solid var(--line2);border-radius:var(--r-card) var(--r-card) 0 0"><span class="t pin on">Map</span><span class="t f"><span class="dirty"></span>ports.rs<span class="x">✕</span></span><span class="t f">service.rs<span class="x">✕</span></span><span class="t f" style="color:var(--s-yk)">pg.rs · Yokohama<span class="x">✕</span></span><span class="t f">Review · feat/refund<span class="x">✕</span></span><span class="sp"></span><span class="r"><span class="seg"><span>repo</span><span>areas</span><span class="on">items</span></span><span class="ovl"><span class="on"><i></i>sessions</span><span class="on"><i></i>plan</span><span><i></i>findings</span><span><i></i>delta</span></span>⌘1 Map · ⌘W close</span></div>
+<div class="cmp" style="gap:24px">
+<div class="ex"><span class="st">left pane view switch</span><div class="seg fill" style="width:220px"><span class="on">Files</span><span>Changes</span><span>Review</span></div></div>
+<div class="ex"><span class="st">with a count and a disabled view</span><div class="seg fill" style="width:220px"><span>Files</span><span class="on">Changes · 3</span><span class="off">Review</span></div></div>
+<div class="ex"><span class="st">right pane · about the selection</span><div class="seg"><span class="on">Code</span><span>Reach</span></div></div>
+<div class="ex"><span class="st">reach bar</span><div class="cmp" style="gap:6px;font-size:var(--fs-md)"><span class="seg" style="gap:0"><span>−</span><span class="on m">depth 1</span><span>+</span><span style="color:var(--sel)">all</span></span><span class="mute">4 reached</span><span class="seg"><span class="on">incoming</span><span>outgoing</span></span></div></div>
+</div>
+<div class="ex"><span class="st">11 · funnel (onboarding, out of V1 · tokens allow it)</span><div class="funnel"><span class="done">open</span><span class="done">map</span><span class="on">place</span><span>rules</span><span>first ask</span></div></div>
+</div>
+
+<!-- ============ RULES ============ -->
+<h2 id="rules">rules <small>encoded, not just written</small></h2>
+<div class="spec">
+<div class="rule"><b>verbs</b><span>live in a pane's fixed bar (<span class="m">.verbs</span>) or in a chip. There is no <span class="m">.modal</span> class in the system; the update dialog and the ⌘P palette are the two popovers, and both are dismissed by Esc without a trace.</span></div>
+<div class="rule"><b>blocked</b><span>is a <span class="m">.pill</span> wherever its subject is named: in the selector, in a menu row, under the gated button, in a session-card row. Same pill, same words (<span class="m">asks · 2</span>, <span class="m">collision</span>, <span class="m">paused</span>).</span></div>
+<div class="rule"><b>manual first</b><span>in every pair the manual door comes first and is the bold one: <span class="m">fix myself · with Yokohama</span>, <span class="m">Update myself · with Yokohama</span>, <span class="m">Resolve myself · with Yokohama</span>. The split button is the one exception, and the "me first" setting swaps it.</span></div>
+<div class="rule"><b>text</b><span>chips and cards separate with <span class="m">·</span>; labels are lowercase; identifiers, branch names, counts and file:line are mono. No uppercase eyebrows anywhere (the mocks had some; see the changes below).</span></div>
+<div class="rule"><b>dark</b><span>every token has a dark value; components never hard-code a hex. The session palette is re-tuned for dark (higher lightness for the main and sub, dark tints for bg) so the 12 px test holds on both.</span></div>
+<div class="rule"><b>motion</b><span>only <span class="m">.frame.live</span>, <span class="m">.frame.waiting</span> and <span class="m">arch-item-pulse</span> animate; <span class="m">prefers-reduced-motion</span> stills them all. Nothing has a hover transition.</span></div>
+<div class="rule"><b>size</b><span>nothing on a screen exceeds 14 px; 14 is for pane headings only. Map labels are 10 px and do not scale; folding handles scale.</span></div>
+</div>
+
+<!-- ============ SCREENS ============ -->
+<h2 id="screens">composed screens <small>rebuilt from the components above, nothing else</small></h2>
+<h3>A · session, live <small class="mute" style="font-weight:400">session flow · state 2 "working, live"</small></h3>
+<p class="lead">Yokohama owns feat/refund. The frame runs in its colour; the session card is pinned at the top of the left pane; the map overlays what the session touched (sub-agent in the lighter shade, untouched plan elements still amber); the thread streams on the right with the verb bar in its fixed place.</p>
+<div class="frame live" id="scrA">
+<div class="inner shell">
+<div class="top"><span class="brand">arch</span><span class="ink2">orderly</span><span class="lbl">branch</span><span class="selector"><span class="dot s"></span>feat/refund<span class="pill s">working</span><span class="car">▾</span></span><span class="right"><span class="pill">●●●○</span><span>Ask ⌘K</span></span></div>
+<div class="strip"><span class="bn">feat/refund</span><span class="chip" style="--sc:var(--s-yk);--sc-bg:var(--s-yk-bg)"><span class="k agent">agent</span>Yokohama <span class="n">· 3/6</span><span class="sep">·</span><a class="p">follow</a><span class="sep">·</span><a>step in</a></span><span class="chip"><span class="k git">git</span>behind main <span class="n">· 2</span><span class="sep">·</span><a class="p">Update myself</a><span class="sep">·</span><a>with Yokohama</a></span><span class="chip"><span class="k tree">tree</span>2 files editing<span class="sep">·</span><a class="p">open pg.rs</a></span></div>
+<div class="body">
+<div class="left">
+<div class="scard"><div class="h"><span class="dot s"></span><b>Yokohama</b><span class="mute">claude code</span><span class="n">3/6</span></div>
+<div class="e"><span class="g done">✓</span>RefundRequest<span class="w">Yokohama</span></div><div class="e"><span class="g done">✓</span>Refunds · port<span class="w">Yokohama</span></div><div class="e on"><span class="g run">●</span>PgRefundRepo<span class="w">sub · store</span></div><div class="e sub"><span class="g run">●</span>tests/refund.rs<span class="w">sub · tests</span></div><div class="e"><span class="g">·</span>refund() in api<span class="w"></span></div><div class="e"><span class="g">·</span>webhook · refund<span class="w"></span></div>
+<div class="foot">14 min · 2 sub-agents<a>thread ›</a></div></div>
+<div class="seg fill" style="margin:10px 0 8px"><span class="on">Files</span><span>Changes · 4</span><span class="off">Review</span></div>
+<div class="back">‹ repo <b>orderly</b></div>
+<div class="tree"><div class="tr d">api/</div><div class="tr f">service.rs</div><div class="tr f">webhook.rs</div><div class="tr d">domain/</div><div class="tr f">order.rs<span class="mk s">Y</span></div><div class="tr f">ports.rs<span class="mk s">Y</span></div><div class="tr f">refund.rs<span class="mk s">Y</span></div><div class="tr d">store/</div><div class="tr f on">pg.rs<span class="mk s">●</span></div><div class="tr d">clients/</div><div class="tr f">payments_http.rs<span class="mk p">plan</span></div><div class="tr d">tests/</div><div class="tr f">refund.rs<span class="mk s">●</span></div></div>
+</div>
+<div class="center">
+<div class="tabbar"><span class="t pin on">Map</span><span class="t f" style="color:var(--s-yk)">pg.rs · Yokohama<span class="x">✕</span></span><span class="sp"></span><span class="r"><span class="seg"><span>repo</span><span>areas</span><span class="on">items</span></span><span class="ovl"><span class="on"><i></i>sessions</span><span class="on"><i></i>plan</span><span><i></i>findings</span><span><i></i>delta</span></span></span></div>
+<div class="mapin" style="padding:14px">
+<svg class="map" viewBox="0 0 640 260" style="width:100%;height:auto" role="img"><title>orderly · feat/refund · Yokohama's overlay</title>
+<defs><marker id="ar2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="context-stroke"/></marker></defs>
+<rect class="area" x="6" y="6" width="150" height="248" rx="6"/><text class="area-h" x="12" y="20">api · driving</text>
+<rect class="area" x="166" y="6" width="150" height="248" rx="6"/><text class="area-h" x="172" y="20">domain</text>
+<rect class="area" x="326" y="6" width="150" height="248" rx="6"/><text class="area-h" x="332" y="20">clients · store · driven</text>
+<rect class="area" x="486" y="6" width="148" height="248" rx="6"/><text class="area-h" x="492" y="20">outbound</text>
+<rect class="item" x="14" y="32" width="134" height="18"/><text class="lbl" x="19" y="44.5">router · entry</text>
+<rect class="item" x="14" y="62" width="134" height="18"/><text class="lbl" x="19" y="74.5">pay()</text>
+<rect class="item" x="14" y="92" width="134" height="18"/><text class="lbl" x="19" y="104.5">close()</text>
+<rect class="item" x="14" y="122" width="134" height="18"/><text class="lbl" x="19" y="134.5">handle_webhook()</text>
+<rect class="item planned" x="14" y="152" width="134" height="18"/><text class="lbl" x="19" y="164.5" style="fill:var(--sug)">refund()</text>
+<rect class="item planned" x="14" y="182" width="134" height="18"/><text class="lbl" x="19" y="194.5" style="fill:var(--sug)">webhook · refund</text>
+<rect class="item" x="174" y="32" width="134" height="18"/><text class="lbl" x="179" y="44.5">Order</text>
+<rect class="item port" x="174" y="72" width="134" height="18"/><text class="lbl" x="183" y="84.5">OrderRepo · port</text>
+<rect class="item port" x="174" y="112" width="134" height="18"/><text class="lbl" x="183" y="124.5">Payments · port</text>
+<rect class="item s" x="174" y="152" width="134" height="18"/><text class="lbl" x="179" y="164.5">RefundRequest</text>
+<rect class="item port s" x="174" y="192" width="134" height="18"/><text class="lbl" x="183" y="204.5">Refunds · port</text>
+<rect class="item" x="334" y="72" width="134" height="18"/><text class="lbl" x="339" y="84.5">PgOrderRepo</text>
+<rect class="item" x="334" y="112" width="134" height="18"/><text class="lbl" x="339" y="124.5">PaymentsHttp</text>
+<rect class="item sub" x="334" y="192" width="134" height="18" id="pulsing"/><text class="lbl" x="339" y="204.5">PgRefundRepo</text>
+<rect class="item ext" x="494" y="72" width="130" height="18"/><text class="lbl" x="499" y="84.5">postgres · sqlx</text>
+<rect class="item ext" x="494" y="112" width="130" height="18"/><text class="lbl" x="499" y="124.5">payments · http</text>
+<path class="link" d="M148,71 H160 V81 H172" marker-end="url(#ar2)"/><path class="link" d="M148,101 H160 V81 H172" marker-end="url(#ar2)"/><path class="link" d="M148,131 H160 V121 H172" marker-end="url(#ar2)"/>
+<path class="link planned" d="M148,161 H172" marker-end="url(#ar2)"/><path class="link planned" d="M148,191 H160 V201 H172" marker-end="url(#ar2)"/>
+<path class="link smell" d="M334,81 H308" marker-end="url(#ar2)"/><path class="link smell" d="M334,121 H308" marker-end="url(#ar2)"/>
+<path class="link s" d="M334,201 H308" marker-end="url(#ar2)" style="stroke:var(--s-yk-sub);stroke-dasharray:4 3"/>
+<path class="link" d="M468,81 H492" marker-end="url(#ar2)"/><path class="link" d="M468,121 H492" marker-end="url(#ar2)"/><path class="link s" d="M468,201 H480 V81 H492" marker-end="url(#ar2)" style="stroke:var(--s-yk-sub)"/>
+</svg>
+</div>
+<div class="legend"><span><i style="background:var(--s-yk-bg);border-color:var(--s-yk)"></i>touched by Yokohama</span><span><i style="background:var(--s-yk-bg);border-color:var(--s-yk-sub)"></i>its sub-agent</span><span><i style="background:var(--sugBg);border-color:var(--sug);border-style:dashed"></i>planned · not yet</span><span style="margin-left:auto">map updates on the agent's saves · last 4 s ago</span></div>
+</div>
+<div class="right thread">
+<div class="hd"><b>Yokohama</b><span>claude code · PgRefundRepo</span><span class="r">session</span></div>
+<div class="msgs">
+<div class="msg me"><div class="who">you · 14:02</div>Add refunds for paid orders. Keep the payments port; a refund is a new port method, not a new client.</div>
+<div class="msg ag"><div class="who">Yokohama</div>Domain done: RefundRequest and the Refunds port. Handing the store to a sub-agent while I prepare the api element.<div class="tool">arch reach Payments · depth 1<br>edit domain/refund.rs · +61<br>edit domain/ports.rs · +9</div><span class="changed">changed · RefundRequest added · Refunds port added</span></div>
+<div class="msg sub"><div class="who">sub · store</div>Implementing PgRefundRepo on the existing sqlx transaction from PgOrderRepo.<div class="tool">read store/pg.rs<br>edit store/pg.rs · +38 −2 · streaming</div><span class="changed none">no change on the map yet · next save</span></div>
+<div class="msg sub"><div class="who">sub · tests</div>Writing the lifecycle test for a refund after payment.<div class="tool">edit tests/refund.rs · +44</div></div>
+</div>
+<div class="verbs"><span class="st"><span class="dot s"></span>running · 2 sub-agents</span><span class="ac"><button class="sm g" data-tip="pause">⏸</button><button class="sm g" data-tip="step in">✋</button><button class="sm g" data-tip="stop">⏹</button><button class="sm quiet">driver ▾</button></span></div>
+<div class="composer"><input placeholder="tell Yokohama…"><button class="sm primary">Send</button></div>
+</div>
+</div>
+<div class="status"><span>Findings 0</span><span>Rules 3</span><span style="color:var(--s-yk)">Yokohama editing 2 files</span><span class="r">Map up to date · 4 s ago</span></div>
+</div></div>
+
+<h3 style="margin-top:32px">B · map, edit at scale <small class="mute" style="font-weight:400">map focus · "edit at scale" on 1,214 items</small></h3>
+<p class="lead">Five areas folded to chips with counts and badges, domain expanded in place because the selection lives there, a 12-item selection with its handles and pill, the tray and the toolbar, undo until Keep. Blue frame: these are your uncommitted map edits. Every label is readable; nothing shrank.</p>
+<div class="frame editing" id="scrB">
+<div class="inner shell" style="--bodyh:600px">
+<div class="top"><span class="brand">arch</span><span class="ink2">orderly</span><span class="lbl">branch</span><span class="selector"><span class="dot sel"></span>chore/split-domain<span class="car">▾</span></span><span class="right"><span class="pill">●●●●</span><span>Ask ⌘K</span></span></div>
+<div class="strip"><span class="bn">chore/split-domain</span><span class="chip"><span class="k tree">tree</span>map edits · 4 <span class="n">· not kept</span><span class="sep">·</span><a class="p">Keep</a><span class="sep">·</span><a>undo all</a></span><span class="chip"><span class="k finding">finding</span>rule <span class="n">no-cycles</span> · 1<span class="sep">·</span><a class="p">fix myself</a><span class="sep">·</span><a>with an agent</a></span></div>
+<div class="body">
+<div class="left">
+<div class="seg fill" style="margin:0 0 8px"><span class="on">Files</span><span>Changes · 1</span><span class="off">Review</span></div>
+<div class="back">‹ repo <b>orderly</b></div>
+<div class="tree"><div class="tr d">api/</div><div class="tr d">domain/</div><div class="tr f on">mod.rs<span class="mk M">M</span></div><div class="tr f">order.rs</div><div class="tr f">refund.rs</div><div class="tr f">ports.rs</div><div class="tr f">pricing/ · 18 files</div><div class="tr d">store/</div><div class="tr d">clients/</div><div class="tr d">notify/</div><div class="tr d">tests/</div><div class="tr d">.arch/</div><div class="tr f">units<span class="mk M">M</span></div></div>
+</div>
+<div class="center">
+<div class="tabbar"><span class="t pin on">Map</span><span class="t f">mod.rs<span class="x">✕</span></span><span class="sp"></span><span class="r"><span class="seg"><span>repo</span><span>areas</span><span class="on">items</span></span><span class="ovl"><span><i></i>sessions</span><span><i></i>plan</span><span class="on"><i></i>findings</span><span><i></i>delta</span></span></span></div>
+<div class="mapin" id="mapB"></div>
+<div class="legend"><span>1,214 items · 5 areas folded · domain expanded</span><span><i style="background:var(--selBg);border-color:var(--sel)"></i>12 selected</span><span><i style="border-color:var(--bad)"></i>1 finding</span><span style="margin-left:auto">⌘Z undoes until Keep · ⇧2 fits the area</span></div>
+</div>
+<div class="right">
+<div class="hd" style="padding:8px 12px;border-bottom:1px solid var(--line2);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:var(--fs-base)"><b class="m" style="font-size:var(--fs-xl);font-weight:500">12 items</b><span class="ink2">domain · pricing</span><span class="ink2"><b>31</b> links inside</span><span class="ink2"><b>6</b> links out</span><span style="flex-basis:100%;display:flex;gap:4px;align-items:center"><span class="seg"><span class="on">Reach</span><span>Code</span></span><button class="sm">Ask</button><span class="mute" style="margin-left:auto;font-size:var(--fs-sm)">Esc clears</span></span></div>
+<div style="padding:10px 12px;display:grid;gap:8px;overflow:auto">
+<div class="card"><h5>sub-area from selection<span class="r tag c">proposed</span></h5><div class="row"><span class="g mute">▭</span>pricing · 12 items · stays in domain's column</div><div class="row"><span class="g sug">→</span><span>declared in domain/pricing/mod.rs as <span class="m">@arch area: pricing</span></span></div><div class="row"><span class="g ok">✓</span>no link changes column</div><div class="acts"><button class="sm primary">Make sub-area</button><button class="sm quiet">cancel</button></div></div>
+<div class="card"><h5>edits since last Keep<span class="r tag">4</span></h5><div class="row"><span class="g mute">1</span>moved RefundRequest to domain<span class="src">undo</span></div><div class="row"><span class="g mute">2</span>renamed area "misc" → "notify"<span class="src">undo</span></div><div class="row"><span class="g mute">3</span>placed fn audit_log from the tray<span class="src">undo</span></div><div class="row"><span class="g mute">4</span>drew area "pricing" (this one)<span class="src">undo</span></div><div class="acts"><button class="sm primary">Keep · 1 change in Changes</button><button class="sm">undo all</button></div></div>
+<div class="card" style="border-color:var(--bad)"><h5>⚠ no-cycles<span class="r tag b">1</span></h5><div class="row"><span class="g bad">↺</span>notify → api → notify<span class="src">why ›</span></div><div class="acts"><button class="sm">fix myself</button><button class="sm">with an agent</button><button class="sm quiet">allow…</button></div></div>
+</div>
+</div>
+</div>
+<div class="status"><span>Findings 1</span><span>Rules 5</span><span style="color:var(--sel)">4 map edits not kept</span><span class="r">Map up to date · 2 s ago</span></div>
+</div></div>
+
+<!-- ============ CHANGES ============ -->
+<h2 id="changes">changes from the reference pages <small>and why</small></h2>
+<div class="note">
+<ol>
+<li><b>Chip radius 6 → 4.</b> The mocks drew Actions chips at 6 px, the same as cards. The handoff's scale (3 items · 4 chips · 6 cards) gives chips their own step so a chip reads as a control and a card as a container; the tag inside a chip is 3.</li>
+<li><b>Uppercase eyebrows dropped.</b> The mocks' section titles (<span class="m">h6</span> in menus, panes and Reach) were uppercase with letter-spacing. The rule "lowercase labels" now applies everywhere; they are 10.5 px mute, no tracking.</li>
+<li><b>Frame rotate 4 s → 6 s.</b> The session mock ran the sweep at 4 s and 3.2 s in two places; the handoff says ~6 s. One duration, one token (<span class="m">--t-frame</span>).</li>
+<li><b>Waiting frame is amber over a tint, not amber over a hard-coded #EAD9B0.</b> The pulse now animates opacity of an amber layer over <span class="m">sugBg</span>, so it works in dark mode and under reduced motion (still amber).</li>
+<li><b>Semantic colours get dark-tuned foregrounds.</b> The mocks kept <span class="m">sel/ok/bad/sug</span> identical in dark and only changed their backgrounds; on dark paper those fail contrast as text. Dark now lifts each (e.g. sel #1F5FA8 → #5B95E0). Same for the session palette.</li>
+<li><b>Map palette is now tokens.</b> The mocks hard-coded the warm map greys (#F1EFE8, #888780, #B4B2A9, #5F5E5A, #2C2C2A) in SVG. They are now <span class="m">--map-*</span> with dark values, and duplicated as plain values in <span class="m">arch-tokens.json</span> so the WebGL layer reads the same numbers.</li>
+<li><b>Session card foot link right-aligned, glyph column fixed at 12 px.</b> The mocks varied; the card now has one grid so rows align across sessions.</li>
+<li><b>Thread pane top border is the pane's identity.</b> The mocks coloured agent messages by background (<span class="m">ykBg</span>). Now agent messages are outlined (1 px, 3 px left) in the session colour, sub-agents in the sub shade, and only your messages have a filled background; this keeps the 12 px palette test readable when two sessions' threads sit side by side, and the pane header's top border says which one you are in.</li>
+<li><b>Six session colours added</b> (teal, magenta, cyan, olive, sienna, plum) with an assignment order. Teal sits close to <span class="m">ok</span> green and plum close to violet at 12 px; they are ranked last for that reason, and a session is always named beside its colour.</li>
+<li><b>Question block keeps its "later".</b> The mocks showed it only in a note; it is part of the component now, so "answering resumes, later leaves it waiting" is visible in the block itself.</li>
+<li><b>Deviation card shows the three typologies as fixed labels</b> before the generated option text, so the pattern (back on the plan · update the plan · not this change) is recognisable whatever the wording.</li>
+<li><b>Not changed:</b> the shell grid (220 · 1fr · 330), the tab bar, the map anatomy, the glyph set, IBM Plex, the 4 px grid, the 14 px ceiling, the `·` separator.</li>
+</ol>
+</div>
+<p class="lead" style="margin-top:20px">Constraint check · plain CSS and DOM, no framework, no icon font (glyphs are Unicode; the toolbar uses six characters that a 20-glyph SVG set can replace); every colour is a variable; map values exist as numbers; dark mode from day one; 13" density (the two screens above are 1,280 px wide at 100%).</p>
+</div>
+
+<script>
+// ---- theme switch (docs only)
+document.querySelectorAll('.dochd .theme span').forEach(s=>s.onclick=()=>{document.querySelectorAll('.dochd .theme span').forEach(x=>x.classList.remove('on'));s.classList.add('on');const t=s.dataset.t;if(t==='system')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',t);readVars()});
+// ---- live readouts of the resolved variable values
+function readVars(){const cs=getComputedStyle(document.documentElement);document.querySelectorAll('[data-var]').forEach(e=>{e.textContent=cs.getPropertyValue(e.dataset.var).trim()})}
+readVars();
+// ---- session palette
+const S=[['yk','violet','Yokohama'],['tl','teal','Lyon'],['mg','magenta','Malmö'],['cy','cyan','Cusco'],['ol','olive','Oslo'],['sn','sienna','Seville'],['pl','plum','Porto']];
+document.getElementById('sessions').innerHTML=S.map(([k,n,nm],i)=>`<div class="ex"><span class="st">${i+1} · --s-${k} · ${n}</span><div class="sw"><i style="background:var(--s-${k})"></i><i style="background:var(--s-${k}-sub)"></i><i style="background:var(--s-${k}-bg)"></i><span class="m mute" style="font-size:var(--fs-xs)"><span data-var="--s-${k}"></span><br><span data-var="--s-${k}-sub"></span></span></div></div>`).join('');
+document.getElementById('sesstest').innerHTML=S.map(([k,n,nm])=>`<div style="--sc:var(--s-${k});--sc-sub:var(--s-${k}-sub);--sc-bg:var(--s-${k}-bg);display:flex;flex-direction:column;gap:6px;font-size:var(--fs-base)"><span style="display:flex;gap:6px;align-items:center"><span class="dot s"></span>${nm}<span class="pill s">working</span></span><div class="scard" style="width:150px;padding:4px 8px"><div class="h" style="margin:0"><b>${nm}</b><span class="n">2/5</span></div></div><div class="msg ag" style="padding:4px 8px;font-size:var(--fs-sm)"><div class="who">${nm}</div>outlined message</div><div class="msg sub" style="padding:4px 8px;font-size:var(--fs-sm)"><div class="who">sub · store</div>sub-agent</div></div>`).join('');
+readVars();
+// ---- frames
+const F=[['idle','no session · nothing of yours pending'],['live','Yokohama is working'],['waiting','Yokohama asks · 2'],['editing','your uncommitted work'],['collision','you and Yokohama on pg.rs'],['focus','planning · a focus is open']];
+document.getElementById('frames').innerHTML=F.map(([c,l])=>`<div class="ex"><span class="st">${c}</span><div class="frame ${c}"><div class="inner" style="height:64px;display:grid;place-items:center;font-size:var(--fs-base);color:var(--ink2)">${l}</div></div></div>`).join('')+`<div class="ex"><span class="st">live · another session's colour</span><div class="frame live" style="--frame-color:var(--s-tl);--frame-sub:var(--s-tl-sub)"><div class="inner" style="height:64px;display:grid;place-items:center;font-size:var(--fs-base);color:var(--ink2)">Lyon is working</div></div></div>`;
+// ---- one pulse on a changed map item (screen A)
+setTimeout(()=>{const p=document.getElementById('pulsing');if(p){p.style.transition='none';p.animate([{strokeWidth:'1px',strokeOpacity:1},{strokeWidth:'6px',strokeOpacity:0}],{duration:700,easing:'ease-out'})}},1200);
+// ---- screen B: the map at scale, generated
+(function(){
+const W=900,H=470;let s=`<div class="scroll"><svg class="map" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="display:block" role="img"><title>orderly at scale · domain expanded</title><defs><marker id="ar3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="context-stroke"/></marker></defs>`;
+const cols=[{x:10,w:150,name:'api · driving',chips:[['handlers',214,0,0],['auth',38,0,0],['webhooks',61,0,0]]},{x:172,w:0,name:'domain',open:true},{x:0,w:150,name:'clients · store · driven',chips:[['store',112,1,0],['clients',49,0,0],['notify',12,0,1]]},{x:0,w:130,name:'outbound',chips:[['crates',41,0,0]]}];
+const domW=380;cols[1].w=domW;cols[2].x=cols[1].x+domW+12;cols[3].x=cols[2].x+150+12;
+cols.forEach(c=>{s+=`<rect class="area" x="${c.x}" y="6" width="${c.w}" height="${H-12}" rx="6"/><text class="area-h" x="${c.x+6}" y="20">${c.name}</text>`;
+ if(c.chips)c.chips.forEach((ch,i)=>{const y=34+i*34;s+=`<rect class="chipf" x="${c.x+8}" y="${y}" width="${c.w-16}" height="22"/><text class="chipf-t" x="${c.x+18}" y="${y+15}">${ch[0]}</text><text class="lbl chipf-n" text-anchor="end" x="${c.x+c.w-18-(ch[3]?14:0)}" y="${y+15}">· ${ch[1]}</text>`;
+  if(ch[3])s+=`<circle class="bd" cx="${c.x+c.w-18}" cy="${y+3}" r="6"/><text class="bd-t" x="${c.x+c.w-20.5}" y="${y+6}">1</text>`;});});
+// domain expanded: 3 sub-areas, one being drawn (pricing, selected)
+const subs=[{n:'orders',x:cols[1].x+8,y:30,w:176,items:['Order','OrderId','Status','OrderRepo · port','Payments · port','Refunds · port','RefundRequest','Line','Address','Customer','CustomerId','Money','Currency','Discount','Tax']},{n:'pricing · drawing',x:cols[1].x+194,y:30,w:176,edit:true,items:['PriceList','Rate','Tier','Rounding','Quote','QuoteLine','Surcharge','FxRate','Fx · port','Ledger · port','Invoice','InvoiceId']},{n:'inventory',x:cols[1].x+8,y:30+15*22+40,w:176,items:['Stock','Sku','Reservation','Warehouse','Inventory · port']}];
+subs.forEach(a=>{const h=a.items.length*22+28;s+=`<rect class="area ${a.edit?'editing':''}" x="${a.x}" y="${a.y}" width="${a.w}" height="${h}" rx="6"/><text class="area-h" x="${a.x+6}" y="${a.y+13}" ${a.edit?'style="fill:var(--sel)"':''}>${a.n}</text>`;
+ a.items.forEach((it,i)=>{const y=a.y+22+i*22;const port=/port/.test(it);const sel=a.edit;s+=`<rect class="item ${port?'port':''} ${sel?'sel':''}" x="${a.x+8}" y="${y}" width="${a.w-16}" height="18"/><text class="lbl ${sel?'sel':''}" x="${a.x+(port?17:13)}" y="${y+12.5}">${it}</text>`;});
+ if(a.edit){s+=`<rect class="selbox" x="${a.x-4}" y="${a.y-4}" width="${a.w+8}" height="${h+8}"/>`;[[a.x-7,a.y-7],[a.x+a.w+1,a.y-7],[a.x-7,a.y+h+1],[a.x+a.w+1,a.y+h+1]].forEach(([hx,hy])=>s+=`<rect class="handle" x="${hx}" y="${hy}" width="6" height="6"/>`)}});
+// links: chip → domain, domain → chip, plus a finding link
+const L=[['M160,45 H172 V61 H'+(subs[0].x),0],['M160,79 H166 V127 H'+(subs[0].x),0],['M160,113 H166 V149 H'+(subs[0].x),0],[`M${subs[0].x+subs[0].w} ${subs[0].y+22+3*22+9} H${subs[1].x}`,0],[`M${subs[0].x+subs[0].w} ${subs[0].y+22+11*22+9} H${subs[1].x}`,0],[`M${cols[2].x+8} 45 H${subs[1].x+subs[1].w+8}`,'smell'],[`M${subs[1].x+subs[1].w} ${subs[1].y+22+8*22+9} H${cols[2].x+8} V79`,0],[`M${subs[1].x+subs[1].w} ${subs[1].y+22+9*22+9} H${cols[2].x+4} V113 H${cols[2].x+8}`,0],[`M${cols[2].x+150} 45 H${cols[3].x+8}`,0],[`M${cols[2].x+150} 113 H${cols[3].x+8} `,'finding'],[`M${cols[2].x+8} 113 H${cols[1].x+domW} `,'smell finding']];
+L.forEach(([d,c])=>s+=`<path class="link ${c||''}" d="${d}" marker-end="url(#ar3)"/>`);
+s+=`<rect class="fpill" x="${cols[2].x+150+8}" y="98" width="22" height="12"/><text class="fpill-t" x="${cols[2].x+150+12}" y="107">⚠ 1</text>`;
+s+=`</svg></div>`;
+const m=document.getElementById('mapB');m.innerHTML=s+`<div class="apill" style="left:${subs[1].x-70}px;top:8px"><span class="p">Sub-area…</span><span>Rename</span><span>Reach</span><span>Ask</span><span>✕ drop</span></div><div class="tray"><div class="th">Unplaced <span class="n">2</span><span class="c">hide ›</span></div><div class="ti"><span>struct Retry</span><span>mod metrics</span></div><div class="foot">drag onto an area or a chip</div></div><div class="wb"><span data-tip="select · V" class="on">⬚</span><span data-tip="draw an area · A">▭</span><span data-tip="sub-area from selection">⊟</span><span class="gap"></span><span data-tip="undo · ⌘Z">↶</span><span data-tip="redo">↷</span><span class="gap"></span><span data-tip="one change in Changes" style="color:var(--sel);font-weight:600">Keep</span></div><div class="zoomc"><span>−</span><b>100%</b><span>+</span><span>fit ⇧1</span></div><div class="minimap" style="height:70px"><svg viewBox="0 0 124 62" style="width:100%;height:100%;display:block"><rect x="2" y="2" width="18" height="58" rx="2" fill="none" stroke="var(--map-areaStroke)" stroke-dasharray="2 2"/><rect x="23" y="2" width="52" height="58" rx="2" fill="none" stroke="var(--map-areaStroke)" stroke-dasharray="2 2"/><rect x="78" y="2" width="22" height="58" rx="2" fill="none" stroke="var(--map-areaStroke)" stroke-dasharray="2 2"/><rect x="103" y="2" width="19" height="58" rx="2" fill="none" stroke="var(--map-areaStroke)" stroke-dasharray="2 2"/><rect x="27" y="6" width="20" height="40" fill="var(--map-itemStroke)" opacity=".35"/><rect x="50" y="6" width="20" height="30" fill="var(--sel)" opacity=".6"/></svg><div class="vp" style="left:24px;top:4px;width:80px;height:50px"></div></div>`;
+})();
+</script>
+</body></html>

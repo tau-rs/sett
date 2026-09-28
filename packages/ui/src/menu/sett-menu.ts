@@ -24,7 +24,9 @@ export class SettMenu extends LitElement {
       padding-bottom: var(--sett-space-1);
     }
   `;
-  render() { return html`<div role="listbox"><slot></slot></div>`; }
+  /** accessible name of the list; the selector that owns the menu usually says what it lists */
+  @property() label = 'menu';
+  render() { return html`<div role="listbox" aria-label=${this.label}><slot></slot></div>`; }
 }
 
 /**
@@ -46,7 +48,10 @@ export class SettMenuGroup extends LitElement {
       text-transform: lowercase;
     }
   `;
-  render() { return html`<h6>${this.label}</h6><slot></slot>`; }
+  connectedCallback() { super.connectedCallback(); this.setAttribute('role', 'group'); }
+  updated() { this.setAttribute('aria-label', this.label); }
+  // the heading is presentational: a listbox group may only own options, and the group carries the name
+  render() { return html`<h6 role="presentation">${this.label}</h6><slot></slot>`; }
 }
 
 /**
@@ -94,17 +99,20 @@ export class SettMenuItem extends LitElement {
     this.dispatchEvent(new CustomEvent('sett-select', { bubbles: true, composed: true, detail: { state: this.state } }));
   }
 
+  // the row itself is the option, so the listbox > group > option tree is what assistive tech reads
+  updated() { this.setAttribute('aria-selected', String(this.selected)); }
+
   render() {
     const s = STATUS[this.state];
     return html`
       <span class="dot" data-kind=${s.dot} ?data-pulse=${!!s.pulse}></span>
       <span class="name"><slot></slot></span>
       ${s.pill ? html`<sett-pill kind=${s.pill} session=${this.session ?? ''}>${pillWords(this.state, this.count)}</sett-pill>` : ''}
-      <span class="right"><slot name="right"></slot></span>
-      <span role="option" aria-selected=${this.selected} hidden></span>`;
+      <span class="right"><slot name="right"></slot></span>`;
   }
   connectedCallback() {
     super.connectedCallback();
+    this.setAttribute('role', 'option');
     this.addEventListener('click', this.choose);
   }
 }

@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import tokens from '@tau-rs/sett-tokens/tokens.json';
+
+<Meta title="docs/Tokens" />
+
+# Tokens
+
+Every token, straight from `packages/tokens/dist/tokens.json` (built from the DTCG source in `packages/tokens/src`). The name is the CSS custom property: `--sett-<path>`. Components reference these and never a raw value.
+
+export const mono = { fontFamily: 'var(--sett-font-mono)', fontSize: 'var(--sett-font-size-sm)', whiteSpace: 'nowrap' };
+export const Swatch = ({ value }) => (
+  <span style={{ display: 'inline-block', width: 40, height: 18, borderRadius: 3, verticalAlign: 'middle', marginRight: 6, background: value, border: '1px solid var(--sett-color-line)' }} />
+);
+export const Value = ({ t }) => (
+  <>{t.type === 'color' ? <Swatch value={t.css} /> : null}<code>{t.css}</code></>
+);
+export const themed = tokens.light.map((l, i) => ({ light: l, dark: tokens.dark[i] }));
+
+## Themed · {tokens.light.length} tokens, light and dark
+
+Colours, session colours, map primitives, syntax and editor colours. The dark set carries the same names.
+
+<table>
+  <thead><tr><th>token</th><th>type</th><th>light</th><th>dark</th><th>what</th></tr></thead>
+  <tbody>
+    {themed.map(({ light, dark }) => (
+      <tr key={light.name}>
+        <td style={mono}>{light.name}</td>
+        <td>{light.type}</td>
+        <td style={mono}><Value t={light} /></td>
+        <td style={mono}><Value t={dark} /></td>
+        <td>{light.description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## Base · {tokens.base.length} tokens, theme-independent
+
+Type, spacing, radii, strokes, motion and the shadow.
+
+<table>
+  <thead><tr><th>token</th><th>type</th><th>value</th><th>what</th></tr></thead>
+  <tbody>
+    {tokens.base.map((t) => (
+      <tr key={t.name}>
+        <td style={mono}>{t.name}</td>
+        <td>{t.type}</td>
+        <td style={mono}><Value t={t} /></td>
+        <td>{t.description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

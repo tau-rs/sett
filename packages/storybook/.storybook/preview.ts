@@ -19,6 +19,8 @@ const preview: Preview = {
     }),
   ],
   parameters: {
+    // the a11y gate: an axe violation (contrast included) fails the story's test in both themes
+    a11y: { test: 'error' },
     backgrounds: { disable: true },
     controls: { expanded: true },
   },

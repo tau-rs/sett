@@ -1,0 +1,12 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import design from '../../../DESIGN.md?raw';
+
+<Meta title="docs/Rules" />
+
+# Rules
+
+The body of `DESIGN.md`, rendered as is. That file is normative: where a mock, a screenshot or a story disagrees with it, the file wins. Its front matter is a resolved summary of the tokens and lives on the Tokens page.
+
+{/* DESIGN.md is the normative text; this page renders its body. The front matter is a resolved summary of the tokens and is left to the Tokens page. */}
+
+<Markdown>{design.replace(/^---[\s\S]*?\n---\n/, '')}</Markdown>

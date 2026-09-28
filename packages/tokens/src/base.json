@@ -212,6 +212,40 @@
       }
     }
   },
+  "size": {
+    "$description": "control heights kept from the reference page (validated 2026-09-28, issue #2)",
+    "pill": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "tag": {
+      "$type": "dimension",
+      "$value": {
+        "value": 15,
+        "unit": "px"
+      }
+    }
+  },
+  "pad": {
+    "$description": "horizontal padding inside pill and tag",
+    "pill": {
+      "$type": "dimension",
+      "$value": {
+        "value": 7,
+        "unit": "px"
+      }
+    },
+    "tag": {
+      "$type": "dimension",
+      "$value": {
+        "value": 5,
+        "unit": "px"
+      }
+    }
+  },
   "motion": {
     "$description": "the only motion in the product",
     "frame-rotate": {

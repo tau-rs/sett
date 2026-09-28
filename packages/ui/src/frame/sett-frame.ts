@@ -1,0 +1,79 @@
+import { LitElement, css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { sessionStyles, type SessionId } from '../session.js';
+
+export type FrameState = 'idle' | 'live' | 'waiting' | 'editing' | 'collision' | 'focus';
+
+/**
+ * The one frame that changes colour. Wraps a pane; the slot is the pane's
+ * paper. idle grey · live session gradient (rotates) · waiting amber (pulses)
+ * · editing sel · collision bad · focus a sel ring at the lit stroke inside
+ * the idle frame. The only two animations in the chrome live here;
+ * `prefers-reduced-motion` and the `still` attribute stop both.
+ *
+ * @slot - the pane content
+ * @csspart inner - the paper inside the frame
+ */
+@customElement('sett-frame')
+export class SettFrame extends LitElement {
+  @property({ reflect: true }) state: FrameState = 'idle';
+
+  /** session id for the live state; unknown ids fall back to yk */
+  @property({ reflect: true }) session?: SessionId;
+
+  /** force the reduced-motion rendering (solid colours, no animation) */
+  @property({ type: Boolean, reflect: true }) still = false;
+
+  static styles = [
+    sessionStyles,
+    css`
+      :host {
+        display: block;
+        position: relative;
+        padding: var(--sett-stroke-frame);
+        border-radius: var(--sett-radius-pane);
+        background: var(--sett-color-line2);
+      }
+      .inner {
+        position: relative;
+        z-index: 1;
+        background: var(--sett-color-paper);
+        border-radius: calc(var(--sett-radius-pane) - var(--sett-stroke-frame));
+        overflow: hidden;
+      }
+      :host([state='editing']) { background: var(--sett-color-sel); }
+      :host([state='collision']) { background: var(--sett-color-bad); }
+      :host([state='focus']) .inner { box-shadow: inset 0 0 0 var(--sett-stroke-lit) var(--sett-color-sel); }
+      :host([state='live']) {
+        background: linear-gradient(120deg, var(--_session), var(--_session-sub), var(--_session), var(--_session-sub), var(--_session));
+        background-size: 300% 100%;
+        animation: sett-frame-rotate var(--sett-motion-frame-rotate) linear infinite;
+      }
+      :host([state='waiting']) { background: var(--sett-color-sug-bg); }
+      :host([state='waiting'])::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: var(--sett-color-sug);
+        animation: sett-frame-pulse var(--sett-motion-frame-pulse) ease-in-out infinite;
+      }
+      @keyframes sett-frame-rotate { from { background-position: 0% 50%; } to { background-position: 300% 50%; } }
+      @keyframes sett-frame-pulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+      :host([still][state='live']) { animation: none; background: var(--_session); }
+      :host([still][state='waiting'])::before { animation: none; opacity: 1; }
+      @media (prefers-reduced-motion: reduce) {
+        :host([state='live']) { animation: none; background: var(--_session); }
+        :host([state='waiting'])::before { animation: none; opacity: 1; }
+      }
+    `,
+  ];
+
+  render() {
+    return html`<div class="inner" part="inner"><slot></slot></div>`;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap { 'sett-frame': SettFrame }
+}

@@ -59,7 +59,7 @@ sett styles developer tools that put a map or a document at the centre and keep 
 ## Colours
 
 - Chrome greys are the resting state. `ink`, `ink2`, `mute` are the only three text colours; no fourth.
-- `sel` (blue) is selection, your own work, links, and the editing frame. `ok` green is done/passed/added. `bad` red is finding/deviation/collision/removed. `sug` amber is suggested/planned/waiting and the focus frame.
+- `sel` (blue) is selection, your own work, links, the editing frame, and the focus ring (a `lit` stroke inside the idle frame; focus is "you are here", never a status). `ok` green is done/passed/added. `bad` red is finding/deviation/collision/removed. `sug` amber is suggested/planned/waiting: things that need you.
 - Session colours identify an agent everywhere (frame, dot, card border, message border, map overlay). Seven are defined; assign in order yk, tl, mg, cy, ol, sn, pl. A session is always named next to its colour. Each has a `sub` shade (sub-agents) and a `bg` tint.
 - Every colour has a dark value. Components never hard-code a hex.
 

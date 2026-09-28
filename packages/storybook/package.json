@@ -2,11 +2,24 @@
   "name": "@tau-rs/sett-storybook",
   "version": "0.1.0",
   "private": true,
-  "description": "sett · storybook (Phase 3, not started)",
+  "description": "sett · Storybook. Stories live next to the components in packages/ui.",
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "echo 'storybook: nothing to build yet'",
-    "test": "echo 'storybook: nothing to test yet'"
+    "dev": "storybook dev -p 6006 --no-open",
+    "build": "storybook build --quiet",
+    "test": "echo 'storybook: story tests arrive with Phase 3 (#15)'"
+  },
+  "dependencies": {
+    "@tau-rs/sett": "workspace:*",
+    "@tau-rs/sett-tokens": "workspace:*",
+    "lit": "^3.3.3"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/addon-themes": "^10.6.0",
+    "@storybook/web-components-vite": "^10.6.0",
+    "storybook": "^10.6.0",
+    "vite": "^8.3.1"
   }
 }

@@ -9,7 +9,7 @@ hits=$(grep -rnE '#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b' \
   --include='*.html' --include='*.rs' --include='*.json' --include='*.mdx' --include='*.svg' \
   --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=target --exclude-dir=dist \
   --exclude-dir=tokens --exclude-dir=design --exclude-dir=.context --exclude-dir=.superpowers \
-  --exclude-dir=__snapshots__ . || true)
+  --exclude-dir=__snapshots__ --exclude-dir=storybook-static . || true)
 if [ -n "$hits" ]; then
   echo "raw hex outside packages/tokens:" >&2
   echo "$hits" >&2

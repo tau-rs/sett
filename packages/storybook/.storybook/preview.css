@@ -1,0 +1,7 @@
+/* the sett chrome around every story: paper on bg, sans at base size */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+html { background: var(--sett-color-bg); color-scheme: light dark; }
+body, .sb-show-main { font-family: var(--sett-font-sans); font-size: var(--sett-font-size-base); line-height: var(--sett-font-line-height-ui); color: var(--sett-color-ink); background: var(--sett-color-bg); }
+.sett-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sett-space-2); }
+.sett-paper { background: var(--sett-color-paper); border: var(--sett-stroke-hair) solid var(--sett-color-line2); border-radius: var(--sett-radius-card); padding: var(--sett-space-2) var(--sett-space-3); }
+.sett-sep { color: var(--sett-color-mute); }

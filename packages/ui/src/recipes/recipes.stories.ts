@@ -14,6 +14,8 @@ const shellCss = html`<style>${unsafeStatic(editorCss)}
 .left { background: var(--sett-color-paper); border-right: var(--sett-stroke-hair) solid var(--sett-color-line2); padding: var(--sett-space-2); display: flex; flex-direction: column; gap: var(--sett-space-2); min-height: 0; overflow: hidden; }
 .center { display: flex; flex-direction: column; min-width: 0; padding: var(--sett-space-2); gap: var(--sett-space-1); }
 .center sett-frame { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.center sett-frame::part(inner) { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.center .ed { flex: 1; }
 .right { border-left: var(--sett-stroke-hair) solid var(--sett-color-line2); display: flex; min-height: 0; overflow: hidden; background: var(--sett-color-paper); }
 .right sett-thread { flex: 1; }
 .status { display: flex; gap: var(--sett-space-4); padding: var(--sett-space-1) var(--sett-space-3); background: var(--sett-color-paper); border-top: var(--sett-stroke-hair) solid var(--sett-color-line2); font-size: var(--sett-font-size-sm); color: var(--sett-color-ink2); } .status .r { margin-left: auto; }

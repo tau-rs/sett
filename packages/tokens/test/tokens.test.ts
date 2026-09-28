@@ -65,3 +65,67 @@ describe('tokens.ts and tokens.rs', () => {
     expect(JSON.parse(dist('report.json')).unsupported).toEqual([]);
   });
 });
+
+describe('sett-theme.{light,dark}.json (Theia colour theme)', () => {
+  const themes = { light: JSON.parse(dist('sett-theme.light.json')), dark: JSON.parse(dist('sett-theme.dark.json')) };
+  const tokens = JSON.parse(dist('tokens.json'));
+  const hexes = /#[0-9A-F]{6}(?:[0-9A-F]{2})?\b/g;
+  const pathsOf = (set: 'light' | 'dark', group: string) => tokens[set].filter((t: { path: string[] }) => t.path[0] === group).map((t: { path: string[] }) => t.path.join('.'));
+
+  it('match the snapshots', async () => {
+    await expect(dist('sett-theme.light.json')).toMatchFileSnapshot('__snapshots__/sett-theme.light.json.snap');
+    await expect(dist('sett-theme.dark.json')).toMatchFileSnapshot('__snapshots__/sett-theme.dark.json.snap');
+  });
+  it('are VS Code colour themes of the right type with semantic highlighting on', () => {
+    for (const [type, theme] of Object.entries(themes)) {
+      expect(theme.$schema).toBe('vscode://schemas/color-theme');
+      expect(theme.name).toBe(`sett ${type}`);
+      expect(theme.type).toBe(type);
+      expect(theme.semanticHighlighting).toBe(true);
+      expect(Object.keys(theme.colors).length).toBeGreaterThan(40);
+    }
+  });
+  it('every colour in a theme is a colour token of that set, nothing invented', async () => {
+    for (const set of ['light', 'dark'] as const) {
+      const known = new Set(tokens[set].filter((t: { type: string }) => t.type === 'color').map((t: { css: string }) => t.css));
+      const used = dist(`sett-theme.${set}.json`).match(hexes) ?? [];
+      expect(used.length).toBeGreaterThan(0);
+      for (const h of used) expect(known.has(h), `${set}: ${h}`).toBe(true);
+      expect(dist(`sett-theme.${set}.json`)).not.toContain('var(--');
+    }
+  });
+  it('every syntax class colours a semantic token and a TextMate scope', async () => {
+    const { SEMANTIC, TEXTMATE } = await import('../theme.mjs');
+    for (const set of ['light', 'dark'] as const) {
+      const theme = themes[set];
+      const byPath = new Map(tokens[set].map((t: { path: string[]; css: string }) => [t.path.join('.'), t.css]));
+      const classes = pathsOf(set, 'syntax').map((p: string) => p.split('.')[1]);
+      expect(classes).toEqual(['keyword', 'string', 'constant', 'type', 'function', 'macro', 'attribute', 'comment']);
+      for (const cls of classes) {
+        const hex = byPath.get(`syntax.${cls}`);
+        expect(Object.keys(SEMANTIC), cls).toContain(cls);
+        expect(Object.keys(TEXTMATE), cls).toContain(cls);
+        for (const sel of SEMANTIC[cls as keyof typeof SEMANTIC]) expect(theme.semanticTokenColors[sel], `${set} ${sel}`).toBe(hex);
+        const rule = theme.tokenColors.find((r: { name: string }) => r.name === `sett ${cls}`);
+        expect(rule?.scope, `${set} ${cls}`).toEqual(TEXTMATE[cls as keyof typeof TEXTMATE]);
+        expect(rule?.settings.foreground).toBe(hex);
+      }
+      expect(theme.semanticTokenColors.keyword).toBe(theme.semanticTokenColors['*.declaration']);
+    }
+  });
+  it('every editor.* token reaches a Theia colour id, or is listed as decoration-only', async () => {
+    const { COLORS, DECORATION_ONLY } = await import('../theme.mjs');
+    const mapped = new Set(Object.values(COLORS));
+    for (const set of ['light', 'dark'] as const) {
+      for (const p of pathsOf(set, 'editor')) expect(mapped.has(p) || DECORATION_ONLY.includes(p), `${set} ${p}`).toBe(true);
+      for (const p of DECORATION_ONLY) expect(pathsOf(set, 'editor'), p).toContain(p);
+      for (const p of mapped) expect(tokens[set].some((t: { path: string[] }) => t.path.join('.') === p), `${set} ${p}`).toBe(true);
+    }
+  });
+  it('light and dark map the same ids, scopes and selectors', () => {
+    expect(Object.keys(themes.light.colors)).toEqual(Object.keys(themes.dark.colors));
+    expect(Object.keys(themes.light.semanticTokenColors)).toEqual(Object.keys(themes.dark.semanticTokenColors));
+    expect(themes.light.tokenColors.map((r: { scope: string[] }) => r.scope)).toEqual(themes.dark.tokenColors.map((r: { scope: string[] }) => r.scope));
+    expect(themes.light.colors['editor.background']).not.toBe(themes.dark.colors['editor.background']);
+  });
+});

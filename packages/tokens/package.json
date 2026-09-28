@@ -11,7 +11,9 @@
     ".": { "types": "./dist/tokens.d.ts", "import": "./dist/tokens.js" },
     "./sett.css": "./dist/sett.css",
     "./tokens.json": "./dist/tokens.json",
-    "./tokens.ts": "./dist/tokens.ts"
+    "./tokens.ts": "./dist/tokens.ts",
+    "./sett-theme.light.json": "./dist/sett-theme.light.json",
+    "./sett-theme.dark.json": "./dist/sett-theme.dark.json"
   },
   "scripts": {
     "build": "node build.mjs && tsc -p tsconfig.build.json",

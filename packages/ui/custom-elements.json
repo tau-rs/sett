@@ -294,6 +294,46 @@
             "name": "ComposerMode",
             "module": "./thread/sett-thread.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettCard",
+          "declaration": {
+            "name": "SettCard",
+            "module": "./card/sett-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettCardRow",
+          "declaration": {
+            "name": "SettCardRow",
+            "module": "./card/sett-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPipe",
+          "declaration": {
+            "name": "SettPipe",
+            "module": "./card/sett-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CardVariant",
+          "declaration": {
+            "name": "CardVariant",
+            "module": "./card/sett-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RowKind",
+          "declaration": {
+            "name": "RowKind",
+            "module": "./card/sett-card.js"
+          }
         }
       ]
     },
@@ -397,6 +437,263 @@
           "declaration": {
             "name": "dotStyles",
             "module": "src/status.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/card/sett-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One card shape for seven uses: fix (dashed blue), plan delta (amber),\nimpact, merge checklist, pipeline, result (green), what's new. A heading\nwith a state (pill) or count (tag) on the right, then rows.",
+          "name": "SettCard",
+          "cssParts": [
+            {
+              "description": "the heading row",
+              "name": "heading"
+            }
+          ],
+          "slots": [
+            {
+              "description": "sett-card-row elements (and a sett-pipe for the pipeline)",
+              "name": ""
+            },
+            {
+              "description": "the heading text",
+              "name": "title"
+            },
+            {
+              "description": "a sett-pill (state) or sett-tag (count) at the right of the heading",
+              "name": "state"
+            },
+            {
+              "description": "buttons; only the fix card and the delta have them",
+              "name": "acts"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "CardVariant"
+              },
+              "default": "'plain'",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "CardVariant"
+              },
+              "default": "'plain'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-card",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A card row: glyph · fact · where it leads. With `place` (a spot in code) or\n`nav` (another pane) the whole row is the link: it lights on hover and ends\nwith ›. A place is drawn as the small mono tag; a nav as a grey word.",
+          "name": "SettCardRow",
+          "slots": [
+            {
+              "description": "the fact",
+              "name": ""
+            },
+            {
+              "description": "a mono note at the right when the row leads nowhere (e.g. `41 s`, `new`)",
+              "name": "right"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "mark",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
+              "attribute": "mark"
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "RowKind"
+              },
+              "default": "'mute'",
+              "description": "colour of the glyph",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "place",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a spot in code, e.g. `service.rs:61`",
+              "attribute": "place"
+            },
+            {
+              "kind": "field",
+              "name": "nav",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a destination, e.g. `pipeline`",
+              "attribute": "nav"
+            },
+            {
+              "kind": "method",
+              "name": "go",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-go",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "with `{ place }` or `{ nav }`"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mark",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
+              "fieldName": "mark"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "RowKind"
+              },
+              "default": "'mute'",
+              "description": "colour of the glyph",
+              "fieldName": "kind"
+            },
+            {
+              "name": "place",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a spot in code, e.g. `service.rs:61`",
+              "fieldName": "place"
+            },
+            {
+              "name": "nav",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a destination, e.g. `pipeline`",
+              "fieldName": "nav"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-card-row",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The pipeline bar: one segment per step. `steps` is a comma list of ok | bad | run | pending.",
+          "name": "SettPipe",
+          "members": [
+            {
+              "kind": "field",
+              "name": "steps",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "steps"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "steps",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "steps"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-pipe",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettCard",
+          "declaration": {
+            "name": "SettCard",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-card",
+          "declaration": {
+            "name": "SettCard",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettCardRow",
+          "declaration": {
+            "name": "SettCardRow",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-card-row",
+          "declaration": {
+            "name": "SettCardRow",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPipe",
+          "declaration": {
+            "name": "SettPipe",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-pipe",
+          "declaration": {
+            "name": "SettPipe",
+            "module": "src/card/sett-card.ts"
           }
         }
       ]
@@ -1002,6 +1299,188 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/selector/sett-selector.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Branch selector in a pane bar: dot, branch name, a pill when the branch has\na state, caret. Click toggles `open`; the `menu` slot (a sett-menu) hangs\nunder it as an anchored disclosure: nothing is dimmed or trapped, Esc, a\nclick outside or choosing a row closes it.",
+          "name": "SettSelector",
+          "cssParts": [
+            {
+              "description": "the selector box",
+              "name": "button"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the branch name, mono",
+              "name": ""
+            },
+            {
+              "description": "the sett-menu shown while open",
+              "name": "menu"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              },
+              "default": "'main'",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for planning / working; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "number of open asks, shown in the pill for the asks state",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "whether the menu is shown",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering",
+              "attribute": "still",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "onDocClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "close"
+            },
+            {
+              "kind": "method",
+              "name": "toggle"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the menu opens"
+            },
+            {
+              "name": "sett-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the menu closes"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              },
+              "default": "'main'",
+              "fieldName": "state"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for planning / working; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "number of open asks, shown in the pill for the asks state",
+              "fieldName": "count"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "whether the menu is shown",
+              "fieldName": "open"
+            },
+            {
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering",
+              "fieldName": "still"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-selector",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettSelector",
+          "declaration": {
+            "name": "SettSelector",
+            "module": "src/selector/sett-selector.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-selector",
+          "declaration": {
+            "name": "SettSelector",
+            "module": "src/selector/sett-selector.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/session-card/sett-session-card.ts",
       "declarations": [
         {
@@ -1422,188 +1901,6 @@
           "declaration": {
             "name": "SettSubAgent",
             "module": "src/session-card/sett-session-card.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/selector/sett-selector.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Branch selector in a pane bar: dot, branch name, a pill when the branch has\na state, caret. Click toggles `open`; the `menu` slot (a sett-menu) hangs\nunder it as an anchored disclosure: nothing is dimmed or trapped, Esc, a\nclick outside or choosing a row closes it.",
-          "name": "SettSelector",
-          "cssParts": [
-            {
-              "description": "the selector box",
-              "name": "button"
-            }
-          ],
-          "slots": [
-            {
-              "description": "the branch name, mono",
-              "name": ""
-            },
-            {
-              "description": "the sett-menu shown while open",
-              "name": "menu"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "BranchState"
-              },
-              "default": "'main'",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for planning / working; unknown ids fall back to yk",
-              "attribute": "session",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "count",
-              "type": {
-                "text": "number | undefined"
-              },
-              "description": "number of open asks, shown in the pill for the asks state",
-              "attribute": "count"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "whether the menu is shown",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering",
-              "attribute": "still",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "onDocClick",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "onKey",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "close"
-            },
-            {
-              "kind": "method",
-              "name": "toggle"
-            }
-          ],
-          "events": [
-            {
-              "name": "sett-open",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "when the menu opens"
-            },
-            {
-              "name": "sett-close",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "when the menu closes"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "BranchState"
-              },
-              "default": "'main'",
-              "fieldName": "state"
-            },
-            {
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for planning / working; unknown ids fall back to yk",
-              "fieldName": "session"
-            },
-            {
-              "name": "count",
-              "type": {
-                "text": "number | undefined"
-              },
-              "description": "number of open asks, shown in the pill for the asks state",
-              "fieldName": "count"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "whether the menu is shown",
-              "fieldName": "open"
-            },
-            {
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering",
-              "fieldName": "still"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-selector",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettSelector",
-          "declaration": {
-            "name": "SettSelector",
-            "module": "src/selector/sett-selector.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-selector",
-          "declaration": {
-            "name": "SettSelector",
-            "module": "src/selector/sett-selector.ts"
           }
         }
       ]

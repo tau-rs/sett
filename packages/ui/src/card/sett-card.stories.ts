@@ -3,6 +3,7 @@ import { html } from 'lit';
 import './sett-card.js';
 import '../pill/sett-pill.js';
 import '../tag/sett-tag.js';
+import '../button/sett-button.js';
 
 const w = (inner: unknown) => html`<div style="width:300px">${inner}</div>`;
 const meta: Meta = { title: 'cards/card', component: 'sett-card' };
@@ -12,13 +13,13 @@ type Story = StoryObj;
 export const Fix: Story = { render: () => w(html`<sett-card variant="fix"><span slot="title">fix · no-http-in-domain</span><sett-tag slot="state" kind="bad">1 site</sett-tag>
   <sett-card-row mark="⚠" kind="bad" place="domain/notify.rs:12">uses reqwest</sett-card-row>
   <sett-card-row mark="→" kind="mute" nav="why">move the call behind a Notifier port in api</sett-card-row>
-  <button slot="acts" class="primary">with Yokohama</button><button slot="acts">fix myself</button><button slot="acts" class="quiet">allow this site…</button></sett-card>`) };
+  <sett-button slot="acts" variant="primary" size="sm">with Yokohama</sett-button><sett-button slot="acts" size="sm">fix myself</sett-button><sett-button slot="acts" variant="quiet" size="sm">allow this site…</sett-button></sett-card>`) };
 export const Delta: Story = { name: 'plan delta', render: () => w(html`<sett-card variant="delta"><span slot="title">plan delta</span><sett-tag slot="state" kind="sug">3 elements</sett-tag>
   <sett-card-row mark="+" kind="sug"><b>RefundRequest</b> · domain<span slot="right">new</span></sett-card-row>
   <sett-card-row mark="+" kind="sug"><b>Refunds</b> · port<span slot="right">new</span></sett-card-row>
   <sett-card-row mark="~" kind="sug"><b>PaymentsHttp</b> · +refund()<span slot="right">changed</span></sett-card-row>
   <sett-card-row mark="·" kind="mute">keeps: OrderRepo, Payments<span slot="right">unchanged</span></sett-card-row>
-  <button slot="acts" class="primary">accept · delegate to Yokohama ▾</button><button slot="acts">save plan</button></sett-card>`) };
+  <sett-button slot="acts" variant="primary" size="sm">accept · delegate to Yokohama ▾</sett-button><sett-button slot="acts" size="sm">save plan</sett-button></sett-card>`) };
 export const Impact: Story = { render: () => w(html`<sett-card variant="impact"><span slot="title">impact · save() changed</span><sett-tag slot="state" kind="sel">2 feel it</sett-tag>
   <sett-card-row mark="▸" kind="mute" place="service.rs:61">api::pay</sett-card-row>
   <sett-card-row mark="▸" kind="mute" place="service.rs:88">api::close</sett-card-row>

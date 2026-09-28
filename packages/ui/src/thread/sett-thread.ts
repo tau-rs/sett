@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { sessionStyles, type SessionId } from '../session.js';
 import { dotStyles } from '../status.js';
 import { buttonStyles } from './buttons.js';
+import { state } from 'lit/decorators.js';
 
 export type ThreadIdentity = 'session' | 'planner' | 'framer' | 'fixer';
 export type MsgFrom = 'me' | 'agent' | 'sub';
@@ -228,9 +229,11 @@ export class SettComposer extends LitElement {
   @property({ reflect: true }) mode: ComposerMode = 'send';
   @property() placeholder = '';
   @property() session?: string;
+  @state() private empty = true;
   static styles = [
     buttonStyles,
     css`
+      button:disabled { background: transparent; border-style: dashed; color: var(--sett-color-sel); border-color: var(--sett-color-sel); opacity: 1; }
       :host { display: flex; gap: var(--sett-space-1); padding: var(--sett-space-2); border-top: var(--sett-stroke-hair) solid var(--sett-color-line2); background: var(--sett-color-paper); }
       :host([mode='handback']) { flex-direction: column; align-items: stretch; background: var(--sett-color-sel-bg); }
       input, textarea { flex: 1; font: inherit; font-size: var(--sett-font-size-lg); color: var(--sett-color-ink); background: var(--sett-color-paper); border: var(--sett-stroke-hair) solid var(--sett-color-line); border-radius: var(--sett-radius-chip); padding: var(--sett-space-1) var(--sett-space-2); min-width: 0; }
@@ -247,8 +250,8 @@ export class SettComposer extends LitElement {
   }
   render() {
     if (this.mode === 'handback') {
-      return html`<textarea placeholder=${this.placeholder || 'what you changed, and where to pick up…'}></textarea>
-        <div class="row"><span class="hint"><slot name="files"></slot></span><button class="primary" @click=${this.send}>hand back</button></div>`;
+      return html`<textarea placeholder=${this.placeholder || 'what you changed, and where to pick up…'} @input=${(e: Event) => (this.empty = !(e.target as HTMLTextAreaElement).value.trim())}></textarea>
+        <div class="row"><span class="hint"><slot name="files"></slot></span><button class="primary" ?disabled=${this.empty} @click=${this.send}>hand back</button></div>`;
     }
     return html`<input placeholder=${this.placeholder} @keydown=${(e: KeyboardEvent) => { if (e.key === 'Enter') this.send(); }}><button class="primary" @click=${this.send}>send</button>`;
   }

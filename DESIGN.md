@@ -53,7 +53,7 @@ sett styles developer tools that put a map or a document at the centre and keep 
 
 ## Principles that constrain visual design
 
-- **P-1 · two doors.** Every action has a manual path and an agent path, both visible; the manual door comes first and is the bold one (`fix myself · with Yokohama`). Never a single "let the AI" button.
+- **P-1 · two doors, agent door first.** Every action has a manual path and an agent path, both visible. The agent door comes first and is the bold one; the manual door is always there and never privileged (`with Yokohama · fix myself`). The "me first" setting swaps order and weight. Never a single "let the AI" button, never a hidden manual path.
 - **P-2 · reader, not owner.** Nothing pops up, nothing blocks. State is shown by chips, pills and one frame that changes colour, never by a modal or a banner.
 
 ## Colours
@@ -84,7 +84,7 @@ Only three things move: the live frame (session gradient, 6 s rotate), the waiti
 
 1. Verbs live in a pane's fixed bar or in a chip. There is no modal component.
 2. A blocked or waiting state is a `pill` wherever its subject is named: selector, menu row, gated button reason, session-card row. Same pill, same words.
-3. Manual door first in every pair. The split button (Accept · delegate ▾ | Save plan) is the one exception; the "me first" setting swaps it.
+3. Agent door first and bold in every pair, manual second and plain; the "me first" setting swaps both. Verbs are lowercase. A done chip keeps full contrast: its kind label turns ok with `✓`, and it gains a plain `dismiss` verb.
 4. Chips and cards separate with `·`; identifiers are mono.
 5. Dark mode is required from day one.
 6. Map primitives are values, not CSS: the WebGL layer reads `tokens.rs`, generated from the same DTCG source.

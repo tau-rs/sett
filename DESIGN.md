@@ -82,7 +82,7 @@ Only three things move: the live frame (session gradient, 6 s rotate), the waiti
 
 ## Rules the components encode
 
-1. Verbs live in a pane's fixed bar or in a chip. There is no modal component.
+1. Verbs live in a pane's fixed bar or in a chip. There is no modal component. A menu is an anchored disclosure under its selector: it never dims or traps the screen and closes on Esc, on a click outside, or when a row is chosen. That is allowed under P-2; a popup that blocks is not.
 2. A blocked or waiting state is a `pill` wherever its subject is named: selector, menu row, gated button reason, session-card row. Same pill, same words.
 3. Agent door first and bold in every pair, manual second and plain; the "me first" setting swaps both. Verbs are lowercase. A done chip keeps full contrast: its kind label turns ok with `✓`, and it gains a plain `dismiss` verb.
 4. Chips and cards separate with `·`; identifiers are mono.

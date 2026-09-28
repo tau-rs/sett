@@ -10,6 +10,8 @@ export default defineConfig({
   test: {
     onConsoleLog: (log) => !log.includes('Lit is in dev mode'),
     projects: [
+      // the static build, loaded in a real browser the way a reader gets it (test/smoke.test.ts)
+      { test: { name: 'smoke', include: ['test/smoke.test.ts'], environment: 'node' } },
       ...themes.map((theme) => ({
         plugins: [storybookTest({ configDir: '.storybook', initialGlobals: { theme } })],
         test: {

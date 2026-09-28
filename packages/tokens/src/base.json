@@ -1,0 +1,297 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "font": {
+    "$description": "sett · type. Map label is one size and never scales.",
+    "sans": {
+      "$type": "fontFamily",
+      "$value": [
+        "IBM Plex Sans",
+        "system-ui",
+        "sans-serif"
+      ]
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": [
+        "IBM Plex Mono",
+        "ui-monospace",
+        "monospace"
+      ]
+    },
+    "size": {
+      "xs": {
+        "$type": "dimension",
+        "$value": {
+          "value": 10.5,
+          "unit": "px"
+        }
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": {
+          "value": 11,
+          "unit": "px"
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": {
+          "value": 11.5,
+          "unit": "px"
+        }
+      },
+      "base": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12.5,
+          "unit": "px"
+        }
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": {
+          "value": 13,
+          "unit": "px"
+        }
+      },
+      "h": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        }
+      }
+    },
+    "map-label": {
+      "$type": "dimension",
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      }
+    },
+    "line-height": {
+      "ui": {
+        "$type": "number",
+        "$value": 1.45
+      },
+      "code": {
+        "$type": "number",
+        "$value": 1.65
+      }
+    },
+    "weight": {
+      "normal": {
+        "$type": "fontWeight",
+        "$value": 400
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": 500
+      },
+      "semibold": {
+        "$type": "fontWeight",
+        "$value": 600
+      }
+    }
+  },
+  "space": {
+    "1": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      }
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      }
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      }
+    }
+  },
+  "radius": {
+    "item": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "px"
+      }
+    },
+    "chip": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
+    "card": {
+      "$type": "dimension",
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      }
+    },
+    "node": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "pane": {
+      "$type": "dimension",
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      }
+    },
+    "pill": {
+      "$type": "dimension",
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      }
+    }
+  },
+  "stroke": {
+    "hair": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      }
+    },
+    "lit": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.6,
+        "unit": "px"
+      }
+    },
+    "frame": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "px"
+      }
+    }
+  },
+  "motion": {
+    "$description": "the only motion in the product",
+    "frame-rotate": {
+      "$type": "duration",
+      "$value": {
+        "value": 6.0,
+        "unit": "s"
+      }
+    },
+    "frame-pulse": {
+      "$type": "duration",
+      "$value": {
+        "value": 1.6,
+        "unit": "s"
+      }
+    },
+    "item-pulse": {
+      "$type": "duration",
+      "$value": {
+        "value": 700.0,
+        "unit": "ms"
+      }
+    },
+    "zoom": {
+      "$type": "duration",
+      "$value": {
+        "value": 220.0,
+        "unit": "ms"
+      }
+    },
+    "ease": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.2,
+        0.7,
+        0.2,
+        1
+      ]
+    }
+  },
+  "glyph": {
+    "done": {
+      "$type": "string",
+      "$value": "✓"
+    },
+    "running": {
+      "$type": "string",
+      "$value": "●"
+    },
+    "paused": {
+      "$type": "string",
+      "$value": "⏸"
+    },
+    "steppedIn": {
+      "$type": "string",
+      "$value": "✋"
+    },
+    "deviation": {
+      "$type": "string",
+      "$value": "≠"
+    },
+    "asks": {
+      "$type": "string",
+      "$value": "!"
+    },
+    "pending": {
+      "$type": "string",
+      "$value": "·"
+    },
+    "finding": {
+      "$type": "string",
+      "$value": "⚠"
+    },
+    "you": {
+      "$type": "string",
+      "$value": "you"
+    },
+    "sep": {
+      "$type": "string",
+      "$value": "·"
+    }
+  }
+}

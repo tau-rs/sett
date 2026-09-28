@@ -12,3 +12,4 @@ export { SettCard, SettCardRow, SettPipe, type CardVariant, type RowKind } from 
 export { SettButton, SettSplitButton, SettGatedButton, type ButtonVariant, type ButtonSize } from './button/sett-button.js';
 export { SettTabbar, SettTab, SettSeg, SettSegItem, SettOverlayToggles, SettToggle } from './tabs/sett-tabs.js';
 export { SettHint, type HintKind } from './editor/sett-hint.js';
+export { SettFunnel, SettFunnelStep } from './funnel/sett-funnel.js';

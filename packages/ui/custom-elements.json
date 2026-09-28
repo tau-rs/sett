@@ -438,6 +438,22 @@
             "name": "HintKind",
             "module": "./editor/sett-hint.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettFunnel",
+          "declaration": {
+            "name": "SettFunnel",
+            "module": "./funnel/sett-funnel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettFunnelStep",
+          "declaration": {
+            "name": "SettFunnelStep",
+            "module": "./funnel/sett-funnel.js"
+          }
         }
       ]
     },
@@ -1278,6 +1294,69 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/editor/sett-hint.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An inlay hint: rust-analyzer's type hints and arch's own use one shape, a\nquiet grey pill after the code. `kind` colours the text for the\ndeclaration's right-aligned facts (planned, finding, session, blame).",
+          "name": "SettHint",
+          "slots": [
+            {
+              "description": "the hint text",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "HintKind"
+              },
+              "default": "'default'",
+              "attribute": "kind",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "HintKind"
+              },
+              "default": "'default'",
+              "fieldName": "kind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-hint",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettHint",
+          "declaration": {
+            "name": "SettHint",
+            "module": "src/editor/sett-hint.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-hint",
+          "declaration": {
+            "name": "SettHint",
+            "module": "src/editor/sett-hint.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/frame/sett-frame.ts",
       "declarations": [
         {
@@ -1385,63 +1464,153 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/editor/sett-hint.ts",
+      "path": "src/funnel/sett-funnel.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "An inlay hint: rust-analyzer's type hints and arch's own use one shape, a\nquiet grey pill after the code. `kind` colours the text for the\ndeclaration's right-aligned facts (planned, finding, session, blame).",
-          "name": "SettHint",
+          "description": "Onboarding progress: a stepper. A circle per step, ✓ when done, filled for\nthe current one, a number for the rest, a thin line between.",
+          "name": "SettFunnel",
           "slots": [
             {
-              "description": "the hint text",
+              "description": "sett-funnel-step elements",
               "name": ""
             }
           ],
           "members": [
             {
               "kind": "field",
-              "name": "kind",
+              "name": "current",
               "type": {
-                "text": "HintKind"
+                "text": "number"
               },
-              "default": "'default'",
-              "attribute": "kind",
-              "reflects": true
+              "default": "1",
+              "description": "1-based index of the current step",
+              "attribute": "current"
+            },
+            {
+              "kind": "method",
+              "name": "apply",
+              "privacy": "private"
             }
           ],
           "attributes": [
             {
-              "name": "kind",
+              "name": "current",
               "type": {
-                "text": "HintKind"
+                "text": "number"
               },
-              "default": "'default'",
-              "fieldName": "kind"
+              "default": "1",
+              "description": "1-based index of the current step",
+              "fieldName": "current"
             }
           ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
           },
-          "tagName": "sett-hint",
+          "tagName": "sett-funnel",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One step of the funnel. State and number are set by the parent.",
+          "name": "SettFunnelStep",
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "'done' | 'current' | 'pending'"
+              },
+              "default": "'pending'",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "index"
+            },
+            {
+              "kind": "field",
+              "name": "first",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "first",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "'done' | 'current' | 'pending'"
+              },
+              "default": "'pending'",
+              "fieldName": "state"
+            },
+            {
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "index"
+            },
+            {
+              "name": "first",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "first"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-funnel-step",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SettHint",
+          "name": "SettFunnel",
           "declaration": {
-            "name": "SettHint",
-            "module": "src/editor/sett-hint.ts"
+            "name": "SettFunnel",
+            "module": "src/funnel/sett-funnel.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sett-hint",
+          "name": "sett-funnel",
           "declaration": {
-            "name": "SettHint",
-            "module": "src/editor/sett-hint.ts"
+            "name": "SettFunnel",
+            "module": "src/funnel/sett-funnel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettFunnelStep",
+          "declaration": {
+            "name": "SettFunnelStep",
+            "module": "src/funnel/sett-funnel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-funnel-step",
+          "declaration": {
+            "name": "SettFunnelStep",
+            "module": "src/funnel/sett-funnel.ts"
           }
         }
       ]

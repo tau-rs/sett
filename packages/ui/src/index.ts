@@ -11,3 +11,4 @@ export { SettThread, SettMsg, SettTool, SettChanged, SettOption, SettQuestion, S
 export { SettCard, SettCardRow, SettPipe, type CardVariant, type RowKind } from './card/sett-card.js';
 export { SettButton, SettSplitButton, SettGatedButton, type ButtonVariant, type ButtonSize } from './button/sett-button.js';
 export { SettTabbar, SettTab, SettSeg, SettSegItem, SettOverlayToggles, SettToggle } from './tabs/sett-tabs.js';
+export { SettHint, type HintKind } from './editor/sett-hint.js';

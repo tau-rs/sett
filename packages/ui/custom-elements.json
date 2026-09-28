@@ -422,6 +422,22 @@
             "name": "SettToggle",
             "module": "./tabs/sett-tabs.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettHint",
+          "declaration": {
+            "name": "SettHint",
+            "module": "./editor/sett-hint.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HintKind",
+          "declaration": {
+            "name": "HintKind",
+            "module": "./editor/sett-hint.js"
+          }
         }
       ]
     },
@@ -1369,21 +1385,15 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/pill/sett-pill.ts",
+      "path": "src/editor/sett-hint.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "Status pill: the one way a blocked or waiting state is written wherever its\nsubject is named (selector, menu row, gated button reason, session-card row).\nMono, 11 px, never animates.",
-          "name": "SettPill",
-          "cssParts": [
-            {
-              "description": "the pill box",
-              "name": "pill"
-            }
-          ],
+          "description": "An inlay hint: rust-analyzer's type hints and arch's own use one shape, a\nquiet grey pill after the code. `kind` colours the text for the\ndeclaration's right-aligned facts (planned, finding, session, blame).",
+          "name": "SettHint",
           "slots": [
             {
-              "description": "the label, lowercase",
+              "description": "the hint text",
               "name": ""
             }
           ],
@@ -1392,21 +1402,10 @@
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "PillKind"
+                "text": "HintKind"
               },
               "default": "'default'",
-              "description": "colour role. `sug` amber for asks/planned/waiting, `bad`, `ok`, `sel`, or `session` (see `session`).",
               "attribute": "kind",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id (yk tl mg cy ol sn pl) when kind is `session`; unknown ids fall back to yk",
-              "attribute": "session",
               "reflects": true
             }
           ],
@@ -1414,44 +1413,35 @@
             {
               "name": "kind",
               "type": {
-                "text": "PillKind"
+                "text": "HintKind"
               },
               "default": "'default'",
-              "description": "colour role. `sug` amber for asks/planned/waiting, `bad`, `ok`, `sel`, or `session` (see `session`).",
               "fieldName": "kind"
-            },
-            {
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id (yk tl mg cy ol sn pl) when kind is `session`; unknown ids fall back to yk",
-              "fieldName": "session"
             }
           ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
           },
-          "tagName": "sett-pill",
+          "tagName": "sett-hint",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SettPill",
+          "name": "SettHint",
           "declaration": {
-            "name": "SettPill",
-            "module": "src/pill/sett-pill.ts"
+            "name": "SettHint",
+            "module": "src/editor/sett-hint.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sett-pill",
+          "name": "sett-hint",
           "declaration": {
-            "name": "SettPill",
-            "module": "src/pill/sett-pill.ts"
+            "name": "SettHint",
+            "module": "src/editor/sett-hint.ts"
           }
         }
       ]
@@ -1692,6 +1682,95 @@
           "declaration": {
             "name": "SettMenuItem",
             "module": "src/menu/sett-menu.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/pill/sett-pill.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Status pill: the one way a blocked or waiting state is written wherever its\nsubject is named (selector, menu row, gated button reason, session-card row).\nMono, 11 px, never animates.",
+          "name": "SettPill",
+          "cssParts": [
+            {
+              "description": "the pill box",
+              "name": "pill"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the label, lowercase",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "PillKind"
+              },
+              "default": "'default'",
+              "description": "colour role. `sug` amber for asks/planned/waiting, `bad`, `ok`, `sel`, or `session` (see `session`).",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id (yk tl mg cy ol sn pl) when kind is `session`; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "PillKind"
+              },
+              "default": "'default'",
+              "description": "colour role. `sug` amber for asks/planned/waiting, `bad`, `ok`, `sel`, or `session` (see `session`).",
+              "fieldName": "kind"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id (yk tl mg cy ol sn pl) when kind is `session`; unknown ids fall back to yk",
+              "fieldName": "session"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-pill",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettPill",
+          "declaration": {
+            "name": "SettPill",
+            "module": "src/pill/sett-pill.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-pill",
+          "declaration": {
+            "name": "SettPill",
+            "module": "src/pill/sett-pill.ts"
           }
         }
       ]

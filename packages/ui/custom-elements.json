@@ -190,6 +190,110 @@
             "name": "SubState",
             "module": "./session-card/sett-session-card.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettThread",
+          "declaration": {
+            "name": "SettThread",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMsg",
+          "declaration": {
+            "name": "SettMsg",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettTool",
+          "declaration": {
+            "name": "SettTool",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettChanged",
+          "declaration": {
+            "name": "SettChanged",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettOption",
+          "declaration": {
+            "name": "SettOption",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettQuestion",
+          "declaration": {
+            "name": "SettQuestion",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettDeviation",
+          "declaration": {
+            "name": "SettDeviation",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettVerbs",
+          "declaration": {
+            "name": "SettVerbs",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettComposer",
+          "declaration": {
+            "name": "SettComposer",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ThreadIdentity",
+          "declaration": {
+            "name": "ThreadIdentity",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MsgFrom",
+          "declaration": {
+            "name": "MsgFrom",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "VerbsState",
+          "declaration": {
+            "name": "VerbsState",
+            "module": "./thread/sett-thread.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ComposerMode",
+          "declaration": {
+            "name": "ComposerMode",
+            "module": "./thread/sett-thread.js"
+          }
         }
       ]
     },
@@ -293,113 +397,6 @@
           "declaration": {
             "name": "dotStyles",
             "module": "src/status.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/frame/sett-frame.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "The one frame that changes colour. Wraps a pane; the slot is the pane's\npaper. idle grey · live session gradient (rotates) · waiting amber (pulses)\n· editing sel · collision bad · focus a sel ring at the lit stroke inside\nthe idle frame. The only two animations in the chrome live here;\n`prefers-reduced-motion` and the `still` attribute stop both.",
-          "name": "SettFrame",
-          "cssParts": [
-            {
-              "description": "the paper inside the frame",
-              "name": "inner"
-            }
-          ],
-          "slots": [
-            {
-              "description": "the pane content",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FrameState"
-              },
-              "default": "'idle'",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for the live state; unknown ids fall back to yk",
-              "attribute": "session",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering (solid colours, no animation)",
-              "attribute": "still",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "FrameState"
-              },
-              "default": "'idle'",
-              "fieldName": "state"
-            },
-            {
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for the live state; unknown ids fall back to yk",
-              "fieldName": "session"
-            },
-            {
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering (solid colours, no animation)",
-              "fieldName": "still"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-frame",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettFrame",
-          "declaration": {
-            "name": "SettFrame",
-            "module": "src/frame/sett-frame.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-frame",
-          "declaration": {
-            "name": "SettFrame",
-            "module": "src/frame/sett-frame.ts"
           }
         }
       ]
@@ -563,6 +560,113 @@
           "declaration": {
             "name": "SettChip",
             "module": "src/chip/sett-chip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/frame/sett-frame.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The one frame that changes colour. Wraps a pane; the slot is the pane's\npaper. idle grey · live session gradient (rotates) · waiting amber (pulses)\n· editing sel · collision bad · focus a sel ring at the lit stroke inside\nthe idle frame. The only two animations in the chrome live here;\n`prefers-reduced-motion` and the `still` attribute stop both.",
+          "name": "SettFrame",
+          "cssParts": [
+            {
+              "description": "the paper inside the frame",
+              "name": "inner"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the pane content",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FrameState"
+              },
+              "default": "'idle'",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the live state; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering (solid colours, no animation)",
+              "attribute": "still",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "FrameState"
+              },
+              "default": "'idle'",
+              "fieldName": "state"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the live state; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering (solid colours, no animation)",
+              "fieldName": "still"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-frame",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettFrame",
+          "declaration": {
+            "name": "SettFrame",
+            "module": "src/frame/sett-frame.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-frame",
+          "declaration": {
+            "name": "SettFrame",
+            "module": "src/frame/sett-frame.ts"
           }
         }
       ]
@@ -892,188 +996,6 @@
           "declaration": {
             "name": "SettPill",
             "module": "src/pill/sett-pill.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/selector/sett-selector.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Branch selector in a pane bar: dot, branch name, a pill when the branch has\na state, caret. Click toggles `open`; the `menu` slot (a sett-menu) hangs\nunder it as an anchored disclosure: nothing is dimmed or trapped, Esc, a\nclick outside or choosing a row closes it.",
-          "name": "SettSelector",
-          "cssParts": [
-            {
-              "description": "the selector box",
-              "name": "button"
-            }
-          ],
-          "slots": [
-            {
-              "description": "the branch name, mono",
-              "name": ""
-            },
-            {
-              "description": "the sett-menu shown while open",
-              "name": "menu"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "BranchState"
-              },
-              "default": "'main'",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for planning / working; unknown ids fall back to yk",
-              "attribute": "session",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "count",
-              "type": {
-                "text": "number | undefined"
-              },
-              "description": "number of open asks, shown in the pill for the asks state",
-              "attribute": "count"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "whether the menu is shown",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering",
-              "attribute": "still",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "onDocClick",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "onKey",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "close"
-            },
-            {
-              "kind": "method",
-              "name": "toggle"
-            }
-          ],
-          "events": [
-            {
-              "name": "sett-open",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "when the menu opens"
-            },
-            {
-              "name": "sett-close",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "when the menu closes"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "BranchState"
-              },
-              "default": "'main'",
-              "fieldName": "state"
-            },
-            {
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for planning / working; unknown ids fall back to yk",
-              "fieldName": "session"
-            },
-            {
-              "name": "count",
-              "type": {
-                "text": "number | undefined"
-              },
-              "description": "number of open asks, shown in the pill for the asks state",
-              "fieldName": "count"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "whether the menu is shown",
-              "fieldName": "open"
-            },
-            {
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering",
-              "fieldName": "still"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-selector",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettSelector",
-          "declaration": {
-            "name": "SettSelector",
-            "module": "src/selector/sett-selector.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-selector",
-          "declaration": {
-            "name": "SettSelector",
-            "module": "src/selector/sett-selector.ts"
           }
         }
       ]
@@ -1506,6 +1428,188 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/selector/sett-selector.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Branch selector in a pane bar: dot, branch name, a pill when the branch has\na state, caret. Click toggles `open`; the `menu` slot (a sett-menu) hangs\nunder it as an anchored disclosure: nothing is dimmed or trapped, Esc, a\nclick outside or choosing a row closes it.",
+          "name": "SettSelector",
+          "cssParts": [
+            {
+              "description": "the selector box",
+              "name": "button"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the branch name, mono",
+              "name": ""
+            },
+            {
+              "description": "the sett-menu shown while open",
+              "name": "menu"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              },
+              "default": "'main'",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for planning / working; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "number of open asks, shown in the pill for the asks state",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "whether the menu is shown",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering",
+              "attribute": "still",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "onDocClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "close"
+            },
+            {
+              "kind": "method",
+              "name": "toggle"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the menu opens"
+            },
+            {
+              "name": "sett-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the menu closes"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              },
+              "default": "'main'",
+              "fieldName": "state"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for planning / working; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "number of open asks, shown in the pill for the asks state",
+              "fieldName": "count"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "whether the menu is shown",
+              "fieldName": "open"
+            },
+            {
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering",
+              "fieldName": "still"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-selector",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettSelector",
+          "declaration": {
+            "name": "SettSelector",
+            "module": "src/selector/sett-selector.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-selector",
+          "declaration": {
+            "name": "SettSelector",
+            "module": "src/selector/sett-selector.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/tag/sett-tag.ts",
       "declarations": [
         {
@@ -1603,6 +1707,822 @@
           "declaration": {
             "name": "SettTag",
             "module": "src/tag/sett-tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/thread/buttons.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "buttonStyles",
+          "default": "css` button { font: inherit; font-size: var(--sett-font-size-md); line-height: var(--sett-space-4); padding: var(--sett-space-1) var(--sett-space-2); color: var(--sett-color-ink); background: var(--sett-color-paper); border: var(--sett-stroke-hair) solid var(--sett-color-line); border-radius: var(--sett-radius-chip); cursor: pointer; text-transform: lowercase; white-space: nowrap; } button:hover { background: var(--sett-color-well); } button:focus-visible { outline: none; box-shadow: 0 0 0 var(--sett-stroke-lit) var(--sett-color-sel); } button.primary { background: var(--sett-color-sel); color: var(--sett-color-paper); border-color: var(--sett-color-sel); } button.quiet { border-color: transparent; background: transparent; color: var(--sett-color-ink2); } button:disabled { opacity: var(--sett-map-faded-opacity); cursor: not-allowed; } `",
+          "description": "buttons inside thread parts: grid metrics, lowercase, tokens only"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "buttonStyles",
+          "declaration": {
+            "name": "buttonStyles",
+            "module": "src/thread/buttons.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/thread/sett-thread.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One pane shape for every conversation. The top border says who you talk to:\nthe session colour for a session, amber for the planner, blue for the framer\nand the fixer. Header, scrolling messages, fixed verbs bar, composer.",
+          "name": "SettThread",
+          "cssParts": [
+            {
+              "description": "the header",
+              "name": "header"
+            },
+            {
+              "description": "the scrolling area",
+              "name": "messages"
+            }
+          ],
+          "slots": [
+            {
+              "description": "messages (sett-msg, sett-question, sett-deviation)",
+              "name": ""
+            },
+            {
+              "description": "who, in the header",
+              "name": "name"
+            },
+            {
+              "description": "what, next to the name",
+              "name": "context"
+            },
+            {
+              "description": "the role, right-aligned in the header",
+              "name": "role"
+            },
+            {
+              "description": "a sett-verbs",
+              "name": "verbs"
+            },
+            {
+              "description": "a sett-composer",
+              "name": "composer"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "identity",
+              "type": {
+                "text": "ThreadIdentity"
+              },
+              "default": "'session'",
+              "attribute": "identity",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "attribute": "session",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "identity",
+              "type": {
+                "text": "ThreadIdentity"
+              },
+              "default": "'session'",
+              "fieldName": "identity"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "fieldName": "session"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-thread",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A message. Yours sit on the right in the selection tint; an agent's on the\nleft outlined in its colour; a sub-agent's in the sub shade. Every message\nopens with an author line: dot, name in the author's colour, time.",
+          "name": "SettMsg",
+          "slots": [
+            {
+              "description": "the body; may contain sett-tool and sett-changed",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "from",
+              "type": {
+                "text": "MsgFrom"
+              },
+              "default": "'agent'",
+              "attribute": "from",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "author",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "who wrote it: `you`, the session name, or `sub · store`",
+              "attribute": "author"
+            },
+            {
+              "kind": "field",
+              "name": "time",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "time"
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "attribute": "session",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "from",
+              "type": {
+                "text": "MsgFrom"
+              },
+              "default": "'agent'",
+              "fieldName": "from"
+            },
+            {
+              "name": "author",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "who wrote it: `you`, the session name, or `sub · store`",
+              "fieldName": "author"
+            },
+            {
+              "name": "time",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "time"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "fieldName": "session"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-msg",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A tool block inside a message: mono, one line per call.",
+          "name": "SettTool",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-tool",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The line that ends every agent reply: `changed · what`, or `no change` with `none`.",
+          "name": "SettChanged",
+          "members": [
+            {
+              "kind": "field",
+              "name": "none",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "none",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "none",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "none"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-changed",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One option in a question or a deviation: a row that reads left to right,\nwith what it changes on the right (`effect`) or a label on the left (`label`).",
+          "name": "SettOption",
+          "slots": [
+            {
+              "description": "the option text",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "effect",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what choosing it changes, e.g. `+1 item in domain`",
+              "attribute": "effect"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "a left column label, e.g. `back on the plan`",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "quiet",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "quiet",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "choose",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-choose",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "with `{ value }` from the `value` attribute"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "effect",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what choosing it changes, e.g. `+1 item in domain`",
+              "fieldName": "effect"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "a left column label, e.g. `back on the plan`",
+              "fieldName": "label"
+            },
+            {
+              "name": "quiet",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "quiet"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-option",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The agent asks. Each option says what it changes; `later` leaves it waiting.",
+          "name": "SettQuestion",
+          "slots": [
+            {
+              "description": "the question",
+              "name": ""
+            },
+            {
+              "description": "sett-option elements",
+              "name": "option"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "author",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "author"
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "attribute": "count"
+            },
+            {
+              "kind": "method",
+              "name": "later",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-later",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "author",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "author"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "fieldName": "count"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-question",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The agent left the plan. Reason, then the three ways back (and discuss).",
+          "name": "SettDeviation",
+          "slots": [
+            {
+              "description": "the reason",
+              "name": ""
+            },
+            {
+              "description": "sett-option elements with a `label`",
+              "name": "way"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "subject",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "subject"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "subject",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "subject"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-deviation",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The fixed bar above the composer. With a `state`, it draws the take-over\nverbs: running `pause · stop`, paused `resume · take over · stop`, taken\nover `stop` (hand back lives in the composer). Without one, the slots draw\nwhatever the identity needs.",
+          "name": "SettVerbs",
+          "slots": [
+            {
+              "description": "the status words on the left (used when no state)",
+              "name": ""
+            },
+            {
+              "description": "extra verbs on the right",
+              "name": "actions"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "VerbsState | undefined"
+              },
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "subject",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what the session is on, e.g. `PgRefundRepo`",
+              "attribute": "subject"
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "still",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "verb",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "v",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-verb",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "with `{ verb }`"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "VerbsState | undefined"
+              },
+              "fieldName": "state"
+            },
+            {
+              "name": "subject",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what the session is on, e.g. `PgRefundRepo`",
+              "fieldName": "subject"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "fieldName": "session"
+            },
+            {
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "still"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-verbs",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The composer. `send` is an input and a send button. `handback` turns it into\nthe hand-back note: blue, a few lines, the touched files under it, and\n\"hand back\" as its button.",
+          "name": "SettComposer",
+          "slots": [
+            {
+              "description": "the touched files line, shown in handback mode",
+              "name": "files"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "ComposerMode"
+              },
+              "default": "'send'",
+              "attribute": "mode",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "session"
+            },
+            {
+              "kind": "method",
+              "name": "send",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-send",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "with `{ text, mode }`"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mode",
+              "type": {
+                "text": "ComposerMode"
+              },
+              "default": "'send'",
+              "fieldName": "mode"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "session"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-composer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettThread",
+          "declaration": {
+            "name": "SettThread",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-thread",
+          "declaration": {
+            "name": "SettThread",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMsg",
+          "declaration": {
+            "name": "SettMsg",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-msg",
+          "declaration": {
+            "name": "SettMsg",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettTool",
+          "declaration": {
+            "name": "SettTool",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-tool",
+          "declaration": {
+            "name": "SettTool",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettChanged",
+          "declaration": {
+            "name": "SettChanged",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-changed",
+          "declaration": {
+            "name": "SettChanged",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettOption",
+          "declaration": {
+            "name": "SettOption",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-option",
+          "declaration": {
+            "name": "SettOption",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettQuestion",
+          "declaration": {
+            "name": "SettQuestion",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-question",
+          "declaration": {
+            "name": "SettQuestion",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettDeviation",
+          "declaration": {
+            "name": "SettDeviation",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-deviation",
+          "declaration": {
+            "name": "SettDeviation",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettVerbs",
+          "declaration": {
+            "name": "SettVerbs",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-verbs",
+          "declaration": {
+            "name": "SettVerbs",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettComposer",
+          "declaration": {
+            "name": "SettComposer",
+            "module": "src/thread/sett-thread.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-composer",
+          "declaration": {
+            "name": "SettComposer",
+            "module": "src/thread/sett-thread.ts"
           }
         }
       ]

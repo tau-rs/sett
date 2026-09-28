@@ -13,6 +13,8 @@ const root = join(fileURLToPath(new URL('.', import.meta.url)), '..', 'storybook
 const mime: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' };
 
 type Entry = { id: string; type: string; title: string; importPath: string };
+type Token = { name: string };
+const tokensJson = join(fileURLToPath(new URL('.', import.meta.url)), '..', '..', 'tokens', 'dist', 'tokens.json');
 
 function firstStoryPerFamily(): Entry[] {
   const index = JSON.parse(readFileSync(join(root, 'index.json'), 'utf8')) as { entries: Record<string, Entry> };
@@ -46,6 +48,40 @@ describe('storybook-static smoke', () => {
 
   const families = existsSync(join(root, 'index.json')) ? firstStoryPerFamily() : [];
   test('one story per family is listed', () => { expect(families.length).toBeGreaterThanOrEqual(12); });
+
+  // docs pages: each renders, and says what it must
+  const docs: Record<string, (text: string) => void> = {
+    'docs-tokens--docs': (text) => {
+      const sets = JSON.parse(readFileSync(tokensJson, 'utf8')) as Record<string, Token[]>;
+      const names = new Set(Object.values(sets).flat().map((t) => t.name));
+      const missing = [...names].filter((n) => !text.includes(n));
+      expect(missing, 'token names absent from the Tokens page').toEqual([]);
+      expect(names.size).toBeGreaterThan(100);
+    },
+    'docs-rules--docs': (text) => {
+      expect(text).toContain('Rules the components encode');
+      expect(text).toContain('Verbs live in a pane');
+      expect(text, 'front matter must not render').not.toContain('tokens: ./packages/tokens/src');
+    },
+    'docs-map--docs': (text) => { expect(text).toContain('Map primitives'); },
+  };
+  describe('docs', () => {
+    for (const [id, check] of Object.entries(docs)) {
+      test(id, async () => {
+        const page = await browser.newPage();
+        const errors: string[] = [];
+        page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
+        await page.goto(`${base}/iframe.html?id=${id}&viewMode=docs`);
+        await page.waitForSelector('body.sb-show-main, body.sb-show-errordisplay', { timeout: 15000 });
+        await page.waitForSelector('#storybook-docs h1, body.sb-show-errordisplay', { timeout: 15000 });
+        const state = await page.evaluate(() => ({ error: document.body.classList.contains('sb-show-errordisplay'), text: document.querySelector('#storybook-docs')?.textContent ?? '' }));
+        await page.close();
+        expect(errors, id).toEqual([]);
+        expect(state.error, `${id} showed the error display`).toBe(false);
+        check(state.text);
+      }, 30000);
+    }
+  });
 
   for (const theme of ['light', 'dark'] as const) {
     describe(theme, () => {

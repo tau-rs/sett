@@ -88,6 +88,7 @@ Only three things move: the live frame (session gradient, 6 s rotate), the waiti
 4. Chips and cards separate with `·`; identifiers are mono.
 5. Dark mode is required from day one.
 6. Map primitives are values, not CSS: the WebGL layer reads `tokens.rs`, generated from the same DTCG source.
+7. Session-card rows: the glyph carries the state; the right cell says only what the glyph cannot (`asks · n`, `paused`, `deviation`, `you`) in plain secondary ink, never a pill and never the session's own name. The current row takes the session's tint. Sub-agents fold under their step, folded by default, with the count and a glyph run on the step row and one continuous guide line in the sub shade when open.
 
 ## Glyph vocabulary
 

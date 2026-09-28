@@ -1,0 +1,1758 @@
+{
+ "name": "zero2prod",
+ "tagline": "zero2prod \u00b7 newsletter API \u00b7 actix-web \u00b7 sqlx \u00b7 redis \u00b7 Postmark \u00b7 from the repo at 970987c (2024-09-01)",
+ "repos": {
+  "z2p": {
+   "units": [
+    {
+     "id": "api",
+     "name": "zero2prod \u00b7 api",
+     "kind": "app",
+     "x": 200,
+     "y": 200,
+     "layout": "hexagon",
+     "crates": 1,
+     "items": 140,
+     "areas": 9,
+     "findings": 2,
+     "exposes": [
+      [
+       "http",
+       "12 routes",
+       "routes",
+       "z2p.http"
+      ]
+     ],
+     "needs": [
+      [
+       "sql",
+       "postgres \u00b7 6 tables",
+       "persistence",
+       "z2p.pg"
+      ],
+      [
+       "redis",
+       "sessions",
+       "session",
+       "z2p.redis"
+      ],
+      [
+       "http",
+       "Postmark",
+       "email",
+       "postmark"
+      ],
+      [
+       "crate",
+       "actix-web \u00b7 sqlx \u00b7 argon2 \u00b7 \u2026",
+       "startup",
+       "z2p.deps"
+      ]
+     ]
+    },
+    {
+     "id": "worker",
+     "name": "issue delivery worker",
+     "kind": "app",
+     "x": 600,
+     "y": 200,
+     "layout": "hexagon",
+     "crates": 1,
+     "items": 40,
+     "areas": 4,
+     "exposes": [],
+     "needs": [
+      [
+       "sql",
+       "issue_delivery_queue \u00b7 newsletter_issues",
+       "queue",
+       "z2p.queue"
+      ],
+      [
+       "http",
+       "Postmark",
+       "wemail",
+       "postmark"
+      ]
+     ]
+    }
+   ],
+   "edges": [
+    {
+     "f": "api",
+     "t": "worker",
+     "kind": "sql",
+     "label": "issue_delivery_queue",
+     "how": "enqueues rows the worker dequeues \u00b7 no code link",
+     "witness": "src/routes/admin/newsletter/post.rs:105 \u00b7 src/issue_delivery_worker.rs:95",
+     "c": "z2p.queue"
+    }
+   ]
+  }
+ },
+ "units": {
+  "api": {
+   "repo": "z2p",
+   "layout": "hexagon",
+   "columns": [
+    [
+     "driving",
+     "routes \u00b7 driving"
+    ],
+    [
+     "domain",
+     "domain"
+    ],
+    [
+     "driven",
+     "driven"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "routes",
+     "col": 0,
+     "name": "routes \u00b7 public",
+     "items": [
+      {
+       "id": "health",
+       "name": "health_check()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "subscribe",
+       "name": "subscribe()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "confirm",
+       "name": "confirm()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "home",
+       "name": "home()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "login_form",
+       "name": "login_form()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "login",
+       "name": "login()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "publish_pub",
+       "name": "publish_newsletter() \u00b7 POST /newsletters",
+       "k": "fn",
+       "entry": 1,
+       "finding": 1
+      }
+     ]
+    },
+    {
+     "id": "admin",
+     "col": 0,
+     "name": "routes \u00b7 admin",
+     "items": [
+      {
+       "id": "dashboard",
+       "name": "admin_dashboard()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "pubform",
+       "name": "publish_newsletter_form()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "publish",
+       "name": "publish_newsletter()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "pwform",
+       "name": "change_password_form()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "pwchange",
+       "name": "change_password()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "logout",
+       "name": "log_out()",
+       "k": "fn",
+       "entry": 1
+      }
+     ]
+    },
+    {
+     "id": "mw",
+     "col": 0,
+     "name": "middleware",
+     "items": [
+      {
+       "id": "reject",
+       "name": "reject_anonymous_users()",
+       "k": "fn"
+      },
+      {
+       "id": "userid",
+       "name": "UserId",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "domain",
+     "col": 1,
+     "name": "domain",
+     "items": [
+      {
+       "id": "newsub",
+       "name": "NewSubscriber",
+       "k": "struct"
+      },
+      {
+       "id": "subemail",
+       "name": "SubscriberEmail::parse",
+       "k": "struct"
+      },
+      {
+       "id": "subname",
+       "name": "SubscriberName::parse",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "auth",
+     "col": 1,
+     "name": "authentication",
+     "items": [
+      {
+       "id": "creds",
+       "name": "Credentials",
+       "k": "struct"
+      },
+      {
+       "id": "validate",
+       "name": "validate_credentials()",
+       "k": "fn"
+      },
+      {
+       "id": "authchange",
+       "name": "change_password()",
+       "k": "fn"
+      },
+      {
+       "id": "autherr",
+       "name": "AuthError",
+       "k": "enum"
+      }
+     ]
+    },
+    {
+     "id": "idem",
+     "col": 1,
+     "name": "idempotency",
+     "items": [
+      {
+       "id": "idkey",
+       "name": "IdempotencyKey",
+       "k": "struct"
+      },
+      {
+       "id": "tryproc",
+       "name": "try_processing()",
+       "k": "fn"
+      },
+      {
+       "id": "saveresp",
+       "name": "save_response()",
+       "k": "fn"
+      },
+      {
+       "id": "getsaved",
+       "name": "get_saved_response()",
+       "k": "fn"
+      },
+      {
+       "id": "nextaction",
+       "name": "NextAction",
+       "k": "enum"
+      }
+     ]
+    },
+    {
+     "id": "session",
+     "col": 1,
+     "name": "session",
+     "items": [
+      {
+       "id": "tsession",
+       "name": "TypedSession",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "persistence",
+     "col": 2,
+     "name": "persistence \u00b7 sqlx",
+     "items": [
+      {
+       "id": "insertsub",
+       "name": "insert_subscriber()",
+       "k": "fn"
+      },
+      {
+       "id": "storetok",
+       "name": "store_token()",
+       "k": "fn"
+      },
+      {
+       "id": "confirmsub",
+       "name": "confirm_subscriber()",
+       "k": "fn"
+      },
+      {
+       "id": "idfromtok",
+       "name": "get_subscriber_id_from_token()",
+       "k": "fn"
+      },
+      {
+       "id": "getuser",
+       "name": "get_username()",
+       "k": "fn"
+      },
+      {
+       "id": "insertissue",
+       "name": "insert_newsletter_issue()",
+       "k": "fn"
+      },
+      {
+       "id": "enqueue",
+       "name": "enqueue_delivery_tasks()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "email",
+     "col": 2,
+     "name": "email",
+     "items": [
+      {
+       "id": "emailclient",
+       "name": "EmailClient",
+       "k": "struct"
+      },
+      {
+       "id": "sendmail",
+       "name": "send_email()",
+       "k": "fn"
+      },
+      {
+       "id": "sendconf",
+       "name": "send_confirmation_email()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "startup",
+     "col": 2,
+     "name": "startup",
+     "items": [
+      {
+       "id": "app",
+       "name": "Application::build()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "runfn",
+       "name": "run() \u00b7 HttpServer",
+       "k": "fn"
+      },
+      {
+       "id": "pool",
+       "name": "get_connection_pool()",
+       "k": "fn"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "subscribe",
+     "newsub"
+    ],
+    [
+     "newsub",
+     "subemail"
+    ],
+    [
+     "newsub",
+     "subname"
+    ],
+    [
+     "subscribe",
+     "insertsub"
+    ],
+    [
+     "subscribe",
+     "storetok"
+    ],
+    [
+     "subscribe",
+     "sendconf"
+    ],
+    [
+     "sendconf",
+     "sendmail"
+    ],
+    [
+     "emailclient",
+     "sendmail"
+    ],
+    [
+     "confirm",
+     "idfromtok"
+    ],
+    [
+     "confirm",
+     "confirmsub"
+    ],
+    [
+     "login",
+     "creds"
+    ],
+    [
+     "login",
+     "validate"
+    ],
+    [
+     "login",
+     "tsession"
+    ],
+    [
+     "reject",
+     "tsession"
+    ],
+    [
+     "reject",
+     "userid"
+    ],
+    [
+     "dashboard",
+     "getuser"
+    ],
+    [
+     "pwchange",
+     "validate"
+    ],
+    [
+     "pwchange",
+     "authchange"
+    ],
+    [
+     "logout",
+     "tsession"
+    ],
+    [
+     "publish",
+     "idkey"
+    ],
+    [
+     "publish",
+     "tryproc"
+    ],
+    [
+     "publish",
+     "saveresp"
+    ],
+    [
+     "tryproc",
+     "nextaction"
+    ],
+    [
+     "publish",
+     "insertissue"
+    ],
+    [
+     "publish",
+     "enqueue"
+    ],
+    [
+     "publish_pub",
+     "insertissue",
+     {
+      "smell": 1,
+      "label": "mounted outside /admin \u00b7 no reject_anonymous_users"
+     }
+    ],
+    [
+     "app",
+     "runfn"
+    ],
+    [
+     "app",
+     "pool"
+    ],
+    [
+     "runfn",
+     "reject"
+    ],
+    [
+     "validate",
+     "autherr"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "clients",
+      "browsers \u00b7 clients"
+     ]
+    ],
+    "deps": [
+     [
+      "worker",
+      "issue delivery worker \u00b7 via issue_delivery_queue"
+     ]
+    ]
+   }
+  },
+  "worker": {
+   "repo": "z2p",
+   "layout": "hexagon",
+   "columns": [
+    [
+     "driving",
+     "worker \u00b7 driving"
+    ],
+    [
+     "domain",
+     "task"
+    ],
+    [
+     "driven",
+     "queue \u00b7 email"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "wloop",
+     "col": 0,
+     "name": "worker",
+     "items": [
+      {
+       "id": "runworker",
+       "name": "run_worker_until_stopped()",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "wloopfn",
+       "name": "worker_loop()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "task",
+     "col": 1,
+     "name": "task",
+     "items": [
+      {
+       "id": "tryexec",
+       "name": "try_execute_task()",
+       "k": "fn"
+      },
+      {
+       "id": "outcome",
+       "name": "ExecutionOutcome",
+       "k": "enum"
+      },
+      {
+       "id": "wemail_parse",
+       "name": "SubscriberEmail::parse",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "queue",
+     "col": 2,
+     "name": "queue \u00b7 sqlx",
+     "items": [
+      {
+       "id": "dequeue",
+       "name": "dequeue_task()",
+       "k": "fn"
+      },
+      {
+       "id": "deletetask",
+       "name": "delete_task()",
+       "k": "fn"
+      },
+      {
+       "id": "getissue",
+       "name": "get_issue()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "wemail",
+     "col": 2,
+     "name": "email",
+     "items": [
+      {
+       "id": "wsend",
+       "name": "EmailClient::send_email()",
+       "k": "fn"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "runworker",
+     "wloopfn"
+    ],
+    [
+     "wloopfn",
+     "tryexec"
+    ],
+    [
+     "tryexec",
+     "outcome"
+    ],
+    [
+     "tryexec",
+     "wemail_parse"
+    ],
+    [
+     "tryexec",
+     "dequeue"
+    ],
+    [
+     "tryexec",
+     "getissue"
+    ],
+    [
+     "tryexec",
+     "wsend"
+    ],
+    [
+     "tryexec",
+     "deletetask"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "api",
+      "zero2prod \u00b7 api \u00b7 enqueues"
+     ]
+    ],
+    "deps": []
+   }
+  }
+ },
+ "contracts": {
+  "z2p.http": {
+   "kind": "http",
+   "name": "zero2prod \u00b7 HTTP API",
+   "owner": "zero2prod",
+   "format": "actix-web App \u00b7 12 routes",
+   "witness": "src/startup.rs:90-106",
+   "ops": [
+    "GET / \u2192 home",
+    "POST /subscriptions \u2192 200",
+    "GET /subscriptions/confirm?subscription_token \u2192 200",
+    "GET /health_check \u2192 200",
+    "GET /login \u2192 html",
+    "POST /login \u2192 303",
+    "GET /admin/dashboard \u2192 html \u00b7 auth",
+    "GET /admin/newsletters \u2192 html \u00b7 auth",
+    "POST /admin/newsletters \u2192 303 \u00b7 auth \u00b7 idempotent",
+    "GET /admin/password \u2192 html \u00b7 auth",
+    "POST /admin/password \u2192 303 \u00b7 auth",
+    "POST /admin/logout \u2192 303 \u00b7 auth",
+    "POST /newsletters \u2192 303 \u00b7 no auth"
+   ],
+   "handlers": {
+    "GET /": "home",
+    "POST /subscriptions": "subscribe",
+    "GET /subscriptions/confirm?subscription_token": "confirm",
+    "GET /health_check": "health",
+    "GET /login": "login_form",
+    "POST /login": "login",
+    "GET /admin/dashboard": "dashboard",
+    "GET /admin/newsletters": "pubform",
+    "POST /admin/newsletters": "publish",
+    "GET /admin/password": "pwform",
+    "POST /admin/password": "pwchange",
+    "POST /admin/logout": "logout",
+    "POST /newsletters": "publish_pub"
+   },
+   "used": [
+    [
+     "browsers \u00b7 clients",
+     "forms \u00b7 links"
+    ]
+   ],
+   "notes": "/admin/* is behind reject_anonymous_users (from_fn middleware) \u00b7 POST /newsletters at line 106 is mounted outside /admin: the same handler, unauthenticated \u2192 finding"
+  },
+  "z2p.pg": {
+   "kind": "sql",
+   "name": "postgres",
+   "owner": "zero2prod",
+   "format": "sqlx \u00b7 6 tables \u00b7 13 migrations",
+   "witness": "migrations/",
+   "ops": [
+    "subscriptions",
+    "subscription_tokens",
+    "users",
+    "idempotency",
+    "newsletter_issues",
+    "issue_delivery_queue"
+   ],
+   "used": [
+    [
+     "api",
+     "insert \u00b7 update \u00b7 select"
+    ],
+    [
+     "worker",
+     "dequeue \u00b7 delete"
+    ]
+   ],
+   "notes": "the worker and the API share issue_delivery_queue: that table is their only coupling"
+  },
+  "z2p.queue": {
+   "kind": "sql",
+   "name": "issue_delivery_queue",
+   "owner": "zero2prod",
+   "format": "table used as a queue \u00b7 SKIP LOCKED",
+   "witness": "src/issue_delivery_worker.rs:95 \u00b7 src/routes/admin/newsletter/post.rs:105",
+   "ops": [
+    "INSERT one row per confirmed subscriber (API)",
+    "SELECT \u2026 FOR UPDATE SKIP LOCKED LIMIT 1 (worker)",
+    "DELETE after send (worker)"
+   ],
+   "schema": "issue_delivery_queue { newsletter_issue_id, subscriber_email }",
+   "used": [
+    [
+     "api",
+     "enqueue_delivery_tasks()"
+    ],
+    [
+     "worker",
+     "dequeue_task() \u00b7 delete_task()"
+    ]
+   ],
+   "notes": "no function calls between the two tasks; the map draws the table as the edge"
+  },
+  "z2p.redis": {
+   "kind": "redis",
+   "name": "sessions",
+   "owner": "zero2prod",
+   "format": "actix-session \u00b7 RedisSessionStore",
+   "witness": "src/startup.rs:81",
+   "ops": [
+    "session cookie \u2192 user_id",
+    "TypedSession::insert_user_id \u00b7 get_user_id \u00b7 renew \u00b7 log_out"
+   ],
+   "used": [
+    [
+     "api",
+     "login \u00b7 reject_anonymous_users \u00b7 logout"
+    ]
+   ]
+  },
+  "postmark": {
+   "kind": "http",
+   "name": "Postmark \u00b7 email API",
+   "owner": "external",
+   "format": "REST \u00b7 POST {base_url}/email",
+   "witness": "src/email_client.rs:35-50",
+   "ops": [
+    "POST /email { From, To, Subject, HtmlBody, TextBody }",
+    "header X-Postmark-Server-Token",
+    "timeout from configuration"
+   ],
+   "used": [
+    [
+     "api",
+     "send_confirmation_email()"
+    ],
+    [
+     "worker",
+     "try_execute_task()"
+    ]
+   ]
+  },
+  "z2p.deps": {
+   "kind": "crate",
+   "name": "crates.io dependencies",
+   "owner": "external",
+   "format": "Cargo.toml \u00b7 27 crates",
+   "witness": "Cargo.toml",
+   "ops": [
+    "actix-web \u00b7 actix-session \u00b7 actix-web-flash-messages",
+    "sqlx (postgres, runtime-tokio-rustls)",
+    "reqwest (Postmark)",
+    "argon2 \u00b7 secrecy \u00b7 uuid",
+    "tracing \u00b7 tracing-actix-web \u00b7 tracing-bunyan-formatter",
+    "validator \u00b7 unicode-segmentation \u00b7 serde"
+   ],
+   "used": []
+  }
+ },
+ "code": {
+  "subscribe": {
+   "file": "src/routes/subscriptions.rs",
+   "line": 61,
+   "unit": "api",
+   "callers": [
+    [
+     "runfn",
+     "run() \u00b7 POST /subscriptions"
+    ]
+   ],
+   "calls": [
+    [
+     "insertsub",
+     "insert_subscriber()"
+    ],
+    [
+     "storetok",
+     "store_token()"
+    ],
+    [
+     "sendconf",
+     "send_confirmation_email()"
+    ]
+   ],
+   "lines": [
+    [
+     61,
+     "pub async fn subscribe(",
+     "hl"
+    ],
+    [
+     62,
+     "    form: web::Form<FormData>,",
+     "hl"
+    ],
+    [
+     63,
+     "    pool: web::Data<PgPool>,",
+     "hl"
+    ],
+    [
+     64,
+     "    email_client: web::Data<EmailClient>,",
+     "hl"
+    ],
+    [
+     65,
+     "    base_url: web::Data<ApplicationBaseUrl>,",
+     "hl"
+    ],
+    [
+     66,
+     ") -> Result<HttpResponse, SubscribeError> {",
+     "hl"
+    ],
+    [
+     67,
+     "    let new_subscriber = form.0.try_into().map_err(SubscribeError::ValidationError)?;",
+     "hl"
+    ],
+    [
+     68,
+     "    let mut transaction = pool",
+     "hl"
+    ],
+    [
+     69,
+     "        .begin()",
+     "hl"
+    ],
+    [
+     70,
+     "        .await",
+     "hl"
+    ],
+    [
+     71,
+     "        .context(\"Failed to acquire a Postgres connection from the pool\")?;",
+     "hl"
+    ],
+    [
+     72,
+     "    let subscriber_id = insert_subscriber(&mut transaction, &new_subscriber)",
+     "hl"
+    ],
+    [
+     73,
+     "        .await",
+     "hl"
+    ],
+    [
+     74,
+     "        .context(\"Failed to insert new subscriber in the database.\")?;",
+     "hl"
+    ],
+    [
+     75,
+     "    let subscription_token = generate_subscription_token();",
+     "hl"
+    ],
+    [
+     76,
+     "    store_token(&mut transaction, subscriber_id, &subscription_token)",
+     "hl"
+    ],
+    [
+     77,
+     "        .await",
+     "hl"
+    ],
+    [
+     78,
+     "        .context(\"Failed to store the confirmation token for a new subscriber.\")?;",
+     "hl"
+    ],
+    [
+     79,
+     "    transaction",
+     "hl"
+    ],
+    [
+     80,
+     "        .commit()",
+     "hl"
+    ],
+    [
+     81,
+     "        .await",
+     "hl"
+    ],
+    [
+     82,
+     "        .context(\"Failed to commit SQL transaction to store a new subscriber.\")?;",
+     "hl"
+    ],
+    [
+     83,
+     "    send_confirmation_email(",
+     "hl"
+    ],
+    [
+     84,
+     "        &email_client,",
+     "hl"
+    ],
+    [
+     85,
+     "        new_subscriber,",
+     "hl"
+    ],
+    [
+     86,
+     "        &base_url.0,",
+     "hl"
+    ],
+    [
+     87,
+     "        &subscription_token,",
+     "hl"
+    ],
+    [
+     88,
+     "    )",
+     "hl"
+    ],
+    [
+     89,
+     "    .await",
+     "hl"
+    ],
+    [
+     90,
+     "    .context(\"Failed to send a confirmation email.\")?;",
+     "hl"
+    ],
+    [
+     91,
+     "    Ok(HttpResponse::Ok().finish())",
+     "hl"
+    ],
+    [
+     92,
+     "}",
+     "hl"
+    ]
+   ]
+  },
+  "confirm": {
+   "file": "src/routes/subscriptions_confirm.rs",
+   "line": 37,
+   "unit": "api",
+   "callers": [
+    [
+     "runfn",
+     "run() \u00b7 GET /subscriptions/confirm"
+    ]
+   ],
+   "calls": [
+    [
+     "idfromtok",
+     "get_subscriber_id_from_token()"
+    ],
+    [
+     "confirmsub",
+     "confirm_subscriber()"
+    ]
+   ],
+   "lines": [
+    [
+     37,
+     "pub async fn confirm(",
+     "hl"
+    ],
+    [
+     38,
+     "    parameters: web::Query<Parameters>,",
+     "hl"
+    ],
+    [
+     39,
+     "    pool: web::Data<PgPool>,",
+     "hl"
+    ],
+    [
+     40,
+     ") -> Result<HttpResponse, ConfirmationError> {",
+     "hl"
+    ],
+    [
+     41,
+     "    let subscriber_id = get_subscriber_id_from_token(&pool, &parameters.subscription_token)",
+     "hl"
+    ],
+    [
+     42,
+     "        .await",
+     "hl"
+    ],
+    [
+     43,
+     "        .context(\"Failed to retrieve the subscriber id associated with the provided token.\")?",
+     "hl"
+    ],
+    [
+     44,
+     "        .ok_or(ConfirmationError::UnknownToken)?;",
+     "hl"
+    ],
+    [
+     45,
+     "    confirm_subscriber(&pool, subscriber_id)",
+     "hl"
+    ],
+    [
+     46,
+     "        .await",
+     "hl"
+    ],
+    [
+     47,
+     "        .context(\"Failed to update the subscriber status to `confirmed`.\")?;",
+     "hl"
+    ],
+    [
+     48,
+     "    Ok(HttpResponse::Ok().finish())",
+     "hl"
+    ],
+    [
+     49,
+     "}",
+     "hl"
+    ]
+   ]
+  },
+  "reject": {
+   "file": "src/authentication/middleware.rs",
+   "line": 28,
+   "unit": "api",
+   "callers": [
+    [
+     "runfn",
+     "run() \u00b7 scope /admin"
+    ]
+   ],
+   "calls": [
+    [
+     "tsession",
+     "TypedSession"
+    ]
+   ],
+   "lines": [
+    [
+     28,
+     "pub async fn reject_anonymous_users(",
+     "hl"
+    ],
+    [
+     29,
+     "    mut req: ServiceRequest,",
+     "hl"
+    ],
+    [
+     30,
+     "    next: Next<impl MessageBody>,",
+     "hl"
+    ],
+    [
+     31,
+     ") -> Result<ServiceResponse<impl MessageBody>, actix_web::Error> {",
+     "hl"
+    ],
+    [
+     32,
+     "    let session = {",
+     "hl"
+    ],
+    [
+     33,
+     "        let (http_request, payload) = req.parts_mut();",
+     "hl"
+    ],
+    [
+     34,
+     "        TypedSession::from_request(http_request, payload).await",
+     "hl"
+    ],
+    [
+     35,
+     "    }?;",
+     "hl"
+    ],
+    [
+     36,
+     "",
+     "hl"
+    ],
+    [
+     37,
+     "    match session.get_user_id().map_err(e500)? {",
+     "hl"
+    ],
+    [
+     38,
+     "        Some(user_id) => {",
+     "hl"
+    ],
+    [
+     39,
+     "            req.extensions_mut().insert(UserId(user_id));",
+     "hl"
+    ],
+    [
+     40,
+     "            next.call(req).await",
+     "hl"
+    ],
+    [
+     41,
+     "        }",
+     "hl"
+    ],
+    [
+     42,
+     "        None => {",
+     "hl"
+    ],
+    [
+     43,
+     "            let response = see_other(\"/login\");",
+     "hl"
+    ],
+    [
+     44,
+     "            let e = anyhow::anyhow!(\"The user has not logged in\");",
+     "hl"
+    ],
+    [
+     45,
+     "            Err(InternalError::from_response(e, response).into())",
+     "hl"
+    ],
+    [
+     46,
+     "        }",
+     "hl"
+    ],
+    [
+     47,
+     "    }",
+     "hl"
+    ]
+   ]
+  },
+  "runworker": {
+   "file": "src/issue_delivery_worker.rs",
+   "line": 8,
+   "unit": "worker",
+   "callers": [],
+   "calls": [
+    [
+     "tryexec",
+     "try_execute_task()"
+    ]
+   ],
+   "lines": [
+    [
+     8,
+     "pub async fn run_worker_until_stopped(configuration: Settings) -> Result<(), anyhow::Error> {",
+     "hl"
+    ],
+    [
+     9,
+     "    let connection_pool = get_connection_pool(&configuration.database);",
+     "hl"
+    ],
+    [
+     10,
+     "    let email_client = configuration.email_client.client();",
+     "hl"
+    ],
+    [
+     11,
+     "    worker_loop(connection_pool, email_client).await",
+     "hl"
+    ],
+    [
+     12,
+     "}",
+     "hl"
+    ],
+    [
+     13,
+     "",
+     "hl"
+    ],
+    [
+     14,
+     "async fn worker_loop(pool: PgPool, email_client: EmailClient) -> Result<(), anyhow::Error> {",
+     "hl"
+    ],
+    [
+     15,
+     "    loop {",
+     "hl"
+    ],
+    [
+     16,
+     "        match try_execute_task(&pool, &email_client).await {",
+     "hl"
+    ],
+    [
+     17,
+     "            Ok(ExecutionOutcome::EmptyQueue) => {",
+     "hl"
+    ],
+    [
+     18,
+     "                tokio::time::sleep(Duration::from_secs(10)).await;",
+     "hl"
+    ],
+    [
+     19,
+     "            }",
+     "hl"
+    ],
+    [
+     20,
+     "            Err(_) => {",
+     "hl"
+    ],
+    [
+     21,
+     "                tokio::time::sleep(Duration::from_secs(1)).await;",
+     "hl"
+    ],
+    [
+     22,
+     "            }",
+     "hl"
+    ],
+    [
+     23,
+     "            Ok(ExecutionOutcome::TaskCompleted) => {}",
+     "hl"
+    ],
+    [
+     24,
+     "        }",
+     "hl"
+    ],
+    [
+     25,
+     "    }",
+     "hl"
+    ],
+    [
+     26,
+     "}",
+     "hl"
+    ],
+    [
+     27,
+     "",
+     "hl"
+    ]
+   ]
+  },
+  "tryexec": {
+   "file": "src/issue_delivery_worker.rs",
+   "line": 41,
+   "unit": "worker",
+   "callers": [
+    [
+     "wloopfn",
+     "worker_loop()"
+    ]
+   ],
+   "calls": [
+    [
+     "dequeue",
+     "dequeue_task()"
+    ],
+    [
+     "getissue",
+     "get_issue()"
+    ],
+    [
+     "wsend",
+     "send_email()"
+    ]
+   ],
+   "lines": [
+    [
+     41,
+     "pub async fn try_execute_task(",
+     "hl"
+    ],
+    [
+     42,
+     "    pool: &PgPool,",
+     "hl"
+    ],
+    [
+     43,
+     "    email_client: &EmailClient,",
+     "hl"
+    ],
+    [
+     44,
+     ") -> Result<ExecutionOutcome, anyhow::Error> {",
+     "hl"
+    ],
+    [
+     45,
+     "    let task = dequeue_task(pool).await?;",
+     "hl"
+    ],
+    [
+     46,
+     "    if task.is_none() {",
+     "hl"
+    ],
+    [
+     47,
+     "        return Ok(ExecutionOutcome::EmptyQueue);",
+     "hl"
+    ],
+    [
+     48,
+     "    }",
+     "hl"
+    ],
+    [
+     49,
+     "    let (transaction, issue_id, email) = task.unwrap();",
+     "hl"
+    ],
+    [
+     50,
+     "    Span::current()",
+     "hl"
+    ],
+    [
+     51,
+     "        .record(\"newsletter_issue_id\", display(issue_id))",
+     "hl"
+    ],
+    [
+     52,
+     "        .record(\"subscriber_email\", display(&email));",
+     "hl"
+    ],
+    [
+     53,
+     "    match SubscriberEmail::parse(email.clone()) {",
+     "hl"
+    ],
+    [
+     54,
+     "        Ok(email) => {",
+     "hl"
+    ],
+    [
+     55,
+     "            let issue = get_issue(pool, issue_id).await?;",
+     "hl"
+    ],
+    [
+     56,
+     "            if let Err(e) = email_client",
+     "hl"
+    ],
+    [
+     57,
+     "                .send_email(",
+     "hl"
+    ],
+    [
+     58,
+     "                    &email,",
+     "hl"
+    ],
+    [
+     59,
+     "                    &issue.title,",
+     "hl"
+    ],
+    [
+     60,
+     "                    &issue.html_content,",
+     "hl"
+    ],
+    [
+     61,
+     "                    &issue.text_content,",
+     "hl"
+    ],
+    [
+     62,
+     "                )",
+     "hl"
+    ]
+   ]
+  },
+  "publish_pub": {
+   "file": "src/startup.rs",
+   "line": 90,
+   "unit": "api",
+   "callers": [],
+   "calls": [
+    [
+     "publish",
+     "publish_newsletter()"
+    ]
+   ],
+   "lines": [
+    [
+     90,
+     "            .route(\"/\", web::get().to(home))",
+     "hl"
+    ],
+    [
+     91,
+     "            .service(",
+     "hl"
+    ],
+    [
+     92,
+     "                web::scope(\"/admin\")",
+     "hl"
+    ],
+    [
+     93,
+     "                    .wrap(from_fn(reject_anonymous_users))",
+     "hl"
+    ],
+    [
+     94,
+     "                    .route(\"/dashboard\", web::get().to(admin_dashboard))",
+     "hl"
+    ],
+    [
+     95,
+     "                    .route(\"/newsletters\", web::get().to(publish_newsletter_form))",
+     "hl"
+    ],
+    [
+     96,
+     "                    .route(\"/newsletters\", web::post().to(publish_newsletter))",
+     "hl"
+    ],
+    [
+     97,
+     "                    .route(\"/password\", web::get().to(change_password_form))",
+     "hl"
+    ],
+    [
+     98,
+     "                    .route(\"/password\", web::post().to(change_password))",
+     "hl"
+    ],
+    [
+     99,
+     "                    .route(\"/logout\", web::post().to(log_out)),",
+     "hl"
+    ],
+    [
+     100,
+     "            )",
+     "hl"
+    ],
+    [
+     101,
+     "            .route(\"/login\", web::get().to(login_form))",
+     "hl"
+    ],
+    [
+     102,
+     "            .route(\"/login\", web::post().to(login))",
+     "hl"
+    ],
+    [
+     103,
+     "            .route(\"/health_check\", web::get().to(health_check))",
+     "hl"
+    ],
+    [
+     104,
+     "            .route(\"/subscriptions\", web::post().to(subscribe))",
+     "hl"
+    ],
+    [
+     105,
+     "            .route(\"/subscriptions/confirm\", web::get().to(confirm))",
+     "hl"
+    ],
+    [
+     106,
+     "            .route(\"/newsletters\", web::post().to(publish_newsletter))",
+     "bad"
+    ],
+    [
+     107,
+     "            .app_data(db_pool.clone())"
+    ]
+   ]
+  }
+ },
+ "system": {
+  "nodes": [
+   {
+    "id": "clients",
+    "name": "browsers \u00b7 clients",
+    "kind": "declared",
+    "x": 40,
+    "y": 250,
+    "units": 0,
+    "items": 0,
+    "declared": true,
+    "exposes": [],
+    "needs": [
+     [
+      "http",
+      "zero2prod \u00b7 12 routes",
+      null,
+      "z2p.http"
+     ]
+    ]
+   },
+   {
+    "id": "z2p",
+    "name": "zero2prod",
+    "kind": "app",
+    "x": 340,
+    "y": 250,
+    "units": 2,
+    "items": 180,
+    "sessions": 0,
+    "findings": 2,
+    "meta": "one crate \u00b7 API + worker",
+    "exposes": [
+     [
+      "http",
+      "12 routes \u00b7 actix-web",
+      "api",
+      "z2p.http"
+     ]
+    ],
+    "needs": [
+     [
+      "sql",
+      "postgres \u00b7 6 tables",
+      "api",
+      "z2p.pg"
+     ],
+     [
+      "redis",
+      "sessions",
+      "api",
+      "z2p.redis"
+     ],
+     [
+      "http",
+      "Postmark \u00b7 POST /email",
+      "api",
+      "postmark"
+     ]
+    ]
+   },
+   {
+    "id": "postgres",
+    "name": "postgres",
+    "kind": "data store",
+    "x": 680,
+    "y": 120,
+    "units": 0,
+    "items": 6,
+    "meta": "6 tables \u00b7 sqlx migrations",
+    "exposes": [
+     [
+      "sql",
+      "6 tables",
+      null,
+      "z2p.pg"
+     ]
+    ],
+    "needs": []
+   },
+   {
+    "id": "redis",
+    "name": "redis",
+    "kind": "data store",
+    "x": 680,
+    "y": 300,
+    "units": 0,
+    "items": 0,
+    "meta": "session store",
+    "exposes": [
+     [
+      "redis",
+      "sessions",
+      null,
+      "z2p.redis"
+     ]
+    ],
+    "needs": []
+   },
+   {
+    "id": "postmark",
+    "name": "Postmark",
+    "kind": "third-party",
+    "x": 680,
+    "y": 470,
+    "units": 0,
+    "items": 0,
+    "meta": "transactional email API",
+    "exposes": [
+     [
+      "http",
+      "POST /email",
+      null,
+      "postmark"
+     ]
+    ],
+    "needs": []
+   }
+  ],
+  "edges": [
+   {
+    "f": "clients",
+    "t": "z2p",
+    "kind": "http",
+    "label": "12 routes",
+    "how": "calls \u00b7 sync",
+    "witness": "src/startup.rs:90-106",
+    "fs": 0,
+    "ts": 0,
+    "c": "z2p.http"
+   },
+   {
+    "f": "z2p",
+    "t": "postgres",
+    "kind": "sql",
+    "label": "6 tables",
+    "how": "queries \u00b7 sqlx",
+    "witness": "migrations/ \u00b7 13 files",
+    "fs": 0,
+    "ts": 0,
+    "c": "z2p.pg"
+   },
+   {
+    "f": "z2p",
+    "t": "redis",
+    "kind": "redis",
+    "label": "sessions",
+    "how": "reads \u00b7 writes",
+    "witness": "src/startup.rs:81 RedisSessionStore",
+    "fs": 1,
+    "ts": 0,
+    "c": "z2p.redis"
+   },
+   {
+    "f": "z2p",
+    "t": "postmark",
+    "kind": "http",
+    "label": "POST /email",
+    "how": "calls \u00b7 sync",
+    "witness": "src/email_client.rs:35",
+    "fs": 2,
+    "ts": 0,
+    "c": "postmark"
+   }
+  ],
+  "groups": [
+   {
+    "name": "one process \u00b7 two tokio tasks (API, delivery worker)",
+    "x": 300,
+    "y": 180,
+    "w": 270,
+    "h": 260
+   }
+  ]
+ }
+}

@@ -1,0 +1,2745 @@
+{
+ "name": "zed-industries",
+ "tagline": "Zed \u00b7 250 crates at HEAD (2026-09-27) \u00b7 nine units hand-grouped from the manifests \u00b7 items are illustrative",
+ "system": {
+  "nodes": [
+   {
+    "id": "zed",
+    "name": "zed",
+    "kind": "monorepo",
+    "x": 200,
+    "y": 210,
+    "units": 9,
+    "items": 42000,
+    "sessions": 2,
+    "findings": 7,
+    "meta": "250 crates",
+    "exposes": [
+     [
+      "crate",
+      "zed_extension_api",
+      "language",
+      "zed_extension_api"
+     ],
+     [
+      "rpc",
+      "zed.proto \u00b7 collab",
+      "collab",
+      "zed.proto"
+     ],
+     [
+      "http",
+      "collab \u00b7 /api",
+      "collab",
+      "collab.api"
+     ]
+    ],
+    "needs": [
+     [
+      "http",
+      "api.zed.dev \u00b7 releases",
+      "zedapp",
+      "zed.site"
+     ],
+     [
+      "http",
+      "llm.zed.dev",
+      "agent",
+      "llm.zed.dev"
+     ],
+     [
+      "crate",
+      "extensions \u00b7 wasm",
+      "language",
+      "ext.manifests"
+     ]
+    ]
+   },
+   {
+    "id": "ext",
+    "name": "extensions",
+    "kind": "registry",
+    "x": 580,
+    "y": 70,
+    "units": 1,
+    "items": 3100,
+    "sessions": 0,
+    "findings": 0,
+    "meta": "wasm extensions",
+    "exposes": [
+     [
+      "crate",
+      "extension manifests"
+     ]
+    ],
+    "needs": [
+     [
+      "crate",
+      "zed_extension_api"
+     ]
+    ]
+   },
+   {
+    "id": "cloud",
+    "name": "cloud",
+    "kind": "service",
+    "x": 580,
+    "y": 350,
+    "units": 2,
+    "items": 5200,
+    "sessions": 0,
+    "findings": 1,
+    "meta": "llm proxy \u00b7 auth",
+    "exposes": [
+     [
+      "http",
+      "llm.zed.dev"
+     ],
+     [
+      "http",
+      "api.zed.dev"
+     ]
+    ],
+    "needs": [
+     [
+      "sql",
+      "postgres"
+     ]
+    ]
+   },
+   {
+    "id": "site",
+    "name": "zed.dev",
+    "kind": "declared",
+    "x": 940,
+    "y": 210,
+    "units": 0,
+    "items": 0,
+    "declared": true,
+    "exposes": [
+     [
+      "http",
+      "releases \u00b7 declared"
+     ]
+    ],
+    "needs": []
+   }
+  ],
+  "edges": [
+   {
+    "f": "zed",
+    "t": "ext",
+    "kind": "crate",
+    "label": "zed_extension_api",
+    "how": "publishes \u00b7 build",
+    "witness": "crates/extension_api/Cargo.toml",
+    "fs": 0,
+    "ts": 0,
+    "c": "zed_extension_api"
+   },
+   {
+    "f": "ext",
+    "t": "zed",
+    "kind": "crate",
+    "label": "extension manifests \u00b7 wasm",
+    "how": "loaded \u00b7 runtime",
+    "witness": "extensions/*/extension.toml",
+    "fx": 0,
+    "tn": 2,
+    "c": "ext.manifests"
+   },
+   {
+    "f": "zed",
+    "t": "cloud",
+    "kind": "http",
+    "label": "llm.zed.dev",
+    "how": "calls \u00b7 sync",
+    "witness": "crates/client/src/client.rs",
+    "fs": 2,
+    "ts": 0,
+    "c": "llm.zed.dev"
+   },
+   {
+    "f": "zed",
+    "t": "site",
+    "kind": "declared",
+    "label": "releases",
+    "how": "declared \u00b7 unverified",
+    "declared": true,
+    "c": "zed.site"
+   }
+  ],
+  "groups": [
+   {
+    "name": "editor + backend",
+    "x": 150,
+    "y": 30,
+    "w": 640,
+    "h": 470
+   }
+  ]
+ },
+ "repos": {
+  "zed": {
+   "units": [
+    {
+     "id": "cli",
+     "name": "cli",
+     "kind": "app",
+     "x": 40,
+     "y": 250,
+     "layout": "hexagon",
+     "crates": 1,
+     "items": 210,
+     "areas": 2,
+     "sessions": 0,
+     "findings": 0,
+     "exposes": [
+      [
+       "pub",
+       "main \u00b7 entry"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "zed \u00b7 ipc"
+      ]
+     ]
+    },
+    {
+     "id": "zedapp",
+     "name": "zed \u00b7 app",
+     "kind": "app",
+     "x": 320,
+     "y": 250,
+     "layout": "hexagon",
+     "crates": 59,
+     "items": 9800,
+     "areas": 6,
+     "sessions": 2,
+     "findings": 3,
+     "exposes": [
+      [
+       "pub",
+       "main \u00b7 entry",
+       "main"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "gpui \u00b7 172",
+       "zext"
+      ],
+      [
+       "crate",
+       "editor \u00b7 51",
+       "zext"
+      ],
+      [
+       "crate",
+       "language \u00b7 44",
+       "ws"
+      ],
+      [
+       "crate",
+       "project \u00b7 35",
+       "ws"
+      ],
+      [
+       "crate",
+       "agent \u00b7 16",
+       "ws"
+      ]
+     ]
+    },
+    {
+     "id": "gpui",
+     "name": "gpui \u00b7 framework",
+     "kind": "framework",
+     "x": 320,
+     "y": 540,
+     "layout": "layers",
+     "crates": 70,
+     "items": 11200,
+     "areas": 5,
+     "sessions": 0,
+     "findings": 1,
+     "exposes": [
+      [
+       "pub",
+       "App \u00b7 Window",
+       "pub"
+      ],
+      [
+       "pub",
+       "Element \u00b7 trait",
+       "els"
+      ],
+      [
+       "pub",
+       "Context<T>",
+       "views"
+      ],
+      [
+       "pub",
+       "prelude",
+       "pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "wgpu",
+       "plat"
+      ],
+      [
+       "crate",
+       "objc \u00b7 x11 \u00b7 windows",
+       "plat"
+      ],
+      [
+       "crate",
+       "taffy",
+       "els"
+      ]
+     ]
+    },
+    {
+     "id": "editor",
+     "name": "editor",
+     "kind": "library",
+     "x": 600,
+     "y": 110,
+     "layout": "layers",
+     "crates": 33,
+     "items": 8100,
+     "areas": 7,
+     "sessions": 0,
+     "findings": 0,
+     "exposes": [
+      [
+       "pub",
+       "Editor"
+      ],
+      [
+       "pub",
+       "MultiBuffer"
+      ],
+      [
+       "pub",
+       "actions"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "gpui \u00b7 281"
+      ],
+      [
+       "crate",
+       "language \u00b7 55"
+      ],
+      [
+       "crate",
+       "project \u00b7 52"
+      ]
+     ]
+    },
+    {
+     "id": "language",
+     "name": "language",
+     "kind": "library",
+     "x": 600,
+     "y": 390,
+     "layout": "layers",
+     "crates": 39,
+     "items": 9200,
+     "areas": 6,
+     "sessions": 0,
+     "findings": 2,
+     "exposes": [
+      [
+       "pub",
+       "Buffer"
+      ],
+      [
+       "pub",
+       "LanguageRegistry"
+      ],
+      [
+       "pub",
+       "LspAdapter \u00b7 trait"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "gpui \u00b7 251"
+      ],
+      [
+       "crate",
+       "tree-sitter"
+      ],
+      [
+       "crate",
+       "lsp"
+      ]
+     ]
+    },
+    {
+     "id": "project",
+     "name": "project",
+     "kind": "library",
+     "x": 880,
+     "y": 110,
+     "layout": "layers",
+     "crates": 14,
+     "items": 3400,
+     "areas": 4,
+     "sessions": 0,
+     "findings": 0,
+     "exposes": [
+      [
+       "pub",
+       "Project"
+      ],
+      [
+       "pub",
+       "Worktree"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "gpui \u00b7 86"
+      ],
+      [
+       "crate",
+       "language \u00b7 23"
+      ]
+     ]
+    },
+    {
+     "id": "agent",
+     "name": "agent",
+     "kind": "library",
+     "x": 880,
+     "y": 390,
+     "layout": "layers",
+     "crates": 14,
+     "items": 2600,
+     "areas": 4,
+     "sessions": 0,
+     "findings": 1,
+     "exposes": [
+      [
+       "pub",
+       "Thread"
+      ],
+      [
+       "pub",
+       "AgentServer \u00b7 trait"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "gpui \u00b7 115"
+      ],
+      [
+       "crate",
+       "language \u00b7 28"
+      ],
+      [
+       "http",
+       "anthropic \u00b7 openai \u00b7 \u2026"
+      ]
+     ]
+    },
+    {
+     "id": "collab",
+     "name": "collab \u00b7 service",
+     "kind": "service",
+     "x": 1160,
+     "y": 250,
+     "layout": "hexagon",
+     "crates": 2,
+     "items": 1120,
+     "areas": 4,
+     "sessions": 0,
+     "findings": 0,
+     "exposes": [
+      [
+       "rpc",
+       "zed.proto"
+      ],
+      [
+       "http",
+       "/api"
+      ]
+     ],
+     "needs": [
+      [
+       "sql",
+       "postgres"
+      ],
+      [
+       "http",
+       "livekit"
+      ],
+      [
+       "crate",
+       "gpui \u00b7 21"
+      ]
+     ]
+    },
+    {
+     "id": "tools",
+     "name": "tools",
+     "kind": "library",
+     "x": 1160,
+     "y": 540,
+     "layout": "layers",
+     "crates": 18,
+     "items": 1400,
+     "areas": 3,
+     "sessions": 0,
+     "findings": 0,
+     "meta": "eval \u00b7 benchmarks \u00b7 sandbox",
+     "exposes": [],
+     "needs": [
+      [
+       "crate",
+       "gpui \u00b7 29"
+      ]
+     ]
+    }
+   ],
+   "edges": [
+    {
+     "f": "zedapp",
+     "t": "gpui",
+     "n": 172
+    },
+    {
+     "f": "zedapp",
+     "t": "editor",
+     "n": 51
+    },
+    {
+     "f": "zedapp",
+     "t": "language",
+     "n": 44
+    },
+    {
+     "f": "zedapp",
+     "t": "project",
+     "n": 35
+    },
+    {
+     "f": "zedapp",
+     "t": "agent",
+     "n": 16
+    },
+    {
+     "f": "editor",
+     "t": "gpui",
+     "n": 281
+    },
+    {
+     "f": "editor",
+     "t": "language",
+     "n": 55
+    },
+    {
+     "f": "editor",
+     "t": "project",
+     "n": 52
+    },
+    {
+     "f": "language",
+     "t": "gpui",
+     "n": 251
+    },
+    {
+     "f": "agent",
+     "t": "gpui",
+     "n": 115
+    },
+    {
+     "f": "agent",
+     "t": "language",
+     "n": 28
+    },
+    {
+     "f": "project",
+     "t": "gpui",
+     "n": 86
+    },
+    {
+     "f": "collab",
+     "t": "gpui",
+     "n": 21
+    },
+    {
+     "f": "tools",
+     "t": "gpui",
+     "n": 29
+    },
+    {
+     "f": "cli",
+     "t": "zedapp",
+     "n": 1
+    },
+    {
+     "f": "zedapp",
+     "t": "collab",
+     "n": 2,
+     "label": "proto"
+    }
+   ]
+  },
+  "ext": {
+   "units": [
+    {
+     "id": "extreg",
+     "name": "extensions \u00b7 registry",
+     "kind": "library",
+     "layout": "layers",
+     "items": 3100,
+     "areas": 2,
+     "crates": 1
+    }
+   ],
+   "edges": []
+  },
+  "cloud": {
+   "units": [
+    {
+     "id": "llm",
+     "name": "llm proxy",
+     "kind": "app",
+     "x": 200,
+     "y": 200,
+     "layout": "hexagon",
+     "items": 2900,
+     "areas": 4,
+     "crates": 1,
+     "findings": 1
+    },
+    {
+     "id": "auth",
+     "name": "auth",
+     "kind": "app",
+     "x": 560,
+     "y": 200,
+     "layout": "hexagon",
+     "items": 2300,
+     "areas": 3,
+     "crates": 1
+    }
+   ],
+   "edges": [
+    {
+     "f": "llm",
+     "t": "auth",
+     "n": 3
+    }
+   ]
+  }
+ },
+ "units": {
+  "zedapp": {
+   "repo": "zed",
+   "layout": "hexagon",
+   "columns": [
+    [
+     "driving",
+     "app \u00b7 driving"
+    ],
+    [
+     "domain",
+     "workspace \u00b7 domain"
+    ],
+    [
+     "driven",
+     "driven"
+    ],
+    [
+     "outbound",
+     "outbound"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "main",
+     "col": 0,
+     "name": "main.rs",
+     "items": [
+      {
+       "id": "zmain",
+       "name": "main \u00b7 entry",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "initui",
+       "name": "init_ui()",
+       "k": "fn"
+      },
+      {
+       "id": "cli_conn",
+       "name": "handle_cli_connection()",
+       "k": "fn"
+      },
+      {
+       "id": "openp",
+       "name": "open_paths()",
+       "k": "fn",
+       "session": 1
+      }
+     ]
+    },
+    {
+     "id": "actions",
+     "col": 0,
+     "name": "zed_actions",
+     "items": [
+      {
+       "id": "quit",
+       "name": "Quit",
+       "k": "struct"
+      },
+      {
+       "id": "opens",
+       "name": "OpenSettings",
+       "k": "struct"
+      },
+      {
+       "id": "newwin",
+       "name": "NewWindow",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "ws",
+     "col": 1,
+     "name": "workspace",
+     "items": [
+      {
+       "id": "wsp",
+       "name": "Workspace",
+       "k": "struct"
+      },
+      {
+       "id": "pane",
+       "name": "Pane",
+       "k": "struct"
+      },
+      {
+       "id": "itemt",
+       "name": "Item \u00b7 trait",
+       "k": "trait",
+       "port": 1
+      },
+      {
+       "id": "dock",
+       "name": "Dock",
+       "k": "struct"
+      },
+      {
+       "id": "panel",
+       "name": "Panel \u00b7 trait",
+       "k": "trait",
+       "port": 1
+      }
+     ]
+    },
+    {
+     "id": "settings",
+     "col": 1,
+     "name": "settings",
+     "items": [
+      {
+       "id": "sett",
+       "name": "Settings \u00b7 trait",
+       "k": "trait",
+       "port": 1
+      },
+      {
+       "id": "sstore",
+       "name": "SettingsStore",
+       "k": "struct"
+      },
+      {
+       "id": "keymap",
+       "name": "KeymapFile",
+       "k": "struct",
+       "finding": 1
+      }
+     ]
+    },
+    {
+     "id": "storage",
+     "col": 2,
+     "name": "storage",
+     "items": [
+      {
+       "id": "wsdb",
+       "name": "WorkspaceDb",
+       "k": "impl"
+      },
+      {
+       "id": "persist",
+       "name": "PersistedItems",
+       "k": "impl"
+      }
+     ]
+    },
+    {
+     "id": "clients",
+     "col": 2,
+     "name": "clients",
+     "items": [
+      {
+       "id": "autoup",
+       "name": "AutoUpdater",
+       "k": "impl"
+      },
+      {
+       "id": "tele",
+       "name": "Telemetry",
+       "k": "impl",
+       "finding": 1
+      }
+     ]
+    },
+    {
+     "id": "zext",
+     "col": 3,
+     "name": "externals",
+     "items": [
+      {
+       "id": "apized",
+       "name": "api.zed.dev \u00b7 http",
+       "k": "ext",
+       "ext": 1
+      },
+      {
+       "id": "sqlite",
+       "name": "sqlite \u00b7 sqlez",
+       "k": "ext",
+       "ext": 1
+      },
+      {
+       "id": "gpuiext",
+       "name": "gpui \u00b7 unit",
+       "k": "ext",
+       "ext": 1
+      },
+      {
+       "id": "editorext",
+       "name": "editor \u00b7 unit",
+       "k": "ext",
+       "ext": 1
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "zmain",
+     "initui"
+    ],
+    [
+     "zmain",
+     "cli_conn"
+    ],
+    [
+     "initui",
+     "wsp"
+    ],
+    [
+     "cli_conn",
+     "openp"
+    ],
+    [
+     "openp",
+     "wsp"
+    ],
+    [
+     "wsp",
+     "pane"
+    ],
+    [
+     "wsp",
+     "itemt"
+    ],
+    [
+     "wsp",
+     "dock"
+    ],
+    [
+     "dock",
+     "panel"
+    ],
+    [
+     "wsp",
+     "sett"
+    ],
+    [
+     "quit",
+     "wsp"
+    ],
+    [
+     "opens",
+     "sett"
+    ],
+    [
+     "sstore",
+     "sett",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "wsdb",
+     "persist"
+    ],
+    [
+     "wsp",
+     "wsdb"
+    ],
+    [
+     "autoup",
+     "apized"
+    ],
+    [
+     "tele",
+     "apized"
+    ],
+    [
+     "wsdb",
+     "sqlite"
+    ],
+    [
+     "pane",
+     "editorext"
+    ],
+    [
+     "wsp",
+     "gpuiext"
+    ],
+    [
+     "keymap",
+     "sstore",
+     {
+      "smell": 1,
+      "label": "cycle"
+     }
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "cli",
+      "cli \u00b7 ipc"
+     ]
+    ],
+    "deps": [
+     [
+      "gpui",
+      "gpui \u00b7 172 crates depend"
+     ],
+     [
+      "editor",
+      "editor \u00b7 51"
+     ],
+     [
+      "language",
+      "language \u00b7 44"
+     ],
+     [
+      "project",
+      "project \u00b7 35"
+     ]
+    ]
+   }
+  },
+  "gpui": {
+   "repo": "zed",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 leaf \u00b7 geometry"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 platform"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 elements"
+    ],
+    [
+     "layer",
+     "L3 \u00b7 views \u00b7 window"
+    ],
+    [
+     "layer",
+     "L4 \u00b7 public api"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "geo",
+     "col": 0,
+     "name": "geometry",
+     "items": [
+      {
+       "id": "point",
+       "name": "Point",
+       "k": "struct"
+      },
+      {
+       "id": "size",
+       "name": "Size",
+       "k": "struct"
+      },
+      {
+       "id": "bounds",
+       "name": "Bounds",
+       "k": "struct"
+      },
+      {
+       "id": "pixels",
+       "name": "Pixels",
+       "k": "struct"
+      },
+      {
+       "id": "rems",
+       "name": "Rems",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "color",
+     "col": 0,
+     "name": "color",
+     "folded": 1,
+     "items": [
+      {
+       "id": "hsla",
+       "name": "Hsla",
+       "k": "struct"
+      },
+      {
+       "id": "rgba",
+       "name": "Rgba",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "plat",
+     "col": 1,
+     "name": "platform",
+     "items": [
+      {
+       "id": "platt",
+       "name": "Platform \u00b7 trait",
+       "k": "trait",
+       "port": 1
+      },
+      {
+       "id": "mac",
+       "name": "MacPlatform",
+       "k": "impl"
+      },
+      {
+       "id": "linux",
+       "name": "LinuxPlatform",
+       "k": "impl"
+      },
+      {
+       "id": "win",
+       "name": "WindowsPlatform",
+       "k": "impl"
+      },
+      {
+       "id": "pwin",
+       "name": "PlatformWindow \u00b7 trait",
+       "k": "trait",
+       "port": 1
+      }
+     ]
+    },
+    {
+     "id": "els",
+     "col": 2,
+     "name": "elements",
+     "items": [
+      {
+       "id": "elt",
+       "name": "Element \u00b7 trait",
+       "k": "trait",
+       "port": 1,
+       "fam": "214 impls"
+      },
+      {
+       "id": "div",
+       "name": "Div",
+       "k": "struct"
+      },
+      {
+       "id": "text",
+       "name": "Text",
+       "k": "struct"
+      },
+      {
+       "id": "img",
+       "name": "Img",
+       "k": "struct"
+      },
+      {
+       "id": "canvas",
+       "name": "Canvas",
+       "k": "struct"
+      },
+      {
+       "id": "svg",
+       "name": "Svg",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "views",
+     "col": 3,
+     "name": "views \u00b7 window",
+     "items": [
+      {
+       "id": "window",
+       "name": "Window",
+       "k": "struct"
+      },
+      {
+       "id": "rendert",
+       "name": "Render \u00b7 trait",
+       "k": "trait",
+       "port": 1,
+       "fam": "1,180 impls"
+      },
+      {
+       "id": "view",
+       "name": "View<V>",
+       "k": "struct"
+      },
+      {
+       "id": "ctx",
+       "name": "Context<T>",
+       "k": "struct"
+      },
+      {
+       "id": "entity",
+       "name": "Entity",
+       "k": "struct",
+       "finding": 1
+      }
+     ]
+    },
+    {
+     "id": "pub",
+     "col": 4,
+     "name": "public api",
+     "items": [
+      {
+       "id": "app",
+       "name": "App",
+       "k": "struct"
+      },
+      {
+       "id": "application",
+       "name": "Application",
+       "k": "struct"
+      },
+      {
+       "id": "prelude",
+       "name": "prelude",
+       "k": "mod"
+      },
+      {
+       "id": "actionsm",
+       "name": "actions! \u00b7 macro",
+       "k": "macro"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "point",
+     "bounds"
+    ],
+    [
+     "size",
+     "bounds"
+    ],
+    [
+     "pixels",
+     "size"
+    ],
+    [
+     "bounds",
+     "pwin"
+    ],
+    [
+     "platt",
+     "mac",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "platt",
+     "linux",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "platt",
+     "win",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "pwin",
+     "window"
+    ],
+    [
+     "bounds",
+     "div"
+    ],
+    [
+     "elt",
+     "div",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "elt",
+     "text",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "elt",
+     "img",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "div",
+     "window"
+    ],
+    [
+     "window",
+     "ctx"
+    ],
+    [
+     "view",
+     "rendert"
+    ],
+    [
+     "ctx",
+     "entity"
+    ],
+    [
+     "window",
+     "app"
+    ],
+    [
+     "ctx",
+     "app"
+    ],
+    [
+     "app",
+     "application"
+    ],
+    [
+     "elt",
+     "prelude"
+    ],
+    [
+     "rendert",
+     "prelude"
+    ],
+    [
+     "entity",
+     "elt",
+     {
+      "smell": 1,
+      "label": "L3 \u2192 L2 \u00b7 cycle"
+     }
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "zedapp",
+      "zed \u00b7 app \u00b7 172"
+     ],
+     [
+      "editor",
+      "editor \u00b7 281"
+     ],
+     [
+      "language",
+      "language \u00b7 251"
+     ]
+    ],
+    "deps": [
+     [
+      "wgpu",
+      "wgpu \u00b7 external"
+     ],
+     [
+      "taffy",
+      "taffy \u00b7 external"
+     ]
+    ]
+   }
+  },
+  "editor": {
+   "repo": "zed",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 text"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 buffer"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 display"
+    ],
+    [
+     "layer",
+     "L3 \u00b7 editor"
+    ],
+    [
+     "layer",
+     "L4 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "e0",
+     "col": 0,
+     "name": "text",
+     "items": [
+      {
+       "id": "rope",
+       "name": "Rope",
+       "k": "struct"
+      },
+      {
+       "id": "anchor",
+       "name": "Anchor",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "e1",
+     "col": 1,
+     "name": "buffer",
+     "items": [
+      {
+       "id": "mbuf",
+       "name": "MultiBuffer",
+       "k": "struct"
+      },
+      {
+       "id": "bdiff",
+       "name": "BufferDiff",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "e2",
+     "col": 2,
+     "name": "display",
+     "items": [
+      {
+       "id": "dmap",
+       "name": "DisplayMap",
+       "k": "struct"
+      },
+      {
+       "id": "bmap",
+       "name": "BlockMap",
+       "k": "struct"
+      },
+      {
+       "id": "wrap",
+       "name": "WrapMap",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "e3",
+     "col": 3,
+     "name": "editor",
+     "items": [
+      {
+       "id": "ed",
+       "name": "Editor",
+       "k": "struct"
+      },
+      {
+       "id": "edel",
+       "name": "EditorElement",
+       "k": "struct"
+      },
+      {
+       "id": "sel",
+       "name": "SelectionsCollection",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "e4",
+     "col": 4,
+     "name": "public",
+     "items": [
+      {
+       "id": "edpub",
+       "name": "pub Editor \u00b7 actions",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "rope",
+     "anchor"
+    ],
+    [
+     "anchor",
+     "mbuf"
+    ],
+    [
+     "mbuf",
+     "bdiff"
+    ],
+    [
+     "mbuf",
+     "dmap"
+    ],
+    [
+     "dmap",
+     "bmap"
+    ],
+    [
+     "dmap",
+     "wrap"
+    ],
+    [
+     "dmap",
+     "ed"
+    ],
+    [
+     "ed",
+     "edel"
+    ],
+    [
+     "ed",
+     "sel"
+    ],
+    [
+     "ed",
+     "edpub"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "zedapp",
+      "zed \u00b7 app \u00b7 51"
+     ]
+    ],
+    "deps": [
+     [
+      "gpui",
+      "gpui \u00b7 281"
+     ],
+     [
+      "language",
+      "language \u00b7 55"
+     ],
+     [
+      "project",
+      "project \u00b7 52"
+     ]
+    ]
+   }
+  },
+  "language": {
+   "repo": "zed",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 syntax"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 buffer"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 registry \u00b7 lsp"
+    ],
+    [
+     "layer",
+     "L3 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "l0",
+     "col": 0,
+     "name": "syntax",
+     "items": [
+      {
+       "id": "tsn",
+       "name": "SyntaxMap",
+       "k": "struct"
+      },
+      {
+       "id": "grammar",
+       "name": "Grammar",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "l1",
+     "col": 1,
+     "name": "buffer",
+     "items": [
+      {
+       "id": "lbuf",
+       "name": "Buffer",
+       "k": "struct"
+      },
+      {
+       "id": "diag",
+       "name": "DiagnosticSet",
+       "k": "struct",
+       "finding": 1
+      }
+     ]
+    },
+    {
+     "id": "l2",
+     "col": 2,
+     "name": "registry \u00b7 lsp",
+     "items": [
+      {
+       "id": "lreg",
+       "name": "LanguageRegistry",
+       "k": "struct"
+      },
+      {
+       "id": "lsp",
+       "name": "LspAdapter \u00b7 trait",
+       "k": "trait",
+       "port": 1,
+       "fam": "62 impls"
+      },
+      {
+       "id": "lang",
+       "name": "Language",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "l3",
+     "col": 3,
+     "name": "public",
+     "items": [
+      {
+       "id": "lpub",
+       "name": "pub Buffer \u00b7 Language \u00b7 \u2026",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "grammar",
+     "tsn"
+    ],
+    [
+     "tsn",
+     "lbuf"
+    ],
+    [
+     "lbuf",
+     "diag"
+    ],
+    [
+     "lbuf",
+     "lang"
+    ],
+    [
+     "lang",
+     "lreg"
+    ],
+    [
+     "lsp",
+     "lreg"
+    ],
+    [
+     "lreg",
+     "lpub"
+    ],
+    [
+     "lbuf",
+     "lpub"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "editor",
+      "editor \u00b7 55"
+     ],
+     [
+      "zedapp",
+      "zed \u00b7 app \u00b7 44"
+     ]
+    ],
+    "deps": [
+     [
+      "gpui",
+      "gpui \u00b7 251"
+     ],
+     [
+      "tree-sitter",
+      "tree-sitter \u00b7 external"
+     ]
+    ]
+   }
+  },
+  "project": {
+   "repo": "zed",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 worktree"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 project"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "p0",
+     "col": 0,
+     "name": "worktree",
+     "items": [
+      {
+       "id": "wt",
+       "name": "Worktree",
+       "k": "struct"
+      },
+      {
+       "id": "entry",
+       "name": "Entry",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "p1",
+     "col": 1,
+     "name": "project",
+     "items": [
+      {
+       "id": "proj",
+       "name": "Project",
+       "k": "struct"
+      },
+      {
+       "id": "lspstore",
+       "name": "LspStore",
+       "k": "struct"
+      },
+      {
+       "id": "bufstore",
+       "name": "BufferStore",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "p2",
+     "col": 2,
+     "name": "public",
+     "items": [
+      {
+       "id": "ppub",
+       "name": "pub Project \u00b7 Worktree",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "entry",
+     "wt"
+    ],
+    [
+     "wt",
+     "proj"
+    ],
+    [
+     "proj",
+     "lspstore"
+    ],
+    [
+     "proj",
+     "bufstore"
+    ],
+    [
+     "proj",
+     "ppub"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "editor",
+      "editor \u00b7 52"
+     ],
+     [
+      "zedapp",
+      "zed \u00b7 app \u00b7 35"
+     ]
+    ],
+    "deps": [
+     [
+      "gpui",
+      "gpui \u00b7 86"
+     ],
+     [
+      "language",
+      "language \u00b7 23"
+     ]
+    ]
+   }
+  },
+  "agent": {
+   "repo": "zed",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 protocol"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 thread"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "a0",
+     "col": 0,
+     "name": "protocol",
+     "items": [
+      {
+       "id": "acp",
+       "name": "acp \u00b7 types",
+       "k": "mod"
+      },
+      {
+       "id": "tool",
+       "name": "Tool \u00b7 trait",
+       "k": "trait",
+       "port": 1,
+       "fam": "41 impls"
+      }
+     ]
+    },
+    {
+     "id": "a1",
+     "col": 1,
+     "name": "thread",
+     "items": [
+      {
+       "id": "thread",
+       "name": "Thread",
+       "k": "struct"
+      },
+      {
+       "id": "model",
+       "name": "LanguageModel \u00b7 trait",
+       "k": "trait",
+       "port": 1
+      }
+     ]
+    },
+    {
+     "id": "a2",
+     "col": 2,
+     "name": "public",
+     "items": [
+      {
+       "id": "apub",
+       "name": "pub Thread \u00b7 AgentServer",
+       "k": "mod",
+       "finding": 1
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "acp",
+     "thread"
+    ],
+    [
+     "tool",
+     "thread"
+    ],
+    [
+     "model",
+     "thread"
+    ],
+    [
+     "thread",
+     "apub"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "zedapp",
+      "zed \u00b7 app \u00b7 16"
+     ]
+    ],
+    "deps": [
+     [
+      "gpui",
+      "gpui \u00b7 115"
+     ],
+     [
+      "language",
+      "language \u00b7 28"
+     ]
+    ]
+   }
+  },
+  "collab": {
+   "repo": "zed",
+   "layout": "hexagon",
+   "columns": [
+    [
+     "driving",
+     "rpc \u00b7 http"
+    ],
+    [
+     "domain",
+     "domain"
+    ],
+    [
+     "driven",
+     "store"
+    ],
+    [
+     "outbound",
+     "outbound"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "c0",
+     "col": 0,
+     "name": "rpc",
+     "items": [
+      {
+       "id": "cmain",
+       "name": "main \u00b7 entry",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "join",
+       "name": "join_room()",
+       "k": "fn"
+      },
+      {
+       "id": "chan",
+       "name": "channel_messages()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "c1",
+     "col": 1,
+     "name": "domain",
+     "items": [
+      {
+       "id": "room",
+       "name": "Room",
+       "k": "struct"
+      },
+      {
+       "id": "channel",
+       "name": "Channel",
+       "k": "struct"
+      },
+      {
+       "id": "dbport",
+       "name": "Database \u00b7 port",
+       "k": "trait",
+       "port": 1
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "col": 2,
+     "name": "store",
+     "items": [
+      {
+       "id": "pgdb",
+       "name": "PgDatabase",
+       "k": "impl"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "col": 3,
+     "name": "externals",
+     "items": [
+      {
+       "id": "cpg",
+       "name": "postgres \u00b7 sea-orm",
+       "k": "ext",
+       "ext": 1
+      },
+      {
+       "id": "lk",
+       "name": "livekit",
+       "k": "ext",
+       "ext": 1
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "cmain",
+     "join"
+    ],
+    [
+     "join",
+     "room"
+    ],
+    [
+     "chan",
+     "channel"
+    ],
+    [
+     "room",
+     "dbport"
+    ],
+    [
+     "channel",
+     "dbport"
+    ],
+    [
+     "pgdb",
+     "dbport",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "pgdb",
+     "cpg"
+    ],
+    [
+     "join",
+     "lk"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "zedapp",
+      "zed \u00b7 app \u00b7 proto"
+     ]
+    ],
+    "deps": [
+     [
+      "gpui",
+      "gpui \u00b7 21"
+     ]
+    ]
+   }
+  },
+  "cli": {
+   "repo": "zed",
+   "layout": "hexagon",
+   "columns": [
+    [
+     "driving",
+     "cli"
+    ],
+    [
+     "domain",
+     "ipc"
+    ],
+    [
+     "driven",
+     "clients"
+    ],
+    [
+     "outbound",
+     "outbound"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "k0",
+     "col": 0,
+     "name": "main",
+     "items": [
+      {
+       "id": "kmain",
+       "name": "main \u00b7 entry",
+       "k": "fn",
+       "entry": 1
+      }
+     ]
+    },
+    {
+     "id": "k1",
+     "col": 1,
+     "name": "ipc",
+     "items": [
+      {
+       "id": "req",
+       "name": "CliRequest",
+       "k": "enum"
+      }
+     ]
+    },
+    {
+     "id": "k2",
+     "col": 2,
+     "name": "clients",
+     "items": [
+      {
+       "id": "ipcc",
+       "name": "IpcClient",
+       "k": "impl"
+      }
+     ]
+    },
+    {
+     "id": "k3",
+     "col": 3,
+     "name": "externals",
+     "items": [
+      {
+       "id": "zedx",
+       "name": "zed \u00b7 app \u00b7 ipc",
+       "k": "ext",
+       "ext": 1
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "kmain",
+     "req"
+    ],
+    [
+     "req",
+     "ipcc"
+    ],
+    [
+     "ipcc",
+     "zedx"
+    ]
+   ],
+   "portals": {
+    "callers": [],
+    "deps": [
+     [
+      "zedapp",
+      "zed \u00b7 app"
+     ]
+    ]
+   }
+  },
+  "tools": {
+   "repo": "zed",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 harness"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 tools"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "t0",
+     "col": 0,
+     "name": "harness",
+     "items": [
+      {
+       "id": "bench",
+       "name": "bench_metrics",
+       "k": "mod"
+      }
+     ]
+    },
+    {
+     "id": "t1",
+     "col": 1,
+     "name": "tools",
+     "items": [
+      {
+       "id": "evalc",
+       "name": "eval_cli",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "sandbox",
+       "name": "sandbox",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "docs",
+       "name": "docs_preprocessor",
+       "k": "fn",
+       "entry": 1
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "bench",
+     "evalc"
+    ]
+   ],
+   "portals": {
+    "callers": [],
+    "deps": [
+     [
+      "gpui",
+      "gpui \u00b7 29"
+     ]
+    ]
+   }
+  },
+  "extreg": {
+   "repo": "ext",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 manifests"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "x0",
+     "col": 0,
+     "name": "manifests",
+     "items": [
+      {
+       "id": "man",
+       "name": "extension.toml \u00b7 300+",
+       "k": "mod"
+      }
+     ]
+    },
+    {
+     "id": "x1",
+     "col": 1,
+     "name": "public",
+     "items": [
+      {
+       "id": "xpub",
+       "name": "registry index",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "man",
+     "xpub"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "zed",
+      "zed"
+     ]
+    ],
+    "deps": []
+   }
+  },
+  "llm": {
+   "repo": "cloud",
+   "layout": "hexagon",
+   "columns": [
+    [
+     "driving",
+     "http"
+    ],
+    [
+     "domain",
+     "domain"
+    ],
+    [
+     "driven",
+     "clients"
+    ],
+    [
+     "outbound",
+     "outbound"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "m0",
+     "col": 0,
+     "name": "http",
+     "items": [
+      {
+       "id": "mmain",
+       "name": "main \u00b7 entry",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "complete",
+       "name": "complete()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "m1",
+     "col": 1,
+     "name": "domain",
+     "items": [
+      {
+       "id": "quota",
+       "name": "Quota",
+       "k": "struct"
+      },
+      {
+       "id": "prov",
+       "name": "Provider \u00b7 port",
+       "k": "trait",
+       "port": 1
+      }
+     ]
+    },
+    {
+     "id": "m2",
+     "col": 2,
+     "name": "clients",
+     "items": [
+      {
+       "id": "anth",
+       "name": "AnthropicClient",
+       "k": "impl",
+       "finding": 1
+      }
+     ]
+    },
+    {
+     "id": "m3",
+     "col": 3,
+     "name": "externals",
+     "items": [
+      {
+       "id": "anthx",
+       "name": "anthropic \u00b7 http",
+       "k": "ext",
+       "ext": 1
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "mmain",
+     "complete"
+    ],
+    [
+     "complete",
+     "quota"
+    ],
+    [
+     "complete",
+     "prov"
+    ],
+    [
+     "anth",
+     "prov",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "anth",
+     "anthx"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "zed",
+      "zed \u00b7 client"
+     ]
+    ],
+    "deps": [
+     [
+      "auth",
+      "auth"
+     ]
+    ]
+   }
+  },
+  "auth": {
+   "repo": "cloud",
+   "layout": "hexagon",
+   "columns": [
+    [
+     "driving",
+     "http"
+    ],
+    [
+     "domain",
+     "domain"
+    ],
+    [
+     "driven",
+     "store"
+    ],
+    [
+     "outbound",
+     "outbound"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "u0",
+     "col": 0,
+     "name": "http",
+     "items": [
+      {
+       "id": "umain",
+       "name": "main \u00b7 entry",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "login",
+       "name": "login()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "u1",
+     "col": 1,
+     "name": "domain",
+     "items": [
+      {
+       "id": "sess",
+       "name": "Session",
+       "k": "struct"
+      },
+      {
+       "id": "urepo",
+       "name": "UserRepo \u00b7 port",
+       "k": "trait",
+       "port": 1
+      }
+     ]
+    },
+    {
+     "id": "u2",
+     "col": 2,
+     "name": "store",
+     "items": [
+      {
+       "id": "upg",
+       "name": "PgUserRepo",
+       "k": "impl"
+      }
+     ]
+    },
+    {
+     "id": "u3",
+     "col": 3,
+     "name": "externals",
+     "items": [
+      {
+       "id": "upgx",
+       "name": "postgres",
+       "k": "ext",
+       "ext": 1
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "umain",
+     "login"
+    ],
+    [
+     "login",
+     "sess"
+    ],
+    [
+     "sess",
+     "urepo"
+    ],
+    [
+     "upg",
+     "urepo",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "upg",
+     "upgx"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "llm",
+      "llm proxy"
+     ]
+    ],
+    "deps": []
+   }
+  }
+ },
+ "contracts": {
+  "zed_extension_api": {
+   "kind": "crate",
+   "name": "zed_extension_api",
+   "owner": "zed",
+   "format": "Rust crate on crates.io \u00b7 wasm ABI",
+   "witness": "crates/extension_api/src/lib.rs",
+   "ops": [
+    "register_extension!(T)",
+    "trait Extension { language_server_command \u00b7 \u2026 }",
+    "wit: zed:extension@0.x"
+   ],
+   "used": [
+    [
+     "extensions",
+     "300+ extensions compile against it"
+    ]
+   ],
+   "notes": "the ABI version in extension.toml is the contract; a mismatch is a finding"
+  },
+  "ext.manifests": {
+   "kind": "crate",
+   "name": "extension manifests",
+   "owner": "extensions",
+   "format": "extension.toml + wasm",
+   "witness": "extensions/*/extension.toml",
+   "ops": [
+    "id \u00b7 name \u00b7 version \u00b7 schema_version",
+    "grammars \u00b7 languages \u00b7 themes",
+    "language_servers"
+   ],
+   "used": [
+    [
+     "zed",
+     "loaded at runtime by the extension unit"
+    ]
+   ]
+  },
+  "llm.zed.dev": {
+   "kind": "http",
+   "name": "llm.zed.dev",
+   "owner": "cloud",
+   "format": "REST \u00b7 JSON",
+   "witness": "crates/client/src/client.rs",
+   "ops": [
+    "POST /completion",
+    "POST /predict_edits",
+    "GET /models"
+   ],
+   "used": [
+    [
+     "zed",
+     "calls \u00b7 sync \u00b7 from the agent unit"
+    ]
+   ]
+  },
+  "zed.proto": {
+   "kind": "rpc",
+   "name": "zed.proto",
+   "owner": "zed \u00b7 collab",
+   "format": "protobuf over websocket",
+   "witness": "crates/proto/proto/zed.proto",
+   "ops": [
+    "JoinRoom \u00b7 LeaveRoom",
+    "UpdateBuffer \u00b7 SynchronizeBuffers",
+    "\u2026 180 messages"
+   ],
+   "used": [
+    [
+     "zed \u00b7 app",
+     "every collab feature"
+    ]
+   ]
+  },
+  "collab.api": {
+   "kind": "http",
+   "name": "collab \u00b7 /api",
+   "owner": "collab",
+   "format": "axum Router",
+   "witness": "crates/collab/src/api.rs",
+   "ops": [
+    "GET /rpc",
+    "POST /users",
+    "GET /extensions"
+   ],
+   "used": []
+  },
+  "zed.site": {
+   "kind": "declared",
+   "name": "zed.dev",
+   "owner": "declared",
+   "format": "drawn by hand",
+   "ops": [
+    "releases feed \u00b7 nobody has checked"
+   ],
+   "used": []
+  }
+ },
+ "code": {
+  "window": {
+   "file": "crates/gpui/src/window.rs",
+   "line": 1210,
+   "unit": "gpui",
+   "callers": [
+    [
+     "div",
+     "Div"
+    ],
+    [
+     "app",
+     "App"
+    ]
+   ],
+   "calls": [
+    [
+     "pwin",
+     "PlatformWindow \u00b7 trait"
+    ],
+    [
+     "ctx",
+     "Context<T>"
+    ]
+   ],
+   "lines": [
+    [
+     1206,
+     "impl Window {"
+    ],
+    [
+     1207,
+     "    /// Draws the root view into the platform window."
+    ],
+    [
+     1208,
+     "    #[profiling::function]"
+    ],
+    [
+     1209,
+     ""
+    ],
+    [
+     1210,
+     "    pub(crate) fn draw(&mut self, cx: &mut App) -> ArenaClearNeeded {",
+     "hl"
+    ],
+    [
+     1211,
+     "        self.invalidate_entities();",
+     "hl"
+    ],
+    [
+     1212,
+     "        cx.entities.clear_accessed();",
+     "hl"
+    ],
+    [
+     1213,
+     "        self.dirty.set(false);",
+     "hl"
+    ],
+    [
+     1214,
+     "        self.draw_roots(cx);",
+     "hl"
+    ],
+    [
+     1215,
+     "        self.platform_window.draw(&self.rendered_frame.scene);",
+     "hl"
+    ],
+    [
+     1216,
+     "        ArenaClearNeeded",
+     "hl"
+    ],
+    [
+     1217,
+     "    }",
+     "hl"
+    ],
+    [
+     1218,
+     "}"
+    ]
+   ]
+  },
+  "entity": {
+   "file": "crates/gpui/src/app/entity_map.rs",
+   "line": 311,
+   "unit": "gpui",
+   "callers": [
+    [
+     "ctx",
+     "Context<T>"
+    ]
+   ],
+   "calls": [
+    [
+     "elt",
+     "Element \u00b7 trait \u00b7 cycle"
+    ]
+   ],
+   "lines": [
+    [
+     308,
+     "impl<T: 'static> Entity<T> {"
+    ],
+    [
+     309,
+     "    /// Updates the entity and re-renders if it is a view."
+    ],
+    [
+     310,
+     ""
+    ],
+    [
+     311,
+     "    pub fn update<R>(&self, cx: &mut App, f: impl FnOnce(&mut T, &mut Context<T>) -> R) -> R {",
+     "hl"
+    ],
+    [
+     312,
+     "        cx.update_entity(self, f)",
+     "hl"
+    ],
+    [
+     313,
+     "    }",
+     "hl"
+    ],
+    [
+     314,
+     ""
+    ],
+    [
+     315,
+     "    // finding: this branch reaches Element (L2) from L3",
+     "bad"
+    ],
+    [
+     316,
+     "    pub fn into_any_element(self) -> AnyElement where T: Render { /* \u2026 */ }",
+     "bad"
+    ],
+    [
+     317,
+     "}"
+    ]
+   ]
+  }
+ }
+}

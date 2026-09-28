@@ -11,13 +11,13 @@ Repo: `tau-rs/sett`. Package name `@tau-rs/sett` (tokens `@tau-rs/sett-tokens`, 
 ## Phase 1 · tokens (one session, ends green)
 1. `pnpm init` workspace: `packages/tokens`, `packages/ui`, `packages/storybook`, `packages/agent`.
 2. `packages/tokens`: Style Dictionary (v4+, DTCG mode). Targets: `dist/sett.css` (`:root` light, `@media (prefers-color-scheme: dark)` + `[data-theme]` dark), `dist/tokens.ts`, `dist/tokens.rs` (a `pub const` per token, colours as `[f32;3]`, dimensions as `f32`). If the installed version rejects the colour object form, add a preprocessor that reads `.hex`; do not rewrite the source files.
-3. Variable names are the DTCG path with `--sett-` prefix: `--sett-color-sel`, `--sett-session-yk-sub`, `--sett-map-item-stroke`, `--sett-radius-chip`.
+3. Variable names are the DTCG path with `--sett-` prefix: `--sett-color-sel`, `--sett-session-yk-sub`, `--sett-map-kind-rpc-color`, `--sett-radius-chip`.
 4. CI: `npx @google/design.md lint DESIGN.md` (adjust front-matter keys to the schema if lint asks; keep the body untouched), a snapshot test on `sett.css`, and a check that no hex appears outside `packages/tokens`.
 5. Commit. Report back the token count per file and any value the converter could not express.
 
 ## Phase 2 · ui (Lit)
 Order (each with stories before moving on): `sett-pill` `sett-tag` → `sett-chip` → `sett-frame` → `sett-selector` (+ menu) → `sett-session-card` → thread family: `sett-msg` `sett-tool` `sett-changed` `sett-question` `sett-deviation` `sett-verbs` `sett-composer` `sett-thread` → `sett-card` (+ variants fix/delta/impact/checklist/pipeline/result/whatsnew) → `sett-split-button` `sett-gated-button` → `sett-tabbar` `sett-seg` `sett-overlay-toggles` → `sett-inlay` → `sett-funnel`.
-Map primitives: **not** components. Ship `packages/tokens/dist/tokens.rs` and one Storybook docs page that draws the SVG legend from `tokens.ts`.
+Map: Lit components after all (ADR 0001, `docs/adr/0001-the-map-is-dom.md`); lanes in issues #35-#41. `packages/tokens/dist/tokens.rs` keeps shipping for any GPU layer; the Storybook Map docs page draws the kind legend from `tokens.ts`.
 Generate `custom-elements.json` with `@custom-elements-manifest/analyzer` on every build.
 
 ## States each component must cover (stories = these)

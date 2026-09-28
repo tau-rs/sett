@@ -4,7 +4,8 @@
 # design/ (the reference rendering the tokens were extracted from).
 set -eu
 cd "$(dirname "$0")/.."
-hits=$(grep -rnE '#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b' \
+# 6-digit hex, or 3-digit hex with at least one letter (so #418 in prose is not a colour)
+hits=$(grep -rnE '#[0-9a-fA-F]{6}\b|#([a-fA-F][0-9a-fA-F]{2}|[0-9a-fA-F][a-fA-F][0-9a-fA-F]|[0-9a-fA-F]{2}[a-fA-F])\b' \
   --include='*.ts' --include='*.tsx' --include='*.js' --include='*.mjs' --include='*.css' \
   --include='*.html' --include='*.rs' --include='*.json' --include='*.mdx' --include='*.svg' \
   --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=target --exclude-dir=dist \

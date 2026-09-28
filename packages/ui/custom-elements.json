@@ -94,6 +94,62 @@
             "name": "SessionId",
             "module": "./session.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettSelector",
+          "declaration": {
+            "name": "SettSelector",
+            "module": "./selector/sett-selector.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMenu",
+          "declaration": {
+            "name": "SettMenu",
+            "module": "./menu/sett-menu.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMenuGroup",
+          "declaration": {
+            "name": "SettMenuGroup",
+            "module": "./menu/sett-menu.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMenuItem",
+          "declaration": {
+            "name": "SettMenuItem",
+            "module": "./menu/sett-menu.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "STATUS",
+          "declaration": {
+            "name": "STATUS",
+            "module": "./status.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "pillWords",
+          "declaration": {
+            "name": "pillWords",
+            "module": "./status.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BranchState",
+          "declaration": {
+            "name": "BranchState",
+            "module": "./status.js"
+          }
         }
       ]
     },
@@ -131,6 +187,72 @@
           "declaration": {
             "name": "sessionStyles",
             "module": "src/session.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/status.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "STATUS",
+          "type": {
+            "text": "Record<BranchState, { dot: DotKind; pill?: PillKind; words?: string; pulse?: boolean }>"
+          },
+          "default": "{ main: { dot: 'ok' }, yours: { dot: 'sel' }, planning: { dot: 'session', pill: 'session', words: 'planning' }, working: { dot: 'session', pill: 'session', words: 'working', pulse: true }, asks: { dot: 'sug', pill: 'sug', words: 'asks' }, paused: { dot: 'mute', pill: 'default', words: 'paused' }, done: { dot: 'ok', pill: 'ok', words: 'done' }, collision: { dot: 'bad', pill: 'bad', words: 'collision' }, }",
+          "description": "dot colour, pill kind and pill words per state. `asks` takes a count."
+        },
+        {
+          "kind": "function",
+          "name": "pillWords",
+          "parameters": [
+            {
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              }
+            },
+            {
+              "name": "count",
+              "optional": true,
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "dotStyles",
+          "default": "css` .dot { flex: none; width: var(--sett-space-2); height: var(--sett-space-2); border-radius: var(--sett-radius-chip); background: var(--sett-color-mute); } .dot[data-kind='ok'] { background: var(--sett-color-ok); } .dot[data-kind='sel'] { background: var(--sett-color-sel); } .dot[data-kind='sug'] { background: var(--sett-color-sug); } .dot[data-kind='bad'] { background: var(--sett-color-bad); } .dot[data-kind='session'] { background: var(--_session); } .dot[data-pulse] { animation: sett-dot-pulse var(--sett-motion-frame-pulse) ease-in-out infinite; } @keyframes sett-dot-pulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } } :host([still]) .dot[data-pulse] { animation: none; } @media (prefers-reduced-motion: reduce) { .dot[data-pulse] { animation: none; } } `",
+          "description": "The status dot. Session colour comes from the host's `--_session` (see\nsessionStyles). It pulses while its session is working: the one allowed use\nof the frame-pulse timing outside the frame. Reduced motion stills it."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "STATUS",
+          "declaration": {
+            "name": "STATUS",
+            "module": "src/status.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "pillWords",
+          "declaration": {
+            "name": "pillWords",
+            "module": "src/status.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "dotStyles",
+          "declaration": {
+            "name": "dotStyles",
+            "module": "src/status.ts"
           }
         }
       ]
@@ -407,6 +529,246 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/menu/sett-menu.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The list under a selector: rows grouped by what they need from you.\nPaper, hairline, card radius, shadow. Not a modal: see sett-selector.",
+          "name": "SettMenu",
+          "slots": [
+            {
+              "description": "sett-menu-group elements",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-menu",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A group in the menu: lowercase title in mute at 10.5 px, then rows.",
+          "name": "SettMenuGroup",
+          "slots": [
+            {
+              "description": "sett-menu-item elements",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "group title: needs you · working · waiting to merge · saved plans · main",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "group title: needs you · working · waiting to merge · saved plans · main",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-menu-group",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One row: dot, name in mono, pill when the branch has a state, then who or\nhow far on the right. Rows never wrap: the name truncates with an ellipsis,\nthe right cell keeps its width and the name's size.",
+          "name": "SettMenuItem",
+          "slots": [
+            {
+              "description": "the branch or plan name",
+              "name": ""
+            },
+            {
+              "description": "who is on it or how far it is, e.g. `Lyon · 4/6`",
+              "name": "right"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              },
+              "default": "'main'",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the current row",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "still",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "choose",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-select",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the row is chosen"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              },
+              "default": "'main'",
+              "fieldName": "state"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "fieldName": "session"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "fieldName": "count"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the current row",
+              "fieldName": "selected"
+            },
+            {
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "still"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-menu-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettMenu",
+          "declaration": {
+            "name": "SettMenu",
+            "module": "src/menu/sett-menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-menu",
+          "declaration": {
+            "name": "SettMenu",
+            "module": "src/menu/sett-menu.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMenuGroup",
+          "declaration": {
+            "name": "SettMenuGroup",
+            "module": "src/menu/sett-menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-menu-group",
+          "declaration": {
+            "name": "SettMenuGroup",
+            "module": "src/menu/sett-menu.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMenuItem",
+          "declaration": {
+            "name": "SettMenuItem",
+            "module": "src/menu/sett-menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-menu-item",
+          "declaration": {
+            "name": "SettMenuItem",
+            "module": "src/menu/sett-menu.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/pill/sett-pill.ts",
       "declarations": [
         {
@@ -490,6 +852,188 @@
           "declaration": {
             "name": "SettPill",
             "module": "src/pill/sett-pill.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/selector/sett-selector.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Branch selector in a pane bar: dot, branch name, a pill when the branch has\na state, caret. Click toggles `open`; the `menu` slot (a sett-menu) hangs\nunder it as an anchored disclosure: nothing is dimmed or trapped, Esc, a\nclick outside or choosing a row closes it.",
+          "name": "SettSelector",
+          "cssParts": [
+            {
+              "description": "the selector box",
+              "name": "button"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the branch name, mono",
+              "name": ""
+            },
+            {
+              "description": "the sett-menu shown while open",
+              "name": "menu"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              },
+              "default": "'main'",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for planning / working; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "number of open asks, shown in the pill for the asks state",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "whether the menu is shown",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering",
+              "attribute": "still",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "onDocClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "close"
+            },
+            {
+              "kind": "method",
+              "name": "toggle"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the menu opens"
+            },
+            {
+              "name": "sett-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the menu closes"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              },
+              "default": "'main'",
+              "fieldName": "state"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for planning / working; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "number of open asks, shown in the pill for the asks state",
+              "fieldName": "count"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "whether the menu is shown",
+              "fieldName": "open"
+            },
+            {
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering",
+              "fieldName": "still"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-selector",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettSelector",
+          "declaration": {
+            "name": "SettSelector",
+            "module": "src/selector/sett-selector.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-selector",
+          "declaration": {
+            "name": "SettSelector",
+            "module": "src/selector/sett-selector.ts"
           }
         }
       ]

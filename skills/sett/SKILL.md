@@ -9,7 +9,7 @@ description: Use when building or reviewing UI for a tau-rs developer tool (arch
 
 ## What sett is for
 
-sett styles developer tools that put a map or a document at the centre and keep the chrome quiet around it. It was extracted from the arch mocks (September 2026) and is meant to be reused by other tau-rs tools. Two surfaces: the **chrome** (cool grey on white) and the **map** (warm paper, warm-grey items). Semantic colours are fills and text; session colours are outlines, dots and borders. That split is what lets both sets coexist at 12 px.
+sett styles developer tools that put a map or a document at the centre and keep the chrome quiet around it. It was extracted from the arch mocks (September 2026) and is meant to be reused by other tau-rs tools. One material: the **map** sits on the same cool grey as the **chrome** around it, and only the columns inside an open unit are tinted (ADR 0001). Semantic colours are fills and text; session colours are outlines, dots and borders. That split is what lets both sets coexist at 12 px.
 
 - **P-1 · two doors, agent door first.** Every action has a manual path and an agent path, both visible. The agent door comes first and is the bold one; the manual door is always there and never privileged (`with Yokohama · fix myself`). The "me first" setting swaps order and weight. Never a single "let the AI" button, never a hidden manual path.
 - **P-2 · reader, not owner.** Nothing pops up, nothing blocks. State is shown by chips, pills and one frame that changes colour, never by a modal or a banner.
@@ -23,7 +23,7 @@ DESIGN.md is normative: where a mock, a screenshot, a story or this file disagre
 - Chrome greys are the resting state. `ink`, `ink2`, `mute` are the only three text colours; no fourth.
 - `sel` (blue) is selection, your own work, links, the editing frame, and the focus ring (a `lit` stroke inside the idle frame; focus is "you are here", never a status). `ok` green is done/passed/added. `bad` red is finding/deviation/collision/removed. `sug` amber is suggested/planned/waiting: things that need you.
 - Session colours identify an agent everywhere (frame, dot, card border, message border, map overlay). Seven are defined; assign in order yk, tl, mg, cy, ol, sn, pl. A session is always named next to its colour. Each has a `sub` shade (sub-agents) and a `bg` tint.
-- Every colour has a dark value. Components never hard-code a hex.
+- Every colour has a dark value. Components never hard-code a hex. Accent text (`sel`, `ok`, `sug`, `bad`) sits on `paper` or `bg`, never on the `well` tint, where blue and red fall under 4.5:1.
 - Any colour that is read as text reaches 4.5:1 (WCAG AA) on every surface it sits on, in both themes: `mute`, `ok`, `bad`, `sug`, `sel` and every session `main` on paper, well, bg and their own tint. The Storybook a11y gate fails a story on any contrast below that, so a text colour changes here, in the tokens, never in a component. Sub shades are outlines, dots and guide lines, not text.
 
 ### Type
@@ -41,7 +41,7 @@ DESIGN.md is normative: where a mock, a screenshot, a story or this file disagre
 
 ### Motion
 
-Only three things move: the live frame (session gradient, 6 s rotate), the waiting frame (amber pulse, 1.6 s), and one 700 ms ring on a map item whose facts changed. `prefers-reduced-motion` stills all of them. One more use of the waiting-frame pulse is allowed: the session dot pulses while its session is working, wherever that dot sits (selector, menu row, session card). Pills and tags never animate; the gradient never leaves the frame. No hover transitions, no fades, no slide-ins. Content never moves; only the border does.
+Only three things move in the chrome: the live frame (session gradient, 6 s rotate), the waiting frame (amber pulse, 1.6 s), and one 700 ms ring on a map item whose facts changed. The map adds three, and only three: the camera fit (`zoom`, 300 ms), the row cross-fade when a node changes tier (`tier-swap`, 150 ms), and the direction dash on the selected unit's edges (`flow`, 1.1 s). A node never resizes itself; the camera moves. `prefers-reduced-motion` stills all of them. One more use of the waiting-frame pulse is allowed: the session dot pulses while its session is working, wherever that dot sits (selector, menu row, session card). Pills and tags never animate; the gradient never leaves the frame. No hover transitions, no fades, no slide-ins. Content never moves; only the border does.
 
 ### Rules the components encode
 
@@ -50,7 +50,7 @@ Only three things move: the live frame (session gradient, 6 s rotate), the waiti
 3. Agent door first and bold in every pair, manual second and plain; the "me first" setting swaps both. Verbs are lowercase. A done chip keeps full contrast: its kind label turns ok with `✓`, and it gains a plain `dismiss` verb. A blocked primary button (the gated merge, hand back before the note) is a dashed blue outline with blue text at full contrast, never a faded fill; its reason sits under it as pills that link to what unblocks it.
 4. Chips and cards separate with `·`; identifiers are mono.
 5. Dark mode is required from day one.
-6. Map primitives are values, not CSS: the WebGL layer reads `tokens.rs`, generated from the same DTCG source.
+6. The map is DOM (ADR 0001): `sett-*` elements read the `map.*` tokens as CSS variables. `tokens.rs` is still generated from the same DTCG source for any GPU layer, but nothing in sett depends on one existing. The map's own rules are the section "The map" below.
 7. Session-card rows: the glyph carries the state; the right cell says only what the glyph cannot (`asks · n`, `paused`, `deviation`, `you`) in plain secondary ink, never a pill and never the session's own name. The current row takes the session's tint. Sub-agents fold under their step, folded by default, with the count and a glyph run on the step row and one continuous guide line in the sub shade when open.
 8. Thread messages: every message opens with an author line (a dot and the name at 11 px medium in the author's colour, then the time). Yours sit on the right in the selection tint; agents on the left outlined in their colour; sub-agents outlined in the sub shade with the sub-shade dot, the name still in the session's main colour (the sub shade is not a text colour). Every agent reply ends with a `changed · what` or `no change` line.
 9. Taking over is two acts: pause, then take over. Verbs are words, never glyphs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop`. `✋` is a state glyph on the session card only. Handing back is written in the composer, which becomes the hand-back note while you hold a step; the note lands in the thread as a message from you with its changed line.

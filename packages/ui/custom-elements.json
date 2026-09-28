@@ -374,6 +374,54 @@
             "name": "ButtonSize",
             "module": "./button/sett-button.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettTabbar",
+          "declaration": {
+            "name": "SettTabbar",
+            "module": "./tabs/sett-tabs.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettTab",
+          "declaration": {
+            "name": "SettTab",
+            "module": "./tabs/sett-tabs.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettSeg",
+          "declaration": {
+            "name": "SettSeg",
+            "module": "./tabs/sett-tabs.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettSegItem",
+          "declaration": {
+            "name": "SettSegItem",
+            "module": "./tabs/sett-tabs.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettOverlayToggles",
+          "declaration": {
+            "name": "SettOverlayToggles",
+            "module": "./tabs/sett-tabs.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettToggle",
+          "declaration": {
+            "name": "SettToggle",
+            "module": "./tabs/sett-tabs.js"
+          }
         }
       ]
     },
@@ -2252,6 +2300,437 @@
           "declaration": {
             "name": "SettSubAgent",
             "module": "src/session-card/sett-session-card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/tabs/sett-tabs.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The centre tab bar: map pinned first, file tabs in mono, shortcuts on the right.",
+          "name": "SettTabbar",
+          "slots": [
+            {
+              "description": "sett-tab elements",
+              "name": ""
+            },
+            {
+              "description": "what sits at the right end (level switch, overlay toggles, shortcuts)",
+              "name": "right"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-tabbar",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A tab. `pinned` has no close mark; `dirty` carries an amber mark after the\nname and keeps its close mark; `session` colours the label.",
+          "name": "SettTab",
+          "slots": [
+            {
+              "description": "the label",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "pinned",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "pinned",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "dirty",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "dirty",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "mono",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "mono label, for files",
+              "attribute": "mono",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-close",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "the close mark was pressed"
+            },
+            {
+              "description": "the tab was chosen",
+              "name": "sett-select"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "pinned",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "pinned"
+            },
+            {
+              "name": "dirty",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "dirty"
+            },
+            {
+              "name": "mono",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "mono label, for files",
+              "fieldName": "mono"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "fieldName": "session"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-tab",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A segmented control in a well. Never has a disabled item: a view with\nnothing in it opens to an empty state instead.",
+          "name": "SettSeg",
+          "slots": [
+            {
+              "description": "sett-seg-item elements",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "stretch to the container, items share the width",
+              "attribute": "fill",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "fill",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "stretch to the container, items share the width",
+              "fieldName": "fill"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-seg",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One item of a segmented control.",
+          "name": "SettSegItem",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-seg-item",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The row of overlay toggles on the map bar.",
+          "name": "SettOverlayToggles",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-overlay-toggles",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One overlay toggle: a small square that fills when on.",
+          "name": "SettToggle",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "on",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "on",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "flip",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "on",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "on"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-toggle",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettTabbar",
+          "declaration": {
+            "name": "SettTabbar",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-tabbar",
+          "declaration": {
+            "name": "SettTabbar",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettTab",
+          "declaration": {
+            "name": "SettTab",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-tab",
+          "declaration": {
+            "name": "SettTab",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettSeg",
+          "declaration": {
+            "name": "SettSeg",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-seg",
+          "declaration": {
+            "name": "SettSeg",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettSegItem",
+          "declaration": {
+            "name": "SettSegItem",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-seg-item",
+          "declaration": {
+            "name": "SettSegItem",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettOverlayToggles",
+          "declaration": {
+            "name": "SettOverlayToggles",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-overlay-toggles",
+          "declaration": {
+            "name": "SettOverlayToggles",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettToggle",
+          "declaration": {
+            "name": "SettToggle",
+            "module": "src/tabs/sett-tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-toggle",
+          "declaration": {
+            "name": "SettToggle",
+            "module": "src/tabs/sett-tabs.ts"
           }
         }
       ]

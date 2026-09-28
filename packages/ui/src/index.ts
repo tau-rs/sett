@@ -10,3 +10,4 @@ export { SettSessionCard, SettPlanRow, SettSubAgent, type PlanState, type SubSta
 export { SettThread, SettMsg, SettTool, SettChanged, SettOption, SettQuestion, SettDeviation, SettVerbs, SettComposer, type ThreadIdentity, type MsgFrom, type VerbsState, type ComposerMode } from './thread/sett-thread.js';
 export { SettCard, SettCardRow, SettPipe, type CardVariant, type RowKind } from './card/sett-card.js';
 export { SettButton, SettSplitButton, SettGatedButton, type ButtonVariant, type ButtonSize } from './button/sett-button.js';
+export { SettTabbar, SettTab, SettSeg, SettSegItem, SettOverlayToggles, SettToggle } from './tabs/sett-tabs.js';

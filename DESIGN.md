@@ -92,6 +92,7 @@ Only three things move: the live frame (session gradient, 6 s rotate), the waiti
 8. Thread messages: every message opens with an author line (a dot and the name at 11 px medium in the author's colour, then the time). Yours sit on the right in the selection tint; agents on the left outlined in their colour; sub-agents in the sub shade. Every agent reply ends with a `changed · what` or `no change` line.
 9. Taking over is two acts: pause, then take over. Verbs are words, never glyphs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop`. `✋` is a state glyph on the session card only. Handing back is written in the composer, which becomes the hand-back note while you hold a step; the note lands in the thread as a message from you with its changed line.
 10. Card rows lead somewhere as a whole: the row is the link, it lights on hover and ends with `›`; blue is left to buttons. A place in code (`service.rs:61`) is the small mono tag; a destination (pipeline, findings, why) is a grey word. A card heading carries a pill for a state and a tag for a count.
+11. Tabs: the map is pinned first and unclosable; file tabs are mono; an unsaved file carries an amber mark after its name and its close mark stays; a tab a session opened takes that session's colour. Views are never disabled: a view with nothing in it stays clickable and opens to an empty state that names the two doors.
 
 ## Glyph vocabulary
 

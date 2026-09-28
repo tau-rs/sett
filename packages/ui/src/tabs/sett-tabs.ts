@@ -11,10 +11,12 @@ import { sessionStyles, type SessionId } from '../session.js';
 export class SettTabbar extends LitElement {
   static styles = css`
     :host { display: flex; align-items: stretch; height: calc(var(--sett-space-4) * 2); border-bottom: var(--sett-stroke-hair) solid var(--sett-color-line2); background: var(--sett-color-well); font-family: var(--sett-font-sans); font-size: var(--sett-font-size-base); color: var(--sett-color-ink2); }
+    .tabs { display: contents; }
     .sp { flex: 1; }
     .r { display: flex; align-items: center; gap: var(--sett-space-2); padding: 0 var(--sett-space-2); color: var(--sett-color-mute); font-size: var(--sett-font-size-sm); }
   `;
-  render() { return html`<slot></slot><span class="sp"></span><span class="r"><slot name="right"></slot></span>`; }
+  // only the tabs are the tablist; the right end holds switches and a seg of its own
+  render() { return html`<div class="tabs" role="tablist"><slot></slot></div><span class="sp"></span><span class="r"><slot name="right"></slot></span>`; }
 }
 
 /**
@@ -68,6 +70,7 @@ export class SettSeg extends LitElement {
     :host([fill]) { display: flex; }
     :host([fill]) ::slotted(sett-seg-item) { flex: 1; text-align: center; }
   `;
+  connectedCallback() { super.connectedCallback(); this.setAttribute('role', 'tablist'); }
   render() { return html`<slot></slot>`; }
 }
 

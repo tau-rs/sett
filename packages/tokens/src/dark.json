@@ -71,11 +71,11 @@
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.4863,
-          0.549,
-          0.5843
+          0.5608,
+          0.6235,
+          0.6588
         ],
-        "hex": "#7C8C95"
+        "hex": "#8F9FA8"
       },
       "$description": "hints, counts, line numbers"
     },
@@ -110,13 +110,13 @@
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.3569,
-          0.5843,
-          0.8784
+          0.3843,
+          0.6157,
+          0.9098
         ],
-        "hex": "#5B95E0"
+        "hex": "#629DE8"
       },
-      "$description": "selection · your work · links · editing frame"
+      "$description": "selection \u00b7 your work \u00b7 links \u00b7 editing frame"
     },
     "selBg": {
       "$type": "color",
@@ -155,7 +155,7 @@
         ],
         "hex": "#4DB388"
       },
-      "$description": "done · passed · added lines"
+      "$description": "done \u00b7 passed \u00b7 added lines"
     },
     "okBg": {
       "$type": "color",
@@ -175,13 +175,13 @@
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.8784,
-          0.4,
-          0.3608
+          0.9216,
+          0.4392,
+          0.3961
         ],
-        "hex": "#E0665C"
+        "hex": "#EB7065"
       },
-      "$description": "finding · deviation · collision · removed lines"
+      "$description": "finding \u00b7 deviation \u00b7 collision \u00b7 removed lines"
     },
     "badBg": {
       "$type": "color",
@@ -207,7 +207,7 @@
         ],
         "hex": "#E0A63A"
       },
-      "$description": "suggested · planned · waiting · focus frame"
+      "$description": "suggested \u00b7 planned \u00b7 waiting \u00b7 focus frame"
     },
     "sugBg": {
       "$type": "color",
@@ -390,11 +390,11 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5725,
-            0.5176,
-            0.9098
+            0.5882,
+            0.5333,
+            0.9255
           ],
-          "hex": "#9284E8"
+          "hex": "#9688EC"
         }
       },
       "sub": {
@@ -472,11 +472,11 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8392,
-            0.3725,
-            0.6902
+            0.8902,
+            0.4196,
+            0.7373
           ],
-          "hex": "#D65FB0"
+          "hex": "#E36BBC"
         }
       },
       "sub": {
@@ -595,11 +595,11 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8275,
-            0.4706,
-            0.3059
+            0.851,
+            0.4941,
+            0.3255
           ],
-          "hex": "#D3784E"
+          "hex": "#D97E53"
         }
       },
       "sub": {
@@ -636,11 +636,11 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.698,
-            0.4,
-            0.7843
+            0.7725,
+            0.4706,
+            0.8588
           ],
-          "hex": "#B266C8"
+          "hex": "#C578DB"
         }
       },
       "sub": {

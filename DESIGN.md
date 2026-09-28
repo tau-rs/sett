@@ -10,28 +10,28 @@ colors:
     well: "#E9EDEF"
     ink: "#17242B"
     ink2: "#4A5B64"
-    mute: "#8A9AA3"
+    mute: "#5D6C75"
     line: "#CBD4D9"
     line2: "#E1E7EA"
     sel: "#1F5FA8"
-    ok: "#2E7D5B"
+    ok: "#287857"
     bad: "#B23A33"
-    sug: "#B87A0E"
-    session-yk: "#6B5BD2"
+    sug: "#946003"
+    session-yk: "#6959D0"
   dark:
     bg: "#141B1F"
     paper: "#1B2429"
     well: "#22303A"
     ink: "#E6EDF0"
     ink2: "#B3C0C7"
-    mute: "#7C8C95"
+    mute: "#8F9FA8"
     line: "#33434C"
     line2: "#28353D"
-    sel: "#5B95E0"
+    sel: "#629DE8"
     ok: "#4DB388"
-    bad: "#E0665C"
+    bad: "#EB7065"
     sug: "#E0A63A"
-    session-yk: "#9284E8"
+    session-yk: "#9688EC"
 typography:
   sans: { fontFamily: "IBM Plex Sans", fallback: "system-ui, sans-serif" }
   mono: { fontFamily: "IBM Plex Mono", fallback: "ui-monospace, monospace" }
@@ -62,6 +62,7 @@ sett styles developer tools that put a map or a document at the centre and keep 
 - `sel` (blue) is selection, your own work, links, the editing frame, and the focus ring (a `lit` stroke inside the idle frame; focus is "you are here", never a status). `ok` green is done/passed/added. `bad` red is finding/deviation/collision/removed. `sug` amber is suggested/planned/waiting: things that need you.
 - Session colours identify an agent everywhere (frame, dot, card border, message border, map overlay). Seven are defined; assign in order yk, tl, mg, cy, ol, sn, pl. A session is always named next to its colour. Each has a `sub` shade (sub-agents) and a `bg` tint.
 - Every colour has a dark value. Components never hard-code a hex.
+- Any colour that is read as text reaches 4.5:1 (WCAG AA) on every surface it sits on, in both themes: `mute`, `ok`, `bad`, `sug`, `sel` and every session `main` on paper, well, bg and their own tint. The Storybook a11y gate fails a story on any contrast below that, so a text colour changes here, in the tokens, never in a component. Sub shades are outlines, dots and guide lines, not text.
 
 ## Type
 
@@ -89,7 +90,7 @@ Only three things move: the live frame (session gradient, 6 s rotate), the waiti
 5. Dark mode is required from day one.
 6. Map primitives are values, not CSS: the WebGL layer reads `tokens.rs`, generated from the same DTCG source.
 7. Session-card rows: the glyph carries the state; the right cell says only what the glyph cannot (`asks · n`, `paused`, `deviation`, `you`) in plain secondary ink, never a pill and never the session's own name. The current row takes the session's tint. Sub-agents fold under their step, folded by default, with the count and a glyph run on the step row and one continuous guide line in the sub shade when open.
-8. Thread messages: every message opens with an author line (a dot and the name at 11 px medium in the author's colour, then the time). Yours sit on the right in the selection tint; agents on the left outlined in their colour; sub-agents in the sub shade. Every agent reply ends with a `changed · what` or `no change` line.
+8. Thread messages: every message opens with an author line (a dot and the name at 11 px medium in the author's colour, then the time). Yours sit on the right in the selection tint; agents on the left outlined in their colour; sub-agents outlined in the sub shade with the sub-shade dot, the name still in the session's main colour (the sub shade is not a text colour). Every agent reply ends with a `changed · what` or `no change` line.
 9. Taking over is two acts: pause, then take over. Verbs are words, never glyphs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop`. `✋` is a state glyph on the session card only. Handing back is written in the composer, which becomes the hand-back note while you hold a step; the note lands in the thread as a message from you with its changed line.
 10. Card rows lead somewhere as a whole: the row is the link, it lights on hover and ends with `›`; blue is left to buttons. A place in code (`service.rs:61`) is the small mono tag; a destination (pipeline, findings, why) is a grey word. A card heading carries a pill for a state and a tag for a count.
 11. Tabs: the map is pinned first and unclosable; file tabs are mono; an unsaved file carries an amber mark after its name and its close mark stays; a tab a session opened takes that session's colour. Views are never disabled: a view with nothing in it stays clickable and opens to an empty state that names the two doors.

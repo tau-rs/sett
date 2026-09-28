@@ -43,7 +43,7 @@ export class SettThread extends LitElement {
   render() {
     return html`
       <div class="hd" part="header"><slot name="name"></slot><slot name="context"></slot><span class="r"><slot name="role"></slot></span></div>
-      <div class="msgs" part="messages"><slot></slot></div>
+      <div class="msgs" part="messages" tabindex="0"><slot></slot></div>
       <slot name="verbs"></slot>
       <slot name="composer"></slot>`;
   }
@@ -70,7 +70,7 @@ export class SettMsg extends LitElement {
       :host([from='sub']) { border-color: var(--_session-sub); }
       :host([from='me']) { align-self: flex-end; background: var(--sett-color-sel-bg); border-color: transparent; }
       .who { display: flex; align-items: center; gap: var(--sett-space-1); font-size: var(--sett-font-size-sm); font-weight: var(--sett-font-weight-medium); color: var(--_session); margin-bottom: var(--sett-space-1); }
-      :host([from='sub']) .who { color: var(--_session-sub); }
+      :host([from='sub']) .who .d { background: var(--_session-sub); }
       :host([from='me']) .who { color: var(--sett-color-sel); }
       .who .d { width: var(--sett-space-2); height: var(--sett-space-2); border-radius: var(--sett-radius-chip); background: currentColor; flex: none; }
       .who .t { color: var(--sett-color-mute); font-weight: var(--sett-font-weight-normal); }

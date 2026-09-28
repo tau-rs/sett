@@ -6,3 +6,4 @@ dist/
 target/
 *.zip
 storybook-static/
+.vitest-attachments/

@@ -7,3 +7,4 @@ export { SettSelector } from './selector/sett-selector.js';
 export { SettMenu, SettMenuGroup, SettMenuItem } from './menu/sett-menu.js';
 export { STATUS, pillWords, type BranchState } from './status.js';
 export { SettSessionCard, SettPlanRow, SettSubAgent, type PlanState, type SubState } from './session-card/sett-session-card.js';
+export { SettThread, SettMsg, SettTool, SettChanged, SettOption, SettQuestion, SettDeviation, SettVerbs, SettComposer, type ThreadIdentity, type MsgFrom, type VerbsState, type ComposerMode } from './thread/sett-thread.js';

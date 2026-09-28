@@ -20,6 +20,8 @@
     "editor.selectionHighlightBackground": "#28353D",
     "editor.findMatchBackground": "#3D3116",
     "editor.findMatchHighlightBackground": "#3D3116",
+    "editorIndentGuide.background": "#28353D",
+    "editorIndentGuide.activeBackground": "#33434C",
     "editorIndentGuide.background1": "#28353D",
     "editorIndentGuide.activeBackground1": "#33434C",
     "editorBracketMatch.border": "#33434C",

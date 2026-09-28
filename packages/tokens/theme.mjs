@@ -25,6 +25,9 @@ export const COLORS = {
   'editor.selectionHighlightBackground': 'editor.occurrence',
   'editor.findMatchBackground': 'editor.find',
   'editor.findMatchHighlightBackground': 'editor.find',
+  // both id generations: Theia before Monaco 0.44 reads the unsuffixed ones
+  'editorIndentGuide.background': 'editor.indentGuide',
+  'editorIndentGuide.activeBackground': 'editor.bracket',
   'editorIndentGuide.background1': 'editor.indentGuide',
   'editorIndentGuide.activeBackground1': 'editor.bracket',
   'editorBracketMatch.border': 'editor.bracket',

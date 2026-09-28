@@ -58,8 +58,8 @@ function toCss(t) {
     default: unsupported.push(`${t.path.join('.')} (${t.type}) has no css rendering`); return null;
   }
 }
-// ts: numbers stay numbers, everything else is the css-ready string
-const toTs = (t) => (t.type === 'number' || t.type === 'fontWeight' ? t.value : toCss(t));
+// ts: numbers stay numbers, glyph strings stay raw text, everything else is the css-ready string
+const toTs = (t) => (t.type === 'number' || t.type === 'fontWeight' || t.type === 'string' ? t.value : toCss(t));
 
 const f32 = (n) => (Number.isInteger(n) ? `${n}.0` : String(n));
 function toRust(t) {

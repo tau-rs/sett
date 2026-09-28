@@ -1,0 +1,203 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "sett dark",
+  "type": "dark",
+  "semanticHighlighting": true,
+  "colors": {
+    "editor.background": "#1B2429",
+    "editor.foreground": "#E6EDF0",
+    "editorGutter.background": "#1B2429",
+    "editorLineNumber.foreground": "#8F9FA8",
+    "editorLineNumber.activeForeground": "#B3C0C7",
+    "editorCursor.foreground": "#E6EDF0",
+    "editorWhitespace.foreground": "#28353D",
+    "editorRuler.foreground": "#28353D",
+    "editor.lineHighlightBackground": "#22303A",
+    "editor.selectionBackground": "#1E3350",
+    "editor.inactiveSelectionBackground": "#1E3350",
+    "editor.wordHighlightBackground": "#28353D",
+    "editor.wordHighlightStrongBackground": "#28353D",
+    "editor.selectionHighlightBackground": "#28353D",
+    "editor.findMatchBackground": "#3D3116",
+    "editor.findMatchHighlightBackground": "#3D3116",
+    "editorIndentGuide.background": "#28353D",
+    "editorIndentGuide.activeBackground": "#33434C",
+    "editorIndentGuide.background1": "#28353D",
+    "editorIndentGuide.activeBackground1": "#33434C",
+    "editorBracketMatch.border": "#33434C",
+    "editorBracketMatch.background": "#28353D",
+    "editorError.foreground": "#EB7065",
+    "editorWarning.foreground": "#E0A63A",
+    "editorInfo.foreground": "#629DE8",
+    "editorHint.foreground": "#629DE8",
+    "editorInlayHint.background": "#22303A",
+    "editorInlayHint.foreground": "#8F9FA8",
+    "editorInlayHint.typeBackground": "#22303A",
+    "editorInlayHint.typeForeground": "#8F9FA8",
+    "editorInlayHint.parameterBackground": "#22303A",
+    "editorInlayHint.parameterForeground": "#8F9FA8",
+    "editorGutter.modifiedBackground": "#629DE8",
+    "editorGutter.addedBackground": "#4DB388",
+    "editorGutter.deletedBackground": "#EB7065",
+    "diffEditor.insertedTextBackground": "#1D3A2E",
+    "diffEditor.removedTextBackground": "#45231F",
+    "diffEditor.insertedLineBackground": "#1D3A2E",
+    "diffEditor.removedLineBackground": "#45231F",
+    "editorOverviewRuler.errorForeground": "#EB7065",
+    "editorOverviewRuler.warningForeground": "#E0A63A",
+    "editorOverviewRuler.infoForeground": "#629DE8",
+    "editorOverviewRuler.modifiedForeground": "#629DE8",
+    "editorOverviewRuler.addedForeground": "#4DB388",
+    "editorOverviewRuler.deletedForeground": "#EB7065",
+    "editorOverviewRuler.findMatchForeground": "#E0A63A",
+    "editorOverviewRuler.selectionHighlightForeground": "#629DE8",
+    "editorOverviewRuler.wordHighlightForeground": "#33434C",
+    "editorOverviewRuler.bracketMatchForeground": "#33434C",
+    "editorOverviewRuler.border": "#28353D",
+    "editorLink.activeForeground": "#629DE8",
+    "editorCodeLens.foreground": "#8F9FA8",
+    "editorLightBulb.foreground": "#E0A63A",
+    "editorGhostText.foreground": "#8F9FA8"
+  },
+  "tokenColors": [
+    {
+      "name": "sett keyword",
+      "scope": [
+        "keyword",
+        "storage",
+        "storage.type",
+        "storage.modifier",
+        "keyword.control"
+      ],
+      "settings": {
+        "foreground": "#79B5F1"
+      }
+    },
+    {
+      "name": "sett string",
+      "scope": [
+        "string",
+        "constant.character.escape"
+      ],
+      "settings": {
+        "foreground": "#7DBF8F"
+      }
+    },
+    {
+      "name": "sett constant",
+      "scope": [
+        "constant.numeric",
+        "constant.language",
+        "constant.other",
+        "variable.other.constant",
+        "entity.name.constant"
+      ],
+      "settings": {
+        "foreground": "#DAA773"
+      }
+    },
+    {
+      "name": "sett type",
+      "scope": [
+        "entity.name.type",
+        "entity.name.class",
+        "entity.name.struct",
+        "entity.name.enum",
+        "entity.name.trait",
+        "entity.name.union",
+        "entity.other.inherited-class",
+        "support.type",
+        "storage.type.primitive",
+        "entity.name.lifetime"
+      ],
+      "settings": {
+        "foreground": "#38C2CB"
+      }
+    },
+    {
+      "name": "sett function",
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#EA98BD"
+      }
+    },
+    {
+      "name": "sett macro",
+      "scope": [
+        "entity.name.function.macro",
+        "entity.name.macro",
+        "support.function.macro"
+      ],
+      "settings": {
+        "foreground": "#E8A07F"
+      }
+    },
+    {
+      "name": "sett attribute",
+      "scope": [
+        "meta.attribute",
+        "meta.attribute entity.name.type",
+        "meta.attribute entity.name.function",
+        "meta.attribute punctuation",
+        "meta.preprocessor",
+        "keyword.control.directive",
+        "entity.other.attribute-name"
+      ],
+      "settings": {
+        "foreground": "#46BEE5"
+      }
+    },
+    {
+      "name": "sett comment",
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#8F9FA8"
+      }
+    }
+  ],
+  "semanticTokenColors": {
+    "keyword": "#79B5F1",
+    "selfKeyword": "#79B5F1",
+    "selfTypeKeyword": "#79B5F1",
+    "operator.controlFlow": "#79B5F1",
+    "*.declaration": "#79B5F1",
+    "string": "#7DBF8F",
+    "character": "#7DBF8F",
+    "escapeSequence": "#7DBF8F",
+    "formatSpecifier": "#7DBF8F",
+    "number": "#DAA773",
+    "boolean": "#DAA773",
+    "enumMember": "#DAA773",
+    "variable.constant": "#DAA773",
+    "variable.static": "#DAA773",
+    "type": "#38C2CB",
+    "class": "#38C2CB",
+    "struct": "#38C2CB",
+    "enum": "#38C2CB",
+    "interface": "#38C2CB",
+    "union": "#38C2CB",
+    "typeAlias": "#38C2CB",
+    "typeParameter": "#38C2CB",
+    "builtinType": "#38C2CB",
+    "lifetime": "#38C2CB",
+    "function": "#EA98BD",
+    "method": "#EA98BD",
+    "macro": "#E8A07F",
+    "macroBang": "#E8A07F",
+    "derive": "#E8A07F",
+    "deriveHelper": "#E8A07F",
+    "procMacro": "#E8A07F",
+    "attribute": "#46BEE5",
+    "attributeBracket": "#46BEE5",
+    "builtinAttribute": "#46BEE5",
+    "decorator": "#46BEE5",
+    "toolModule": "#46BEE5",
+    "comment": "#8F9FA8"
+  }
+}

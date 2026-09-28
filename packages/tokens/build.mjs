@@ -4,10 +4,12 @@
 //   dist/tokens.ts    base / light / dark as typed objects with css-ready values
 //   dist/tokens.json  flat list per set, for docs pages
 //   dist/tokens.rs    pub const per token; colours [f32; 3], dimensions f32, strokes as dash arrays (empty = solid)
+//   dist/sett-theme.{light,dark}.json  Theia / VS Code colour theme, see theme.mjs
 import StyleDictionary from 'style-dictionary';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { renderTheme } from './theme.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const src = (f) => join(here, 'src', f);
@@ -159,6 +161,8 @@ await writeFile(join(dist, 'sett.css'), css(sets));
 await writeFile(join(dist, 'tokens.ts'), ts(sets));
 await writeFile(join(dist, 'tokens.json'), json(sets));
 await writeFile(join(dist, 'tokens.rs'), rust(sets));
+for (const type of ['light', 'dark'])
+  await writeFile(join(dist, `sett-theme.${type}.json`), JSON.stringify(renderTheme(sets[type], { name: `sett ${type}`, type }), null, 2) + '\n');
 const report = { base: sets.base.length, light: sets.light.length, dark: sets.dark.length, unsupported: [...new Set(unsupported)] };
 await writeFile(join(dist, 'report.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(`sett-tokens: base ${report.base} · light ${report.light} · dark ${report.dark}${report.unsupported.length ? `\n  not expressed: ${report.unsupported.join('; ')}` : ''}`);

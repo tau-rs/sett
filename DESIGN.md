@@ -84,7 +84,7 @@ Only three things move: the live frame (session gradient, 6 s rotate), the waiti
 
 1. Verbs live in a pane's fixed bar or in a chip. There is no modal component. A menu is an anchored disclosure under its selector: it never dims or traps the screen and closes on Esc, on a click outside, or when a row is chosen. That is allowed under P-2; a popup that blocks is not.
 2. A blocked or waiting state is a `pill` wherever its subject is named: selector, menu row, gated button reason, session-card row. Same pill, same words.
-3. Agent door first and bold in every pair, manual second and plain; the "me first" setting swaps both. Verbs are lowercase. A done chip keeps full contrast: its kind label turns ok with `✓`, and it gains a plain `dismiss` verb.
+3. Agent door first and bold in every pair, manual second and plain; the "me first" setting swaps both. Verbs are lowercase. A done chip keeps full contrast: its kind label turns ok with `✓`, and it gains a plain `dismiss` verb. A blocked primary button (the gated merge, hand back before the note) is a dashed blue outline with blue text at full contrast, never a faded fill; its reason sits under it as pills that link to what unblocks it.
 4. Chips and cards separate with `·`; identifiers are mono.
 5. Dark mode is required from day one.
 6. Map primitives are values, not CSS: the WebGL layer reads `tokens.rs`, generated from the same DTCG source.

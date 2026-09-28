@@ -15,6 +15,31 @@ jobs:
           cache: pnpm
       - uses: dtolnay/rust-toolchain@stable
       - run: pnpm install --frozen-lockfile
+      # the story tests (vitest browser mode, a11y gate) and the static smoke test run in Chromium
+      - run: pnpm --filter @tau-rs/sett-storybook exec playwright install --with-deps chromium
       - run: pnpm build
       - run: pnpm test
       - run: cargo test --workspace
+      # the static Storybook, published as the run's artifact on every branch and to Pages from main
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static
+          path: packages/storybook/storybook-static
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          path: packages/storybook/storybook-static
+
+  publish-pages:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build-test
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

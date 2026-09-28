@@ -18,7 +18,7 @@ describe('sett.css', () => {
   });
   it('names follow --sett-<dtcg-path> in kebab case', () => {
     const css = dist('sett.css');
-    for (const v of ['--sett-color-sel', '--sett-color-sel-bg', '--sett-session-yk-sub', '--sett-map-item-stroke', '--sett-radius-chip', '--sett-map-faded-opacity', '--sett-glyph-stepped-in'])
+    for (const v of ['--sett-color-sel', '--sett-color-sel-bg', '--sett-session-yk-sub', '--sett-map-kind-rpc-color', '--sett-radius-chip', '--sett-map-threshold-fold-floor', '--sett-glyph-stepped-in'])
       expect(css).toContain(`${v}:`);
     expect(css).not.toMatch(/--sett-[a-z0-9-]*[A-Z]/);
   });
@@ -27,10 +27,17 @@ describe('sett.css', () => {
 describe('tokens.json', () => {
   const j = JSON.parse(dist('tokens.json'));
   it('counts every token per source file', () => {
-    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 49, light: 71, dark: 71 });
+    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 107, light: 93, dark: 93 });
   });
   it('light and dark define the same paths in the same order', () => {
     expect(j.light.map((t: { name: string }) => t.name)).toEqual(j.dark.map((t: { name: string }) => t.name));
+  });
+  it('map kinds and methods alias the palette, never a new hex', () => {
+    const light = Object.fromEntries(j.light.map((t: { name: string; css: string }) => [t.name, t.css]));
+    expect(light['--sett-map-kind-rpc-color']).toBe(light['--sett-color-sel']);
+    expect(light['--sett-map-kind-pub-color']).toBe(light['--sett-session-yk-main']);
+    expect(light['--sett-map-method-delete']).toBe(light['--sett-color-bad']);
+    expect(light['--sett-map-status-port-bg']).toBe(light['--sett-map-surface-domain']);
   });
   it('every colour is one css hex or rgba', () => {
     for (const t of [...j.light, ...j.dark].filter((t: { type: string }) => t.type === 'color'))
@@ -48,7 +55,10 @@ describe('tokens.ts and tokens.rs', () => {
     const rs = dist('tokens.rs');
     expect(rs).toContain('pub const COLOR_SEL: [f32; 3] = [0.1216, 0.3725, 0.6588];');
     expect(rs).toContain('pub const RADIUS_CHIP: f32 = 4.0;');
-    expect(rs).toContain('pub const MAP_ITEM_STROKE: [f32; 3]');
+    expect(rs).toContain('pub const MAP_SURFACE_DRIVING: [f32; 3]');
+    expect(rs).toContain('pub const MAP_KIND_TOPIC_STROKE: &[f32] = &[7.0, 4.0];');
+    expect(rs).toContain('pub const MAP_KIND_RPC_STROKE: &[f32] = &[];');
+    expect(rs).toContain('pub const MAP_SHADOW_FOCUS: &[Shadow]');
     expect(rs).toMatch(/pub mod light \{[\s\S]*pub mod dark \{/);
   });
   it('the converter expressed everything', () => {

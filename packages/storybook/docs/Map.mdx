@@ -1,28 +1,96 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { light, dark, sessionOrder } from '@tau-rs/sett-tokens';
+import { base, light, dark, sessionOrder } from '@tau-rs/sett-tokens';
 
 <Meta title="docs/Map" />
 
-# Map primitives
+# The map
 
-Map primitives are values, not components: arch's WebGL layer reads the `sett-tokens` crate, the same numbers as this page. Items are 18 px boxes with a 10 px mono label that never scales; ports have round ends; externals are dashed. Overlays stack by one rule: outline = session, fill = plan or finding.
+The map is DOM (ADR 0001): every map thing is a `sett-*` element, and the numbers on this page are the ones it reads. The camera is the only thing that moves; a node never resizes itself. Text has one size; less room means fewer rows and a `+n`. The port colours are the legend the rest of the time: this page is the on-demand version.
 
-export const Swatch = ({ name, l, d }) => (
-  <tr>
-    <td style={{ fontFamily: 'var(--sett-font-mono)', fontSize: 'var(--sett-font-size-sm)' }}>{name}</td>
+export const Sw = ({ l, d }) => (
+  <>
     <td><span style={{ display: 'inline-block', width: 40, height: 18, borderRadius: 3, background: l, border: '1px solid var(--sett-color-line)' }} /> <code>{l}</code></td>
     <td><span style={{ display: 'inline-block', width: 40, height: 18, borderRadius: 3, background: d, border: '1px solid var(--sett-color-line)' }} /> <code>{d}</code></td>
-  </tr>
+  </>
+);
+export const Line = ({ color, dash }) => (
+  <svg width="120" height="14" style={{ verticalAlign: 'middle' }}>
+    <defs><marker id={`h-${color}-${dash}`} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 z" fill={color} /></marker></defs>
+    <line x1="2" y1="7" x2="110" y2="7" stroke={color} strokeWidth="1.5" strokeDasharray={dash === 'solid' ? undefined : dash} markerEnd={`url(#h-${color}-${dash})`} />
+  </svg>
 );
 
+## Kinds
+
+One colour and one stroke per kind, used identically on port dots, edges, hint chips and these swatches.
+
 <table>
-  <thead><tr><th>token</th><th>light</th><th>dark</th></tr></thead>
+  <thead><tr><th>kind</th><th>light</th><th>dark</th><th>stroke</th></tr></thead>
   <tbody>
-    {Object.keys(light.map).filter((k) => k !== 'fadedOpacity').map((k) => <Swatch key={k} name={`map.${k}`} l={light.map[k]} d={dark.map[k]} />)}
+    {Object.keys(base.map.kind).map((k) => (
+      <tr key={k}>
+        <td style={{ fontFamily: 'var(--sett-font-mono)' }}>{k}</td>
+        <Sw l={light.map.kind[k].color} d={dark.map.kind[k].color} />
+        <td><Line color={light.map.kind[k].color} dash={base.map.kind[k].stroke} /> <code>{base.map.kind[k].stroke}</code></td>
+      </tr>
+    ))}
   </tbody>
 </table>
 
-Faded opacity: **{light.map.fadedOpacity}** on the whole group.
+## HTTP methods
+
+Weight {base.map.method.weight}, {base.map.method.size}, in a fixed {base.map.size.methodColumn} column.
+
+<table>
+  <thead><tr><th>method</th><th>light</th><th>dark</th></tr></thead>
+  <tbody>
+    {Object.keys(light.map.method).map((m) => (
+      <tr key={m}><td style={{ fontFamily: 'var(--sett-font-mono)', fontWeight: 600 }}>{m.toUpperCase()}</td><Sw l={light.map.method[m]} d={dark.map.method[m]} /></tr>
+    ))}
+  </tbody>
+</table>
+
+## Surfaces and status
+
+The board is the chrome's `bg`. Inside an open unit the columns are tinted: driving, domain, driven; outbound is the fill of an external item, code the code page.
+
+<table>
+  <thead><tr><th>surface</th><th>light</th><th>dark</th></tr></thead>
+  <tbody>
+    {Object.keys(light.map.surface).map((k) => (
+      <tr key={k}><td style={{ fontFamily: 'var(--sett-font-mono)' }}>{k}</td><Sw l={light.map.surface[k]} d={dark.map.surface[k]} /></tr>
+    ))}
+  </tbody>
+</table>
+
+<table>
+  <thead><tr><th>status</th><th>part</th><th>light</th><th>dark</th></tr></thead>
+  <tbody>
+    {Object.keys(light.map.status).flatMap((s) => Object.keys(light.map.status[s]).map((part) => (
+      <tr key={`${s}-${part}`}><td style={{ fontFamily: 'var(--sett-font-mono)' }}>{s}</td><td>{part}</td><Sw l={light.map.status[s][part]} d={dark.map.status[s][part]} /></tr>
+    )))}
+  </tbody>
+</table>
+
+Units unrelated to the focus fade to **{base.map.far}**. Accent text never sits on the well tint.
+
+## Sizes and thresholds
+
+Sizes are px at camera scale 1. Thresholds are the on-screen width of a node; the tier is read from it (mini · chip · card · open · enter), with a {base.map.threshold.hysteresis} band before folding back.
+
+<table>
+  <thead><tr><th>size</th><th>value</th></tr></thead>
+  <tbody>
+    {Object.keys(base.map.size).map((k) => <tr key={k}><td style={{ fontFamily: 'var(--sett-font-mono)' }}>{k}</td><td>{base.map.size[k]}</td></tr>)}
+  </tbody>
+</table>
+
+<table>
+  <thead><tr><th>threshold</th><th>value</th></tr></thead>
+  <tbody>
+    {Object.keys(base.map.threshold).map((k) => <tr key={k}><td style={{ fontFamily: 'var(--sett-font-mono)' }}>{k}</td><td>{base.map.threshold[k]}</td></tr>)}
+  </tbody>
+</table>
 
 ## Session overlays
 

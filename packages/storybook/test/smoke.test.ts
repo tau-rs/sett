@@ -63,7 +63,10 @@ describe('storybook-static smoke', () => {
       expect(text).toContain('Verbs live in a pane');
       expect(text, 'front matter must not render').not.toContain('tokens: ./packages/tokens/src');
     },
-    'docs-map--docs': (text) => { expect(text).toContain('Map primitives'); },
+    'docs-map--docs': (text) => {
+      expect(text).toContain('The map is DOM');
+      for (const k of ['rpc', 'topic', 'declared', 'driving', 'nodeChipW', 'hysteresis']) expect(text).toContain(k);
+    },
   };
   describe('docs', () => {
     for (const [id, check] of Object.entries(docs)) {

@@ -3,7 +3,7 @@
 //   dist/sett.css     :root light, dark under prefers-color-scheme and [data-theme="dark"]
 //   dist/tokens.ts    base / light / dark as typed objects with css-ready values
 //   dist/tokens.json  flat list per set, for docs pages
-//   dist/tokens.rs    pub const per token; colours [f32; 3], dimensions f32
+//   dist/tokens.rs    pub const per token; colours [f32; 3], dimensions f32, strokes as dash arrays (empty = solid)
 import StyleDictionary from 'style-dictionary';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -43,6 +43,7 @@ function hexWithAlpha(c) {
   const [r, g, b] = c.components.map((x) => Math.round(x * 255));
   return `rgba(${r}, ${g}, ${b}, ${c.alpha})`;
 }
+const shadowCss = (v) => `${v.offsetX.value}${v.offsetX.unit} ${v.offsetY.value}${v.offsetY.unit} ${v.blur.value}${v.blur.unit} ${v.spread.value}${v.spread.unit} ${hexWithAlpha(v.color)}`;
 function toCss(t) {
   const v = t.value;
   switch (t.type) {
@@ -54,7 +55,8 @@ function toCss(t) {
     case 'number': return String(v);
     case 'cubicBezier': return `cubic-bezier(${v.join(', ')})`;
     case 'string': return JSON.stringify(v);
-    case 'shadow': return `${v.offsetX.value}${v.offsetX.unit} ${v.offsetY.value}${v.offsetY.unit} ${v.blur.value}${v.blur.unit} ${v.spread.value}${v.spread.unit} ${hexWithAlpha(v.color)}`;
+    case 'shadow': return (Array.isArray(v) ? v : [v]).map(shadowCss).join(', ');
+    case 'strokeStyle': return typeof v === 'string' ? v : v.dashArray.map((d) => `${d.value}`).join(' ');
     default: unsupported.push(`${t.path.join('.')} (${t.type}) has no css rendering`); return null;
   }
 }
@@ -80,8 +82,12 @@ function toRust(t) {
     case 'number': return `pub const ${name}: f32 = ${f32(v)};`;
     case 'cubicBezier': return `pub const ${name}: [f32; 4] = [${v.map(f32).join(', ')}];`;
     case 'string': return `pub const ${name}: &str = ${JSON.stringify(v)};`;
-    case 'shadow':
-      return `pub const ${name}: Shadow = Shadow { color: [${v.color.components.map(f32).join(', ')}], alpha: ${f32(v.color.alpha ?? 1)}, offset: [${f32(v.offsetX.value)}, ${f32(v.offsetY.value)}], blur: ${f32(v.blur.value)}, spread: ${f32(v.spread.value)} };`;
+    case 'shadow': {
+      const one = (sv) => `Shadow { color: [${sv.color.components.map(f32).join(', ')}], alpha: ${f32(sv.color.alpha ?? 1)}, offset: [${f32(sv.offsetX.value)}, ${f32(sv.offsetY.value)}], blur: ${f32(sv.blur.value)}, spread: ${f32(sv.spread.value)} }`;
+      return Array.isArray(v) ? `pub const ${name}: &[Shadow] = &[${v.map(one).join(', ')}];` : `pub const ${name}: Shadow = ${one(v)};`;
+    }
+    case 'strokeStyle':
+      return `pub const ${name}: &[f32] = &[${typeof v === 'string' ? '' : v.dashArray.map((d) => f32(d.value)).join(', ')}];`;
     default: unsupported.push(`${t.path.join('.')} (${t.type}) has no rust rendering`); return null;
   }
 }

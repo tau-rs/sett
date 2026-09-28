@@ -116,7 +116,7 @@
         ],
         "hex": "#1F5FA8"
       },
-      "$description": "selection \u00b7 your work \u00b7 links \u00b7 editing frame"
+      "$description": "selection · your work · links · editing frame"
     },
     "selBg": {
       "$type": "color",
@@ -155,7 +155,7 @@
         ],
         "hex": "#287857"
       },
-      "$description": "done \u00b7 passed \u00b7 added lines"
+      "$description": "done · passed · added lines"
     },
     "okBg": {
       "$type": "color",
@@ -181,7 +181,7 @@
         ],
         "hex": "#B23A33"
       },
-      "$description": "finding \u00b7 deviation \u00b7 collision \u00b7 removed lines"
+      "$description": "finding · deviation · collision · removed lines"
     },
     "badBg": {
       "$type": "color",
@@ -207,7 +207,7 @@
         ],
         "hex": "#946003"
       },
-      "$description": "suggested \u00b7 planned \u00b7 waiting \u00b7 focus frame"
+      "$description": "suggested · planned · waiting · focus frame"
     },
     "sugBg": {
       "$type": "color",
@@ -255,130 +255,297 @@
     }
   },
   "map": {
-    "$description": "warm palette of the map surface; consumed by CSS and by the WebGL layer (tokens.rs)",
-    "paper": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.9686,
-          0.9647,
-          0.949
-        ],
-        "hex": "#F7F6F2"
+    "$description": "the map's colours (ADR 0001): surfaces are the column tints, everything else aliases the base palette",
+    "surface": {
+      "driving": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9176,
+            0.9451,
+            0.9725
+          ],
+          "hex": "#EAF1F8"
+        }
+      },
+      "domain": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9647,
+            0.9451,
+            0.902
+          ],
+          "hex": "#F6F1E6"
+        }
+      },
+      "driven": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9333,
+            0.9569,
+            0.9333
+          ],
+          "hex": "#EEF4EE"
+        }
+      },
+      "outbound": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9451,
+            0.9333,
+            0.9686
+          ],
+          "hex": "#F1EEF7"
+        }
+      },
+      "code": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9843,
+            0.9843,
+            0.9804
+          ],
+          "hex": "#FBFBFA"
+        }
       }
     },
-    "grid": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.9333,
-          0.9255,
-          0.902
-        ],
-        "hex": "#EEECE6"
+    "kind": {
+      "rpc": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.sel}"
+        }
+      },
+      "http": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.ok}"
+        }
+      },
+      "cli": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.ok}"
+        }
+      },
+      "topic": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.sug}"
+        }
+      },
+      "crate": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.mute}"
+        }
+      },
+      "sql": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.mute}"
+        }
+      },
+      "pub": {
+        "color": {
+          "$type": "color",
+          "$value": "{session.yk.main}"
+        }
+      },
+      "redis": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.bad}"
+        }
+      },
+      "fs": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.ink2}"
+        }
+      },
+      "tty": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.ink2}"
+        }
+      },
+      "declared": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.mute}"
+        }
       }
     },
-    "item": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.9451,
-          0.9373,
-          0.9098
-        ],
-        "hex": "#F1EFE8"
+    "method": {
+      "get": {
+        "$type": "color",
+        "$value": "{color.ok}"
+      },
+      "post": {
+        "$type": "color",
+        "$value": "{color.sel}"
+      },
+      "put": {
+        "$type": "color",
+        "$value": "{color.sug}"
+      },
+      "patch": {
+        "$type": "color",
+        "$value": "{color.sug}"
+      },
+      "delete": {
+        "$type": "color",
+        "$value": "{color.bad}"
       }
     },
-    "itemStroke": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.5333,
-          0.5294,
-          0.502
-        ],
-        "hex": "#888780"
+    "status": {
+      "finding": {
+        "border": {
+          "$type": "color",
+          "$value": "{color.bad}"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "{color.badBg}"
+        }
+      },
+      "session": {
+        "border": {
+          "$type": "color",
+          "$value": "{session.yk.main}"
+        }
+      },
+      "smell": {
+        "color": {
+          "$type": "color",
+          "$value": "{color.bad}"
+        }
+      },
+      "entry": {
+        "border": {
+          "$type": "color",
+          "$value": "{color.sel}"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "{color.selBg}"
+        }
+      },
+      "port": {
+        "border": {
+          "$type": "color",
+          "$value": "{color.sug}"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "{map.surface.domain}"
+        }
+      },
+      "external": {
+        "border": {
+          "$type": "color",
+          "$value": "{color.mute}"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "{map.surface.outbound}"
+        }
       }
     },
-    "itemInk": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.1725,
-          0.1725,
-          0.1647
-        ],
-        "hex": "#2C2C2A"
+    "shadow": {
+      "focus": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "color": "{color.sel}",
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 0,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 0,
+              "unit": "px"
+            },
+            "spread": {
+              "value": 1,
+              "unit": "px"
+            }
+          },
+          {
+            "color": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "hex": "#000000",
+              "alpha": 0.12
+            },
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 12,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 32,
+              "unit": "px"
+            },
+            "spread": {
+              "value": 0,
+              "unit": "px"
+            }
+          }
+        ]
+      },
+      "card": {
+        "$type": "shadow",
+        "$value": {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "hex": "#000000",
+            "alpha": 0.07
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 4,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 16,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
       }
-    },
-    "areaStroke": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.7059,
-          0.698,
-          0.6627
-        ],
-        "hex": "#B4B2A9"
-      }
-    },
-    "areaInk": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.3725,
-          0.3686,
-          0.3529
-        ],
-        "hex": "#5F5E5A"
-      }
-    },
-    "link": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.5333,
-          0.5294,
-          0.502
-        ],
-        "hex": "#888780"
-      }
-    },
-    "linkLit": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.1216,
-          0.3725,
-          0.6588
-        ],
-        "hex": "#1F5FA8"
-      }
-    },
-    "external": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.9059,
-          0.898,
-          0.8706
-        ],
-        "hex": "#E7E5DE"
-      }
-    },
-    "faded-opacity": {
-      "$type": "number",
-      "$value": 0.3
     }
   },
   "session": {

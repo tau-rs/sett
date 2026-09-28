@@ -670,5 +670,172 @@
         "$description": "tint"
       }
     }
+  },
+  "syntax": {
+    "$description": "syntax colours: every accent at one CIELAB lightness (L* 36 on white, L* 72 on the dark paper), 7:1 or better, hues in the gaps between the session colours",
+    "keyword": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.4745,
+          0.7098,
+          0.9451
+        ],
+        "hex": "#79B5F1"
+      },
+      "$description": "keywords and the name at a declaration"
+    },
+    "string": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.4902,
+          0.749,
+          0.5608
+        ],
+        "hex": "#7DBF8F"
+      },
+      "$description": "string literals"
+    },
+    "constant": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8549,
+          0.6549,
+          0.451
+        ],
+        "hex": "#DAA773"
+      },
+      "$description": "numbers and constants"
+    },
+    "type": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2196,
+          0.7608,
+          0.7961
+        ],
+        "hex": "#38C2CB"
+      },
+      "$description": "types in use"
+    },
+    "function": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9176,
+          0.5961,
+          0.7412
+        ],
+        "hex": "#EA98BD"
+      },
+      "$description": "function and method calls"
+    },
+    "macro": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9098,
+          0.6275,
+          0.498
+        ],
+        "hex": "#E8A07F"
+      },
+      "$description": "macros"
+    },
+    "attribute": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2745,
+          0.7451,
+          0.898
+        ],
+        "hex": "#46BEE5"
+      },
+      "$description": "attributes and preprocessor"
+    },
+    "comment": {
+      "$type": "color",
+      "$value": "{color.mute}",
+      "$description": "comments"
+    }
+  },
+  "editor": {
+    "$description": "editor surfaces and decorations, aliases onto the chrome colours",
+    "line": {
+      "$type": "color",
+      "$value": "{color.well}",
+      "$description": "current line"
+    },
+    "selection": {
+      "$type": "color",
+      "$value": "{color.selBg}",
+      "$description": "selection"
+    },
+    "occurrence": {
+      "$type": "color",
+      "$value": "{color.line2}",
+      "$description": "other occurrences of the symbol under the caret"
+    },
+    "find": {
+      "$type": "color",
+      "$value": "{color.sugBg}",
+      "$description": "find hits"
+    },
+    "indentGuide": {
+      "$type": "color",
+      "$value": "{color.line2}",
+      "$description": "indent guides"
+    },
+    "bracket": {
+      "$type": "color",
+      "$value": "{color.line}",
+      "$description": "matching bracket"
+    },
+    "underlineError": {
+      "$type": "color",
+      "$value": "{color.bad}",
+      "$description": "error underline; a finding is error grade"
+    },
+    "underlineWarning": {
+      "$type": "color",
+      "$value": "{color.sug}",
+      "$description": "warning underline"
+    },
+    "underlineHint": {
+      "$type": "color",
+      "$value": "{color.sel}",
+      "$description": "hint underline"
+    },
+    "hintBg": {
+      "$type": "color",
+      "$value": "{color.well}",
+      "$description": "inlay hint pill, rust-analyzer and arch alike"
+    },
+    "hintInk": {
+      "$type": "color",
+      "$value": "{color.mute}",
+      "$description": "inlay hint text"
+    },
+    "gutterYou": {
+      "$type": "color",
+      "$value": "{color.sel}",
+      "$description": "gutter change bar for your lines; a session uses its main colour"
+    },
+    "witness": {
+      "$type": "color",
+      "$value": "{color.selBg}",
+      "$description": "highlighted span the framer cited"
+    }
   }
 }

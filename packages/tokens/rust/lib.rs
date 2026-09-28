@@ -10,7 +10,7 @@ mod tests {
 
     #[test]
     fn colours_are_unit_srgb() {
-        for c in [light::COLOR_SEL, dark::COLOR_SEL, light::SESSION_YK_MAIN, light::MAP_ITEM_STROKE] {
+        for c in [light::COLOR_SEL, dark::COLOR_SEL, light::SESSION_YK_MAIN, light::MAP_SURFACE_DRIVING] {
             assert!(c.iter().all(|x| (0.0..=1.0).contains(x)));
         }
     }

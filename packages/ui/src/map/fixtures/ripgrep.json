@@ -1,0 +1,2999 @@
+{
+ "name": "ripgrep",
+ "tagline": "ripgrep \u00b7 11 crates \u00b7 one binary \u00b7 from the workspace manifests at HEAD (2026-08-04)",
+ "system": null,
+ "repos": {
+  "ripgrep": {
+   "units": [
+    {
+     "id": "rg",
+     "name": "rg \u00b7 core",
+     "kind": "app",
+     "x": 60,
+     "y": 300,
+     "layout": "hexagon",
+     "crates": 1,
+     "items": 1900,
+     "areas": 3,
+     "meta": "crates/core \u00b7 flags \u00b7 haystack \u00b7 search \u00b7 index",
+     "exposes": [
+      [
+       "cli",
+       "rg \u00b7 108 flags",
+       "flags",
+       "rg.cli"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "grep \u00b7 Searcher \u00b7 Printer \u00b7 Matcher",
+       "search",
+       "grep.pub"
+      ],
+      [
+       "crate",
+       "ignore \u00b7 WalkBuilder",
+       "walk",
+       "ignore.pub"
+      ],
+      [
+       "crate",
+       "grep-index \u00b7 Index",
+       "index",
+       "index.pub"
+      ],
+      [
+       "fs",
+       "files \u00b7 mmap \u00b7 stdin",
+       "haystack",
+       "rg.fs"
+      ],
+      [
+       "tty",
+       "stdout \u00b7 stderr \u00b7 colors",
+       "print",
+       "rg.tty"
+      ]
+     ]
+    },
+    {
+     "id": "grep",
+     "name": "grep",
+     "kind": "library",
+     "x": 330,
+     "y": 300,
+     "layout": "layers",
+     "crates": 1,
+     "items": 40,
+     "areas": 3,
+     "meta": "facade: re-exports the grep-* crates",
+     "exposes": [
+      [
+       "pub",
+       "grep::searcher \u00b7 printer \u00b7 regex \u00b7 matcher \u00b7 cli \u00b7 pcre2",
+       "re",
+       "grep.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "grep-* crates",
+       "re",
+       "grep.pub"
+      ]
+     ]
+    },
+    {
+     "id": "ignore",
+     "name": "ignore",
+     "kind": "library",
+     "x": 330,
+     "y": 520,
+     "layout": "layers",
+     "crates": 1,
+     "items": 2100,
+     "areas": 3,
+     "meta": "ignore files, directory walking",
+     "exposes": [
+      [
+       "pub",
+       "WalkBuilder \u00b7 Walk \u00b7 WalkParallel",
+       "walk",
+       "ignore.pub"
+      ],
+      [
+       "pub",
+       "gitignore \u00b7 overrides \u00b7 types",
+       "rules",
+       "ignore.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "globset",
+       "rules",
+       "globset.pub"
+      ],
+      [
+       "crate",
+       "crossbeam-deque \u00b7 regex-automata \u00b7 walkdir",
+       "walk",
+       "ignore.deps"
+      ],
+      [
+       "fs",
+       ".gitignore \u00b7 .ignore files",
+       "rules",
+       "ignore.fs"
+      ]
+     ]
+    },
+    {
+     "id": "grep-index",
+     "name": "grep-index",
+     "kind": "library",
+     "x": 330,
+     "y": 80,
+     "layout": "layers",
+     "crates": 1,
+     "items": 600,
+     "areas": 3,
+     "meta": "grep, but with an index (new)",
+     "exposes": [
+      [
+       "pub",
+       "Index \u00b7 IndexBuilder \u00b7 IndexDiscovery",
+       "index",
+       "index.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "fs",
+       ".rgindex files",
+       "index",
+       "index.fs"
+      ]
+     ]
+    },
+    {
+     "id": "grep-searcher",
+     "name": "grep-searcher",
+     "kind": "library",
+     "x": 600,
+     "y": 200,
+     "layout": "layers",
+     "crates": 1,
+     "items": 1400,
+     "areas": 3,
+     "meta": "line oriented searching",
+     "exposes": [
+      [
+       "pub",
+       "Searcher \u00b7 SearcherBuilder",
+       "searcher",
+       "searcher.pub"
+      ],
+      [
+       "pub",
+       "Sink \u00b7 SinkMatch \u00b7 SinkContext",
+       "sink",
+       "sink.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "grep-matcher \u00b7 Matcher",
+       "searcher",
+       "matcher.pub"
+      ],
+      [
+       "crate",
+       "memmap2 \u00b7 encoding_rs \u00b7 memchr",
+       "lines",
+       "searcher.deps"
+      ]
+     ]
+    },
+    {
+     "id": "grep-printer",
+     "name": "grep-printer",
+     "kind": "library",
+     "x": 600,
+     "y": 420,
+     "layout": "layers",
+     "crates": 1,
+     "items": 1600,
+     "areas": 3,
+     "meta": "Standard \u00b7 Summary \u00b7 JSON sinks",
+     "exposes": [
+      [
+       "pub",
+       "Standard \u00b7 Summary \u00b7 JSON",
+       "sinks",
+       "printer.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "grep-searcher \u00b7 Sink",
+       "sinks",
+       "sink.pub"
+      ],
+      [
+       "crate",
+       "grep-matcher",
+       "sinks",
+       "matcher.pub"
+      ],
+      [
+       "crate",
+       "termcolor \u00b7 serde_json",
+       "color",
+       "printer.deps"
+      ]
+     ]
+    },
+    {
+     "id": "grep-regex",
+     "name": "grep-regex",
+     "kind": "library",
+     "x": 870,
+     "y": 120,
+     "layout": "layers",
+     "crates": 1,
+     "items": 700,
+     "areas": 3,
+     "meta": "Matcher for Rust regex",
+     "exposes": [
+      [
+       "pub",
+       "RegexMatcher \u00b7 RegexMatcherBuilder",
+       "matcher",
+       "regex.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "grep-matcher \u00b7 Matcher trait",
+       "matcher",
+       "matcher.pub"
+      ],
+      [
+       "crate",
+       "regex-automata \u00b7 regex-syntax",
+       "matcher",
+       "regex.deps"
+      ]
+     ]
+    },
+    {
+     "id": "grep-pcre2",
+     "name": "grep-pcre2",
+     "kind": "library",
+     "x": 870,
+     "y": 320,
+     "layout": "layers",
+     "crates": 1,
+     "items": 300,
+     "areas": 3,
+     "meta": "Matcher for PCRE2",
+     "exposes": [
+      [
+       "pub",
+       "RegexMatcher (PCRE2)",
+       "matcher",
+       "pcre2.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "grep-matcher",
+       "matcher",
+       "matcher.pub"
+      ],
+      [
+       "crate",
+       "pcre2 \u00b7 C library",
+       "matcher",
+       "pcre2.deps"
+      ]
+     ]
+    },
+    {
+     "id": "grep-cli",
+     "name": "grep-cli",
+     "kind": "library",
+     "x": 870,
+     "y": 520,
+     "layout": "layers",
+     "crates": 1,
+     "items": 500,
+     "areas": 3,
+     "meta": "decompress \u00b7 escape \u00b7 patterns",
+     "exposes": [
+      [
+       "pub",
+       "patterns \u00b7 escape \u00b7 decompress \u00b7 hostname",
+       "all",
+       "cli.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "globset",
+       "decompress",
+       "globset.pub"
+      ],
+      [
+       "fs",
+       "pattern files \u00b7 stdin",
+       "patterns",
+       "cli.fs"
+      ]
+     ]
+    },
+    {
+     "id": "grep-matcher",
+     "name": "grep-matcher",
+     "kind": "library",
+     "x": 1140,
+     "y": 220,
+     "layout": "layers",
+     "crates": 1,
+     "items": 400,
+     "areas": 3,
+     "meta": "the Matcher trait",
+     "exposes": [
+      [
+       "pub",
+       "Matcher \u00b7 trait",
+       "trait",
+       "matcher.pub"
+      ],
+      [
+       "pub",
+       "Match \u00b7 Captures \u00b7 LineTerminator",
+       "types",
+       "matcher.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "memchr",
+       "types",
+       "matcher.deps"
+      ]
+     ]
+    },
+    {
+     "id": "globset",
+     "name": "globset",
+     "kind": "library",
+     "x": 1140,
+     "y": 520,
+     "layout": "layers",
+     "crates": 1,
+     "items": 900,
+     "areas": 3,
+     "meta": "glob and glob set matching",
+     "exposes": [
+      [
+       "pub",
+       "Glob \u00b7 GlobSet \u00b7 GlobMatcher",
+       "glob",
+       "globset.pub"
+      ]
+     ],
+     "needs": [
+      [
+       "crate",
+       "regex-automata \u00b7 aho-corasick \u00b7 bstr",
+       "glob",
+       "globset.deps"
+      ]
+     ]
+    }
+   ],
+   "edges": [
+    {
+     "f": "rg",
+     "t": "grep",
+     "kind": "crate",
+     "n": 31,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "rg",
+     "t": "ignore",
+     "kind": "crate",
+     "n": 9,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "rg",
+     "t": "grep-index",
+     "kind": "crate",
+     "n": 4,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep",
+     "t": "grep-searcher",
+     "kind": "crate",
+     "n": 1,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep",
+     "t": "grep-printer",
+     "kind": "crate",
+     "n": 1,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep",
+     "t": "grep-regex",
+     "kind": "crate",
+     "n": 1,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep",
+     "t": "grep-pcre2",
+     "kind": "crate",
+     "n": 1,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep",
+     "t": "grep-cli",
+     "kind": "crate",
+     "n": 1,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep",
+     "t": "grep-matcher",
+     "kind": "crate",
+     "n": 1,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep-searcher",
+     "t": "grep-matcher",
+     "kind": "crate",
+     "n": 12,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep-printer",
+     "t": "grep-matcher",
+     "kind": "crate",
+     "n": 6,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep-printer",
+     "t": "grep-searcher",
+     "kind": "crate",
+     "n": 18,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep-regex",
+     "t": "grep-matcher",
+     "kind": "crate",
+     "n": 9,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep-pcre2",
+     "t": "grep-matcher",
+     "kind": "crate",
+     "n": 7,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "grep-cli",
+     "t": "globset",
+     "kind": "crate",
+     "n": 3,
+     "how": "uses \u00b7 build"
+    },
+    {
+     "f": "ignore",
+     "t": "globset",
+     "kind": "crate",
+     "n": 14,
+     "how": "uses \u00b7 build"
+    }
+   ]
+  }
+ },
+ "units": {
+  "rg": {
+   "repo": "ripgrep",
+   "layout": "hexagon",
+   "columns": [
+    [
+     "driving",
+     "flags \u00b7 driving"
+    ],
+    [
+     "domain",
+     "search \u00b7 domain"
+    ],
+    [
+     "driven",
+     "sinks \u00b7 driven"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "main",
+     "col": 0,
+     "name": "main.rs",
+     "items": [
+      {
+       "id": "main",
+       "name": "main \u00b7 entry",
+       "k": "fn",
+       "entry": 1
+      },
+      {
+       "id": "run",
+       "name": "run()",
+       "k": "fn"
+      },
+      {
+       "id": "search",
+       "name": "search()",
+       "k": "fn"
+      },
+      {
+       "id": "search_par",
+       "name": "search_parallel()",
+       "k": "fn"
+      },
+      {
+       "id": "files",
+       "name": "files()",
+       "k": "fn"
+      },
+      {
+       "id": "types",
+       "name": "types()",
+       "k": "fn"
+      },
+      {
+       "id": "generate",
+       "name": "generate()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "flags",
+     "col": 0,
+     "name": "flags",
+     "items": [
+      {
+       "id": "parse",
+       "name": "flags::parse()",
+       "k": "fn"
+      },
+      {
+       "id": "hiargs",
+       "name": "HiArgs",
+       "k": "struct"
+      },
+      {
+       "id": "lowargs",
+       "name": "LowArgs",
+       "k": "struct"
+      },
+      {
+       "id": "defs",
+       "name": "defs \u00b7 108 Flag impls",
+       "k": "impl",
+       "fam": "108 impls"
+      },
+      {
+       "id": "mode",
+       "name": "Mode \u00b7 SearchMode",
+       "k": "enum"
+      }
+     ]
+    },
+    {
+     "id": "search",
+     "col": 1,
+     "name": "search",
+     "items": [
+      {
+       "id": "worker",
+       "name": "SearchWorker<W>",
+       "k": "struct"
+      },
+      {
+       "id": "workerb",
+       "name": "SearchWorkerBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "sresult",
+       "name": "SearchResult",
+       "k": "struct"
+      },
+      {
+       "id": "spath",
+       "name": "search_path()",
+       "k": "fn"
+      },
+      {
+       "id": "sreader",
+       "name": "search_reader()",
+       "k": "fn"
+      },
+      {
+       "id": "pm",
+       "name": "PatternMatcher",
+       "k": "enum"
+      }
+     ]
+    },
+    {
+     "id": "haystack",
+     "col": 1,
+     "name": "haystack",
+     "items": [
+      {
+       "id": "hay",
+       "name": "Haystack",
+       "k": "struct"
+      },
+      {
+       "id": "hayb",
+       "name": "HaystackBuilder",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "index",
+     "col": 1,
+     "name": "index",
+     "folded": 1,
+     "items": [
+      {
+       "id": "iread",
+       "name": "index::read()",
+       "k": "fn"
+      },
+      {
+       "id": "iwrite",
+       "name": "index::write()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "print",
+     "col": 2,
+     "name": "printer glue",
+     "items": [
+      {
+       "id": "printer",
+       "name": "Printer<W>",
+       "k": "enum"
+      },
+      {
+       "id": "pstd",
+       "name": "Standard \u00b7 Summary \u00b7 JSON",
+       "k": "impl"
+      }
+     ]
+    },
+    {
+     "id": "msg",
+     "col": 2,
+     "name": "messages \u00b7 logger",
+     "items": [
+      {
+       "id": "msgs",
+       "name": "messages::errored()",
+       "k": "fn"
+      },
+      {
+       "id": "logger",
+       "name": "Logger",
+       "k": "struct"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "main",
+     "run"
+    ],
+    [
+     "run",
+     "search"
+    ],
+    [
+     "run",
+     "search_par"
+    ],
+    [
+     "run",
+     "files"
+    ],
+    [
+     "run",
+     "types"
+    ],
+    [
+     "run",
+     "generate"
+    ],
+    [
+     "parse",
+     "hiargs"
+    ],
+    [
+     "parse",
+     "lowargs"
+    ],
+    [
+     "parse",
+     "defs"
+    ],
+    [
+     "hiargs",
+     "mode"
+    ],
+    [
+     "search",
+     "worker"
+    ],
+    [
+     "search_par",
+     "worker"
+    ],
+    [
+     "workerb",
+     "worker"
+    ],
+    [
+     "worker",
+     "spath"
+    ],
+    [
+     "spath",
+     "sreader"
+    ],
+    [
+     "worker",
+     "pm"
+    ],
+    [
+     "search",
+     "hay"
+    ],
+    [
+     "hayb",
+     "hay"
+    ],
+    [
+     "run",
+     "iread"
+    ],
+    [
+     "worker",
+     "printer"
+    ],
+    [
+     "printer",
+     "pstd"
+    ],
+    [
+     "run",
+     "msgs"
+    ],
+    [
+     "main",
+     "logger"
+    ]
+   ],
+   "portals": {
+    "callers": [],
+    "deps": [
+     [
+      "grep",
+      "grep \u00b7 Searcher \u00b7 Printer \u00b7 Matcher"
+     ],
+     [
+      "ignore",
+      "ignore \u00b7 WalkBuilder"
+     ],
+     [
+      "grep-index",
+      "grep-index"
+     ]
+    ]
+   }
+  },
+  "grep-searcher": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 lines"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 searcher"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 sink"
+    ],
+    [
+     "layer",
+     "L3 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "lines",
+     "col": 0,
+     "name": "lines",
+     "items": [
+      {
+       "id": "lineiter",
+       "name": "LineIter",
+       "k": "struct"
+      },
+      {
+       "id": "linestep",
+       "name": "LineStep",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "searcher",
+     "col": 1,
+     "name": "searcher",
+     "items": [
+      {
+       "id": "searcher",
+       "name": "Searcher",
+       "k": "struct"
+      },
+      {
+       "id": "searcherb",
+       "name": "SearcherBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "bindet",
+       "name": "BinaryDetection",
+       "k": "struct"
+      },
+      {
+       "id": "mmap",
+       "name": "MmapChoice",
+       "k": "struct"
+      },
+      {
+       "id": "enc",
+       "name": "Encoding",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "sink",
+     "col": 2,
+     "name": "sink",
+     "items": [
+      {
+       "id": "sinkt",
+       "name": "Sink \u00b7 trait",
+       "k": "trait",
+       "port": 1,
+       "fam": "9 impls"
+      },
+      {
+       "id": "sinkmatch",
+       "name": "SinkMatch",
+       "k": "struct"
+      },
+      {
+       "id": "sinkctx",
+       "name": "SinkContext",
+       "k": "struct"
+      },
+      {
+       "id": "sinkfin",
+       "name": "SinkFinish",
+       "k": "struct"
+      },
+      {
+       "id": "sinks",
+       "name": "sinks::UTF8 \u00b7 Lossy \u00b7 Bytes",
+       "k": "impl"
+      }
+     ]
+    },
+    {
+     "id": "spub",
+     "col": 3,
+     "name": "public",
+     "items": [
+      {
+       "id": "spubs",
+       "name": "pub use searcher \u00b7 sink \u00b7 lines",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "lineiter",
+     "searcher"
+    ],
+    [
+     "linestep",
+     "searcher"
+    ],
+    [
+     "searcherb",
+     "searcher"
+    ],
+    [
+     "bindet",
+     "searcher"
+    ],
+    [
+     "mmap",
+     "searcher"
+    ],
+    [
+     "enc",
+     "searcher"
+    ],
+    [
+     "searcher",
+     "sinkt"
+    ],
+    [
+     "sinkt",
+     "sinkmatch"
+    ],
+    [
+     "sinkt",
+     "sinkctx"
+    ],
+    [
+     "sinkt",
+     "sinkfin"
+    ],
+    [
+     "sinks",
+     "sinkt",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "searcher",
+     "spubs"
+    ],
+    [
+     "sinkt",
+     "spubs"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "grep-printer",
+      "grep-printer \u00b7 Sink impls"
+     ],
+     [
+      "grep",
+      "grep \u00b7 facade"
+     ]
+    ],
+    "deps": [
+     [
+      "grep-matcher",
+      "grep-matcher \u00b7 Matcher"
+     ]
+    ]
+   }
+  },
+  "grep-printer": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 color \u00b7 hyperlink"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 sinks"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "color",
+     "col": 0,
+     "name": "color \u00b7 hyperlink",
+     "items": [
+      {
+       "id": "colorspecs",
+       "name": "ColorSpecs",
+       "k": "struct"
+      },
+      {
+       "id": "usercolor",
+       "name": "UserColorSpec",
+       "k": "struct"
+      },
+      {
+       "id": "hyper",
+       "name": "HyperlinkFormat",
+       "k": "struct"
+      },
+      {
+       "id": "hyperenv",
+       "name": "HyperlinkEnvironment",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "sinks",
+     "col": 1,
+     "name": "sinks",
+     "items": [
+      {
+       "id": "standard",
+       "name": "Standard",
+       "k": "struct"
+      },
+      {
+       "id": "standardsink",
+       "name": "StandardSink \u00b7 impl Sink",
+       "k": "impl"
+      },
+      {
+       "id": "summary",
+       "name": "Summary",
+       "k": "struct"
+      },
+      {
+       "id": "summarysink",
+       "name": "SummarySink \u00b7 impl Sink",
+       "k": "impl"
+      },
+      {
+       "id": "json",
+       "name": "JSON",
+       "k": "struct"
+      },
+      {
+       "id": "jsonsink",
+       "name": "JSONSink \u00b7 impl Sink",
+       "k": "impl"
+      },
+      {
+       "id": "stats",
+       "name": "Stats",
+       "k": "struct"
+      },
+      {
+       "id": "pathp",
+       "name": "PathPrinter",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "ppub",
+     "col": 2,
+     "name": "public",
+     "items": [
+      {
+       "id": "ppubs",
+       "name": "pub use standard \u00b7 summary \u00b7 json \u00b7 stats",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "colorspecs",
+     "standard"
+    ],
+    [
+     "usercolor",
+     "colorspecs"
+    ],
+    [
+     "hyper",
+     "standard"
+    ],
+    [
+     "hyperenv",
+     "hyper"
+    ],
+    [
+     "standard",
+     "standardsink"
+    ],
+    [
+     "summary",
+     "summarysink"
+    ],
+    [
+     "json",
+     "jsonsink"
+    ],
+    [
+     "stats",
+     "summarysink"
+    ],
+    [
+     "standard",
+     "ppubs"
+    ],
+    [
+     "summary",
+     "ppubs"
+    ],
+    [
+     "json",
+     "ppubs"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "rg",
+      "rg \u00b7 core"
+     ]
+    ],
+    "deps": [
+     [
+      "grep-searcher",
+      "grep-searcher \u00b7 Sink"
+     ],
+     [
+      "grep-matcher",
+      "grep-matcher"
+     ]
+    ]
+   }
+  },
+  "grep-regex": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 config"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 matcher"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "rconf",
+     "col": 0,
+     "name": "config \u00b7 literal \u00b7 strip",
+     "items": [
+      {
+       "id": "rconfig",
+       "name": "Config",
+       "k": "struct"
+      },
+      {
+       "id": "rlit",
+       "name": "literal \u00b7 InnerLiterals",
+       "k": "mod"
+      },
+      {
+       "id": "rstrip",
+       "name": "strip_from_match",
+       "k": "fn"
+      },
+      {
+       "id": "rnonl",
+       "name": "non_matching_bytes",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "rmatch",
+     "col": 1,
+     "name": "matcher",
+     "items": [
+      {
+       "id": "rmatcher",
+       "name": "RegexMatcher",
+       "k": "struct"
+      },
+      {
+       "id": "rmatcherb",
+       "name": "RegexMatcherBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "rcaps",
+       "name": "RegexCaptures",
+       "k": "struct"
+      },
+      {
+       "id": "rimpl",
+       "name": "impl Matcher for RegexMatcher",
+       "k": "impl"
+      }
+     ]
+    },
+    {
+     "id": "rpub",
+     "col": 2,
+     "name": "public",
+     "items": [
+      {
+       "id": "rpubs",
+       "name": "pub use matcher \u00b7 error",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "rconfig",
+     "rmatcherb"
+    ],
+    [
+     "rlit",
+     "rmatcher"
+    ],
+    [
+     "rstrip",
+     "rmatcher"
+    ],
+    [
+     "rnonl",
+     "rmatcher"
+    ],
+    [
+     "rmatcherb",
+     "rmatcher"
+    ],
+    [
+     "rmatcher",
+     "rcaps"
+    ],
+    [
+     "rimpl",
+     "rmatcher",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "rmatcher",
+     "rpubs"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "rg",
+      "rg \u00b7 core"
+     ],
+     [
+      "grep",
+      "grep"
+     ]
+    ],
+    "deps": [
+     [
+      "grep-matcher",
+      "grep-matcher \u00b7 Matcher trait"
+     ]
+    ]
+   }
+  },
+  "grep-matcher": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 types"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 trait"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "mtypes",
+     "col": 0,
+     "name": "types",
+     "items": [
+      {
+       "id": "mmatch",
+       "name": "Match",
+       "k": "struct"
+      },
+      {
+       "id": "mcaps",
+       "name": "Captures \u00b7 trait",
+       "k": "trait",
+       "port": 1
+      },
+      {
+       "id": "mlt",
+       "name": "LineTerminator",
+       "k": "struct"
+      },
+      {
+       "id": "mbytes",
+       "name": "ByteSet",
+       "k": "struct"
+      },
+      {
+       "id": "mlmk",
+       "name": "LineMatchKind",
+       "k": "enum"
+      }
+     ]
+    },
+    {
+     "id": "mtrait",
+     "col": 1,
+     "name": "trait",
+     "items": [
+      {
+       "id": "matchert",
+       "name": "Matcher \u00b7 trait",
+       "k": "trait",
+       "port": 1,
+       "fam": "2 impls \u00b7 grep-regex \u00b7 grep-pcre2"
+      },
+      {
+       "id": "nocaps",
+       "name": "NoCaptures",
+       "k": "struct"
+      },
+      {
+       "id": "noerr",
+       "name": "NoError",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "mpub",
+     "col": 2,
+     "name": "public",
+     "items": [
+      {
+       "id": "mpubs",
+       "name": "pub use Matcher \u00b7 Match \u00b7 Captures",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "mmatch",
+     "matchert"
+    ],
+    [
+     "mcaps",
+     "matchert"
+    ],
+    [
+     "mlt",
+     "matchert"
+    ],
+    [
+     "mbytes",
+     "matchert"
+    ],
+    [
+     "mlmk",
+     "matchert"
+    ],
+    [
+     "nocaps",
+     "mcaps",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "matchert",
+     "mpubs"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "grep-regex",
+      "grep-regex \u00b7 impl Matcher"
+     ],
+     [
+      "grep-pcre2",
+      "grep-pcre2 \u00b7 impl Matcher"
+     ],
+     [
+      "grep-searcher",
+      "grep-searcher"
+     ],
+     [
+      "grep-printer",
+      "grep-printer"
+     ]
+    ],
+    "deps": []
+   }
+  },
+  "ignore": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 rules"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 dir \u00b7 walk"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "rules",
+     "col": 0,
+     "name": "gitignore \u00b7 overrides \u00b7 types",
+     "items": [
+      {
+       "id": "gitignore",
+       "name": "Gitignore",
+       "k": "struct"
+      },
+      {
+       "id": "gitignoreb",
+       "name": "GitignoreBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "overrides",
+       "name": "Override",
+       "k": "struct"
+      },
+      {
+       "id": "types",
+       "name": "Types \u00b7 TypesBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "pathutil",
+       "name": "pathutil",
+       "k": "mod"
+      }
+     ]
+    },
+    {
+     "id": "walk",
+     "col": 1,
+     "name": "dir \u00b7 walk",
+     "items": [
+      {
+       "id": "ignore",
+       "name": "Ignore \u00b7 dir",
+       "k": "struct"
+      },
+      {
+       "id": "walkb",
+       "name": "WalkBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "walk",
+       "name": "Walk",
+       "k": "struct"
+      },
+      {
+       "id": "walkpar",
+       "name": "WalkParallel",
+       "k": "struct"
+      },
+      {
+       "id": "incr",
+       "name": "IncrementalIgnore",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "ipub",
+     "col": 2,
+     "name": "public",
+     "items": [
+      {
+       "id": "ipubs",
+       "name": "pub use walk \u00b7 gitignore \u00b7 overrides \u00b7 types",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "gitignoreb",
+     "gitignore"
+    ],
+    [
+     "gitignore",
+     "ignore"
+    ],
+    [
+     "overrides",
+     "ignore"
+    ],
+    [
+     "types",
+     "ignore"
+    ],
+    [
+     "pathutil",
+     "ignore"
+    ],
+    [
+     "ignore",
+     "walk"
+    ],
+    [
+     "walkb",
+     "walk"
+    ],
+    [
+     "walkb",
+     "walkpar"
+    ],
+    [
+     "incr",
+     "ignore"
+    ],
+    [
+     "walkb",
+     "ipubs"
+    ],
+    [
+     "gitignore",
+     "ipubs"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "rg",
+      "rg \u00b7 core"
+     ]
+    ],
+    "deps": [
+     [
+      "globset",
+      "globset"
+     ]
+    ]
+   }
+  },
+  "globset": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 glob"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 set"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "glob",
+     "col": 0,
+     "name": "glob",
+     "items": [
+      {
+       "id": "glob",
+       "name": "Glob",
+       "k": "struct"
+      },
+      {
+       "id": "globb",
+       "name": "GlobBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "globm",
+       "name": "GlobMatcher",
+       "k": "struct"
+      },
+      {
+       "id": "cand",
+       "name": "Candidate",
+       "k": "struct"
+      },
+      {
+       "id": "escape",
+       "name": "escape()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "set",
+     "col": 1,
+     "name": "set",
+     "items": [
+      {
+       "id": "globset",
+       "name": "GlobSet",
+       "k": "struct"
+      },
+      {
+       "id": "globsetb",
+       "name": "GlobSetBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "strategies",
+       "name": "strategies \u00b7 literal \u00b7 prefix \u00b7 suffix \u00b7 regex",
+       "k": "mod"
+      }
+     ]
+    },
+    {
+     "id": "gpub",
+     "col": 2,
+     "name": "public",
+     "items": [
+      {
+       "id": "gpubs",
+       "name": "pub use Glob \u00b7 GlobSet \u00b7 Candidate",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "globb",
+     "glob"
+    ],
+    [
+     "glob",
+     "globm"
+    ],
+    [
+     "cand",
+     "globset"
+    ],
+    [
+     "glob",
+     "globset"
+    ],
+    [
+     "globsetb",
+     "globset"
+    ],
+    [
+     "strategies",
+     "globset"
+    ],
+    [
+     "globset",
+     "gpubs"
+    ],
+    [
+     "glob",
+     "gpubs"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "ignore",
+      "ignore"
+     ],
+     [
+      "grep-cli",
+      "grep-cli"
+     ]
+    ],
+    "deps": []
+   }
+  },
+  "grep-cli": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 utilities"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "util",
+     "col": 0,
+     "name": "utilities",
+     "items": [
+      {
+       "id": "decomp",
+       "name": "DecompressionReader",
+       "k": "struct"
+      },
+      {
+       "id": "decompm",
+       "name": "DecompressionMatcher",
+       "k": "struct"
+      },
+      {
+       "id": "cescape",
+       "name": "escape \u00b7 unescape",
+       "k": "fn"
+      },
+      {
+       "id": "human",
+       "name": "parse_human_readable_size",
+       "k": "fn"
+      },
+      {
+       "id": "patterns",
+       "name": "patterns_from_path \u00b7 stdin",
+       "k": "fn"
+      },
+      {
+       "id": "process",
+       "name": "CommandReader",
+       "k": "struct"
+      },
+      {
+       "id": "hostname",
+       "name": "hostname()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "cpub",
+     "col": 1,
+     "name": "public",
+     "items": [
+      {
+       "id": "cpubs",
+       "name": "pub use decompress \u00b7 escape \u00b7 human \u00b7 pattern \u00b7 process",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "decompm",
+     "decomp"
+    ],
+    [
+     "decomp",
+     "cpubs"
+    ],
+    [
+     "cescape",
+     "cpubs"
+    ],
+    [
+     "human",
+     "cpubs"
+    ],
+    [
+     "patterns",
+     "cpubs"
+    ],
+    [
+     "process",
+     "cpubs"
+    ],
+    [
+     "hostname",
+     "cpubs"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "rg",
+      "rg \u00b7 core"
+     ],
+     [
+      "grep",
+      "grep"
+     ]
+    ],
+    "deps": [
+     [
+      "globset",
+      "globset"
+     ]
+    ]
+   }
+  },
+  "grep-pcre2": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 matcher"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "pmatch",
+     "col": 0,
+     "name": "matcher",
+     "items": [
+      {
+       "id": "pmatcher",
+       "name": "RegexMatcher",
+       "k": "struct"
+      },
+      {
+       "id": "pmatcherb",
+       "name": "RegexMatcherBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "pimpl",
+       "name": "impl Matcher for RegexMatcher",
+       "k": "impl"
+      },
+      {
+       "id": "pjit",
+       "name": "is_jit_available()",
+       "k": "fn"
+      }
+     ]
+    },
+    {
+     "id": "ppub2",
+     "col": 1,
+     "name": "public",
+     "items": [
+      {
+       "id": "ppubs2",
+       "name": "pub use matcher \u00b7 error",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "pmatcherb",
+     "pmatcher"
+    ],
+    [
+     "pimpl",
+     "pmatcher",
+     {
+      "impl": 1
+     }
+    ],
+    [
+     "pmatcher",
+     "ppubs2"
+    ],
+    [
+     "pjit",
+     "ppubs2"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "grep",
+      "grep"
+     ]
+    ],
+    "deps": [
+     [
+      "grep-matcher",
+      "grep-matcher"
+     ]
+    ]
+   }
+  },
+  "grep-index": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 literal"
+    ],
+    [
+     "layer",
+     "L1 \u00b7 index"
+    ],
+    [
+     "layer",
+     "L2 \u00b7 public"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "lit",
+     "col": 0,
+     "name": "literal",
+     "items": [
+      {
+       "id": "ilit",
+       "name": "literal",
+       "k": "mod"
+      }
+     ]
+    },
+    {
+     "id": "idx",
+     "col": 1,
+     "name": "index",
+     "items": [
+      {
+       "id": "index",
+       "name": "Index",
+       "k": "struct"
+      },
+      {
+       "id": "indexb",
+       "name": "IndexBuilder",
+       "k": "struct"
+      },
+      {
+       "id": "indexd",
+       "name": "IndexDiscovery",
+       "k": "struct"
+      }
+     ]
+    },
+    {
+     "id": "xpub",
+     "col": 2,
+     "name": "public",
+     "items": [
+      {
+       "id": "xpubs",
+       "name": "pub use index \u00b7 literal",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [
+    [
+     "ilit",
+     "index"
+    ],
+    [
+     "indexb",
+     "index"
+    ],
+    [
+     "indexd",
+     "index"
+    ],
+    [
+     "index",
+     "xpubs"
+    ]
+   ],
+   "portals": {
+    "callers": [
+     [
+      "rg",
+      "rg \u00b7 core"
+     ]
+    ],
+    "deps": []
+   }
+  },
+  "grep": {
+   "repo": "ripgrep",
+   "layout": "layers",
+   "columns": [
+    [
+     "layer",
+     "L0 \u00b7 re-exports"
+    ]
+   ],
+   "areas": [
+    {
+     "id": "re",
+     "col": 0,
+     "name": "re-exports",
+     "items": [
+      {
+       "id": "re1",
+       "name": "pub use grep_searcher as searcher",
+       "k": "mod"
+      },
+      {
+       "id": "re2",
+       "name": "pub use grep_printer as printer",
+       "k": "mod"
+      },
+      {
+       "id": "re3",
+       "name": "pub use grep_regex as regex",
+       "k": "mod"
+      },
+      {
+       "id": "re4",
+       "name": "pub use grep_matcher as matcher",
+       "k": "mod"
+      },
+      {
+       "id": "re5",
+       "name": "pub use grep_cli as cli",
+       "k": "mod"
+      },
+      {
+       "id": "re6",
+       "name": "pub use grep_pcre2 as pcre2 \u00b7 feature",
+       "k": "mod"
+      }
+     ]
+    }
+   ],
+   "links": [],
+   "portals": {
+    "callers": [
+     [
+      "rg",
+      "rg \u00b7 core"
+     ]
+    ],
+    "deps": [
+     [
+      "grep-searcher",
+      "searcher"
+     ],
+     [
+      "grep-printer",
+      "printer"
+     ],
+     [
+      "grep-regex",
+      "regex"
+     ],
+     [
+      "grep-matcher",
+      "matcher"
+     ],
+     [
+      "grep-cli",
+      "cli"
+     ],
+     [
+      "grep-pcre2",
+      "pcre2"
+     ]
+    ]
+   }
+  }
+ },
+ "contracts": {
+  "rg.cli": {
+   "kind": "cli",
+   "name": "rg \u00b7 command line",
+   "owner": "ripgrep",
+   "format": "108 flags \u00b7 crates/core/flags/defs.rs",
+   "witness": "crates/core/flags/defs.rs",
+   "ops": [
+    "-e/--regexp PATTERN",
+    "-i/--ignore-case",
+    "-S/--smart-case",
+    "-w/--word-regexp",
+    "-g/--glob GLOB",
+    "-t/--type TYPE",
+    "--files",
+    "-l/--files-with-matches",
+    "-c/--count",
+    "-n/--line-number",
+    "-C/--context NUM",
+    "--json",
+    "-j/--threads NUM",
+    "--mmap",
+    "-z/--search-zip",
+    "--pre COMMAND",
+    "-P/--pcre2",
+    "--index (new)",
+    "\u2026 90 more"
+   ],
+   "handlers": {
+    "--files": "files",
+    "--json": "pstd",
+    "-P/--pcre2": "pm",
+    "--index (new)": "iread",
+    "-j/--threads NUM": "search_par"
+   },
+   "used": [
+    [
+     "the shell",
+     "argv \u00b7 stdin"
+    ]
+   ],
+   "notes": "every flag is a Flag impl in defs.rs; the parser lowers them to LowArgs then HiArgs"
+  },
+  "grep.pub": {
+   "kind": "pub",
+   "name": "grep \u00b7 facade",
+   "owner": "grep",
+   "format": "pub use of six crates",
+   "witness": "crates/grep/src/lib.rs",
+   "ops": [
+    "grep::searcher",
+    "grep::printer",
+    "grep::regex",
+    "grep::matcher",
+    "grep::cli",
+    "grep::pcre2 (feature)"
+   ],
+   "used": [
+    [
+     "rg",
+     "31 items"
+    ]
+   ]
+  },
+  "searcher.pub": {
+   "kind": "pub",
+   "name": "Searcher \u00b7 SearcherBuilder",
+   "owner": "grep-searcher",
+   "format": "pub items",
+   "witness": "crates/searcher/src/lib.rs",
+   "ops": [
+    "Searcher::search_path(matcher, path, sink)",
+    "Searcher::search_reader(matcher, rdr, sink)",
+    "Searcher::search_slice(matcher, slice, sink)",
+    "SearcherBuilder: line_number \u00b7 multi_line \u00b7 binary_detection \u00b7 memory_map \u00b7 encoding"
+   ],
+   "used": [
+    [
+     "rg",
+     "SearchWorker"
+    ],
+    [
+     "grep-printer",
+     "tests"
+    ]
+   ]
+  },
+  "sink.pub": {
+   "kind": "pub",
+   "name": "Sink \u00b7 trait",
+   "owner": "grep-searcher",
+   "format": "trait \u00b7 9 impls",
+   "witness": "crates/searcher/src/sink.rs",
+   "ops": [
+    "fn matched(&mut self, &Searcher, &SinkMatch) \u2192 Result<bool>",
+    "fn context(&mut self, &Searcher, &SinkContext) \u2192 Result<bool>",
+    "fn begin \u00b7 finish \u00b7 binary_data"
+   ],
+   "used": [
+    [
+     "grep-printer",
+     "StandardSink \u00b7 SummarySink \u00b7 JSONSink"
+    ]
+   ]
+  },
+  "matcher.pub": {
+   "kind": "pub",
+   "name": "Matcher \u00b7 trait",
+   "owner": "grep-matcher",
+   "format": "trait \u00b7 2 impls",
+   "witness": "crates/matcher/src/lib.rs",
+   "ops": [
+    "fn find_at(&self, haystack, at) \u2192 Result<Option<Match>>",
+    "fn new_captures(&self) \u2192 Result<Captures>",
+    "fn captures_at \u00b7 find_iter \u00b7 replace",
+    "fn line_terminator \u00b7 non_matching_bytes"
+   ],
+   "used": [
+    [
+     "grep-regex",
+     "RegexMatcher"
+    ],
+    [
+     "grep-pcre2",
+     "RegexMatcher"
+    ],
+    [
+     "grep-searcher",
+     "generic bound"
+    ],
+    [
+     "grep-printer",
+     "generic bound"
+    ]
+   ]
+  },
+  "printer.pub": {
+   "kind": "pub",
+   "name": "Standard \u00b7 Summary \u00b7 JSON",
+   "owner": "grep-printer",
+   "format": "pub items",
+   "witness": "crates/printer/src/lib.rs",
+   "ops": [
+    "StandardBuilder \u2192 Standard<W>",
+    "SummaryBuilder \u2192 Summary<W>",
+    "JSONBuilder \u2192 JSON<W>",
+    "Stats \u00b7 PathPrinter"
+   ],
+   "used": [
+    [
+     "rg",
+     "Printer<W> enum"
+    ]
+   ]
+  },
+  "regex.pub": {
+   "kind": "pub",
+   "name": "RegexMatcher",
+   "owner": "grep-regex",
+   "format": "pub items",
+   "witness": "crates/regex/src/lib.rs",
+   "ops": [
+    "RegexMatcherBuilder::build(pattern) \u2192 RegexMatcher",
+    "RegexMatcherBuilder: case_insensitive \u00b7 word \u00b7 line_terminator \u00b7 multi_line"
+   ],
+   "used": [
+    [
+     "rg",
+     "PatternMatcher::RustRegex"
+    ]
+   ]
+  },
+  "pcre2.pub": {
+   "kind": "pub",
+   "name": "RegexMatcher (PCRE2)",
+   "owner": "grep-pcre2",
+   "format": "pub items \u00b7 feature pcre2",
+   "witness": "crates/pcre2/src/lib.rs",
+   "ops": [
+    "RegexMatcherBuilder::build(pattern)",
+    "is_jit_available()"
+   ],
+   "used": [
+    [
+     "rg",
+     "PatternMatcher::PCRE2"
+    ]
+   ]
+  },
+  "ignore.pub": {
+   "kind": "pub",
+   "name": "WalkBuilder \u00b7 Walk \u00b7 WalkParallel",
+   "owner": "ignore",
+   "format": "pub items",
+   "witness": "crates/ignore/src/lib.rs",
+   "ops": [
+    "WalkBuilder::new(path).build() \u2192 Walk",
+    "WalkBuilder::build_parallel() \u2192 WalkParallel",
+    "WalkBuilder: hidden \u00b7 git_ignore \u00b7 overrides \u00b7 types \u00b7 threads \u00b7 max_depth"
+   ],
+   "used": [
+    [
+     "rg",
+     "files() \u00b7 search()"
+    ]
+   ]
+  },
+  "globset.pub": {
+   "kind": "pub",
+   "name": "Glob \u00b7 GlobSet",
+   "owner": "globset",
+   "format": "pub items",
+   "witness": "crates/globset/src/lib.rs",
+   "ops": [
+    "Glob::new(pattern) \u00b7 GlobBuilder",
+    "GlobSetBuilder::add(glob).build() \u2192 GlobSet",
+    "GlobSet::is_match \u00b7 matches_into"
+   ],
+   "used": [
+    [
+     "ignore",
+     "gitignore \u00b7 overrides \u00b7 types"
+    ],
+    [
+     "grep-cli",
+     "decompress"
+    ]
+   ]
+  },
+  "index.pub": {
+   "kind": "pub",
+   "name": "Index \u00b7 IndexBuilder",
+   "owner": "grep-index",
+   "format": "pub items",
+   "witness": "crates/index/src/lib.rs",
+   "ops": [
+    "IndexBuilder \u2192 Index",
+    "IndexDiscovery::find()"
+   ],
+   "used": [
+    [
+     "rg",
+     "index::read \u00b7 index::write"
+    ]
+   ]
+  },
+  "cli.pub": {
+   "kind": "pub",
+   "name": "grep-cli utilities",
+   "owner": "grep-cli",
+   "format": "pub items",
+   "witness": "crates/cli/src/lib.rs",
+   "ops": [
+    "patterns_from_path \u00b7 patterns_from_stdin",
+    "DecompressionReader \u00b7 resolve_binary",
+    "escape \u00b7 unescape",
+    "parse_human_readable_size",
+    "CommandReader \u00b7 hostname"
+   ],
+   "used": [
+    [
+     "rg",
+     "flags \u00b7 haystack"
+    ]
+   ]
+  },
+  "rg.fs": {
+   "kind": "fs",
+   "name": "files \u00b7 mmap \u00b7 stdin",
+   "owner": "external",
+   "format": "std::fs \u00b7 memmap2",
+   "witness": "crates/core/haystack.rs",
+   "ops": [
+    "read files, optionally memory-mapped",
+    "stdin when no path given"
+   ],
+   "used": [
+    [
+     "rg",
+     "Haystack"
+    ]
+   ]
+  },
+  "rg.tty": {
+   "kind": "tty",
+   "name": "stdout \u00b7 stderr",
+   "owner": "external",
+   "format": "termcolor \u00b7 BufferWriter",
+   "witness": "crates/core/main.rs",
+   "ops": [
+    "matches, context, stats to stdout",
+    "errors to stderr (eprintln_locked!)"
+   ],
+   "used": [
+    [
+     "rg",
+     "Printer<W>"
+    ]
+   ]
+  },
+  "ignore.fs": {
+   "kind": "fs",
+   "name": ".gitignore \u00b7 .ignore \u00b7 .rgignore",
+   "owner": "external",
+   "format": "files read while walking",
+   "witness": "crates/ignore/src/gitignore.rs",
+   "ops": [
+    ".gitignore \u00b7 .git/info/exclude \u00b7 global gitignore",
+    ".ignore \u00b7 .rgignore"
+   ],
+   "used": [
+    [
+     "ignore",
+     "Ignore \u00b7 dir"
+    ]
+   ]
+  },
+  "cli.fs": {
+   "kind": "fs",
+   "name": "pattern files",
+   "owner": "external",
+   "format": "-f FILE \u00b7 stdin",
+   "witness": "crates/cli/src/pattern.rs",
+   "ops": [
+    "patterns_from_path(path)",
+    "patterns_from_stdin()"
+   ],
+   "used": [
+    [
+     "grep-cli",
+     "patterns"
+    ]
+   ]
+  },
+  "index.fs": {
+   "kind": "fs",
+   "name": ".rgindex files",
+   "owner": "external",
+   "format": "on-disk index",
+   "witness": "crates/index/src/index.rs",
+   "ops": [
+    "IndexDiscovery::find()"
+   ],
+   "used": [
+    [
+     "grep-index",
+     "Index"
+    ]
+   ]
+  },
+  "searcher.deps": {
+   "kind": "crate",
+   "name": "memmap2 \u00b7 encoding_rs \u00b7 memchr",
+   "owner": "external",
+   "format": "crates.io",
+   "witness": "crates/searcher/Cargo.toml",
+   "ops": [
+    "memmap2 (memory maps)",
+    "encoding_rs \u00b7 encoding_rs_io (transcoding)",
+    "memchr \u00b7 bstr"
+   ],
+   "used": [
+    [
+     "grep-searcher",
+     ""
+    ]
+   ]
+  },
+  "printer.deps": {
+   "kind": "crate",
+   "name": "termcolor \u00b7 serde_json",
+   "owner": "external",
+   "format": "crates.io",
+   "witness": "crates/printer/Cargo.toml",
+   "ops": [
+    "termcolor (colors)",
+    "serde \u00b7 serde_json (--json)",
+    "bstr"
+   ],
+   "used": [
+    [
+     "grep-printer",
+     ""
+    ]
+   ]
+  },
+  "regex.deps": {
+   "kind": "crate",
+   "name": "regex-automata \u00b7 regex-syntax",
+   "owner": "external",
+   "format": "crates.io",
+   "witness": "crates/regex/Cargo.toml",
+   "ops": [
+    "regex-automata (meta regex)",
+    "regex-syntax (ast \u00b7 hir)",
+    "bstr"
+   ],
+   "used": [
+    [
+     "grep-regex",
+     ""
+    ]
+   ]
+  },
+  "matcher.deps": {
+   "kind": "crate",
+   "name": "memchr",
+   "owner": "external",
+   "format": "crates.io",
+   "witness": "crates/matcher/Cargo.toml",
+   "ops": [
+    "memchr"
+   ],
+   "used": []
+  },
+  "ignore.deps": {
+   "kind": "crate",
+   "name": "crossbeam-deque \u00b7 walkdir",
+   "owner": "external",
+   "format": "crates.io",
+   "witness": "crates/ignore/Cargo.toml",
+   "ops": [
+    "crossbeam-deque (parallel walk)",
+    "walkdir",
+    "regex-automata",
+    "same-file"
+   ],
+   "used": []
+  },
+  "globset.deps": {
+   "kind": "crate",
+   "name": "regex-automata \u00b7 aho-corasick \u00b7 bstr",
+   "owner": "external",
+   "format": "crates.io",
+   "witness": "crates/globset/Cargo.toml",
+   "ops": [
+    "regex-automata",
+    "aho-corasick",
+    "bstr"
+   ],
+   "used": []
+  },
+  "pcre2.deps": {
+   "kind": "crate",
+   "name": "pcre2 \u00b7 C library",
+   "owner": "external",
+   "format": "crates.io \u00b7 links libpcre2-8",
+   "witness": "crates/pcre2/Cargo.toml",
+   "ops": [
+    "pcre2 crate \u2192 pcre2-sys \u2192 libpcre2"
+   ],
+   "used": []
+  }
+ },
+ "code": {
+  "main": {
+   "file": "crates/core/main.rs",
+   "line": 44,
+   "unit": "rg",
+   "callers": [],
+   "calls": [
+    [
+     "parse",
+     "flags::parse()"
+    ],
+    [
+     "run",
+     "run()"
+    ]
+   ],
+   "lines": [
+    [
+     44,
+     "fn main() -> ExitCode {",
+     "hl"
+    ],
+    [
+     45,
+     "    match run(flags::parse()) {",
+     "hl"
+    ],
+    [
+     46,
+     "        Ok(code) => code,",
+     "hl"
+    ],
+    [
+     47,
+     "        Err(err) => {",
+     "hl"
+    ],
+    [
+     48,
+     "            // Look for a broken pipe error. In this case, we generally want",
+     "hl"
+    ],
+    [
+     49,
+     "            // to exit \"gracefully\" with a success exit code. This matches",
+     "hl"
+    ],
+    [
+     50,
+     "            // existing Unix convention. We need to handle this explicitly",
+     "hl"
+    ],
+    [
+     51,
+     "            // since the Rust runtime doesn't ask for PIPE signals, and thus",
+     "hl"
+    ],
+    [
+     52,
+     "            // we get an I/O error instead. Traditional C Unix applications",
+     "hl"
+    ],
+    [
+     53,
+     "            // quit by getting a PIPE signal that they don't handle, and thus",
+     "hl"
+    ],
+    [
+     54,
+     "            // the unhandled signal causes the process to unceremoniously",
+     "hl"
+    ],
+    [
+     55,
+     "            // terminate.",
+     "hl"
+    ],
+    [
+     56,
+     "            for cause in err.chain() {",
+     "hl"
+    ],
+    [
+     57,
+     "                if let Some(ioerr) = cause.downcast_ref::<std::io::Error>() {",
+     "hl"
+    ],
+    [
+     58,
+     "                    if ioerr.kind() == std::io::ErrorKind::BrokenPipe {",
+     "hl"
+    ],
+    [
+     59,
+     "                        return ExitCode::from(0);",
+     "hl"
+    ],
+    [
+     60,
+     "                    }",
+     "hl"
+    ],
+    [
+     61,
+     "                }",
+     "hl"
+    ],
+    [
+     62,
+     "            }",
+     "hl"
+    ],
+    [
+     63,
+     "            eprintln_locked!(\"{:#}\", err);",
+     "hl"
+    ],
+    [
+     64,
+     "            ExitCode::from(2)",
+     "hl"
+    ],
+    [
+     65,
+     "        }",
+     "hl"
+    ],
+    [
+     66,
+     "    }",
+     "hl"
+    ]
+   ]
+  },
+  "run": {
+   "file": "crates/core/main.rs",
+   "line": 78,
+   "unit": "rg",
+   "callers": [
+    [
+     "main",
+     "main"
+    ]
+   ],
+   "calls": [
+    [
+     "search",
+     "search()"
+    ],
+    [
+     "search_par",
+     "search_parallel()"
+    ],
+    [
+     "files",
+     "files()"
+    ],
+    [
+     "iread",
+     "index::read()"
+    ]
+   ],
+   "lines": [
+    [
+     78,
+     "fn run(result: crate::flags::ParseResult<HiArgs>) -> anyhow::Result<ExitCode> {",
+     "hl"
+    ],
+    [
+     79,
+     "    use crate::flags::{Mode, ParseResult};",
+     "hl"
+    ],
+    [
+     80,
+     "",
+     "hl"
+    ],
+    [
+     81,
+     "    let args = match result {",
+     "hl"
+    ],
+    [
+     82,
+     "        ParseResult::Err(err) => return Err(err),",
+     "hl"
+    ],
+    [
+     83,
+     "        ParseResult::Special(mode) => return special(mode),",
+     "hl"
+    ],
+    [
+     84,
+     "        ParseResult::Ok(args) => args,",
+     "hl"
+    ],
+    [
+     85,
+     "    };",
+     "hl"
+    ],
+    [
+     86,
+     "    let matched = match args.mode() {",
+     "hl"
+    ],
+    [
+     87,
+     "        Mode::Search(_) if !args.matches_possible() => false,",
+     "hl"
+    ],
+    [
+     88,
+     "        Mode::Search(mode) if args.index() > 0 => index::read(&args, mode)?,",
+     "hl"
+    ],
+    [
+     89,
+     "        Mode::Search(mode) if args.threads() == 1 => search(&args, mode)?,",
+     "hl"
+    ],
+    [
+     90,
+     "        Mode::Search(mode) => search_parallel(&args, mode)?,",
+     "hl"
+    ],
+    [
+     91,
+     "        Mode::Index(_) => {",
+     "hl"
+    ],
+    [
+     92,
+     "            index::write(&args)?;",
+     "hl"
+    ],
+    [
+     93,
+     "            return Ok(ExitCode::from(0));",
+     "hl"
+    ],
+    [
+     94,
+     "        }",
+     "hl"
+    ],
+    [
+     95,
+     "        Mode::Files if args.threads() == 1 => files(&args)?,",
+     "hl"
+    ],
+    [
+     96,
+     "        Mode::Files => files_parallel(&args)?,",
+     "hl"
+    ],
+    [
+     97,
+     "        Mode::Types => return types(&args),",
+     "hl"
+    ],
+    [
+     98,
+     "        Mode::Generate(mode) => return generate(mode),",
+     "hl"
+    ],
+    [
+     99,
+     "    };",
+     "hl"
+    ],
+    [
+     100,
+     "    Ok(if matched && (args.quiet() || !messages::errored()) {",
+     "hl"
+    ],
+    [
+     101,
+     "        ExitCode::from(0)",
+     "hl"
+    ],
+    [
+     102,
+     "    } else if messages::errored() {",
+     "hl"
+    ],
+    [
+     103,
+     "        ExitCode::from(2)",
+     "hl"
+    ],
+    [
+     104,
+     "    } else {",
+     "hl"
+    ],
+    [
+     105,
+     "        ExitCode::from(1)",
+     "hl"
+    ],
+    [
+     106,
+     "    })",
+     "hl"
+    ],
+    [
+     107,
+     "}",
+     "hl"
+    ]
+   ]
+  },
+  "spath": {
+   "file": "crates/core/search.rs",
+   "line": 342,
+   "unit": "rg",
+   "callers": [
+    [
+     "worker",
+     "SearchWorker"
+    ]
+   ],
+   "calls": [
+    [
+     "pm",
+     "PatternMatcher"
+    ]
+   ],
+   "lines": [
+    [
+     342,
+     "    fn search_path(&mut self, path: &Path) -> io::Result<SearchResult> {",
+     "hl"
+    ],
+    [
+     343,
+     "        use self::PatternMatcher::*;",
+     "hl"
+    ],
+    [
+     344,
+     "",
+     "hl"
+    ],
+    [
+     345,
+     "        let (searcher, printer) = (&mut self.searcher, &mut self.printer);",
+     "hl"
+    ],
+    [
+     346,
+     "        match self.matcher {",
+     "hl"
+    ],
+    [
+     347,
+     "            RustRegex(ref m) => search_path(m, searcher, printer, path),",
+     "hl"
+    ],
+    [
+     348,
+     "            #[cfg(feature = \"pcre2\")]",
+     "hl"
+    ],
+    [
+     349,
+     "            PCRE2(ref m) => search_path(m, searcher, printer, path),",
+     "hl"
+    ],
+    [
+     350,
+     "        }",
+     "hl"
+    ],
+    [
+     351,
+     "    }",
+     "hl"
+    ]
+   ]
+  }
+ }
+}

@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { light, dark, sessionOrder } from '@tau-rs/sett-tokens';
+
+<Meta title="docs/Map" />
+
+# Map primitives
+
+Map primitives are values, not components: arch's WebGL layer reads the `sett-tokens` crate, the same numbers as this page. Items are 18 px boxes with a 10 px mono label that never scales; ports have round ends; externals are dashed. Overlays stack by one rule: outline = session, fill = plan or finding.
+
+export const Swatch = ({ name, l, d }) => (
+  <tr>
+    <td style={{ fontFamily: 'var(--sett-font-mono)', fontSize: 'var(--sett-font-size-sm)' }}>{name}</td>
+    <td><span style={{ display: 'inline-block', width: 40, height: 18, borderRadius: 3, background: l, border: '1px solid var(--sett-color-line)' }} /> <code>{l}</code></td>
+    <td><span style={{ display: 'inline-block', width: 40, height: 18, borderRadius: 3, background: d, border: '1px solid var(--sett-color-line)' }} /> <code>{d}</code></td>
+  </tr>
+);
+
+<table>
+  <thead><tr><th>token</th><th>light</th><th>dark</th></tr></thead>
+  <tbody>
+    {Object.keys(light.map).filter((k) => k !== 'fadedOpacity').map((k) => <Swatch key={k} name={`map.${k}`} l={light.map[k]} d={dark.map[k]} />)}
+  </tbody>
+</table>
+
+Faded opacity: **{light.map.fadedOpacity}** on the whole group.
+
+## Session overlays
+
+Outline in the session's main colour, fill in its tint; sub-agents outline in the sub shade. Assign in this order: {sessionOrder.join(' · ')}.
+
+<table>
+  <thead><tr><th>session</th><th>main</th><th>sub</th><th>bg</th></tr></thead>
+  <tbody>
+    {sessionOrder.map((id) => (
+      <tr key={id}>
+        <td style={{ fontFamily: 'var(--sett-font-mono)' }}>{id}</td>
+        {['main', 'sub', 'bg'].map((k) => <td key={k}><span style={{ display: 'inline-block', width: 40, height: 18, borderRadius: 3, background: light.session[id][k], border: '1px solid var(--sett-color-line)' }} /> <code>{light.session[id][k]}</code></td>)}
+      </tr>
+    ))}
+  </tbody>
+</table>

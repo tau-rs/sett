@@ -30,6 +30,12 @@ export const Checklist: Story = { name: 'merge checklist', render: () => w(html`
   <sett-card-row mark="⚠" kind="bad" nav="findings">1 finding · no-http-in-domain</sett-card-row>
   <sett-card-row mark="·" kind="sug" nav="review">2 remarks open</sett-card-row>
   <sett-card-row mark="✓" kind="ok" nav="session">plan realized · 6/6</sett-card-row></sett-card>`) };
+export const ChecklistNoPlan: Story = { name: 'merge checklist · plan · none · hand-made branch (spec §13.22)', render: () => w(html`<sett-card variant="checklist"><span slot="title">merge checklist</span><sett-pill slot="state" kind="ok">ready</sett-pill>
+  <sett-card-row mark="✓" kind="ok" nav="git">up to date with main</sett-card-row>
+  <sett-card-row mark="✓" kind="ok" nav="pipeline">tests · 41 passed</sett-card-row>
+  <sett-card-row mark="✓" kind="ok" nav="findings">no finding</sett-card-row>
+  <sett-card-row mark="·" kind="sug" nav="review">1 remark open</sett-card-row>
+  <sett-card-row mark="·" kind="mute">plan · none · hand-made branch</sett-card-row></sett-card>`) };
 export const Pipeline: Story = { render: () => w(html`<sett-card variant="pipeline"><span slot="title">pipeline · #418</span><sett-pill slot="state" kind="sug">running · 2/4</sett-pill>
   <sett-pipe steps="ok,ok,run,pending"></sett-pipe>
   <sett-card-row mark="✓" kind="ok">check<span slot="right">41 s</span></sett-card-row>

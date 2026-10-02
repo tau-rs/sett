@@ -5637,7 +5637,7 @@
         },
         {
           "kind": "class",
-          "description": "One plan element: glyph, name in mono, and on the right only what the glyph\ncannot say (asks · n, paused, deviation, you). Sub-agents go in the `sub`\nslot and fold under the row, folded by default; the row then shows the\ncount and a glyph run.",
+          "description": "One plan element: glyph, name in mono, and on the right only what the glyph\ncannot say (asks · n, paused, deviation, resolve, you). A `resolve` element is\nthe one a conflict adds to the plan, both intents in context (spec §13.19).\nSub-agents go in the `sub`\nslot and fold under the row, folded by default; the row then shows the\ncount and a glyph run.",
           "name": "SettPlanRow",
           "cssParts": [
             {
@@ -6989,7 +6989,7 @@
           "name": "SettStatusItem",
           "slots": [
             {
-              "description": "the count or state: `b` is a count (ink, medium); `[data-tone=\"sug\" | \"bad\" | \"ok\"]` takes that accent",
+              "description": "the count or state: `b` is a count (ink, medium); `[data-tone=\"sug\" | \"bad\" | \"ok\"]` takes that accent; `[data-tone=\"mute\"]` is the lightest ink, for what is known least (a crate guessed, bins not analyzed: spec §13.7, §13.10)",
               "name": ""
             }
           ],

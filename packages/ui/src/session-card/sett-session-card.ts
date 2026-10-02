@@ -4,12 +4,12 @@ import { base } from '@tau-rs/sett-tokens';
 import { sessionStyles, type SessionId } from '../session.js';
 import { dotStyles } from '../status.js';
 
-export type PlanState = 'done' | 'running' | 'paused' | 'stepped-in' | 'deviation' | 'asks' | 'pending';
+export type PlanState = 'done' | 'running' | 'paused' | 'stepped-in' | 'deviation' | 'asks' | 'resolve' | 'pending';
 export type SubState = 'done' | 'running' | 'pending';
 
 const GLYPH: Record<PlanState | SubState, string> = {
   done: base.glyph.done, running: base.glyph.running, paused: base.glyph.paused, 'stepped-in': base.glyph.steppedIn,
-  deviation: base.glyph.deviation, asks: base.glyph.asks, pending: base.glyph.pending,
+  deviation: base.glyph.deviation, asks: base.glyph.asks, resolve: base.glyph.resolve, pending: base.glyph.pending,
 };
 
 const rowStyles = css`
@@ -17,7 +17,7 @@ const rowStyles = css`
   .g { width: var(--sett-space-3); text-align: center; font-family: var(--sett-font-sans); flex: none; color: var(--sett-color-mute); }
   .g[data-state='done'] { color: var(--sett-color-ok); }
   .g[data-state='running'] { color: var(--_session); }
-  .g[data-state='paused'], .g[data-state='asks'] { color: var(--sett-color-sug); }
+  .g[data-state='paused'], .g[data-state='asks'], .g[data-state='resolve'] { color: var(--sett-color-sug); }
   .g[data-state='stepped-in'] { color: var(--sett-color-sel); }
   .g[data-state='deviation'] { color: var(--sett-color-bad); }
   .name { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
@@ -88,7 +88,9 @@ export class SettSessionCard extends LitElement {
 
 /**
  * One plan element: glyph, name in mono, and on the right only what the glyph
- * cannot say (asks · n, paused, deviation, you). Sub-agents go in the `sub`
+ * cannot say (asks · n, paused, deviation, resolve, you). A `resolve` element is
+ * the one a conflict adds to the plan, both intents in context (spec §13.19).
+ * Sub-agents go in the `sub`
  * slot and fold under the row, folded by default; the row then shows the
  * count and a glyph run.
  *
@@ -151,7 +153,7 @@ export class SettPlanRow extends LitElement {
   }
 
   render() {
-    const right = this.state === 'asks' ? `asks ${base.glyph.sep} ${this.count ?? ''}`.trim() : this.state === 'paused' ? 'paused' : this.state === 'deviation' ? 'deviation' : this.who ?? '';
+    const right = this.state === 'asks' ? `asks ${base.glyph.sep} ${this.count ?? ''}`.trim() : this.state === 'paused' ? 'paused' : this.state === 'deviation' ? 'deviation' : this.state === 'resolve' ? 'resolve' : this.who ?? '';
     const hasSubs = this.subs.length > 0;
     return html`
       <div class="row" part="row">

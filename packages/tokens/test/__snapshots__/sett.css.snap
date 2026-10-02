@@ -76,6 +76,7 @@
   --sett-glyph-asks: "!";
   --sett-glyph-pending: "·";
   --sett-glyph-finding: "⚠";
+  --sett-glyph-resolve: "⇄";
   --sett-glyph-you: "you";
   --sett-glyph-sep: "·";
   --sett-map-size-node-chip-w: 180px;

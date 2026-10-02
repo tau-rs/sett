@@ -535,6 +535,10 @@
       "$type": "string",
       "$value": "⚠"
     },
+    "resolve": {
+      "$type": "string",
+      "$value": "⇄"
+    },
     "you": {
       "$type": "string",
       "$value": "you"

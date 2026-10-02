@@ -27,13 +27,14 @@ describe('session card', () => {
     expect(await right('<sett-plan-row state="asks" count="2">x</sett-plan-row>')).toBe('asks · 2');
     expect(await right('<sett-plan-row state="paused">x</sett-plan-row>')).toBe('paused');
     expect(await right('<sett-plan-row state="deviation">x</sett-plan-row>')).toBe('deviation');
+    expect(await right('<sett-plan-row state="resolve">x</sett-plan-row>')).toBe('resolve');
     expect(await right('<sett-plan-row state="stepped-in" who="you">x</sett-plan-row>')).toBe('you');
     expect(await right('<sett-plan-row state="done">x</sett-plan-row>')).toBe('');
     expect(await right('<sett-plan-row state="running">x</sett-plan-row>')).toBe('');
   });
   it('glyphs come from the tokens', async () => {
     const g = async (s: string) => (await mount(`<sett-plan-row state="${s}">x</sett-plan-row>`)).shadowRoot.querySelector('.g').textContent;
-    expect(await g('done')).toBe('✓'); expect(await g('running')).toBe('●'); expect(await g('stepped-in')).toBe('✋'); expect(await g('deviation')).toBe('≠'); expect(await g('asks')).toBe('!');
+    expect(await g('done')).toBe('✓'); expect(await g('running')).toBe('●'); expect(await g('stepped-in')).toBe('✋'); expect(await g('deviation')).toBe('≠'); expect(await g('asks')).toBe('!'); expect(await g('resolve')).toBe('⇄');
   });
   it('sub-agents fold by default with a count and glyph run; toggle opens', async () => {
     const el = await mount('<sett-plan-row state="running" current>PgRefundRepo<sett-sub-agent slot="sub" state="done">a</sett-sub-agent><sett-sub-agent slot="sub" state="running">b</sett-sub-agent><sett-sub-agent slot="sub">c</sett-sub-agent></sett-plan-row>');

@@ -30,6 +30,21 @@ describe('sett-status-bar surface', () => {
   });
 });
 
+describe('analysis states (spec §13.7, §13.10)', () => {
+  it('a mute tone is the lightest ink, beside ok, sug and bad', () => {
+    const css = cssOf('sett-status-item');
+    for (const t of ['ok', 'sug', 'bad', 'mute']) expect(css).toContain(`[data-tone='${t}']`);
+    expect(css).toMatch(/\[data-tone='mute'\]\)\s*\{\s*color:\s*var\(--sett-color-mute\)/);
+  });
+  it('guessed and not analyzed are states on the Map item, a link to Checks, never a verb', async () => {
+    const el = await mount(`<sett-status-bar><sett-status-item slot="right" href="#checks"><span data-tone="ok">Map up to date · 2 s</span> · <span data-tone="sug">1 crate guessed</span> · <span data-tone="mute">2 bins not analyzed</span></sett-status-item></sett-status-bar>`);
+    const item = el.querySelector('sett-status-item');
+    expect(item.shadowRoot.querySelector('a').getAttribute('href')).toBe('#checks');
+    expect(item.textContent.replace(/\s+/g, ' ').trim()).toBe('Map up to date · 2 s · 1 crate guessed · 2 bins not analyzed');
+    expect(item.textContent).not.toMatch(/\b(open|fix|retry|analy[sz]e)\b/);
+  });
+});
+
 describe('status bar', () => {
   it('uses tokens only and never animates', () => {
     for (const t of TAGS) {

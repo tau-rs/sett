@@ -63,7 +63,7 @@ Names never move, fade or resize. Life goes into what surrounds them: rings, a s
 4. Chips and cards separate with `·`; identifiers are mono.
 5. Dark mode is required from day one.
 6. The map is DOM (ADR 0001): `sett-*` elements read the `map.*` tokens as CSS variables. `tokens.rs` is still generated from the same DTCG source for any GPU layer, but nothing in sett depends on one existing. The map's own rules are the section "The map" below.
-7. Session-card rows: the glyph carries the state; the right cell says only what the glyph cannot (`asks · n`, `paused`, `deviation`, `you`) in plain secondary ink, never a pill and never the session's own name. The current row takes the session's tint. A **group** row is a lane of the plan with its gate; its right cell reads the gate in the same plain words: `done` · `running` · `gate` · `failed n/m` · `waiting`. Sub-agents fold under their group (under their step when the plan has no groups), folded by default, with the count and a glyph run on that row and one continuous guide line in the sub shade when open.
+7. Session-card rows: the glyph carries the state; the right cell says only what the glyph cannot (`asks · n`, `paused`, `deviation`, `resolve`, `you`) in plain secondary ink, never a pill and never the session's own name. The current row takes the session's tint. A **group** row is a lane of the plan with its gate; its right cell reads the gate in the same plain words: `done` · `running` · `gate` · `failed n/m` · `waiting`. A **resolve** row is the element a conflict adds to the plan, both intents in context: `⇄` in `sug`, since it needs a hand, not a fix. Sub-agents fold under their group (under their step when the plan has no groups), folded by default, with the count and a glyph run on that row and one continuous guide line in the sub shade when open.
 8. Thread messages: every message opens with an author line (a dot and the name at 11 px medium in the author's colour, then the time). Yours sit on the right in the selection tint; agents on the left outlined in their colour; sub-agents outlined in the sub shade with the sub-shade dot, the name still in the session's main colour (the sub shade is not a text colour). Every agent reply ends with a `changed · what` or `no change` line.
 9. Taking over is two acts: pause, then take over one element. Verbs are words, never glyphs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop`. `✋` is a state glyph on the session card only. Handing back is written in the composer, which becomes the hand-back note while you hold an element; the note lands in the thread as a message from you with its changed line. **Focus** and **Lock** are the two scope verbs and are not taking over: Focus changes what the shell is about, Lock pins it, and neither changes who writes (see "The shell").
 10. Card rows lead somewhere as a whole: the row is the link, it lights on hover and ends with `›`; blue is left to buttons. A place in code (`service.rs:61`) is the small mono tag; a destination (pipeline, findings, why) is a grey word. A card heading carries a pill for a state and a tag for a count.
@@ -72,7 +72,7 @@ Names never move, fade or resize. Life goes into what surrounds them: rings, a s
 
 ### Glyph vocabulary
 
-`✓` done · `●` running · `⏸` paused · `✋` taken over · `≠` deviation · `!` asks · `·` pending · `⚠` finding · `🔒` locked scope. Unicode, sans, in a 12 px column. No icon font.
+`✓` done · `●` running · `⏸` paused · `✋` taken over · `≠` deviation · `!` asks · `⇄` resolve · `·` pending · `⚠` finding · `🔒` locked scope. Unicode, sans, in a 12 px column. No icon font.
 
 ## Hard constraints
 
@@ -139,6 +139,7 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-area>`
@@ -266,6 +267,7 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-button>`
@@ -307,6 +309,7 @@ One card shape for seven uses: fix (dashed blue), plan delta (amber), impact, me
   - `cards-card--delta` plan delta
   - `cards-card--impact` Impact
   - `cards-card--checklist` merge checklist
+  - `cards-card--checklist-no-plan` merge checklist · plan · none · hand-made branch (spec §13.22)
   - `cards-card--pipeline` Pipeline
   - `cards-card--result` Result
   - `cards-card--whats-new` what's new
@@ -333,6 +336,7 @@ A card row: glyph · fact · where it leads. With `place` (a spot in code) or `n
   - `cards-card--delta` plan delta
   - `cards-card--impact` Impact
   - `cards-card--checklist` merge checklist
+  - `cards-card--checklist-no-plan` merge checklist · plan · none · hand-made branch (spec §13.22)
   - `cards-card--pipeline` Pipeline
   - `cards-card--result` Result
   - `cards-card--whats-new` what's new
@@ -1088,6 +1092,7 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-panel-output>`
@@ -1123,6 +1128,7 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-panel-row>`
@@ -1163,6 +1169,7 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-panel-tab>`
@@ -1205,6 +1212,7 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-panel-table>`
@@ -1242,6 +1250,7 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-pill>`
@@ -1279,6 +1288,7 @@ The pipeline bar: one segment per step. `steps` is a comma list of ok | bad | ru
   - `cards-card--delta` plan delta
   - `cards-card--impact` Impact
   - `cards-card--checklist` merge checklist
+  - `cards-card--checklist-no-plan` merge checklist · plan · none · hand-made branch (spec §13.22)
   - `cards-card--pipeline` Pipeline
   - `cards-card--result` Result
   - `cards-card--whats-new` what's new
@@ -1288,7 +1298,7 @@ The pipeline bar: one segment per step. `steps` is a comma list of ok | bad | ru
 
 ### `<sett-plan-row>`
 
-One plan element: glyph, name in mono, and on the right only what the glyph cannot say (asks · n, paused, deviation, you). Sub-agents go in the `sub` slot and fold under the row, folded by default; the row then shows the count and a glyph run.
+One plan element: glyph, name in mono, and on the right only what the glyph cannot say (asks · n, paused, deviation, resolve, you). A `resolve` element is the one a conflict adds to the plan, both intents in context (spec §13.19). Sub-agents go in the `sub` slot and fold under the row, folded by default; the row then shows the count and a glyph run.
 
 - attrs:
   - `state=PlanState`
@@ -1309,6 +1319,7 @@ One plan element: glyph, name in mono, and on the right only what the glyph cann
   - `primitives-session-card--sub-agents-open` running · sub-agents unfolded
   - `primitives-session-card--many-sub-agents` running · twelve sub-agents
   - `primitives-session-card--trouble` asks · paused · stepped in · deviation
+  - `primitives-session-card--resolve` resolve · a conflict added an element to the plan (spec §13.19)
   - `primitives-session-card--glyph-column` the glyph column
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
@@ -1532,6 +1543,7 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-scope-line>`
@@ -1572,6 +1584,7 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-seg>`
@@ -1685,6 +1698,7 @@ Pinned at the top of the left pane while a session owns the branch. Header: sess
   - `primitives-session-card--sub-agents-open` running · sub-agents unfolded
   - `primitives-session-card--many-sub-agents` running · twelve sub-agents
   - `primitives-session-card--trouble` asks · paused · stepped in · deviation
+  - `primitives-session-card--resolve` resolve · a conflict added an element to the plan (spec §13.19)
   - `primitives-session-card--glyph-column` the glyph column
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
@@ -1820,6 +1834,7 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-status-item>`
@@ -1835,7 +1850,7 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `name=string` — what the scope is called: `refund flow`, `fix-pool-size`
   - `locked=boolean` — the scope is locked: 🔒 after its words
 - slots:
-  - `(default)` — the count or state: `b` is a count (ink, medium); `[data-tone="sug" | "bad" | "ok"]` takes that accent
+  - `(default)` — the count or state: `b` is a count (ink, medium); `[data-tone="sug" | "bad" | "ok"]` takes that accent; `[data-tone="mute"]` is the lightest ink, for what is known least (a crate guessed, bins not analyzed: spec §13.7, §13.10)
 - stories:
   - `shell-activity-rail--default` Default
   - `shell-activity-rail--active` active · Sessions, Files, Findings
@@ -1863,6 +1878,7 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-sub-agent>`
@@ -1878,6 +1894,7 @@ A sub-agent row under a plan element: glyph and name, same rhythm as the plan ro
   - `primitives-session-card--sub-agents-open` running · sub-agents unfolded
   - `primitives-session-card--many-sub-agents` running · twelve sub-agents
   - `primitives-session-card--trouble` asks · paused · stepped in · deviation
+  - `primitives-session-card--resolve` resolve · a conflict added an element to the plan (spec §13.19)
   - `primitives-session-card--glyph-column` the glyph column
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still

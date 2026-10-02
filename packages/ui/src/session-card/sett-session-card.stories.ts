@@ -36,10 +36,20 @@ export const RunningWithSubAgents: Story = { name: 'running · element 3 of 6 ·
 export const SubAgentsOpen: Story = { name: 'running · sub-agents unfolded', render: () => running(true) };
 export const ManySubAgents: Story = { name: 'running · twelve sub-agents', render: () => html`<div class="sett-row">${running(false, 12)}${running(true, 12)}</div>` };
 export const Trouble: Story = { name: 'asks · paused · stepped in · deviation', render: () => trouble };
+export const Resolve: Story = {
+  name: 'resolve · a conflict added an element to the plan (spec §13.19)',
+  render: () => html`<sett-session-card name="Lyon" driver="codex" session="tl" step="3" of="4" style="width:250px">
+    <sett-plan-row state="done">RetryPolicy</sett-plan-row>
+    <sett-plan-row state="done">PgQueue</sett-plan-row>
+    <sett-plan-row state="resolve" current>pool.rs · with w2 · fix-pool-size</sett-plan-row>
+    <sett-plan-row state="pending">tests</sett-plan-row>
+    <span slot="foot">paused 20 s ago</span><a slot="thread">thread ›</a>
+  </sett-session-card>`,
+};
 export const GlyphColumn: Story = {
   name: 'the glyph column',
   render: () => html`<sett-session-card name="glyphs" driver="" style="width:250px">
-    ${(['done', 'running', 'paused', 'stepped-in', 'deviation', 'asks', 'pending'] as const).map((s) => html`<sett-plan-row state=${s} count="2" who=${s === 'stepped-in' ? 'you' : ''}>${s}</sett-plan-row>`)}
+    ${(['done', 'running', 'paused', 'stepped-in', 'deviation', 'asks', 'resolve', 'pending'] as const).map((s) => html`<sett-plan-row state=${s} count="2" who=${s === 'stepped-in' ? 'you' : ''}>${s}</sett-plan-row>`)}
   </sett-session-card>`,
 };
 export const OtherSession: Story = { name: 'another session colour', render: () => running(true, 6, 'mg') };

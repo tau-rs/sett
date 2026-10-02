@@ -27,7 +27,12 @@ describe('sett.css', () => {
 describe('tokens.json', () => {
   const j = JSON.parse(dist('tokens.json'));
   it('counts every token per source file', () => {
-    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 107, light: 93, dark: 93 });
+    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 131, light: 93, dark: 93 });
+  });
+  it('every map motion named in DESIGN.md has a duration or easing token', () => {
+    const names = j.base.map((t: { name: string }) => t.name);
+    for (const m of ['breath', 'hover', 'fold', 'draw', 'wave-in', 'wave-out', 'wave-gap', 'bloom', 'ignite', 'pop', 'kick', 'cool', 'ease-in', 'ease-out', 'ease-fold', 'ease-spring', 'zoom', 'tier-swap', 'flow', 'item-pulse'])
+      expect(names, m).toContain(`--sett-motion-${m}`);
   });
   it('light and dark define the same paths in the same order', () => {
     expect(j.light.map((t: { name: string }) => t.name)).toEqual(j.dark.map((t: { name: string }) => t.name));

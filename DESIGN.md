@@ -44,7 +44,8 @@ motion:
   frameRotate: 6s
   framePulse: 1.6s
   itemPulse: 700ms
-  allowed: [frame.live, frame.waiting, item-pulse, zoom, tier-swap, flow]
+  breath: 2.8s
+  allowed: [frame.live, frame.waiting, map.presence, map.response, map.events]
 ---
 
 ## What sett is for
@@ -79,7 +80,19 @@ sett styles developer tools that put a map or a document at the centre and keep 
 
 ## Motion
 
-Only three things move in the chrome: the live frame (session gradient, 6 s rotate), the waiting frame (amber pulse, 1.6 s), and one 700 ms ring on a map item whose facts changed. The map adds three, and only three: the camera fit (`zoom`, 300 ms), the row cross-fade when a node changes tier (`tier-swap`, 150 ms), and the direction dash on the selected unit's edges (`flow`, 1.1 s). A node never resizes itself; the camera moves. `prefers-reduced-motion` stills all of them. One more use of the waiting-frame pulse is allowed: the session dot pulses while its session is working, wherever that dot sits (selector, menu row, session card). Pills and tags never animate; the gradient never leaves the frame. No hover transitions, no fades, no slide-ins. Content never moves; only the border does.
+Names never move, fade or resize. Life goes into what surrounds them: rings, a sheen behind the text, dots, lines, counters. Every motion has a still twin under `prefers-reduced-motion`, and nothing else may animate.
+
+**Chrome.** The live frame (session gradient, 6 s rotate) and the waiting frame (amber pulse, 1.6 s). The gradient never leaves the frame. Pills and tags never animate. A session's dot breathes while its session is working, wherever that dot sits.
+
+**Map · presence** (always on, slow, `motion.breath`). The ring of an item an agent is working on breathes, never below `map.presence.breathMin`, and a soft sheen in the session's colour sweeps across the item; the item's own colour stays visible under it. The session's badge keeps the same beat; different sessions are offset so three agents read as three. A ring left on an item touched earlier is thin, still, and quieter than any live ring.
+
+**Map · response** (to the hand, fast). Pointing eases the border (`motion.hover`) and turns the item's links blue, together with the item at the other end. Selecting draws the connections outward (`motion.draw`); only then do the `flow` dashes travel, and on the selection alone. Folding eases shut (`motion.fold`) and the arrow turns. The camera fit is `zoom`; a node never resizes itself; its rows swap with `tier-swap`.
+
+**Map · events** (one-shot). A change flashes one ring outward (`item-pulse`). A fixed finding eases back to plain and its count pops out (`motion.pop`). An agent's move is a jump, rendered as a pulse: leaving, a wave closes in on the thing and is swallowed (`wave-in`) and an item cools to its still ring (`cool`); arriving, the thing blooms (`bloom`), two waves in its own shape roll outward (`wave-out`), its badge ignites (`ignite`), and an item gets one quick bright sheen (`kick`). Nothing crosses the space between.
+
+**Where it lands.** One living mark per agent, on the nearest thing you can see: the item; else the folded area's badge; else the unit's box and its badge; else the hint pill at the board's edge. Your selection follows the same rule: a folded area that hides it shows a blue count, and a dock on its border where the links plug in.
+
+**Layers, from the inside out.** The item's own colour · the sheen · your selection, tight to the box · the session ring, one step out (`map.size.ringGap`) · the change flash, past everything. Two signals never need the same pixels. Two agents on one item split one ring; rings never stack.
 
 ## Rules the components encode
 
@@ -104,14 +117,14 @@ Terms: a **unit** is a crate or app on the repo board; a **node** is its box, sh
 2. **Nothing on the layer above moves because you looked closer.** No re-layout on focus; neighbours stay, unrelated ones recede: a node to mute ink and a faint border (its text stays readable), an edge or a dot to `map.far` opacity. Off-view neighbours get border hints (`sett-hint-chip`), grouped when they would overlap, gone the moment they are seen.
 3. **Fold, never shrink.** One text size per level. Less room means fewer rows and a `+n`. A node never resizes itself: the camera moves (`zoom`), and the rows swap with one `tier-swap` cross-fade.
 4. **Open in place.** A unit opens inside its node on the same board; code opens in a tab of `sett-tabbar`, only by double-click. There is no layer between repo and unit.
-5. **Edges carry no labels at rest.** The port row says what and how much; colour and stroke are the kind (`map.kind.*`); the arrow says who uses whom; the line stops `map.size.arrow` before the head; an edge never crosses its own node; a column-skipping link takes the channel below the columns, in its own lane. The `flow` dash runs on the selected unit's edges only.
+5. **Edges carry no labels at rest.** The port row says what and how much; colour and stroke are the kind (`map.kind.*`); the arrow says who uses whom; the line stops `map.size.arrow` before the head; an edge never crosses its own node; a column-skipping link takes the channel below the columns, in its own lane. The `flow` dash belongs to the selection alone; pointing at something turns its links blue, without dashes.
 6. **Externals are an interface, not a column.** Rails on the flat sides of the unit, sections in a fixed order (platform services · third-party services · events · data stores · os · libraries), headers lowercase and mute; a neighbour's matching port is wired straight to ours.
 7. **Ports dock, layout wins.** A port always docks; when the neighbour is on the wrong side, the edge takes a detour around the card rather than moving anything.
 8. **Chrome docks.** Nothing floats over the drawing: the panel is docked right and its first row is the transient status line (well tint, 1.9 s or the next action); there is no toast; the legend is on demand; the port colours are the legend the rest of the time.
 9. **Keyboard.** Esc: tab → unit → focus → level. ↩ open/enter. `f` fit. `o` toggle the inside. Focus-visible rings on every interactive element.
 10. **Provenance is visible.** Declared things are dashed (`map.kind.declared`) and say so; illustrative data says so in the tagline; every contract cites a witness `file:line`.
 
-Rejected, keep out: stepped zoom · Bring & Go (moving neighbours to the ports) · edge labels at rest · an outbound column of boxes · floating inspector cards · ghost neighbours arranged callers-left / dependencies-right · a level change between repo and unit · zoom-to-code · a distinct card design per tier · a toast · a node animating its own box · hover transitions · uppercase eyebrows.
+Rejected, keep out: stepped zoom · Bring & Go (moving neighbours to the ports) · edge labels at rest · an outbound column of boxes · floating inspector cards · ghost neighbours arranged callers-left / dependencies-right · a level change between repo and unit · zoom-to-code · a distinct card design per tier · a toast · a node animating its own box · uppercase eyebrows · a text that moves or fades · a sliding gradient outside the frame · a ring, spark or wire travelling between items · a tint that hides an item's own colour · stacked rings.
 
 ## Glyph vocabulary
 

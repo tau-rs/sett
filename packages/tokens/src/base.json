@@ -247,7 +247,7 @@
     }
   },
   "motion": {
-    "$description": "the only motion in the product: frame-rotate, frame-pulse, item-pulse, and on the map zoom (camera fit), tier-swap (row cross-fade) and flow (dash on the selected unit's edges)",
+    "$description": "chrome: frame-rotate, frame-pulse. map (DESIGN.md Motion): presence (breath), response (hover, fold, draw, zoom, tier-swap, flow), events (item-pulse, wave-in, wave-out, bloom, ignite, pop, kick, cool). Names never move, fade or resize.",
     "frame-rotate": {
       "$type": "duration",
       "$value": {
@@ -298,6 +298,127 @@
         "value": 1.1,
         "unit": "s"
       }
+    },
+    "breath": {
+      "$type": "duration",
+      "$value": {
+        "value": 2.8,
+        "unit": "s"
+      },
+      "$description": "presence: one breath of a live ring, a badge, a sheen"
+    },
+    "hover": {
+      "$type": "duration",
+      "$value": {
+        "value": 120,
+        "unit": "ms"
+      }
+    },
+    "fold": {
+      "$type": "duration",
+      "$value": {
+        "value": 240,
+        "unit": "ms"
+      }
+    },
+    "draw": {
+      "$type": "duration",
+      "$value": {
+        "value": 260,
+        "unit": "ms"
+      }
+    },
+    "wave-in": {
+      "$type": "duration",
+      "$value": {
+        "value": 240,
+        "unit": "ms"
+      }
+    },
+    "wave-out": {
+      "$type": "duration",
+      "$value": {
+        "value": 460,
+        "unit": "ms"
+      }
+    },
+    "wave-gap": {
+      "$type": "duration",
+      "$value": {
+        "value": 110,
+        "unit": "ms"
+      }
+    },
+    "bloom": {
+      "$type": "duration",
+      "$value": {
+        "value": 520,
+        "unit": "ms"
+      }
+    },
+    "ignite": {
+      "$type": "duration",
+      "$value": {
+        "value": 420,
+        "unit": "ms"
+      }
+    },
+    "pop": {
+      "$type": "duration",
+      "$value": {
+        "value": 260,
+        "unit": "ms"
+      }
+    },
+    "kick": {
+      "$type": "duration",
+      "$value": {
+        "value": 460,
+        "unit": "ms"
+      }
+    },
+    "cool": {
+      "$type": "duration",
+      "$value": {
+        "value": 520,
+        "unit": "ms"
+      }
+    },
+    "ease-in": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.5,
+        0,
+        0.9,
+        0.5
+      ]
+    },
+    "ease-out": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.1,
+        0.6,
+        0.3,
+        1
+      ]
+    },
+    "ease-fold": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.3,
+        0,
+        0.2,
+        1
+      ]
+    },
+    "ease-spring": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.2,
+        0.9,
+        0.3,
+        1.3
+      ]
     }
   },
   "glyph": {
@@ -518,6 +639,41 @@
         "$type": "dimension",
         "$value": {
           "value": 44,
+          "unit": "px"
+        }
+      },
+      "ringGap": {
+        "$type": "dimension",
+        "$value": {
+          "value": 3,
+          "unit": "px"
+        }
+      },
+      "wave": {
+        "$type": "dimension",
+        "$value": {
+          "value": 9,
+          "unit": "px"
+        }
+      },
+      "waveNode": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        }
+      },
+      "bloom": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        }
+      },
+      "bloomNode": {
+        "$type": "dimension",
+        "$value": {
+          "value": 22,
           "unit": "px"
         }
       }
@@ -822,6 +978,21 @@
             "lineCap": "butt"
           }
         }
+      }
+    },
+    "presence": {
+      "$description": "how strong an agent's marks are",
+      "breathMin": {
+        "$type": "number",
+        "$value": 0.6
+      },
+      "touched": {
+        "$type": "number",
+        "$value": 0.5
+      },
+      "sheen": {
+        "$type": "number",
+        "$value": 0.26
       }
     }
   }

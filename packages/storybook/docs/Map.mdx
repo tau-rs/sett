@@ -5,7 +5,7 @@ import { base, light, dark, sessionOrder } from '@tau-rs/sett-tokens';
 
 # The map
 
-The map is DOM (ADR 0001): every map thing is a `sett-*` element, and the numbers on this page are the ones it reads. The camera is the only thing that moves; a node never resizes itself. Text has one size; less room means fewer rows and a `+n`. The port colours are the legend the rest of the time: this page is the on-demand version.
+The map is DOM (ADR 0001): every map thing is a `sett-*` element, and the numbers on this page are the ones it reads. A node never resizes itself; the camera moves. What else may move, and what each motion tells you, is the Motion section of the rules page. Text has one size; less room means fewer rows and a `+n`. The port colours are the legend the rest of the time: this page is the on-demand version.
 
 export const Sw = ({ l, d }) => (
   <>

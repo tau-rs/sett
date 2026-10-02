@@ -20,3 +20,4 @@ export { SettNode, tierFor, type NodeTier } from './map/sett-node.js';
 export { splitLabel, portOf, unitOf, unitPorts, opOf, opsOf, sectionOf, type Fixture, type FixtureUnit, type FixtureContract, type Port, type Op } from './map/fixtures.js';
 export { presenceStyles, beatStyles, beatOf, wave, bloom, arrive, leave, flash, reducedMotion, durationMs, type WaveOptions } from './map/motion.js';
 export { SettItem, ITEM_KINDS, type ItemKind } from './map/sett-item.js';
+export { SettArea } from './map/sett-area.js';

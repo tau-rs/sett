@@ -3,19 +3,11 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { base } from '@tau-rs/sett-tokens';
 import { sessionStyles, type SessionId } from '../session.js';
 import { dotStyles } from '../status.js';
+import { gateOf, type GateWord } from '../gate.js';
 
 /** `stepped-in` is the old name of `taken-over`, accepted for one release and drawn the same (#63) */
 export type PlanState = 'done' | 'running' | 'paused' | 'taken-over' | 'stepped-in' | 'deviation' | 'asks' | 'resolve' | 'pending';
 export type SubState = 'done' | 'running' | 'pending';
-
-/** a group's gate, DESIGN.md rule 7: the right cell's words; `failed` carries its round, `failed n/m` */
-export type GateWord = 'done' | 'running' | 'gate' | 'failed' | 'waiting';
-export const GATE_WORDS = ['done', 'running', 'gate', 'failed n/m', 'waiting'] as const;
-/** the gate word of a group's `gate` attribute: its first word; anything else reads as waiting */
-export const gateOf = (words?: string): GateWord => {
-  const w = (words ?? '').trim().split(/\s/)[0];
-  return (['done', 'running', 'gate', 'failed', 'waiting'] as const).includes(w as GateWord) ? (w as GateWord) : 'waiting';
-};
 
 const GLYPH: Record<Exclude<PlanState, 'stepped-in'> | SubState, string> = {
   done: base.glyph.done, running: base.glyph.running, paused: base.glyph.paused, 'taken-over': base.glyph.takenOver,
@@ -148,7 +140,7 @@ export class SettPlanRow extends LitElement {
   @property({ reflect: true }) state: PlanState = 'pending';
   /** `group`: a lane of the plan with its gate */
   @property({ reflect: true }) kind?: 'group';
-  /** a group's gate words: `done` · `running` · `gate` · `failed n/m` · `waiting` */
+  /** a group's gate words, from one source with the Sessions view (`GROUP_STATES`): `done` · `running` · `gate` · `failed n/m` · `waiting` */
   @property() gate?: string;
   /** the row the session is on now: takes the session tint */
   @property({ type: Boolean, reflect: true }) current = false;

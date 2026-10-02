@@ -2374,7 +2374,7 @@ One plan element: glyph, name in mono, and on the right only what the glyph cann
 - attrs:
   - `state=PlanState`
   - `kind='group'` — `group`: a lane of the plan with its gate
-  - `gate=string` — a group's gate words: `done` · `running` · `gate` · `failed n/m` · `waiting`
+  - `gate=string` — a group's gate words, from one source with the Sessions view (`GROUP_STATES`): `done` · `running` · `gate` · `failed n/m` · `waiting`
   - `current=boolean` — the row the session is on now: takes the session tint
   - `count=number` — number of open asks, for the asks state
   - `who=string` — who is on it when it is not the session, e.g. `you`

@@ -16,8 +16,7 @@ export type SessionRowScope = 'session' | 'you' | 'plan';
 /** the tint of a session row's state tag */
 export type SessionTone = Extract<TagKind, 'sug' | 'ok' | 'session' | 'default'>;
 
-/** a group row's words, DESIGN.md rule 7; `failed n/m` carries its count */
-export const GROUP_STATES = ['done', 'running', 'gate', 'failed n/m', 'waiting'] as const;
+export { GROUP_STATES } from '../gate.js';
 
 /** the tint each group state implies, by its first word; `judge` is the gate row's state */
 export const GROUP_TONE: Record<string, TagKind> = { done: 'ok', running: 'default', gate: 'sug', failed: 'bad', waiting: 'sug', judge: 'sug' };

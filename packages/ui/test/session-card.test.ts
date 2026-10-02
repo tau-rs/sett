@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import '../src/index.js';
-import { GATE_WORDS, gateOf } from '../src/index.js';
+import { GROUP_STATES, gateOf } from '../src/index.js';
 
 const cssOf = (tag: string) => ([] as any[]).concat((customElements.get(tag) as any).styles).map((s: any) => s.cssText).join('\n');
 const tick = () => new Promise((r) => setTimeout(r, 0));
@@ -51,7 +51,7 @@ describe('session card', () => {
   });
   it('a group row reads its gate on the right, in rule 7 words, and its glyph says the same', async () => {
     const row = async (gate: string) => { const el = await mount(`<sett-plan-row kind="group" gate="${gate}">group 1</sett-plan-row>`); return { right: el.shadowRoot.querySelector('.right')?.textContent, g: el.shadowRoot.querySelector('.g') }; };
-    expect(GATE_WORDS).toEqual(['done', 'running', 'gate', 'failed n/m', 'waiting']);
+    expect(GROUP_STATES).toEqual(['done', 'running', 'gate', 'failed n/m', 'waiting']);
     const done = await row('done'); expect(done.right).toBe('done'); expect(done.g.textContent).toBe('✓'); expect(done.g.getAttribute('data-gate')).toBe('done');
     const run = await row('running'); expect(run.right).toBe('running'); expect(run.g.textContent).toBe('●'); expect(run.g.getAttribute('data-gate')).toBe('running');
     const gate = await row('gate'); expect(gate.right).toBe('gate'); expect(gate.g.textContent).toBe('●'); expect(gate.g.getAttribute('data-gate')).toBe('gate');

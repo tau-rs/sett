@@ -20,7 +20,7 @@ export class SettIntentBar extends LitElement {
   @property() value = '';
 
   /** the empty field's words */
-  @property() placeholder = 'what should change?';
+  @property() placeholder = 'what do you want to change? one sentence';
 
   /** what the plan holds, mute at the right, e.g. `5 elements · 2 groups` */
   @property() counts?: string;

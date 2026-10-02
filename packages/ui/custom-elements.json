@@ -9111,7 +9111,7 @@
               "type": {
                 "text": "string"
               },
-              "default": "'what should change?'",
+              "default": "'what do you want to change? one sentence'",
               "description": "the empty field's words",
               "attribute": "placeholder"
             },
@@ -9156,7 +9156,7 @@
               "type": {
                 "text": "string"
               },
-              "default": "'what should change?'",
+              "default": "'what do you want to change? one sentence'",
               "description": "the empty field's words",
               "fieldName": "placeholder"
             },

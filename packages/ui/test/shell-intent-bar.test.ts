@@ -21,7 +21,7 @@ describe('sett-intent-bar', () => {
     const input = bar.shadowRoot.querySelector('input');
     expect(input.getAttribute('aria-label')).toBe('intention');
     expect(input.getAttribute('type')).toBe('text');
-    expect(input.placeholder).toBe('what should change?');
+    expect(input.placeholder).toBe('what do you want to change? one sentence');
     expect(bar.shadowRoot.querySelectorAll('input, textarea').length).toBe(1);
     const c = cssOf('sett-intent-bar');
     expect(c).toMatch(/:host \{[^}]*background: var\(--sett-color-sug-bg\)/);

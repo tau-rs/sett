@@ -2464,6 +2464,22 @@
             "name": "SettIntentBar",
             "module": "./shell/sett-intent-bar.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettInspector",
+          "declaration": {
+            "name": "SettInspector",
+            "module": "./shell/sett-inspector.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "InspectorTone",
+          "declaration": {
+            "name": "InspectorTone",
+            "module": "./shell/sett-inspector.js"
+          }
         }
       ]
     },
@@ -9211,6 +9227,234 @@
           "declaration": {
             "name": "SettTreeRow",
             "module": "src/shell/sett-files-view.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-inspector.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The inspector, the right pane: it is about the selection (DESIGN.md \"The\nshell\" rule 6). A header (heading, sub, state), a scrolling body, a fixed\nverbs bar with its small note, and a composer row shown only when one is\nslotted. The top border says who the pane is about, in the thread family's\nwords: a `session` takes the session colour; `kind` planner is amber, framer\nand fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with\nthe heading as its title. Width is the app's (`size.shell.inspector`).",
+          "name": "SettInspector",
+          "cssParts": [
+            {
+              "description": "the header row",
+              "name": "header"
+            },
+            {
+              "description": "the scrolling body",
+              "name": "body"
+            },
+            {
+              "description": "the fixed verbs bar",
+              "name": "verbs"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the body: a card, kv rows, messages, a hunk, a form",
+              "name": ""
+            },
+            {
+              "description": "the fixed bar's sett-button elements, agent door first",
+              "name": "verbs"
+            },
+            {
+              "description": "the small mute line under the verbs",
+              "name": "note"
+            },
+            {
+              "description": "a sett-composer; the row exists only when slotted",
+              "name": "composer"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the heading, bold",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "sub",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the secondary words after the heading",
+              "attribute": "sub"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the state words at the right: `running`, `draft`, `🔒 locked`, `new`",
+              "attribute": "state"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "InspectorTone"
+              },
+              "default": "'default'",
+              "description": "the state's colour: bad, sug, ok, mute; default is secondary ink",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id: a 3 px top border in the session colour and the heading in it",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "ThreadIdentity | undefined"
+              },
+              "description": "the thread kind the pane holds: session (session colour), planner (amber), framer or fixer (blue)",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the pane is the 28 px handle",
+              "attribute": "folded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "has",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "unfold",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "the folded handle was pressed",
+              "name": "sett-unfold"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the heading, bold",
+              "fieldName": "heading"
+            },
+            {
+              "name": "sub",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the secondary words after the heading",
+              "fieldName": "sub"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the state words at the right: `running`, `draft`, `🔒 locked`, `new`",
+              "fieldName": "state"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "InspectorTone"
+              },
+              "default": "'default'",
+              "description": "the state's colour: bad, sug, ok, mute; default is secondary ink",
+              "fieldName": "tone"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id: a 3 px top border in the session colour and the heading in it",
+              "fieldName": "session"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "ThreadIdentity | undefined"
+              },
+              "description": "the thread kind the pane holds: session (session colour), planner (amber), framer or fixer (blue)",
+              "fieldName": "kind"
+            },
+            {
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the pane is the 28 px handle",
+              "fieldName": "folded"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-inspector",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettInspector",
+          "declaration": {
+            "name": "SettInspector",
+            "module": "src/shell/sett-inspector.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-inspector",
+          "declaration": {
+            "name": "SettInspector",
+            "module": "src/shell/sett-inspector.ts"
           }
         }
       ]

@@ -139,6 +139,11 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -213,6 +218,11 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -287,6 +297,11 @@ The agent strip: the session's path under the scope line when a session is the s
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -451,6 +466,11 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -620,6 +640,11 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -698,6 +723,11 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -771,6 +801,11 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -969,6 +1004,11 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -1094,6 +1134,11 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -1174,6 +1219,11 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -1321,6 +1371,11 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -1375,6 +1430,94 @@ An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet 
   - `editor-decorations--hints` sett-hint · kinds
   - `editor-decorations--all-situations` all eight situations
 
+### `<sett-inspector>`
+
+The inspector, the right pane: it is about the selection (DESIGN.md "The shell" rule 6). A header (heading, sub, state), a scrolling body, a fixed verbs bar with its small note, and a composer row shown only when one is slotted. The top border says who the pane is about, in the thread family's words: a `session` takes the session colour; `kind` planner is amber, framer and fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with the heading as its title. Width is the app's (`size.shell.inspector`).
+
+- attrs:
+  - `heading=string` — the heading, bold
+  - `sub=string` — the secondary words after the heading
+  - `state=string` — the state words at the right: `running`, `draft`, `🔒 locked`, `new`
+  - `tone=InspectorTone` — the state's colour: bad, sug, ok, mute; default is secondary ink
+  - `session=SessionId` — session id: a 3 px top border in the session colour and the heading in it
+  - `kind=ThreadIdentity` — the thread kind the pane holds: session (session colour), planner (amber), framer or fixer (blue)
+  - `folded=boolean` — the pane is the 28 px handle
+- slots:
+  - `(default)` — the body: a card, kv rows, messages, a hunk, a form
+  - `verbs` — the fixed bar's sett-button elements, agent door first
+  - `note` — the small mute line under the verbs
+  - `composer` — a sett-composer; the row exists only when slotted
+- parts:
+  - `header` — the header row
+  - `body` — the scrolling body
+  - `verbs` — the fixed verbs bar
+- events:
+  - `sett-unfold` — the folded handle was pressed
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-intent-bar>`
 
 The intent bar: the plan's intention, above the Map in a plan scope (the plan on the shell: "the intention sits above it"). One line of text on the sug tint with a hairline under it; Enter drafts: the planner draws elements. At the right, what the plan holds so far in mute (`5 elements · 2 groups`) and the app's verbs, if any. The field's styling is the composer's, kept local here: the composer's styles are not a shared module and lifting them out would be a refactor of it.
@@ -1416,6 +1559,11 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -1576,6 +1724,11 @@ The list under the scope selector: sessions grouped by what they need, `planning
   - `primitives-selector--menu-open` menu open · main, then planning / yours / needs you / running / in review / done
   - `primitives-selector--narrow-menu` menu · narrow, rows never wrap
   - `primitives-selector--reduced-motion` reduced motion · working dot still
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
 
 ### `<sett-menu-group>`
 
@@ -1664,6 +1817,11 @@ One row: dot, name in mono, pill when the row has a state, then who or how far o
   - `primitives-selector--menu-open` menu open · main, then planning / yours / needs you / running / in review / done
   - `primitives-selector--narrow-menu` menu · narrow, rows never wrap
   - `primitives-selector--reduced-motion` reduced motion · working dot still
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
 
 ### `<sett-msg>`
 
@@ -1722,6 +1880,11 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2013,6 +2176,11 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2079,6 +2247,11 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2150,6 +2323,11 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2223,6 +2401,11 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2291,6 +2474,11 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2638,6 +2826,11 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2709,6 +2902,11 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2919,6 +3117,11 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2998,6 +3201,11 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -3172,6 +3380,11 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -3239,6 +3452,11 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -3313,6 +3531,11 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -3559,6 +3782,11 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -3655,6 +3883,11 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds

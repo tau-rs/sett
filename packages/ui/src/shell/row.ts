@@ -52,6 +52,9 @@ export const letterStyles = css`
   :host([selected]) .sl { color: var(--sett-color-ink); }
 `;
 
+/** a row's event, built outside the class so the manifest lists the rows' real events, not a `type` */
+const rowEvent = (type: string, detail: Record<string, unknown>) => new CustomEvent(type, { bubbles: true, composed: true, detail });
+
 /**
  * A row of the left pane: a tree item with a depth, a selection and a fold.
  * It never changes its own `selected` or `open`: a click fires `sett-select`,
@@ -85,7 +88,7 @@ export abstract class SettRow extends LitElement {
   protected get detail(): Record<string, unknown> { return { kind: this.kind, name: this.name }; }
 
   protected fire(type: string, extra: Record<string, unknown> = {}) {
-    this.dispatchEvent(new CustomEvent(type, { bubbles: true, composed: true, detail: { ...this.detail, ...extra } }));
+    this.dispatchEvent(rowEvent(type, { ...this.detail, ...extra }));
   }
 
   /** the app's selection: a click, or Space */

@@ -2388,6 +2388,14 @@
             "name": "ChangesWhat",
             "module": "./shell/sett-changes-list.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettIntentBar",
+          "declaration": {
+            "name": "SettIntentBar",
+            "module": "./shell/sett-intent-bar.js"
+          }
         }
       ]
     },
@@ -6593,14 +6601,6 @@
               "description": "the children, rendered only while open"
             }
           ],
-          "events": [
-            {
-              "name": "type",
-              "type": {
-                "text": "CustomEvent"
-              }
-            }
-          ],
           "attributes": [
             {
               "name": "name",
@@ -8167,16 +8167,6 @@
             {
               "description": "`{ kind: 'commit', name, sha, open }`",
               "name": "sett-fold"
-            },
-            {
-              "name": "type",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "inheritedFrom": {
-                "name": "SettRow",
-                "module": "src/shell/row.ts"
-              }
             }
           ],
           "attributes": [
@@ -8899,16 +8889,6 @@
             {
               "description": "`{ kind, name, open }`",
               "name": "sett-fold"
-            },
-            {
-              "name": "type",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "inheritedFrom": {
-                "name": "SettRow",
-                "module": "src/shell/row.ts"
-              }
             }
           ],
           "attributes": [
@@ -9090,6 +9070,128 @@
           "declaration": {
             "name": "SettTreeRow",
             "module": "src/shell/sett-files-view.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-intent-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The intent bar: the plan's intention, above the Map in a plan scope (the\nplan on the shell: \"the intention sits above it\"). One line of text on\nthe sug tint with a hairline under it; Enter drafts: the planner draws\nelements. At the right, what the plan holds so far in mute (`5 elements ·\n2 groups`) and the app's verbs, if any. The field's styling is the\ncomposer's, kept local here: the composer's styles are not a shared\nmodule and lifting them out would be a refactor of it.",
+          "name": "SettIntentBar",
+          "cssParts": [
+            {
+              "description": "the text field",
+              "name": "input"
+            }
+          ],
+          "slots": [
+            {
+              "description": "sett-button elements at the right end",
+              "name": "verbs"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the intention's words; kept in step with what is typed",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'what should change?'",
+              "description": "the empty field's words",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "counts",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the plan holds, mute at the right, e.g. `5 elements · 2 groups`",
+              "attribute": "counts"
+            },
+            {
+              "kind": "field",
+              "name": "onInput",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ value }` on Enter",
+              "name": "sett-intent"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the intention's words; kept in step with what is typed",
+              "fieldName": "value"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'what should change?'",
+              "description": "the empty field's words",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "counts",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the plan holds, mute at the right, e.g. `5 elements · 2 groups`",
+              "fieldName": "counts"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-intent-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettIntentBar",
+          "declaration": {
+            "name": "SettIntentBar",
+            "module": "src/shell/sett-intent-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-intent-bar",
+          "declaration": {
+            "name": "SettIntentBar",
+            "module": "src/shell/sett-intent-bar.ts"
           }
         }
       ]
@@ -9774,16 +9876,6 @@
             {
               "description": "the Focus button, Enter or a double click: `{ kind, name, session }`",
               "name": "sett-focus"
-            },
-            {
-              "name": "type",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "inheritedFrom": {
-                "name": "SettRow",
-                "module": "src/shell/row.ts"
-              }
             }
           ],
           "attributes": [
@@ -10261,19 +10353,7 @@
             "module": "/src/shell/row.js"
           },
           "tagName": "sett-group-row",
-          "customElement": true,
-          "events": [
-            {
-              "name": "type",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "inheritedFrom": {
-                "name": "SettRow",
-                "module": "src/shell/row.ts"
-              }
-            }
-          ]
+          "customElement": true
         },
         {
           "kind": "class",
@@ -10616,19 +10696,7 @@
             "module": "/src/shell/row.js"
           },
           "tagName": "sett-agent-row",
-          "customElement": true,
-          "events": [
-            {
-              "name": "type",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "inheritedFrom": {
-                "name": "SettRow",
-                "module": "src/shell/row.ts"
-              }
-            }
-          ]
+          "customElement": true
         },
         {
           "kind": "class",
@@ -10907,16 +10975,6 @@
             {
               "description": "`{ kind: 'file', name }`",
               "name": "sett-open"
-            },
-            {
-              "name": "type",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "inheritedFrom": {
-                "name": "SettRow",
-                "module": "src/shell/row.ts"
-              }
             }
           ],
           "attributes": [
@@ -11267,16 +11325,6 @@
             {
               "description": "`{ kind: 'changes', name: 'changes' }`",
               "name": "sett-open"
-            },
-            {
-              "name": "type",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "inheritedFrom": {
-                "name": "SettRow",
-                "module": "src/shell/row.ts"
-              }
             }
           ],
           "attributes": [

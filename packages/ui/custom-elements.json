@@ -341,7 +341,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "One card shape for seven uses: fix (dashed blue), plan delta (amber),\nimpact, merge checklist, pipeline, result (green), what's new. A heading\nwith a state (pill) or count (tag) on the right, then rows.",
+          "description": "One card shape for seven uses: fix (dashed blue), plan delta (amber),\nimpact, merge checklist, pipeline, result (green), what's new. A heading\nwith a state (pill) or count (tag) on the right, an optional `sub` line\nunder it, then rows; under the rows a `how` block (the merge's how), the\nverbs, and a `note` (the small mute line that says what happens next).",
           "name": "SettCard",
           "cssParts": [
             {
@@ -351,7 +351,7 @@
           ],
           "slots": [
             {
-              "description": "sett-card-row elements (and a sett-pipe for the pipeline)",
+              "description": "sett-card-row and sett-kv-row elements (and a sett-pipe for the pipeline), or a sett-hunk",
               "name": ""
             },
             {
@@ -359,12 +359,24 @@
               "name": "title"
             },
             {
-              "description": "a sett-pill (state) or sett-tag (count) at the right of the heading",
+              "description": "a sett-pill (state) or sett-tag (count) at the right of the heading; the result carries two pills",
               "name": "state"
             },
             {
-              "description": "buttons; only the fix card and the delta have them",
+              "description": "the secondary line under the heading, e.g. What's new's `from: your save · a pull`",
+              "name": "sub"
+            },
+            {
+              "description": "the block under the rows: the merge's `squash · from the forge's default · delete branch · archive session`",
+              "name": "how"
+            },
+            {
+              "description": "buttons; the fix card, the delta, What's new and the merge checklist have them, agent door first",
               "name": "acts"
+            },
+            {
+              "description": "the small mute line at the bottom: `the row moves to Done`",
+              "name": "note"
             }
           ],
           "members": [
@@ -377,6 +389,19 @@
               "default": "'plain'",
               "attribute": "variant",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "has",
+              "privacy": "private"
             }
           ],
           "attributes": [
@@ -398,7 +423,7 @@
         },
         {
           "kind": "class",
-          "description": "A card row: glyph · fact · where it leads. With `place` (a spot in code) or\n`nav` (another pane) the whole row is the link: it lights on hover and ends\nwith ›. A place is drawn as the small mono tag; a nav as a grey word.",
+          "description": "A card row: glyph · fact · where it leads. With `place` (a spot in code) or\n`nav` (another pane) the whole row is the link: it lights on hover and ends\nwith ›. A place is drawn as the small mono tag; a nav as a grey word. The\nglyph takes the kind's colour; `session` with a session id draws it in\nthat session's colour (What's new's `●` for a session told at idle).",
           "name": "SettCardRow",
           "slots": [
             {
@@ -418,7 +443,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
+              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦ ◆ ●), or a short count (`+1`)",
               "attribute": "mark"
             },
             {
@@ -430,6 +455,16 @@
               "default": "'mute'",
               "description": "colour of the glyph",
               "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id, for `kind=\"session\"`",
+              "attribute": "session",
               "reflects": true
             },
             {
@@ -472,7 +507,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
+              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦ ◆ ●), or a short count (`+1`)",
               "fieldName": "mark"
             },
             {
@@ -483,6 +518,14 @@
               "default": "'mute'",
               "description": "colour of the glyph",
               "fieldName": "kind"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id, for `kind=\"session\"`",
+              "fieldName": "session"
             },
             {
               "name": "place",
@@ -506,6 +549,88 @@
             "package": "lit"
           },
           "tagName": "sett-card-row",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A key · value row of an inspector layout (the pages' `kv`): a mute label in\na fixed column, the value after it. `mono` sets the value in the mono face\nfor sites and files. The `right` slot holds a link at the end of the value\n(`pick hunks`). Inside a sett-card the side padding goes.",
+          "name": "SettKvRow",
+          "slots": [
+            {
+              "description": "the value",
+              "name": ""
+            },
+            {
+              "description": "a word or link at the right end of the value",
+              "name": "right"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key, lowercase: `site`, `rule`, `fix`, `files`, `checks`, `then`",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "mono",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the value in the mono face",
+              "attribute": "mono",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'sug' | 'bad' | 'ok' | undefined"
+              },
+              "description": "the value's colour: sug for a line that needs you (`behind`)",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key, lowercase: `site`, `rule`, `fix`, `files`, `checks`, `then`",
+              "fieldName": "label"
+            },
+            {
+              "name": "mono",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the value in the mono face",
+              "fieldName": "mono"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "'sug' | 'bad' | 'ok' | undefined"
+              },
+              "description": "the value's colour: sug for a line that needs you (`behind`)",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-kv-row",
           "customElement": true
         },
         {
@@ -571,6 +696,22 @@
           "name": "sett-card-row",
           "declaration": {
             "name": "SettCardRow",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettKvRow",
+          "declaration": {
+            "name": "SettKvRow",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-kv-row",
+          "declaration": {
+            "name": "SettKvRow",
             "module": "src/card/sett-card.ts"
           }
         },
@@ -1470,6 +1611,14 @@
           "name": "SettCardRow",
           "declaration": {
             "name": "SettCardRow",
+            "module": "./card/sett-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettKvRow",
+          "declaration": {
+            "name": "SettKvRow",
             "module": "./card/sett-card.js"
           }
         },
@@ -2463,6 +2612,94 @@
           "declaration": {
             "name": "SettIntentBar",
             "module": "./shell/sett-intent-bar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettInspector",
+          "declaration": {
+            "name": "SettInspector",
+            "module": "./shell/sett-inspector.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "InspectorTone",
+          "declaration": {
+            "name": "InspectorTone",
+            "module": "./shell/sett-inspector.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettHunk",
+          "declaration": {
+            "name": "SettHunk",
+            "module": "./shell/sett-hunk.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettHunkLine",
+          "declaration": {
+            "name": "SettHunkLine",
+            "module": "./shell/sett-hunk.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRemark",
+          "declaration": {
+            "name": "SettRemark",
+            "module": "./shell/sett-hunk.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HunkLineKind",
+          "declaration": {
+            "name": "HunkLineKind",
+            "module": "./shell/sett-hunk.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RemarkKind",
+          "declaration": {
+            "name": "RemarkKind",
+            "module": "./shell/sett-hunk.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettCommitForm",
+          "declaration": {
+            "name": "SettCommitForm",
+            "module": "./shell/sett-commit-form.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CommitThen",
+          "declaration": {
+            "name": "CommitThen",
+            "module": "./shell/sett-commit-form.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettAsk",
+          "declaration": {
+            "name": "SettAsk",
+            "module": "./shell/sett-ask.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettResolveRow",
+          "declaration": {
+            "name": "SettResolveRow",
+            "module": "./shell/sett-ask.js"
           }
         }
       ]
@@ -7099,6 +7336,220 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/shell/sett-ask.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The Ask thread in the inspector (spec §6 Daily): your question on the right\nin the selection tint, the `ran` block (one line per query, a sett-tool),\nthe answer (a sett-msg from the framer, blue; its items are small mono tags),\nthe witnesses it cites as mono tags that are links (`open all` after them),\nthen, when there is one, the **judgement** block, labelled and standing on\nfacts with its resolve rows, and the **can't compute** block that offers the\nnearest queries as links. The `make it so` door hands the answer to a plan.\nThe composer under it is the inspector's, not this element's.",
+          "name": "SettAsk",
+          "slots": [
+            {
+              "description": "your question, the words only",
+              "name": "question"
+            },
+            {
+              "description": "a sett-tool with one `ran …` line per query",
+              "name": "ran"
+            },
+            {
+              "description": "a sett-msg from the agent; items inside it are `sett-tag mono`",
+              "name": "answer"
+            },
+            {
+              "description": "the judgement's words and its sett-resolve-row elements",
+              "name": "judgement"
+            },
+            {
+              "description": "the can't-compute words",
+              "name": "cant"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "witnesses",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the witnesses the answer cites, space-separated: `service.rs:14 ports.rs:6 pg.rs:14`",
+              "attribute": "witnesses"
+            },
+            {
+              "kind": "field",
+              "name": "nearest",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the nearest queries a can't-compute offers, separated by ` | `: `path ship() → postgres | why OrderRepo::save`",
+              "attribute": "nearest"
+            },
+            {
+              "kind": "field",
+              "name": "has",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "fire",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "enter",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ place }` from a witness, `{ places }` from open all",
+              "name": "sett-go"
+            },
+            {
+              "description": "`{ query }` from a nearest query",
+              "name": "sett-query"
+            },
+            {
+              "description": "make it so was pressed",
+              "name": "sett-plan"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "witnesses",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the witnesses the answer cites, space-separated: `service.rs:14 ports.rs:6 pg.rs:14`",
+              "fieldName": "witnesses"
+            },
+            {
+              "name": "nearest",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the nearest queries a can't-compute offers, separated by ` | `: `path ship() → postgres | why OrderRepo::save`",
+              "fieldName": "nearest"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-ask",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A resolve row of a judgement: `⇄` in amber (it needs a hand, not a fix), the\nfact, its source in mono, and the `resolve` link at the end.",
+          "name": "SettResolveRow",
+          "slots": [
+            {
+              "description": "the fact",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "where the fact comes from, mono: `rules:3`, `service.rs:14`",
+              "attribute": "source"
+            },
+            {
+              "kind": "field",
+              "name": "verb",
+              "type": {
+                "text": "string"
+              },
+              "default": "'resolve'",
+              "description": "the verb at the end, lowercase",
+              "attribute": "verb"
+            },
+            {
+              "kind": "field",
+              "name": "go",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ source }` from the resolve link",
+              "name": "sett-resolve"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "where the fact comes from, mono: `rules:3`, `service.rs:14`",
+              "fieldName": "source"
+            },
+            {
+              "name": "verb",
+              "type": {
+                "text": "string"
+              },
+              "default": "'resolve'",
+              "description": "the verb at the end, lowercase",
+              "fieldName": "verb"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-resolve-row",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettAsk",
+          "declaration": {
+            "name": "SettAsk",
+            "module": "src/shell/sett-ask.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-ask",
+          "declaration": {
+            "name": "SettAsk",
+            "module": "src/shell/sett-ask.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettResolveRow",
+          "declaration": {
+            "name": "SettResolveRow",
+            "module": "src/shell/sett-ask.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-resolve-row",
+          "declaration": {
+            "name": "SettResolveRow",
+            "module": "src/shell/sett-ask.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/shell/sett-bottom-panel.ts",
       "declarations": [
         {
@@ -8487,6 +8938,236 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/shell/sett-commit-form.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The ready commit in the inspector, one click from the `you` chip (spec §4,\n§6 Daily; ADR 0016): the message, the description prefilled from the diff,\nthen the `files` line with `pick hunks`, the `checks` that ran on save, the\n`then` choice (stay on main · push to a branch · open MR), and, when main\nmoved, the `behind` line in amber with both doors, agent door first. The\nprimary verb is `commit · ⌘↩`. \"Behind main\" is a line here, never a dialog.\nThe form owns its fields and `then`; it reports the rest.",
+          "name": "SettCommitForm",
+          "cssParts": [
+            {
+              "description": "the message input",
+              "name": "message"
+            },
+            {
+              "description": "the description textarea",
+              "name": "description"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the small mute line under the verb",
+              "name": "note"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the commit message, prefilled from the diff or the plan element",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the description, prefilled from the diff",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'description · prefilled from the diff'",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "files",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the files line, mono: `store/pg.rs +12 · store/pool.rs +8`",
+              "attribute": "files"
+            },
+            {
+              "kind": "field",
+              "name": "checks",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the checks line: `ran on save · check 0 · tests 41 ✓`",
+              "attribute": "checks"
+            },
+            {
+              "kind": "field",
+              "name": "then",
+              "type": {
+                "text": "CommitThen"
+              },
+              "default": "'main'",
+              "description": "what happens next: stay on `main`, or push to a `branch` and open an MR",
+              "attribute": "then",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "behind",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "main moved: `main moved 2 commits`; the line and its two doors appear",
+              "attribute": "behind"
+            },
+            {
+              "kind": "field",
+              "name": "fire",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "field",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "commit",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "choose",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ message, description, then }` from the verb or ⌘↩ in a field",
+              "name": "sett-commit"
+            },
+            {
+              "description": "`pick hunks` was pressed",
+              "name": "sett-pick"
+            },
+            {
+              "description": "`{ then }` when the choice changes",
+              "name": "sett-then"
+            },
+            {
+              "description": "`{ door: 'agent' | 'manual' }` from the behind line",
+              "name": "sett-update"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the commit message, prefilled from the diff or the plan element",
+              "fieldName": "value"
+            },
+            {
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the description, prefilled from the diff",
+              "fieldName": "description"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'description · prefilled from the diff'",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "files",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the files line, mono: `store/pg.rs +12 · store/pool.rs +8`",
+              "fieldName": "files"
+            },
+            {
+              "name": "checks",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the checks line: `ran on save · check 0 · tests 41 ✓`",
+              "fieldName": "checks"
+            },
+            {
+              "name": "then",
+              "type": {
+                "text": "CommitThen"
+              },
+              "default": "'main'",
+              "description": "what happens next: stay on `main`, or push to a `branch` and open an MR",
+              "fieldName": "then"
+            },
+            {
+              "name": "behind",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "main moved: `main moved 2 commits`; the line and its two doors appear",
+              "fieldName": "behind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-commit-form",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettCommitForm",
+          "declaration": {
+            "name": "SettCommitForm",
+            "module": "src/shell/sett-commit-form.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-commit-form",
+          "declaration": {
+            "name": "SettCommitForm",
+            "module": "src/shell/sett-commit-form.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/shell/sett-files-view.ts",
       "declarations": [
         {
@@ -9211,6 +9892,633 @@
           "declaration": {
             "name": "SettTreeRow",
             "module": "src/shell/sett-files-view.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-hunk.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One hunk of a review, or the fix card's proposed change. Header: `file:line ·\nitem · sub-agent` (the sub-agent in its session colour), then the review\nverbs at the right: `viewed` once seen (else `v · viewed`), `r · remark`,\n`show on map`. Lines slot in as `sett-hunk-line`; a `sett-remark` goes in\nthe `remark` slot under them. `proposed` swaps the right side for\n`proposed · verified: …` and drops the verbs: the hunk is a proposal, not a\ndiff to review. It reports and never flips `viewed` itself.",
+          "name": "SettHunk",
+          "cssParts": [
+            {
+              "description": "the header row",
+              "name": "header"
+            }
+          ],
+          "slots": [
+            {
+              "description": "sett-hunk-line elements",
+              "name": ""
+            },
+            {
+              "description": "a sett-remark under the lines",
+              "name": "remark"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "file",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "where, in mono: `service.rs:22`",
+              "attribute": "file"
+            },
+            {
+              "kind": "field",
+              "name": "item",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the item the hunk belongs to: `pay()`",
+              "attribute": "item"
+            },
+            {
+              "kind": "field",
+              "name": "agent",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sub-agent that wrote it: `a3`, drawn in the session colour",
+              "attribute": "agent"
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "viewed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the file was marked viewed: the ok word replaces the button",
+              "attribute": "viewed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "proposed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the fix card's hunk: a proposal, with how it was verified",
+              "attribute": "proposed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "verified",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "how the proposal was verified, after `verified:` (e.g. `check green`)",
+              "attribute": "verified"
+            },
+            {
+              "kind": "field",
+              "name": "fire",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ viewed }`, the state asked for",
+              "name": "sett-viewed"
+            },
+            {
+              "description": "`r · remark` was pressed",
+              "name": "sett-remark"
+            },
+            {
+              "description": "`show on map` was pressed",
+              "name": "sett-show"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "file",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "where, in mono: `service.rs:22`",
+              "fieldName": "file"
+            },
+            {
+              "name": "item",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the item the hunk belongs to: `pay()`",
+              "fieldName": "item"
+            },
+            {
+              "name": "agent",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sub-agent that wrote it: `a3`, drawn in the session colour",
+              "fieldName": "agent"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "fieldName": "session"
+            },
+            {
+              "name": "viewed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the file was marked viewed: the ok word replaces the button",
+              "fieldName": "viewed"
+            },
+            {
+              "name": "proposed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the fix card's hunk: a proposal, with how it was verified",
+              "fieldName": "proposed"
+            },
+            {
+              "name": "verified",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "how the proposal was verified, after `verified:` (e.g. `check green`)",
+              "fieldName": "verified"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-hunk",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the\nbad tint, `ctx` plain, `flag` on the amber tint: the line a remark points\nat. The sign comes from the kind; the text is the code only.",
+          "name": "SettHunkLine",
+          "slots": [
+            {
+              "description": "the code",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "HunkLineKind"
+              },
+              "default": "'ctx'",
+              "attribute": "kind",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "HunkLineKind"
+              },
+              "default": "'ctx'",
+              "fieldName": "kind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-hunk-line",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The block under a hunk: an author line (dot and name, like a message), the\ntext, then the two exits: `ask for a change` (a plan element the session\nrealizes) and `comment · no change needed` (an observation; never blocks).\nOnce `kind` is set the verbs go: a change shows the pill `asks for a\nchange` and the element line (`E7 · realized in the session`); a comment\nshows its plain pill. The remark reports and never sets `kind` itself.",
+          "name": "SettRemark",
+          "slots": [
+            {
+              "description": "the remark text",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "author",
+              "type": {
+                "text": "string"
+              },
+              "default": "'you'",
+              "attribute": "author"
+            },
+            {
+              "kind": "field",
+              "name": "place",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the line it points at, mono: `service.rs:23`",
+              "attribute": "place"
+            },
+            {
+              "kind": "field",
+              "name": "time",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "time"
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "RemarkKind | undefined"
+              },
+              "description": "the exit taken; unset while the remark is being written",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "element",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the plan element a change became: `E7`",
+              "attribute": "element"
+            },
+            {
+              "kind": "field",
+              "name": "choose",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ kind }`: `change` or `comment`",
+              "name": "sett-remark-kind"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "author",
+              "type": {
+                "text": "string"
+              },
+              "default": "'you'",
+              "fieldName": "author"
+            },
+            {
+              "name": "place",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the line it points at, mono: `service.rs:23`",
+              "fieldName": "place"
+            },
+            {
+              "name": "time",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "time"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "RemarkKind | undefined"
+              },
+              "description": "the exit taken; unset while the remark is being written",
+              "fieldName": "kind"
+            },
+            {
+              "name": "element",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the plan element a change became: `E7`",
+              "fieldName": "element"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-remark",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettHunk",
+          "declaration": {
+            "name": "SettHunk",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-hunk",
+          "declaration": {
+            "name": "SettHunk",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettHunkLine",
+          "declaration": {
+            "name": "SettHunkLine",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-hunk-line",
+          "declaration": {
+            "name": "SettHunkLine",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRemark",
+          "declaration": {
+            "name": "SettRemark",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-remark",
+          "declaration": {
+            "name": "SettRemark",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-inspector.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The inspector, the right pane: it is about the selection (DESIGN.md \"The\nshell\" rule 6). A header (heading, sub, state), a scrolling body, a fixed\nverbs bar with its small note, and a composer row shown only when one is\nslotted. The top border says who the pane is about, in the thread family's\nwords: a `session` takes the session colour; `kind` planner is amber, framer\nand fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with\nthe heading as its title. Width is the app's (`size.shell.inspector`).",
+          "name": "SettInspector",
+          "cssParts": [
+            {
+              "description": "the header row",
+              "name": "header"
+            },
+            {
+              "description": "the scrolling body",
+              "name": "body"
+            },
+            {
+              "description": "the fixed verbs bar",
+              "name": "verbs"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the body: a card, kv rows, messages, a hunk, a form",
+              "name": ""
+            },
+            {
+              "description": "the fixed bar's sett-button elements, agent door first",
+              "name": "verbs"
+            },
+            {
+              "description": "the small mute line under the verbs",
+              "name": "note"
+            },
+            {
+              "description": "a sett-composer; the row exists only when slotted",
+              "name": "composer"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the heading, bold",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "sub",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the secondary words after the heading",
+              "attribute": "sub"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the state words at the right: `running`, `draft`, `🔒 locked`, `new`",
+              "attribute": "state"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "InspectorTone"
+              },
+              "default": "'default'",
+              "description": "the state's colour: bad, sug, ok, mute; default is secondary ink",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id: a 3 px top border in the session colour and the heading in it",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "ThreadIdentity | undefined"
+              },
+              "description": "the thread kind the pane holds: session (session colour), planner (amber), framer or fixer (blue)",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the pane is the 28 px handle",
+              "attribute": "folded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "has",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "unfold",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "the folded handle was pressed",
+              "name": "sett-unfold"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the heading, bold",
+              "fieldName": "heading"
+            },
+            {
+              "name": "sub",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the secondary words after the heading",
+              "fieldName": "sub"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the state words at the right: `running`, `draft`, `🔒 locked`, `new`",
+              "fieldName": "state"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "InspectorTone"
+              },
+              "default": "'default'",
+              "description": "the state's colour: bad, sug, ok, mute; default is secondary ink",
+              "fieldName": "tone"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id: a 3 px top border in the session colour and the heading in it",
+              "fieldName": "session"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "ThreadIdentity | undefined"
+              },
+              "description": "the thread kind the pane holds: session (session colour), planner (amber), framer or fixer (blue)",
+              "fieldName": "kind"
+            },
+            {
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the pane is the 28 px handle",
+              "fieldName": "folded"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-inspector",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettInspector",
+          "declaration": {
+            "name": "SettInspector",
+            "module": "src/shell/sett-inspector.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-inspector",
+          "declaration": {
+            "name": "SettInspector",
+            "module": "src/shell/sett-inspector.ts"
           }
         }
       ]
@@ -13089,12 +14397,16 @@
         },
         {
           "kind": "class",
-          "description": "The agent asks. Each option says what it changes; `later` leaves it waiting.",
+          "description": "The agent asks. Each option says what it changes; `later` leaves it waiting.\nA gate that failed asks the same way (spec §6 \"Gate failed\"): the four doors\nare option rows, and the `input` slot holds the one-line hint for `one more\nround with a hint`.",
           "name": "SettQuestion",
           "slots": [
             {
               "description": "the question",
               "name": ""
+            },
+            {
+              "description": "a one-line `input` under the question, e.g. the hint for one more round",
+              "name": "input"
             },
             {
               "description": "sett-option elements",
@@ -13159,7 +14471,7 @@
         },
         {
           "kind": "class",
-          "description": "The agent left the plan. Reason, then the three ways back (and discuss).",
+          "description": "The agent left the plan. Reason, then the three ways back (and discuss). A\ndenied write (spec §6 \"Deviation\") names the check that denied it in\n`check`, mono: `core · element scope`.",
           "name": "SettDeviation",
           "slots": [
             {
@@ -13180,6 +14492,16 @@
               },
               "default": "''",
               "attribute": "subject"
+            },
+            {
+              "kind": "field",
+              "name": "check",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the check that denied the write, mono: `core · element scope`",
+              "attribute": "check"
             }
           ],
           "attributes": [
@@ -13190,6 +14512,15 @@
               },
               "default": "''",
               "fieldName": "subject"
+            },
+            {
+              "name": "check",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the check that denied the write, mono: `core · element scope`",
+              "fieldName": "check"
             }
           ],
           "superclass": {

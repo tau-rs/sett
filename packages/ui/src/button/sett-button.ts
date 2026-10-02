@@ -33,7 +33,7 @@ export class SettButton extends LitElement {
     :host([variant='primary']) button { background: var(--sett-color-sel); color: var(--sett-color-paper); border-color: var(--sett-color-sel); }
     :host([variant='quiet']) button { border-color: transparent; background: transparent; color: var(--sett-color-ink2); }
     button:disabled { cursor: not-allowed; background: transparent; border-style: dashed; color: var(--sett-color-mute); border-color: var(--sett-color-line); }
-    :host([variant='primary']) button:disabled { color: var(--sett-color-sel); border-color: var(--sett-color-sel); }
+    :host([variant='primary']) button:disabled { background: transparent; border-style: dashed; color: var(--sett-color-sel); border-color: var(--sett-color-sel); }
   `;
   render() { return html`<button part="button" ?disabled=${this.disabled}><slot></slot></button>`; }
 }
@@ -62,7 +62,7 @@ export class SettSplitButton extends LitElement {
     .dd { border-radius: 0 var(--sett-radius-chip) var(--sett-radius-chip) 0; padding-left: var(--sett-space-1); padding-right: var(--sett-space-1); margin-left: calc(-1 * var(--sett-stroke-hair)); }
     :host([variant='primary']) button { background: var(--sett-color-sel); color: var(--sett-color-paper); border-color: var(--sett-color-sel); }
     :host([variant='primary']) .dd { border-left-color: var(--sett-color-paper); }
-    button:disabled { cursor: not-allowed; background: transparent; border-style: dashed; color: var(--sett-color-sel); border-color: var(--sett-color-sel); }
+    button:disabled, :host([variant='primary']) button:disabled { cursor: not-allowed; background: transparent; border-style: dashed; color: var(--sett-color-sel); border-color: var(--sett-color-sel); }
     .menu { position: absolute; top: calc(100% + var(--sett-space-1)); left: 0; z-index: 1; }
     :host(:not([open])) .menu { display: none; }
   `;

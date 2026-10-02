@@ -39,6 +39,19 @@ export const Main: Story = { name: 'main · up to date', render: () => both('mai
 export const Session: Story = { name: 'session · 2 behind main', render: () => both('session') };
 export const YouLocked: Story = { name: 'you locked · 2 changed', render: () => both('you') };
 export const Plan: Story = { name: 'plan', render: () => both('plan') };
+export const Analysis: Story = {
+  name: 'map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)',
+  render: () => html`<div style="display:grid;gap:var(--sett-space-4)">
+    ${labelled('every crate type-checked', html`<sett-status-bar>${SCOPE.main}<sett-status-item label="Checks"><span data-tone="ok">all passed</span></sett-status-item>
+      <sett-status-item slot="right" href="#map"><span data-tone="ok">Map up to date · 2 s</span></sett-status-item></sett-status-bar>`)}
+    ${labelled('one crate rust-analyzer could not type-check: syntax-level facts, marked guessed; warns, never blocks; the reason is on the Checks tab', html`<sett-status-bar>${SCOPE.main}<sett-status-item label="Checks"><span data-tone="sug">1 warning</span></sett-status-item>
+      <sett-status-item slot="right" href="#checks"><span data-tone="ok">Map up to date · 2 s</span> · <span data-tone="sug">1 crate guessed</span></sett-status-item></sett-status-bar>`)}
+    ${labelled('the unit is the main bin and its closure; other bins and examples are not analyzed, in the lightest ink', html`<sett-status-bar>${SCOPE.main}<sett-status-item label="Checks"><span data-tone="ok">all passed</span></sett-status-item>
+      <sett-status-item slot="right" href="#checks"><span data-tone="ok">Map up to date · 2 s</span> · <span data-tone="mute">2 bins not analyzed</span></sett-status-item></sett-status-bar>`)}
+    ${labelled('both', html`<sett-status-bar>${SCOPE.main}<sett-status-item label="Checks"><span data-tone="sug">1 warning</span></sett-status-item>
+      <sett-status-item slot="right" href="#checks"><span data-tone="ok">Map up to date · 2 s</span> · <span data-tone="sug">1 crate guessed</span> · <span data-tone="mute">2 bins not analyzed</span></sett-status-item></sett-status-bar>`)}
+  </div>`,
+};
 export const Links: Story = {
   name: 'items · the host is the link, or an anchor with href; a count is ink, a tone is its accent',
   render: () => html`<sett-status-bar>

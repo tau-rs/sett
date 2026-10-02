@@ -45,7 +45,7 @@ export class SettStatusBar extends LitElement {
  * set. With `scope` it is the scope item: a dot in the scope's colour, then
  * the scope's words from `scopeText` (and `🔒` when locked), then its state.
  *
- * @slot - the count or state: `b` is a count (ink, medium); `[data-tone="sug" | "bad" | "ok"]` takes that accent
+ * @slot - the count or state: `b` is a count (ink, medium); `[data-tone="sug" | "bad" | "ok"]` takes that accent; `[data-tone="mute"]` is the lightest ink, for what is known least (a crate guessed, bins not analyzed: spec §13.7, §13.10)
  */
 @customElement('sett-status-item')
 export class SettStatusItem extends LitElement {
@@ -84,6 +84,7 @@ export class SettStatusItem extends LitElement {
       ::slotted([data-tone='sug']) { color: var(--sett-color-sug); }
       ::slotted([data-tone='bad']) { color: var(--sett-color-bad); }
       ::slotted([data-tone='ok']) { color: var(--sett-color-ok); }
+      ::slotted([data-tone='mute']) { color: var(--sett-color-mute); }
     `,
   ];
 

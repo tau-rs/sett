@@ -23,6 +23,8 @@ Synced to: no ADR yet (`arch-design` holds none on 2026-10-02). DESIGN.md wins o
 | 2026-10-02 | `arch-fixtures` (handoff §7) | the repository is empty; stories cannot load `fixtures-for-ui/` | stories use sett's own fixtures (ripgrep, zero2prod, zed), to export (#70) |
 | 2026-10-02 | fixtures, links | a layered unit's links are stored leaf → public, a hexagon's user → used; one convention is needed before links are drawn | #38 |
 | 2026-10-02 | analyser output | lane 4 needs a kind per link and how the analyser knows it; `sett-item` needs the kinds const · static · alias · union | #69, #68 |
+| 2026-10-02 | shell page, daily flow | no page draws the **`detected` chip** of a `you` session (spec §4: "the git chip counts the changes; commit is one click from the chip; `Delegate the rest`") | sett draws it with a `sel` label, `changes detected · n files`, doors `delegate the rest` · `commit` (#63); to confirm or redraw |
+| 2026-10-02 | session flow, shell page | the **gate of a group has no glyph** on any page (the pages write `judge` as a tag; DESIGN.md rule 7 writes `gate`); the session card's glyph column needs one per gate word | sett reads the gate through the existing glyphs: `✓` done · `●` running · `●` gate in amber · `!` failed in red · `·` waiting (#63); no new glyph |
 
 ## Deviations (what sett changed from the pages, and why)
 
@@ -41,3 +43,6 @@ Synced to: no ADR yet (`arch-design` holds none on 2026-10-02). DESIGN.md wins o
 | 2026-10-02 | sessions wireflow | the full-paths toggle (☰) sits beside the `changed · all files` seg, not in the first stage's header | a button inside a `tree` fails the a11y gate (`aria-required-children`); one setting per list matches "remembered per session" (#62) |
 | 2026-10-02 | shell | a sub-agent row shows a dot in the sub shade only, no glyph run or guide line | a 24 px row with a name and a state tag has no room for the card's idiom (#62) |
 | 2026-10-02 | shell | on a selected row the status letter and tone words go `ink` | `bad` and session colours on the `sel` tint are 4.3:1 in dark (#62) |
+| 2026-10-02 | session | the session card's group row is `sett-plan-row kind="group"`, with its elements inside it and its sub-agents folded under the group | the Sessions view (lane C) owns `sett-group-row`; one name per element (#63) |
+| 2026-10-02 | session | `stepped-in` is `taken-over` on the card's rows; the old value still draws for one release | step in is gone from the vocabulary (rule 9) |
+| 2026-10-02 | plan, daily | a planned element's hint is a `sett-hint` pill after the code at its site, next to `◇`, not a right-aligned count | rule 12: the hint sits at the site; the counts stay the declaration's |

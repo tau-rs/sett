@@ -598,7 +598,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent\ndoor first and bold, manual door second and plain (P-1); `me-first` swaps\nthem. A chip always carries a verb (DESIGN.md \"The shell\" rule 1); a\nseparator stands before each verb that is there. A done chip keeps full\ncontrast, its label turns ok with ✓ and it gains a plain `dismiss` verb.\nThe `gate` kind is a group's gate (`gate · group 1 → group 2 · judge\nrunning`, verb `open`): its label takes the colour of the session that runs\nit, and a failed gate (`failed 1/2`) is the `blocking` state. Never animates.",
+          "description": "Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent\ndoor first and bold, manual door second and plain (P-1); `me-first` swaps\nthem. A chip always carries a verb (DESIGN.md \"The shell\" rule 1); a\nseparator stands before each verb that is there. A done chip keeps full\ncontrast, its label turns ok with ✓ and it gains a plain `dismiss` verb.\nThe `gate` kind is a group's gate (`gate · group 1 → group 2 · judge\nrunning`, verb `open`): its label takes the colour of the session that runs\nit, and a failed gate (`failed 1/2`) is the `blocking` state. The\n`detected` kind is your own work, found by the watcher and never declared\n(`changes detected · 3 files`, spec §4 \"Work by hand\"): its label is `sel`\nlike everything that is yours; agent door `delegate the rest`, manual door\n`commit`. Never animates.",
           "name": "SettChip",
           "cssParts": [
             {
@@ -661,7 +661,7 @@
               "type": {
                 "text": "SessionId | undefined"
               },
-              "description": "session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label",
+              "description": "session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label; detected is yours and takes none",
               "attribute": "session",
               "reflects": true
             },
@@ -733,7 +733,7 @@
               "type": {
                 "text": "SessionId | undefined"
               },
-              "description": "session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label",
+              "description": "session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label; detected is yours and takes none",
               "fieldName": "session"
             },
             {

@@ -806,12 +806,12 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
 
 ### `<sett-chip>`
 
-Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door first and bold, manual door second and plain (P-1); `me-first` swaps them. A chip always carries a verb (DESIGN.md "The shell" rule 1); a separator stands before each verb that is there. A done chip keeps full contrast, its label turns ok with ✓ and it gains a plain `dismiss` verb. The `gate` kind is a group's gate (`gate · group 1 → group 2 · judge running`, verb `open`): its label takes the colour of the session that runs it, and a failed gate (`failed 1/2`) is the `blocking` state. Never animates.
+Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door first and bold, manual door second and plain (P-1); `me-first` swaps them. A chip always carries a verb (DESIGN.md "The shell" rule 1); a separator stands before each verb that is there. A done chip keeps full contrast, its label turns ok with ✓ and it gains a plain `dismiss` verb. The `gate` kind is a group's gate (`gate · group 1 → group 2 · judge running`, verb `open`): its label takes the colour of the session that runs it, and a failed gate (`failed 1/2`) is the `blocking` state. The `detected` kind is your own work, found by the watcher and never declared (`changes detected · 3 files`, spec §4 "Work by hand"): its label is `sel` like everything that is yours; agent door `delegate the rest`, manual door `commit`. Never animates.
 
 - attrs:
   - `kind=ChipKind` — what the chip is about
   - `state=ChipState` — normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓)
-  - `session=SessionId` — session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label
+  - `session=SessionId` — session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label; detected is yours and takes none
   - `me-first=boolean` — the "me first" setting: manual door first and bold
 - slots:
   - `(default)` — the fact, lowercase
@@ -834,6 +834,8 @@ Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door 
   - `primitives-chip--tree` Tree
   - `primitives-chip--gate-running` kind · gate · running, in the session's colour, verb open
   - `primitives-chip--gate-failed` kind · gate · failed n/m, blocking
+  - `primitives-chip--detected` kind · detected · your own work, found by the watcher · four states
+  - `primitives-chip--detected-in-bar` in context · a you session: the detected chip beside the agent chip
   - `primitives-chip--normal` Normal
   - `primitives-chip--blocking` Blocking
   - `primitives-chip--waiting` Waiting

@@ -125,6 +125,12 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -189,6 +195,12 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -251,6 +263,12 @@ The agent strip: the session's path under the scope line when a session is the s
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -404,6 +422,12 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -533,6 +557,148 @@ The line that ends every agent reply: `changed · what`, or `no change` with `no
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
 
+### `<sett-changes-header>`
+
+The header card of the Changes list: the branch in mono and its worktree, ahead and behind, when it was last rebased, then the MR row (`MR !42 · checks ✓ · merge gated`) and the plan row (`plan · 5 elements · group 2 of 2`), each a row that is the link to what it names, ending in `›` (DESIGN.md rule 10). The verbs sit under them in the `verbs` slot: the app decides which, agent door first where there is a pair.
+
+- attrs:
+  - `branch=string` — the branch name, mono
+  - `worktree=string` — the worktree, mono mute after the branch, e.g. `w1`
+  - `ahead=string` — commits ahead of main
+  - `behind=string` — commits behind main
+  - `rebased=string` — `rebased 2 h ago`
+  - `mr=string` — the MR row's words, e.g. `MR !42 · checks ✓ · merge gated`
+  - `plan=string` — the plan row's words, e.g. `plan · 5 elements · group 2 of 2`
+- slots:
+  - `verbs` — sett-button elements: open MR · rebase · review so far
+- events:
+  - `sett-open` — `{ what: 'mr' | 'plan' }` from a row
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-changes-list>`
+
+The Changes list of a session, laid out like Magit's status buffer (the sessions wireflow): the branch's state in a header card, then one section per stage, top to bottom, not staged · next commit · commits ahead. A file is in exactly one section. `all` is the other shape of the same list: the whole worktree as a tree with the changed files marked and their stage as a pill. The consumer passes stages or tree rows; the list transforms nothing. The mode seg reports and never switches itself; so does the full-paths toggle at its right (`flat`, one setting for the whole list, remembered per session). The stage verbs (stage, unstage, commit) are the app's and live in the right pane.
+
+- attrs:
+  - `mode=ChangesMode` — which shape the rows are: the seg marks it
+  - `flat=boolean` — the stages list full paths instead of folders: the toggle is pressed
+- slots:
+  - `header` — a sett-changes-header
+  - `(default)` — sett-stage sections (changed), or sett-tree-row rows (all)
+- parts:
+  - `tree` — the sections or rows
+- events:
+  - `sett-mode` — `{ value }` from the seg; the app sets `mode`
+  - `sett-flat` — `{ flat }` from the toggle, the state asked for; the app sets `flat` here and on the stages
+  - `sett-select` — from a row
+  - `sett-open` — from a row's Enter or double click, or a header line `{ what }`
+  - `sett-fold` — from a folder or commit chevron
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-changes-row>`
 
 The Changes row of a session: `changes` and, at the right, what the branch holds (`2 ahead · MR !42 · gated`). Enter or a double click opens the Changes list.
@@ -560,6 +726,12 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -712,6 +884,80 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
+### `<sett-commit-row>`
+
+A commit ahead of main: its sha in mono, its message, the element it realises (`E3`), the writer, and the gate it passed (`gate ✓`, ok). It expands in place to its files (sett-file-row). Enter or a double click opens it in the inspector.
+
+- attrs:
+  - `sha=string` — the short sha, 7 chars, mono
+  - `element=string` — the plan element the commit realises, e.g. `E3`
+  - `writer=string` — who wrote it, mono at the right
+  - `gate=string` — the gate it passed: `gate ✓` reads ok; any other words are plain
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- slots:
+  - `(default)` — sett-file-row children; rendered only while open
+- events:
+  - `sett-open` — `{ kind: 'commit', name, sha }`
+  - `sett-fold` — `{ kind: 'commit', name, sha, open }`
+  - `type`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-composer>`
 
 The composer. `send` is an input and a send button. `handback` turns it into the hand-back note: blue, a few lines, the touched files under it, and "hand back" as its button.
@@ -791,6 +1037,12 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -859,6 +1111,12 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -996,6 +1254,12 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -1310,6 +1574,12 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -1589,6 +1859,12 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -1644,6 +1920,12 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -1704,6 +1986,12 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -1766,6 +2054,12 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -1823,6 +2117,12 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2147,6 +2447,12 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2207,6 +2513,12 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2396,6 +2708,12 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2463,6 +2781,12 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2601,6 +2925,71 @@ The planner's accept: the main verb plus a ▾ that opens a list (the driver) un
   - `buttons-buttons--gated-open` gated · open
   - `buttons-buttons--hand-back-disabled` hand back · disabled until the note is written
 
+### `<sett-stage>`
+
+One stage of the Changes list: `not staged` · `next commit · E3` · `commits ahead`, with its count. Rows sit under their folders (sett-tree-row, then sett-file-row); `flat` says the rows are full paths instead (the toggle that asks for it is the list's: a button inside the tree would not pass the a11y gate). In review, `progress` (`3 of 7 viewed`) sits at the right.
+
+- attrs:
+  - `label=string` — the stage's words, lowercase
+  - `count=string` — how many rows, mono at the right
+  - `flat=boolean` — rows are full paths, not folders
+  - `progress=string` — review progress, e.g. `3 of 7 viewed`
+- slots:
+  - `(default)` — sett-tree-row folders with sett-file-row rows, or sett-commit-row rows
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-status-bar>`
 
 The status bar: counts and states, each a link to the view that owns it, never a verb (DESIGN.md "The shell" rule 8). One line at the bottom of the shell.
@@ -2621,6 +3010,12 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2684,6 +3079,12 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2912,6 +3313,12 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2996,6 +3403,12 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected

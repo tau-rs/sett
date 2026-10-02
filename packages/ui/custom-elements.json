@@ -2340,6 +2340,54 @@
             "name": "PresenceScope",
             "module": "./shell/sett-files-view.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettChangesList",
+          "declaration": {
+            "name": "SettChangesList",
+            "module": "./shell/sett-changes-list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettChangesHeader",
+          "declaration": {
+            "name": "SettChangesHeader",
+            "module": "./shell/sett-changes-list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettStage",
+          "declaration": {
+            "name": "SettStage",
+            "module": "./shell/sett-changes-list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettCommitRow",
+          "declaration": {
+            "name": "SettCommitRow",
+            "module": "./shell/sett-changes-list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ChangesMode",
+          "declaration": {
+            "name": "ChangesMode",
+            "module": "./shell/sett-changes-list.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ChangesWhat",
+          "declaration": {
+            "name": "ChangesWhat",
+            "module": "./shell/sett-changes-list.js"
+          }
         }
       ]
     },
@@ -7427,6 +7475,881 @@
           "declaration": {
             "name": "SettPanelLine",
             "module": "src/shell/sett-bottom-panel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-changes-list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The Changes list of a session, laid out like Magit's status buffer (the\nsessions wireflow): the branch's state in a header card, then one section\nper stage, top to bottom, not staged · next commit · commits ahead. A file\nis in exactly one section. `all` is the other shape of the same list: the\nwhole worktree as a tree with the changed files marked and their stage as\na pill. The consumer passes stages or tree rows; the list transforms\nnothing. The mode seg reports and never switches itself; so does the\nfull-paths toggle at its right (`flat`, one setting for the whole list,\nremembered per session). The stage verbs (stage, unstage, commit) are the\napp's and live in the right pane.",
+          "name": "SettChangesList",
+          "cssParts": [
+            {
+              "description": "the sections or rows",
+              "name": "tree"
+            }
+          ],
+          "slots": [
+            {
+              "description": "a sett-changes-header",
+              "name": "header"
+            },
+            {
+              "description": "sett-stage sections (changed), or sett-tree-row rows (all)",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "ChangesMode"
+              },
+              "default": "'changed'",
+              "description": "which shape the rows are: the seg marks it",
+              "attribute": "mode",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "flat",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the stages list full paths instead of folders: the toggle is pressed",
+              "attribute": "flat",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "keys",
+              "privacy": "private",
+              "default": "new TreeKeys(this)"
+            },
+            {
+              "kind": "field",
+              "name": "onSeg",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "flip",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ value }` from the seg; the app sets `mode`",
+              "name": "sett-mode"
+            },
+            {
+              "description": "`{ flat }` from the toggle, the state asked for; the app sets `flat` here and on the stages",
+              "name": "sett-flat"
+            },
+            {
+              "description": "from a row",
+              "name": "sett-select"
+            },
+            {
+              "description": "from a row's Enter or double click, or a header line `{ what }`",
+              "name": "sett-open"
+            },
+            {
+              "description": "from a folder or commit chevron",
+              "name": "sett-fold"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mode",
+              "type": {
+                "text": "ChangesMode"
+              },
+              "default": "'changed'",
+              "description": "which shape the rows are: the seg marks it",
+              "fieldName": "mode"
+            },
+            {
+              "name": "flat",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the stages list full paths instead of folders: the toggle is pressed",
+              "fieldName": "flat"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-changes-list",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The header card of the Changes list: the branch in mono and its worktree,\nahead and behind, when it was last rebased, then the MR row (`MR !42 ·\nchecks ✓ · merge gated`) and the plan row (`plan · 5 elements · group 2 of\n2`), each a row that is the link to what it names, ending in `›` (DESIGN.md\nrule 10). The verbs sit under them in the `verbs` slot: the app decides\nwhich, agent door first where there is a pair.",
+          "name": "SettChangesHeader",
+          "slots": [
+            {
+              "description": "sett-button elements: open MR · rebase · review so far",
+              "name": "verbs"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "branch",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the branch name, mono",
+              "attribute": "branch"
+            },
+            {
+              "kind": "field",
+              "name": "worktree",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree, mono mute after the branch, e.g. `w1`",
+              "attribute": "worktree"
+            },
+            {
+              "kind": "field",
+              "name": "ahead",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "commits ahead of main",
+              "attribute": "ahead"
+            },
+            {
+              "kind": "field",
+              "name": "behind",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "commits behind main",
+              "attribute": "behind"
+            },
+            {
+              "kind": "field",
+              "name": "rebased",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "`rebased 2 h ago`",
+              "attribute": "rebased"
+            },
+            {
+              "kind": "field",
+              "name": "mr",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the MR row's words, e.g. `MR !42 · checks ✓ · merge gated`",
+              "attribute": "mr"
+            },
+            {
+              "kind": "field",
+              "name": "plan",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the plan row's words, e.g. `plan · 5 elements · group 2 of 2`",
+              "attribute": "plan"
+            },
+            {
+              "kind": "method",
+              "name": "open",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "what",
+                  "type": {
+                    "text": "ChangesWhat"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onKey",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                },
+                {
+                  "name": "what",
+                  "type": {
+                    "text": "ChangesWhat"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "link",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "what",
+                  "type": {
+                    "text": "ChangesWhat"
+                  }
+                },
+                {
+                  "name": "words",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ what: 'mr' | 'plan' }` from a row"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "branch",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the branch name, mono",
+              "fieldName": "branch"
+            },
+            {
+              "name": "worktree",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree, mono mute after the branch, e.g. `w1`",
+              "fieldName": "worktree"
+            },
+            {
+              "name": "ahead",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "commits ahead of main",
+              "fieldName": "ahead"
+            },
+            {
+              "name": "behind",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "commits behind main",
+              "fieldName": "behind"
+            },
+            {
+              "name": "rebased",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "`rebased 2 h ago`",
+              "fieldName": "rebased"
+            },
+            {
+              "name": "mr",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the MR row's words, e.g. `MR !42 · checks ✓ · merge gated`",
+              "fieldName": "mr"
+            },
+            {
+              "name": "plan",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the plan row's words, e.g. `plan · 5 elements · group 2 of 2`",
+              "fieldName": "plan"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-changes-header",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One stage of the Changes list: `not staged` · `next commit · E3` ·\n`commits ahead`, with its count. Rows sit under their folders\n(sett-tree-row, then sett-file-row); `flat` says the rows are full paths\ninstead (the toggle that asks for it is the list's: a button inside the\ntree would not pass the a11y gate). In review, `progress` (`3 of 7\nviewed`) sits at the right.",
+          "name": "SettStage",
+          "slots": [
+            {
+              "description": "sett-tree-row folders with sett-file-row rows, or sett-commit-row rows",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the stage's words, lowercase",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how many rows, mono at the right",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "flat",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "rows are full paths, not folders",
+              "attribute": "flat",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "progress",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "review progress, e.g. `3 of 7 viewed`",
+              "attribute": "progress"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the stage's words, lowercase",
+              "fieldName": "label"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how many rows, mono at the right",
+              "fieldName": "count"
+            },
+            {
+              "name": "flat",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "rows are full paths, not folders",
+              "fieldName": "flat"
+            },
+            {
+              "name": "progress",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "review progress, e.g. `3 of 7 viewed`",
+              "fieldName": "progress"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-stage",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A commit ahead of main: its sha in mono, its message, the element it\nrealises (`E3`), the writer, and the gate it passed (`gate ✓`, ok). It\nexpands in place to its files (sett-file-row). Enter or a double click\nopens it in the inspector.",
+          "name": "SettCommitRow",
+          "slots": [
+            {
+              "description": "sett-file-row children; rendered only while open",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "RowKind"
+              },
+              "readonly": true,
+              "default": "'commit'",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "sha",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the short sha, 7 chars, mono",
+              "attribute": "sha"
+            },
+            {
+              "kind": "field",
+              "name": "element",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the plan element the commit realises, e.g. `E3`",
+              "attribute": "element"
+            },
+            {
+              "kind": "field",
+              "name": "writer",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "who wrote it, mono at the right",
+              "attribute": "writer"
+            },
+            {
+              "kind": "field",
+              "name": "gate",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the gate it passed: `gate ✓` reads ok; any other words are plain",
+              "attribute": "gate"
+            },
+            {
+              "kind": "field",
+              "name": "foldable",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "a row with a chevron and children",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "detail",
+              "type": {
+                "text": "Record<string, unknown>"
+              },
+              "privacy": "protected",
+              "description": "what every event of this row says",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what the row names",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "depth",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "nesting from 0; `space.3` of indent per level",
+              "attribute": "depth",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector is about: the sel tint",
+              "attribute": "selected",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dim",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a row that is not part of what matters here: name in mute",
+              "attribute": "dim",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "children shown (foldable rows only)",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "fire",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "extra",
+                  "default": "{}",
+                  "type": {
+                    "text": "Record<string, unknown>"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "description": "the app's selection: a click, or Space",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "activate",
+              "description": "Enter or a double click: open what the row names",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "fold",
+              "description": "the chevron, or Left/Right: asks for the other state",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onDblClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onChevron",
+              "privacy": "private",
+              "description": "the chevron is the fold and nothing else: its clicks never select or open the row",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "chevron",
+              "privacy": "protected",
+              "description": "the chevron column: a glyph on a foldable row, kept empty otherwise so names align",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "kids",
+              "privacy": "protected",
+              "description": "the children, rendered only while open",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ kind: 'commit', name, sha }`",
+              "name": "sett-open"
+            },
+            {
+              "description": "`{ kind: 'commit', name, sha, open }`",
+              "name": "sett-fold"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "sha",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the short sha, 7 chars, mono",
+              "fieldName": "sha"
+            },
+            {
+              "name": "element",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the plan element the commit realises, e.g. `E3`",
+              "fieldName": "element"
+            },
+            {
+              "name": "writer",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "who wrote it, mono at the right",
+              "fieldName": "writer"
+            },
+            {
+              "name": "gate",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the gate it passed: `gate ✓` reads ok; any other words are plain",
+              "fieldName": "gate"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what the row names",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "depth",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "nesting from 0; `space.3` of indent per level",
+              "fieldName": "depth",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector is about: the sel tint",
+              "fieldName": "selected",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "dim",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a row that is not part of what matters here: name in mute",
+              "fieldName": "dim",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "children shown (foldable rows only)",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "SettRow",
+            "module": "/src/shell/row.js"
+          },
+          "tagName": "sett-commit-row",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettChangesList",
+          "declaration": {
+            "name": "SettChangesList",
+            "module": "src/shell/sett-changes-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-changes-list",
+          "declaration": {
+            "name": "SettChangesList",
+            "module": "src/shell/sett-changes-list.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettChangesHeader",
+          "declaration": {
+            "name": "SettChangesHeader",
+            "module": "src/shell/sett-changes-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-changes-header",
+          "declaration": {
+            "name": "SettChangesHeader",
+            "module": "src/shell/sett-changes-list.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettStage",
+          "declaration": {
+            "name": "SettStage",
+            "module": "src/shell/sett-changes-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-stage",
+          "declaration": {
+            "name": "SettStage",
+            "module": "src/shell/sett-changes-list.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettCommitRow",
+          "declaration": {
+            "name": "SettCommitRow",
+            "module": "src/shell/sett-changes-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-commit-row",
+          "declaration": {
+            "name": "SettCommitRow",
+            "module": "src/shell/sett-changes-list.ts"
           }
         }
       ]

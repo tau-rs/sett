@@ -46,3 +46,8 @@ Synced to: no ADR yet (`arch-design` holds none on 2026-10-02). DESIGN.md wins o
 | 2026-10-02 | session | the session card's group row is `sett-plan-row kind="group"`, with its elements inside it and its sub-agents folded under the group | the Sessions view (lane C) owns `sett-group-row`; one name per element (#63) |
 | 2026-10-02 | session | `stepped-in` is `taken-over` on the card's rows; the old value still draws for one release | step in is gone from the vocabulary (rule 9) |
 | 2026-10-02 | plan, daily | a planned element's hint is a `sett-hint` pill after the code at its site, next to `◇`, not a right-aligned count | rule 12: the hint sits at the site; the counts stay the declaration's |
+||||||| parent of e9a9746 (feat(ui): card layouts: checklist rows and how, result pills, plan delta, What's new doors, fix card (shell lane E))
+| 2026-10-02 | review (merge) | the how is one plain line, `squash · from the forge's default · delete branch · archive session`; no radios, no checkboxes | the strategy is read from the forge, never chosen in arch (ADR 0016); the gated button under it is the only verb |
+| 2026-10-02 | review (merged) | two pills on the result, `merged` in ok and `archived` plain; the page has one `merged · archived` | merged is the forge's fact, archived is arch's, restorable (ADR 0003) |
+| 2026-10-02 | daily (What's new) | the door words `show · open · place · follow` are grey and end with `›`; the page draws them in blue | rule 10: the row is the link, blue is left to buttons |
+| 2026-10-02 | daily (fix card), review | the fix card's hunk and a review hunk draw the sign from the line's kind; the text is the code only | one line element for both pages; a flagged line (the one a remark points at) keeps its `+` |

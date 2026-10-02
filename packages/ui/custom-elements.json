@@ -341,7 +341,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "One card shape for seven uses: fix (dashed blue), plan delta (amber),\nimpact, merge checklist, pipeline, result (green), what's new. A heading\nwith a state (pill) or count (tag) on the right, then rows.",
+          "description": "One card shape for seven uses: fix (dashed blue), plan delta (amber),\nimpact, merge checklist, pipeline, result (green), what's new. A heading\nwith a state (pill) or count (tag) on the right, an optional `sub` line\nunder it, then rows; under the rows a `how` block (the merge's how), the\nverbs, and a `note` (the small mute line that says what happens next).",
           "name": "SettCard",
           "cssParts": [
             {
@@ -351,7 +351,7 @@
           ],
           "slots": [
             {
-              "description": "sett-card-row elements (and a sett-pipe for the pipeline)",
+              "description": "sett-card-row and sett-kv-row elements (and a sett-pipe for the pipeline), or a sett-hunk",
               "name": ""
             },
             {
@@ -359,12 +359,24 @@
               "name": "title"
             },
             {
-              "description": "a sett-pill (state) or sett-tag (count) at the right of the heading",
+              "description": "a sett-pill (state) or sett-tag (count) at the right of the heading; the result carries two pills",
               "name": "state"
             },
             {
-              "description": "buttons; only the fix card and the delta have them",
+              "description": "the secondary line under the heading, e.g. What's new's `from: your save · a pull`",
+              "name": "sub"
+            },
+            {
+              "description": "the block under the rows: the merge's `squash · from the forge's default · delete branch · archive session`",
+              "name": "how"
+            },
+            {
+              "description": "buttons; the fix card, the delta, What's new and the merge checklist have them, agent door first",
               "name": "acts"
+            },
+            {
+              "description": "the small mute line at the bottom: `the row moves to Done`",
+              "name": "note"
             }
           ],
           "members": [
@@ -377,6 +389,19 @@
               "default": "'plain'",
               "attribute": "variant",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "has",
+              "privacy": "private"
             }
           ],
           "attributes": [
@@ -398,7 +423,7 @@
         },
         {
           "kind": "class",
-          "description": "A card row: glyph · fact · where it leads. With `place` (a spot in code) or\n`nav` (another pane) the whole row is the link: it lights on hover and ends\nwith ›. A place is drawn as the small mono tag; a nav as a grey word.",
+          "description": "A card row: glyph · fact · where it leads. With `place` (a spot in code) or\n`nav` (another pane) the whole row is the link: it lights on hover and ends\nwith ›. A place is drawn as the small mono tag; a nav as a grey word. The\nglyph takes the kind's colour; `session` with a session id draws it in\nthat session's colour (What's new's `●` for a session told at idle).",
           "name": "SettCardRow",
           "slots": [
             {
@@ -418,7 +443,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
+              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦ ◆ ●), or a short count (`+1`)",
               "attribute": "mark"
             },
             {
@@ -430,6 +455,16 @@
               "default": "'mute'",
               "description": "colour of the glyph",
               "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id, for `kind=\"session\"`",
+              "attribute": "session",
               "reflects": true
             },
             {
@@ -472,7 +507,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
+              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦ ◆ ●), or a short count (`+1`)",
               "fieldName": "mark"
             },
             {
@@ -483,6 +518,14 @@
               "default": "'mute'",
               "description": "colour of the glyph",
               "fieldName": "kind"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id, for `kind=\"session\"`",
+              "fieldName": "session"
             },
             {
               "name": "place",
@@ -506,6 +549,88 @@
             "package": "lit"
           },
           "tagName": "sett-card-row",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A key · value row of an inspector layout (the pages' `kv`): a mute label in\na fixed column, the value after it. `mono` sets the value in the mono face\nfor sites and files. The `right` slot holds a link at the end of the value\n(`pick hunks`). Inside a sett-card the side padding goes.",
+          "name": "SettKvRow",
+          "slots": [
+            {
+              "description": "the value",
+              "name": ""
+            },
+            {
+              "description": "a word or link at the right end of the value",
+              "name": "right"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key, lowercase: `site`, `rule`, `fix`, `files`, `checks`, `then`",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "mono",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the value in the mono face",
+              "attribute": "mono",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'sug' | 'bad' | 'ok' | undefined"
+              },
+              "description": "the value's colour: sug for a line that needs you (`behind`)",
+              "attribute": "tone",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key, lowercase: `site`, `rule`, `fix`, `files`, `checks`, `then`",
+              "fieldName": "label"
+            },
+            {
+              "name": "mono",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the value in the mono face",
+              "fieldName": "mono"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "'sug' | 'bad' | 'ok' | undefined"
+              },
+              "description": "the value's colour: sug for a line that needs you (`behind`)",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-kv-row",
           "customElement": true
         },
         {
@@ -571,6 +696,22 @@
           "name": "sett-card-row",
           "declaration": {
             "name": "SettCardRow",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettKvRow",
+          "declaration": {
+            "name": "SettKvRow",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-kv-row",
+          "declaration": {
+            "name": "SettKvRow",
             "module": "src/card/sett-card.ts"
           }
         },
@@ -1470,6 +1611,14 @@
           "name": "SettCardRow",
           "declaration": {
             "name": "SettCardRow",
+            "module": "./card/sett-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettKvRow",
+          "declaration": {
+            "name": "SettKvRow",
             "module": "./card/sett-card.js"
           }
         },

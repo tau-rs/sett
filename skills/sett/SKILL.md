@@ -559,15 +559,18 @@ A button. Grid metrics, lowercase, tokens only. A disabled primary is a dashed b
 
 ### `<sett-card>`
 
-One card shape for seven uses: fix (dashed blue), plan delta (amber), impact, merge checklist, pipeline, result (green), what's new. A heading with a state (pill) or count (tag) on the right, then rows.
+One card shape for seven uses: fix (dashed blue), plan delta (amber), impact, merge checklist, pipeline, result (green), what's new. A heading with a state (pill) or count (tag) on the right, an optional `sub` line under it, then rows; under the rows a `how` block (the merge's how), the verbs, and a `note` (the small mute line that says what happens next).
 
 - attrs:
   - `variant=CardVariant`
 - slots:
-  - `(default)` — sett-card-row elements (and a sett-pipe for the pipeline)
+  - `(default)` — sett-card-row and sett-kv-row elements (and a sett-pipe for the pipeline), or a sett-hunk
   - `title` — the heading text
-  - `state` — a sett-pill (state) or sett-tag (count) at the right of the heading
-  - `acts` — buttons; only the fix card and the delta have them
+  - `state` — a sett-pill (state) or sett-tag (count) at the right of the heading; the result carries two pills
+  - `sub` — the secondary line under the heading, e.g. What's new's `from: your save · a pull`
+  - `how` — the block under the rows: the merge's `squash · from the forge's default · delete branch · archive session`
+  - `acts` — buttons; the fix card, the delta, What's new and the merge checklist have them, agent door first
+  - `note` — the small mute line at the bottom: `the row moves to Done`
 - parts:
   - `heading` — the heading row
 - stories:
@@ -582,14 +585,23 @@ One card shape for seven uses: fix (dashed blue), plan delta (amber), impact, me
   - `cards-card--rows` rows · place, destination, note, none
   - `cards-card--pipes` pipe · states
   - `cards-card--all-seven` all seven
+  - `cards-card--merge-blocked` merge · checklist rows with their sources, the how, approve · merge gated by its reasons
+  - `cards-card--merge-ready` merge · every line ✓, approve · merge open
+  - `cards-card--merge-no-plan` merge · plan · none · hand-made branch (ADR 0022)
+  - `cards-card--merged` result · merged (forge fact) · archived (arch fact), the row moves to Done
+  - `cards-card--plan-delta` plan delta · E7 from a remark: the remark as intention, the hunk's item as site
+  - `cards-card--whats-new-doors` what's new · a glyph column, a door word on every line, mark as seen
+  - `cards-card--fix-card` fix card · site, rule, fix, the proposed hunk, both doors and allow
+  - `cards-card--fix-card-in-inspector` fix card · in the inspector
 
 ### `<sett-card-row>`
 
-A card row: glyph · fact · where it leads. With `place` (a spot in code) or `nav` (another pane) the whole row is the link: it lights on hover and ends with ›. A place is drawn as the small mono tag; a nav as a grey word.
+A card row: glyph · fact · where it leads. With `place` (a spot in code) or `nav` (another pane) the whole row is the link: it lights on hover and ends with ›. A place is drawn as the small mono tag; a nav as a grey word. The glyph takes the kind's colour; `session` with a session id draws it in that session's colour (What's new's `●` for a session told at idle).
 
 - attrs:
-  - `mark=string` — the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)
+  - `mark=string` — the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦ ◆ ●), or a short count (`+1`)
   - `kind=RowKind` — colour of the glyph
+  - `session=SessionId` — session id, for `kind="session"`
   - `place=string` — a spot in code, e.g. `service.rs:61`
   - `nav=string` — a destination, e.g. `pipeline`
 - slots:
@@ -609,6 +621,14 @@ A card row: glyph · fact · where it leads. With `place` (a spot in code) or `n
   - `cards-card--rows` rows · place, destination, note, none
   - `cards-card--pipes` pipe · states
   - `cards-card--all-seven` all seven
+  - `cards-card--merge-blocked` merge · checklist rows with their sources, the how, approve · merge gated by its reasons
+  - `cards-card--merge-ready` merge · every line ✓, approve · merge open
+  - `cards-card--merge-no-plan` merge · plan · none · hand-made branch (ADR 0022)
+  - `cards-card--merged` result · merged (forge fact) · archived (arch fact), the row moves to Done
+  - `cards-card--plan-delta` plan delta · E7 from a remark: the remark as intention, the hunk's item as site
+  - `cards-card--whats-new-doors` what's new · a glyph column, a door word on every line, mark as seen
+  - `cards-card--fix-card` fix card · site, rule, fix, the proposed hunk, both doors and allow
+  - `cards-card--fix-card-in-inspector` fix card · in the inspector
 
 ### `<sett-changed>`
 
@@ -1964,6 +1984,38 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
+### `<sett-kv-row>`
+
+A key · value row of an inspector layout (the pages' `kv`): a mute label in a fixed column, the value after it. `mono` sets the value in the mono face for sites and files. The `right` slot holds a link at the end of the value (`pick hunks`). Inside a sett-card the side padding goes.
+
+- attrs:
+  - `label=string` — the key, lowercase: `site`, `rule`, `fix`, `files`, `checks`, `then`
+  - `mono=boolean` — the value in the mono face
+  - `tone='sug' | 'bad' | 'ok'` — the value's colour: sug for a line that needs you (`behind`)
+- slots:
+  - `(default)` — the value
+  - `right` — a word or link at the right end of the value
+- stories:
+  - `cards-card--fix` Fix
+  - `cards-card--delta` plan delta
+  - `cards-card--impact` Impact
+  - `cards-card--checklist` merge checklist
+  - `cards-card--checklist-no-plan` merge checklist · plan · none · hand-made branch (spec §13.22)
+  - `cards-card--pipeline` Pipeline
+  - `cards-card--result` Result
+  - `cards-card--whats-new` what's new
+  - `cards-card--rows` rows · place, destination, note, none
+  - `cards-card--pipes` pipe · states
+  - `cards-card--all-seven` all seven
+  - `cards-card--merge-blocked` merge · checklist rows with their sources, the how, approve · merge gated by its reasons
+  - `cards-card--merge-ready` merge · every line ✓, approve · merge open
+  - `cards-card--merge-no-plan` merge · plan · none · hand-made branch (ADR 0022)
+  - `cards-card--merged` result · merged (forge fact) · archived (arch fact), the row moves to Done
+  - `cards-card--plan-delta` plan delta · E7 from a remark: the remark as intention, the hunk's item as site
+  - `cards-card--whats-new-doors` what's new · a glyph column, a door word on every line, mark as seen
+  - `cards-card--fix-card` fix card · site, rule, fix, the proposed hunk, both doors and allow
+  - `cards-card--fix-card-in-inspector` fix card · in the inspector
+
 ### `<sett-menu>`
 
 The list under the scope selector: sessions grouped by what they need, `planning` · `yours` · `needs you` · `running` · `in review` · `done`, and `main` as a row of its own, in no group. Paper, hairline, card radius, shadow. Not a modal: see sett-selector.
@@ -2881,6 +2933,14 @@ The pipeline bar: one segment per step. `steps` is a comma list of ok | bad | ru
   - `cards-card--rows` rows · place, destination, note, none
   - `cards-card--pipes` pipe · states
   - `cards-card--all-seven` all seven
+  - `cards-card--merge-blocked` merge · checklist rows with their sources, the how, approve · merge gated by its reasons
+  - `cards-card--merge-ready` merge · every line ✓, approve · merge open
+  - `cards-card--merge-no-plan` merge · plan · none · hand-made branch (ADR 0022)
+  - `cards-card--merged` result · merged (forge fact) · archived (arch fact), the row moves to Done
+  - `cards-card--plan-delta` plan delta · E7 from a remark: the remark as intention, the hunk's item as site
+  - `cards-card--whats-new-doors` what's new · a glyph column, a door word on every line, mark as seen
+  - `cards-card--fix-card` fix card · site, rule, fix, the proposed hunk, both doors and allow
+  - `cards-card--fix-card-in-inspector` fix card · in the inspector
 
 ### `<sett-plan-row>`
 

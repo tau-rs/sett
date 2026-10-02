@@ -30,7 +30,7 @@ DESIGN.md is normative: where a mock, a screenshot, a story or this file disagre
 
 - Sans for UI and prose; mono for identifiers, code, branch names, counts, file:line, and map labels.
 - Scale 10.5 / 11 / 11.5 / 12 / 12.5 / 13 / 14. Nothing on a screen is larger than 14; 14 is for pane headings only.
-- Map labels are 10 px, one size, and never scale. Scale is handled by folding, never by shrinking.
+- On the map, one text size per level, and it never scales: a name inside a unit is 12 px mono, the same size as the area header above it. Scale is handled by folding, never by shrinking; a name too long for its box ends in an ellipsis.
 - Weights: 400 body, 500 names and active tabs, 600 headings and primary links. No bold identifiers.
 - Labels are lowercase. No uppercase eyebrows, no letter-spacing.
 
@@ -99,6 +99,78 @@ Every element has a story per state, and every story is a test that runs in both
 ## Elements
 
 Tag · attributes (name=type) · slots · CSS parts · events, then the stories that show each state.
+
+### `<sett-area>`
+
+A module-sized group of items inside a column. The header carries what the area holds: its name, how many items, a red count for findings, and one dot per session with an item here. It counts its own `sett-item` children; the `count`, `findings` and `sessions` attributes override that for a folded area whose items the application chose not to render. Folded, the header also carries what the fold hides (DESIGN.md § Motion, "where it lands"): a session whose live item is hidden keeps its dot breathing, the area takes that agent's arrival and departure pulse, and a blue count says how many selected items are inside.
+
+- attrs:
+  - `name=string`
+  - `folded=boolean`
+  - `count=number` — override: how many items, when they are not rendered
+  - `findings=number` — override: how many findings, when the items are not rendered
+  - `sessions=string` — override: the session ids present, space-separated, when the items are not rendered
+- slots:
+  - `(default)` — `sett-item` children
+- parts:
+  - `header` — the header row
+  - `body` — the items' container
+- events:
+  - `sett-fold` — `{ folded }` when the header is used
+- stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layer · five layers · gpui
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-button>`
 
@@ -226,6 +298,72 @@ Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door 
   - `primitives-chip--other-session` agent · another session's colour
   - `primitives-chip--me-first` me first · manual door first and bold
   - `primitives-chip--actions-strip` in context · actions strip
+
+### `<sett-column>`
+
+A tinted band inside an open unit, holding areas. In a hexagon the three columns are driving (what calls in), domain (the core) and driven (what is called out to); a layered unit has one `layer` column per layer. Externals are never a column: they are ports on the needs rail (rule 6).
+
+- attrs:
+  - `kind=ColumnKind`
+  - `label=string` — e.g. `routes · driving`; the kind is appended when the label does not already say it
+- slots:
+  - `(default)` — `sett-area` children, stacked by normal flow
+- parts:
+  - `header` — the column's label
+- stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layer · five layers · gpui
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-composer>`
 
@@ -364,6 +502,81 @@ An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet 
   - `editor-decorations--busy-day` a busy day · session, plan, finding
   - `editor-decorations--hints` sett-hint · kinds
   - `editor-decorations--all-situations` all eight situations
+
+### `<sett-item>`
+
+One function, struct or trait inside an area: an 18 px box in a 22 px row, its name in mono at the base size. The name never moves, fades or resizes; everything else is drawn around or behind it (DESIGN.md § Motion): the item's own colour, an agent's sheen, your selection tight to the box, the session ring one step out, a change flash past everything. `session` alone is a thin still ring: an agent touched this earlier. With `live` the ring breathes and a sheen sweeps: an agent is here now. When `live` flips, the item plays its own arrival or departure pulse.
+
+- attrs:
+  - `kind=ItemKind`
+  - `family=string` — a family count shown as a pill at the end, e.g. `214 impls`
+  - `session=SessionId` — the session that touched or is working on this item; the ring takes its colour
+  - `also=SessionId` — a second session on the same item: the one ring is split in their two colours, never stacked
+  - `live=boolean` — the session is working here right now: the ring breathes and a sheen sweeps
+  - `entry=boolean` — called from outside the unit: blue fill
+  - `port=boolean` — a trait the domain depends on: amber pill shape
+  - `finding=boolean` — a rule is broken here: dashed red
+  - `selected=boolean`
+- slots:
+  - `(default)` — the item's name
+- parts:
+  - `ring` — the session ring
+- events:
+  - `sett-select` — `{ kind }` on click, Enter or Space
+- stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layer · five layers · gpui
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-menu>`
 
@@ -514,6 +727,31 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
 - events:
   - `sett-open` — `{ action: 'open' | 'enter' | 'close' }` from the foot
 - stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layer · five layers · gpui
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -536,6 +774,12 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-op-row>`
 
@@ -557,6 +801,31 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `sett-expand` — from the `more` row
   - `sett-select` — `{ kind, path }` when a row with a handler or a route is clicked
 - stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layer · five layers · gpui
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -579,6 +848,12 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-option>`
 
@@ -710,6 +985,31 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
 - events:
   - `sett-select` — `{ kind, name, side }` when the row is clicked
 - stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layer · five layers · gpui
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -732,6 +1032,12 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-question>`
 
@@ -770,6 +1076,31 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `header` — the `exposes · n ports` line
   - `section` — each section header
 - stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layer · five layers · gpui
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -792,6 +1123,12 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-seg>`
 
@@ -886,6 +1223,73 @@ Pinned at the top of the left pane while a session owns the branch. Header: sess
   - `primitives-session-card--glyph-column` the glyph column
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
+
+### `<sett-sheet>`
+
+The inside of an open unit: the exposes rail, the columns, the needs rail, in one row. `sett-node[tier="sheet"]` hosts one in its `inside` slot, and a ghost neighbour shows the same element folded. Everything inside is laid out by normal flow, so the links of lane 4 read their endpoints from the DOM. `folded` folds every area at once (the PoC's areas / items switch).
+
+- attrs:
+  - `folded=boolean` — fold every area inside, or open them all again
+- slots:
+  - `exposes` — a `sett-rail side="exposes"`
+  - `(default)` — `sett-column` children
+  - `needs` — a `sett-rail side="needs"`
+- events:
+  - `sett-fold` — bubbles from the areas inside
+- stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layer · five layers · gpui
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-split-button>`
 

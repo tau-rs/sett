@@ -71,6 +71,15 @@ describe('sett-node', () => {
     expect(el.shadowRoot!.querySelector('slot[name="inside"]')).not.toBeNull();
     expect(el.shadowRoot!.querySelector('[part="foot"]')!.textContent).toContain('close');
   });
+  it('an open unit whose inside brings its own rails does not list its ports twice', async () => {
+    const bare = await mount('<sett-node tier="sheet" name="api" kind="app"><sett-sheet slot="inside"><sett-rail slot="exposes" side="exposes"></sett-rail><sett-rail slot="needs" side="needs"></sett-rail></sett-sheet></sett-node>');
+    expect(bare.shadowRoot!.querySelector('[part="ports"]')!.hasAttribute('hidden')).toBe(true);
+    expect(bare.shadowRoot!.querySelector('.pcap')!.hasAttribute('hidden')).toBe(true);
+    const withRows = await mount('<sett-node tier="sheet" name="api" kind="app"><sett-port-row slot="exposes" kind="http" name="routes"></sett-port-row></sett-node>');
+    expect(withRows.shadowRoot!.querySelector('[part="ports"]')!.hasAttribute('hidden')).toBe(false);
+    const card = await mount('<sett-node tier="card" name="api" kind="app"></sett-node>');
+    expect(card.shadowRoot!.querySelector('[part="ports"]')!.hasAttribute('hidden')).toBe(false);
+  });
   it('declared replaces the meta with the provenance line', async () => {
     const el = await mount('<sett-node tier="chip" name="zed.dev" kind="external" declared><span>x</span></sett-node>');
     expect(el.shadowRoot!.querySelector('.meta')!.textContent).toContain('declared · unverified');

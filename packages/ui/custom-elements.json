@@ -1708,6 +1708,78 @@
             "name": "Op",
             "module": "./map/fixtures.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "presenceStyles",
+          "declaration": {
+            "name": "presenceStyles",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "wave",
+          "declaration": {
+            "name": "wave",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "bloom",
+          "declaration": {
+            "name": "bloom",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "arrive",
+          "declaration": {
+            "name": "arrive",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "leave",
+          "declaration": {
+            "name": "leave",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "flash",
+          "declaration": {
+            "name": "flash",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "reducedMotion",
+          "declaration": {
+            "name": "reducedMotion",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "durationMs",
+          "declaration": {
+            "name": "durationMs",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "WaveOptions",
+          "declaration": {
+            "name": "WaveOptions",
+            "module": "./map/motion.js"
+          }
         }
       ]
     },
@@ -2193,6 +2265,221 @@
           "declaration": {
             "name": "rail",
             "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/motion.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "durationMs",
+          "return": {
+            "type": {
+              "text": "number"
+            }
+          },
+          "parameters": [
+            {
+              "name": "v",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "a `motion.*` duration token (\"460ms\", \"2.8s\") in milliseconds"
+        },
+        {
+          "kind": "function",
+          "name": "reducedMotion",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "description": "true when the reader turned motion off; every helper then does nothing and the element shows its still twin"
+        },
+        {
+          "kind": "variable",
+          "name": "presenceStyles",
+          "default": "css` @keyframes sett-breathe { 0%, 100% { opacity: var(--sett-map-presence-breath-min); } 50% { opacity: 1; } } @keyframes sett-sheen { 0% { background-position: 110% 0; } 60%, 100% { background-position: -10% 0; } } @keyframes sett-badge { 0%, 100% { transform: scale(0.8); opacity: var(--sett-map-presence-breath-min); } 50% { transform: scale(1.15); opacity: 1; } } @keyframes sett-ignite { 0% { transform: scale(0.2); } 45% { transform: scale(1.9); } 100% { transform: scale(1); } } @keyframes sett-pop { 0% { transform: scale(1); } 40% { transform: scale(1.3); } 100% { transform: scale(1); } } @keyframes sett-cool { 0% { opacity: 1; } 100% { opacity: var(--sett-map-presence-touched); } } .sett-wave { position: absolute; box-sizing: border-box; border: var(--sett-stroke-lit) solid var(--_session); pointer-events: none; } @media (prefers-reduced-motion: reduce) { .sett-wave { display: none; } } `",
+          "description": "Keyframes and the wave box shared by every map element that shows an agent.\nThe host must be `position: relative` and expose `--_session` (see `sessionStyles`)."
+        },
+        {
+          "kind": "function",
+          "name": "wave",
+          "return": {
+            "type": {
+              "text": "Promise<void>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "host",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "{ inward = false, delay = 0, big = false }",
+              "default": "{}",
+              "type": {
+                "text": "WaveOptions"
+              }
+            }
+          ],
+          "description": "one wave in the host's own shape, drawn in its shadow root and removed when done"
+        },
+        {
+          "kind": "function",
+          "name": "bloom",
+          "return": {
+            "type": {
+              "text": "Promise<void>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "host",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "big",
+              "default": "false"
+            }
+          ],
+          "description": "the host glows in its session's colour and settles back"
+        },
+        {
+          "kind": "function",
+          "name": "arrive",
+          "return": {
+            "type": {
+              "text": "Promise<void>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "host",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "big",
+              "default": "false"
+            }
+          ],
+          "description": "an agent arrives: the host blooms and two waves in its own shape roll outward"
+        },
+        {
+          "kind": "function",
+          "name": "leave",
+          "return": {
+            "type": {
+              "text": "Promise<void>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "host",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "big",
+              "default": "false"
+            }
+          ],
+          "description": "an agent leaves: one wave closes in on the host and is swallowed"
+        },
+        {
+          "kind": "function",
+          "name": "flash",
+          "return": {
+            "type": {
+              "text": "Promise<void>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "host",
+              "type": {
+                "text": "HTMLElement"
+              }
+            }
+          ],
+          "description": "a change: one ring flashes outward past everything, once (`motion.item-pulse`)"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "durationMs",
+          "declaration": {
+            "name": "durationMs",
+            "module": "src/map/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "reducedMotion",
+          "declaration": {
+            "name": "reducedMotion",
+            "module": "src/map/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "presenceStyles",
+          "declaration": {
+            "name": "presenceStyles",
+            "module": "src/map/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "wave",
+          "declaration": {
+            "name": "wave",
+            "module": "src/map/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "bloom",
+          "declaration": {
+            "name": "bloom",
+            "module": "src/map/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "arrive",
+          "declaration": {
+            "name": "arrive",
+            "module": "src/map/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "leave",
+          "declaration": {
+            "name": "leave",
+            "module": "src/map/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "flash",
+          "declaration": {
+            "name": "flash",
+            "module": "src/map/motion.ts"
           }
         }
       ]

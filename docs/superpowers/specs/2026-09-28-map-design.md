@@ -60,3 +60,14 @@ Lanes 2 to 6 are independent once lane 1 merges. Every map story must pass the a
 - PoC section headers set lowercase (decision 5).
 - PoC floating toast replaced by a panel status line (decision 2).
 - Flow dash scoped to the selected unit (decision 3b).
+
+## Addendum · 2026-10-02 · lane 3 and the motion system
+
+Settled with the visual companion; ledger: #37 (lane 3) and #52 (motion). ADR 0002 records the motion change.
+
+**Lane 3.** Items are 12 px mono. Areas and items are laid out by flow. A fourth element, `sett-sheet`, is the inside of an open unit. An area's header counts its own items (attributes override) and shows name · count · red findings pill · one dot per session · arrow. `session="<id>"` on an item draws a ring in that session's colour just outside the box.
+
+**Motion** replaces decision 3's "no hover transitions" and the short list under "Motion after this spec". The camera rule stands: a node never resizes itself. The rest is DESIGN.md § Motion: presence, response, events; an agent's move is a jump rendered as a pulse, landing on the nearest visible thing.
+
+Rejected on the way: a sliding gradient ring on items, a comet or a wire travelling between items, a ring gliding in a straight line, a blue outline around a folded area, a tint wash that hid a finding's red.
+

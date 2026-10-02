@@ -454,6 +454,206 @@
             "name": "SettFunnelStep",
             "module": "./funnel/sett-funnel.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettOpRow",
+          "declaration": {
+            "name": "SettOpRow",
+            "module": "./map/sett-op-row.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "OpKind",
+          "declaration": {
+            "name": "OpKind",
+            "module": "./map/sett-op-row.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPortRow",
+          "declaration": {
+            "name": "SettPortRow",
+            "module": "./map/sett-port-row.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PORT_KINDS",
+          "declaration": {
+            "name": "PORT_KINDS",
+            "module": "./map/sett-port-row.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PortKind",
+          "declaration": {
+            "name": "PortKind",
+            "module": "./map/sett-port-row.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PortSide",
+          "declaration": {
+            "name": "PortSide",
+            "module": "./map/sett-port-row.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRail",
+          "declaration": {
+            "name": "SettRail",
+            "module": "./map/sett-rail.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RAIL_SECTIONS",
+          "declaration": {
+            "name": "RAIL_SECTIONS",
+            "module": "./map/sett-rail.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RAIL_LABEL",
+          "declaration": {
+            "name": "RAIL_LABEL",
+            "module": "./map/sett-rail.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RailSection",
+          "declaration": {
+            "name": "RailSection",
+            "module": "./map/sett-rail.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettNode",
+          "declaration": {
+            "name": "SettNode",
+            "module": "./map/sett-node.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "tierFor",
+          "declaration": {
+            "name": "tierFor",
+            "module": "./map/sett-node.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "NodeTier",
+          "declaration": {
+            "name": "NodeTier",
+            "module": "./map/sett-node.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "splitLabel",
+          "declaration": {
+            "name": "splitLabel",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "portOf",
+          "declaration": {
+            "name": "portOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "unitOf",
+          "declaration": {
+            "name": "unitOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "unitPorts",
+          "declaration": {
+            "name": "unitPorts",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "opOf",
+          "declaration": {
+            "name": "opOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "opsOf",
+          "declaration": {
+            "name": "opsOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sectionOf",
+          "declaration": {
+            "name": "sectionOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Fixture",
+          "declaration": {
+            "name": "Fixture",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FixtureUnit",
+          "declaration": {
+            "name": "FixtureUnit",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FixtureContract",
+          "declaration": {
+            "name": "FixtureContract",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Port",
+          "declaration": {
+            "name": "Port",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Op",
+          "declaration": {
+            "name": "Op",
+            "module": "./map/fixtures.js"
+          }
         }
       ]
     },
@@ -1131,6 +1331,69 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/editor/sett-hint.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An inlay hint: rust-analyzer's type hints and arch's own use one shape, a\nquiet grey pill after the code. `kind` colours the text for the\ndeclaration's right-aligned facts (planned, finding, session, blame).",
+          "name": "SettHint",
+          "slots": [
+            {
+              "description": "the hint text",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "HintKind"
+              },
+              "default": "'default'",
+              "attribute": "kind",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "HintKind"
+              },
+              "default": "'default'",
+              "fieldName": "kind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-hint",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettHint",
+          "declaration": {
+            "name": "SettHint",
+            "module": "src/editor/sett-hint.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-hint",
+          "declaration": {
+            "name": "SettHint",
+            "module": "src/editor/sett-hint.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/chip/sett-chip.ts",
       "declarations": [
         {
@@ -1294,176 +1557,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/editor/sett-hint.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "An inlay hint: rust-analyzer's type hints and arch's own use one shape, a\nquiet grey pill after the code. `kind` colours the text for the\ndeclaration's right-aligned facts (planned, finding, session, blame).",
-          "name": "SettHint",
-          "slots": [
-            {
-              "description": "the hint text",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "kind",
-              "type": {
-                "text": "HintKind"
-              },
-              "default": "'default'",
-              "attribute": "kind",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "kind",
-              "type": {
-                "text": "HintKind"
-              },
-              "default": "'default'",
-              "fieldName": "kind"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-hint",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettHint",
-          "declaration": {
-            "name": "SettHint",
-            "module": "src/editor/sett-hint.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-hint",
-          "declaration": {
-            "name": "SettHint",
-            "module": "src/editor/sett-hint.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/frame/sett-frame.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "The one frame that changes colour. Wraps a pane; the slot is the pane's\npaper. idle grey · live session gradient (rotates) · waiting amber (pulses)\n· editing sel · collision bad · focus a sel ring at the lit stroke inside\nthe idle frame. The only two animations in the chrome live here;\n`prefers-reduced-motion` and the `still` attribute stop both.",
-          "name": "SettFrame",
-          "cssParts": [
-            {
-              "description": "the paper inside the frame",
-              "name": "inner"
-            }
-          ],
-          "slots": [
-            {
-              "description": "the pane content",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FrameState"
-              },
-              "default": "'idle'",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for the live state; unknown ids fall back to yk",
-              "attribute": "session",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering (solid colours, no animation)",
-              "attribute": "still",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "FrameState"
-              },
-              "default": "'idle'",
-              "fieldName": "state"
-            },
-            {
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for the live state; unknown ids fall back to yk",
-              "fieldName": "session"
-            },
-            {
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering (solid colours, no animation)",
-              "fieldName": "still"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-frame",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettFrame",
-          "declaration": {
-            "name": "SettFrame",
-            "module": "src/frame/sett-frame.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-frame",
-          "declaration": {
-            "name": "SettFrame",
-            "module": "src/frame/sett-frame.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/funnel/sett-funnel.ts",
       "declarations": [
         {
@@ -1611,6 +1704,1485 @@
           "declaration": {
             "name": "SettFunnelStep",
             "module": "src/funnel/sett-funnel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/frame/sett-frame.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The one frame that changes colour. Wraps a pane; the slot is the pane's\npaper. idle grey · live session gradient (rotates) · waiting amber (pulses)\n· editing sel · collision bad · focus a sel ring at the lit stroke inside\nthe idle frame. The only two animations in the chrome live here;\n`prefers-reduced-motion` and the `still` attribute stop both.",
+          "name": "SettFrame",
+          "cssParts": [
+            {
+              "description": "the paper inside the frame",
+              "name": "inner"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the pane content",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FrameState"
+              },
+              "default": "'idle'",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the live state; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering (solid colours, no animation)",
+              "attribute": "still",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "FrameState"
+              },
+              "default": "'idle'",
+              "fieldName": "state"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the live state; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering (solid colours, no animation)",
+              "fieldName": "still"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-frame",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettFrame",
+          "declaration": {
+            "name": "SettFrame",
+            "module": "src/frame/sett-frame.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-frame",
+          "declaration": {
+            "name": "SettFrame",
+            "module": "src/frame/sett-frame.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/fixtures.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "splitLabel",
+          "return": {
+            "type": {
+              "text": "{ name: string; count?: string }"
+            }
+          },
+          "parameters": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "`\"postgres · 6 tables\"` → name `postgres`, count `6 tables`; a tail that does not start with a digit stays in the name"
+        },
+        {
+          "kind": "function",
+          "name": "portOf",
+          "return": {
+            "type": {
+              "text": "Port"
+            }
+          },
+          "parameters": [
+            {
+              "name": "t",
+              "type": {
+                "text": "FixturePort"
+              }
+            },
+            {
+              "name": "side",
+              "type": {
+                "text": "PortSide"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "unitOf",
+          "return": {
+            "type": {
+              "text": "FixtureUnit"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "unitPorts",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "opOf",
+          "return": {
+            "type": {
+              "text": "Op"
+            }
+          },
+          "parameters": [
+            {
+              "name": "s",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "c",
+              "type": {
+                "text": "FixtureContract"
+              }
+            }
+          ],
+          "description": "one contract op string → op-row props; the contract's `handlers` map wires a route to the item that handles it"
+        },
+        {
+          "kind": "function",
+          "name": "opsOf",
+          "return": {
+            "type": {
+              "text": "Op[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "contract",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "sectionOf",
+          "return": {
+            "type": {
+              "text": "RailSection"
+            }
+          },
+          "parameters": [
+            {
+              "name": "p",
+              "type": {
+                "text": "Port"
+              }
+            },
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            }
+          ],
+          "description": "the rail section a port belongs to, in the PoC's categorisation"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "splitLabel",
+          "declaration": {
+            "name": "splitLabel",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "portOf",
+          "declaration": {
+            "name": "portOf",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "unitOf",
+          "declaration": {
+            "name": "unitOf",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "unitPorts",
+          "declaration": {
+            "name": "unitPorts",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "opOf",
+          "declaration": {
+            "name": "opOf",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "opsOf",
+          "declaration": {
+            "name": "opsOf",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sectionOf",
+          "declaration": {
+            "name": "sectionOf",
+            "module": "src/map/fixtures.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/map-fixtures.stories-helpers.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "ripgrep",
+          "default": "ripgrepJson as unknown"
+        },
+        {
+          "kind": "variable",
+          "name": "zero2prod",
+          "default": "zero2prodJson as unknown"
+        },
+        {
+          "kind": "variable",
+          "name": "zed",
+          "default": "zedJson as unknown"
+        },
+        {
+          "kind": "variable",
+          "name": "UNITS",
+          "type": {
+            "text": "[Fixture, string][]"
+          },
+          "default": "[[ripgrep, 'rg'], [zero2prod, 'api'], [zed, 'gpui']]",
+          "description": "the three real units every map story leans on"
+        },
+        {
+          "kind": "function",
+          "name": "fmt",
+          "parameters": [
+            {
+              "name": "n",
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "metaLines",
+          "parameters": [
+            {
+              "name": "u",
+              "type": {
+                "text": "FixtureUnit"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "badges",
+          "parameters": [
+            {
+              "name": "u",
+              "type": {
+                "text": "FixtureUnit"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "portRow",
+          "parameters": [
+            {
+              "name": "p",
+              "type": {
+                "text": "Port"
+              }
+            },
+            {
+              "name": "extra",
+              "default": "{}",
+              "type": {
+                "text": "{ compact?: boolean; selected?: boolean; slot?: string; format?: string }"
+              }
+            },
+            {
+              "name": "ops",
+              "default": "nothing",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "opRow",
+          "parameters": [
+            {
+              "name": "o",
+              "type": {
+                "text": "ReturnType<typeof opsOf>[number]"
+              }
+            },
+            {
+              "name": "selected",
+              "default": "false"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "node",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tier",
+              "type": {
+                "text": "'mini' | 'chip' | 'card' | 'sheet'"
+              }
+            },
+            {
+              "name": "state",
+              "default": "{}",
+              "type": {
+                "text": "Record<string, boolean>"
+              }
+            },
+            {
+              "name": "inside",
+              "default": "nothing",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ],
+          "description": "a node at a tier, sized by the tier's token, fed from a fixture unit"
+        },
+        {
+          "kind": "function",
+          "name": "rail",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "side",
+              "type": {
+                "text": "'exposes' | 'needs'"
+              }
+            },
+            {
+              "name": "extra",
+              "default": "{}",
+              "type": {
+                "text": "{ compact?: boolean; selectedPort?: string }"
+              }
+            }
+          ],
+          "description": "a rail for one side of a unit, ports in their sections with their contract ops"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ripgrep",
+          "declaration": {
+            "name": "ripgrep",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "zero2prod",
+          "declaration": {
+            "name": "zero2prod",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "zed",
+          "declaration": {
+            "name": "zed",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "UNITS",
+          "declaration": {
+            "name": "UNITS",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "fmt",
+          "declaration": {
+            "name": "fmt",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "metaLines",
+          "declaration": {
+            "name": "metaLines",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "badges",
+          "declaration": {
+            "name": "badges",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "portRow",
+          "declaration": {
+            "name": "portRow",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "opRow",
+          "declaration": {
+            "name": "opRow",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "node",
+          "declaration": {
+            "name": "node",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "rail",
+          "declaration": {
+            "name": "rail",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-node.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A unit's box on the board, at one of four tiers. The host sets the box and\nthe tier (from the on-screen width, see `tierFor`); the node never resizes\nitself, the camera moves (rule 3). `mini` is the name only; `chip` adds the\nmeta lines and badges; `card` adds the port rows in two columns and the\nfoot; `sheet` hosts what is inside.",
+          "name": "SettNode",
+          "cssParts": [
+            {
+              "description": "the head: name · kind · badges",
+              "name": "hd"
+            },
+            {
+              "description": "the two-column port grid",
+              "name": "ports"
+            },
+            {
+              "description": "the foot with the open / enter acts",
+              "name": "foot"
+            }
+          ],
+          "slots": [
+            {
+              "description": "meta lines, one element each (`entry · hexagon`, `1 crate · 140 items`)",
+              "name": ""
+            },
+            {
+              "description": "count badges in the head (a finding count, a session count)",
+              "name": "badges"
+            },
+            {
+              "description": "`sett-port-row side=\"exposes\"` rows, left column of a card",
+              "name": "exposes"
+            },
+            {
+              "description": "`sett-port-row side=\"needs\"` rows, right column of a card",
+              "name": "needs"
+            },
+            {
+              "description": "the open unit (sheet tier)",
+              "name": "inside"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "app · library · external · … shown mute after the name",
+              "attribute": "kind"
+            },
+            {
+              "kind": "field",
+              "name": "tier",
+              "type": {
+                "text": "NodeTier"
+              },
+              "default": "'chip'",
+              "attribute": "tier",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the selection: sel border and ring",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "focused",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focused card: sel ring and the focus shadow, above its neighbours",
+              "attribute": "focused",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the focus: recedes to mute ink and a faint border (text stays above 4.5:1; `map.far` opacity is for edges and dots)",
+              "attribute": "far",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "declared",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "declared by hand, nothing verified: dashed, secondary ink (rule 10)",
+              "attribute": "declared",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "exposes",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "needs",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "method",
+              "name": "act",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "action",
+                  "type": {
+                    "text": "'open' | 'enter' | 'close'"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "count",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ action: 'open' | 'enter' | 'close' }` from the foot"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "app · library · external · … shown mute after the name",
+              "fieldName": "kind"
+            },
+            {
+              "name": "tier",
+              "type": {
+                "text": "NodeTier"
+              },
+              "default": "'chip'",
+              "fieldName": "tier"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the selection: sel border and ring",
+              "fieldName": "selected"
+            },
+            {
+              "name": "focused",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focused card: sel ring and the focus shadow, above its neighbours",
+              "fieldName": "focused"
+            },
+            {
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the focus: recedes to mute ink and a faint border (text stays above 4.5:1; `map.far` opacity is for edges and dots)",
+              "fieldName": "far"
+            },
+            {
+              "name": "declared",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "declared by hand, nothing verified: dashed, secondary ink (rule 10)",
+              "fieldName": "declared"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-node",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "NodeTier",
+          "declaration": {
+            "name": "NodeTier",
+            "module": "./tier.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "tierFor",
+          "declaration": {
+            "name": "tierFor",
+            "module": "./tier.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettNode",
+          "declaration": {
+            "name": "SettNode",
+            "module": "src/map/sett-node.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-node",
+          "declaration": {
+            "name": "SettNode",
+            "module": "src/map/sett-node.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-op-row.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One operation under a port in a rail: a route (method chip · path · return\nor `→ handler`), an rpc (`name(args) → out`), a schema line, a table, a cli\nflag, plain text, or the `… n more` fold line. One row = `map.size.opRow`.",
+          "name": "SettOpRow",
+          "cssParts": [
+            {
+              "description": "the method chip",
+              "name": "method"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the text of a schema, table, text or rpc-args row",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "OpKind"
+              },
+              "default": "'text'",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "method",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "GET · POST · PUT · PATCH · DELETE for a route; the flag itself (`-i`) for a flag",
+              "attribute": "method"
+            },
+            {
+              "kind": "field",
+              "name": "path",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the route path, the rpc name, or the flag's description",
+              "attribute": "path"
+            },
+            {
+              "kind": "field",
+              "name": "returns",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what comes back, shown mute after the path when there is no handler",
+              "attribute": "returns"
+            },
+            {
+              "kind": "field",
+              "name": "handler",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the item that handles the route; shown as `→ handler` in sel and reflected as `has-handler`",
+              "attribute": "handler"
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "hidden rows behind a `more` row",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-expand",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "from the `more` row"
+            },
+            {
+              "name": "sett-select",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ kind, path }` when a row with a handler or a route is clicked"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "OpKind"
+              },
+              "default": "'text'",
+              "fieldName": "kind"
+            },
+            {
+              "name": "method",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "GET · POST · PUT · PATCH · DELETE for a route; the flag itself (`-i`) for a flag",
+              "fieldName": "method"
+            },
+            {
+              "name": "path",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the route path, the rpc name, or the flag's description",
+              "fieldName": "path"
+            },
+            {
+              "name": "returns",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what comes back, shown mute after the path when there is no handler",
+              "fieldName": "returns"
+            },
+            {
+              "name": "handler",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the item that handles the route; shown as `→ handler` in sel and reflected as `has-handler`",
+              "fieldName": "handler"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "hidden rows behind a `more` row",
+              "fieldName": "count"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "selected"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-op-row",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettOpRow",
+          "declaration": {
+            "name": "SettOpRow",
+            "module": "src/map/sett-op-row.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-op-row",
+          "declaration": {
+            "name": "SettOpRow",
+            "module": "src/map/sett-op-row.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-port-row.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "PORT_KINDS",
+          "type": {
+            "text": "PortKind[]"
+          },
+          "default": "['rpc', 'http', 'cli', 'topic', 'crate', 'sql', 'pub', 'redis', 'fs', 'tty', 'declared']"
+        },
+        {
+          "kind": "class",
+          "description": "One port of a unit: the dot on the border (the kind's colour), then\n`kind · name · count`. On the `exposes` side the dot is on the left; on\n`needs` the row mirrors and the dot is on the right. Op rows go in the\ndefault slot; past `fold` of them a `… n more` row appears until expanded.",
+          "name": "SettPortRow",
+          "cssParts": [
+            {
+              "description": "the border dot",
+              "name": "dot"
+            },
+            {
+              "description": "the kind · name · count line",
+              "name": "row"
+            }
+          ],
+          "slots": [
+            {
+              "description": "`sett-op-row` children (a rail shows them; a card's rows have none)",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "PortKind"
+              },
+              "default": "'crate'",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count or short fact, mono, tabular",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "side",
+              "type": {
+                "text": "PortSide"
+              },
+              "default": "'exposes'",
+              "attribute": "side",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the contract's format, shown mute at the far end (rails only)",
+              "attribute": "format"
+            },
+            {
+              "kind": "field",
+              "name": "fold",
+              "type": {
+                "text": "number"
+              },
+              "description": "op rows shown before `… n more`",
+              "attribute": "fold"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "compact",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "compact density: `map.size.portRowCompact`",
+              "attribute": "compact",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "expanded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hiddenOps",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "applyFold",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-select",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ kind, name, side }` when the row is clicked"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "PortKind"
+              },
+              "default": "'crate'",
+              "fieldName": "kind"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count or short fact, mono, tabular",
+              "fieldName": "count"
+            },
+            {
+              "name": "side",
+              "type": {
+                "text": "PortSide"
+              },
+              "default": "'exposes'",
+              "fieldName": "side"
+            },
+            {
+              "name": "format",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the contract's format, shown mute at the far end (rails only)",
+              "fieldName": "format"
+            },
+            {
+              "name": "fold",
+              "type": {
+                "text": "number"
+              },
+              "description": "op rows shown before `… n more`",
+              "fieldName": "fold"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "selected"
+            },
+            {
+              "name": "compact",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "compact density: `map.size.portRowCompact`",
+              "fieldName": "compact"
+            },
+            {
+              "name": "expanded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "expanded"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-port-row",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PORT_KINDS",
+          "declaration": {
+            "name": "PORT_KINDS",
+            "module": "src/map/sett-port-row.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPortRow",
+          "declaration": {
+            "name": "SettPortRow",
+            "module": "src/map/sett-port-row.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-port-row",
+          "declaration": {
+            "name": "SettPortRow",
+            "module": "src/map/sett-port-row.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-rail.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "RAIL_SECTIONS",
+          "type": {
+            "text": "RailSection[]"
+          },
+          "default": "['services', 'third-party', 'events', 'data', 'system', 'crates']",
+          "description": "the fixed order of a rail's sections (rule 6)"
+        },
+        {
+          "kind": "variable",
+          "name": "RAIL_LABEL",
+          "type": {
+            "text": "Record<RailSection, Record<PortSide, string>>"
+          },
+          "default": "{ services: { exposes: 'api', needs: 'platform services' }, 'third-party': { exposes: 'api · public', needs: 'third-party services' }, events: { exposes: 'events published', needs: 'events consumed' }, data: { exposes: 'data', needs: 'data stores' }, system: { exposes: 'os', needs: 'os · files · terminal' }, crates: { exposes: 'public items', needs: 'libraries' }, }",
+          "description": "header per section, per side, as the PoC labels them"
+        },
+        {
+          "kind": "class",
+          "description": "A unit's API block on one flat side: `exposes` on the left, `needs` on the\nright. Ports go in the slot named after their section; the rail keeps the\nsections in the fixed order, labels them per side, and hides empty ones.\nHeaders are lowercase and mute. Width is `map.size.rail`.",
+          "name": "SettRail",
+          "cssParts": [
+            {
+              "description": "the `exposes · n ports` line",
+              "name": "header"
+            },
+            {
+              "description": "each section header",
+              "name": "section"
+            }
+          ],
+          "slots": [
+            {
+              "description": "· third-party · events · data · system · crates - `sett-port-row` children",
+              "name": "services"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "side",
+              "type": {
+                "text": "PortSide"
+              },
+              "default": "'exposes'",
+              "attribute": "side",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "counts",
+              "type": {
+                "text": "Partial<Record<RailSection, number>>"
+              },
+              "privacy": "private",
+              "default": "{}"
+            },
+            {
+              "kind": "method",
+              "name": "recount",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "side",
+              "type": {
+                "text": "PortSide"
+              },
+              "default": "'exposes'",
+              "fieldName": "side"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-rail",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "RAIL_SECTIONS",
+          "declaration": {
+            "name": "RAIL_SECTIONS",
+            "module": "src/map/sett-rail.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RAIL_LABEL",
+          "declaration": {
+            "name": "RAIL_LABEL",
+            "module": "src/map/sett-rail.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRail",
+          "declaration": {
+            "name": "SettRail",
+            "module": "src/map/sett-rail.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-rail",
+          "declaration": {
+            "name": "SettRail",
+            "module": "src/map/sett-rail.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/tier.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "tierFor",
+          "return": {
+            "type": {
+              "text": "NodeTier"
+            }
+          },
+          "parameters": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "previous",
+              "optional": true,
+              "type": {
+                "text": "NodeTier"
+              }
+            }
+          ],
+          "description": "The tier for an on-screen width. With `previous`, folding back one tier waits\nuntil the width is a `hysteresis` band under the threshold, so a wheel zoom\nhovering around a threshold does not flicker between two row layouts."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "tierFor",
+          "declaration": {
+            "name": "tierFor",
+            "module": "src/map/tier.ts"
           }
         }
       ]

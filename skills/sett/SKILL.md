@@ -147,6 +147,7 @@ The activity rail: the always-visible column that picks what the left pane shows
 A module-sized group of items inside a column. The header carries what the area holds: its name, how many items, a red count for findings, and one dot per session with an item here. It counts its own `sett-item` children; the `count`, `findings` and `sessions` attributes override that for a folded area whose items the application chose not to render. Folded, the header also carries what the fold hides (DESIGN.md § Motion, "where it lands"): a session whose live item is hidden keeps its dot breathing, the area takes that agent's arrival and departure pulse, and a blue count says how many selected items are inside.
 
 - attrs:
+  - `key=string` — the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`
   - `name=string`
   - `folded=boolean`
   - `count=number` — override: how many items, when they are not rendered
@@ -631,6 +632,7 @@ An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet 
 One function, struct or trait inside an area: an 18 px box in a 22 px row, its name in mono at the base size. The name never moves, fades or resizes; everything else is drawn around or behind it (DESIGN.md § Motion): the item's own colour, an agent's sheen, your selection tight to the box, the session ring one step out, a change flash past everything. `session` alone is a thin still ring: an agent touched this earlier. With `live` the ring breathes and a sheen sweeps: an agent is here now. When `live` flips, the item plays its own arrival or departure pulse.
 
 - attrs:
+  - `key=string` — the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`
   - `kind=ItemKind`
   - `family=string` — a family count shown as a pill at the end, e.g. `214 impls`
   - `unresolved=number` — links the analyser could not resolve (dyn, spawn), folded to one pill with their count (rule 6)
@@ -964,6 +966,7 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
 One operation under a port in a rail: a route (method chip · path · return or `→ handler`), an rpc (`name(args) → out`), a schema line, a table, a cli flag, plain text, or the `… n more` fold line. One row = `map.size.opRow`.
 
 - attrs:
+  - `key=string` — the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`
   - `kind=OpKind`
   - `method=string` — GET · POST · PUT · PATCH · DELETE for a route; the flag itself (`-i`) for a flag
   - `path=string` — the route path, the rpc name, or the flag's description
@@ -1361,6 +1364,7 @@ One plan element: glyph, name in mono, and on the right only what the glyph cann
 One port of a unit: the dot on the border (the kind's colour), then `kind · name · count`. On the `exposes` side the dot is on the left; on `needs` the row mirrors and the dot is on the right. Op rows go in the default slot; past `fold` of them a `… n more` row appears until expanded.
 
 - attrs:
+  - `key=string` — the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`
   - `kind=PortKind`
   - `name=string`
   - `count=string` — a count or short fact, mono, tabular

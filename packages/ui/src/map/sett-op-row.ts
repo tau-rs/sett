@@ -16,6 +16,8 @@ const METHODS = ['get', 'post', 'put', 'patch', 'delete'];
  */
 @customElement('sett-op-row')
 export class SettOpRow extends LitElement {
+  /** the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id` */
+  @property({ reflect: true }) key?: string;
   @property({ reflect: true }) kind: OpKind = 'text';
   /** GET · POST · PUT · PATCH · DELETE for a route; the flag itself (`-i`) for a flag */
   @property() method?: string;

@@ -25,6 +25,8 @@ export const ITEM_KINDS: ItemKind[] = ['fn', 'struct', 'enum', 'trait', 'impl', 
  */
 @customElement('sett-item')
 export class SettItem extends LitElement {
+  /** the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id` */
+  @property({ reflect: true }) key?: string;
   @property({ reflect: true }) kind: ItemKind = 'fn';
   /** a family count shown as a pill at the end, e.g. `214 impls` */
   @property() family?: string;

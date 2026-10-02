@@ -1727,6 +1727,70 @@
         },
         {
           "kind": "js",
+          "name": "itemsOf",
+          "declaration": {
+            "name": "itemsOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linkKindOf",
+          "declaration": {
+            "name": "linkKindOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linksOf",
+          "declaration": {
+            "name": "linksOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "wiresOf",
+          "declaration": {
+            "name": "wiresOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "portKey",
+          "declaration": {
+            "name": "portKey",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "opKey",
+          "declaration": {
+            "name": "opKey",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FixtureLink",
+          "declaration": {
+            "name": "FixtureLink",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FixtureLinkRow",
+          "declaration": {
+            "name": "FixtureLinkRow",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "InsideColumn",
           "declaration": {
             "name": "InsideColumn",
@@ -1955,6 +2019,94 @@
           "declaration": {
             "name": "SettSheet",
             "module": "./map/sett-sheet.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LINK_KINDS",
+          "declaration": {
+            "name": "LINK_KINDS",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LINK_KIND_NAMES",
+          "declaration": {
+            "name": "LINK_KIND_NAMES",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LINK_FAMILIES",
+          "declaration": {
+            "name": "LINK_FAMILIES",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isLinkKind",
+          "declaration": {
+            "name": "isLinkKind",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "familyOf",
+          "declaration": {
+            "name": "familyOf",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "kindsOf",
+          "declaration": {
+            "name": "kindsOf",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LinkKind",
+          "declaration": {
+            "name": "LinkKind",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LinkFamily",
+          "declaration": {
+            "name": "LinkFamily",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LinkHead",
+          "declaration": {
+            "name": "LinkHead",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LinkTail",
+          "declaration": {
+            "name": "LinkTail",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LinkKindSpec",
+          "declaration": {
+            "name": "LinkKindSpec",
+            "module": "./map/link-kinds.js"
           }
         },
         {
@@ -2325,6 +2477,151 @@
             }
           ],
           "description": "The columns of an open unit with their areas. An `outbound` column is left\nout on purpose: externals are an interface, not a column (rule 6); they are\nports on the needs rail. The fixtures list a layered unit leaf first; it is\nread public API first, so \"uses\" points left to right as in a hexagon\n(rule 11), and each layer says its depth for the tint."
+        },
+        {
+          "kind": "function",
+          "name": "portKey",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "p",
+              "type": {
+                "text": "Port"
+              }
+            }
+          ],
+          "description": "the key of a port row in a story: side and contract, unique inside a unit"
+        },
+        {
+          "kind": "function",
+          "name": "opKey",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "contract",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "op",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the key of an op row in a story: its contract and the op as written"
+        },
+        {
+          "kind": "function",
+          "name": "linkKindOf",
+          "return": {
+            "type": {
+              "text": "LinkKind"
+            }
+          },
+          "parameters": [
+            {
+              "name": "from",
+              "type": {
+                "text": "FixtureItem"
+              }
+            },
+            {
+              "name": "to",
+              "type": {
+                "text": "FixtureItem"
+              }
+            },
+            {
+              "name": "opts",
+              "default": "{}",
+              "type": {
+                "text": "FixtureLinkRow[2]"
+              }
+            }
+          ],
+          "description": "The kind of a fixture link, derived from the two items (illustrative: the\nfixtures carry `impl` and `smell` only; the analyser will emit a kind per\nlink, #58). A smell is the finding overlay, not a kind."
+        },
+        {
+          "kind": "function",
+          "name": "itemsOf",
+          "return": {
+            "type": {
+              "text": "Record<string, FixtureItem>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "every item of a unit by id"
+        },
+        {
+          "kind": "function",
+          "name": "linksOf",
+          "return": {
+            "type": {
+              "text": "FixtureLink[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "The links of a unit, from the dependent to what it depends on. A layered\nunit stores its pairs leaf → public (lane F); they are flipped here so\n\"uses\" points left to right under both column rules (rule 11)."
+        },
+        {
+          "kind": "function",
+          "name": "wiresOf",
+          "return": {
+            "type": {
+              "text": "FixtureLink[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "The port wires of a unit: a route with a handler wires its op row to that\nitem; a port without handlers wires to its area, into the unit on the\nexposes side and out of it on the needs side."
         }
       ],
       "exports": [
@@ -2398,6 +2695,184 @@
           "declaration": {
             "name": "insideOf",
             "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "portKey",
+          "declaration": {
+            "name": "portKey",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "opKey",
+          "declaration": {
+            "name": "opKey",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linkKindOf",
+          "declaration": {
+            "name": "linkKindOf",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "itemsOf",
+          "declaration": {
+            "name": "itemsOf",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linksOf",
+          "declaration": {
+            "name": "linksOf",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "wiresOf",
+          "declaration": {
+            "name": "wiresOf",
+            "module": "src/map/fixtures.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/link-kinds.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "LINK_FAMILIES",
+          "type": {
+            "text": "LinkFamily[]"
+          },
+          "default": "['does', 'promises', 'knows', 'around']"
+        },
+        {
+          "kind": "variable",
+          "name": "LINK_KINDS",
+          "type": {
+            "text": "Record<LinkKind, LinkKindSpec>"
+          },
+          "default": "{ 'calls': { family: 'does', head: 'triangle', label: 'calls', means: 'runs it directly, compiler-inserted calls included' }, 'calls-port': { family: 'does', head: 'socket', label: 'calls port', means: 'calls through an interface whose target is chosen at run time' }, 'hands-off': { family: 'does', head: 'chevron', label: 'hands off', means: 'starts work that runs later or elsewhere: spawn, callback, send' }, 'constructs': { family: 'does', head: 'dot', label: 'constructs', means: 'makes a value of it' }, 'wires': { family: 'does', head: 'bar', label: 'wires', means: 'builds an adapter and plugs it into a port slot, or registers it in a container' }, 'calls-out': { family: 'does', head: 'double-chevron', label: 'calls out', means: 'reaches outside the unit: another crate, the system, the environment' }, 'listens-to': { family: 'does', head: 'hollow-dot', label: 'listens to', means: 'subscribes to its events' }, 'implements': { family: 'promises', head: 'hollow-triangle', label: 'implements', means: 'fulfils the contract, declared or by shape' }, 'inherits': { family: 'promises', head: 'based-triangle', label: 'inherits', means: 'is a kind of it, with its behaviour' }, 'refines': { family: 'promises', head: 'double-hollow-triangle', label: 'refines', means: 'a contract that requires another' }, 'depends-on-port': { family: 'promises', head: 'socket', label: 'depends on port', means: 'declares a need by interface only' }, 'uses-type': { family: 'knows', head: 'chevron', label: 'uses type', means: 'names it in a signature or a local' }, 'holds': { family: 'knows', head: 'chevron', tail: 'diamond', label: 'holds', means: 'has a field of that type' }, 'shares-state': { family: 'knows', head: 'chevron', tail: 'hollow-diamond', label: 'shares state', means: 'mutable state reachable from both: statics, interior mutability, shared ownership' }, 'matches-on': { family: 'knows', head: 'square', label: 'matches on', means: 'depends on its insides: destructuring, field access, casts' }, 'translates': { family: 'knows', head: 'double-chevron', label: 'translates', means: 'converts to or from it' }, 'reads': { family: 'knows', head: 'dot', label: 'reads', means: 'uses a constant or immutable static as a value' }, 'tests': { family: 'around', head: 'hollow-dot', label: 'tests', means: 'exercises it from a test' }, 're-exports': { family: 'around', head: 'double-chevron', label: 're-exports', means: 'makes it visible under its own name' }, 'expands': { family: 'around', head: 'triangle', label: 'expands', means: 'a macro, template or generator that writes code' }, 'decorates': { family: 'around', head: 'square', label: 'decorates', means: 'alters or registers it without being called by it' }, 'refers-to': { head: 'none', label: 'refers to', means: 'only an import or an unresolved reference is known' }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "LINK_KIND_NAMES",
+          "default": "Object.keys(LINK_KINDS)"
+        },
+        {
+          "kind": "function",
+          "name": "isLinkKind",
+          "return": {
+            "type": {
+              "text": "s is LinkKind"
+            }
+          },
+          "parameters": [
+            {
+              "name": "s",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "familyOf",
+          "return": {
+            "type": {
+              "text": "LinkFamily | undefined"
+            }
+          },
+          "parameters": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "LinkKind"
+              }
+            }
+          ],
+          "description": "the family of a kind; the fallback has none"
+        },
+        {
+          "kind": "function",
+          "name": "kindsOf",
+          "return": {
+            "type": {
+              "text": "LinkKind[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "family",
+              "type": {
+                "text": "LinkFamily"
+              }
+            }
+          ],
+          "description": "the kinds of a family, in the order of the table"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LINK_FAMILIES",
+          "declaration": {
+            "name": "LINK_FAMILIES",
+            "module": "src/map/link-kinds.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LINK_KINDS",
+          "declaration": {
+            "name": "LINK_KINDS",
+            "module": "src/map/link-kinds.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LINK_KIND_NAMES",
+          "declaration": {
+            "name": "LINK_KIND_NAMES",
+            "module": "src/map/link-kinds.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isLinkKind",
+          "declaration": {
+            "name": "isLinkKind",
+            "module": "src/map/link-kinds.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "familyOf",
+          "declaration": {
+            "name": "familyOf",
+            "module": "src/map/link-kinds.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "kindsOf",
+          "declaration": {
+            "name": "kindsOf",
+            "module": "src/map/link-kinds.ts"
           }
         }
       ]
@@ -2518,6 +2993,13 @@
             {
               "name": "selected",
               "default": "false"
+            },
+            {
+              "name": "key",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
             }
           ]
         },
@@ -3197,6 +3679,16 @@
           "members": [
             {
               "kind": "field",
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`",
+              "attribute": "key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "name",
               "type": {
                 "text": "string"
@@ -3332,6 +3824,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`",
+              "fieldName": "key"
+            },
             {
               "name": "name",
               "type": {
@@ -3571,6 +4071,16 @@
           "members": [
             {
               "kind": "field",
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`",
+              "attribute": "key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "kind",
               "type": {
                 "text": "ItemKind"
@@ -3727,6 +4237,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`",
+              "fieldName": "key"
+            },
             {
               "name": "kind",
               "type": {
@@ -4224,6 +4742,16 @@
           "members": [
             {
               "kind": "field",
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`",
+              "attribute": "key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "kind",
               "type": {
                 "text": "OpKind"
@@ -4311,6 +4839,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`",
+              "fieldName": "key"
+            },
             {
               "name": "kind",
               "type": {
@@ -4431,6 +4967,16 @@
           "members": [
             {
               "kind": "field",
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`",
+              "attribute": "key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "kind",
               "type": {
                 "text": "PortKind"
@@ -4546,6 +5092,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`",
+              "fieldName": "key"
+            },
             {
               "name": "kind",
               "type": {

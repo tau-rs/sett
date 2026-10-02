@@ -191,7 +191,7 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -437,7 +437,7 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -653,7 +653,7 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -804,7 +804,7 @@ A message. Yours sit on the right in the selection tint; an agent's on the left 
 
 ### `<sett-node>`
 
-A unit's box on the board, at one of four tiers. The host sets the box and the tier (from the on-screen width, see `tierFor`); the node never resizes itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the meta lines and badges; `card` adds the port rows in two columns and the foot; `sheet` hosts what is inside.
+A unit's box on the board, at one of four tiers. The host sets the box and the tier (from the on-screen width, see `tierFor`); the node never resizes itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the meta lines and badges; `card` adds the port rows in two columns; `sheet` hosts what is inside. A closed node has no foot and no link: opening is the host's, by double-click or ↩ on the node and by nothing else (rule 4). An open node keeps one link, `▴ close`.
 
 - attrs:
   - `name=string`
@@ -823,9 +823,9 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
 - parts:
   - `hd` — the head: name · kind · badges
   - `ports` — the two-column port grid
-  - `foot` — the foot with the open / enter acts
+  - `foot` — the foot of an open node: `▴ close`
 - events:
-  - `sett-open` — `{ action: 'open' | 'enter' | 'close' }` from the foot
+  - `sett-open` — `{ action: 'close' }` from `▴ close` on an open node; the node never asks to open
 - stories:
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
@@ -859,7 +859,7 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -936,7 +936,7 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -1315,7 +1315,7 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -1409,7 +1409,7 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -1655,7 +1655,7 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected

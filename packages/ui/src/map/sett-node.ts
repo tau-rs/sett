@@ -9,18 +9,20 @@ export { tierFor } from './tier.js';
  * A unit's box on the board, at one of four tiers. The host sets the box and
  * the tier (from the on-screen width, see `tierFor`); the node never resizes
  * itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the
- * meta lines and badges; `card` adds the port rows in two columns and the
- * foot; `sheet` hosts what is inside.
+ * meta lines and badges; `card` adds the port rows in two columns; `sheet`
+ * hosts what is inside. A closed node has no foot and no link: opening is the
+ * host's, by double-click or ↩ on the node and by nothing else (rule 4). An
+ * open node keeps one link, `▴ close`.
  *
  * @slot - meta lines, one element each (`entry · hexagon`, `1 crate · 140 items`)
  * @slot badges - count badges in the head (a finding count, a session count)
  * @slot exposes - `sett-port-row side="exposes"` rows, left column of a card
  * @slot needs - `sett-port-row side="needs"` rows, right column of a card
  * @slot inside - the open unit (sheet tier)
- * @fires sett-open - `{ action: 'open' | 'enter' | 'close' }` from the foot
+ * @fires sett-open - `{ action: 'close' }` from `▴ close` on an open node; the node never asks to open
  * @csspart hd - the head: name · kind · badges
  * @csspart ports - the two-column port grid
- * @csspart foot - the foot with the open / enter acts
+ * @csspart foot - the foot of an open node: `▴ close`
  */
 @customElement('sett-node')
 export class SettNode extends LitElement {
@@ -69,13 +71,14 @@ export class SettNode extends LitElement {
     .col { min-width: 0; }
     .ports[hidden], .pcap[hidden] { display: none; }
     .pcap { display: flex; justify-content: space-between; padding: var(--sett-space-1) var(--sett-space-3) 0; font-size: var(--sett-font-size-xs); color: var(--sett-color-mute); }
+    :host([tier='card']) .pcap { padding-bottom: var(--sett-space-2); }
     .inside { border-top: var(--sett-stroke-hair) solid var(--sett-color-line2); margin-top: var(--sett-space-2); padding: var(--sett-space-2) var(--sett-space-3); }
-    .ft { display: flex; justify-content: space-between; padding: var(--sett-space-1) var(--sett-space-3) var(--sett-space-1); font-size: var(--sett-font-size-sm); }
+    .ft { display: flex; padding: var(--sett-space-1) var(--sett-space-3) var(--sett-space-1); font-size: var(--sett-font-size-sm); }
     .ft a { color: var(--sett-color-sel); cursor: pointer; }
   `;
 
-  private act(action: 'open' | 'enter' | 'close') {
-    this.dispatchEvent(new CustomEvent('sett-open', { bubbles: true, composed: true, detail: { action } }));
+  private close() {
+    this.dispatchEvent(new CustomEvent('sett-open', { bubbles: true, composed: true, detail: { action: 'close' } }));
   }
   private count() {
     // its own port rows only: a sheet inside has rails in slots of the same name
@@ -98,11 +101,7 @@ export class SettNode extends LitElement {
           <div class="col"><slot name="needs" @slotchange=${this.count}></slot></div>
         </div>
         <div class="pcap" ?hidden=${bare}><span>exposes · ${this.exposes}</span><span>needs · ${this.needs}</span></div>` : nothing}
-      ${this.tier === 'sheet' ? html`<div class="inside"><slot name="inside"></slot></div>` : nothing}
-      ${ports ? html`<div class="ft" part="foot">
-          ${this.tier === 'sheet' ? html`<a @click=${() => this.act('close')}>▴ close</a>` : html`<a @click=${() => this.act('open')}>▾ open · what is inside</a>`}
-          <a @click=${() => this.act('enter')}>enter ›</a>
-        </div>` : nothing}`;
+      ${this.tier === 'sheet' ? html`<div class="inside"><slot name="inside"></slot></div><div class="ft" part="foot"><a @click=${this.close}>▴ close</a></div>` : nothing}`;
   }
 }
 

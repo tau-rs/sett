@@ -51,7 +51,7 @@ describe('sett-node', () => {
     expect(chip.shadowRoot!.querySelector('slot[name="badges"]')).not.toBeNull();
     expect(chip.shadowRoot!.querySelector('[part="ports"]')).toBeNull();
   });
-  it('card lays ports in two columns and counts them; the foot offers open and enter', async () => {
+  it('card lays ports in two columns and counts them', async () => {
     const el = await mount(`<sett-node tier="card" name="api" kind="app">
       <sett-port-row slot="exposes" kind="http" name="routes" count="12"></sett-port-row>
       <sett-port-row slot="needs" kind="sql" name="postgres" side="needs"></sett-port-row>
@@ -61,15 +61,24 @@ describe('sett-node', () => {
     expect(sr.querySelectorAll('[part="ports"] .col').length).toBe(2);
     expect(sr.querySelector('.pcap')!.textContent).toContain('exposes · 1');
     expect(sr.querySelector('.pcap')!.textContent).toContain('needs · 2');
-    const acts: string[] = [];
-    el.addEventListener('sett-open', (e: Event) => acts.push((e as CustomEvent).detail.action));
-    sr.querySelectorAll('[part="foot"] a').forEach((a) => (a as HTMLElement).click());
-    expect(acts).toEqual(['open', 'enter']);
   });
-  it('sheet hosts the inside and offers close', async () => {
+  it('a closed node has no foot and no link: it opens by double-click or ↩, which are the host\'s (rule 4)', async () => {
+    for (const tier of ['mini', 'chip', 'card']) {
+      const el = await mount(`<sett-node tier="${tier}" name="api" kind="app"></sett-node>`);
+      expect(el.shadowRoot!.querySelector('[part="foot"]'), tier).toBeNull();
+      expect(el.shadowRoot!.querySelector('a'), tier).toBeNull();
+    }
+    expect(cssOf('sett-node'), 'the card keeps its bottom padding under the counts line').toContain(":host([tier='card']) .pcap { padding-bottom: var(--sett-space-2); }");
+  });
+  it('an open node hosts the inside and keeps one link, close', async () => {
     const el = await mount('<sett-node tier="sheet" name="api" kind="app"><div slot="inside">columns</div></sett-node>');
     expect(el.shadowRoot!.querySelector('slot[name="inside"]')).not.toBeNull();
-    expect(el.shadowRoot!.querySelector('[part="foot"]')!.textContent).toContain('close');
+    const links = Array.from(el.shadowRoot!.querySelectorAll('[part="foot"] a')) as HTMLElement[];
+    expect(links.map((a) => a.textContent)).toEqual(['▴ close']);
+    const acts: string[] = [];
+    el.addEventListener('sett-open', (e: Event) => acts.push((e as CustomEvent).detail.action));
+    links[0].click();
+    expect(acts).toEqual(['close']);
   });
   it('an open unit whose inside brings its own rails does not list its ports twice', async () => {
     const bare = await mount('<sett-node tier="sheet" name="api" kind="app"><sett-sheet slot="inside"><sett-rail slot="exposes" side="exposes"></sett-rail><sett-rail slot="needs" side="needs"></sett-rail></sett-sheet></sett-node>');

@@ -18,14 +18,14 @@ type Story = StoryObj;
 
 export const Default: Story = {};
 const perTier = (tier: (typeof TIERS)[number]): Story => ({
-  name: `tier · ${tier} · five states · rg, api, gpui`,
+  name: `tier · ${tier} · five states, no foot (a closed node opens by double-click or ↩) · rg, api, gpui`,
   render: () => html`${STATES.map((s) => html`<div class="sett-row" style="margin-bottom:var(--sett-space-3)"><span class="sett-sep" style="width:var(--sett-map-size-panel);font-family:var(--sett-font-mono)">${s}</span>${UNITS.map(([f, id]) => node(f, id, tier, stateOf(s)))}</div>`)}`,
 });
 export const Mini = perTier('mini');
 export const Chip = perTier('chip');
 export const Card = perTier('card');
 export const Sheet: Story = {
-  name: 'tier · sheet · hosts the inside (lanes 3+)',
+  name: 'tier · sheet · hosts the inside and keeps one link, ▴ close',
   render: () => html`${node(zed, 'gpui', 'sheet', { focused: true }, html`<div slot="inside" style="color:var(--sett-color-mute);font-size:var(--sett-font-size-sm)">columns · areas · items land here (sett-column, sett-area, sett-item)</div>`)}`,
 };
 export const OnTheBoard: Story = {

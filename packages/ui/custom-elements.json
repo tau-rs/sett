@@ -3755,7 +3755,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "A unit's box on the board, at one of four tiers. The host sets the box and\nthe tier (from the on-screen width, see `tierFor`); the node never resizes\nitself, the camera moves (rule 3). `mini` is the name only; `chip` adds the\nmeta lines and badges; `card` adds the port rows in two columns and the\nfoot; `sheet` hosts what is inside.",
+          "description": "A unit's box on the board, at one of four tiers. The host sets the box and\nthe tier (from the on-screen width, see `tierFor`); the node never resizes\nitself, the camera moves (rule 3). `mini` is the name only; `chip` adds the\nmeta lines and badges; `card` adds the port rows in two columns; `sheet`\nhosts what is inside. A closed node has no foot and no link: opening is the\nhost's, by double-click or ↩ on the node and by nothing else (rule 4). An\nopen node keeps one link, `▴ close`.",
           "name": "SettNode",
           "cssParts": [
             {
@@ -3767,7 +3767,7 @@
               "name": "ports"
             },
             {
-              "description": "the foot with the open / enter acts",
+              "description": "the foot of an open node: `▴ close`",
               "name": "foot"
             }
           ],
@@ -3887,16 +3887,8 @@
             },
             {
               "kind": "method",
-              "name": "act",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "action",
-                  "type": {
-                    "text": "'open' | 'enter' | 'close'"
-                  }
-                }
-              ]
+              "name": "close",
+              "privacy": "private"
             },
             {
               "kind": "method",
@@ -3910,7 +3902,7 @@
               "type": {
                 "text": "CustomEvent"
               },
-              "description": "`{ action: 'open' | 'enter' | 'close' }` from the foot"
+              "description": "`{ action: 'close' }` from `▴ close` on an open node; the node never asks to open"
             }
           ],
           "attributes": [

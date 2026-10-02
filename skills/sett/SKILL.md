@@ -672,12 +672,12 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
 
 ### `<sett-menu>`
 
-The list under a selector: rows grouped by what they need from you. Paper, hairline, card radius, shadow. Not a modal: see sett-selector.
+The list under the scope selector: sessions grouped by what they need, `planning` · `yours` · `needs you` · `running` · `in review` · `done`, and `main` as a row of its own, in no group. Paper, hairline, card radius, shadow. Not a modal: see sett-selector.
 
 - attrs:
   - `label=string` — accessible name of the list; the selector that owns the menu usually says what it lists
 - slots:
-  - `(default)` — sett-menu-group elements
+  - `(default)` — sett-menu-group elements, and a sett-menu-item for a row that belongs to no group (`main`)
 - stories:
   - `buttons-buttons--buttons` button · default, primary, quiet, sm, disabled
   - `buttons-buttons--split-agent-first` split · agent first (default)
@@ -697,16 +697,25 @@ The list under a selector: rows grouped by what they need from you. Paper, hairl
   - `primitives-selector--collision` Collision
   - `primitives-selector--all-states` All States
   - `primitives-selector--other-session` working · another session
-  - `primitives-selector--menu-open` menu open · grouped needs-you / working / waiting-to-merge / saved-plans / main
+  - `primitives-selector--scope-main` scope · main, neutral
+  - `primitives-selector--scope-session` scope · session, the words in the session's colour
+  - `primitives-selector--scope-other-session` scope · another session colour
+  - `primitives-selector--scope-session-asks` scope · session that asks: same pill, same words
+  - `primitives-selector--scope-you` scope · you, sel
+  - `primitives-selector--scope-you-locked` scope · you locked, 🔒 after the words
+  - `primitives-selector--scope-plan` scope · plan, sug
+  - `primitives-selector--scope-readings` scope · the four readings side by side
+  - `primitives-selector--scope-every-session` scope · every session colour, the words stay readable
+  - `primitives-selector--menu-open` menu open · main, then planning / yours / needs you / running / in review / done
   - `primitives-selector--narrow-menu` menu · narrow, rows never wrap
   - `primitives-selector--reduced-motion` reduced motion · working dot still
 
 ### `<sett-menu-group>`
 
-A group in the menu: lowercase title in mute at 10.5 px, then rows.
+A group in the menu: lowercase title in mute at 10.5 px, then rows. The groups say what a session needs, in this order: `planning` · `yours` · `needs you` · `running` · `in review` · `done`.
 
 - attrs:
-  - `label=string` — group title: needs you · working · waiting to merge · saved plans · main
+  - `label=string` — group title, lowercase: planning · yours · needs you · running · in review · done
 - slots:
   - `(default)` — sett-menu-item elements
 - stories:
@@ -728,13 +737,22 @@ A group in the menu: lowercase title in mute at 10.5 px, then rows.
   - `primitives-selector--collision` Collision
   - `primitives-selector--all-states` All States
   - `primitives-selector--other-session` working · another session
-  - `primitives-selector--menu-open` menu open · grouped needs-you / working / waiting-to-merge / saved-plans / main
+  - `primitives-selector--scope-main` scope · main, neutral
+  - `primitives-selector--scope-session` scope · session, the words in the session's colour
+  - `primitives-selector--scope-other-session` scope · another session colour
+  - `primitives-selector--scope-session-asks` scope · session that asks: same pill, same words
+  - `primitives-selector--scope-you` scope · you, sel
+  - `primitives-selector--scope-you-locked` scope · you locked, 🔒 after the words
+  - `primitives-selector--scope-plan` scope · plan, sug
+  - `primitives-selector--scope-readings` scope · the four readings side by side
+  - `primitives-selector--scope-every-session` scope · every session colour, the words stay readable
+  - `primitives-selector--menu-open` menu open · main, then planning / yours / needs you / running / in review / done
   - `primitives-selector--narrow-menu` menu · narrow, rows never wrap
   - `primitives-selector--reduced-motion` reduced motion · working dot still
 
 ### `<sett-menu-item>`
 
-One row: dot, name in mono, pill when the branch has a state, then who or how far on the right. Rows never wrap: the name truncates with an ellipsis, the right cell keeps its width and the name's size.
+One row: dot, name in mono, pill when the row has a state, then who or how far on the right. A row that names a scope writes the words the selector writes (`scopeText`). Rows never wrap: the name truncates with an ellipsis, the right cell keeps its width and the name's size.
 
 - attrs:
   - `state=BranchState`
@@ -743,7 +761,7 @@ One row: dot, name in mono, pill when the branch has a state, then who or how fa
   - `selected=boolean` — the current row
   - `still=boolean`
 - slots:
-  - `(default)` — the branch or plan name
+  - `(default)` — the words of the scope: `main`, `w1 · refund flow`, `you · fix-pool-size`, `plan · refund flow`
   - `right` — who is on it or how far it is, e.g. `Lyon · 4/6`
 - events:
   - `sett-select` — when the row is chosen
@@ -766,7 +784,16 @@ One row: dot, name in mono, pill when the branch has a state, then who or how fa
   - `primitives-selector--collision` Collision
   - `primitives-selector--all-states` All States
   - `primitives-selector--other-session` working · another session
-  - `primitives-selector--menu-open` menu open · grouped needs-you / working / waiting-to-merge / saved-plans / main
+  - `primitives-selector--scope-main` scope · main, neutral
+  - `primitives-selector--scope-session` scope · session, the words in the session's colour
+  - `primitives-selector--scope-other-session` scope · another session colour
+  - `primitives-selector--scope-session-asks` scope · session that asks: same pill, same words
+  - `primitives-selector--scope-you` scope · you, sel
+  - `primitives-selector--scope-you-locked` scope · you locked, 🔒 after the words
+  - `primitives-selector--scope-plan` scope · plan, sug
+  - `primitives-selector--scope-readings` scope · the four readings side by side
+  - `primitives-selector--scope-every-session` scope · every session colour, the words stay readable
+  - `primitives-selector--menu-open` menu open · main, then planning / yours / needs you / running / in review / done
   - `primitives-selector--narrow-menu` menu · narrow, rows never wrap
   - `primitives-selector--reduced-motion` reduced motion · working dot still
 
@@ -1531,16 +1558,20 @@ One item of a segmented control.
 
 ### `<sett-selector>`
 
-Branch selector in a pane bar: dot, branch name, a pill when the branch has a state, caret. Click toggles `open`; the `menu` slot (a sett-menu) hangs under it as an anchored disclosure: nothing is dimmed or trapped, Esc, a click outside or choosing a row closes it.
+The scope selector in the bar: dot, the words of the scope, a pill when it has a state, caret. With `scope` set it writes the scope the way the scope line and the frame do (DESIGN.md "The shell" rule 3): the words come from `scopeText` (`main` · `w1 · refund flow` · `you · fix-pool-size` · `plan · refund flow`), never from the consumer; the dot takes the scope's colour; for a session, you and a plan the border and the words take it too (main stays neutral); `locked` adds `🔒` after the words. `state` still drives the pill (`asks · n`, `paused`, `done`, `collision`…) and the dot's pulse. Without `scope` it is the branch selector it was: the default slot is the name and `state` drives the dot and the pill. Click toggles `open`; the `menu` slot (a sett-menu) hangs under it as an anchored disclosure: nothing is dimmed or trapped, Esc, a click outside or choosing a row closes it.
 
 - attrs:
   - `state=BranchState`
-  - `session=SessionId` — session id for planning / working; unknown ids fall back to yk
+  - `scope=ScopeKind` — what the shell is about; when set, the words are written from `scope`, `scope-id` and `name`
+  - `session=SessionId` — session id: the colour of a session scope and of the planning / working pill; unknown ids fall back to yk
+  - `scope-id=string` — the worktree id of a session scope, e.g. `w1`
+  - `name=string` — what the scope is called: `refund flow`, `fix-pool-size`
+  - `locked=boolean` — the focus is pinned: shows 🔒 after the words of the scope
   - `count=number` — number of open asks, shown in the pill for the asks state
   - `open=boolean` — whether the menu is shown
   - `still=boolean` — force the reduced-motion rendering
 - slots:
-  - `(default)` — the branch name, mono
+  - `(default)` — the branch name, mono; not shown while `scope` is set
   - `menu` — the sett-menu shown while open
 - parts:
   - `button` — the selector box
@@ -1559,7 +1590,16 @@ Branch selector in a pane bar: dot, branch name, a pill when the branch has a st
   - `primitives-selector--collision` Collision
   - `primitives-selector--all-states` All States
   - `primitives-selector--other-session` working · another session
-  - `primitives-selector--menu-open` menu open · grouped needs-you / working / waiting-to-merge / saved-plans / main
+  - `primitives-selector--scope-main` scope · main, neutral
+  - `primitives-selector--scope-session` scope · session, the words in the session's colour
+  - `primitives-selector--scope-other-session` scope · another session colour
+  - `primitives-selector--scope-session-asks` scope · session that asks: same pill, same words
+  - `primitives-selector--scope-you` scope · you, sel
+  - `primitives-selector--scope-you-locked` scope · you locked, 🔒 after the words
+  - `primitives-selector--scope-plan` scope · plan, sug
+  - `primitives-selector--scope-readings` scope · the four readings side by side
+  - `primitives-selector--scope-every-session` scope · every session colour, the words stay readable
+  - `primitives-selector--menu-open` menu open · main, then planning / yours / needs you / running / in review / done
   - `primitives-selector--narrow-menu` menu · narrow, rows never wrap
   - `primitives-selector--reduced-motion` reduced motion · working dot still
 

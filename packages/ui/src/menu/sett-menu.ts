@@ -5,10 +5,12 @@ import { STATUS, dotStyles, pillWords, type BranchState } from '../status.js';
 import '../pill/sett-pill.js';
 
 /**
- * The list under a selector: rows grouped by what they need from you.
- * Paper, hairline, card radius, shadow. Not a modal: see sett-selector.
+ * The list under the scope selector: sessions grouped by what they need,
+ * `planning` · `yours` · `needs you` · `running` · `in review` · `done`, and
+ * `main` as a row of its own, in no group. Paper, hairline, card radius,
+ * shadow. Not a modal: see sett-selector.
  *
- * @slot - sett-menu-group elements
+ * @slot - sett-menu-group elements, and a sett-menu-item for a row that belongs to no group (`main`)
  */
 @customElement('sett-menu')
 export class SettMenu extends LitElement {
@@ -23,6 +25,7 @@ export class SettMenu extends LitElement {
       font-size: var(--sett-font-size-lg);
       padding-bottom: var(--sett-space-1);
     }
+    ::slotted(sett-menu-item:first-child) { margin-top: var(--sett-space-1); }
   `;
   /** accessible name of the list; the selector that owns the menu usually says what it lists */
   @property() label = 'menu';
@@ -30,12 +33,14 @@ export class SettMenu extends LitElement {
 }
 
 /**
- * A group in the menu: lowercase title in mute at 10.5 px, then rows.
+ * A group in the menu: lowercase title in mute at 10.5 px, then rows. The
+ * groups say what a session needs, in this order: `planning` · `yours` ·
+ * `needs you` · `running` · `in review` · `done`.
  * @slot - sett-menu-item elements
  */
 @customElement('sett-menu-group')
 export class SettMenuGroup extends LitElement {
-  /** group title: needs you · working · waiting to merge · saved plans · main */
+  /** group title, lowercase: planning · yours · needs you · running · in review · done */
   @property() label = '';
   static styles = css`
     :host { display: block; }
@@ -55,11 +60,12 @@ export class SettMenuGroup extends LitElement {
 }
 
 /**
- * One row: dot, name in mono, pill when the branch has a state, then who or
- * how far on the right. Rows never wrap: the name truncates with an ellipsis,
- * the right cell keeps its width and the name's size.
+ * One row: dot, name in mono, pill when the row has a state, then who or
+ * how far on the right. A row that names a scope writes the words the
+ * selector writes (`scopeText`). Rows never wrap: the name truncates with an
+ * ellipsis, the right cell keeps its width and the name's size.
  *
- * @slot - the branch or plan name
+ * @slot - the words of the scope: `main`, `w1 · refund flow`, `you · fix-pool-size`, `plan · refund flow`
  * @slot right - who is on it or how far it is, e.g. `Lyon · 4/6`
  * @fires sett-select - when the row is chosen
  */

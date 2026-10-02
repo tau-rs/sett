@@ -26,3 +26,4 @@ export { SettSheet } from './map/sett-sheet.js';
 export { scopeWords, scopeText, scopeStyles, SCOPE_LOCK, type Scope, type ScopeKind } from './scope.js';
 export { badgeStyles, type BadgeTone } from './badge.js';
 export { SettActivityRail, SettRailItem } from './shell/sett-activity-rail.js';
+export { SettScopeLine } from './shell/sett-scope-line.js';

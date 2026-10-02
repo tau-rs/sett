@@ -118,6 +118,15 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
   - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
 
 ### `<sett-area>`
 
@@ -1168,6 +1177,42 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
   - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+
+### `<sett-scope-line>`
+
+The scope line: the first row of the left pane, saying what the shell is about (DESIGN.md "The shell" rule 3). A dot in the scope's colour on the scope's tint, the words from `scopeWords`, an optional muted note on the right, and `🔒` when the scope is locked. An indicator, never a control: no button, no event, nothing to focus. It is read as one label, e.g. `scope: w1 · refund flow, locked`.
+
+- attrs:
+  - `scope=ScopeKind` — what the shell is about
+  - `session=SessionId` — session id when the scope is a session; unknown ids fall back to yk
+  - `scope-id=string` — the worktree id of a session scope, e.g. `w1`
+  - `name=string` — what the scope is called: `refund flow`, `fix-pool-size`
+  - `sub=string` — a muted note at the right, e.g. `as on disk`
+  - `locked=boolean` — the focus is pinned: shows 🔒 after the words
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
 
 ### `<sett-seg>`
 

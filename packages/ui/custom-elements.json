@@ -2002,6 +2002,14 @@
             "name": "SettRailItem",
             "module": "./shell/sett-activity-rail.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettScopeLine",
+          "declaration": {
+            "name": "SettScopeLine",
+            "module": "./shell/sett-scope-line.js"
+          }
         }
       ]
     },
@@ -5932,6 +5940,163 @@
           "declaration": {
             "name": "SettRailItem",
             "module": "src/shell/sett-activity-rail.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-scope-line.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The scope line: the first row of the left pane, saying what the shell is\nabout (DESIGN.md \"The shell\" rule 3). A dot in the scope's colour on the\nscope's tint, the words from `scopeWords`, an optional muted note on the\nright, and `🔒` when the scope is locked. An indicator, never a control: no\nbutton, no event, nothing to focus. It is read as one label, e.g.\n`scope: w1 · refund flow, locked`.",
+          "name": "SettScopeLine",
+          "members": [
+            {
+              "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind"
+              },
+              "default": "'main'",
+              "description": "what the shell is about",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "scopeId",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "attribute": "scope-id"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "sub",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a muted note at the right, e.g. `as on disk`",
+              "attribute": "sub"
+            },
+            {
+              "kind": "field",
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focus is pinned: shows 🔒 after the words",
+              "attribute": "locked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "Scope"
+              },
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind"
+              },
+              "default": "'main'",
+              "description": "what the shell is about",
+              "fieldName": "scope"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "scope-id",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "fieldName": "scopeId"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "fieldName": "name"
+            },
+            {
+              "name": "sub",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a muted note at the right, e.g. `as on disk`",
+              "fieldName": "sub"
+            },
+            {
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focus is pinned: shows 🔒 after the words",
+              "fieldName": "locked"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-scope-line",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettScopeLine",
+          "declaration": {
+            "name": "SettScopeLine",
+            "module": "src/shell/sett-scope-line.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-scope-line",
+          "declaration": {
+            "name": "SettScopeLine",
+            "module": "src/shell/sett-scope-line.ts"
           }
         }
       ]

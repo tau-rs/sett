@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import './sett-item.js';
 import './sett-area.js';
+import './sett-column.js';
+import './sett-sheet.js';
+import './sett-link.js';
 import type { SettItem } from './sett-item.js';
 
 /**
@@ -74,4 +77,35 @@ export const TwoAgentsOneItem: Story = {
   name: '8 · collision · two agents on the same item',
   render: () => scene(box(html`<sett-area name="routes · public"><sett-item entry>health_check()</sett-item><sett-item entry finding session="yk" also="tl" live>confirm()</sett-item><sett-item>SubscriptionToken</sett-item></sett-area>`),
     'One ring, half in each agent\'s colour. Rings never stack: an item has room for one.'),
+};
+
+/** a small open unit: two columns, three areas, the links between them */
+const mini = (who: Record<string, string> = {}, folded: string[] = []) => html`
+  <sett-sheet>
+    <sett-column kind="driving" label="routes"><sett-area key="routes" name="routes · public" ?folded=${folded.includes('routes')}>
+      <sett-item key="subscribe" entry ?selected=${who.subscribe === 'selected'}>subscribe()</sett-item><sett-item key="confirm" entry>confirm()</sett-item></sett-area></sett-column>
+    <sett-column kind="domain" label="domain"><sett-area key="domain" name="domain" ?folded=${folded.includes('domain')}>
+      <sett-item key="newsub" kind="struct" ?selected=${who.newsub === 'selected'}>NewSubscriber</sett-item><sett-item key="email" kind="struct">SubscriberEmail::parse</sett-item></sett-area>
+      <sett-area key="auth" name="auth" ?folded=${folded.includes('auth')}><sett-item key="validate" ?selected=${who.validate === 'selected'}>validate_credentials()</sett-item><sett-item key="creds" kind="struct">Credentials</sett-item></sett-area></sett-column>
+    <sett-link from="subscribe" to="newsub" kind="constructs"></sett-link>
+    <sett-link from="subscribe" to="validate" kind="calls"></sett-link>
+    <sett-link from="newsub" to="email" kind="constructs"></sett-link>
+    <sett-link from="confirm" to="validate" kind="calls"></sett-link>
+    <sett-link from="validate" to="creds" kind="uses-type"></sett-link>
+  </sett-sheet>`;
+const toggleAttr = (r: HTMLElement, sel: string, attr: string) => { const el = r.querySelector(sel)!; el.toggleAttribute(attr, !el.hasAttribute(attr)); };
+
+export const PointingLights: Story = {
+  name: '9 · response · pointing lights an item\'s links and the item at the other end',
+  render: () => scene(mini(), 'Point at subscribe(): its two lines turn blue with NewSubscriber and validate_credentials() at their other ends, over motion.hover. Point at a line: it lights with both its ends. Nothing moves, nothing dashes.'),
+};
+export const SelectDrawsOutward: Story = {
+  name: '10 · response · selecting draws the connections outward, then the flow travels',
+  render: () => scene(mini(), 'Click select. The links of subscribe() are drawn from it toward their other ends over motion.draw; only once drawn do the flow dashes travel, on the selection alone; every other line recedes to map.far.',
+    act('select subscribe()', (r) => toggleAttr(r, 'sett-item[key="subscribe"]', 'selected'))),
+};
+export const FoldHidesTheSelection: Story = {
+  name: '11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands',
+  render: () => scene(mini({ validate: 'selected' }), 'Click fold. The auth area eases shut; the selected item inside is hidden, so its lines ride the area\'s edge up to the chip, the header shows the blue count, and a blue dock dot lands on the border where the links plug in (port language). Unfold and the lines come back down to the item.',
+    act('fold / unfold auth', (r) => toggleAttr(r, 'sett-area[key="auth"]', 'folded'))),
 };

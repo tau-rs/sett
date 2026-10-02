@@ -26,6 +26,8 @@ const EMPTY: Counts = { count: 0, findings: 0, selected: 0, sessions: [], live: 
  */
 @customElement('sett-area')
 export class SettArea extends LitElement {
+  /** the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id` */
+  @property({ reflect: true }) key?: string;
   @property() name = '';
   @property({ type: Boolean, reflect: true }) folded = false;
   /** override: how many items, when they are not rendered */

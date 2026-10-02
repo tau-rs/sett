@@ -624,9 +624,10 @@
       "columnGutter": {
         "$type": "dimension",
         "$value": {
-          "value": 26,
+          "value": 56,
           "unit": "px"
-        }
+        },
+        "$description": "between two columns, and between a rail and its column: room for the link tracks (map.size.track)"
       },
       "itemRow": {
         "$type": "dimension",
@@ -662,6 +663,30 @@
           "value": 8,
           "unit": "px"
         }
+      },
+      "track": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$description": "between two link tracks in a gutter, and two lanes in the channel under the columns"
+      },
+      "branch": {
+        "$type": "dimension",
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        },
+        "$description": "the dot where a link branches off its trunk, and a plug at rest"
+      },
+      "hit": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$description": "the invisible hit width of a link"
       },
       "halo": {
         "$type": "dimension",
@@ -884,6 +909,101 @@
         "$value": {
           "value": 8,
           "unit": "px"
+        }
+      }
+    },
+    "link": {
+      "$description": "the lines between items inside a unit: one line pattern per family, the head says the kind (#58, #68)",
+      "does": {
+        "$description": "runs something: calls, calls port, hands off, constructs, wires, calls out, listens to",
+        "stroke": {
+          "$type": "strokeStyle",
+          "$value": "solid"
+        },
+        "dock": {
+          "$description": "where this family docks on an item, as a share of the box height",
+          "$type": "number",
+          "$value": 0.5
+        }
+      },
+      "promises": {
+        "$description": "a contract: implements, inherits, refines, depends on port",
+        "stroke": {
+          "$type": "strokeStyle",
+          "$value": {
+            "dashArray": [
+              {
+                "value": 5,
+                "unit": "px"
+              },
+              {
+                "value": 4,
+                "unit": "px"
+              }
+            ],
+            "lineCap": "butt"
+          }
+        },
+        "dock": {
+          "$description": "where this family docks on an item, as a share of the box height",
+          "$type": "number",
+          "$value": 0.3
+        }
+      },
+      "knows": {
+        "$description": "depends on a shape: uses type, holds, shares state, matches on, translates, reads",
+        "stroke": {
+          "$type": "strokeStyle",
+          "$value": {
+            "dashArray": [
+              {
+                "value": 1.5,
+                "unit": "px"
+              },
+              {
+                "value": 3,
+                "unit": "px"
+              }
+            ],
+            "lineCap": "butt"
+          }
+        },
+        "dock": {
+          "$description": "where this family docks on an item, as a share of the box height",
+          "$type": "number",
+          "$value": 0.7
+        }
+      },
+      "around": {
+        "$description": "surrounds the code: tests, re-exports, expands, decorates",
+        "stroke": {
+          "$type": "strokeStyle",
+          "$value": {
+            "dashArray": [
+              {
+                "value": 6,
+                "unit": "px"
+              },
+              {
+                "value": 3,
+                "unit": "px"
+              },
+              {
+                "value": 1.5,
+                "unit": "px"
+              },
+              {
+                "value": 3,
+                "unit": "px"
+              }
+            ],
+            "lineCap": "butt"
+          }
+        },
+        "dock": {
+          "$description": "where this family docks on an item, as a share of the box height",
+          "$type": "number",
+          "$value": 0.9
         }
       }
     },

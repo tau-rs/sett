@@ -7,6 +7,7 @@ import type { PortKind, PortSide } from './sett-port-row.js';
 import type { RailSection } from './sett-rail.js';
 import type { ColumnDepth, ColumnKind } from './sett-column.js';
 import type { ItemKind } from './sett-item.js';
+import type { LinkKind } from './link-kinds.js';
 
 /** `[kind, "name · count", area, contract]` as the PoC stores a port */
 export type FixturePort = [string, string, string, string];
@@ -22,7 +23,9 @@ export interface FixtureContract {
 }
 export interface FixtureItem { id: string; name: string; k: string; entry?: number; port?: number; finding?: number; session?: number; fam?: string; ext?: number }
 export interface FixtureArea { id: string; col: number; name: string; folded?: number; items: FixtureItem[] }
-export interface FixtureInside { layout: 'hexagon' | 'layers'; columns: [string, string][]; areas: FixtureArea[] }
+/** `[from, to, { impl?, smell?, label? }]` as the PoC stores a link; a layered unit stores leaf → public */
+export type FixtureLinkRow = [string, string, { impl?: number; smell?: number; label?: string }?];
+export interface FixtureInside { layout: 'hexagon' | 'layers'; columns: [string, string][]; areas: FixtureArea[]; links?: FixtureLinkRow[] }
 export interface Fixture {
   units: Record<string, FixtureInside>;
   name: string; tagline: string; system: unknown;
@@ -110,4 +113,88 @@ export function insideOf(f: Fixture, id: string): InsideColumn[] {
     .map((c): InsideColumn => ({ ...c, kind: (['driving', 'domain', 'driven'].includes(c.kind) ? c.kind : 'layer') as ColumnKind }));
   if (u.layout !== 'layers') return cols;
   return cols.reverse().map((c, i) => ({ ...c, depth: i === 0 ? 'api' : i === cols.length - 1 ? 'leaf' : 'internal' }));
+}
+
+/** one line inside a unit, ready for `sett-link`: ends by key, a kind, the finding overlay, and whether it is a port wire */
+export interface FixtureLink { from: string; to: string; kind: LinkKind; finding?: boolean; label?: string; wire?: boolean }
+
+/** the key of a port row in a story: side and contract, unique inside a unit */
+export const portKey = (p: Port): string => `${p.side}:${p.contract}`;
+/** the key of an op row in a story: its contract and the op as written */
+export const opKey = (contract: string, op: string): string => `${contract}:${op}`;
+
+/**
+ * The kind of a fixture link, derived from the two items (illustrative: the
+ * fixtures carry `impl` and `smell` only; the analyser will emit a kind per
+ * link, #58). A smell is the finding overlay, not a kind.
+ */
+export function linkKindOf(from: FixtureItem, to: FixtureItem, opts: FixtureLinkRow[2] = {}): LinkKind {
+  if (to.ext) return 'calls-out';
+  if (opts.impl) return 'implements';
+  if (to.k === 'macro') return 'expands';
+  if (from.k === 'mod') return from.name.startsWith('pub use') ? 're-exports' : 'calls';
+  if (to.k === 'trait') {
+    if (from.k === 'impl' || from.k === 'struct' || from.k === 'enum') return 'implements';
+    if (from.k === 'trait') return 'refines';
+    return to.port ? 'calls-port' : 'uses-type';
+  }
+  switch (from.k) {
+    case 'fn':
+    case 'impl':
+      if (to.k === 'fn') return 'calls';
+      if (to.k === 'enum') return 'matches-on';
+      if (to.k === 'struct') return /::(parse|new|build|from)\b/.test(to.name) ? 'constructs' : 'uses-type';
+      return 'refers-to';
+    case 'struct':
+      if (to.k === 'fn') return 'calls';
+      if (to.k === 'struct' || to.k === 'enum') return 'holds';
+      return 'uses-type';
+    case 'enum':
+    case 'trait':
+      return to.k === 'fn' ? 'calls' : 'uses-type';
+    default:
+      return 'refers-to';
+  }
+}
+
+/** every item of a unit by id */
+export const itemsOf = (f: Fixture, id: string): Record<string, FixtureItem> => {
+  const u = f.units[id];
+  if (!u) throw new Error(`no inside for unit ${id} in ${f.name}`);
+  return Object.fromEntries(u.areas.flatMap((a) => a.items.map((it) => [it.id, it])));
+};
+
+/**
+ * The links of a unit, from the dependent to what it depends on. A layered
+ * unit stores its pairs leaf → public (lane F); they are flipped here so
+ * "uses" points left to right under both column rules (rule 11).
+ */
+export function linksOf(f: Fixture, id: string): FixtureLink[] {
+  const u = f.units[id];
+  const items = itemsOf(f, id);
+  return (u.links ?? []).map(([a, b, opts = {}]) => {
+    const [from, to] = u.layout === 'layers' ? [b, a] : [a, b];
+    const l: FixtureLink = { from, to, kind: linkKindOf(items[from], items[to], opts) };
+    if (opts.smell) l.finding = true;
+    if (opts.label) l.label = opts.label;
+    return l;
+  });
+}
+
+/**
+ * The port wires of a unit: a route with a handler wires its op row to that
+ * item; a port without handlers wires to its area, into the unit on the
+ * exposes side and out of it on the needs side.
+ */
+export function wiresOf(f: Fixture, id: string): FixtureLink[] {
+  const { exposes, needs } = unitPorts(f, id);
+  const out: FixtureLink[] = [];
+  for (const p of exposes) {
+    const c = f.contracts[p.contract];
+    const handled = (c?.ops ?? []).filter((op) => opOf(op, c).handler);
+    if (handled.length) for (const op of handled) out.push({ from: opKey(p.contract, op), to: opOf(op, c).handler!, kind: 'calls', wire: true });
+    else out.push({ from: portKey(p), to: p.area, kind: 'calls', wire: true });
+  }
+  for (const p of needs) out.push({ from: p.area, to: portKey(p), kind: 'calls-out', wire: true });
+  return out;
 }

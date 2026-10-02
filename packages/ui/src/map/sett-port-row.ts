@@ -20,6 +20,8 @@ export const PORT_KINDS: PortKind[] = ['rpc', 'http', 'cli', 'topic', 'crate', '
  */
 @customElement('sett-port-row')
 export class SettPortRow extends LitElement {
+  /** the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id` */
+  @property({ reflect: true }) key?: string;
   @property({ reflect: true }) kind: PortKind = 'crate';
   @property() name = '';
   /** a count or short fact, mono, tabular */

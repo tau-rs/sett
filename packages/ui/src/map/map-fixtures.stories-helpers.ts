@@ -2,7 +2,7 @@
 import { html, nothing } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Fixture, FixtureArea, FixtureItem, FixtureUnit, Port } from './fixtures.js';
-import { insideOf, itemKindOf, opsOf, sectionOf, unitOf, unitPorts } from './fixtures.js';
+import { insideOf, itemKindOf, linksOf, opKey, opsOf, portKey, sectionOf, unitOf, unitPorts, wiresOf, type FixtureLink } from './fixtures.js';
 import { sessionOrder } from '@tau-rs/sett-tokens';
 import ripgrepJson from './fixtures/ripgrep.json' with { type: 'json' };
 import zero2prodJson from './fixtures/zero2prod.json' with { type: 'json' };
@@ -16,6 +16,7 @@ import './sett-item.js';
 import './sett-area.js';
 import './sett-column.js';
 import './sett-sheet.js';
+import './sett-link.js';
 
 export const ripgrep = ripgrepJson as unknown as Fixture;
 export const zero2prod = zero2prodJson as unknown as Fixture;
@@ -34,10 +35,10 @@ export const badges = (u: FixtureUnit) => html`
 export const sessionsOf = (u: FixtureUnit) => sessionOrder.slice(0, u.sessions ?? 0).join(' ');
 
 export const portRow = (p: Port, extra: { compact?: boolean; selected?: boolean; slot?: string; format?: string } = {}, ops: unknown = nothing) => html`
-  <sett-port-row slot=${extra.slot ?? p.side} kind=${p.kind} name=${p.name} count=${p.count ?? ''} side=${p.side} format=${extra.format ?? ''} ?compact=${extra.compact} ?selected=${extra.selected}>${ops}</sett-port-row>`;
+  <sett-port-row key=${portKey(p)} slot=${extra.slot ?? p.side} kind=${p.kind} name=${p.name} count=${p.count ?? ''} side=${p.side} format=${extra.format ?? ''} ?compact=${extra.compact} ?selected=${extra.selected}>${ops}</sett-port-row>`;
 
-export const opRow = (o: ReturnType<typeof opsOf>[number], selected = false) => html`
-  <sett-op-row kind=${o.kind} method=${o.method ?? ''} path=${o.path ?? ''} returns=${o.returns ?? ''} handler=${o.handler ?? ''} ?selected=${selected}>${o.args ?? o.text ?? ''}</sett-op-row>`;
+export const opRow = (o: ReturnType<typeof opsOf>[number], selected = false, key?: string) => html`
+  <sett-op-row key=${ifDefined(key)} kind=${o.kind} method=${o.method ?? ''} path=${o.path ?? ''} returns=${o.returns ?? ''} handler=${o.handler ?? ''} ?selected=${selected}>${o.args ?? o.text ?? ''}</sett-op-row>`;
 
 /** a node at a tier, sized by the tier's token, fed from a fixture unit; `who` says which sessions are on it and which are working now */
 export const node = (f: Fixture, id: string, tier: 'mini' | 'chip' | 'card' | 'sheet', state: Record<string, boolean> = {}, inside: unknown = nothing, who: { sessions?: string; live?: string } = {}) => {
@@ -56,7 +57,7 @@ export const node = (f: Fixture, id: string, tier: 'mini' | 'chip' | 'card' | 's
 export const rail = (f: Fixture, id: string, side: 'exposes' | 'needs', extra: { compact?: boolean; selectedPort?: string; slot?: string } = {}) => {
   const ports = unitPorts(f, id)[side];
   return html`<sett-rail side=${side} slot=${ifDefined(extra.slot)}>
-    ${ports.map((p) => portRow(p, { slot: sectionOf(p, f), compact: extra.compact, selected: extra.selectedPort === p.name, format: f.contracts[p.contract]?.format }, opsOf(f, p.contract).map((o) => opRow(o))))}
+    ${ports.map((p) => portRow(p, { slot: sectionOf(p, f), compact: extra.compact, selected: extra.selectedPort === p.name, format: f.contracts[p.contract]?.format }, (f.contracts[p.contract]?.ops ?? []).map((s, i) => opRow(opsOf(f, p.contract)[i], false, opKey(p.contract, s)))))}
   </sett-rail>`;
 };
 
@@ -65,18 +66,25 @@ export interface On { session?: string; live?: boolean; also?: string; selected?
 export type Who = Record<string, On>;
 
 export const itemEl = (it: FixtureItem, on: On = {}) => html`
-  <sett-item data-id=${it.id} kind=${itemKindOf(it)} ?entry=${!!it.entry} ?port=${!!it.port} ?finding=${!!it.finding} family=${ifDefined(it.fam)} session=${ifDefined(on.session)} also=${ifDefined(on.also)} ?live=${on.live} ?selected=${on.selected}>${it.name}</sett-item>`;
+  <sett-item key=${it.id} kind=${itemKindOf(it)} ?entry=${!!it.entry} ?port=${!!it.port} ?finding=${!!it.finding} family=${ifDefined(it.fam)} session=${ifDefined(on.session)} also=${ifDefined(on.also)} ?live=${on.live} ?selected=${on.selected}>${it.name}</sett-item>`;
 
 export const areaEl = (a: FixtureArea, who: Who = {}, folded = !!a.folded) => html`
-  <sett-area data-id=${a.id} name=${a.name} ?folded=${folded}>${a.items.map((it) => itemEl(it, who[it.id]))}</sett-area>`;
+  <sett-area key=${a.id} name=${a.name} ?folded=${folded}>${a.items.map((it) => itemEl(it, who[it.id]))}</sett-area>`;
 
 /** the columns of a unit with their areas and items, as the fixture has them */
 export const columnsOf = (f: Fixture, id: string, who: Who = {}, foldedAreas: string[] = []) =>
   insideOf(f, id).map((c) => html`<sett-column kind=${c.kind} depth=${ifDefined(c.depth)} label=${c.label}>${c.areas.map((a) => areaEl(a, who, !!a.folded || foldedAreas.includes(a.id)))}</sett-column>`);
 
-/** the inside of a unit: exposes rail · columns · needs rail */
-export const sheetOf = (f: Fixture, id: string, who: Who = {}, opts: { folded?: boolean; foldedAreas?: string[]; slot?: string } = {}) => html`
-  <sett-sheet slot=${ifDefined(opts.slot)} ?folded=${opts.folded}>${rail(f, id, 'exposes', { slot: 'exposes' })}${columnsOf(f, id, who, opts.foldedAreas)}${rail(f, id, 'needs', { slot: 'needs' })}</sett-sheet>`;
+/** one `sett-link` from a fixture link; kinds on fixture links are derived from the items (illustrative) */
+export const linkEl = (l: FixtureLink) => html`
+  <sett-link from=${l.from} to=${l.to} kind=${l.kind} label=${ifDefined(l.label)} ?finding=${l.finding} ?wire=${l.wire}></sett-link>`;
+/** the links and port wires of a unit, as `sett-link` children for its sheet */
+export const linksEl = (f: Fixture, id: string, wires = true) => html`${linksOf(f, id).map(linkEl)}${wires ? wiresOf(f, id).map(linkEl) : nothing}`;
+
+export interface SheetOpts { folded?: boolean; foldedAreas?: string[]; slot?: string; links?: boolean; wires?: boolean; level?: 'items' | 'plugs'; filter?: string }
+/** the inside of a unit: exposes rail · columns · needs rail, and the links between the things inside */
+export const sheetOf = (f: Fixture, id: string, who: Who = {}, opts: SheetOpts = {}) => html`
+  <sett-sheet slot=${ifDefined(opts.slot)} ?folded=${opts.folded} level=${ifDefined(opts.level)} filter=${ifDefined(opts.filter)}>${rail(f, id, 'exposes', { slot: 'exposes' })}${columnsOf(f, id, who, opts.foldedAreas)}${rail(f, id, 'needs', { slot: 'needs' })}${opts.links === false ? nothing : linksEl(f, id, opts.wires !== false)}</sett-sheet>`;
 
 /** the sessions on a unit, read from who is on its items: every session named, and the ones live somewhere */
 export const sessionsOn = (who: Who) => {
@@ -86,5 +94,5 @@ export const sessionsOn = (who: Who) => {
 };
 
 /** an open unit: the node at its sheet tier hosting the inside; its head lists the sessions on its items */
-export const openUnit = (f: Fixture, id: string, who: Who = {}, opts: { folded?: boolean; foldedAreas?: string[] } = {}) =>
+export const openUnit = (f: Fixture, id: string, who: Who = {}, opts: SheetOpts = {}) =>
   node(f, id, 'sheet', { focused: true }, sheetOf(f, id, who, { ...opts, slot: 'inside' }), sessionsOn(who));

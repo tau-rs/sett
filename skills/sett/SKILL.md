@@ -195,6 +195,12 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-node--card` Card
   - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -449,6 +455,12 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-node--card` Card
   - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -671,6 +683,12 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-node--card` Card
   - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -850,7 +868,7 @@ A message. Yours sit on the right in the selection tint; an agent's on the left 
 
 ### `<sett-node>`
 
-A unit's box on the board, at one of four tiers. The host sets the box and the tier (from the on-screen width, see `tierFor`); the node never resizes itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the meta lines and badges; `card` adds the port rows in two columns; `sheet` hosts what is inside. A closed node has no foot and no link: opening is the host's, by double-click or ↩ on the node and by nothing else (rule 4). An open node keeps one link, `▴ close`.
+A unit's box on the board, at one of four tiers. The host sets the box and the tier (from the on-screen width, see `tierFor`); the node never resizes itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the meta lines and badges; `card` adds the port rows in two columns; `sheet` hosts what is inside. A closed node has no foot and no link: opening is the host's, by double-click or ↩ on the node and by nothing else (rule 4). An open node keeps one link, `▴ close`. The head carries one dot per session with an agent on the unit (`sessions`). A session that is working here now (`live`) breathes when this box is the nearest thing you can see (DESIGN.md § Motion, "where it lands"): the unit is closed, or it is open and no item of that session is rendered inside. Open with the item on screen, the item (or the folded area's badge) carries the life and the dot is still. When `live` flips, the node plays the arrival or departure pulse on its box, the larger wave (`map.size.waveNode`).
 
 - attrs:
   - `name=string`
@@ -860,9 +878,11 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `focused=boolean` — the focused card: sel ring and the focus shadow, above its neighbours
   - `far=boolean` — unrelated to the focus: recedes to mute ink and a faint border (text stays above 4.5:1; `map.far` opacity is for edges and dots)
   - `declared=boolean` — declared by hand, nothing verified: dashed, secondary ink (rule 10)
+  - `sessions=string` — the sessions with an agent on this unit, space-separated ids, one dot each in the head, in session order
+  - `live=string` — the sessions working here right now, space-separated: their dots breathe when the box is the nearest thing you can see; a change plays the pulse
 - slots:
   - `(default)` — meta lines, one element each (`entry · hexagon`, `1 crate · 140 items`)
-  - `badges` — count badges in the head (a finding count, a session count)
+  - `badges` — count badges in the head (a finding count); the session dots are the node's own
   - `exposes` — `sett-port-row side="exposes"` rows, left column of a card
   - `needs` — `sett-port-row side="needs"` rows, right column of a card
   - `inside` — the open unit (sheet tier)
@@ -908,6 +928,12 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-node--card` Card
   - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -988,6 +1014,12 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-node--card` Card
   - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -1381,6 +1413,12 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-node--card` Card
   - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -1478,6 +1516,12 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-node--card` Card
   - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -1751,6 +1795,12 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-node--card` Card
   - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures

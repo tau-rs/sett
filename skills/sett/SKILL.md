@@ -100,6 +100,25 @@ Every element has a story per state, and every story is a test that runs in both
 
 Tag · attributes (name=type) · slots · CSS parts · events, then the stories that show each state.
 
+### `<sett-activity-rail>`
+
+The activity rail: the always-visible column that picks what the left pane shows (DESIGN.md "The shell" rule 2). Three items, Sessions · Files · Findings, each a glyph over a horizontal label. It never hides: `closed` only records that the left pane is folded, and changes nothing here, so the badges and the scope bar stay. When the scope is not main, the active item's bar takes the scope's colour. Arrow up and down move focus between the items, Enter or Space activates. The rail reports and never changes `active` itself. Give it an `aria-label`.
+
+- attrs:
+  - `scope=ScopeKind` — what the shell is about; anything but main colours the active item's bar
+  - `session=SessionId` — session id when the scope is a session; unknown ids fall back to yk
+  - `closed=boolean` — the left pane is closed. A fact for the consumer: the rail looks the same
+- slots:
+  - `(default)` — sett-rail-item elements
+- events:
+  - `sett-view` — `{ value, active }` when an item is activated; `active` is true when it already was the active one (the consumer closes the pane)
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+
 ### `<sett-area>`
 
 A module-sized group of items inside a column. The header carries what the area holds: its name, how many items, a red count for findings, and one dot per session with an item here. It counts its own `sett-item` children; the `count`, `findings` and `sessions` attributes override that for a folded area whose items the application chose not to render. Folded, the header also carries what the fold hides (DESIGN.md § Motion, "where it lands"): a session whose live item is hidden keeps its dot breathing, the area takes that agent's arrival and departure pulse, and a blue count says how many selected items are inside.
@@ -1129,6 +1148,26 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-sheet--open-gpui` in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
+
+### `<sett-rail-item>`
+
+One view of the activity rail: a glyph over a horizontal label, never the glyph alone. Active, it is ink on paper with a bar on its left: `sel`, or the scope's colour when the rail has one. A badge sits top right: `sug` for what asks you, `bad` for a new blocking finding.
+
+- attrs:
+  - `value=string` — the view this item picks, reported by the rail's `sett-view`
+  - `active=boolean`
+  - `badge=string` — a count shown top right; no attribute, no badge
+  - `tone=BadgeTone` — the badge's fill: sug (asks you) or bad (a new blocking finding)
+  - `badge-label=string` — what the badge says to a screen reader, e.g. `1 asks you`
+- slots:
+  - `(default)` — the label, always shown
+  - `glyph` — an inline SVG drawn with `currentColor`; sized and stroked here
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
 
 ### `<sett-seg>`
 

@@ -1986,6 +1986,22 @@
             "name": "BadgeTone",
             "module": "./badge.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettActivityRail",
+          "declaration": {
+            "name": "SettActivityRail",
+            "module": "./shell/sett-activity-rail.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRailItem",
+          "declaration": {
+            "name": "SettRailItem",
+            "module": "./shell/sett-activity-rail.js"
+          }
         }
       ]
     },
@@ -5642,6 +5658,280 @@
           "declaration": {
             "name": "sessionStyles",
             "module": "src/session.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-activity-rail.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The activity rail: the always-visible column that picks what the left pane\nshows (DESIGN.md \"The shell\" rule 2). Three items, Sessions · Files ·\nFindings, each a glyph over a horizontal label. It never hides: `closed`\nonly records that the left pane is folded, and changes nothing here, so the\nbadges and the scope bar stay. When the scope is not main, the active\nitem's bar takes the scope's colour.\n\nArrow up and down move focus between the items, Enter or Space activates.\nThe rail reports and never changes `active` itself. Give it an `aria-label`.",
+          "name": "SettActivityRail",
+          "slots": [
+            {
+              "description": "sett-rail-item elements",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind"
+              },
+              "default": "'main'",
+              "description": "what the shell is about; anything but main colours the active item's bar",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the left pane is closed. A fact for the consumer: the rail looks the same",
+              "attribute": "closed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "SettRailItem[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "sync",
+              "privacy": "private",
+              "description": "one tab stop: the active item, or the first when none is"
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ value, active }` when an item is activated; `active` is true when it already was the active one (the consumer closes the pane)",
+              "name": "sett-view"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind"
+              },
+              "default": "'main'",
+              "description": "what the shell is about; anything but main colours the active item's bar",
+              "fieldName": "scope"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "closed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the left pane is closed. A fact for the consumer: the rail looks the same",
+              "fieldName": "closed"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-activity-rail",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One view of the activity rail: a glyph over a horizontal label, never the\nglyph alone. Active, it is ink on paper with a bar on its left: `sel`, or\nthe scope's colour when the rail has one. A badge sits top right: `sug` for\nwhat asks you, `bad` for a new blocking finding.",
+          "name": "SettRailItem",
+          "slots": [
+            {
+              "description": "the label, always shown",
+              "name": ""
+            },
+            {
+              "description": "an inline SVG drawn with `currentColor`; sized and stroked here",
+              "name": "glyph"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the view this item picks, reported by the rail's `sett-view`",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "badge",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count shown top right; no attribute, no badge",
+              "attribute": "badge"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "BadgeTone"
+              },
+              "default": "'sug'",
+              "description": "the badge's fill: sug (asks you) or bad (a new blocking finding)",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "badgeLabel",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the badge says to a screen reader, e.g. `1 asks you`",
+              "attribute": "badge-label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the view this item picks, reported by the rail's `sett-view`",
+              "fieldName": "value"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "badge",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count shown top right; no attribute, no badge",
+              "fieldName": "badge"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "BadgeTone"
+              },
+              "default": "'sug'",
+              "description": "the badge's fill: sug (asks you) or bad (a new blocking finding)",
+              "fieldName": "tone"
+            },
+            {
+              "name": "badge-label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the badge says to a screen reader, e.g. `1 asks you`",
+              "fieldName": "badgeLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-rail-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettActivityRail",
+          "declaration": {
+            "name": "SettActivityRail",
+            "module": "src/shell/sett-activity-rail.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-activity-rail",
+          "declaration": {
+            "name": "SettActivityRail",
+            "module": "src/shell/sett-activity-rail.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRailItem",
+          "declaration": {
+            "name": "SettRailItem",
+            "module": "src/shell/sett-activity-rail.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-rail-item",
+          "declaration": {
+            "name": "SettRailItem",
+            "module": "src/shell/sett-activity-rail.ts"
           }
         }
       ]

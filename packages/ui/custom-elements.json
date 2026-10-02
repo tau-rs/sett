@@ -2468,6 +2468,19 @@
         },
         {
           "kind": "function",
+          "name": "sessionsOf",
+          "parameters": [
+            {
+              "name": "u",
+              "type": {
+                "text": "FixtureUnit"
+              }
+            }
+          ],
+          "description": "the fixture counts sessions; the node wants their ids: the first n, in session order"
+        },
+        {
+          "kind": "function",
           "name": "portRow",
           "parameters": [
             {
@@ -2543,9 +2556,16 @@
               "type": {
                 "text": "unknown"
               }
+            },
+            {
+              "name": "who",
+              "default": "{}",
+              "type": {
+                "text": "{ sessions?: string; live?: string }"
+              }
             }
           ],
-          "description": "a node at a tier, sized by the tier's token, fed from a fixture unit"
+          "description": "a node at a tier, sized by the tier's token, fed from a fixture unit; `who` says which sessions are on it and which are working now"
         },
         {
           "kind": "function",
@@ -2689,6 +2709,19 @@
         },
         {
           "kind": "function",
+          "name": "sessionsOn",
+          "parameters": [
+            {
+              "name": "who",
+              "type": {
+                "text": "Who"
+              }
+            }
+          ],
+          "description": "the sessions on a unit, read from who is on its items: every session named, and the ones live somewhere"
+        },
+        {
+          "kind": "function",
           "name": "openUnit",
           "parameters": [
             {
@@ -2718,7 +2751,7 @@
               }
             }
           ],
-          "description": "an open unit: the node at its sheet tier hosting the inside"
+          "description": "an open unit: the node at its sheet tier hosting the inside; its head lists the sessions on its items"
         }
       ],
       "exports": [
@@ -2775,6 +2808,14 @@
           "name": "badges",
           "declaration": {
             "name": "badges",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sessionsOf",
+          "declaration": {
+            "name": "sessionsOf",
             "module": "src/map/map-fixtures.stories-helpers.ts"
           }
         },
@@ -2839,6 +2880,14 @@
           "name": "sheetOf",
           "declaration": {
             "name": "sheetOf",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sessionsOn",
+          "declaration": {
+            "name": "sessionsOn",
             "module": "src/map/map-fixtures.stories-helpers.ts"
           }
         },
@@ -2979,6 +3028,13 @@
             {
               "name": "big",
               "default": "false"
+            },
+            {
+              "name": "session",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "description": "an agent arrives: the host blooms and two waves in its own shape roll outward"
@@ -3001,6 +3057,13 @@
             {
               "name": "big",
               "default": "false"
+            },
+            {
+              "name": "session",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "description": "an agent leaves: one wave closes in on the host and is swallowed"
@@ -3790,7 +3853,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "A unit's box on the board, at one of four tiers. The host sets the box and\nthe tier (from the on-screen width, see `tierFor`); the node never resizes\nitself, the camera moves (rule 3). `mini` is the name only; `chip` adds the\nmeta lines and badges; `card` adds the port rows in two columns; `sheet`\nhosts what is inside. A closed node has no foot and no link: opening is the\nhost's, by double-click or ↩ on the node and by nothing else (rule 4). An\nopen node keeps one link, `▴ close`.",
+          "description": "A unit's box on the board, at one of four tiers. The host sets the box and\nthe tier (from the on-screen width, see `tierFor`); the node never resizes\nitself, the camera moves (rule 3). `mini` is the name only; `chip` adds the\nmeta lines and badges; `card` adds the port rows in two columns; `sheet`\nhosts what is inside. A closed node has no foot and no link: opening is the\nhost's, by double-click or ↩ on the node and by nothing else (rule 4). An\nopen node keeps one link, `▴ close`.\n\nThe head carries one dot per session with an agent on the unit (`sessions`).\nA session that is working here now (`live`) breathes when this box is the\nnearest thing you can see (DESIGN.md § Motion, \"where it lands\"): the unit\nis closed, or it is open and no item of that session is rendered inside.\nOpen with the item on screen, the item (or the folded area's badge) carries\nthe life and the dot is still. When `live` flips, the node plays the\narrival or departure pulse on its box, the larger wave (`map.size.waveNode`).",
           "name": "SettNode",
           "cssParts": [
             {
@@ -3812,7 +3875,7 @@
               "name": ""
             },
             {
-              "description": "count badges in the head (a finding count, a session count)",
+              "description": "count badges in the head (a finding count); the session dots are the node's own",
               "name": "badges"
             },
             {
@@ -3904,6 +3967,26 @@
             },
             {
               "kind": "field",
+              "name": "sessions",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions with an agent on this unit, space-separated ids, one dot each in the head, in session order",
+              "attribute": "sessions"
+            },
+            {
+              "kind": "field",
+              "name": "live",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions working here right now, space-separated: their dots breathe when the box is the nearest thing you can see; a change plays the pulse",
+              "attribute": "live"
+            },
+            {
+              "kind": "field",
               "name": "exposes",
               "type": {
                 "text": "number"
@@ -3919,6 +4002,60 @@
               },
               "privacy": "private",
               "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "igniting",
+              "type": {
+                "text": "string[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "ids",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string[]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "v",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "landsHere",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "this box is the nearest thing you can see for that session: the unit is closed, or no live item of hers is rendered inside"
             },
             {
               "kind": "method",
@@ -4001,6 +4138,24 @@
               "default": "false",
               "description": "declared by hand, nothing verified: dashed, secondary ink (rule 10)",
               "fieldName": "declared"
+            },
+            {
+              "name": "sessions",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions with an agent on this unit, space-separated ids, one dot each in the head, in session order",
+              "fieldName": "sessions"
+            },
+            {
+              "name": "live",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions working here right now, space-separated: their dots breathe when the box is the nearest thing you can see; a change plays the pulse",
+              "fieldName": "live"
             }
           ],
           "superclass": {

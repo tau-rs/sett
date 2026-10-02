@@ -86,6 +86,7 @@ describe('sett-area', () => {
     expect(calls.filter((c) => (c.el as HTMLElement).className === 'sett-wave').length).toBe(2);   // two waves in its shape
     const mg = dots(el).find((d) => d.getAttribute('title') === 'mg')!;
     expect(mg.classList.contains('ignite')).toBe(true);
+    expect(el.style.getPropertyValue('--_session'), 'the pulse takes the colour of the agent who moved (#78)').toBe('var(--sett-session-mg-main)');
     calls.length = 0;
     it.removeAttribute('live'); await tick(); await el.updateComplete;
     expect(calls.length).toBe(1);                                                          // one wave closing in

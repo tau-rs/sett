@@ -135,11 +135,12 @@ export class SettArea extends LitElement {
       for (const r of records) {
         if (r.type !== 'attributes' || r.attributeName !== 'live') continue;
         const it = r.target as Element;
+        const who = it.getAttribute('session') ?? undefined;
         if (it.hasAttribute('live')) {
-          void arrive(this);
-          this.igniting = it.getAttribute('session');
+          void arrive(this, false, who);
+          this.igniting = who ?? null;
           setTimeout(() => { this.igniting = null; }, durationMs(base.motion.ignite));
-        } else void leave(this);
+        } else void leave(this, false, who);
       }
     }
     this.recount();

@@ -84,13 +84,24 @@ export function bloom(host: HTMLElement, big = false): Promise<void> {
   return animate(host, [{ boxShadow: none }, { boxShadow: glow, offset: 0.3 }, { boxShadow: none }], { duration: durationMs(M.bloom), easing: 'ease-out' });
 }
 
+/**
+ * The pulse takes the colour of the agent who moved. An item has it from its
+ * `session` attribute; a host that draws several sessions (an area's or a
+ * node's badges) names the one who moved and gets `--_session` set for the pulse.
+ */
+const colour = (host: HTMLElement, session?: string) => {
+  if (session) host.style.setProperty('--_session', `var(--sett-session-${session}-main)`);
+};
+
 /** an agent arrives: the host blooms and two waves in its own shape roll outward */
-export function arrive(host: HTMLElement, big = false): Promise<void> {
+export function arrive(host: HTMLElement, big = false, session?: string): Promise<void> {
+  colour(host, session);
   return Promise.all([bloom(host, big), wave(host, { big }), wave(host, { big, delay: durationMs(M['wave-gap']) })]).then(() => undefined);
 }
 
 /** an agent leaves: one wave closes in on the host and is swallowed */
-export function leave(host: HTMLElement, big = false): Promise<void> {
+export function leave(host: HTMLElement, big = false, session?: string): Promise<void> {
+  colour(host, session);
   return wave(host, { inward: true, big });
 }
 

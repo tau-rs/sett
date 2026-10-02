@@ -778,6 +778,8 @@ The line that ends every agent reply: `changed · what`, or `no change` with `no
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+  - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
+  - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
 ### `<sett-changes-header>`
 
@@ -1415,13 +1417,16 @@ The composer. `send` is an input and a send button. `handback` turns it into the
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+  - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
+  - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
 ### `<sett-deviation>`
 
-The agent left the plan. Reason, then the three ways back (and discuss).
+The agent left the plan. Reason, then the three ways back (and discuss). A denied write (spec §6 "Deviation") names the check that denied it in `check`, mono: `core · element scope`.
 
 - attrs:
   - `subject=string`
+  - `check=string` — the check that denied the write, mono: `core · element scope`
 - slots:
   - `(default)` — the reason
   - `way` — sett-option elements with a `label`
@@ -1437,6 +1442,8 @@ The agent left the plan. Reason, then the three ways back (and discuss).
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+  - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
+  - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
 ### `<sett-file-row>`
 
@@ -2498,6 +2505,8 @@ A message. Yours sit on the right in the selection tint; an agent's on the left 
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+  - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
+  - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
 ### `<sett-new-session-row>`
 
@@ -2790,6 +2799,8 @@ One option in a question or a deviation: a row that reads left to right, with wh
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+  - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
+  - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
 ### `<sett-overlay-toggles>`
 
@@ -3441,13 +3452,14 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
 
 ### `<sett-question>`
 
-The agent asks. Each option says what it changes; `later` leaves it waiting.
+The agent asks. Each option says what it changes; `later` leaves it waiting. A gate that failed asks the same way (spec §6 "Gate failed"): the four doors are option rows, and the `input` slot holds the one-line hint for `one more round with a hint`.
 
 - attrs:
   - `author=string`
   - `count=number`
 - slots:
   - `(default)` — the question
+  - `input` — a one-line `input` under the question, e.g. the hint for one more round
   - `option` — sett-option elements
 - events:
   - `sett-later`
@@ -3463,6 +3475,8 @@ The agent asks. Each option says what it changes; `later` leaves it waiting.
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+  - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
+  - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
 ### `<sett-rail>`
 
@@ -4749,6 +4763,8 @@ One pane shape for every conversation. The top border says who you talk to: the 
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+  - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
+  - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
 ### `<sett-toggle>`
 
@@ -4786,6 +4802,8 @@ A tool block inside a message: mono, one line per call.
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+  - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
+  - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
 ### `<sett-tree-row>`
 
@@ -4917,6 +4935,8 @@ The fixed bar above the composer. With a `state`, it draws the take-over verbs: 
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+  - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
+  - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
 ### `<sett-view-section>`
 

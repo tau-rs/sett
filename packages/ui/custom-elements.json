@@ -14397,12 +14397,16 @@
         },
         {
           "kind": "class",
-          "description": "The agent asks. Each option says what it changes; `later` leaves it waiting.",
+          "description": "The agent asks. Each option says what it changes; `later` leaves it waiting.\nA gate that failed asks the same way (spec §6 \"Gate failed\"): the four doors\nare option rows, and the `input` slot holds the one-line hint for `one more\nround with a hint`.",
           "name": "SettQuestion",
           "slots": [
             {
               "description": "the question",
               "name": ""
+            },
+            {
+              "description": "a one-line `input` under the question, e.g. the hint for one more round",
+              "name": "input"
             },
             {
               "description": "sett-option elements",
@@ -14467,7 +14471,7 @@
         },
         {
           "kind": "class",
-          "description": "The agent left the plan. Reason, then the three ways back (and discuss).",
+          "description": "The agent left the plan. Reason, then the three ways back (and discuss). A\ndenied write (spec §6 \"Deviation\") names the check that denied it in\n`check`, mono: `core · element scope`.",
           "name": "SettDeviation",
           "slots": [
             {
@@ -14488,6 +14492,16 @@
               },
               "default": "''",
               "attribute": "subject"
+            },
+            {
+              "kind": "field",
+              "name": "check",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the check that denied the write, mono: `core · element scope`",
+              "attribute": "check"
             }
           ],
           "attributes": [
@@ -14498,6 +14512,15 @@
               },
               "default": "''",
               "fieldName": "subject"
+            },
+            {
+              "name": "check",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the check that denied the write, mono: `core · element scope`",
+              "fieldName": "check"
             }
           ],
           "superclass": {

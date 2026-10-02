@@ -131,7 +131,11 @@ export class SettOption extends LitElement {
 
 /**
  * The agent asks. Each option says what it changes; `later` leaves it waiting.
+ * A gate that failed asks the same way (spec §6 "Gate failed"): the four doors
+ * are option rows, and the `input` slot holds the one-line hint for `one more
+ * round with a hint`.
  * @slot - the question
+ * @slot input - a one-line `input` under the question, e.g. the hint for one more round
  * @slot option - sett-option elements
  * @fires sett-later
  */
@@ -144,33 +148,40 @@ export class SettQuestion extends LitElement {
     b { font-weight: var(--sett-font-weight-semibold); }
     .sub { font-size: var(--sett-font-size-sm); color: var(--sett-color-mute); }
     .q { margin-top: var(--sett-space-1); }
+    ::slotted(input) { box-sizing: border-box; width: 100%; margin-top: var(--sett-space-2); font: inherit; font-size: var(--sett-font-size-base); color: var(--sett-color-ink); background: var(--sett-color-paper); border: var(--sett-stroke-hair) solid var(--sett-color-line); border-radius: var(--sett-radius-chip); padding: var(--sett-space-1) var(--sett-space-2); }
+    ::slotted(input:focus-visible) { outline: none; box-shadow: 0 0 0 var(--sett-stroke-lit) var(--sett-color-sel); }
     .opts { display: flex; flex-direction: column; gap: var(--sett-space-1); margin-top: var(--sett-space-2); }
     .later { margin-top: var(--sett-space-2); font-size: var(--sett-font-size-sm); color: var(--sett-color-ink2); cursor: pointer; }
   `;
   private later() { this.dispatchEvent(new CustomEvent('sett-later', { bubbles: true, composed: true })); }
   render() {
     return html`<b>${this.author} asks${this.count != null ? html` · ${this.count}` : ''}</b><div class="sub">one question, with what each option changes</div>
-      <div class="q"><slot></slot></div><div class="opts"><slot name="option"></slot></div>
+      <div class="q"><slot></slot></div><slot name="input"></slot><div class="opts"><slot name="option"></slot></div>
       <div class="later" @click=${this.later}>later · leaves it waiting, no nagging</div>`;
   }
 }
 
 /**
- * The agent left the plan. Reason, then the three ways back (and discuss).
+ * The agent left the plan. Reason, then the three ways back (and discuss). A
+ * denied write (spec §6 "Deviation") names the check that denied it in
+ * `check`, mono: `core · element scope`.
  * @slot - the reason
  * @slot way - sett-option elements with a `label`
  */
 @customElement('sett-deviation')
 export class SettDeviation extends LitElement {
   @property() subject = '';
+  /** the check that denied the write, mono: `core · element scope` */
+  @property() check = '';
   static styles = css`
     :host { display: block; border: var(--sett-stroke-hair) solid var(--sett-color-bad); background: var(--sett-color-bad-bg); border-radius: var(--sett-radius-node); padding: var(--sett-space-2); font-size: var(--sett-font-size-lg); }
     b { font-weight: var(--sett-font-weight-semibold); color: var(--sett-color-bad); }
+    .check { display: block; margin-top: var(--sett-space-1); font-family: var(--sett-font-mono); font-size: var(--sett-font-size-sm); color: var(--sett-color-mute); }
     .reason { margin: var(--sett-space-1) 0 var(--sett-space-2); color: var(--sett-color-ink2); }
     .typ { display: grid; gap: var(--sett-space-1); }
   `;
   render() {
-    return html`<b>${'≠'} deviation</b> · ${this.subject}<div class="reason"><slot></slot></div><div class="typ"><slot name="way"></slot></div>`;
+    return html`<b>${'≠'} deviation</b> · ${this.subject}${this.check ? html`<span class="check">check · ${this.check}</span>` : ''}<div class="reason"><slot></slot></div><div class="typ"><slot name="way"></slot></div>`;
   }
 }
 

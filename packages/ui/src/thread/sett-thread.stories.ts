@@ -66,3 +66,14 @@ export const Composer: Story = { name: 'composer · send and hand back', render:
 export const HandBackMoment: Story = { name: 'hand back · before and after', render: () => html`<div style="display:flex;gap:12px">
   ${box(sessionThread(html`<sett-verbs slot="verbs" state="taken-over" subject="PgRefundRepo"></sett-verbs>`, html`<sett-composer slot="composer" mode="handback"><span slot="files">store/pg.rs · +12 −4</span></sett-composer>`), '720px')}
 </div>` };
+export const GateFailed: Story = { name: 'question · gate failed: four doors, a hint for one more round, later', render: () => html`<div style="width:330px"><sett-question author="refund flow">gate · group 1 → group 2 failed twice: judge says refund() does not honour the port contract
+  <input slot="input" placeholder="a hint for one more round · what the judge keeps missing…" aria-label="hint">
+  <sett-option slot="option" value="round" effect="round 3 of 2">one more round with a hint</sett-option>
+  <sett-option slot="option" value="take-over" effect="pause a2 · you hold E2">take over</sett-option>
+  <sett-option slot="option" value="accept" effect="recorded override">accept as is</sett-option>
+  <sett-option slot="option" value="re-plan" effect="opens the planner" quiet>re-plan</sett-option></sett-question></div>` };
+export const DeniedWrite: Story = { name: 'deviation · denied write: the check id, the reason, three typologies, discuss', render: () => html`<div style="width:330px"><sett-deviation subject="a2" check="core · element scope">wrote <sett-tag mono>api/service.rs</sett-tag>, outside E2's scope, adding ship() → PgOrderRepo::mark_refunded (api → store). The write was denied; the finding is on the Checks tab. why: "to persist the refunded flag without touching the port"
+  <sett-option slot="way" value="back" label="back on the plan">do it through OrderRepo::save · as planned</sett-option>
+  <sett-option slot="way" value="update" label="update the plan">add mark_refunded to the OrderRepo port · +1 element in group 1</sett-option>
+  <sett-option slot="way" value="carve" label="not this change">carve out as a follow-up intention</sett-option>
+  <sett-option slot="way" value="discuss" label="discuss" quiet>not a decision · how you get to one</sett-option></sett-deviation></div>` };

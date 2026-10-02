@@ -1,6 +1,6 @@
 {
   "name": "@tau-rs/sett",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "sett \u00b7 Lit web components for tau-rs developer tools",
   "license": "MIT",
   "type": "module",

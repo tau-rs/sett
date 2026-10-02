@@ -23,6 +23,8 @@ Synced to: no ADR yet (`arch-design` holds none on 2026-10-02). DESIGN.md wins o
 | 2026-10-02 | `arch-fixtures` (handoff §7) | the repository is empty; stories cannot load `fixtures-for-ui/` | stories use sett's own fixtures (ripgrep, zero2prod, zed), to export (#70) |
 | 2026-10-02 | fixtures, links | a layered unit's links are stored leaf → public, a hexagon's user → used; one convention is needed before links are drawn | #38 |
 | 2026-10-02 | analyser output | lane 4 needs a kind per link and how the analyser knows it; `sett-item` needs the kinds const · static · alias · union | #69, #68 |
+| 2026-10-02 | shell page, daily flow | no page draws the **`detected` chip** of a `you` session (spec §4: "the git chip counts the changes; commit is one click from the chip; `Delegate the rest`") | sett draws it with a `sel` label, `changes detected · n files`, doors `delegate the rest` · `commit` (#63); to confirm or redraw |
+| 2026-10-02 | session flow, shell page | the **gate of a group has no glyph** on any page (the pages write `judge` as a tag; DESIGN.md rule 7 writes `gate`); the session card's glyph column needs one per gate word | sett reads the gate through the existing glyphs: `✓` done · `●` running · `●` gate in amber · `!` failed in red · `·` waiting (#63); no new glyph |
 
 ## Deviations (what sett changed from the pages, and why)
 
@@ -36,3 +38,20 @@ Synced to: no ADR yet (`arch-design` holds none on 2026-10-02). DESIGN.md wins o
 | 2026-10-02 | shell | the lock inside the selector's box; `main` has a neutral dot; a plan is one amber box `plan · refund flow` | spec §4; no `main › plan › …` crumb |
 | 2026-10-02 | map | a closed node has no foot at all: `▾ open` and `enter ›` both go | "enter" was the PoC's jump to a level DESIGN.md rejects (#65) |
 | 2026-10-02 | map | layer labels fall left to right `L4 · public api … L0 · leaf` | layers read public API left, leaves right (#74) |
+| 2026-10-02 | shell, session, plan | the Sessions view reads `group 1`, `gate · group 1 → group 2`; the pages still read `Lane W1`, `Gate W1 → W2` | the owner's vocabulary: group and gate; waves are a V2 policy (#62) |
+| 2026-10-02 | shell | the new-session door reads `+ new session · delegate`; the pages read `· manual or delegate` | a you session is detected, never declared (LEFT-7) |
+| 2026-10-02 | sessions wireflow | the full-paths toggle (☰) sits beside the `changed · all files` seg, not in the first stage's header | a button inside a `tree` fails the a11y gate (`aria-required-children`); one setting per list matches "remembered per session" (#62) |
+| 2026-10-02 | shell | a sub-agent row shows a dot in the sub shade only, no glyph run or guide line | a 24 px row with a name and a state tag has no room for the card's idiom (#62) |
+| 2026-10-02 | shell | on a selected row the status letter and tone words go `ink` | `bad` and session colours on the `sel` tint are 4.3:1 in dark (#62) |
+| 2026-10-02 | session | the session card's group row is `sett-plan-row kind="group"`, with its elements inside it and its sub-agents folded under the group | the Sessions view (lane C) owns `sett-group-row`; one name per element (#63) |
+| 2026-10-02 | session | `stepped-in` is `taken-over` on the card's rows; the old value still draws for one release | step in is gone from the vocabulary (rule 9) |
+| 2026-10-02 | plan, daily | a planned element's hint is a `sett-hint` pill after the code at its site, next to `◇`, not a right-aligned count | rule 12: the hint sits at the site; the counts stay the declaration's |
+||||||| parent of e9a9746 (feat(ui): card layouts: checklist rows and how, result pills, plan delta, What's new doors, fix card (shell lane E))
+| 2026-10-02 | review (merge) | the how is one plain line, `squash · from the forge's default · delete branch · archive session`; no radios, no checkboxes | the strategy is read from the forge, never chosen in arch (ADR 0016); the gated button under it is the only verb |
+| 2026-10-02 | review (merged) | two pills on the result, `merged` in ok and `archived` plain; the page has one `merged · archived` | merged is the forge's fact, archived is arch's, restorable (ADR 0003) |
+| 2026-10-02 | daily (What's new) | the door words `show · open · place · follow` are grey and end with `›`; the page draws them in blue | rule 10: the row is the link, blue is left to buttons |
+| 2026-10-02 | daily (fix card), review | the fix card's hunk and a review hunk draw the sign from the line's kind; the text is the code only | one line element for both pages; a flagged line (the one a remark points at) keeps its `+` |
+| 2026-10-02 | daily (Ask) | the `make it so → plan` door sits under the answer, not inside it; witnesses are mono tags that are links, `open all` after them | no button inside a message (thread rule 8: a reply ends with its changed line); a place in code is the small mono tag (rule 10) |
+| 2026-10-02 | daily (commit) | the behind line reads `main moved 2 commits · with an agent · update myself`, agent door first and bold; the page puts `update myself` first | P-1 |
+| 2026-10-02 | session (deviation) | the denied write names its check as `core · element scope`; the page reads `waves/scope` | the element-scope veto is the core's one rule in V1 (spec §8, §13.12); waves are a V2 policy |
+| 2026-10-02 | session (gate failed) | the four doors are option rows under the question, `accept as is` carries `recorded override`, `later` stays; the hint is a one-line input under the question, not the composer | the gate asks like any ask (spec §6); the override is a record (ADR 0013) |

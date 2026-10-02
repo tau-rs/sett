@@ -71,6 +71,7 @@
   --sett-glyph-done: "✓";
   --sett-glyph-running: "●";
   --sett-glyph-paused: "⏸";
+  --sett-glyph-taken-over: "✋";
   --sett-glyph-stepped-in: "✋";
   --sett-glyph-deviation: "≠";
   --sett-glyph-asks: "!";

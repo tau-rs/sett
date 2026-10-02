@@ -15,7 +15,9 @@ describe('buttons', () => {
   it('a disabled primary is a dashed blue outline, not a faded fill', () => {
     const c = cssOf('sett-button');
     expect(c).toMatch(/button:disabled \{[^}]*border-style: dashed/);
-    expect(c).toMatch(/\[variant='primary'\]\) button:disabled \{ color: var\(--sett-color-sel\); border-color: var\(--sett-color-sel\)/);
+    // the primary rule outranks button:disabled (0,2,1 vs 0,1,1): the disabled primary must restate the outline, or it paints blue on blue
+    expect(c).toMatch(/\[variant='primary'\]\) button:disabled \{ background: transparent; border-style: dashed; color: var\(--sett-color-sel\); border-color: var\(--sett-color-sel\)/);
+    expect(cssOf('sett-split-button')).toMatch(/button:disabled, :host\(\[variant='primary'\]\) button:disabled \{[^}]*background: transparent; border-style: dashed; color: var\(--sett-color-sel\)/);
   });
   it('split: main press fires, dropdown toggles the list, Escape closes', async () => {
     const el = await mount('<sett-split-button>accept<sett-menu slot="menu"></sett-menu></sett-split-button>');

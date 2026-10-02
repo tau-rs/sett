@@ -7,6 +7,7 @@ const KINDS = ['git', 'agent', 'finding', 'review', 'pipeline', 'tree'] as const
 const STATES = ['normal', 'blocking', 'waiting', 'done'] as const;
 // a group's gate has one verb, open; its words are the gate's in DESIGN.md rule 7: running · failed n/m · waiting · done
 const GATE = 'group 1 → group 2';
+// your own work, found by the watcher (spec §4): the git chip of a `you` session; the doors are delegate the rest · commit
 
 const facts: Record<string, Record<string, string>> = {
   git: { normal: 'behind main|· 2', blocking: 'conflict in|pg.rs', waiting: 'rebase running|', done: 'updated to main|' },
@@ -16,9 +17,11 @@ const facts: Record<string, Record<string, string>> = {
   pipeline: { normal: 'passed|', blocking: 'tests failed|· 3', waiting: 'running|· 2/5', done: 'passed|· 5/5' },
   tree: { normal: '1 uncommitted|', blocking: 'map edits · 4|· not kept', waiting: '2 files editing|', done: 'committed|' },
   gate: { normal: `${GATE} · judge running|`, blocking: `${GATE}|· failed 1/2`, waiting: `${GATE} · waiting|`, done: `${GATE} · done|` },
+  detected: { normal: 'changes detected|· 3 files', blocking: 'changes collide with w1|· pool.rs', waiting: 'commit drafted|· 3 files', done: 'committed|· 3 files' },
 };
 const verbs: Record<string, [string, string, string?]> = {
   gate: ['', '', 'open'],
+  detected: ['delegate the rest', 'commit'],
   git: ['with Yokohama', 'update myself'], agent: ['follow', 'take over'], finding: ['with Yokohama', 'fix myself', 'allow'],
   review: ['with Yokohama', 'address myself', 'send back'], pipeline: ['fix with Yokohama', 'open log', 'rerun'], tree: ['with Yokohama', 'commit', 'discard'],
 };
@@ -34,7 +37,7 @@ const meta: Meta = {
   component: 'sett-chip',
   args: { kind: 'git', state: 'normal', meFirst: false },
   argTypes: {
-    kind: { control: 'select', options: [...KINDS, 'gate'] },
+    kind: { control: 'select', options: [...KINDS, 'gate', 'detected'] },
     state: { control: 'select', options: STATES },
     session: { control: 'select', options: sessionOrder },
   },
@@ -56,6 +59,11 @@ export const GateRunning: Story = {
   render: () => html`<div class="sett-row">${chip('gate', 'normal', { session: 'yk' })}${chip('gate', 'normal', { session: 'tl' })}</div>`,
 };
 export const GateFailed: Story = { name: 'kind · gate · failed n/m, blocking', render: () => chip('gate', 'blocking', { session: 'yk' }) };
+export const Detected: Story = { name: 'kind · detected · your own work, found by the watcher · four states', render: () => html`<div class="sett-row">${STATES.map((s) => chip('detected', s))}</div>` };
+export const DetectedInBar: Story = {
+  name: 'in context · a you session: the detected chip beside the agent chip',
+  render: () => html`<div class="sett-paper sett-row"><span style="font-family:var(--sett-font-mono);font-weight:var(--sett-font-weight-medium)">you · fix-pool-size</span>${chip('detected', 'normal')}${chip('agent', 'normal')}${chip('git', 'normal')}</div>`,
+};
 const perState = (state: string): Story => ({ name: `state · ${state} · six kinds`, render: () => html`<div class="sett-row">${KINDS.map((k) => chip(k, state))}</div>` });
 export const Normal = perState('normal');
 export const Blocking = perState('blocking');

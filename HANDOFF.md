@@ -26,7 +26,7 @@ Generate `custom-elements.json` with `@custom-elements-manifest/analyzer` on eve
 - chip: kinds git/agent/finding/review/pipeline/tree × normal/blocking/waiting/done; another session's colour.
 - frame: idle, live (default + other session colour), waiting, editing, collision, focus; reduced-motion.
 - selector: main, yours, planning, working, asks, paused, done, collision; menu grouped needs-you/working/waiting-to-merge/saved-plans/main.
-- session-card: running with sub-agent; asks/paused/stepped-in/deviation; glyph column.
+- session-card: running with sub-agent; asks/paused/taken-over/deviation; glyph column; groups as lanes with the gate words; the verbs bar and the composer (#63).
 - thread: session / planner / framer / fixer top borders; me / agent / sub messages; tool block; changed / no-change; question with options and "later"; deviation with the three typologies; verbs bar with glyph buttons; composer.
 - cards: all seven; gated + split buttons both states; tabbar with pinned Map, dirty dot, session-coloured tab; seg fill/with count/disabled; inlays six kinds; funnel.
 - Two recipe stories: "session · live" and "map · edit at scale" (composed from the components; the map as a static SVG).

@@ -27,3 +27,4 @@ export { scopeWords, scopeText, scopeStyles, SCOPE_LOCK, type Scope, type ScopeK
 export { badgeStyles, type BadgeTone } from './badge.js';
 export { SettActivityRail, SettRailItem } from './shell/sett-activity-rail.js';
 export { SettScopeLine } from './shell/sett-scope-line.js';
+export { SettStatusBar, SettStatusItem } from './shell/sett-status-bar.js';

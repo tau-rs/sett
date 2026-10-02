@@ -2010,6 +2010,22 @@
             "name": "SettScopeLine",
             "module": "./shell/sett-scope-line.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettStatusBar",
+          "declaration": {
+            "name": "SettStatusBar",
+            "module": "./shell/sett-status-bar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettStatusItem",
+          "declaration": {
+            "name": "SettStatusItem",
+            "module": "./shell/sett-status-bar.js"
+          }
         }
       ]
     },
@@ -5672,6 +5688,77 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/shell/host-link.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "hostLinkStyles",
+          "default": "css` :host { cursor: pointer; } a { color: inherit; text-decoration: none; } :host(:focus-visible), a:focus-visible { outline: var(--sett-stroke-lit) solid var(--sett-color-sel); outline-offset: var(--sett-stroke-hair); } `",
+          "description": "The host-as-link pattern of the shell's status items and What's new lines:\nthe whole element leads to the view that owns it. Without `href` the host\nitself is the link (`role=\"link\"`, in the tab order, Enter clicks it); with\n`href` the element renders an `<a>` and the host steps back."
+        },
+        {
+          "kind": "function",
+          "name": "syncHostLink",
+          "parameters": [
+            {
+              "name": "host",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "href",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "keep the host's role and tab stop in step with `href`; call from willUpdate"
+        },
+        {
+          "kind": "function",
+          "name": "clickOnEnter",
+          "parameters": [
+            {
+              "name": "e",
+              "type": {
+                "text": "KeyboardEvent"
+              }
+            }
+          ],
+          "description": "a keydown listener for the host: Enter on the host itself is a click"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "hostLinkStyles",
+          "declaration": {
+            "name": "hostLinkStyles",
+            "module": "src/shell/host-link.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "syncHostLink",
+          "declaration": {
+            "name": "syncHostLink",
+            "module": "src/shell/host-link.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "clickOnEnter",
+          "declaration": {
+            "name": "clickOnEnter",
+            "module": "src/shell/host-link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/shell/sett-activity-rail.ts",
       "declarations": [
         {
@@ -6097,6 +6184,228 @@
           "declaration": {
             "name": "SettScopeLine",
             "module": "src/shell/sett-scope-line.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-status-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The status bar: counts and states, each a link to the view that owns it,\nnever a verb (DESIGN.md \"The shell\" rule 8). One line at the bottom of the\nshell.",
+          "name": "SettStatusBar",
+          "slots": [
+            {
+              "description": "sett-status-item elements, from the left: the scope first",
+              "name": ""
+            },
+            {
+              "description": "sett-status-item elements pushed to the right end (the caret's place in a file, the map's freshness)",
+              "name": "right"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-status-bar",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One item of the status bar: a count or a state, and a link to the view that\nowns it. The whole item is the link: the host, or an `<a>` when `href` is\nset. With `scope` it is the scope item: a dot in the scope's colour, then\nthe scope's words from `scopeText` (and `🔒` when locked), then its state.",
+          "name": "SettStatusItem",
+          "slots": [
+            {
+              "description": "the count or state: `b` is a count (ink, medium); `[data-tone=\"sug\" | \"bad\" | \"ok\"]` takes that accent",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the view's name before the content, e.g. `Sessions`",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where the item leads; renders an `<a>`. Without it the host is the link and its click is the consumer's",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "makes this the scope item: the kind of scope the shell is about",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "scopeId",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "attribute": "scope-id"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the scope is locked: 🔒 after its words",
+              "attribute": "locked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "filled",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "description": "whether the slot holds anything, so the scope's words are not followed by a dangling `·`"
+            },
+            {
+              "kind": "field",
+              "name": "onSlot",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the view's name before the content, e.g. `Sessions`",
+              "fieldName": "label"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where the item leads; renders an `<a>`. Without it the host is the link and its click is the consumer's",
+              "fieldName": "href"
+            },
+            {
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "makes this the scope item: the kind of scope the shell is about",
+              "fieldName": "scope"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "scope-id",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "fieldName": "scopeId"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "fieldName": "name"
+            },
+            {
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the scope is locked: 🔒 after its words",
+              "fieldName": "locked"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-status-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettStatusBar",
+          "declaration": {
+            "name": "SettStatusBar",
+            "module": "src/shell/sett-status-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-status-bar",
+          "declaration": {
+            "name": "SettStatusBar",
+            "module": "src/shell/sett-status-bar.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettStatusItem",
+          "declaration": {
+            "name": "SettStatusItem",
+            "module": "src/shell/sett-status-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-status-item",
+          "declaration": {
+            "name": "SettStatusItem",
+            "module": "src/shell/sett-status-bar.ts"
           }
         }
       ]

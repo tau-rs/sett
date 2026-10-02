@@ -127,6 +127,12 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-area>`
 
@@ -1186,6 +1192,12 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-scope-line>`
 
@@ -1213,6 +1225,12 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-seg>`
 
@@ -1398,6 +1416,71 @@ The planner's accept: the main verb plus a ▾ that opens a list (the driver) un
   - `buttons-buttons--gated-blocked` gated · blocked with pills
   - `buttons-buttons--gated-open` gated · open
   - `buttons-buttons--hand-back-disabled` hand back · disabled until the note is written
+
+### `<sett-status-bar>`
+
+The status bar: counts and states, each a link to the view that owns it, never a verb (DESIGN.md "The shell" rule 8). One line at the bottom of the shell.
+
+- slots:
+  - `(default)` — sett-status-item elements, from the left: the scope first
+  - `right` — sett-status-item elements pushed to the right end (the caret's place in a file, the map's freshness)
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-status-item>`
+
+One item of the status bar: a count or a state, and a link to the view that owns it. The whole item is the link: the host, or an `<a>` when `href` is set. With `scope` it is the scope item: a dot in the scope's colour, then the scope's words from `scopeText` (and `🔒` when locked), then its state.
+
+- attrs:
+  - `label=string` — the view's name before the content, e.g. `Sessions`
+  - `href=string` — where the item leads; renders an `<a>`. Without it the host is the link and its click is the consumer's
+  - `scope=ScopeKind` — makes this the scope item: the kind of scope the shell is about
+  - `session=SessionId` — session id when the scope is a session; unknown ids fall back to yk
+  - `scope-id=string` — the worktree id of a session scope, e.g. `w1`
+  - `name=string` — what the scope is called: `refund flow`, `fix-pool-size`
+  - `locked=boolean` — the scope is locked: 🔒 after its words
+- slots:
+  - `(default)` — the count or state: `b` is a count (ink, medium); `[data-tone="sug" | "bad" | "ok"]` takes that accent
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-sub-agent>`
 

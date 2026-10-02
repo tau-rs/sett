@@ -18,3 +18,4 @@ export { SettPortRow, PORT_KINDS, type PortKind, type PortSide } from './map/set
 export { SettRail, RAIL_SECTIONS, RAIL_LABEL, type RailSection } from './map/sett-rail.js';
 export { SettNode, tierFor, type NodeTier } from './map/sett-node.js';
 export { splitLabel, portOf, unitOf, unitPorts, opOf, opsOf, sectionOf, type Fixture, type FixtureUnit, type FixtureContract, type Port, type Op } from './map/fixtures.js';
+export { presenceStyles, wave, bloom, arrive, leave, flash, reducedMotion, durationMs, type WaveOptions } from './map/motion.js';

@@ -4,6 +4,28 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/badge.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "badgeStyles",
+          "default": "css` .badge { flex: none; box-sizing: border-box; min-width: var(--sett-size-tag); padding: 0 var(--sett-space-1); border-radius: var(--sett-radius-pill); font-family: var(--sett-font-mono); font-size: var(--sett-font-size-xs); font-weight: var(--sett-font-weight-medium); line-height: var(--sett-size-tag); text-align: center; background: var(--sett-color-well); color: var(--sett-color-ink2); } .badge[data-tone='sug'] { background: var(--sett-color-sug); color: var(--sett-color-paper); } .badge[data-tone='bad'] { background: var(--sett-color-bad); color: var(--sett-color-paper); } `",
+          "description": "The count badge: a small rounded count on a solid fill, on the activity\nrail's items and the bottom panel's tabs. The text on an accent fill is\n`paper`, which reaches 4.5:1 on `sug` and `bad` in both themes (white does\nnot in dark). Counts are mono. Never animates."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "badgeStyles",
+          "declaration": {
+            "name": "badgeStyles",
+            "module": "src/badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/button/sett-button.ts",
       "declarations": [
         {
@@ -1899,6 +1921,174 @@
           "declaration": {
             "name": "SettSheet",
             "module": "./map/sett-sheet.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeWords",
+          "declaration": {
+            "name": "scopeWords",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeText",
+          "declaration": {
+            "name": "scopeText",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeStyles",
+          "declaration": {
+            "name": "scopeStyles",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SCOPE_LOCK",
+          "declaration": {
+            "name": "SCOPE_LOCK",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Scope",
+          "declaration": {
+            "name": "Scope",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ScopeKind",
+          "declaration": {
+            "name": "ScopeKind",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "badgeStyles",
+          "declaration": {
+            "name": "badgeStyles",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BadgeTone",
+          "declaration": {
+            "name": "BadgeTone",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettActivityRail",
+          "declaration": {
+            "name": "SettActivityRail",
+            "module": "./shell/sett-activity-rail.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRailItem",
+          "declaration": {
+            "name": "SettRailItem",
+            "module": "./shell/sett-activity-rail.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettScopeLine",
+          "declaration": {
+            "name": "SettScopeLine",
+            "module": "./shell/sett-scope-line.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettStatusBar",
+          "declaration": {
+            "name": "SettStatusBar",
+            "module": "./shell/sett-status-bar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettStatusItem",
+          "declaration": {
+            "name": "SettStatusItem",
+            "module": "./shell/sett-status-bar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettBottomPanel",
+          "declaration": {
+            "name": "SettBottomPanel",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelTab",
+          "declaration": {
+            "name": "SettPanelTab",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelTable",
+          "declaration": {
+            "name": "SettPanelTable",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelRow",
+          "declaration": {
+            "name": "SettPanelRow",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelOutput",
+          "declaration": {
+            "name": "SettPanelOutput",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelLine",
+          "declaration": {
+            "name": "SettPanelLine",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PanelTableKind",
+          "declaration": {
+            "name": "PanelTableKind",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PanelRowLevel",
+          "declaration": {
+            "name": "PanelRowLevel",
+            "module": "./shell/sett-bottom-panel.js"
           }
         }
       ]
@@ -4825,6 +5015,97 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/scope.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "SCOPE_LOCK",
+          "type": {
+            "text": "string"
+          },
+          "default": "'🔒'",
+          "description": "the glyph shown after the words of a locked scope; it is never part of the words"
+        },
+        {
+          "kind": "function",
+          "name": "scopeWords",
+          "return": {
+            "type": {
+              "text": "{ head: string; tail: string }"
+            }
+          },
+          "parameters": [
+            {
+              "name": "s",
+              "type": {
+                "text": "Scope"
+              }
+            }
+          ],
+          "description": "The words of a scope, written the same wherever the scope is named (DESIGN.md\n\"The shell\" rule 3): `main` · `w1 · refund flow` · `you · fix-pool-size` ·\n`plan · refund flow`. `head` is the mono part (`main`, `w1`, `you`, `plan`),\n`tail` the rest. An unknown kind reads as main."
+        },
+        {
+          "kind": "function",
+          "name": "scopeText",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "s",
+              "type": {
+                "text": "Scope"
+              }
+            }
+          ],
+          "description": "the words on one line: head, then `·` and the tail when there is one"
+        },
+        {
+          "kind": "variable",
+          "name": "scopeStyles",
+          "default": "css` ${sessionStyles} :host { --_scope: var(--sett-color-mute); --_scope-bg: var(--sett-color-well); } :host([scope='session']) { --_scope: var(--_session); --_scope-bg: var(--_session-bg); } :host([scope='you']) { --_scope: var(--sett-color-sel); --_scope-bg: var(--sett-color-sel-bg); } :host([scope='plan']) { --_scope: var(--sett-color-sug); --_scope-bg: var(--sett-color-sug-bg); } `",
+          "description": "The colour of a scope, set from the host attributes `scope` and `session` so\na consumer never passes a colour. Exposes `--_scope` (dot, bar) and\n`--_scope-bg` (tint) inside the host: main is neutral, a session takes its\nown colour (an unknown id falls back like sessionStyles), you is sel, a plan\nis sug."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SCOPE_LOCK",
+          "declaration": {
+            "name": "SCOPE_LOCK",
+            "module": "src/scope.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeWords",
+          "declaration": {
+            "name": "scopeWords",
+            "module": "src/scope.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeText",
+          "declaration": {
+            "name": "scopeText",
+            "module": "src/scope.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeStyles",
+          "declaration": {
+            "name": "scopeStyles",
+            "module": "src/scope.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/selector/sett-selector.ts",
       "declarations": [
         {
@@ -5465,6 +5746,1253 @@
           "declaration": {
             "name": "sessionStyles",
             "module": "src/session.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/host-link.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "hostLinkStyles",
+          "default": "css` :host { cursor: pointer; } a { color: inherit; text-decoration: none; } :host(:focus-visible), a:focus-visible { outline: var(--sett-stroke-lit) solid var(--sett-color-sel); outline-offset: var(--sett-stroke-hair); } `",
+          "description": "The host-as-link pattern of the shell's status items and What's new lines:\nthe whole element leads to the view that owns it. Without `href` the host\nitself is the link (`role=\"link\"`, in the tab order, Enter clicks it); with\n`href` the element renders an `<a>` and the host steps back."
+        },
+        {
+          "kind": "function",
+          "name": "syncHostLink",
+          "parameters": [
+            {
+              "name": "host",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "href",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "keep the host's role and tab stop in step with `href`; call from willUpdate"
+        },
+        {
+          "kind": "function",
+          "name": "clickOnEnter",
+          "parameters": [
+            {
+              "name": "e",
+              "type": {
+                "text": "KeyboardEvent"
+              }
+            }
+          ],
+          "description": "a keydown listener for the host: Enter on the host itself is a click"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "hostLinkStyles",
+          "declaration": {
+            "name": "hostLinkStyles",
+            "module": "src/shell/host-link.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "syncHostLink",
+          "declaration": {
+            "name": "syncHostLink",
+            "module": "src/shell/host-link.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "clickOnEnter",
+          "declaration": {
+            "name": "clickOnEnter",
+            "module": "src/shell/host-link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-activity-rail.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The activity rail: the always-visible column that picks what the left pane\nshows (DESIGN.md \"The shell\" rule 2). Three items, Sessions · Files ·\nFindings, each a glyph over a horizontal label. It never hides: `closed`\nonly records that the left pane is folded, and changes nothing here, so the\nbadges and the scope bar stay. When the scope is not main, the active\nitem's bar takes the scope's colour.\n\nArrow up and down move focus between the items, Enter or Space activates.\nThe rail reports and never changes `active` itself. Give it an `aria-label`.",
+          "name": "SettActivityRail",
+          "slots": [
+            {
+              "description": "sett-rail-item elements",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind"
+              },
+              "default": "'main'",
+              "description": "what the shell is about; anything but main colours the active item's bar",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the left pane is closed. A fact for the consumer: the rail looks the same",
+              "attribute": "closed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "SettRailItem[]"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "sync",
+              "privacy": "private",
+              "description": "one tab stop: the active item, or the first when none is"
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ value, active }` when an item is activated; `active` is true when it already was the active one (the consumer closes the pane)",
+              "name": "sett-view"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind"
+              },
+              "default": "'main'",
+              "description": "what the shell is about; anything but main colours the active item's bar",
+              "fieldName": "scope"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "closed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the left pane is closed. A fact for the consumer: the rail looks the same",
+              "fieldName": "closed"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-activity-rail",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One view of the activity rail: a glyph over a horizontal label, never the\nglyph alone. Active, it is ink on paper with a bar on its left: `sel`, or\nthe scope's colour when the rail has one. A badge sits top right: `sug` for\nwhat asks you, `bad` for a new blocking finding.",
+          "name": "SettRailItem",
+          "slots": [
+            {
+              "description": "the label, always shown",
+              "name": ""
+            },
+            {
+              "description": "an inline SVG drawn with `currentColor`; sized and stroked here",
+              "name": "glyph"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the view this item picks, reported by the rail's `sett-view`",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "badge",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count shown top right; no attribute, no badge",
+              "attribute": "badge"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "BadgeTone"
+              },
+              "default": "'sug'",
+              "description": "the badge's fill: sug (asks you) or bad (a new blocking finding)",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "badgeLabel",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the badge says to a screen reader, e.g. `1 asks you`",
+              "attribute": "badge-label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the view this item picks, reported by the rail's `sett-view`",
+              "fieldName": "value"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "badge",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count shown top right; no attribute, no badge",
+              "fieldName": "badge"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "BadgeTone"
+              },
+              "default": "'sug'",
+              "description": "the badge's fill: sug (asks you) or bad (a new blocking finding)",
+              "fieldName": "tone"
+            },
+            {
+              "name": "badge-label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the badge says to a screen reader, e.g. `1 asks you`",
+              "fieldName": "badgeLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-rail-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettActivityRail",
+          "declaration": {
+            "name": "SettActivityRail",
+            "module": "src/shell/sett-activity-rail.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-activity-rail",
+          "declaration": {
+            "name": "SettActivityRail",
+            "module": "src/shell/sett-activity-rail.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRailItem",
+          "declaration": {
+            "name": "SettRailItem",
+            "module": "src/shell/sett-activity-rail.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-rail-item",
+          "declaration": {
+            "name": "SettRailItem",
+            "module": "src/shell/sett-activity-rail.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-bottom-panel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The bottom panel, under the centre: it lists what already exists, Findings ·\nChecks · Terminal · What's new, nothing else (DESIGN.md \"The shell\" rule 7).\nOpen, it shows the body of the `active` tab; `closed`, it is a strip of its\ntabs with their counts. It reports and never changes `active` or `closed`\nitself; it only marks which of its tabs is the open one.",
+          "name": "SettBottomPanel",
+          "cssParts": [
+            {
+              "description": "the row of tabs",
+              "name": "strip"
+            },
+            {
+              "description": "the open tab's body",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "sett-panel-tab elements",
+              "name": "tabs"
+            },
+            {
+              "description": "the right end of the strip, e.g. the terminal's worktree name",
+              "name": "act"
+            },
+            {
+              "description": "the body of the Findings tab (a sett-panel-table, or an empty state). A body's slot is its tab's value; only the active one is shown",
+              "name": "findings"
+            },
+            {
+              "description": "the body of the Checks tab (a sett-panel-table, then a sett-panel-output)",
+              "name": "checks"
+            },
+            {
+              "description": "the body of the Terminal tab",
+              "name": "terminal"
+            },
+            {
+              "description": "the body of the What's new tab (sett-panel-line elements)",
+              "name": "whatsnew"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the value of the open tab",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "only the strip of tabs and counts is shown",
+              "attribute": "closed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "mark",
+              "privacy": "private",
+              "description": "the open tab is the selected one; closed, none is"
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-toggle",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ closed }` from the caret: the state asked for"
+            },
+            {
+              "description": "`{ value }` from a tab that was chosen (choosing a tab implies open)",
+              "name": "sett-select"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the value of the open tab",
+              "fieldName": "active"
+            },
+            {
+              "name": "closed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "only the strip of tabs and counts is shown",
+              "fieldName": "closed"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-bottom-panel",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A tab of the bottom panel: a name and a count. The count stays when the\npanel is closed. Active: paper, ink, medium, a top bar in `sel`, like\n`sett-tab`. The panel sets `active` from its own `active` and `closed`.",
+          "name": "SettPanelTab",
+          "slots": [
+            {
+              "description": "the name",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count after the name; no attribute, no badge",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "BadgeTone | undefined"
+              },
+              "description": "the count's fill: bad (blocking), sug (needs you); none is the quiet well",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ value }` when the tab is chosen",
+              "name": "sett-select"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count after the name; no attribute, no badge",
+              "fieldName": "count"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "BadgeTone | undefined"
+              },
+              "description": "the count's fill: bad (blocking), sug (needs you); none is the quiet well",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-tab",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The table of the Findings and Checks tabs: a header row, then\n`sett-panel-row` children on the same column grid. Every finding and every\ncheck names its origin or its place (DESIGN.md \"The shell\" rule 7).",
+          "name": "SettPanelTable",
+          "slots": [
+            {
+              "description": "sett-panel-row elements",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "PanelTableKind"
+              },
+              "default": "'findings'",
+              "description": "findings: dot · finding · rule · witness · origin; checks: dot · check · where · result · when",
+              "attribute": "kind",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "PanelTableKind"
+              },
+              "default": "'findings'",
+              "description": "findings: dot · finding · rule · witness · origin; checks: dot · check · where · result · when",
+              "fieldName": "kind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-table",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A row of the panel's table: a leading dot for the level, then the cells.\nThe row never wraps; a cell too long for its column ends in an ellipsis.\nThe whole row opens what it names.",
+          "name": "SettPanelRow",
+          "slots": [
+            {
+              "description": "the cells, plain elements in column order: `[data-mono]` is a mono identifier (file:line, origin, time); `[data-tone=\"sug\" | \"bad\" | \"ok\"]` takes that accent",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "PanelRowLevel"
+              },
+              "default": "'mute'",
+              "description": "the leading dot: bad (blocks, failed), sug (warns, running), ok (passed), mute",
+              "attribute": "level",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector and the map are about: the sel tint",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "cells",
+              "privacy": "private",
+              "description": "the cells are plain elements: the row gives them their role"
+            }
+          ],
+          "events": [
+            {
+              "description": "the row was clicked or Enter was pressed on it (the consumer moves the map or opens the fix card)",
+              "name": "sett-open"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "level",
+              "type": {
+                "text": "PanelRowLevel"
+              },
+              "default": "'mute'",
+              "description": "the leading dot: bad (blocks, failed), sug (warns, running), ok (passed), mute",
+              "fieldName": "level"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector and the map are about: the sel tint",
+              "fieldName": "selected"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-row",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A block of output in the panel: a run's output or its witness under the\nChecks table, and the look of the terminal block. Mono, line breaks kept.\nThe real terminal is Theia's; this only styles a block of text.",
+          "name": "SettPanelOutput",
+          "slots": [
+            {
+              "description": "the text; its line breaks and spaces are kept",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-output",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One line of What's new: what changed, and when. The whole line is the link\nto what it names: the host, or an `<a>` when `href` is set.",
+          "name": "SettPanelLine",
+          "slots": [
+            {
+              "description": "the sentence; `b` is its subject (ink, medium)",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "when",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how long ago, shown at the right in mono, e.g. `3 min`",
+              "attribute": "when"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where the line leads; renders an `<a>`. Without it the host is the link and its click is the consumer's",
+              "attribute": "href"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "when",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how long ago, shown at the right in mono, e.g. `3 min`",
+              "fieldName": "when"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where the line leads; renders an `<a>`. Without it the host is the link and its click is the consumer's",
+              "fieldName": "href"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-line",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettBottomPanel",
+          "declaration": {
+            "name": "SettBottomPanel",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-bottom-panel",
+          "declaration": {
+            "name": "SettBottomPanel",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelTab",
+          "declaration": {
+            "name": "SettPanelTab",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-tab",
+          "declaration": {
+            "name": "SettPanelTab",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelTable",
+          "declaration": {
+            "name": "SettPanelTable",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-table",
+          "declaration": {
+            "name": "SettPanelTable",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelRow",
+          "declaration": {
+            "name": "SettPanelRow",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-row",
+          "declaration": {
+            "name": "SettPanelRow",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelOutput",
+          "declaration": {
+            "name": "SettPanelOutput",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-output",
+          "declaration": {
+            "name": "SettPanelOutput",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelLine",
+          "declaration": {
+            "name": "SettPanelLine",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-line",
+          "declaration": {
+            "name": "SettPanelLine",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-scope-line.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The scope line: the first row of the left pane, saying what the shell is\nabout (DESIGN.md \"The shell\" rule 3). A dot in the scope's colour on the\nscope's tint, the words from `scopeWords`, an optional muted note on the\nright, and `🔒` when the scope is locked. An indicator, never a control: no\nbutton, no event, nothing to focus. It is read as one label, e.g.\n`scope: w1 · refund flow, locked`.",
+          "name": "SettScopeLine",
+          "members": [
+            {
+              "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind"
+              },
+              "default": "'main'",
+              "description": "what the shell is about",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "scopeId",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "attribute": "scope-id"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "sub",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a muted note at the right, e.g. `as on disk`",
+              "attribute": "sub"
+            },
+            {
+              "kind": "field",
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focus is pinned: shows 🔒 after the words",
+              "attribute": "locked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "Scope"
+              },
+              "privacy": "private",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind"
+              },
+              "default": "'main'",
+              "description": "what the shell is about",
+              "fieldName": "scope"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "scope-id",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "fieldName": "scopeId"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "fieldName": "name"
+            },
+            {
+              "name": "sub",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a muted note at the right, e.g. `as on disk`",
+              "fieldName": "sub"
+            },
+            {
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focus is pinned: shows 🔒 after the words",
+              "fieldName": "locked"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-scope-line",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettScopeLine",
+          "declaration": {
+            "name": "SettScopeLine",
+            "module": "src/shell/sett-scope-line.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-scope-line",
+          "declaration": {
+            "name": "SettScopeLine",
+            "module": "src/shell/sett-scope-line.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-status-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The status bar: counts and states, each a link to the view that owns it,\nnever a verb (DESIGN.md \"The shell\" rule 8). One line at the bottom of the\nshell.",
+          "name": "SettStatusBar",
+          "slots": [
+            {
+              "description": "sett-status-item elements, from the left: the scope first",
+              "name": ""
+            },
+            {
+              "description": "sett-status-item elements pushed to the right end (the caret's place in a file, the map's freshness)",
+              "name": "right"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-status-bar",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One item of the status bar: a count or a state, and a link to the view that\nowns it. The whole item is the link: the host, or an `<a>` when `href` is\nset. With `scope` it is the scope item: a dot in the scope's colour, then\nthe scope's words from `scopeText` (and `🔒` when locked), then its state.",
+          "name": "SettStatusItem",
+          "slots": [
+            {
+              "description": "the count or state: `b` is a count (ink, medium); `[data-tone=\"sug\" | \"bad\" | \"ok\"]` takes that accent",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the view's name before the content, e.g. `Sessions`",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where the item leads; renders an `<a>`. Without it the host is the link and its click is the consumer's",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "makes this the scope item: the kind of scope the shell is about",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "scopeId",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "attribute": "scope-id"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the scope is locked: 🔒 after its words",
+              "attribute": "locked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "filled",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "description": "whether the slot holds anything, so the scope's words are not followed by a dangling `·`"
+            },
+            {
+              "kind": "field",
+              "name": "onSlot",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the view's name before the content, e.g. `Sessions`",
+              "fieldName": "label"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where the item leads; renders an `<a>`. Without it the host is the link and its click is the consumer's",
+              "fieldName": "href"
+            },
+            {
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "makes this the scope item: the kind of scope the shell is about",
+              "fieldName": "scope"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id when the scope is a session; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "scope-id",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "fieldName": "scopeId"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "fieldName": "name"
+            },
+            {
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the scope is locked: 🔒 after its words",
+              "fieldName": "locked"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-status-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettStatusBar",
+          "declaration": {
+            "name": "SettStatusBar",
+            "module": "src/shell/sett-status-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-status-bar",
+          "declaration": {
+            "name": "SettStatusBar",
+            "module": "src/shell/sett-status-bar.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettStatusItem",
+          "declaration": {
+            "name": "SettStatusItem",
+            "module": "src/shell/sett-status-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-status-item",
+          "declaration": {
+            "name": "SettStatusItem",
+            "module": "src/shell/sett-status-bar.ts"
           }
         }
       ]

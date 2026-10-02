@@ -100,6 +100,47 @@ Every element has a story per state, and every story is a test that runs in both
 
 Tag · attributes (name=type) · slots · CSS parts · events, then the stories that show each state.
 
+### `<sett-activity-rail>`
+
+The activity rail: the always-visible column that picks what the left pane shows (DESIGN.md "The shell" rule 2). Three items, Sessions · Files · Findings, each a glyph over a horizontal label. It never hides: `closed` only records that the left pane is folded, and changes nothing here, so the badges and the scope bar stay. When the scope is not main, the active item's bar takes the scope's colour. Arrow up and down move focus between the items, Enter or Space activates. The rail reports and never changes `active` itself. Give it an `aria-label`.
+
+- attrs:
+  - `scope=ScopeKind` — what the shell is about; anything but main colours the active item's bar
+  - `session=SessionId` — session id when the scope is a session; unknown ids fall back to yk
+  - `closed=boolean` — the left pane is closed. A fact for the consumer: the rail looks the same
+- slots:
+  - `(default)` — sett-rail-item elements
+- events:
+  - `sett-view` — `{ value, active }` when an item is activated; `active` is true when it already was the active one (the consumer closes the pane)
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-area>`
 
 A module-sized group of items inside a column. The header carries what the area holds: its name, how many items, a red count for findings, and one dot per session with an item here. It counts its own `sett-item` children; the `count`, `findings` and `sessions` attributes override that for a folded area whose items the application chose not to render. Folded, the header also carries what the fold hides (DESIGN.md § Motion, "where it lands"): a session whose live item is hidden keeps its dot breathing, the area takes that agent's arrival and departure pulse, and a blue count says how many selected items are inside.
@@ -171,6 +212,55 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-sheet--open-gpui` in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
+
+### `<sett-bottom-panel>`
+
+The bottom panel, under the centre: it lists what already exists, Findings · Checks · Terminal · What's new, nothing else (DESIGN.md "The shell" rule 7). Open, it shows the body of the `active` tab; `closed`, it is a strip of its tabs with their counts. It reports and never changes `active` or `closed` itself; it only marks which of its tabs is the open one.
+
+- attrs:
+  - `active=string` — the value of the open tab
+  - `closed=boolean` — only the strip of tabs and counts is shown
+- slots:
+  - `tabs` — sett-panel-tab elements
+  - `act` — the right end of the strip, e.g. the terminal's worktree name
+  - `findings` — the body of the Findings tab (a sett-panel-table, or an empty state). A body's slot is its tab's value; only the active one is shown
+  - `checks` — the body of the Checks tab (a sett-panel-table, then a sett-panel-output)
+  - `terminal` — the body of the Terminal tab
+  - `whatsnew` — the body of the What's new tab (sett-panel-line elements)
+- parts:
+  - `strip` — the row of tabs
+  - `body` — the open tab's body
+- events:
+  - `sett-toggle` — `{ closed }` from the caret: the state asked for
+  - `sett-select` — `{ value }` from a tab that was chosen (choosing a tab implies open)
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-button>`
 
@@ -894,6 +984,198 @@ The row of overlay toggles on the map bar.
   - `chrome-tabs-and-switches--seg-inline` seg · inline (code · reach) and the reach bar
   - `chrome-tabs-and-switches--toggles` overlay toggles · on and off
 
+### `<sett-panel-line>`
+
+One line of What's new: what changed, and when. The whole line is the link to what it names: the host, or an `<a>` when `href` is set.
+
+- attrs:
+  - `when=string` — how long ago, shown at the right in mono, e.g. `3 min`
+  - `href=string` — where the line leads; renders an `<a>`. Without it the host is the link and its click is the consumer's
+- slots:
+  - `(default)` — the sentence; `b` is its subject (ink, medium)
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-panel-output>`
+
+A block of output in the panel: a run's output or its witness under the Checks table, and the look of the terminal block. Mono, line breaks kept. The real terminal is Theia's; this only styles a block of text.
+
+- slots:
+  - `(default)` — the text; its line breaks and spaces are kept
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-panel-row>`
+
+A row of the panel's table: a leading dot for the level, then the cells. The row never wraps; a cell too long for its column ends in an ellipsis. The whole row opens what it names.
+
+- attrs:
+  - `level=PanelRowLevel` — the leading dot: bad (blocks, failed), sug (warns, running), ok (passed), mute
+  - `selected=boolean` — the row the inspector and the map are about: the sel tint
+- slots:
+  - `(default)` — the cells, plain elements in column order: `[data-mono]` is a mono identifier (file:line, origin, time); `[data-tone="sug" | "bad" | "ok"]` takes that accent
+- events:
+  - `sett-open` — the row was clicked or Enter was pressed on it (the consumer moves the map or opens the fix card)
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-panel-tab>`
+
+A tab of the bottom panel: a name and a count. The count stays when the panel is closed. Active: paper, ink, medium, a top bar in `sel`, like `sett-tab`. The panel sets `active` from its own `active` and `closed`.
+
+- attrs:
+  - `value=string`
+  - `active=boolean`
+  - `count=string` — a count after the name; no attribute, no badge
+  - `tone=BadgeTone` — the count's fill: bad (blocking), sug (needs you); none is the quiet well
+- slots:
+  - `(default)` — the name
+- events:
+  - `sett-select` — `{ value }` when the tab is chosen
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-panel-table>`
+
+The table of the Findings and Checks tabs: a header row, then `sett-panel-row` children on the same column grid. Every finding and every check names its origin or its place (DESIGN.md "The shell" rule 7).
+
+- attrs:
+  - `kind=PanelTableKind` — findings: dot · finding · rule · witness · origin; checks: dot · check · where · result · when
+- slots:
+  - `(default)` — sett-panel-row elements
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-pill>`
 
 Status pill: the one way a blocked or waiting state is written wherever its subject is named (selector, menu row, gated button reason, session-card row). Mono, 11 px, never animates.
@@ -1130,6 +1412,88 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
+### `<sett-rail-item>`
+
+One view of the activity rail: a glyph over a horizontal label, never the glyph alone. Active, it is ink on paper with a bar on its left: `sel`, or the scope's colour when the rail has one. A badge sits top right: `sug` for what asks you, `bad` for a new blocking finding.
+
+- attrs:
+  - `value=string` — the view this item picks, reported by the rail's `sett-view`
+  - `active=boolean`
+  - `badge=string` — a count shown top right; no attribute, no badge
+  - `tone=BadgeTone` — the badge's fill: sug (asks you) or bad (a new blocking finding)
+  - `badge-label=string` — what the badge says to a screen reader, e.g. `1 asks you`
+- slots:
+  - `(default)` — the label, always shown
+  - `glyph` — an inline SVG drawn with `currentColor`; sized and stroked here
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-scope-line>`
+
+The scope line: the first row of the left pane, saying what the shell is about (DESIGN.md "The shell" rule 3). A dot in the scope's colour on the scope's tint, the words from `scopeWords`, an optional muted note on the right, and `🔒` when the scope is locked. An indicator, never a control: no button, no event, nothing to focus. It is read as one label, e.g. `scope: w1 · refund flow, locked`.
+
+- attrs:
+  - `scope=ScopeKind` — what the shell is about
+  - `session=SessionId` — session id when the scope is a session; unknown ids fall back to yk
+  - `scope-id=string` — the worktree id of a session scope, e.g. `w1`
+  - `name=string` — what the scope is called: `refund flow`, `fix-pool-size`
+  - `sub=string` — a muted note at the right, e.g. `as on disk`
+  - `locked=boolean` — the focus is pinned: shows 🔒 after the words
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-seg>`
 
 A segmented control in a well. Never has a disabled item: a view with nothing in it opens to an empty state instead.
@@ -1314,6 +1678,85 @@ The planner's accept: the main verb plus a ▾ that opens a list (the driver) un
   - `buttons-buttons--gated-blocked` gated · blocked with pills
   - `buttons-buttons--gated-open` gated · open
   - `buttons-buttons--hand-back-disabled` hand back · disabled until the note is written
+
+### `<sett-status-bar>`
+
+The status bar: counts and states, each a link to the view that owns it, never a verb (DESIGN.md "The shell" rule 8). One line at the bottom of the shell.
+
+- slots:
+  - `(default)` — sett-status-item elements, from the left: the scope first
+  - `right` — sett-status-item elements pushed to the right end (the caret's place in a file, the map's freshness)
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-status-item>`
+
+One item of the status bar: a count or a state, and a link to the view that owns it. The whole item is the link: the host, or an `<a>` when `href` is set. With `scope` it is the scope item: a dot in the scope's colour, then the scope's words from `scopeText` (and `🔒` when locked), then its state.
+
+- attrs:
+  - `label=string` — the view's name before the content, e.g. `Sessions`
+  - `href=string` — where the item leads; renders an `<a>`. Without it the host is the link and its click is the consumer's
+  - `scope=ScopeKind` — makes this the scope item: the kind of scope the shell is about
+  - `session=SessionId` — session id when the scope is a session; unknown ids fall back to yk
+  - `scope-id=string` — the worktree id of a session scope, e.g. `w1`
+  - `name=string` — what the scope is called: `refund flow`, `fix-pool-size`
+  - `locked=boolean` — the scope is locked: 🔒 after its words
+- slots:
+  - `(default)` — the count or state: `b` is a count (ink, medium); `[data-tone="sug" | "bad" | "ok"]` takes that accent
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-sub-agent>`
 

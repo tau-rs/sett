@@ -184,6 +184,7 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -432,6 +433,7 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -611,6 +613,7 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
 - attrs:
   - `kind=ItemKind`
   - `family=string` — a family count shown as a pill at the end, e.g. `214 impls`
+  - `unresolved=number` — links the analyser could not resolve (dyn, spawn), folded to one pill with their count (rule 6)
   - `session=SessionId` — the session that touched or is working on this item; the ring takes its colour
   - `also=SessionId` — a second session on the same item: the one ring is split in their two colours, never stacked
   - `live=boolean` — the session is working here right now: the ring breathes and a sheen sweeps
@@ -650,6 +653,7 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -858,6 +862,7 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -937,6 +942,7 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -1318,6 +1324,7 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -1414,6 +1421,7 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -1662,6 +1670,7 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item

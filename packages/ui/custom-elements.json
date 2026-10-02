@@ -3509,6 +3509,15 @@
             },
             {
               "kind": "field",
+              "name": "unresolved",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "links the analyser could not resolve (dyn, spawn), folded to one pill with their count (rule 6)",
+              "attribute": "unresolved"
+            },
+            {
+              "kind": "field",
               "name": "session",
               "type": {
                 "text": "SessionId | undefined"
@@ -3652,6 +3661,14 @@
               },
               "description": "a family count shown as a pill at the end, e.g. `214 impls`",
               "fieldName": "family"
+            },
+            {
+              "name": "unresolved",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "links the analyser could not resolve (dyn, spawn), folded to one pill with their count (rule 6)",
+              "fieldName": "unresolved"
             },
             {
               "name": "session",

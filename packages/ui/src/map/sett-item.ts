@@ -28,6 +28,8 @@ export class SettItem extends LitElement {
   @property({ reflect: true }) kind: ItemKind = 'fn';
   /** a family count shown as a pill at the end, e.g. `214 impls` */
   @property() family?: string;
+  /** links the analyser could not resolve (dyn, spawn), folded to one pill with their count (rule 6) */
+  @property({ type: Number }) unresolved?: number;
   /** the session that touched or is working on this item; the ring takes its colour */
   @property({ reflect: true }) session?: SessionId;
   /** a second session on the same item: the one ring is split in their two colours, never stacked */
@@ -176,7 +178,8 @@ export class SettItem extends LitElement {
       ${this.session ? html`<i class="ring ${this.live ? 'live' : ''} ${this.cooling ? 'cool' : ''}" part="ring"></i>` : nothing}
       ${this.session && this.live ? html`<i class="sheen ${this.kick ? 'kick' : ''}"></i>` : nothing}
       <span class="t"><slot></slot></span>
-      ${this.family ? html`<sett-tag kind="sug">${this.family}</sett-tag>` : nothing}`;
+      ${this.family ? html`<sett-tag kind="sug">${this.family}</sett-tag>` : nothing}
+      ${this.unresolved ? html`<sett-tag kind="sug" title="unresolved links">${this.unresolved} unresolved</sett-tag>` : nothing}`;
   }
 }
 

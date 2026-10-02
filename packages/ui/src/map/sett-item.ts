@@ -17,7 +17,8 @@ export const ITEM_KINDS: ItemKind[] = ['fn', 'struct', 'enum', 'trait', 'impl', 
  *
  * `session` alone is a thin still ring: an agent touched this earlier. With
  * `live` the ring breathes and a sheen sweeps: an agent is here now. When
- * `live` flips, the item plays its own arrival or departure pulse.
+ * `live` flips, the item plays its own arrival or departure pulse. `lit`
+ * is the response to a pointer on one of its links: a blue border.
  *
  * @slot - the item's name
  * @fires sett-select - `{ kind }` on click, Enter or Space
@@ -45,6 +46,8 @@ export class SettItem extends LitElement {
   /** a rule is broken here: dashed red */
   @property({ type: Boolean, reflect: true }) finding = false;
   @property({ type: Boolean, reflect: true }) selected = false;
+  /** at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response) */
+  @property({ type: Boolean, reflect: true }) lit = false;
 
   @state() private kick = false;
   @state() private cooling = false;
@@ -77,6 +80,7 @@ export class SettItem extends LitElement {
         transition: border-color var(--sett-motion-hover) ease, background-color var(--sett-motion-fold) ease, box-shadow var(--sett-motion-hover) ease;
       }
       :host(:hover) { border-color: var(--sett-color-ink2); }
+      :host([lit]) { border-color: var(--sett-color-sel); }
       :host(:focus-visible) { outline: var(--sett-stroke-lit) solid var(--sett-color-sel); outline-offset: var(--sett-stroke-hair); }
       :host([kind='trait']) { font-weight: var(--sett-font-weight-medium); }
       :host([kind='external']) { background: var(--sett-map-status-external-bg); border-color: var(--sett-map-status-external-border); }

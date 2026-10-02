@@ -14,7 +14,7 @@ const style = html`<style>${unsafeStatic(editorCss)}
 const L = (n: number, t: unknown, o: { bar?: string; glyph?: string; cls?: string; hints?: unknown } = {}) => html`<div class="ln sett-gutter-bar ${o.bar ? `sett-gutter-bar--${o.bar}` : ''} ${o.cls ?? ''}"><span class="sett-gutter-glyph ${o.glyph ? `sett-gutter-glyph--${o.glyph}` : ''}"></span><span class="n">${n}</span><span class="t">${t}</span>${o.hints ? html`<span class="sett-hints">${o.hints}</span>` : ''}</div>`;
 const decl = (o: { planned?: boolean; finding?: boolean; witness?: boolean } = {}) => L(5, html`<span class="sett-syn-keyword">pub trait</span> <span class="sett-syn-definition ${o.witness ? 'sett-span-witness' : ''}">OrderRepo</span>: Send + Sync {`, { glyph: o.planned ? 'planned' : o.witness ? 'witness' : '', hints: html`<span>2 callers</span><span>1 impl</span>${o.planned ? html`<span class="sett-hint--planned">planned · +refund()</span>` : ''}${o.finding ? html`<span class="sett-hint--finding">⚠ 1</span>` : ''}` });
 const file = (o: { session?: boolean; you?: boolean; caret?: boolean; planned?: boolean; finding?: boolean; witness?: boolean; xrepo?: boolean } = {}) => html`<div class="ed">
-  ${L(1, html`<span class="sett-syn-comment">//! @arch area: domain</span>`)}
+  ${L(1, html`<span class="sett-syn-comment">//! orders: what an order is, and what the domain may do to one</span>`)}
   ${L(2, html`<span class="sett-syn-keyword">use</span> crate::orders::{<span class="sett-syn-type">Order</span>, <span class="sett-syn-type">OrderId</span>};`)}
   ${o.xrepo ? L(3, html`<span class="sett-syn-keyword">use</span> <span class="sett-sym-external">billing::Invoice</span>;`) : ''}
   ${L(4, html`<span class="sett-syn-attribute">#[async_trait]</span>`)}

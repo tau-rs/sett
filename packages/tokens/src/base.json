@@ -227,6 +227,79 @@
         "value": 15,
         "unit": "px"
       }
+    },
+    "shell": {
+      "$description": "the shell of the arch V1 spec §4: bar and status bar heights, activity rail width, left pane range, inspector and its folded handle, the bottom panel's closed strip, the rail's scope bar and a file's presence bar (issue #60)",
+      "bar": {
+        "$type": "dimension",
+        "$value": {
+          "value": 44,
+          "unit": "px"
+        }
+      },
+      "rail": {
+        "$type": "dimension",
+        "$value": {
+          "value": 56,
+          "unit": "px"
+        }
+      },
+      "paneMin": {
+        "$type": "dimension",
+        "$value": {
+          "value": 260,
+          "unit": "px"
+        }
+      },
+      "paneMax": {
+        "$type": "dimension",
+        "$value": {
+          "value": 280,
+          "unit": "px"
+        }
+      },
+      "inspector": {
+        "$type": "dimension",
+        "$value": {
+          "value": 330,
+          "unit": "px"
+        }
+      },
+      "handle": {
+        "$type": "dimension",
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        }
+      },
+      "strip": {
+        "$type": "dimension",
+        "$value": {
+          "value": 30,
+          "unit": "px"
+        }
+      },
+      "status": {
+        "$type": "dimension",
+        "$value": {
+          "value": 26,
+          "unit": "px"
+        }
+      },
+      "scopeBar": {
+        "$type": "dimension",
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
+      },
+      "presenceBar": {
+        "$type": "dimension",
+        "$value": {
+          "value": 3,
+          "unit": "px"
+        }
+      }
     }
   },
   "pad": {

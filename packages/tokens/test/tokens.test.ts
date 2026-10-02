@@ -27,7 +27,12 @@ describe('sett.css', () => {
 describe('tokens.json', () => {
   const j = JSON.parse(dist('tokens.json'));
   it('counts every token per source file', () => {
-    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 131, light: 93, dark: 93 });
+    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 141, light: 93, dark: 93 });
+  });
+  it('the shell sizes of the arch V1 spec §4 are tokens', () => {
+    const px = Object.fromEntries(j.base.map((t: { name: string; css: string }) => [t.name, t.css]));
+    const shell = { bar: 44, rail: 56, 'pane-min': 260, 'pane-max': 280, inspector: 330, handle: 28, strip: 30, status: 26, 'scope-bar': 2, 'presence-bar': 3 };
+    for (const [k, v] of Object.entries(shell)) expect(px[`--sett-size-shell-${k}`], k).toBe(`${v}px`);
   });
   it('every map motion named in DESIGN.md has a duration or easing token', () => {
     const names = j.base.map((t: { name: string }) => t.name);

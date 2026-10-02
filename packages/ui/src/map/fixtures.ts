@@ -5,6 +5,8 @@
 import type { OpKind } from './sett-op-row.js';
 import type { PortKind, PortSide } from './sett-port-row.js';
 import type { RailSection } from './sett-rail.js';
+import type { ColumnKind } from './sett-column.js';
+import type { ItemKind } from './sett-item.js';
 
 /** `[kind, "name · count", area, contract]` as the PoC stores a port */
 export type FixturePort = [string, string, string, string];
@@ -18,7 +20,11 @@ export interface FixtureContract {
   kind: string; name: string; owner: string; format?: string; witness?: string; ops?: string[];
   handlers?: Record<string, string>; schema?: string[]; used?: string[]; notes?: string;
 }
+export interface FixtureItem { id: string; name: string; k: string; entry?: number; port?: number; finding?: number; session?: number; fam?: string; ext?: number }
+export interface FixtureArea { id: string; col: number; name: string; folded?: number; items: FixtureItem[] }
+export interface FixtureInside { layout: 'hexagon' | 'layers'; columns: [string, string][]; areas: FixtureArea[] }
 export interface Fixture {
+  units: Record<string, FixtureInside>;
   name: string; tagline: string; system: unknown;
   repos: Record<string, { units: FixtureUnit[] }>;
   contracts: Record<string, FixtureContract>;
@@ -75,4 +81,23 @@ export function sectionOf(p: Port, f: Fixture): RailSection {
     case 'fs': case 'tty': return 'system';
     default: return 'crates';
   }
+}
+
+const ITEM_KINDS: ItemKind[] = ['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external'];
+/** the item kind for a fixture item; an item of an outbound column is external */
+export const itemKindOf = (it: FixtureItem): ItemKind => (it.ext ? 'external' : ITEM_KINDS.includes(it.k as ItemKind) ? (it.k as ItemKind) : 'fn');
+
+export interface InsideColumn { kind: ColumnKind; label: string; areas: FixtureArea[] }
+/**
+ * The columns of an open unit with their areas. An `outbound` column is left
+ * out on purpose: externals are an interface, not a column (rule 6); they are
+ * ports on the needs rail.
+ */
+export function insideOf(f: Fixture, id: string): InsideColumn[] {
+  const u = f.units[id];
+  if (!u) throw new Error(`no inside for unit ${id} in ${f.name}`);
+  return u.columns
+    .map(([kind, label], i) => ({ kind, label, areas: u.areas.filter((a) => a.col === i) }))
+    .filter((c) => c.kind !== 'outbound')
+    .map((c) => ({ ...c, kind: (['driving', 'domain', 'driven'].includes(c.kind) ? c.kind : 'layer') as ColumnKind }));
 }

@@ -69,7 +69,7 @@ sett styles developer tools that put a map or a document at the centre and keep 
 
 - Sans for UI and prose; mono for identifiers, code, branch names, counts, file:line, and map labels.
 - Scale 10.5 / 11 / 11.5 / 12 / 12.5 / 13 / 14. Nothing on a screen is larger than 14; 14 is for pane headings only.
-- Map labels are 10 px, one size, and never scale. Scale is handled by folding, never by shrinking.
+- On the map, one text size per level, and it never scales: a name inside a unit is 12 px mono, the same size as the area header above it. Scale is handled by folding, never by shrinking; a name too long for its box ends in an ellipsis.
 - Weights: 400 body, 500 names and active tabs, 600 headings and primary links. No bold identifiers.
 - Labels are lowercase. No uppercase eyebrows, no letter-spacing.
 
@@ -132,6 +132,6 @@ Rejected, keep out: stepped zoom · Bring & Go (moving neighbours to the ports) 
 
 ## Components (v0.1)
 
-chip · frame · selector · session-card · thread (msg, tool, changed, question, deviation, verbs, composer) · map (node, port-row, rail, op-row, area, item, column, edge, link, hint-chip, ghost, panel, position, minimap, crumb, back, cue, code-page, contract-card, legend) · editor inlays · cards (fix, delta, impact, checklist, pipeline, result, what's-new) · split-button · gated-button · tabbar · seg · overlay-toggles · funnel.
+chip · frame · selector · session-card · thread (msg, tool, changed, question, deviation, verbs, composer) · map (node, port-row, rail, op-row, sheet, column, area, item, edge, link, hint-chip, ghost, panel, position, minimap, crumb, back, cue, code-page, contract-card, legend) · editor inlays · cards (fix, delta, impact, checklist, pipeline, result, what's-new) · split-button · gated-button · tabbar · seg · overlay-toggles · funnel.
 
 Reference rendering: `design/arch-design-system.html` (the page this file was extracted from). Where the page and this file disagree, this file wins.

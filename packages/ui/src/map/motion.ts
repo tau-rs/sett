@@ -4,8 +4,8 @@
  * that flips the element plays its own departure or arrival with these.
  * Names never move, fade or resize; nothing here touches text.
  */
-import { css } from 'lit';
-import { base } from '@tau-rs/sett-tokens';
+import { css, unsafeCSS } from 'lit';
+import { base, sessionOrder } from '@tau-rs/sett-tokens';
 
 const M = base.motion;
 /** a `motion.*` duration token ("460ms", "2.8s") in milliseconds */
@@ -19,6 +19,7 @@ export const reducedMotion = (): boolean => typeof matchMedia === 'function' && 
  */
 export const presenceStyles = css`
   @keyframes sett-breathe { 0%, 100% { opacity: var(--sett-map-presence-breath-min); } 50% { opacity: 1; } }
+  @keyframes sett-kick { from { background-position: 110% 0; } to { background-position: -10% 0; } }
   @keyframes sett-sheen { 0% { background-position: 110% 0; } 60%, 100% { background-position: -10% 0; } }
   @keyframes sett-badge { 0%, 100% { transform: scale(0.8); opacity: var(--sett-map-presence-breath-min); } 50% { transform: scale(1.15); opacity: 1; } }
   @keyframes sett-ignite { 0% { transform: scale(0.2); } 45% { transform: scale(1.9); } 100% { transform: scale(1); } }
@@ -32,6 +33,15 @@ export const presenceStyles = css`
   }
   @media (prefers-reduced-motion: reduce) { .sett-wave { display: none; } }
 `;
+
+/**
+ * Each session breathes on its own beat, so three agents read as three and not
+ * as one blinking block. Sets `--_beat` from the `session` attribute; use it as
+ * `animation-delay: calc(var(--sett-motion-breath) * var(--_beat, 0) / -4)`.
+ */
+export const beatStyles = css`${unsafeCSS(sessionOrder.map((id, i) => `:host([session="${id}"]) { --_beat: ${i}; }`).join('\n'))}`;
+/** the beat of a session id, for elements that draw several sessions (an area's badges) */
+export const beatOf = (id: string): number => Math.max(0, (sessionOrder as readonly string[]).indexOf(id));
 
 type Anim = { finished: Promise<unknown> };
 const animate = (el: Element, frames: Keyframe[], opts: KeyframeAnimationOptions): Promise<void> => {

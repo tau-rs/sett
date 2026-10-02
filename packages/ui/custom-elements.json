@@ -1671,6 +1671,46 @@
         },
         {
           "kind": "js",
+          "name": "insideOf",
+          "declaration": {
+            "name": "insideOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "itemKindOf",
+          "declaration": {
+            "name": "itemKindOf",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "InsideColumn",
+          "declaration": {
+            "name": "InsideColumn",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FixtureItem",
+          "declaration": {
+            "name": "FixtureItem",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FixtureArea",
+          "declaration": {
+            "name": "FixtureArea",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "Fixture",
           "declaration": {
             "name": "Fixture",
@@ -1714,6 +1754,22 @@
           "name": "presenceStyles",
           "declaration": {
             "name": "presenceStyles",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "beatStyles",
+          "declaration": {
+            "name": "beatStyles",
+            "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "beatOf",
+          "declaration": {
+            "name": "beatOf",
             "module": "./map/motion.js"
           }
         },
@@ -1779,6 +1835,70 @@
           "declaration": {
             "name": "WaveOptions",
             "module": "./map/motion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettItem",
+          "declaration": {
+            "name": "SettItem",
+            "module": "./map/sett-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ITEM_KINDS",
+          "declaration": {
+            "name": "ITEM_KINDS",
+            "module": "./map/sett-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ItemKind",
+          "declaration": {
+            "name": "ItemKind",
+            "module": "./map/sett-item.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettArea",
+          "declaration": {
+            "name": "SettArea",
+            "module": "./map/sett-area.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettColumn",
+          "declaration": {
+            "name": "SettColumn",
+            "module": "./map/sett-column.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "COLUMN_KINDS",
+          "declaration": {
+            "name": "COLUMN_KINDS",
+            "module": "./map/sett-column.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ColumnKind",
+          "declaration": {
+            "name": "ColumnKind",
+            "module": "./map/sett-column.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettSheet",
+          "declaration": {
+            "name": "SettSheet",
+            "module": "./map/sett-sheet.js"
           }
         }
       ]
@@ -1939,6 +2059,48 @@
             }
           ],
           "description": "the rail section a port belongs to, in the PoC's categorisation"
+        },
+        {
+          "kind": "function",
+          "name": "itemKindOf",
+          "return": {
+            "type": {
+              "text": "ItemKind"
+            }
+          },
+          "parameters": [
+            {
+              "name": "it",
+              "type": {
+                "text": "FixtureItem"
+              }
+            }
+          ],
+          "description": "the item kind for a fixture item; an item of an outbound column is external"
+        },
+        {
+          "kind": "function",
+          "name": "insideOf",
+          "return": {
+            "type": {
+              "text": "InsideColumn[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "The columns of an open unit with their areas. An `outbound` column is left\nout on purpose: externals are an interface, not a column (rule 6); they are\nports on the needs rail."
         }
       ],
       "exports": [
@@ -1995,6 +2157,22 @@
           "name": "sectionOf",
           "declaration": {
             "name": "sectionOf",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "itemKindOf",
+          "declaration": {
+            "name": "itemKindOf",
+            "module": "src/map/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "insideOf",
+          "declaration": {
+            "name": "insideOf",
             "module": "src/map/fixtures.ts"
           }
         }
@@ -2171,11 +2349,152 @@
               "name": "extra",
               "default": "{}",
               "type": {
-                "text": "{ compact?: boolean; selectedPort?: string }"
+                "text": "{ compact?: boolean; selectedPort?: string; slot?: string }"
               }
             }
           ],
           "description": "a rail for one side of a unit, ports in their sections with their contract ops"
+        },
+        {
+          "kind": "function",
+          "name": "itemEl",
+          "parameters": [
+            {
+              "name": "it",
+              "type": {
+                "text": "FixtureItem"
+              }
+            },
+            {
+              "name": "on",
+              "default": "{}",
+              "type": {
+                "text": "On"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "areaEl",
+          "parameters": [
+            {
+              "name": "a",
+              "type": {
+                "text": "FixtureArea"
+              }
+            },
+            {
+              "name": "who",
+              "default": "{}",
+              "type": {
+                "text": "Who"
+              }
+            },
+            {
+              "name": "folded",
+              "default": "!!a.folded"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "columnsOf",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "who",
+              "default": "{}",
+              "type": {
+                "text": "Who"
+              }
+            },
+            {
+              "name": "foldedAreas",
+              "default": "[]",
+              "type": {
+                "text": "string[]"
+              }
+            }
+          ],
+          "description": "the columns of a unit with their areas and items, as the fixture has them"
+        },
+        {
+          "kind": "function",
+          "name": "sheetOf",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "who",
+              "default": "{}",
+              "type": {
+                "text": "Who"
+              }
+            },
+            {
+              "name": "opts",
+              "default": "{}",
+              "type": {
+                "text": "{ folded?: boolean; foldedAreas?: string[]; slot?: string }"
+              }
+            }
+          ],
+          "description": "the inside of a unit: exposes rail · columns · needs rail"
+        },
+        {
+          "kind": "function",
+          "name": "openUnit",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "who",
+              "default": "{}",
+              "type": {
+                "text": "Who"
+              }
+            },
+            {
+              "name": "opts",
+              "default": "{}",
+              "type": {
+                "text": "{ folded?: boolean; foldedAreas?: string[] }"
+              }
+            }
+          ],
+          "description": "an open unit: the node at its sheet tier hosting the inside"
         }
       ],
       "exports": [
@@ -2266,6 +2585,46 @@
             "name": "rail",
             "module": "src/map/map-fixtures.stories-helpers.ts"
           }
+        },
+        {
+          "kind": "js",
+          "name": "itemEl",
+          "declaration": {
+            "name": "itemEl",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "areaEl",
+          "declaration": {
+            "name": "areaEl",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "columnsOf",
+          "declaration": {
+            "name": "columnsOf",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sheetOf",
+          "declaration": {
+            "name": "sheetOf",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "openUnit",
+          "declaration": {
+            "name": "openUnit",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
         }
       ]
     },
@@ -2304,8 +2663,32 @@
         {
           "kind": "variable",
           "name": "presenceStyles",
-          "default": "css` @keyframes sett-breathe { 0%, 100% { opacity: var(--sett-map-presence-breath-min); } 50% { opacity: 1; } } @keyframes sett-sheen { 0% { background-position: 110% 0; } 60%, 100% { background-position: -10% 0; } } @keyframes sett-badge { 0%, 100% { transform: scale(0.8); opacity: var(--sett-map-presence-breath-min); } 50% { transform: scale(1.15); opacity: 1; } } @keyframes sett-ignite { 0% { transform: scale(0.2); } 45% { transform: scale(1.9); } 100% { transform: scale(1); } } @keyframes sett-pop { 0% { transform: scale(1); } 40% { transform: scale(1.3); } 100% { transform: scale(1); } } @keyframes sett-cool { 0% { opacity: 1; } 100% { opacity: var(--sett-map-presence-touched); } } .sett-wave { position: absolute; box-sizing: border-box; border: var(--sett-stroke-lit) solid var(--_session); pointer-events: none; } @media (prefers-reduced-motion: reduce) { .sett-wave { display: none; } } `",
+          "default": "css` @keyframes sett-breathe { 0%, 100% { opacity: var(--sett-map-presence-breath-min); } 50% { opacity: 1; } } @keyframes sett-kick { from { background-position: 110% 0; } to { background-position: -10% 0; } } @keyframes sett-sheen { 0% { background-position: 110% 0; } 60%, 100% { background-position: -10% 0; } } @keyframes sett-badge { 0%, 100% { transform: scale(0.8); opacity: var(--sett-map-presence-breath-min); } 50% { transform: scale(1.15); opacity: 1; } } @keyframes sett-ignite { 0% { transform: scale(0.2); } 45% { transform: scale(1.9); } 100% { transform: scale(1); } } @keyframes sett-pop { 0% { transform: scale(1); } 40% { transform: scale(1.3); } 100% { transform: scale(1); } } @keyframes sett-cool { 0% { opacity: 1; } 100% { opacity: var(--sett-map-presence-touched); } } .sett-wave { position: absolute; box-sizing: border-box; border: var(--sett-stroke-lit) solid var(--_session); pointer-events: none; } @media (prefers-reduced-motion: reduce) { .sett-wave { display: none; } } `",
           "description": "Keyframes and the wave box shared by every map element that shows an agent.\nThe host must be `position: relative` and expose `--_session` (see `sessionStyles`)."
+        },
+        {
+          "kind": "variable",
+          "name": "beatStyles",
+          "default": "css`${unsafeCSS(sessionOrder.map((id, i) => `:host([session=\"${id}\"]) { --_beat: ${i}; }`).join('\\n'))}`",
+          "description": "Each session breathes on its own beat, so three agents read as three and not\nas one blinking block. Sets `--_beat` from the `session` attribute; use it as\n`animation-delay: calc(var(--sett-motion-breath) * var(--_beat, 0) / -4)`."
+        },
+        {
+          "kind": "function",
+          "name": "beatOf",
+          "return": {
+            "type": {
+              "text": "number"
+            }
+          },
+          "parameters": [
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the beat of a session id, for elements that draw several sessions (an area's badges)"
         },
         {
           "kind": "function",
@@ -2444,6 +2827,22 @@
         },
         {
           "kind": "js",
+          "name": "beatStyles",
+          "declaration": {
+            "name": "beatStyles",
+            "module": "src/map/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "beatOf",
+          "declaration": {
+            "name": "beatOf",
+            "module": "src/map/motion.ts"
+          }
+        },
+        {
+          "kind": "js",
           "name": "wave",
           "declaration": {
             "name": "wave",
@@ -2480,6 +2879,630 @@
           "declaration": {
             "name": "flash",
             "module": "src/map/motion.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-area.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A module-sized group of items inside a column. The header carries what the\narea holds: its name, how many items, a red count for findings, and one dot\nper session with an item here. It counts its own `sett-item` children; the\n`count`, `findings` and `sessions` attributes override that for a folded\narea whose items the application chose not to render.\n\nFolded, the header also carries what the fold hides (DESIGN.md § Motion,\n\"where it lands\"): a session whose live item is hidden keeps its dot\nbreathing, the area takes that agent's arrival and departure pulse, and a\nblue count says how many selected items are inside.",
+          "name": "SettArea",
+          "cssParts": [
+            {
+              "description": "the header row",
+              "name": "header"
+            },
+            {
+              "description": "the items' container",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "`sett-item` children",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "folded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "override: how many items, when they are not rendered",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "findings",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "override: how many findings, when the items are not rendered",
+              "attribute": "findings"
+            },
+            {
+              "kind": "field",
+              "name": "sessions",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "override: the session ids present, space-separated, when the items are not rendered",
+              "attribute": "sessions"
+            },
+            {
+              "kind": "field",
+              "name": "seen",
+              "type": {
+                "text": "Counts"
+              },
+              "privacy": "private",
+              "default": "{ count: 0, findings: 0, selected: 0, sessions: [], live: [] }"
+            },
+            {
+              "kind": "field",
+              "name": "popping",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "leavingFindings",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "igniting",
+              "type": {
+                "text": "string | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "read",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Counts"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "recount",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "onItems",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "records",
+                  "type": {
+                    "text": "MutationRecord[]"
+                  }
+                }
+              ],
+              "description": "an agent arriving in, or leaving, a folded area lands on the area itself: the item is hidden"
+            },
+            {
+              "kind": "field",
+              "name": "toggle",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ folded }` when the header is used",
+              "name": "sett-fold"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "folded"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "override: how many items, when they are not rendered",
+              "fieldName": "count"
+            },
+            {
+              "name": "findings",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "override: how many findings, when the items are not rendered",
+              "fieldName": "findings"
+            },
+            {
+              "name": "sessions",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "override: the session ids present, space-separated, when the items are not rendered",
+              "fieldName": "sessions"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-area",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettArea",
+          "declaration": {
+            "name": "SettArea",
+            "module": "src/map/sett-area.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-area",
+          "declaration": {
+            "name": "SettArea",
+            "module": "src/map/sett-area.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-column.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "COLUMN_KINDS",
+          "type": {
+            "text": "ColumnKind[]"
+          },
+          "default": "['driving', 'domain', 'driven', 'layer']"
+        },
+        {
+          "kind": "class",
+          "description": "A tinted band inside an open unit, holding areas. In a hexagon the three\ncolumns are driving (what calls in), domain (the core) and driven (what is\ncalled out to); a layered unit has one `layer` column per layer. Externals\nare never a column: they are ports on the needs rail (rule 6).",
+          "name": "SettColumn",
+          "cssParts": [
+            {
+              "description": "the column's label",
+              "name": "header"
+            }
+          ],
+          "slots": [
+            {
+              "description": "`sett-area` children, stacked by normal flow",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "ColumnKind"
+              },
+              "default": "'domain'",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "e.g. `routes · driving`; the kind is appended when the label does not already say it",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "ColumnKind"
+              },
+              "default": "'domain'",
+              "fieldName": "kind"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "e.g. `routes · driving`; the kind is appended when the label does not already say it",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-column",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "COLUMN_KINDS",
+          "declaration": {
+            "name": "COLUMN_KINDS",
+            "module": "src/map/sett-column.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettColumn",
+          "declaration": {
+            "name": "SettColumn",
+            "module": "src/map/sett-column.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-column",
+          "declaration": {
+            "name": "SettColumn",
+            "module": "src/map/sett-column.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-item.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "ITEM_KINDS",
+          "type": {
+            "text": "ItemKind[]"
+          },
+          "default": "['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external']"
+        },
+        {
+          "kind": "class",
+          "description": "One function, struct or trait inside an area: an 18 px box in a 22 px row,\nits name in mono at the base size. The name never moves, fades or resizes;\neverything else is drawn around or behind it (DESIGN.md § Motion):\nthe item's own colour, an agent's sheen, your selection tight to the box,\nthe session ring one step out, a change flash past everything.\n\n`session` alone is a thin still ring: an agent touched this earlier. With\n`live` the ring breathes and a sheen sweeps: an agent is here now. When\n`live` flips, the item plays its own arrival or departure pulse.",
+          "name": "SettItem",
+          "cssParts": [
+            {
+              "description": "the session ring",
+              "name": "ring"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the item's name",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "ItemKind"
+              },
+              "default": "'fn'",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "family",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a family count shown as a pill at the end, e.g. `214 impls`",
+              "attribute": "family"
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "the session that touched or is working on this item; the ring takes its colour",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "also",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "a second session on the same item: the one ring is split in their two colours, never stacked",
+              "attribute": "also",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "live",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the session is working here right now: the ring breathes and a sheen sweeps",
+              "attribute": "live",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "entry",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "called from outside the unit: blue fill",
+              "attribute": "entry",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "port",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a trait the domain depends on: amber pill shape",
+              "attribute": "port",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "finding",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a rule is broken here: dashed red",
+              "attribute": "finding",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "kick",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "cooling",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "hiddenByFold",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "description": "hidden inside a folded area: the area's header carries the agent's mark instead",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "flash",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "description": "a change: one ring flashes outward, once. Call it when the agent edits this item."
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ kind }` on click, Enter or Space",
+              "name": "sett-select"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "ItemKind"
+              },
+              "default": "'fn'",
+              "fieldName": "kind"
+            },
+            {
+              "name": "family",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a family count shown as a pill at the end, e.g. `214 impls`",
+              "fieldName": "family"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "the session that touched or is working on this item; the ring takes its colour",
+              "fieldName": "session"
+            },
+            {
+              "name": "also",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "a second session on the same item: the one ring is split in their two colours, never stacked",
+              "fieldName": "also"
+            },
+            {
+              "name": "live",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the session is working here right now: the ring breathes and a sheen sweeps",
+              "fieldName": "live"
+            },
+            {
+              "name": "entry",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "called from outside the unit: blue fill",
+              "fieldName": "entry"
+            },
+            {
+              "name": "port",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a trait the domain depends on: amber pill shape",
+              "fieldName": "port"
+            },
+            {
+              "name": "finding",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a rule is broken here: dashed red",
+              "fieldName": "finding"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "selected"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ITEM_KINDS",
+          "declaration": {
+            "name": "ITEM_KINDS",
+            "module": "src/map/sett-item.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettItem",
+          "declaration": {
+            "name": "SettItem",
+            "module": "src/map/sett-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-item",
+          "declaration": {
+            "name": "SettItem",
+            "module": "src/map/sett-item.ts"
           }
         }
       ]
@@ -3325,6 +4348,85 @@
           "declaration": {
             "name": "SettRail",
             "module": "src/map/sett-rail.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-sheet.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The inside of an open unit: the exposes rail, the columns, the needs rail,\nin one row. `sett-node[tier=\"sheet\"]` hosts one in its `inside` slot, and a\nghost neighbour shows the same element folded. Everything inside is laid\nout by normal flow, so the links of lane 4 read their endpoints from the DOM.\n\n`folded` folds every area at once (the PoC's areas / items switch).",
+          "name": "SettSheet",
+          "slots": [
+            {
+              "description": "a `sett-rail side=\"exposes\"`",
+              "name": "exposes"
+            },
+            {
+              "description": "`sett-column` children",
+              "name": ""
+            },
+            {
+              "description": "a `sett-rail side=\"needs\"`",
+              "name": "needs"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "fold every area inside, or open them all again",
+              "attribute": "folded",
+              "reflects": true
+            }
+          ],
+          "events": [
+            {
+              "description": "bubbles from the areas inside",
+              "name": "sett-fold"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "folded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "fold every area inside, or open them all again",
+              "fieldName": "folded"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-sheet",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettSheet",
+          "declaration": {
+            "name": "SettSheet",
+            "module": "src/map/sett-sheet.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-sheet",
+          "declaration": {
+            "name": "SettSheet",
+            "module": "src/map/sett-sheet.ts"
           }
         }
       ]

@@ -67,6 +67,7 @@ export class SettNode extends LitElement {
     .meta ::slotted(*) { display: block; overflow: hidden; text-overflow: ellipsis; }
     .ports { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--sett-space-3); padding: var(--sett-space-1) var(--sett-space-3) 0; --sett-port-dot-offset: calc(-1 * (var(--sett-space-3) + var(--sett-map-size-dot) / 2)); }
     .col { min-width: 0; }
+    .ports[hidden], .pcap[hidden] { display: none; }
     .pcap { display: flex; justify-content: space-between; padding: var(--sett-space-1) var(--sett-space-3) 0; font-size: var(--sett-font-size-xs); color: var(--sett-color-mute); }
     .inside { border-top: var(--sett-stroke-hair) solid var(--sett-color-line2); margin-top: var(--sett-space-2); padding: var(--sett-space-2) var(--sett-space-3); }
     .ft { display: flex; justify-content: space-between; padding: var(--sett-space-1) var(--sett-space-3) var(--sett-space-1); font-size: var(--sett-font-size-sm); }
@@ -77,23 +78,26 @@ export class SettNode extends LitElement {
     this.dispatchEvent(new CustomEvent('sett-open', { bubbles: true, composed: true, detail: { action } }));
   }
   private count() {
-    this.exposes = this.querySelectorAll("[slot='exposes']").length;
-    this.needs = this.querySelectorAll("[slot='needs']").length;
+    // its own port rows only: a sheet inside has rails in slots of the same name
+    this.exposes = this.querySelectorAll(":scope > [slot='exposes']").length;
+    this.needs = this.querySelectorAll(":scope > [slot='needs']").length;
   }
   firstUpdated() { this.count(); }
 
   render() {
     const rich = this.tier !== 'mini';
     const ports = this.tier === 'card' || this.tier === 'sheet';
+    // an open unit whose inside brings its own rails does not list its ports a second time
+    const bare = this.tier === 'sheet' && this.exposes + this.needs === 0;
     return html`
       <div class="hd" part="hd"><b>${this.name}</b>${rich && this.kind ? html`<em>${this.kind}</em>` : nothing}${rich ? html`<span class="badges"><slot name="badges"></slot></span>` : nothing}</div>
       ${rich ? html`<div class="meta">${this.declared ? html`declared · unverified` : html`<slot></slot>`}</div>` : nothing}
       ${ports ? html`
-        <div class="ports" part="ports">
+        <div class="ports" part="ports" ?hidden=${bare}>
           <div class="col"><slot name="exposes" @slotchange=${this.count}></slot></div>
           <div class="col"><slot name="needs" @slotchange=${this.count}></slot></div>
         </div>
-        <div class="pcap"><span>exposes · ${this.exposes}</span><span>needs · ${this.needs}</span></div>` : nothing}
+        <div class="pcap" ?hidden=${bare}><span>exposes · ${this.exposes}</span><span>needs · ${this.needs}</span></div>` : nothing}
       ${this.tier === 'sheet' ? html`<div class="inside"><slot name="inside"></slot></div>` : nothing}
       ${ports ? html`<div class="ft" part="foot">
           ${this.tier === 'sheet' ? html`<a @click=${() => this.act('close')}>▴ close</a>` : html`<a @click=${() => this.act('open')}>▾ open · what is inside</a>`}

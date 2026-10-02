@@ -504,7 +504,7 @@ The agent left the plan. Reason, then the three ways back (and discuss).
 
 ### `<sett-frame>`
 
-The one frame that changes colour. Wraps a pane; the slot is the pane's paper. idle grey · live session gradient (rotates) · waiting amber (pulses) · editing sel · collision bad · focus a sel ring at the lit stroke inside the idle frame. The only two animations in the chrome live here; `prefers-reduced-motion` and the `still` attribute stop both.
+The one frame that changes colour: it says the state of the scope (DESIGN.md "The shell" rule 5). Wraps a pane; the slot is the pane's paper. idle grey · live session gradient (rotates) · waiting amber (pulses) · editing sel · collision bad · planning dashed amber, always still. `focus` is the sel ring for the selection, at the lit stroke inside the idle frame, not a state of the scope. The only two animations in the chrome live here (live and waiting); `prefers-reduced-motion` and the `still` attribute stop both. Planning is dashed because the waiting frame's still twin is solid amber. A state change never moves or resizes the pane inside.
 
 - attrs:
   - `state=FrameState`
@@ -521,8 +521,10 @@ The one frame that changes colour. Wraps a pane; the slot is the pane's paper. i
   - `primitives-frame--waiting` Waiting
   - `primitives-frame--editing` Editing
   - `primitives-frame--collision` Collision
+  - `primitives-frame--planning` planning · dashed amber, always still
   - `primitives-frame--focus` focus · sel ring at the lit stroke
   - `primitives-frame--reduced-motion` reduced motion · live and waiting go still
+  - `primitives-frame--planning-next-to-waiting` planning next to waiting · motion off
   - `primitives-frame--all-states` All States
 
 ### `<sett-funnel>`

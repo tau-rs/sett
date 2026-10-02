@@ -17,7 +17,7 @@ const meta: Meta = {
   component: 'sett-frame',
   args: { state: 'idle', still: false },
   argTypes: {
-    state: { control: 'select', options: ['idle', 'live', 'waiting', 'editing', 'collision', 'focus'] },
+    state: { control: 'select', options: ['idle', 'live', 'waiting', 'editing', 'collision', 'planning', 'focus'] },
     session: { control: 'select', options: sessionOrder },
   },
   render: ({ state, session, still }) => html`<sett-frame state=${state} session=${session ?? ''} ?still=${still} style="width:420px">${pane(html`<sett-pill>${state}</sett-pill>` as never, `${state}`)}</sett-frame>`,
@@ -26,7 +26,7 @@ export default meta;
 type Story = StoryObj;
 
 const one = (state: string, session?: string, still = false, body = state): Story => ({
-  render: () => html`<sett-frame state=${state} session=${session ?? ''} ?still=${still} style="width:420px">${pane(html`<sett-pill kind=${state === 'live' ? 'session' : state === 'waiting' ? 'sug' : 'default'} session=${session ?? ''}>${state === 'live' ? 'working' : state === 'waiting' ? 'asks · 2' : state}</sett-pill>` as never, body)}</sett-frame>`,
+  render: () => html`<sett-frame state=${state} session=${session ?? ''} ?still=${still} style="width:420px">${pane(html`<sett-pill kind=${state === 'live' ? 'session' : state === 'waiting' || state === 'planning' ? 'sug' : 'default'} session=${session ?? ''}>${state === 'live' ? 'working' : state === 'waiting' ? 'asks · 2' : state}</sett-pill>` as never, body)}</sett-frame>`,
 });
 export const Idle = one('idle', undefined, false, 'nothing running');
 export const Live = { ...one('live', undefined, false, 'Yokohama is working'), name: 'live · default session' };
@@ -34,6 +34,7 @@ export const LiveOtherSession = { ...one('live', 'tl', false, 'Lyon is working')
 export const Waiting = one('waiting', undefined, false, 'Yokohama asks');
 export const Editing = one('editing', undefined, false, 'you are editing');
 export const Collision = one('collision', undefined, false, 'two sessions touched pg.rs');
+export const Planning = { ...one('planning', undefined, false, 'a plan is being shaped'), name: 'planning · dashed amber, always still' };
 export const Focus = { ...one('focus', undefined, false, 'keyboard focus on this pane'), name: 'focus · sel ring at the lit stroke' };
 export const ReducedMotion: Story = {
   name: 'reduced motion · live and waiting go still',
@@ -42,8 +43,15 @@ export const ReducedMotion: Story = {
     <sett-frame state="waiting" still>${pane(html`<sett-pill kind="sug">asks · 2</sett-pill>` as never, 'solid amber')}</sett-frame>
   </div>`,
 };
+export const PlanningNextToWaiting: Story = {
+  name: 'planning next to waiting · motion off',
+  render: () => html`<div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sett-space-2);width:860px">
+    <sett-frame state="planning" still>${pane(html`<sett-pill kind="sug">planning</sett-pill>` as never, 'planning · dashed amber')}</sett-frame>
+    <sett-frame state="waiting" still>${pane(html`<sett-pill kind="sug">asks · 2</sett-pill>` as never, 'waiting, motion off · solid amber')}</sett-frame>
+  </div>`,
+};
 export const AllStates: Story = {
   render: () => html`<div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sett-space-2);width:860px">
-    ${['idle', 'live', 'waiting', 'editing', 'collision', 'focus'].map((s) => html`<sett-frame state=${s}>${pane(html`<sett-pill>${s}</sett-pill>` as never, s)}</sett-frame>`)}
+    ${['idle', 'live', 'waiting', 'editing', 'collision', 'planning', 'focus'].map((s) => html`<sett-frame state=${s}>${pane(html`<sett-pill>${s}</sett-pill>` as never, s)}</sett-frame>`)}
   </div>`,
 };

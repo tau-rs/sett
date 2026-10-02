@@ -2,14 +2,18 @@ import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { sessionStyles, type SessionId } from '../session.js';
 
-export type FrameState = 'idle' | 'live' | 'waiting' | 'editing' | 'collision' | 'focus';
+export type FrameState = 'idle' | 'live' | 'waiting' | 'editing' | 'collision' | 'planning' | 'focus';
 
 /**
- * The one frame that changes colour. Wraps a pane; the slot is the pane's
- * paper. idle grey · live session gradient (rotates) · waiting amber (pulses)
- * · editing sel · collision bad · focus a sel ring at the lit stroke inside
- * the idle frame. The only two animations in the chrome live here;
- * `prefers-reduced-motion` and the `still` attribute stop both.
+ * The one frame that changes colour: it says the state of the scope (DESIGN.md
+ * "The shell" rule 5). Wraps a pane; the slot is the pane's paper. idle grey ·
+ * live session gradient (rotates) · waiting amber (pulses) · editing sel ·
+ * collision bad · planning dashed amber, always still. `focus` is the sel ring
+ * for the selection, at the lit stroke inside the idle frame, not a state of
+ * the scope. The only two animations in the chrome live here (live and
+ * waiting); `prefers-reduced-motion` and the `still` attribute stop both.
+ * Planning is dashed because the waiting frame's still twin is solid amber.
+ * A state change never moves or resizes the pane inside.
  *
  * @slot - the pane content
  * @csspart inner - the paper inside the frame
@@ -43,6 +47,7 @@ export class SettFrame extends LitElement {
       }
       :host([state='editing']) { background: var(--sett-color-sel); }
       :host([state='collision']) { background: var(--sett-color-bad); }
+      :host([state='planning']) { padding: 0; border: var(--sett-stroke-frame) dashed var(--sett-color-sug); background: var(--sett-color-paper); }
       :host([state='focus']) .inner { box-shadow: inset 0 0 0 var(--sett-stroke-lit) var(--sett-color-sel); }
       :host([state='live']) {
         background: linear-gradient(120deg, var(--_session), var(--_session-sub), var(--_session), var(--_session-sub), var(--_session));

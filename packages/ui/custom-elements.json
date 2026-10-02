@@ -824,7 +824,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The one frame that changes colour. Wraps a pane; the slot is the pane's\npaper. idle grey · live session gradient (rotates) · waiting amber (pulses)\n· editing sel · collision bad · focus a sel ring at the lit stroke inside\nthe idle frame. The only two animations in the chrome live here;\n`prefers-reduced-motion` and the `still` attribute stop both.",
+          "description": "The one frame that changes colour: it says the state of the scope (DESIGN.md\n\"The shell\" rule 5). Wraps a pane; the slot is the pane's paper. idle grey ·\nlive session gradient (rotates) · waiting amber (pulses) · editing sel ·\ncollision bad · planning dashed amber, always still. `focus` is the sel ring\nfor the selection, at the lit stroke inside the idle frame, not a state of\nthe scope. The only two animations in the chrome live here (live and\nwaiting); `prefers-reduced-motion` and the `still` attribute stop both.\nPlanning is dashed because the waiting frame's still twin is solid amber.\nA state change never moves or resizes the pane inside.",
           "name": "SettFrame",
           "cssParts": [
             {

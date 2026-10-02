@@ -38,3 +38,5 @@ export { SettChangesList, SettChangesHeader, SettStage, SettCommitRow, type Chan
 export { SettIntentBar } from './shell/sett-intent-bar.js';
 export { SettInspector, type InspectorTone } from './shell/sett-inspector.js';
 export { SettHunk, SettHunkLine, SettRemark, type HunkLineKind, type RemarkKind } from './shell/sett-hunk.js';
+export { SettCommitForm, type CommitThen } from './shell/sett-commit-form.js';
+export { SettAsk, SettResolveRow } from './shell/sett-ask.js';

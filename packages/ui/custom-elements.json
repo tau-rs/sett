@@ -4,6 +4,1060 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/button/sett-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A button. Grid metrics, lowercase, tokens only. A disabled primary is a\ndashed blue outline at full contrast, never a faded fill.",
+          "name": "SettButton",
+          "cssParts": [
+            {
+              "description": "the native button",
+              "name": "button"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the label",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'default'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'md'",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'default'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'md'",
+              "fieldName": "size"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-button",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The planner's accept: the main verb plus a ▾ that opens a list (the driver)\nunder it, an anchored disclosure like the selector's.",
+          "name": "SettSplitButton",
+          "slots": [
+            {
+              "description": "the main verb",
+              "name": ""
+            },
+            {
+              "description": "a sett-menu shown while open",
+              "name": "menu"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "onDocClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "close"
+            },
+            {
+              "kind": "field",
+              "name": "toggle"
+            },
+            {
+              "kind": "field",
+              "name": "press"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "/ sett-close"
+            },
+            {
+              "name": "sett-close",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "description": "the main verb was pressed",
+              "name": "sett-press"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "fieldName": "variant"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-split-button",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The merge: a primary button that stays visibly primary while blocked, with\nits reason under it. Blocked = dashed blue outline; reasons are pills, each a\nlink to what unblocks it.",
+          "name": "SettGatedButton",
+          "slots": [
+            {
+              "description": "the verb",
+              "name": ""
+            },
+            {
+              "description": "pills or words under the button",
+              "name": "reason"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "blocked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "blocked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "press",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "when open and pressed",
+              "name": "sett-press"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "blocked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "blocked"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-gated-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettButton",
+          "declaration": {
+            "name": "SettButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-button",
+          "declaration": {
+            "name": "SettButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettSplitButton",
+          "declaration": {
+            "name": "SettSplitButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-split-button",
+          "declaration": {
+            "name": "SettSplitButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettGatedButton",
+          "declaration": {
+            "name": "SettGatedButton",
+            "module": "src/button/sett-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-gated-button",
+          "declaration": {
+            "name": "SettGatedButton",
+            "module": "src/button/sett-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/card/sett-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One card shape for seven uses: fix (dashed blue), plan delta (amber),\nimpact, merge checklist, pipeline, result (green), what's new. A heading\nwith a state (pill) or count (tag) on the right, then rows.",
+          "name": "SettCard",
+          "cssParts": [
+            {
+              "description": "the heading row",
+              "name": "heading"
+            }
+          ],
+          "slots": [
+            {
+              "description": "sett-card-row elements (and a sett-pipe for the pipeline)",
+              "name": ""
+            },
+            {
+              "description": "the heading text",
+              "name": "title"
+            },
+            {
+              "description": "a sett-pill (state) or sett-tag (count) at the right of the heading",
+              "name": "state"
+            },
+            {
+              "description": "buttons; only the fix card and the delta have them",
+              "name": "acts"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "CardVariant"
+              },
+              "default": "'plain'",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "CardVariant"
+              },
+              "default": "'plain'",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-card",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A card row: glyph · fact · where it leads. With `place` (a spot in code) or\n`nav` (another pane) the whole row is the link: it lights on hover and ends\nwith ›. A place is drawn as the small mono tag; a nav as a grey word.",
+          "name": "SettCardRow",
+          "slots": [
+            {
+              "description": "the fact",
+              "name": ""
+            },
+            {
+              "description": "a mono note at the right when the row leads nowhere (e.g. `41 s`, `new`)",
+              "name": "right"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "mark",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
+              "attribute": "mark"
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "RowKind"
+              },
+              "default": "'mute'",
+              "description": "colour of the glyph",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "place",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a spot in code, e.g. `service.rs:61`",
+              "attribute": "place"
+            },
+            {
+              "kind": "field",
+              "name": "nav",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a destination, e.g. `pipeline`",
+              "attribute": "nav"
+            },
+            {
+              "kind": "method",
+              "name": "go",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-go",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "with `{ place }` or `{ nav }`"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mark",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
+              "fieldName": "mark"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "RowKind"
+              },
+              "default": "'mute'",
+              "description": "colour of the glyph",
+              "fieldName": "kind"
+            },
+            {
+              "name": "place",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a spot in code, e.g. `service.rs:61`",
+              "fieldName": "place"
+            },
+            {
+              "name": "nav",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a destination, e.g. `pipeline`",
+              "fieldName": "nav"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-card-row",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The pipeline bar: one segment per step. `steps` is a comma list of ok | bad | run | pending.",
+          "name": "SettPipe",
+          "members": [
+            {
+              "kind": "field",
+              "name": "steps",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "steps"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "steps",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "steps"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-pipe",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettCard",
+          "declaration": {
+            "name": "SettCard",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-card",
+          "declaration": {
+            "name": "SettCard",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettCardRow",
+          "declaration": {
+            "name": "SettCardRow",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-card-row",
+          "declaration": {
+            "name": "SettCardRow",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPipe",
+          "declaration": {
+            "name": "SettPipe",
+            "module": "src/card/sett-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-pipe",
+          "declaration": {
+            "name": "SettPipe",
+            "module": "src/card/sett-card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/chip/sett-chip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent\ndoor first and bold, manual door second and plain (P-1); `me-first` swaps\nthem. A done chip keeps full contrast, its label turns ok with ✓ and it gains\na plain `dismiss` verb. Never animates.",
+          "name": "SettChip",
+          "cssParts": [
+            {
+              "description": "the kind label (a sett-tag)",
+              "name": "label"
+            },
+            {
+              "description": "the verbs group",
+              "name": "verbs"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the fact, lowercase",
+              "name": ""
+            },
+            {
+              "description": "a mono count or identifier after the fact, e.g. `· 2`",
+              "name": "count"
+            },
+            {
+              "description": "the agent door verb (an `<a>`)",
+              "name": "agent"
+            },
+            {
+              "description": "the manual door verb (an `<a>`)",
+              "name": "manual"
+            },
+            {
+              "description": "further verbs, in order",
+              "name": "verb"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "ChipKind"
+              },
+              "default": "'git'",
+              "description": "what the chip is about",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "ChipState"
+              },
+              "default": "'normal'",
+              "description": "normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓)",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the agent kind; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "meFirst",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the \"me first\" setting: manual door first and bold",
+              "attribute": "me-first",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "dismiss",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-dismiss",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "when the done chip's dismiss verb is used"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "ChipKind"
+              },
+              "default": "'git'",
+              "description": "what the chip is about",
+              "fieldName": "kind"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "ChipState"
+              },
+              "default": "'normal'",
+              "description": "normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓)",
+              "fieldName": "state"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the agent kind; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "me-first",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the \"me first\" setting: manual door first and bold",
+              "fieldName": "meFirst"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-chip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettChip",
+          "declaration": {
+            "name": "SettChip",
+            "module": "src/chip/sett-chip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-chip",
+          "declaration": {
+            "name": "SettChip",
+            "module": "src/chip/sett-chip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/editor/sett-hint.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An inlay hint: rust-analyzer's type hints and arch's own use one shape, a\nquiet grey pill after the code. `kind` colours the text for the\ndeclaration's right-aligned facts (planned, finding, session, blame).",
+          "name": "SettHint",
+          "slots": [
+            {
+              "description": "the hint text",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "HintKind"
+              },
+              "default": "'default'",
+              "attribute": "kind",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "HintKind"
+              },
+              "default": "'default'",
+              "fieldName": "kind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-hint",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettHint",
+          "declaration": {
+            "name": "SettHint",
+            "module": "src/editor/sett-hint.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-hint",
+          "declaration": {
+            "name": "SettHint",
+            "module": "src/editor/sett-hint.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/frame/sett-frame.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The one frame that changes colour. Wraps a pane; the slot is the pane's\npaper. idle grey · live session gradient (rotates) · waiting amber (pulses)\n· editing sel · collision bad · focus a sel ring at the lit stroke inside\nthe idle frame. The only two animations in the chrome live here;\n`prefers-reduced-motion` and the `still` attribute stop both.",
+          "name": "SettFrame",
+          "cssParts": [
+            {
+              "description": "the paper inside the frame",
+              "name": "inner"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the pane content",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FrameState"
+              },
+              "default": "'idle'",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the live state; unknown ids fall back to yk",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering (solid colours, no animation)",
+              "attribute": "still",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "FrameState"
+              },
+              "default": "'idle'",
+              "fieldName": "state"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "session id for the live state; unknown ids fall back to yk",
+              "fieldName": "session"
+            },
+            {
+              "name": "still",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "force the reduced-motion rendering (solid colours, no animation)",
+              "fieldName": "still"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-frame",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettFrame",
+          "declaration": {
+            "name": "SettFrame",
+            "module": "src/frame/sett-frame.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-frame",
+          "declaration": {
+            "name": "SettFrame",
+            "module": "src/frame/sett-frame.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/funnel/sett-funnel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Onboarding progress: a stepper. A circle per step, ✓ when done, filled for\nthe current one, a number for the rest, a thin line between.",
+          "name": "SettFunnel",
+          "slots": [
+            {
+              "description": "sett-funnel-step elements",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "1-based index of the current step",
+              "attribute": "current"
+            },
+            {
+              "kind": "method",
+              "name": "apply",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "current",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "1-based index of the current step",
+              "fieldName": "current"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-funnel",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One step of the funnel. State and number are set by the parent.",
+          "name": "SettFunnelStep",
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "'done' | 'current' | 'pending'"
+              },
+              "default": "'pending'",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "index"
+            },
+            {
+              "kind": "field",
+              "name": "first",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "first",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "'done' | 'current' | 'pending'"
+              },
+              "default": "'pending'",
+              "fieldName": "state"
+            },
+            {
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "index"
+            },
+            {
+              "name": "first",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "first"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-funnel-step",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettFunnel",
+          "declaration": {
+            "name": "SettFunnel",
+            "module": "src/funnel/sett-funnel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-funnel",
+          "declaration": {
+            "name": "SettFunnel",
+            "module": "src/funnel/sett-funnel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettFunnelStep",
+          "declaration": {
+            "name": "SettFunnelStep",
+            "module": "src/funnel/sett-funnel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-funnel-step",
+          "declaration": {
+            "name": "SettFunnelStep",
+            "module": "src/funnel/sett-funnel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/index.ts",
       "declarations": [],
       "exports": [
@@ -653,1164 +1707,6 @@
           "declaration": {
             "name": "Op",
             "module": "./map/fixtures.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/session.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "sessionStyles",
-          "default": "css` :host { --_session: var(--sett-session-${unsafeCSS(sessionOrder[0])}-main); --_session-sub: var(--sett-session-${unsafeCSS(sessionOrder[0])}-sub); --_session-bg: var(--sett-session-${unsafeCSS(sessionOrder[0])}-bg); } ${unsafeCSS( sessionOrder .map( (id) => `:host([session=\"${id}\"]) { --_session: var(--sett-session-${id}-main); --_session-sub: var(--sett-session-${id}-sub); --_session-bg: var(--sett-session-${id}-bg); }`, ) .join('\\n'), )} `",
-          "description": "Per-session colour variables, set from the `session` attribute so a consumer\nnever passes a colour. Unknown or missing id falls back to the first session.\nExposes `--_session`, `--_session-sub`, `--_session-bg` inside the host."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SessionId",
-          "declaration": {
-            "name": "SessionId",
-            "module": "src/session.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "sessionOrder",
-          "declaration": {
-            "name": "sessionOrder",
-            "module": "src/session.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "sessionStyles",
-          "declaration": {
-            "name": "sessionStyles",
-            "module": "src/session.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/status.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "STATUS",
-          "type": {
-            "text": "Record<BranchState, { dot: DotKind; pill?: PillKind; words?: string; pulse?: boolean }>"
-          },
-          "default": "{ main: { dot: 'ok' }, yours: { dot: 'sel' }, planning: { dot: 'session', pill: 'session', words: 'planning' }, working: { dot: 'session', pill: 'session', words: 'working', pulse: true }, asks: { dot: 'sug', pill: 'sug', words: 'asks' }, paused: { dot: 'mute', pill: 'default', words: 'paused' }, done: { dot: 'ok', pill: 'ok', words: 'done' }, collision: { dot: 'bad', pill: 'bad', words: 'collision' }, }",
-          "description": "dot colour, pill kind and pill words per state. `asks` takes a count."
-        },
-        {
-          "kind": "function",
-          "name": "pillWords",
-          "parameters": [
-            {
-              "name": "state",
-              "type": {
-                "text": "BranchState"
-              }
-            },
-            {
-              "name": "count",
-              "optional": true,
-              "type": {
-                "text": "number"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "variable",
-          "name": "dotStyles",
-          "default": "css` .dot { flex: none; width: var(--sett-space-2); height: var(--sett-space-2); border-radius: var(--sett-radius-chip); background: var(--sett-color-mute); } .dot[data-kind='ok'] { background: var(--sett-color-ok); } .dot[data-kind='sel'] { background: var(--sett-color-sel); } .dot[data-kind='sug'] { background: var(--sett-color-sug); } .dot[data-kind='bad'] { background: var(--sett-color-bad); } .dot[data-kind='session'] { background: var(--_session); } .dot[data-pulse] { animation: sett-dot-pulse var(--sett-motion-frame-pulse) ease-in-out infinite; } @keyframes sett-dot-pulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } } :host([still]) .dot[data-pulse] { animation: none; } @media (prefers-reduced-motion: reduce) { .dot[data-pulse] { animation: none; } } `",
-          "description": "The status dot. Session colour comes from the host's `--_session` (see\nsessionStyles). It pulses while its session is working: the one allowed use\nof the frame-pulse timing outside the frame. Reduced motion stills it."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "STATUS",
-          "declaration": {
-            "name": "STATUS",
-            "module": "src/status.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "pillWords",
-          "declaration": {
-            "name": "pillWords",
-            "module": "src/status.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "dotStyles",
-          "declaration": {
-            "name": "dotStyles",
-            "module": "src/status.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/button/sett-button.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "A button. Grid metrics, lowercase, tokens only. A disabled primary is a\ndashed blue outline at full contrast, never a faded fill.",
-          "name": "SettButton",
-          "cssParts": [
-            {
-              "description": "the native button",
-              "name": "button"
-            }
-          ],
-          "slots": [
-            {
-              "description": "the label",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "ButtonVariant"
-              },
-              "default": "'default'",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "ButtonSize"
-              },
-              "default": "'md'",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "ButtonVariant"
-              },
-              "default": "'default'",
-              "fieldName": "variant"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "ButtonSize"
-              },
-              "default": "'md'",
-              "fieldName": "size"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-button",
-          "customElement": true
-        },
-        {
-          "kind": "class",
-          "description": "The planner's accept: the main verb plus a ▾ that opens a list (the driver)\nunder it, an anchored disclosure like the selector's.",
-          "name": "SettSplitButton",
-          "slots": [
-            {
-              "description": "the main verb",
-              "name": ""
-            },
-            {
-              "description": "a sett-menu shown while open",
-              "name": "menu"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "ButtonVariant"
-              },
-              "default": "'primary'",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "onDocClick",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "onKey",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "close"
-            },
-            {
-              "kind": "field",
-              "name": "toggle"
-            },
-            {
-              "kind": "field",
-              "name": "press"
-            }
-          ],
-          "events": [
-            {
-              "name": "sett-open",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "/ sett-close"
-            },
-            {
-              "name": "sett-close",
-              "type": {
-                "text": "CustomEvent"
-              }
-            },
-            {
-              "description": "the main verb was pressed",
-              "name": "sett-press"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "ButtonVariant"
-              },
-              "default": "'primary'",
-              "fieldName": "variant"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "open"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-split-button",
-          "customElement": true
-        },
-        {
-          "kind": "class",
-          "description": "The merge: a primary button that stays visibly primary while blocked, with\nits reason under it. Blocked = dashed blue outline; reasons are pills, each a\nlink to what unblocks it.",
-          "name": "SettGatedButton",
-          "slots": [
-            {
-              "description": "the verb",
-              "name": ""
-            },
-            {
-              "description": "pills or words under the button",
-              "name": "reason"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "blocked",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "blocked",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "press",
-              "privacy": "private"
-            }
-          ],
-          "events": [
-            {
-              "description": "when open and pressed",
-              "name": "sett-press"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "blocked",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "blocked"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-gated-button",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettButton",
-          "declaration": {
-            "name": "SettButton",
-            "module": "src/button/sett-button.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-button",
-          "declaration": {
-            "name": "SettButton",
-            "module": "src/button/sett-button.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SettSplitButton",
-          "declaration": {
-            "name": "SettSplitButton",
-            "module": "src/button/sett-button.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-split-button",
-          "declaration": {
-            "name": "SettSplitButton",
-            "module": "src/button/sett-button.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SettGatedButton",
-          "declaration": {
-            "name": "SettGatedButton",
-            "module": "src/button/sett-button.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-gated-button",
-          "declaration": {
-            "name": "SettGatedButton",
-            "module": "src/button/sett-button.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/card/sett-card.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "One card shape for seven uses: fix (dashed blue), plan delta (amber),\nimpact, merge checklist, pipeline, result (green), what's new. A heading\nwith a state (pill) or count (tag) on the right, then rows.",
-          "name": "SettCard",
-          "cssParts": [
-            {
-              "description": "the heading row",
-              "name": "heading"
-            }
-          ],
-          "slots": [
-            {
-              "description": "sett-card-row elements (and a sett-pipe for the pipeline)",
-              "name": ""
-            },
-            {
-              "description": "the heading text",
-              "name": "title"
-            },
-            {
-              "description": "a sett-pill (state) or sett-tag (count) at the right of the heading",
-              "name": "state"
-            },
-            {
-              "description": "buttons; only the fix card and the delta have them",
-              "name": "acts"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "CardVariant"
-              },
-              "default": "'plain'",
-              "attribute": "variant",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "CardVariant"
-              },
-              "default": "'plain'",
-              "fieldName": "variant"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-card",
-          "customElement": true
-        },
-        {
-          "kind": "class",
-          "description": "A card row: glyph · fact · where it leads. With `place` (a spot in code) or\n`nav` (another pane) the whole row is the link: it lights on hover and ends\nwith ›. A place is drawn as the small mono tag; a nav as a grey word.",
-          "name": "SettCardRow",
-          "slots": [
-            {
-              "description": "the fact",
-              "name": ""
-            },
-            {
-              "description": "a mono note at the right when the row leads nowhere (e.g. `41 s`, `new`)",
-              "name": "right"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "mark",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
-              "attribute": "mark"
-            },
-            {
-              "kind": "field",
-              "name": "kind",
-              "type": {
-                "text": "RowKind"
-              },
-              "default": "'mute'",
-              "description": "colour of the glyph",
-              "attribute": "kind",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "place",
-              "type": {
-                "text": "string | undefined"
-              },
-              "description": "a spot in code, e.g. `service.rs:61`",
-              "attribute": "place"
-            },
-            {
-              "kind": "field",
-              "name": "nav",
-              "type": {
-                "text": "string | undefined"
-              },
-              "description": "a destination, e.g. `pipeline`",
-              "attribute": "nav"
-            },
-            {
-              "kind": "method",
-              "name": "go",
-              "privacy": "private"
-            }
-          ],
-          "events": [
-            {
-              "name": "sett-go",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "with `{ place }` or `{ nav }`"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "mark",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "the glyph character, from the vocabulary (✓ ✕ ⚠ · + ~ → ▸ ◦)",
-              "fieldName": "mark"
-            },
-            {
-              "name": "kind",
-              "type": {
-                "text": "RowKind"
-              },
-              "default": "'mute'",
-              "description": "colour of the glyph",
-              "fieldName": "kind"
-            },
-            {
-              "name": "place",
-              "type": {
-                "text": "string | undefined"
-              },
-              "description": "a spot in code, e.g. `service.rs:61`",
-              "fieldName": "place"
-            },
-            {
-              "name": "nav",
-              "type": {
-                "text": "string | undefined"
-              },
-              "description": "a destination, e.g. `pipeline`",
-              "fieldName": "nav"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-card-row",
-          "customElement": true
-        },
-        {
-          "kind": "class",
-          "description": "The pipeline bar: one segment per step. `steps` is a comma list of ok | bad | run | pending.",
-          "name": "SettPipe",
-          "members": [
-            {
-              "kind": "field",
-              "name": "steps",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "steps"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "steps",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "steps"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-pipe",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettCard",
-          "declaration": {
-            "name": "SettCard",
-            "module": "src/card/sett-card.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-card",
-          "declaration": {
-            "name": "SettCard",
-            "module": "src/card/sett-card.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SettCardRow",
-          "declaration": {
-            "name": "SettCardRow",
-            "module": "src/card/sett-card.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-card-row",
-          "declaration": {
-            "name": "SettCardRow",
-            "module": "src/card/sett-card.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SettPipe",
-          "declaration": {
-            "name": "SettPipe",
-            "module": "src/card/sett-card.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-pipe",
-          "declaration": {
-            "name": "SettPipe",
-            "module": "src/card/sett-card.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/editor/sett-hint.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "An inlay hint: rust-analyzer's type hints and arch's own use one shape, a\nquiet grey pill after the code. `kind` colours the text for the\ndeclaration's right-aligned facts (planned, finding, session, blame).",
-          "name": "SettHint",
-          "slots": [
-            {
-              "description": "the hint text",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "kind",
-              "type": {
-                "text": "HintKind"
-              },
-              "default": "'default'",
-              "attribute": "kind",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "kind",
-              "type": {
-                "text": "HintKind"
-              },
-              "default": "'default'",
-              "fieldName": "kind"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-hint",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettHint",
-          "declaration": {
-            "name": "SettHint",
-            "module": "src/editor/sett-hint.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-hint",
-          "declaration": {
-            "name": "SettHint",
-            "module": "src/editor/sett-hint.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/chip/sett-chip.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent\ndoor first and bold, manual door second and plain (P-1); `me-first` swaps\nthem. A done chip keeps full contrast, its label turns ok with ✓ and it gains\na plain `dismiss` verb. Never animates.",
-          "name": "SettChip",
-          "cssParts": [
-            {
-              "description": "the kind label (a sett-tag)",
-              "name": "label"
-            },
-            {
-              "description": "the verbs group",
-              "name": "verbs"
-            }
-          ],
-          "slots": [
-            {
-              "description": "the fact, lowercase",
-              "name": ""
-            },
-            {
-              "description": "a mono count or identifier after the fact, e.g. `· 2`",
-              "name": "count"
-            },
-            {
-              "description": "the agent door verb (an `<a>`)",
-              "name": "agent"
-            },
-            {
-              "description": "the manual door verb (an `<a>`)",
-              "name": "manual"
-            },
-            {
-              "description": "further verbs, in order",
-              "name": "verb"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "kind",
-              "type": {
-                "text": "ChipKind"
-              },
-              "default": "'git'",
-              "description": "what the chip is about",
-              "attribute": "kind",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "ChipState"
-              },
-              "default": "'normal'",
-              "description": "normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓)",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for the agent kind; unknown ids fall back to yk",
-              "attribute": "session",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "meFirst",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "the \"me first\" setting: manual door first and bold",
-              "attribute": "me-first",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "dismiss",
-              "privacy": "private"
-            }
-          ],
-          "events": [
-            {
-              "name": "sett-dismiss",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "description": "when the done chip's dismiss verb is used"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "kind",
-              "type": {
-                "text": "ChipKind"
-              },
-              "default": "'git'",
-              "description": "what the chip is about",
-              "fieldName": "kind"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "ChipState"
-              },
-              "default": "'normal'",
-              "description": "normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓)",
-              "fieldName": "state"
-            },
-            {
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for the agent kind; unknown ids fall back to yk",
-              "fieldName": "session"
-            },
-            {
-              "name": "me-first",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "the \"me first\" setting: manual door first and bold",
-              "fieldName": "meFirst"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-chip",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettChip",
-          "declaration": {
-            "name": "SettChip",
-            "module": "src/chip/sett-chip.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-chip",
-          "declaration": {
-            "name": "SettChip",
-            "module": "src/chip/sett-chip.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/funnel/sett-funnel.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "Onboarding progress: a stepper. A circle per step, ✓ when done, filled for\nthe current one, a number for the rest, a thin line between.",
-          "name": "SettFunnel",
-          "slots": [
-            {
-              "description": "sett-funnel-step elements",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "current",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "description": "1-based index of the current step",
-              "attribute": "current"
-            },
-            {
-              "kind": "method",
-              "name": "apply",
-              "privacy": "private"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "current",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "description": "1-based index of the current step",
-              "fieldName": "current"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-funnel",
-          "customElement": true
-        },
-        {
-          "kind": "class",
-          "description": "One step of the funnel. State and number are set by the parent.",
-          "name": "SettFunnelStep",
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "'done' | 'current' | 'pending'"
-              },
-              "default": "'pending'",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "index",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "attribute": "index"
-            },
-            {
-              "kind": "field",
-              "name": "first",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "first",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "'done' | 'current' | 'pending'"
-              },
-              "default": "'pending'",
-              "fieldName": "state"
-            },
-            {
-              "name": "index",
-              "type": {
-                "text": "number"
-              },
-              "default": "1",
-              "fieldName": "index"
-            },
-            {
-              "name": "first",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "first"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-funnel-step",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettFunnel",
-          "declaration": {
-            "name": "SettFunnel",
-            "module": "src/funnel/sett-funnel.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-funnel",
-          "declaration": {
-            "name": "SettFunnel",
-            "module": "src/funnel/sett-funnel.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "SettFunnelStep",
-          "declaration": {
-            "name": "SettFunnelStep",
-            "module": "src/funnel/sett-funnel.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-funnel-step",
-          "declaration": {
-            "name": "SettFunnelStep",
-            "module": "src/funnel/sett-funnel.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/frame/sett-frame.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "The one frame that changes colour. Wraps a pane; the slot is the pane's\npaper. idle grey · live session gradient (rotates) · waiting amber (pulses)\n· editing sel · collision bad · focus a sel ring at the lit stroke inside\nthe idle frame. The only two animations in the chrome live here;\n`prefers-reduced-motion` and the `still` attribute stop both.",
-          "name": "SettFrame",
-          "cssParts": [
-            {
-              "description": "the paper inside the frame",
-              "name": "inner"
-            }
-          ],
-          "slots": [
-            {
-              "description": "the pane content",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FrameState"
-              },
-              "default": "'idle'",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for the live state; unknown ids fall back to yk",
-              "attribute": "session",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering (solid colours, no animation)",
-              "attribute": "still",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "FrameState"
-              },
-              "default": "'idle'",
-              "fieldName": "state"
-            },
-            {
-              "name": "session",
-              "type": {
-                "text": "SessionId | undefined"
-              },
-              "description": "session id for the live state; unknown ids fall back to yk",
-              "fieldName": "session"
-            },
-            {
-              "name": "still",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "force the reduced-motion rendering (solid colours, no animation)",
-              "fieldName": "still"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sett-frame",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SettFrame",
-          "declaration": {
-            "name": "SettFrame",
-            "module": "src/frame/sett-frame.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sett-frame",
-          "declaration": {
-            "name": "SettFrame",
-            "module": "src/frame/sett-frame.ts"
           }
         }
       ]
@@ -4142,6 +4038,110 @@
           "declaration": {
             "name": "SettSubAgent",
             "module": "src/session-card/sett-session-card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/session.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "sessionStyles",
+          "default": "css` :host { --_session: var(--sett-session-${unsafeCSS(sessionOrder[0])}-main); --_session-sub: var(--sett-session-${unsafeCSS(sessionOrder[0])}-sub); --_session-bg: var(--sett-session-${unsafeCSS(sessionOrder[0])}-bg); } ${unsafeCSS( sessionOrder .map( (id) => `:host([session=\"${id}\"]) { --_session: var(--sett-session-${id}-main); --_session-sub: var(--sett-session-${id}-sub); --_session-bg: var(--sett-session-${id}-bg); }`, ) .join('\\n'), )} `",
+          "description": "Per-session colour variables, set from the `session` attribute so a consumer\nnever passes a colour. Unknown or missing id falls back to the first session.\nExposes `--_session`, `--_session-sub`, `--_session-bg` inside the host."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SessionId",
+          "declaration": {
+            "name": "SessionId",
+            "module": "src/session.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sessionOrder",
+          "declaration": {
+            "name": "sessionOrder",
+            "module": "src/session.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sessionStyles",
+          "declaration": {
+            "name": "sessionStyles",
+            "module": "src/session.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/status.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "STATUS",
+          "type": {
+            "text": "Record<BranchState, { dot: DotKind; pill?: PillKind; words?: string; pulse?: boolean }>"
+          },
+          "default": "{ main: { dot: 'ok' }, yours: { dot: 'sel' }, planning: { dot: 'session', pill: 'session', words: 'planning' }, working: { dot: 'session', pill: 'session', words: 'working', pulse: true }, asks: { dot: 'sug', pill: 'sug', words: 'asks' }, paused: { dot: 'mute', pill: 'default', words: 'paused' }, done: { dot: 'ok', pill: 'ok', words: 'done' }, collision: { dot: 'bad', pill: 'bad', words: 'collision' }, }",
+          "description": "dot colour, pill kind and pill words per state. `asks` takes a count."
+        },
+        {
+          "kind": "function",
+          "name": "pillWords",
+          "parameters": [
+            {
+              "name": "state",
+              "type": {
+                "text": "BranchState"
+              }
+            },
+            {
+              "name": "count",
+              "optional": true,
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "dotStyles",
+          "default": "css` .dot { flex: none; width: var(--sett-space-2); height: var(--sett-space-2); border-radius: var(--sett-radius-chip); background: var(--sett-color-mute); } .dot[data-kind='ok'] { background: var(--sett-color-ok); } .dot[data-kind='sel'] { background: var(--sett-color-sel); } .dot[data-kind='sug'] { background: var(--sett-color-sug); } .dot[data-kind='bad'] { background: var(--sett-color-bad); } .dot[data-kind='session'] { background: var(--_session); } .dot[data-pulse] { animation: sett-dot-pulse var(--sett-motion-frame-pulse) ease-in-out infinite; } @keyframes sett-dot-pulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } } :host([still]) .dot[data-pulse] { animation: none; } @media (prefers-reduced-motion: reduce) { .dot[data-pulse] { animation: none; } } `",
+          "description": "The status dot. Session colour comes from the host's `--_session` (see\nsessionStyles). It pulses while its session is working: the one allowed use\nof the frame-pulse timing outside the frame. Reduced motion stills it."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "STATUS",
+          "declaration": {
+            "name": "STATUS",
+            "module": "src/status.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "pillWords",
+          "declaration": {
+            "name": "pillWords",
+            "module": "src/status.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "dotStyles",
+          "declaration": {
+            "name": "dotStyles",
+            "module": "src/status.ts"
           }
         }
       ]

@@ -299,6 +299,14 @@
           "value": 3,
           "unit": "px"
         }
+      },
+      "row": {
+        "$description": "a row of the bottom panel's tables (issue #61)",
+        "$type": "dimension",
+        "$value": {
+          "value": 26,
+          "unit": "px"
+        }
       }
     }
   },

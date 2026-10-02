@@ -28,3 +28,4 @@ export { badgeStyles, type BadgeTone } from './badge.js';
 export { SettActivityRail, SettRailItem } from './shell/sett-activity-rail.js';
 export { SettScopeLine } from './shell/sett-scope-line.js';
 export { SettStatusBar, SettStatusItem } from './shell/sett-status-bar.js';
+export { SettBottomPanel, SettPanelTab, SettPanelTable, SettPanelRow, SettPanelOutput, SettPanelLine, type PanelTableKind, type PanelRowLevel } from './shell/sett-bottom-panel.js';

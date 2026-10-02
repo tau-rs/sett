@@ -2026,6 +2026,70 @@
             "name": "SettStatusItem",
             "module": "./shell/sett-status-bar.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettBottomPanel",
+          "declaration": {
+            "name": "SettBottomPanel",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelTab",
+          "declaration": {
+            "name": "SettPanelTab",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelTable",
+          "declaration": {
+            "name": "SettPanelTable",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelRow",
+          "declaration": {
+            "name": "SettPanelRow",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelOutput",
+          "declaration": {
+            "name": "SettPanelOutput",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelLine",
+          "declaration": {
+            "name": "SettPanelLine",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PanelTableKind",
+          "declaration": {
+            "name": "PanelTableKind",
+            "module": "./shell/sett-bottom-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PanelRowLevel",
+          "declaration": {
+            "name": "PanelRowLevel",
+            "module": "./shell/sett-bottom-panel.js"
+          }
         }
       ]
     },
@@ -6027,6 +6091,529 @@
           "declaration": {
             "name": "SettRailItem",
             "module": "src/shell/sett-activity-rail.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-bottom-panel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The bottom panel, under the centre: it lists what already exists, Findings ·\nChecks · Terminal · What's new, nothing else (DESIGN.md \"The shell\" rule 7).\nOpen, it shows the body of the `active` tab; `closed`, it is a strip of its\ntabs with their counts. It reports and never changes `active` or `closed`\nitself; it only marks which of its tabs is the open one.",
+          "name": "SettBottomPanel",
+          "cssParts": [
+            {
+              "description": "the row of tabs",
+              "name": "strip"
+            },
+            {
+              "description": "the open tab's body",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "sett-panel-tab elements",
+              "name": "tabs"
+            },
+            {
+              "description": "the right end of the strip, e.g. the terminal's worktree name",
+              "name": "act"
+            },
+            {
+              "description": "the body of the Findings tab (a sett-panel-table, or an empty state). A body's slot is its tab's value; only the active one is shown",
+              "name": "findings"
+            },
+            {
+              "description": "the body of the Checks tab (a sett-panel-table, then a sett-panel-output)",
+              "name": "checks"
+            },
+            {
+              "description": "the body of the Terminal tab",
+              "name": "terminal"
+            },
+            {
+              "description": "the body of the What's new tab (sett-panel-line elements)",
+              "name": "whatsnew"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the value of the open tab",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "only the strip of tabs and counts is shown",
+              "attribute": "closed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "mark",
+              "privacy": "private",
+              "description": "the open tab is the selected one; closed, none is"
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-toggle",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ closed }` from the caret: the state asked for"
+            },
+            {
+              "description": "`{ value }` from a tab that was chosen (choosing a tab implies open)",
+              "name": "sett-select"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the value of the open tab",
+              "fieldName": "active"
+            },
+            {
+              "name": "closed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "only the strip of tabs and counts is shown",
+              "fieldName": "closed"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-bottom-panel",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A tab of the bottom panel: a name and a count. The count stays when the\npanel is closed. Active: paper, ink, medium, a top bar in `sel`, like\n`sett-tab`. The panel sets `active` from its own `active` and `closed`.",
+          "name": "SettPanelTab",
+          "slots": [
+            {
+              "description": "the name",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count after the name; no attribute, no badge",
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "BadgeTone | undefined"
+              },
+              "description": "the count's fill: bad (blocking), sug (needs you); none is the quiet well",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ value }` when the tab is chosen",
+              "name": "sett-select"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "value"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "count",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a count after the name; no attribute, no badge",
+              "fieldName": "count"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "BadgeTone | undefined"
+              },
+              "description": "the count's fill: bad (blocking), sug (needs you); none is the quiet well",
+              "fieldName": "tone"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-tab",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The table of the Findings and Checks tabs: a header row, then\n`sett-panel-row` children on the same column grid. Every finding and every\ncheck names its origin or its place (DESIGN.md \"The shell\" rule 7).",
+          "name": "SettPanelTable",
+          "slots": [
+            {
+              "description": "sett-panel-row elements",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "PanelTableKind"
+              },
+              "default": "'findings'",
+              "description": "findings: dot · finding · rule · witness · origin; checks: dot · check · where · result · when",
+              "attribute": "kind",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "PanelTableKind"
+              },
+              "default": "'findings'",
+              "description": "findings: dot · finding · rule · witness · origin; checks: dot · check · where · result · when",
+              "fieldName": "kind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-table",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A row of the panel's table: a leading dot for the level, then the cells.\nThe row never wraps; a cell too long for its column ends in an ellipsis.\nThe whole row opens what it names.",
+          "name": "SettPanelRow",
+          "slots": [
+            {
+              "description": "the cells, plain elements in column order: `[data-mono]` is a mono identifier (file:line, origin, time); `[data-tone=\"sug\" | \"bad\" | \"ok\"]` takes that accent",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "PanelRowLevel"
+              },
+              "default": "'mute'",
+              "description": "the leading dot: bad (blocks, failed), sug (warns, running), ok (passed), mute",
+              "attribute": "level",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector and the map are about: the sel tint",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "cells",
+              "privacy": "private",
+              "description": "the cells are plain elements: the row gives them their role"
+            }
+          ],
+          "events": [
+            {
+              "description": "the row was clicked or Enter was pressed on it (the consumer moves the map or opens the fix card)",
+              "name": "sett-open"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "level",
+              "type": {
+                "text": "PanelRowLevel"
+              },
+              "default": "'mute'",
+              "description": "the leading dot: bad (blocks, failed), sug (warns, running), ok (passed), mute",
+              "fieldName": "level"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector and the map are about: the sel tint",
+              "fieldName": "selected"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-row",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A block of output in the panel: a run's output or its witness under the\nChecks table, and the look of the terminal block. Mono, line breaks kept.\nThe real terminal is Theia's; this only styles a block of text.",
+          "name": "SettPanelOutput",
+          "slots": [
+            {
+              "description": "the text; its line breaks and spaces are kept",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-output",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One line of What's new: what changed, and when. The whole line is the link\nto what it names: the host, or an `<a>` when `href` is set.",
+          "name": "SettPanelLine",
+          "slots": [
+            {
+              "description": "the sentence; `b` is its subject (ink, medium)",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "when",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how long ago, shown at the right in mono, e.g. `3 min`",
+              "attribute": "when"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where the line leads; renders an `<a>`. Without it the host is the link and its click is the consumer's",
+              "attribute": "href"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "when",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how long ago, shown at the right in mono, e.g. `3 min`",
+              "fieldName": "when"
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where the line leads; renders an `<a>`. Without it the host is the link and its click is the consumer's",
+              "fieldName": "href"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel-line",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettBottomPanel",
+          "declaration": {
+            "name": "SettBottomPanel",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-bottom-panel",
+          "declaration": {
+            "name": "SettBottomPanel",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelTab",
+          "declaration": {
+            "name": "SettPanelTab",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-tab",
+          "declaration": {
+            "name": "SettPanelTab",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelTable",
+          "declaration": {
+            "name": "SettPanelTable",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-table",
+          "declaration": {
+            "name": "SettPanelTable",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelRow",
+          "declaration": {
+            "name": "SettPanelRow",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-row",
+          "declaration": {
+            "name": "SettPanelRow",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelOutput",
+          "declaration": {
+            "name": "SettPanelOutput",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-output",
+          "declaration": {
+            "name": "SettPanelOutput",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPanelLine",
+          "declaration": {
+            "name": "SettPanelLine",
+            "module": "src/shell/sett-bottom-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel-line",
+          "declaration": {
+            "name": "SettPanelLine",
+            "module": "src/shell/sett-bottom-panel.ts"
           }
         }
       ]

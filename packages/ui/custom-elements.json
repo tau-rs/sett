@@ -7181,7 +7181,7 @@
         },
         {
           "kind": "class",
-          "description": "A tab. `pinned` has no close mark; `dirty` carries an amber mark after the\nname and keeps its close mark; `session` colours the label.",
+          "description": "A tab. `pinned` has no close mark; `dirty` carries an amber mark after the\nname and keeps its close mark. A file tab opened in a scope is underlined in\nthat scope's colour: the active tab's top bar takes the session's colour\n(`scope=\"session\"` with `session`), or `sel` for you (`scope=\"you\"`). The\nlabel stays ink like any tab, and an inactive scoped tab carries no mark.\n`session` with no `scope` means `scope=\"session\"`.",
           "name": "SettTab",
           "slots": [
             {
@@ -7233,10 +7233,21 @@
             },
             {
               "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "TabScope | undefined"
+              },
+              "description": "the scope the file was opened in; colours the active tab's bar",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "session",
               "type": {
                 "text": "SessionId | undefined"
               },
+              "description": "session id of a session scope; unknown ids fall back to yk. Alone, it means `scope=\"session\"`",
               "attribute": "session",
               "reflects": true
             },
@@ -7307,10 +7318,19 @@
               "fieldName": "mono"
             },
             {
+              "name": "scope",
+              "type": {
+                "text": "TabScope | undefined"
+              },
+              "description": "the scope the file was opened in; colours the active tab's bar",
+              "fieldName": "scope"
+            },
+            {
               "name": "session",
               "type": {
                 "text": "SessionId | undefined"
               },
+              "description": "session id of a session scope; unknown ids fall back to yk. Alone, it means `scope=\"session\"`",
               "fieldName": "session"
             }
           ],

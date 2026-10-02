@@ -83,7 +83,7 @@ export const SessionLive: Story = { name: 'session · live', render: () => html`
     <sett-chip kind="git">behind main<span slot="count">· 2</span><a slot="agent">with Yokohama</a><a slot="manual">update myself</a></sett-chip>
     <sett-chip kind="finding" state="blocking">rule<span slot="count">no-http-in-domain</span><a slot="agent">with Yokohama</a><a slot="manual">fix myself</a><a slot="verb">allow</a></sett-chip></div>
   <div class="body"><div class="left">${sessionCard}${tree}</div>
-    <div class="center"><sett-tabbar><sett-tab pinned>map</sett-tab><sett-tab mono active dirty>ports.rs</sett-tab><sett-tab mono session="yk">pg.rs · Yokohama</sett-tab><span slot="right">⌘1 map · ⌘W close</span></sett-tabbar><sett-frame state="live" session="yk">${editor}</sett-frame></div>
+    <div class="center"><sett-tabbar><sett-tab pinned>map</sett-tab><sett-tab mono active dirty scope="session" session="yk">ports.rs</sett-tab><sett-tab mono session="yk">pg.rs · Yokohama</sett-tab><span slot="right">⌘1 map · ⌘W close</span></sett-tabbar><sett-frame state="live" session="yk">${editor}</sett-frame></div>
     <div class="right">${thread}</div></div>
   <div class="status"><span>main · up to date</span><span>2 sessions</span><span class="r">ln 8, col 14 · rust-analyzer ✓</span></div></div>` };
 

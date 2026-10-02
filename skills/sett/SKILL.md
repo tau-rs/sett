@@ -67,7 +67,7 @@ Names never move, fade or resize. Life goes into what surrounds them: rings, a s
 8. Thread messages: every message opens with an author line (a dot and the name at 11 px medium in the author's colour, then the time). Yours sit on the right in the selection tint; agents on the left outlined in their colour; sub-agents outlined in the sub shade with the sub-shade dot, the name still in the session's main colour (the sub shade is not a text colour). Every agent reply ends with a `changed · what` or `no change` line.
 9. Taking over is two acts: pause, then take over one element. Verbs are words, never glyphs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop`. `✋` is a state glyph on the session card only. Handing back is written in the composer, which becomes the hand-back note while you hold an element; the note lands in the thread as a message from you with its changed line. **Focus** and **Lock** are the two scope verbs and are not taking over: Focus changes what the shell is about, Lock pins it, and neither changes who writes (see "The shell").
 10. Card rows lead somewhere as a whole: the row is the link, it lights on hover and ends with `›`; blue is left to buttons. A place in code (`service.rs:61`) is the small mono tag; a destination (pipeline, findings, why) is a grey word. A card heading carries a pill for a state and a tag for a count.
-11. Tabs: the map is pinned first and unclosable; file tabs are mono; an unsaved file carries an amber mark after its name and its close mark stays; a tab a session opened takes that session's colour. Views are never disabled: a view with nothing in it stays clickable and opens to an empty state that names the two doors.
+11. Tabs: the map is pinned first and unclosable; file tabs are mono; an unsaved file carries an amber mark after its name and its close mark stays; a file tab is underlined in the colour of the scope it was opened in: the session's, or `sel` for you. Views are never disabled: a view with nothing in it stays clickable and opens to an empty state that names the two doors.
 12. The editor is Theia's; sett themes it, it does not redraw it. Information sits where IDEs put it: the gutter (change bars per line in the author's colour, glyphs), quiet hints in or after the line (counts on the declaration, inline blame on the caret line only, rust-analyzer's hints in the same pill), and underlines (a finding is an error-grade wavy underline on the span, a witness a highlighted span). No line is added to the code, no labelled chip sits in it, verbs never render in it. A planned element is a gutter glyph and a hint pill at its site, in `sug`, never an inserted line. Your own change bars are `sel`. A symbol from another repo is italic in secondary ink. Syntax colours are the `syntax.*` tokens: seven classes at one CIELAB lightness, 7:1 or better in both themes, hues in the gaps between the session colours; comments are mute. The Theia colour theme is generated from those tokens by the tokens build (`@tau-rs/sett-tokens/sett-theme.light.json` and `.dark.json`); the decoration classes are `@tau-rs/sett/editor.css`.
 
 ### Glyph vocabulary
@@ -1008,7 +1008,11 @@ The row of overlay toggles on the map bar.
 
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
-  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, session, plain
+  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
+  - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
+  - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
+  - `chrome-tabs-and-switches--scoped-you` file tab · opened in your own work: underlined in sel
+  - `chrome-tabs-and-switches--review-tab` review tab · a plain centre tab: sans, closable
   - `chrome-tabs-and-switches--seg-fill` seg · fill
   - `chrome-tabs-and-switches--seg-count` seg · with a count
   - `chrome-tabs-and-switches--seg-empty-state` seg · a view with nothing in it is never disabled: empty state
@@ -1535,7 +1539,11 @@ A segmented control in a well. Never has a disabled item: a view with nothing in
   - `(default)` — sett-seg-item elements
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
-  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, session, plain
+  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
+  - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
+  - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
+  - `chrome-tabs-and-switches--scoped-you` file tab · opened in your own work: underlined in sel
+  - `chrome-tabs-and-switches--review-tab` review tab · a plain centre tab: sans, closable
   - `chrome-tabs-and-switches--seg-fill` seg · fill
   - `chrome-tabs-and-switches--seg-count` seg · with a count
   - `chrome-tabs-and-switches--seg-empty-state` seg · a view with nothing in it is never disabled: empty state
@@ -1551,7 +1559,11 @@ One item of a segmented control.
   - `active=boolean`
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
-  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, session, plain
+  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
+  - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
+  - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
+  - `chrome-tabs-and-switches--scoped-you` file tab · opened in your own work: underlined in sel
+  - `chrome-tabs-and-switches--review-tab` review tab · a plain centre tab: sans, closable
   - `chrome-tabs-and-switches--seg-fill` seg · fill
   - `chrome-tabs-and-switches--seg-count` seg · with a count
   - `chrome-tabs-and-switches--seg-empty-state` seg · a view with nothing in it is never disabled: empty state
@@ -1821,14 +1833,15 @@ A sub-agent row under a plan element: glyph and name, same rhythm as the plan ro
 
 ### `<sett-tab>`
 
-A tab. `pinned` has no close mark; `dirty` carries an amber mark after the name and keeps its close mark; `session` colours the label.
+A tab. `pinned` has no close mark; `dirty` carries an amber mark after the name and keeps its close mark. A file tab opened in a scope is underlined in that scope's colour: the active tab's top bar takes the session's colour (`scope="session"` with `session`), or `sel` for you (`scope="you"`). The label stays ink like any tab, and an inactive scoped tab carries no mark. `session` with no `scope` means `scope="session"`.
 
 - attrs:
   - `active=boolean`
   - `pinned=boolean`
   - `dirty=boolean`
   - `mono=boolean` — mono label, for files
-  - `session=SessionId`
+  - `scope=TabScope` — the scope the file was opened in; colours the active tab's bar
+  - `session=SessionId` — session id of a session scope; unknown ids fall back to yk. Alone, it means `scope="session"`
 - slots:
   - `(default)` — the label
 - events:
@@ -1836,7 +1849,11 @@ A tab. `pinned` has no close mark; `dirty` carries an amber mark after the name 
   - `sett-select` — the tab was chosen
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
-  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, session, plain
+  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
+  - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
+  - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
+  - `chrome-tabs-and-switches--scoped-you` file tab · opened in your own work: underlined in sel
+  - `chrome-tabs-and-switches--review-tab` review tab · a plain centre tab: sans, closable
   - `chrome-tabs-and-switches--seg-fill` seg · fill
   - `chrome-tabs-and-switches--seg-count` seg · with a count
   - `chrome-tabs-and-switches--seg-empty-state` seg · a view with nothing in it is never disabled: empty state
@@ -1852,7 +1869,11 @@ The centre tab bar: map pinned first, file tabs in mono, shortcuts on the right.
   - `right` — what sits at the right end (level switch, overlay toggles, shortcuts)
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
-  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, session, plain
+  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
+  - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
+  - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
+  - `chrome-tabs-and-switches--scoped-you` file tab · opened in your own work: underlined in sel
+  - `chrome-tabs-and-switches--review-tab` review tab · a plain centre tab: sans, closable
   - `chrome-tabs-and-switches--seg-fill` seg · fill
   - `chrome-tabs-and-switches--seg-count` seg · with a count
   - `chrome-tabs-and-switches--seg-empty-state` seg · a view with nothing in it is never disabled: empty state
@@ -1919,7 +1940,11 @@ One overlay toggle: a small square that fills when on.
   - `on=boolean`
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
-  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, session, plain
+  - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
+  - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
+  - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
+  - `chrome-tabs-and-switches--scoped-you` file tab · opened in your own work: underlined in sel
+  - `chrome-tabs-and-switches--review-tab` review tab · a plain centre tab: sans, closable
   - `chrome-tabs-and-switches--seg-fill` seg · fill
   - `chrome-tabs-and-switches--seg-count` seg · with a count
   - `chrome-tabs-and-switches--seg-empty-state` seg · a view with nothing in it is never disabled: empty state

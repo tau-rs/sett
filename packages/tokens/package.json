@@ -1,6 +1,6 @@
 {
   "name": "@tau-rs/sett-tokens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "sett design tokens (DTCG 2025.10) built to css, ts and rust",
   "license": "MIT",
   "type": "module",

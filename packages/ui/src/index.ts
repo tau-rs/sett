@@ -21,3 +21,4 @@ export { splitLabel, portOf, unitOf, unitPorts, opOf, opsOf, sectionOf, type Fix
 export { presenceStyles, beatStyles, beatOf, wave, bloom, arrive, leave, flash, reducedMotion, durationMs, type WaveOptions } from './map/motion.js';
 export { SettItem, ITEM_KINDS, type ItemKind } from './map/sett-item.js';
 export { SettArea } from './map/sett-area.js';
+export { SettColumn, COLUMN_KINDS, type ColumnKind } from './map/sett-column.js';

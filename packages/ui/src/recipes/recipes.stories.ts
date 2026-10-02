@@ -79,11 +79,11 @@ type Story = StoryObj;
 export const SessionLive: Story = { name: 'session · live', render: () => html`${shellCss}<div class="shell">
   ${top(html`<sett-selector state="working" session="yk">feat/refund</sett-selector>`, html`<sett-pill>●●●○</sett-pill>`)}
   <div class="strip"><span class="bn">feat/refund</span>
-    <sett-chip kind="agent" session="yk">Yokohama<span slot="count">· 3/6</span><a slot="agent">follow</a><a slot="manual">step in</a></sett-chip>
+    <sett-chip kind="agent" session="yk">Yokohama<span slot="count">· 3/6</span><a slot="agent">follow</a><a slot="manual">take over</a></sett-chip>
     <sett-chip kind="git">behind main<span slot="count">· 2</span><a slot="agent">with Yokohama</a><a slot="manual">update myself</a></sett-chip>
     <sett-chip kind="finding" state="blocking">rule<span slot="count">no-http-in-domain</span><a slot="agent">with Yokohama</a><a slot="manual">fix myself</a><a slot="verb">allow</a></sett-chip></div>
   <div class="body"><div class="left">${sessionCard}${tree}</div>
-    <div class="center"><sett-tabbar><sett-tab pinned>map</sett-tab><sett-tab mono active dirty>ports.rs</sett-tab><sett-tab mono session="yk">pg.rs · Yokohama</sett-tab><span slot="right">⌘1 map · ⌘W close</span></sett-tabbar><sett-frame state="live" session="yk">${editor}</sett-frame></div>
+    <div class="center"><sett-tabbar><sett-tab pinned>map</sett-tab><sett-tab mono active dirty scope="session" session="yk">ports.rs</sett-tab><sett-tab mono session="yk">pg.rs · Yokohama</sett-tab><span slot="right">⌘1 map · ⌘W close</span></sett-tabbar><sett-frame state="live" session="yk">${editor}</sett-frame></div>
     <div class="right">${thread}</div></div>
   <div class="status"><span>main · up to date</span><span>2 sessions</span><span class="r">ln 8, col 14 · rust-analyzer ✓</span></div></div>` };
 

@@ -1,6 +1,10 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { sessionStyles, type SessionId } from '../session.js';
+import type { SessionId } from '../session.js';
+import { scopeStyles, type ScopeKind } from '../scope.js';
+
+/** the scopes a file tab can be opened in: a session's worktree, or your own work */
+export type TabScope = Extract<ScopeKind, 'session' | 'you'>;
 
 /**
  * The centre tab bar: map pinned first, file tabs in mono, shortcuts on the right.
@@ -21,7 +25,11 @@ export class SettTabbar extends LitElement {
 
 /**
  * A tab. `pinned` has no close mark; `dirty` carries an amber mark after the
- * name and keeps its close mark; `session` colours the label.
+ * name and keeps its close mark. A file tab opened in a scope is underlined in
+ * that scope's colour: the active tab's top bar takes the session's colour
+ * (`scope="session"` with `session`), or `sel` for you (`scope="you"`). The
+ * label stays ink like any tab, and an inactive scoped tab carries no mark.
+ * `session` with no `scope` means `scope="session"`.
  * @slot - the label
  * @fires sett-select - the tab was chosen
  * @fires sett-close - the close mark was pressed
@@ -33,15 +41,19 @@ export class SettTab extends LitElement {
   @property({ type: Boolean, reflect: true }) dirty = false;
   /** mono label, for files */
   @property({ type: Boolean, reflect: true }) mono = false;
+  /** the scope the file was opened in; colours the active tab's bar */
+  @property({ reflect: true }) scope?: TabScope;
+  /** session id of a session scope; unknown ids fall back to yk. Alone, it means `scope="session"` */
   @property({ reflect: true }) session?: SessionId;
   static styles = [
-    sessionStyles,
+    scopeStyles,
     css`
-      :host { display: flex; align-items: center; gap: var(--sett-space-2); padding: 0 var(--sett-space-3); border-right: var(--sett-stroke-hair) solid var(--sett-color-line2); color: var(--sett-color-ink2); cursor: pointer; white-space: nowrap; }
+      :host { --_bar: var(--sett-color-sel); display: flex; align-items: center; gap: var(--sett-space-2); padding: 0 var(--sett-space-3); border-right: var(--sett-stroke-hair) solid var(--sett-color-line2); color: var(--sett-color-ink2); cursor: pointer; white-space: nowrap; }
       :host([mono]) { font-family: var(--sett-font-mono); font-size: var(--sett-font-size-md); }
       :host([pinned]) { padding-left: var(--sett-space-2); font-weight: var(--sett-font-weight-medium); }
-      :host([active]) { background: var(--sett-color-paper); color: var(--sett-color-ink); box-shadow: inset 0 var(--sett-stroke-lit) 0 var(--sett-color-sel); }
-      :host([session]) { color: var(--_session); }
+      :host([active]) { background: var(--sett-color-paper); color: var(--sett-color-ink); box-shadow: inset 0 var(--sett-stroke-lit) 0 var(--_bar); }
+      :host([session]:not([scope])) { --_scope: var(--_session); }
+      :host([scope]), :host([session]) { --_bar: var(--_scope); }
       :host(:focus-visible) { outline: none; box-shadow: inset 0 0 0 var(--sett-stroke-lit) var(--sett-color-sel); }
       .mark { color: var(--sett-color-sug); font-size: var(--sett-font-size-xs); }
       .x { color: var(--sett-color-mute); font-size: var(--sett-font-size-xs); cursor: pointer; }

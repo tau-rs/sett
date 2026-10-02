@@ -598,7 +598,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent\ndoor first and bold, manual door second and plain (P-1); `me-first` swaps\nthem. A done chip keeps full contrast, its label turns ok with ✓ and it gains\na plain `dismiss` verb. Never animates.",
+          "description": "Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent\ndoor first and bold, manual door second and plain (P-1); `me-first` swaps\nthem. A chip always carries a verb (DESIGN.md \"The shell\" rule 1); a\nseparator stands before each verb that is there. A done chip keeps full\ncontrast, its label turns ok with ✓ and it gains a plain `dismiss` verb.\nThe `gate` kind is a group's gate (`gate · group 1 → group 2 · judge\nrunning`, verb `open`): its label takes the colour of the session that runs\nit, and a failed gate (`failed 1/2`) is the `blocking` state. Never animates.",
           "name": "SettChip",
           "cssParts": [
             {
@@ -661,7 +661,7 @@
               "type": {
                 "text": "SessionId | undefined"
               },
-              "description": "session id for the agent kind; unknown ids fall back to yk",
+              "description": "session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label",
               "attribute": "session",
               "reflects": true
             },
@@ -679,6 +679,24 @@
             {
               "kind": "method",
               "name": "dismiss",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "has",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "slot",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onSlotChange",
               "privacy": "private"
             }
           ],
@@ -715,7 +733,7 @@
               "type": {
                 "text": "SessionId | undefined"
               },
-              "description": "session id for the agent kind; unknown ids fall back to yk",
+              "description": "session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label",
               "fieldName": "session"
             },
             {
@@ -824,7 +842,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The one frame that changes colour. Wraps a pane; the slot is the pane's\npaper. idle grey · live session gradient (rotates) · waiting amber (pulses)\n· editing sel · collision bad · focus a sel ring at the lit stroke inside\nthe idle frame. The only two animations in the chrome live here;\n`prefers-reduced-motion` and the `still` attribute stop both.",
+          "description": "The one frame that changes colour: it says the state of the scope (DESIGN.md\n\"The shell\" rule 5). Wraps a pane; the slot is the pane's paper. idle grey ·\nlive session gradient (rotates) · waiting amber (pulses) · editing sel ·\ncollision bad · planning dashed amber, always still. `focus` is the sel ring\nfor the selection, at the lit stroke inside the idle frame, not a state of\nthe scope. The only two animations in the chrome live here (live and\nwaiting); `prefers-reduced-motion` and the `still` attribute stop both.\nPlanning is dashed because the waiting frame's still twin is solid amber.\nA state change never moves or resizes the pane inside.",
           "name": "SettFrame",
           "cssParts": [
             {
@@ -4742,11 +4760,11 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The list under a selector: rows grouped by what they need from you.\nPaper, hairline, card radius, shadow. Not a modal: see sett-selector.",
+          "description": "The list under the scope selector: sessions grouped by what they need,\n`planning` · `yours` · `needs you` · `running` · `in review` · `done`, and\n`main` as a row of its own, in no group. Paper, hairline, card radius,\nshadow. Not a modal: see sett-selector.",
           "name": "SettMenu",
           "slots": [
             {
-              "description": "sett-menu-group elements",
+              "description": "sett-menu-group elements, and a sett-menu-item for a row that belongs to no group (`main`)",
               "name": ""
             }
           ],
@@ -4782,7 +4800,7 @@
         },
         {
           "kind": "class",
-          "description": "A group in the menu: lowercase title in mute at 10.5 px, then rows.",
+          "description": "A group in the menu: lowercase title in mute at 10.5 px, then rows. The\ngroups say what a session needs, in this order: `planning` · `yours` ·\n`needs you` · `running` · `in review` · `done`.",
           "name": "SettMenuGroup",
           "slots": [
             {
@@ -4798,7 +4816,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "group title: needs you · working · waiting to merge · saved plans · main",
+              "description": "group title, lowercase: planning · yours · needs you · running · in review · done",
               "attribute": "label"
             }
           ],
@@ -4809,7 +4827,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "group title: needs you · working · waiting to merge · saved plans · main",
+              "description": "group title, lowercase: planning · yours · needs you · running · in review · done",
               "fieldName": "label"
             }
           ],
@@ -4822,11 +4840,11 @@
         },
         {
           "kind": "class",
-          "description": "One row: dot, name in mono, pill when the branch has a state, then who or\nhow far on the right. Rows never wrap: the name truncates with an ellipsis,\nthe right cell keeps its width and the name's size.",
+          "description": "One row: dot, name in mono, pill when the row has a state, then who or\nhow far on the right. A row that names a scope writes the words the\nselector writes (`scopeText`). Rows never wrap: the name truncates with an\nellipsis, the right cell keeps its width and the name's size.",
           "name": "SettMenuItem",
           "slots": [
             {
-              "description": "the branch or plan name",
+              "description": "the words of the scope: `main`, `w1 · refund flow`, `you · fix-pool-size`, `plan · refund flow`",
               "name": ""
             },
             {
@@ -4861,6 +4879,16 @@
                 "text": "number | undefined"
               },
               "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "the scope the row names: its dot takes the scope's colour, as in the selector and the scope line; `state` still gives the pill",
+              "attribute": "scope",
+              "reflects": true
             },
             {
               "kind": "field",
@@ -4920,6 +4948,14 @@
                 "text": "number | undefined"
               },
               "fieldName": "count"
+            },
+            {
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "the scope the row names: its dot takes the scope's colour, as in the selector and the scope line; `state` still gives the pill",
+              "fieldName": "scope"
             },
             {
               "name": "selected",
@@ -5184,7 +5220,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Branch selector in a pane bar: dot, branch name, a pill when the branch has\na state, caret. Click toggles `open`; the `menu` slot (a sett-menu) hangs\nunder it as an anchored disclosure: nothing is dimmed or trapped, Esc, a\nclick outside or choosing a row closes it.",
+          "description": "The scope selector in the bar: dot, the words of the scope, a pill when it\nhas a state, caret. With `scope` set it writes the scope the way the scope\nline and the frame do (DESIGN.md \"The shell\" rule 3): the words come from\n`scopeText` (`main` · `w1 · refund flow` · `you · fix-pool-size` ·\n`plan · refund flow`), never from the consumer; the dot takes the scope's\ncolour; for a session, you and a plan the border and the words take it too\n(main stays neutral); `locked` adds `🔒` after the words. `state` still\ndrives the pill (`asks · n`, `paused`, `done`, `collision`…) and the dot's\npulse. Without `scope` it is the branch selector it was: the default slot is\nthe name and `state` drives the dot and the pill.\n\nClick toggles `open`; the `menu` slot (a sett-menu) hangs under it as an\nanchored disclosure: nothing is dimmed or trapped, Esc, a click outside or\nchoosing a row closes it.",
           "name": "SettSelector",
           "cssParts": [
             {
@@ -5194,7 +5230,7 @@
           ],
           "slots": [
             {
-              "description": "the branch name, mono",
+              "description": "the branch name, mono; not shown while `scope` is set",
               "name": ""
             },
             {
@@ -5215,12 +5251,51 @@
             },
             {
               "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "what the shell is about; when set, the words are written from `scope`, `scope-id` and `name`",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "session",
               "type": {
                 "text": "SessionId | undefined"
               },
-              "description": "session id for planning / working; unknown ids fall back to yk",
+              "description": "session id: the colour of a session scope and of the planning / working pill; unknown ids fall back to yk",
               "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "scopeId",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "attribute": "scope-id"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focus is pinned: shows 🔒 after the words of the scope",
+              "attribute": "locked",
               "reflects": true
             },
             {
@@ -5299,12 +5374,45 @@
               "fieldName": "state"
             },
             {
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "what the shell is about; when set, the words are written from `scope`, `scope-id` and `name`",
+              "fieldName": "scope"
+            },
+            {
               "name": "session",
               "type": {
                 "text": "SessionId | undefined"
               },
-              "description": "session id for planning / working; unknown ids fall back to yk",
+              "description": "session id: the colour of a session scope and of the planning / working pill; unknown ids fall back to yk",
               "fieldName": "session"
+            },
+            {
+              "name": "scope-id",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the worktree id of a session scope, e.g. `w1`",
+              "fieldName": "scopeId"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the scope is called: `refund flow`, `fix-pool-size`",
+              "fieldName": "name"
+            },
+            {
+              "name": "locked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focus is pinned: shows 🔒 after the words of the scope",
+              "fieldName": "locked"
             },
             {
               "name": "count",
@@ -7165,7 +7273,7 @@
         },
         {
           "kind": "class",
-          "description": "A tab. `pinned` has no close mark; `dirty` carries an amber mark after the\nname and keeps its close mark; `session` colours the label.",
+          "description": "A tab. `pinned` has no close mark; `dirty` carries an amber mark after the\nname and keeps its close mark. A file tab opened in a scope is underlined in\nthat scope's colour: the active tab's top bar takes the session's colour\n(`scope=\"session\"` with `session`), or `sel` for you (`scope=\"you\"`). The\nlabel stays ink like any tab, and an inactive scoped tab carries no mark.\n`session` with no `scope` means `scope=\"session\"`.",
           "name": "SettTab",
           "slots": [
             {
@@ -7217,10 +7325,21 @@
             },
             {
               "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "TabScope | undefined"
+              },
+              "description": "the scope the file was opened in; colours the active tab's bar",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "session",
               "type": {
                 "text": "SessionId | undefined"
               },
+              "description": "session id of a session scope; unknown ids fall back to yk. Alone, it means `scope=\"session\"`",
               "attribute": "session",
               "reflects": true
             },
@@ -7291,10 +7410,19 @@
               "fieldName": "mono"
             },
             {
+              "name": "scope",
+              "type": {
+                "text": "TabScope | undefined"
+              },
+              "description": "the scope the file was opened in; colours the active tab's bar",
+              "fieldName": "scope"
+            },
+            {
               "name": "session",
               "type": {
                 "text": "SessionId | undefined"
               },
+              "description": "session id of a session scope; unknown ids fall back to yk. Alone, it means `scope=\"session\"`",
               "fieldName": "session"
             }
           ],

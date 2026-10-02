@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import './sett-tabs.js';
 import '../button/sett-button.js';
+import '../pill/sett-pill.js';
 
 const meta: Meta = { title: 'chrome/tabs and switches', component: 'sett-tabbar' };
 export default meta;
@@ -11,14 +12,31 @@ const bar = html`<sett-tabbar style="width:900px">
   <sett-tab pinned active>map</sett-tab>
   <sett-tab mono dirty>ports.rs</sett-tab>
   <sett-tab mono>service.rs</sett-tab>
-  <sett-tab mono session="yk">pg.rs · Yokohama</sett-tab>
-  <sett-tab>review · feat/refund</sett-tab>
+  <sett-tab mono scope="session" session="yk">pg.rs <sett-pill kind="session" session="yk">w1 · a2</sett-pill></sett-tab>
+  <sett-tab>review · !44</sett-tab>
   <sett-seg slot="right"><sett-seg-item value="repo">repo</sett-seg-item><sett-seg-item value="areas">areas</sett-seg-item><sett-seg-item value="items" active>items</sett-seg-item></sett-seg>
   <sett-overlay-toggles slot="right"><sett-toggle value="sessions" on>sessions</sett-toggle><sett-toggle value="plan" on>plan</sett-toggle><sett-toggle value="findings">findings</sett-toggle><sett-toggle value="delta">delta</sett-toggle></sett-overlay-toggles>
   <span slot="right">⌘1 map · ⌘W close</span>
 </sett-tabbar>`;
 export const Tabbar: Story = { name: 'tabbar · pinned map, unsaved file, session tab, right end', render: () => bar };
-export const TabStates: Story = { name: 'tab · pinned, active, dirty, session, plain', render: () => html`<sett-tabbar style="width:600px"><sett-tab pinned>map</sett-tab><sett-tab mono active>active.rs</sett-tab><sett-tab mono dirty>unsaved.rs</sett-tab><sett-tab mono session="tl">by Lyon</sett-tab><sett-tab>plain</sett-tab></sett-tabbar>` };
+export const TabStates: Story = { name: 'tab · pinned, active, dirty, scoped (no mark while inactive), plain', render: () => html`<sett-tabbar style="width:600px"><sett-tab pinned>map</sett-tab><sett-tab mono active>active.rs</sett-tab><sett-tab mono dirty>unsaved.rs</sett-tab><sett-tab mono scope="session" session="tl">by Lyon</sett-tab><sett-tab>plain</sett-tab></sett-tabbar>` };
+const files = (tab: unknown) => html`<sett-tabbar style="width:600px"><sett-tab pinned>map</sett-tab><sett-tab mono>service.rs</sett-tab>${tab}</sett-tabbar>`;
+export const ScopedSession: Story = {
+  name: "file tab · opened in a session: underlined in the session's colour, the label stays ink",
+  render: () => files(html`<sett-tab mono active scope="session" session="yk">pg.rs <sett-pill kind="session" session="yk">w1 · a2</sett-pill></sett-tab>`),
+};
+export const ScopedOtherSession: Story = {
+  name: 'file tab · another session colour (session alone means scope session)',
+  render: () => files(html`<sett-tab mono active session="tl">retry.rs <sett-pill kind="session" session="tl">w2 · a1</sett-pill></sett-tab>`),
+};
+export const ScopedYou: Story = {
+  name: 'file tab · opened in your own work: underlined in sel',
+  render: () => files(html`<sett-tab mono active dirty scope="you">pool.rs <sett-pill kind="sel">you</sett-pill></sett-tab>`),
+};
+export const ReviewTab: Story = {
+  name: 'review tab · a plain centre tab: sans, closable',
+  render: () => html`<sett-tabbar style="width:600px"><sett-tab pinned>map</sett-tab><sett-tab mono>service.rs</sett-tab><sett-tab active>review · !44</sett-tab></sett-tabbar>`,
+};
 export const SegFill: Story = { name: 'seg · fill', render: () => html`<sett-seg fill style="width:220px"><sett-seg-item value="files" active>files</sett-seg-item><sett-seg-item value="changes">changes</sett-seg-item><sett-seg-item value="review">review</sett-seg-item></sett-seg>` };
 export const SegCount: Story = { name: 'seg · with a count', render: () => html`<sett-seg fill style="width:220px"><sett-seg-item value="files">files</sett-seg-item><sett-seg-item value="changes" active>changes · 3</sett-seg-item><sett-seg-item value="review">review</sett-seg-item></sett-seg>` };
 export const SegEmptyState: Story = { name: 'seg · a view with nothing in it is never disabled: empty state', render: () => html`<div style="width:260px;border:var(--sett-stroke-hair) solid var(--sett-color-line2);border-radius:var(--sett-radius-card);overflow:hidden">

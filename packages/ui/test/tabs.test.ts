@@ -17,6 +17,35 @@ describe('tabs and switches', () => {
     const p = await mount('<sett-tab pinned>map</sett-tab>');
     expect(p.shadowRoot.querySelector('.x')).toBeNull();
   });
+  it("a file tab opened in a scope is underlined in that scope's colour: the active tab's top bar", () => {
+    const c = cssOf('sett-tab');
+    // the bar is the active tab's; a plain tab's is sel, a scoped tab's comes from --_scope
+    expect(c).toMatch(/:host \{[^}]*--_bar: var\(--sett-color-sel\);/);
+    expect(c).toMatch(/:host\(\[active\]\) \{[^}]*box-shadow: inset 0 var\(--sett-stroke-lit\) 0 var\(--_bar\);/);
+    expect(c).toContain(':host([scope]), :host([session]) { --_bar: var(--_scope); }');
+    // scopeStyles: a session's colour, sel for you
+    expect(c).toContain(":host([scope='session']) { --_scope: var(--_session);");
+    expect(c).toContain(":host([scope='you']) { --_scope: var(--sett-color-sel);");
+    // an inactive scoped tab carries no mark: the bar is drawn by the active rule and by nothing else
+    expect(c.match(/var\(--_bar\)/g)).toHaveLength(1);
+  });
+  it('session alone still works and means scope session', async () => {
+    expect(cssOf('sett-tab')).toContain(':host([session]:not([scope])) { --_scope: var(--_session); }');
+    const t = await mount('<sett-tab mono active session="tl">pg.rs</sett-tab>');
+    expect(t.session).toBe('tl');
+    expect(t.hasAttribute('scope')).toBe(false);
+    const y = await mount('<sett-tab mono active scope="you">pool.rs</sett-tab>');
+    expect(y.scope).toBe('you');
+    expect(y.getAttribute('scope')).toBe('you');
+  });
+  it('the label of a scoped tab stays ink2, ink when active: the scope colours the bar, never the name', () => {
+    const c = cssOf('sett-tab');
+    expect(c).not.toMatch(/[^-]color: var\(--_(session|scope|bar)\)/);
+    expect(c).toMatch(/:host \{[^}]*[^-]color: var\(--sett-color-ink2\);/);
+    expect(c).toMatch(/:host\(\[active\]\) \{[^}]*[^-]color: var\(--sett-color-ink\);/);
+    // the focus ring still wins over the bar: it comes later, at the same weight
+    expect(c.indexOf(':host(:focus-visible)')).toBeGreaterThan(c.indexOf(':host([active])'));
+  });
   it('tab fires select on click and close on ✕ without selecting', async () => {
     const t = await mount('<sett-tab mono>a.rs</sett-tab>');
     let sel = 0, cl = 0; t.addEventListener('sett-select', () => sel++); t.addEventListener('sett-close', () => cl++);

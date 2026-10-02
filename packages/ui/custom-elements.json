@@ -4,6 +4,28 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/badge.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "badgeStyles",
+          "default": "css` .badge { flex: none; box-sizing: border-box; min-width: var(--sett-size-tag); padding: 0 var(--sett-space-1); border-radius: var(--sett-radius-pill); font-family: var(--sett-font-mono); font-size: var(--sett-font-size-xs); font-weight: var(--sett-font-weight-medium); line-height: var(--sett-size-tag); text-align: center; background: var(--sett-color-well); color: var(--sett-color-ink2); } .badge[data-tone='sug'] { background: var(--sett-color-sug); color: var(--sett-color-paper); } .badge[data-tone='bad'] { background: var(--sett-color-bad); color: var(--sett-color-paper); } `",
+          "description": "The count badge: a small rounded count on a solid fill, on the activity\nrail's items and the bottom panel's tabs. The text on an accent fill is\n`paper`, which reaches 4.5:1 on `sug` and `bad` in both themes (white does\nnot in dark). Counts are mono. Never animates."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "badgeStyles",
+          "declaration": {
+            "name": "badgeStyles",
+            "module": "src/badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/button/sett-button.ts",
       "declarations": [
         {
@@ -1899,6 +1921,70 @@
           "declaration": {
             "name": "SettSheet",
             "module": "./map/sett-sheet.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeWords",
+          "declaration": {
+            "name": "scopeWords",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeText",
+          "declaration": {
+            "name": "scopeText",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeStyles",
+          "declaration": {
+            "name": "scopeStyles",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SCOPE_LOCK",
+          "declaration": {
+            "name": "SCOPE_LOCK",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Scope",
+          "declaration": {
+            "name": "Scope",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ScopeKind",
+          "declaration": {
+            "name": "ScopeKind",
+            "module": "./scope.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "badgeStyles",
+          "declaration": {
+            "name": "badgeStyles",
+            "module": "./badge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BadgeTone",
+          "declaration": {
+            "name": "BadgeTone",
+            "module": "./badge.js"
           }
         }
       ]
@@ -4819,6 +4905,97 @@
           "declaration": {
             "name": "SettPill",
             "module": "src/pill/sett-pill.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/scope.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "SCOPE_LOCK",
+          "type": {
+            "text": "string"
+          },
+          "default": "'🔒'",
+          "description": "the glyph shown after the words of a locked scope; it is never part of the words"
+        },
+        {
+          "kind": "function",
+          "name": "scopeWords",
+          "return": {
+            "type": {
+              "text": "{ head: string; tail: string }"
+            }
+          },
+          "parameters": [
+            {
+              "name": "s",
+              "type": {
+                "text": "Scope"
+              }
+            }
+          ],
+          "description": "The words of a scope, written the same wherever the scope is named (DESIGN.md\n\"The shell\" rule 3): `main` · `w1 · refund flow` · `you · fix-pool-size` ·\n`plan · refund flow`. `head` is the mono part (`main`, `w1`, `you`, `plan`),\n`tail` the rest. An unknown kind reads as main."
+        },
+        {
+          "kind": "function",
+          "name": "scopeText",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "s",
+              "type": {
+                "text": "Scope"
+              }
+            }
+          ],
+          "description": "the words on one line: head, then `·` and the tail when there is one"
+        },
+        {
+          "kind": "variable",
+          "name": "scopeStyles",
+          "default": "css` ${sessionStyles} :host { --_scope: var(--sett-color-mute); --_scope-bg: var(--sett-color-well); } :host([scope='session']) { --_scope: var(--_session); --_scope-bg: var(--_session-bg); } :host([scope='you']) { --_scope: var(--sett-color-sel); --_scope-bg: var(--sett-color-sel-bg); } :host([scope='plan']) { --_scope: var(--sett-color-sug); --_scope-bg: var(--sett-color-sug-bg); } `",
+          "description": "The colour of a scope, set from the host attributes `scope` and `session` so\na consumer never passes a colour. Exposes `--_scope` (dot, bar) and\n`--_scope-bg` (tint) inside the host: main is neutral, a session takes its\nown colour (an unknown id falls back like sessionStyles), you is sel, a plan\nis sug."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SCOPE_LOCK",
+          "declaration": {
+            "name": "SCOPE_LOCK",
+            "module": "src/scope.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeWords",
+          "declaration": {
+            "name": "scopeWords",
+            "module": "src/scope.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeText",
+          "declaration": {
+            "name": "scopeText",
+            "module": "src/scope.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scopeStyles",
+          "declaration": {
+            "name": "scopeStyles",
+            "module": "src/scope.ts"
           }
         }
       ]

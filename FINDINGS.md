@@ -36,3 +36,8 @@ Synced to: no ADR yet (`arch-design` holds none on 2026-10-02). DESIGN.md wins o
 | 2026-10-02 | shell | the lock inside the selector's box; `main` has a neutral dot; a plan is one amber box `plan · refund flow` | spec §4; no `main › plan › …` crumb |
 | 2026-10-02 | map | a closed node has no foot at all: `▾ open` and `enter ›` both go | "enter" was the PoC's jump to a level DESIGN.md rejects (#65) |
 | 2026-10-02 | map | layer labels fall left to right `L4 · public api … L0 · leaf` | layers read public API left, leaves right (#74) |
+| 2026-10-02 | shell, session, plan | the Sessions view reads `group 1`, `gate · group 1 → group 2`; the pages still read `Lane W1`, `Gate W1 → W2` | the owner's vocabulary: group and gate; waves are a V2 policy (#62) |
+| 2026-10-02 | shell | the new-session door reads `+ new session · delegate`; the pages read `· manual or delegate` | a you session is detected, never declared (LEFT-7) |
+| 2026-10-02 | sessions wireflow | the full-paths toggle (☰) sits beside the `changed · all files` seg, not in the first stage's header | a button inside a `tree` fails the a11y gate (`aria-required-children`); one setting per list matches "remembered per session" (#62) |
+| 2026-10-02 | shell | a sub-agent row shows a dot in the sub shade only, no glyph run or guide line | a 24 px row with a name and a state tag has no room for the card's idiom (#62) |
+| 2026-10-02 | shell | on a selected row the status letter and tone words go `ink` | `bad` and session colours on the `sel` tint are 4.3:1 in dark (#62) |

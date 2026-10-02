@@ -8,9 +8,9 @@ import './sett-item.js';
 const meta: Meta = {
   title: 'map/item',
   component: 'sett-item',
-  args: { kind: 'fn', name: 'subscribe()', entry: true, port: false, finding: false, selected: false, live: false, family: '' },
+  args: { kind: 'fn', name: 'subscribe()', entry: true, port: false, finding: false, selected: false, live: false, family: '', unresolved: 0 },
   argTypes: { kind: { control: 'select', options: ITEM_KINDS }, session: { control: 'select', options: [undefined, ...sessionOrder] }, also: { control: 'select', options: [undefined, ...sessionOrder] } },
-  render: ({ kind, name, entry, port, finding, selected, session, also, live, family }) => stack(html`<sett-item kind=${kind} ?entry=${entry} ?port=${port} ?finding=${finding} ?selected=${selected} session=${ifDefined(session)} also=${ifDefined(also)} ?live=${live} family=${ifDefined(family || undefined)}>${name}</sett-item>`),
+  render: ({ kind, name, entry, port, finding, selected, session, also, live, family, unresolved }) => stack(html`<sett-item kind=${kind} ?entry=${entry} ?port=${port} ?finding=${finding} ?selected=${selected} session=${ifDefined(session)} also=${ifDefined(also)} ?live=${live} family=${ifDefined(family || undefined)} unresolved=${ifDefined(unresolved || undefined)}>${name}</sett-item>`),
 };
 export default meta;
 type Story = StoryObj;
@@ -29,6 +29,14 @@ export const States: Story = {
   render: () => row(
     stack(html`<sett-item>plain()</sett-item><sett-item entry>health_check()</sett-item><sett-item kind="trait" port>EmailSender · trait</sett-item><sett-item finding>confirm()</sett-item><sett-item selected>subscribe()</sett-item><sett-item kind="trait" port family="214 impls">Element · trait</sett-item>`, 'one at a time'),
     stack(html`<sett-item entry finding>confirm()</sett-item><sett-item entry selected>subscribe()</sett-item><sett-item finding selected>store_token()</sett-item><sett-item kind="external" selected>sqlx::PgPool</sett-item>`, 'together'),
+  ),
+};
+export const Unresolved: Story = {
+  name: 'unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill',
+  render: () => row(
+    stack(html`<sett-item>plain()</sett-item><sett-item unresolved="1">spawn_worker()</sett-item><sett-item unresolved="12">dispatch()</sett-item>`, 'none · one · many'),
+    stack(html`<sett-item entry unresolved="2">publish_newsletter()</sett-item><sett-item kind="trait" port unresolved="3">EmailSender · trait</sett-item><sett-item finding unresolved="1">confirm()</sett-item><sett-item kind="external" unresolved="1">sqlx::PgPool</sett-item><sett-item selected unresolved="4">subscribe()</sett-item><sett-item session="yk" live unresolved="2">try_execute_task()</sett-item>`, 'entry · port · finding · external · selected · live'),
+    stack(html`<sett-item kind="trait" port family="214 impls">Element · trait</sett-item><sett-item kind="trait" port family="214 impls" unresolved="3">Element · trait</sett-item><sett-item unresolved="3">get_subscriber_id_from_token()</sett-item>`, 'family alone · family and unresolved · a long name'),
   ),
 };
 export const LongNames: Story = {

@@ -52,6 +52,15 @@ describe('sett-item', () => {
     expect(el.shadowRoot!.querySelector('sett-tag')!.textContent).toBe('214 impls');
     expect(el.hasAttribute('port')).toBe(true);
   });
+  it('unresolved links fold to one pill with their count, after the family pill; none, no pill', async () => {
+    const el = await mount('<sett-item unresolved="3">spawn_worker()</sett-item>');
+    expect(Array.from(el.shadowRoot!.querySelectorAll('sett-tag')).map((t) => t.textContent)).toEqual(['3 unresolved']);
+    expect(el.shadowRoot!.querySelector('sett-tag')!.getAttribute('kind'), 'amber, as the rail section').toBe('sug');
+    const both = await mount('<sett-item kind="trait" port family="214 impls" unresolved="1">Element · trait</sett-item>');
+    expect(Array.from(both.shadowRoot!.querySelectorAll('sett-tag')).map((t) => t.textContent)).toEqual(['214 impls', '1 unresolved']);
+    expect((await mount('<sett-item unresolved="0">x</sett-item>')).shadowRoot!.querySelector('sett-tag')).toBeNull();
+    expect((await mount('<sett-item>x</sett-item>')).shadowRoot!.querySelector('sett-tag')).toBeNull();
+  });
   it('a session alone is a still ring; live makes it breathe and adds the sheen', async () => {
     const plain = await mount('<sett-item>x</sett-item>');
     expect(plain.shadowRoot!.querySelector('.ring')).toBeNull();

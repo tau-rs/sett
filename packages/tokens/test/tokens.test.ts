@@ -27,7 +27,7 @@ describe('sett.css', () => {
 describe('tokens.json', () => {
   const j = JSON.parse(dist('tokens.json'));
   it('counts every token per source file', () => {
-    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 142, light: 93, dark: 93 });
+    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 142, light: 94, dark: 94 });
   });
   it('the shell sizes of the arch V1 spec §4 are tokens', () => {
     const px = Object.fromEntries(j.base.map((t: { name: string; css: string }) => [t.name, t.css]));
@@ -48,6 +48,12 @@ describe('tokens.json', () => {
     expect(light['--sett-map-kind-pub-color']).toBe(light['--sett-session-yk-main']);
     expect(light['--sett-map-method-delete']).toBe(light['--sett-color-bad']);
     expect(light['--sett-map-status-port-bg']).toBe(light['--sett-map-surface-domain']);
+  });
+  it('the unresolved surface is the amber tint in both themes, never a new hex', () => {
+    for (const set of [j.light, j.dark]) {
+      const css = Object.fromEntries(set.map((t: { name: string; css: string }) => [t.name, t.css]));
+      expect(css['--sett-map-surface-unresolved']).toBe(css['--sett-color-sug-bg']);
+    }
   });
   it('every colour is one css hex or rgba', () => {
     for (const t of [...j.light, ...j.dark].filter((t: { type: string }) => t.type === 'color'))

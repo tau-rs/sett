@@ -1927,9 +1927,25 @@
         },
         {
           "kind": "js",
+          "name": "COLUMN_DEPTHS",
+          "declaration": {
+            "name": "COLUMN_DEPTHS",
+            "module": "./map/sett-column.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "ColumnKind",
           "declaration": {
             "name": "ColumnKind",
+            "module": "./map/sett-column.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ColumnDepth",
+          "declaration": {
+            "name": "ColumnDepth",
             "module": "./map/sett-column.js"
           }
         },
@@ -2266,7 +2282,7 @@
               }
             }
           ],
-          "description": "the rail section a port belongs to, in the PoC's categorisation"
+          "description": "The rail section a port belongs to, in the PoC's categorisation. A service\nis ours or a third party's by its contract's owner; one we need whose\ncontract names no owner can be neither, and is unresolved (rule 6)."
         },
         {
           "kind": "function",
@@ -2308,7 +2324,7 @@
               }
             }
           ],
-          "description": "The columns of an open unit with their areas. An `outbound` column is left\nout on purpose: externals are an interface, not a column (rule 6); they are\nports on the needs rail."
+          "description": "The columns of an open unit with their areas. An `outbound` column is left\nout on purpose: externals are an interface, not a column (rule 6); they are\nports on the needs rail. The fixtures list a layered unit leaf first; it is\nread public API first, so \"uses\" points left to right as in a hexagon\n(rule 11), and each layer says its depth for the tint."
         }
       ],
       "exports": [
@@ -3334,8 +3350,16 @@
           "default": "['driving', 'domain', 'driven', 'layer']"
         },
         {
+          "kind": "variable",
+          "name": "COLUMN_DEPTHS",
+          "type": {
+            "text": "ColumnDepth[]"
+          },
+          "default": "['api', 'internal', 'leaf']"
+        },
+        {
           "kind": "class",
-          "description": "A tinted band inside an open unit, holding areas. In a hexagon the three\ncolumns are driving (what calls in), domain (the core) and driven (what is\ncalled out to); a layered unit has one `layer` column per layer. Externals\nare never a column: they are ports on the needs rail (rule 6).",
+          "description": "A tinted band inside an open unit, holding areas. In a hexagon the three\ncolumns are driving (what calls in), domain (the core) and driven (what is\ncalled out to); a layered unit has one `layer` column per layer, public API\nfirst and leaves last, so \"uses\" points left to right under both rules\n(rule 11). A layer has no tint of its own: its `depth` takes the driving\ntint (`api`), the domain tint (`internal`) or the driven tint (`leaf`).\nExternals are never a column: they are ports on the needs rail (rule 6).",
           "name": "SettColumn",
           "cssParts": [
             {
@@ -3362,6 +3386,17 @@
             },
             {
               "kind": "field",
+              "name": "depth",
+              "type": {
+                "text": "ColumnDepth"
+              },
+              "default": "'internal'",
+              "description": "a `layer` column's place by depth, which picks its tint; other kinds ignore it",
+              "attribute": "depth",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "label",
               "type": {
                 "text": "string"
@@ -3379,6 +3414,15 @@
               },
               "default": "'domain'",
               "fieldName": "kind"
+            },
+            {
+              "name": "depth",
+              "type": {
+                "text": "ColumnDepth"
+              },
+              "default": "'internal'",
+              "description": "a `layer` column's place by depth, which picks its tint; other kinds ignore it",
+              "fieldName": "depth"
             },
             {
               "name": "label",
@@ -3404,6 +3448,14 @@
           "name": "COLUMN_KINDS",
           "declaration": {
             "name": "COLUMN_KINDS",
+            "module": "src/map/sett-column.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "COLUMN_DEPTHS",
+          "declaration": {
+            "name": "COLUMN_DEPTHS",
             "module": "src/map/sett-column.ts"
           }
         },
@@ -3472,6 +3524,15 @@
               },
               "description": "a family count shown as a pill at the end, e.g. `214 impls`",
               "attribute": "family"
+            },
+            {
+              "kind": "field",
+              "name": "unresolved",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "links the analyser could not resolve (dyn, spawn), folded to one pill with their count (rule 6)",
+              "attribute": "unresolved"
             },
             {
               "kind": "field",
@@ -3620,6 +3681,14 @@
               "fieldName": "family"
             },
             {
+              "name": "unresolved",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "links the analyser could not resolve (dyn, spawn), folded to one pill with their count (rule 6)",
+              "fieldName": "unresolved"
+            },
+            {
               "name": "session",
               "type": {
                 "text": "SessionId | undefined"
@@ -3721,7 +3790,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "A unit's box on the board, at one of four tiers. The host sets the box and\nthe tier (from the on-screen width, see `tierFor`); the node never resizes\nitself, the camera moves (rule 3). `mini` is the name only; `chip` adds the\nmeta lines and badges; `card` adds the port rows in two columns and the\nfoot; `sheet` hosts what is inside.",
+          "description": "A unit's box on the board, at one of four tiers. The host sets the box and\nthe tier (from the on-screen width, see `tierFor`); the node never resizes\nitself, the camera moves (rule 3). `mini` is the name only; `chip` adds the\nmeta lines and badges; `card` adds the port rows in two columns; `sheet`\nhosts what is inside. A closed node has no foot and no link: opening is the\nhost's, by double-click or ↩ on the node and by nothing else (rule 4). An\nopen node keeps one link, `▴ close`.",
           "name": "SettNode",
           "cssParts": [
             {
@@ -3733,7 +3802,7 @@
               "name": "ports"
             },
             {
-              "description": "the foot with the open / enter acts",
+              "description": "the foot of an open node: `▴ close`",
               "name": "foot"
             }
           ],
@@ -3853,16 +3922,8 @@
             },
             {
               "kind": "method",
-              "name": "act",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "action",
-                  "type": {
-                    "text": "'open' | 'enter' | 'close'"
-                  }
-                }
-              ]
+              "name": "close",
+              "privacy": "private"
             },
             {
               "kind": "method",
@@ -3876,7 +3937,7 @@
               "type": {
                 "text": "CustomEvent"
               },
-              "description": "`{ action: 'open' | 'enter' | 'close' }` from the foot"
+              "description": "`{ action: 'close' }` from `▴ close` on an open node; the node never asks to open"
             }
           ],
           "attributes": [
@@ -4449,8 +4510,8 @@
           "type": {
             "text": "RailSection[]"
           },
-          "default": "['services', 'third-party', 'events', 'data', 'system', 'crates']",
-          "description": "the fixed order of a rail's sections (rule 6)"
+          "default": "['services', 'third-party', 'events', 'data', 'system', 'crates', 'unresolved']",
+          "description": "the fixed order of a rail's sections, unresolved always last (rule 6)"
         },
         {
           "kind": "variable",
@@ -4458,12 +4519,12 @@
           "type": {
             "text": "Record<RailSection, Record<PortSide, string>>"
           },
-          "default": "{ services: { exposes: 'api', needs: 'platform services' }, 'third-party': { exposes: 'api · public', needs: 'third-party services' }, events: { exposes: 'events published', needs: 'events consumed' }, data: { exposes: 'data', needs: 'data stores' }, system: { exposes: 'os', needs: 'os · files · terminal' }, crates: { exposes: 'public items', needs: 'libraries' }, }",
+          "default": "{ services: { exposes: 'api', needs: 'platform services' }, 'third-party': { exposes: 'api · public', needs: 'third-party services' }, events: { exposes: 'events published', needs: 'events consumed' }, data: { exposes: 'data', needs: 'data stores' }, system: { exposes: 'os', needs: 'os · files · terminal' }, crates: { exposes: 'public items', needs: 'libraries' }, unresolved: { exposes: 'unresolved', needs: 'unresolved' }, }",
           "description": "header per section, per side, as the PoC labels them"
         },
         {
           "kind": "class",
-          "description": "A unit's API block on one flat side: `exposes` on the left, `needs` on the\nright. Ports go in the slot named after their section; the rail keeps the\nsections in the fixed order, labels them per side, and hides empty ones.\nHeaders are lowercase and mute. Width is `map.size.rail`.",
+          "description": "A unit's API block on one flat side: `exposes` on the left, `needs` on the\nright. Ports go in the slot named after their section; the rail keeps the\nsections in the fixed order, labels them per side, and hides empty ones.\nHeaders are lowercase and mute. Width is `map.size.rail`.\n\n`unresolved` is always last and sits on its own tint\n(`map.surface.unresolved`): the externals without an owner, which no other\nsection can claim. They have no contract, so their rows carry no op rows.",
           "name": "SettRail",
           "cssParts": [
             {
@@ -4477,7 +4538,7 @@
           ],
           "slots": [
             {
-              "description": "· third-party · events · data · system · crates - `sett-port-row` children",
+              "description": "· third-party · events · data · system · crates · unresolved - `sett-port-row` children",
               "name": "services"
             }
           ],
@@ -4505,6 +4566,19 @@
               "kind": "method",
               "name": "recount",
               "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "section",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "s",
+                  "type": {
+                    "text": "RailSection"
+                  }
+                }
+              ]
             }
           ],
           "attributes": [

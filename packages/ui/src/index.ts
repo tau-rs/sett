@@ -21,7 +21,7 @@ export { splitLabel, portOf, unitOf, unitPorts, opOf, opsOf, sectionOf, insideOf
 export { presenceStyles, beatStyles, beatOf, wave, bloom, arrive, leave, flash, reducedMotion, durationMs, type WaveOptions } from './map/motion.js';
 export { SettItem, ITEM_KINDS, type ItemKind } from './map/sett-item.js';
 export { SettArea } from './map/sett-area.js';
-export { SettColumn, COLUMN_KINDS, type ColumnKind } from './map/sett-column.js';
+export { SettColumn, COLUMN_KINDS, COLUMN_DEPTHS, type ColumnKind, type ColumnDepth } from './map/sett-column.js';
 export { SettSheet } from './map/sett-sheet.js';
 export { scopeWords, scopeText, scopeStyles, SCOPE_LOCK, type Scope, type ScopeKind } from './scope.js';
 export { badgeStyles, type BadgeTone } from './badge.js';

@@ -316,6 +316,11 @@
           ],
           "hex": "#171E22"
         }
+      },
+      "unresolved": {
+        "$description": "the rail's unresolved section: externals without an owner (map rule 6)",
+        "$type": "color",
+        "$value": "{color.sugBg}"
       }
     },
     "kind": {

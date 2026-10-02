@@ -176,11 +176,15 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -188,7 +192,7 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -202,7 +206,9 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -393,10 +399,11 @@ Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door 
 
 ### `<sett-column>`
 
-A tinted band inside an open unit, holding areas. In a hexagon the three columns are driving (what calls in), domain (the core) and driven (what is called out to); a layered unit has one `layer` column per layer. Externals are never a column: they are ports on the needs rail (rule 6).
+A tinted band inside an open unit, holding areas. In a hexagon the three columns are driving (what calls in), domain (the core) and driven (what is called out to); a layered unit has one `layer` column per layer, public API first and leaves last, so "uses" points left to right under both rules (rule 11). A layer has no tint of its own: its `depth` takes the driving tint (`api`), the domain tint (`internal`) or the driven tint (`leaf`). Externals are never a column: they are ports on the needs rail (rule 6).
 
 - attrs:
   - `kind=ColumnKind`
+  - `depth=ColumnDepth` — a `layer` column's place by depth, which picks its tint; other kinds ignore it
   - `label=string` — e.g. `routes · driving`; the kind is appended when the label does not already say it
 - slots:
   - `(default)` — `sett-area` children, stacked by normal flow
@@ -420,11 +427,15 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -432,7 +443,7 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -446,7 +457,9 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -604,6 +617,7 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
 - attrs:
   - `kind=ItemKind`
   - `family=string` — a family count shown as a pill at the end, e.g. `214 impls`
+  - `unresolved=number` — links the analyser could not resolve (dyn, spawn), folded to one pill with their count (rule 6)
   - `session=SessionId` — the session that touched or is working on this item; the ring takes its colour
   - `also=SessionId` — a second session on the same item: the one ring is split in their two colours, never stacked
   - `live=boolean` — the session is working here right now: the ring breathes and a sheen sweeps
@@ -635,11 +649,15 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -647,7 +665,7 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -661,7 +679,9 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -826,7 +846,7 @@ A message. Yours sit on the right in the selection tint; an agent's on the left 
 
 ### `<sett-node>`
 
-A unit's box on the board, at one of four tiers. The host sets the box and the tier (from the on-screen width, see `tierFor`); the node never resizes itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the meta lines and badges; `card` adds the port rows in two columns and the foot; `sheet` hosts what is inside.
+A unit's box on the board, at one of four tiers. The host sets the box and the tier (from the on-screen width, see `tierFor`); the node never resizes itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the meta lines and badges; `card` adds the port rows in two columns; `sheet` hosts what is inside. A closed node has no foot and no link: opening is the host's, by double-click or ↩ on the node and by nothing else (rule 4). An open node keeps one link, `▴ close`.
 
 - attrs:
   - `name=string`
@@ -845,9 +865,9 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
 - parts:
   - `hd` — the head: name · kind · badges
   - `ports` — the two-column port grid
-  - `foot` — the foot with the open / enter acts
+  - `foot` — the foot of an open node: `▴ close`
 - events:
-  - `sett-open` — `{ action: 'open' | 'enter' | 'close' }` from the foot
+  - `sett-open` — `{ action: 'close' }` from `▴ close` on an open node; the node never asks to open
 - stories:
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
@@ -866,11 +886,15 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -878,7 +902,7 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -892,7 +916,9 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -940,11 +966,15 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -952,7 +982,7 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -966,7 +996,9 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -1320,11 +1352,15 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -1332,7 +1368,7 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -1346,7 +1382,9 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -1384,12 +1422,12 @@ The agent asks. Each option says what it changes; `later` leaves it waiting.
 
 ### `<sett-rail>`
 
-A unit's API block on one flat side: `exposes` on the left, `needs` on the right. Ports go in the slot named after their section; the rail keeps the sections in the fixed order, labels them per side, and hides empty ones. Headers are lowercase and mute. Width is `map.size.rail`.
+A unit's API block on one flat side: `exposes` on the left, `needs` on the right. Ports go in the slot named after their section; the rail keeps the sections in the fixed order, labels them per side, and hides empty ones. Headers are lowercase and mute. Width is `map.size.rail`. `unresolved` is always last and sits on its own tint (`map.surface.unresolved`): the externals without an owner, which no other section can claim. They have no contract, so their rows carry no op rows.
 
 - attrs:
   - `side=PortSide`
 - slots:
-  - `services` — · third-party · events · data · system · crates - `sett-port-row` children
+  - `services` — · third-party · events · data · system · crates · unresolved - `sett-port-row` children
 - parts:
   - `header` — the `exposes · n ports` line
   - `section` — each section header
@@ -1411,11 +1449,15 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -1423,7 +1465,7 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -1437,7 +1479,9 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -1675,11 +1719,15 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
@@ -1687,7 +1735,7 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-node--mini` Mini
   - `map-node--chip` Chip
   - `map-node--card` Card
-  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
   - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
@@ -1701,7 +1749,9 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders

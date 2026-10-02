@@ -70,7 +70,7 @@ export const areaEl = (a: FixtureArea, who: Who = {}, folded = !!a.folded) => ht
 
 /** the columns of a unit with their areas and items, as the fixture has them */
 export const columnsOf = (f: Fixture, id: string, who: Who = {}, foldedAreas: string[] = []) =>
-  insideOf(f, id).map((c) => html`<sett-column kind=${c.kind} label=${c.label}>${c.areas.map((a) => areaEl(a, who, !!a.folded || foldedAreas.includes(a.id)))}</sett-column>`);
+  insideOf(f, id).map((c) => html`<sett-column kind=${c.kind} depth=${ifDefined(c.depth)} label=${c.label}>${c.areas.map((a) => areaEl(a, who, !!a.folded || foldedAreas.includes(a.id)))}</sett-column>`);
 
 /** the inside of a unit: exposes rail · columns · needs rail */
 export const sheetOf = (f: Fixture, id: string, who: Who = {}, opts: { folded?: boolean; foldedAreas?: string[]; slot?: string } = {}) => html`

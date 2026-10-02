@@ -15,6 +15,15 @@ describe('sett-column', () => {
     expect(css).not.toMatch(/animation|transition/);
     for (const k of ['driving', 'domain', 'driven']) expect(css).toContain(`:host([kind='${k}']) { background: var(--sett-map-surface-${k}); }`);
   });
+  it('tints a layer by its depth with the hexagon tints, no tint of its own (rule 11)', async () => {
+    const css = cssOf('sett-column');
+    expect(css).toContain(`:host([kind='layer']) { background: var(--sett-map-surface-domain); }`);
+    expect(css).toContain(`:host([kind='layer'][depth='api']) { background: var(--sett-map-surface-driving); }`);
+    expect(css).toContain(`:host([kind='layer'][depth='leaf']) { background: var(--sett-map-surface-driven); }`);
+    const el = await col('<sett-column kind="layer" depth="api" label="L4 · public api"></sett-column>');
+    expect(el.depth).toBe('api');
+    expect((await col('<sett-column kind="layer" label="L2 · elements"></sett-column>')).depth).toBe('internal');
+  });
   it('says its kind only when the label does not', async () => {
     expect((await col('<sett-column kind="driving" label="routes · driving"></sett-column>')).shadowRoot!.querySelector('em')).toBeNull();
     expect((await col('<sett-column kind="driven" label="sinks"></sett-column>')).shadowRoot!.querySelector('em')!.textContent).toBe('driven');

@@ -176,7 +176,10 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
@@ -391,10 +394,11 @@ Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door 
 
 ### `<sett-column>`
 
-A tinted band inside an open unit, holding areas. In a hexagon the three columns are driving (what calls in), domain (the core) and driven (what is called out to); a layered unit has one `layer` column per layer. Externals are never a column: they are ports on the needs rail (rule 6).
+A tinted band inside an open unit, holding areas. In a hexagon the three columns are driving (what calls in), domain (the core) and driven (what is called out to); a layered unit has one `layer` column per layer, public API first and leaves last, so "uses" points left to right under both rules (rule 11). A layer has no tint of its own: its `depth` takes the driving tint (`api`), the domain tint (`internal`) or the driven tint (`leaf`). Externals are never a column: they are ports on the needs rail (rule 6).
 
 - attrs:
   - `kind=ColumnKind`
+  - `depth=ColumnDepth` — a `layer` column's place by depth, which picks its tint; other kinds ignore it
   - `label=string` — e.g. `routes · driving`; the kind is appended when the label does not already say it
 - slots:
   - `(default)` — `sett-area` children, stacked by normal flow
@@ -418,7 +422,10 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
@@ -631,7 +638,10 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
@@ -834,7 +844,10 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
@@ -908,7 +921,10 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
@@ -1284,7 +1300,10 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
@@ -1375,7 +1394,10 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
@@ -1618,7 +1640,10 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
-  - `map-column--layers` layer · five layers · gpui
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight

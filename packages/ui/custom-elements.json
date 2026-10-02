@@ -1909,9 +1909,25 @@
         },
         {
           "kind": "js",
+          "name": "COLUMN_DEPTHS",
+          "declaration": {
+            "name": "COLUMN_DEPTHS",
+            "module": "./map/sett-column.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "ColumnKind",
           "declaration": {
             "name": "ColumnKind",
+            "module": "./map/sett-column.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ColumnDepth",
+          "declaration": {
+            "name": "ColumnDepth",
             "module": "./map/sett-column.js"
           }
         },
@@ -2290,7 +2306,7 @@
               }
             }
           ],
-          "description": "The columns of an open unit with their areas. An `outbound` column is left\nout on purpose: externals are an interface, not a column (rule 6); they are\nports on the needs rail."
+          "description": "The columns of an open unit with their areas. An `outbound` column is left\nout on purpose: externals are an interface, not a column (rule 6); they are\nports on the needs rail. The fixtures list a layered unit leaf first; it is\nread public API first, so \"uses\" points left to right as in a hexagon\n(rule 11), and each layer says its depth for the tint."
         }
       ],
       "exports": [
@@ -3316,8 +3332,16 @@
           "default": "['driving', 'domain', 'driven', 'layer']"
         },
         {
+          "kind": "variable",
+          "name": "COLUMN_DEPTHS",
+          "type": {
+            "text": "ColumnDepth[]"
+          },
+          "default": "['api', 'internal', 'leaf']"
+        },
+        {
           "kind": "class",
-          "description": "A tinted band inside an open unit, holding areas. In a hexagon the three\ncolumns are driving (what calls in), domain (the core) and driven (what is\ncalled out to); a layered unit has one `layer` column per layer. Externals\nare never a column: they are ports on the needs rail (rule 6).",
+          "description": "A tinted band inside an open unit, holding areas. In a hexagon the three\ncolumns are driving (what calls in), domain (the core) and driven (what is\ncalled out to); a layered unit has one `layer` column per layer, public API\nfirst and leaves last, so \"uses\" points left to right under both rules\n(rule 11). A layer has no tint of its own: its `depth` takes the driving\ntint (`api`), the domain tint (`internal`) or the driven tint (`leaf`).\nExternals are never a column: they are ports on the needs rail (rule 6).",
           "name": "SettColumn",
           "cssParts": [
             {
@@ -3344,6 +3368,17 @@
             },
             {
               "kind": "field",
+              "name": "depth",
+              "type": {
+                "text": "ColumnDepth"
+              },
+              "default": "'internal'",
+              "description": "a `layer` column's place by depth, which picks its tint; other kinds ignore it",
+              "attribute": "depth",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "label",
               "type": {
                 "text": "string"
@@ -3361,6 +3396,15 @@
               },
               "default": "'domain'",
               "fieldName": "kind"
+            },
+            {
+              "name": "depth",
+              "type": {
+                "text": "ColumnDepth"
+              },
+              "default": "'internal'",
+              "description": "a `layer` column's place by depth, which picks its tint; other kinds ignore it",
+              "fieldName": "depth"
             },
             {
               "name": "label",
@@ -3386,6 +3430,14 @@
           "name": "COLUMN_KINDS",
           "declaration": {
             "name": "COLUMN_KINDS",
+            "module": "src/map/sett-column.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "COLUMN_DEPTHS",
+          "declaration": {
+            "name": "COLUMN_DEPTHS",
             "module": "src/map/sett-column.ts"
           }
         },

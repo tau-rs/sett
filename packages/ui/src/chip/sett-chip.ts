@@ -4,16 +4,20 @@ import { sessionStyles, type SessionId } from '../session.js';
 import '../tag/sett-tag.js';
 import type { TagKind } from '../tag/sett-tag.js';
 
-export type ChipKind = 'git' | 'agent' | 'finding' | 'review' | 'pipeline' | 'tree';
+export type ChipKind = 'git' | 'agent' | 'finding' | 'review' | 'pipeline' | 'tree' | 'gate';
 export type ChipState = 'normal' | 'blocking' | 'waiting' | 'done';
 
-const TAG_KIND: Record<ChipKind, TagKind> = { git: 'sel', agent: 'session', finding: 'bad', review: 'sug', pipeline: 'ok', tree: 'default' };
+const TAG_KIND: Record<ChipKind, TagKind> = { git: 'sel', agent: 'session', finding: 'bad', review: 'sug', pipeline: 'ok', tree: 'default', gate: 'session' };
 
 /**
  * Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent
  * door first and bold, manual door second and plain (P-1); `me-first` swaps
- * them. A done chip keeps full contrast, its label turns ok with ✓ and it gains
- * a plain `dismiss` verb. Never animates.
+ * them. A chip always carries a verb (DESIGN.md "The shell" rule 1); a
+ * separator stands before each verb that is there. A done chip keeps full
+ * contrast, its label turns ok with ✓ and it gains a plain `dismiss` verb.
+ * The `gate` kind is a group's gate (`gate · group 1 → group 2 · judge
+ * running`, verb `open`): its label takes the colour of the session that runs
+ * it, and a failed gate (`failed 1/2`) is the `blocking` state. Never animates.
  *
  * @slot - the fact, lowercase
  * @slot count - a mono count or identifier after the fact, e.g. `· 2`
@@ -32,7 +36,7 @@ export class SettChip extends LitElement {
   /** normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓) */
   @property({ reflect: true }) state: ChipState = 'normal';
 
-  /** session id for the agent kind; unknown ids fall back to yk */
+  /** session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label */
   @property({ reflect: true }) session?: SessionId;
 
   /** the "me first" setting: manual door first and bold */
@@ -63,6 +67,7 @@ export class SettChip extends LitElement {
       .verbs { display: inline-flex; align-items: center; gap: var(--sett-space-2); }
       .sep::before { content: var(--sett-glyph-sep); color: var(--sett-color-mute); }
       ::slotted(a), a { color: var(--sett-color-sel); cursor: pointer; text-decoration: none; text-transform: lowercase; }
+      .primary { display: contents; }
       .primary ::slotted(a) { font-weight: var(--sett-font-weight-semibold); }
     `,
   ];
@@ -71,17 +76,25 @@ export class SettChip extends LitElement {
     this.dispatchEvent(new CustomEvent('sett-dismiss', { bubbles: true, composed: true }));
   }
 
+  private has(slot: string) {
+    return Array.from(this.children).some((c) => c.getAttribute('slot') === slot);
+  }
+  private onSlotChange = () => this.requestUpdate();
+
   render() {
     const done = this.state === 'done';
-    const tagKind: TagKind = this.state === 'blocking' ? 'bad' : done ? 'ok' : TAG_KIND[this.kind];
+    // a gate belongs to the session that runs it; with none named it does not borrow a session's colour
+    const kind: TagKind = this.kind === 'gate' && !this.session ? 'default' : TAG_KIND[this.kind];
+    const tagKind: TagKind = this.state === 'blocking' ? 'bad' : done ? 'ok' : kind;
     const doors = this.meFirst ? ['manual', 'agent'] : ['agent', 'manual'];
+    const sep = (slot: string) => (this.has(slot) ? html`<span class="sep"></span>` : nothing);
     return html`
       <sett-tag part="label" kind=${tagKind} session=${this.session ?? ''}>${done ? html`${'✓'} ` : nothing}${this.kind}</sett-tag>
       <span class="fact"><slot></slot><slot name="count"></slot></span>
-      <span class="verbs" part="verbs">
-        <span class="sep"></span><span class="primary"><slot name=${doors[0]}></slot></span>
-        <span class="sep"></span><slot name=${doors[1]}></slot>
-        <span class="sep"></span><slot name="verb"></slot>
+      <span class="verbs" part="verbs" @slotchange=${this.onSlotChange}>
+        ${sep(doors[0])}<span class="primary"><slot name=${doors[0]}></slot></span>
+        ${sep(doors[1])}<slot name=${doors[1]}></slot>
+        ${sep('verb')}<slot name="verb"></slot>
         ${done ? html`<span class="sep"></span><a @click=${this.dismiss}>dismiss</a>` : nothing}
       </span>`;
   }

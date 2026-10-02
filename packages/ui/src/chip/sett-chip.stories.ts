@@ -5,6 +5,8 @@ import './sett-chip.js';
 
 const KINDS = ['git', 'agent', 'finding', 'review', 'pipeline', 'tree'] as const;
 const STATES = ['normal', 'blocking', 'waiting', 'done'] as const;
+// a group's gate has one verb, open; its words are the gate's in DESIGN.md rule 7: running · failed n/m · waiting · done
+const GATE = 'group 1 → group 2';
 
 const facts: Record<string, Record<string, string>> = {
   git: { normal: 'behind main|· 2', blocking: 'conflict in|pg.rs', waiting: 'rebase running|', done: 'updated to main|' },
@@ -13,8 +15,10 @@ const facts: Record<string, Record<string, string>> = {
   review: { normal: '2 remarks open|', blocking: 'changes requested|', waiting: 'review requested|', done: 'approved|' },
   pipeline: { normal: 'passed|', blocking: 'tests failed|· 3', waiting: 'running|· 2/5', done: 'passed|· 5/5' },
   tree: { normal: '1 uncommitted|', blocking: 'map edits · 4|· not kept', waiting: '2 files editing|', done: 'committed|' },
+  gate: { normal: `${GATE} · judge running|`, blocking: `${GATE}|· failed 1/2`, waiting: `${GATE} · waiting|`, done: `${GATE} · done|` },
 };
 const verbs: Record<string, [string, string, string?]> = {
+  gate: ['', '', 'open'],
   git: ['with Yokohama', 'update myself'], agent: ['follow', 'step in'], finding: ['with Yokohama', 'fix myself', 'allow'],
   review: ['with Yokohama', 'address myself', 'send back'], pipeline: ['fix with Yokohama', 'open log', 'rerun'], tree: ['with Yokohama', 'commit', 'discard'],
 };
@@ -22,7 +26,7 @@ const chip = (kind: string, state: string, extra = {}) => {
   const [fact, count] = facts[kind][state].split('|');
   const [agent, manual, more] = verbs[kind];
   const { session, meFirst } = extra as { session?: string; meFirst?: boolean };
-  return html`<sett-chip kind=${kind} state=${state} session=${session ?? ''} ?me-first=${meFirst}>${fact}${count ? html`<span slot="count">${count}</span>` : ''}<a slot="agent">${agent}</a><a slot="manual">${manual}</a>${more ? html`<a slot="verb">${more}</a>` : ''}</sett-chip>`;
+  return html`<sett-chip kind=${kind} state=${state} session=${session ?? ''} ?me-first=${meFirst}>${fact}${count ? html`<span slot="count">${count}</span>` : ''}${agent ? html`<a slot="agent">${agent}</a>` : ''}${manual ? html`<a slot="manual">${manual}</a>` : ''}${more ? html`<a slot="verb">${more}</a>` : ''}</sett-chip>`;
 };
 
 const meta: Meta = {
@@ -30,7 +34,7 @@ const meta: Meta = {
   component: 'sett-chip',
   args: { kind: 'git', state: 'normal', meFirst: false },
   argTypes: {
-    kind: { control: 'select', options: KINDS },
+    kind: { control: 'select', options: [...KINDS, 'gate'] },
     state: { control: 'select', options: STATES },
     session: { control: 'select', options: sessionOrder },
   },
@@ -47,6 +51,11 @@ export const Finding = perKind('finding');
 export const Review = perKind('review');
 export const Pipeline = perKind('pipeline');
 export const Tree = perKind('tree');
+export const GateRunning: Story = {
+  name: "kind · gate · running, in the session's colour, verb open",
+  render: () => html`<div class="sett-row">${chip('gate', 'normal', { session: 'yk' })}${chip('gate', 'normal', { session: 'tl' })}</div>`,
+};
+export const GateFailed: Story = { name: 'kind · gate · failed n/m, blocking', render: () => chip('gate', 'blocking', { session: 'yk' }) };
 const perState = (state: string): Story => ({ name: `state · ${state} · six kinds`, render: () => html`<div class="sett-row">${KINDS.map((k) => chip(k, state))}</div>` });
 export const Normal = perState('normal');
 export const Blocking = perState('blocking');

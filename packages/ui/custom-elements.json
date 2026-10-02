@@ -2264,7 +2264,7 @@
               }
             }
           ],
-          "description": "the rail section a port belongs to, in the PoC's categorisation"
+          "description": "The rail section a port belongs to, in the PoC's categorisation. A service\nis ours or a third party's by its contract's owner; one we need whose\ncontract names no owner can be neither, and is unresolved (rule 6)."
         },
         {
           "kind": "function",
@@ -4475,8 +4475,8 @@
           "type": {
             "text": "RailSection[]"
           },
-          "default": "['services', 'third-party', 'events', 'data', 'system', 'crates']",
-          "description": "the fixed order of a rail's sections (rule 6)"
+          "default": "['services', 'third-party', 'events', 'data', 'system', 'crates', 'unresolved']",
+          "description": "the fixed order of a rail's sections, unresolved always last (rule 6)"
         },
         {
           "kind": "variable",
@@ -4484,12 +4484,12 @@
           "type": {
             "text": "Record<RailSection, Record<PortSide, string>>"
           },
-          "default": "{ services: { exposes: 'api', needs: 'platform services' }, 'third-party': { exposes: 'api · public', needs: 'third-party services' }, events: { exposes: 'events published', needs: 'events consumed' }, data: { exposes: 'data', needs: 'data stores' }, system: { exposes: 'os', needs: 'os · files · terminal' }, crates: { exposes: 'public items', needs: 'libraries' }, }",
+          "default": "{ services: { exposes: 'api', needs: 'platform services' }, 'third-party': { exposes: 'api · public', needs: 'third-party services' }, events: { exposes: 'events published', needs: 'events consumed' }, data: { exposes: 'data', needs: 'data stores' }, system: { exposes: 'os', needs: 'os · files · terminal' }, crates: { exposes: 'public items', needs: 'libraries' }, unresolved: { exposes: 'unresolved', needs: 'unresolved' }, }",
           "description": "header per section, per side, as the PoC labels them"
         },
         {
           "kind": "class",
-          "description": "A unit's API block on one flat side: `exposes` on the left, `needs` on the\nright. Ports go in the slot named after their section; the rail keeps the\nsections in the fixed order, labels them per side, and hides empty ones.\nHeaders are lowercase and mute. Width is `map.size.rail`.",
+          "description": "A unit's API block on one flat side: `exposes` on the left, `needs` on the\nright. Ports go in the slot named after their section; the rail keeps the\nsections in the fixed order, labels them per side, and hides empty ones.\nHeaders are lowercase and mute. Width is `map.size.rail`.\n\n`unresolved` is always last and sits on its own tint\n(`map.surface.unresolved`): the externals without an owner, which no other\nsection can claim. They have no contract, so their rows carry no op rows.",
           "name": "SettRail",
           "cssParts": [
             {
@@ -4503,7 +4503,7 @@
           ],
           "slots": [
             {
-              "description": "· third-party · events · data · system · crates - `sett-port-row` children",
+              "description": "· third-party · events · data · system · crates · unresolved - `sett-port-row` children",
               "name": "services"
             }
           ],
@@ -4531,6 +4531,19 @@
               "kind": "method",
               "name": "recount",
               "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "section",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "s",
+                  "type": {
+                    "text": "RailSection"
+                  }
+                }
+              ]
             }
           ],
           "attributes": [

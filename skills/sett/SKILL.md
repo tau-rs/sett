@@ -205,7 +205,9 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -451,7 +453,9 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -667,7 +671,9 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -873,7 +879,9 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -950,7 +958,9 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -1329,7 +1339,9 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -1367,12 +1379,12 @@ The agent asks. Each option says what it changes; `later` leaves it waiting.
 
 ### `<sett-rail>`
 
-A unit's API block on one flat side: `exposes` on the left, `needs` on the right. Ports go in the slot named after their section; the rail keeps the sections in the fixed order, labels them per side, and hides empty ones. Headers are lowercase and mute. Width is `map.size.rail`.
+A unit's API block on one flat side: `exposes` on the left, `needs` on the right. Ports go in the slot named after their section; the rail keeps the sections in the fixed order, labels them per side, and hides empty ones. Headers are lowercase and mute. Width is `map.size.rail`. `unresolved` is always last and sits on its own tint (`map.surface.unresolved`): the externals without an owner, which no other section can claim. They have no contract, so their rows carry no op rows.
 
 - attrs:
   - `side=PortSide`
 - slots:
-  - `services` — · third-party · events · data · system · crates - `sett-port-row` children
+  - `services` — · third-party · events · data · system · crates · unresolved - `sett-port-row` children
 - parts:
   - `header` — the `exposes · n ports` line
   - `section` — each section header
@@ -1423,7 +1435,9 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
@@ -1669,7 +1683,9 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-rail--default` Default
   - `map-rail--exposes` exposes · rg, api, gpui
   - `map-rail--needs` needs · rg, api, gpui
-  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders

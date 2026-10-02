@@ -71,11 +71,17 @@ export function opOf(s: string, c: FixtureContract): Op {
 }
 export const opsOf = (f: Fixture, contract: string): Op[] => (f.contracts[contract]?.ops ?? []).map((s) => opOf(s, f.contracts[contract]));
 
-/** the rail section a port belongs to, in the PoC's categorisation */
+/**
+ * The rail section a port belongs to, in the PoC's categorisation. A service
+ * is ours or a third party's by its contract's owner; one we need whose
+ * contract names no owner can be neither, and is unresolved (rule 6).
+ */
 export function sectionOf(p: Port, f: Fixture): RailSection {
   const c = f.contracts[p.contract];
   switch (p.kind) {
-    case 'http': case 'rpc': case 'cli': return c && c.owner !== f.name ? 'third-party' : 'services';
+    case 'http': case 'rpc': case 'cli':
+      if (!c?.owner && p.side === 'needs') return 'unresolved';
+      return c && c.owner !== f.name ? 'third-party' : 'services';
     case 'topic': return 'events';
     case 'sql': case 'redis': return 'data';
     case 'fs': case 'tty': return 'system';

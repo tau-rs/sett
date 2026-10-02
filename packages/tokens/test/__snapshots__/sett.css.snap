@@ -165,6 +165,7 @@
   --sett-map-surface-driven: #EEF4EE;
   --sett-map-surface-outbound: #F1EEF7;
   --sett-map-surface-code: #FBFBFA;
+  --sett-map-surface-unresolved: #FBF2DE;
   --sett-map-kind-rpc-color: #1F5FA8;
   --sett-map-kind-http-color: #287857;
   --sett-map-kind-cli-color: #287857;
@@ -261,6 +262,7 @@
     --sett-map-surface-driven: #1E2A22;
     --sett-map-surface-outbound: #26232E;
     --sett-map-surface-code: #171E22;
+    --sett-map-surface-unresolved: #3D3116;
     --sett-map-kind-rpc-color: #629DE8;
     --sett-map-kind-http-color: #4DB388;
     --sett-map-kind-cli-color: #4DB388;
@@ -357,6 +359,7 @@
   --sett-map-surface-driven: #1E2A22;
   --sett-map-surface-outbound: #26232E;
   --sett-map-surface-code: #171E22;
+  --sett-map-surface-unresolved: #3D3116;
   --sett-map-kind-rpc-color: #629DE8;
   --sett-map-kind-http-color: #4DB388;
   --sett-map-kind-cli-color: #4DB388;
@@ -452,6 +455,7 @@
   --sett-map-surface-driven: #EEF4EE;
   --sett-map-surface-outbound: #F1EEF7;
   --sett-map-surface-code: #FBFBFA;
+  --sett-map-surface-unresolved: #FBF2DE;
   --sett-map-kind-rpc-color: #1F5FA8;
   --sett-map-kind-http-color: #287857;
   --sett-map-kind-cli-color: #287857;

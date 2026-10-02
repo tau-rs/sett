@@ -2480,6 +2480,46 @@
             "name": "InspectorTone",
             "module": "./shell/sett-inspector.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettHunk",
+          "declaration": {
+            "name": "SettHunk",
+            "module": "./shell/sett-hunk.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettHunkLine",
+          "declaration": {
+            "name": "SettHunkLine",
+            "module": "./shell/sett-hunk.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRemark",
+          "declaration": {
+            "name": "SettRemark",
+            "module": "./shell/sett-hunk.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HunkLineKind",
+          "declaration": {
+            "name": "HunkLineKind",
+            "module": "./shell/sett-hunk.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RemarkKind",
+          "declaration": {
+            "name": "RemarkKind",
+            "module": "./shell/sett-hunk.js"
+          }
         }
       ]
     },
@@ -9227,6 +9267,405 @@
           "declaration": {
             "name": "SettTreeRow",
             "module": "src/shell/sett-files-view.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-hunk.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One hunk of a review, or the fix card's proposed change. Header: `file:line ·\nitem · sub-agent` (the sub-agent in its session colour), then the review\nverbs at the right: `viewed` once seen (else `v · viewed`), `r · remark`,\n`show on map`. Lines slot in as `sett-hunk-line`; a `sett-remark` goes in\nthe `remark` slot under them. `proposed` swaps the right side for\n`proposed · verified: …` and drops the verbs: the hunk is a proposal, not a\ndiff to review. It reports and never flips `viewed` itself.",
+          "name": "SettHunk",
+          "cssParts": [
+            {
+              "description": "the header row",
+              "name": "header"
+            }
+          ],
+          "slots": [
+            {
+              "description": "sett-hunk-line elements",
+              "name": ""
+            },
+            {
+              "description": "a sett-remark under the lines",
+              "name": "remark"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "file",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "where, in mono: `service.rs:22`",
+              "attribute": "file"
+            },
+            {
+              "kind": "field",
+              "name": "item",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the item the hunk belongs to: `pay()`",
+              "attribute": "item"
+            },
+            {
+              "kind": "field",
+              "name": "agent",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sub-agent that wrote it: `a3`, drawn in the session colour",
+              "attribute": "agent"
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "viewed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the file was marked viewed: the ok word replaces the button",
+              "attribute": "viewed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "proposed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the fix card's hunk: a proposal, with how it was verified",
+              "attribute": "proposed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "verified",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "how the proposal was verified, after `verified:` (e.g. `check green`)",
+              "attribute": "verified"
+            },
+            {
+              "kind": "field",
+              "name": "fire",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ viewed }`, the state asked for",
+              "name": "sett-viewed"
+            },
+            {
+              "description": "`r · remark` was pressed",
+              "name": "sett-remark"
+            },
+            {
+              "description": "`show on map` was pressed",
+              "name": "sett-show"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "file",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "where, in mono: `service.rs:22`",
+              "fieldName": "file"
+            },
+            {
+              "name": "item",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the item the hunk belongs to: `pay()`",
+              "fieldName": "item"
+            },
+            {
+              "name": "agent",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sub-agent that wrote it: `a3`, drawn in the session colour",
+              "fieldName": "agent"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "fieldName": "session"
+            },
+            {
+              "name": "viewed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the file was marked viewed: the ok word replaces the button",
+              "fieldName": "viewed"
+            },
+            {
+              "name": "proposed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the fix card's hunk: a proposal, with how it was verified",
+              "fieldName": "proposed"
+            },
+            {
+              "name": "verified",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "how the proposal was verified, after `verified:` (e.g. `check green`)",
+              "fieldName": "verified"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-hunk",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the\nbad tint, `ctx` plain, `flag` on the amber tint: the line a remark points\nat. The sign comes from the kind; the text is the code only.",
+          "name": "SettHunkLine",
+          "slots": [
+            {
+              "description": "the code",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "HunkLineKind"
+              },
+              "default": "'ctx'",
+              "attribute": "kind",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "HunkLineKind"
+              },
+              "default": "'ctx'",
+              "fieldName": "kind"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-hunk-line",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The block under a hunk: an author line (dot and name, like a message), the\ntext, then the two exits: `ask for a change` (a plan element the session\nrealizes) and `comment · no change needed` (an observation; never blocks).\nOnce `kind` is set the verbs go: a change shows the pill `asks for a\nchange` and the element line (`E7 · realized in the session`); a comment\nshows its plain pill. The remark reports and never sets `kind` itself.",
+          "name": "SettRemark",
+          "slots": [
+            {
+              "description": "the remark text",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "author",
+              "type": {
+                "text": "string"
+              },
+              "default": "'you'",
+              "attribute": "author"
+            },
+            {
+              "kind": "field",
+              "name": "place",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the line it points at, mono: `service.rs:23`",
+              "attribute": "place"
+            },
+            {
+              "kind": "field",
+              "name": "time",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "time"
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "RemarkKind | undefined"
+              },
+              "description": "the exit taken; unset while the remark is being written",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "element",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the plan element a change became: `E7`",
+              "attribute": "element"
+            },
+            {
+              "kind": "field",
+              "name": "choose",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ kind }`: `change` or `comment`",
+              "name": "sett-remark-kind"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "author",
+              "type": {
+                "text": "string"
+              },
+              "default": "'you'",
+              "fieldName": "author"
+            },
+            {
+              "name": "place",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the line it points at, mono: `service.rs:23`",
+              "fieldName": "place"
+            },
+            {
+              "name": "time",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "time"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "RemarkKind | undefined"
+              },
+              "description": "the exit taken; unset while the remark is being written",
+              "fieldName": "kind"
+            },
+            {
+              "name": "element",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the plan element a change became: `E7`",
+              "fieldName": "element"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-remark",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettHunk",
+          "declaration": {
+            "name": "SettHunk",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-hunk",
+          "declaration": {
+            "name": "SettHunk",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettHunkLine",
+          "declaration": {
+            "name": "SettHunkLine",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-hunk-line",
+          "declaration": {
+            "name": "SettHunkLine",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettRemark",
+          "declaration": {
+            "name": "SettRemark",
+            "module": "src/shell/sett-hunk.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-remark",
+          "declaration": {
+            "name": "SettRemark",
+            "module": "src/shell/sett-hunk.ts"
           }
         }
       ]

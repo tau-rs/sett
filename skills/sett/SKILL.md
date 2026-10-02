@@ -139,6 +139,14 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -218,6 +226,14 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -297,6 +313,14 @@ The agent strip: the session's path under the scope line when a session is the s
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -466,6 +490,14 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -640,6 +672,14 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -723,6 +763,14 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -801,6 +849,14 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -1004,6 +1060,14 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -1134,6 +1198,14 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -1219,6 +1291,14 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -1371,6 +1451,14 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -1430,6 +1518,181 @@ An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet 
   - `editor-decorations--hints` sett-hint · kinds
   - `editor-decorations--all-situations` all eight situations
 
+### `<sett-hunk>`
+
+One hunk of a review, or the fix card's proposed change. Header: `file:line · item · sub-agent` (the sub-agent in its session colour), then the review verbs at the right: `viewed` once seen (else `v · viewed`), `r · remark`, `show on map`. Lines slot in as `sett-hunk-line`; a `sett-remark` goes in the `remark` slot under them. `proposed` swaps the right side for `proposed · verified: …` and drops the verbs: the hunk is a proposal, not a diff to review. It reports and never flips `viewed` itself.
+
+- attrs:
+  - `file=string` — where, in mono: `service.rs:22`
+  - `item=string` — the item the hunk belongs to: `pay()`
+  - `agent=string` — the sub-agent that wrote it: `a3`, drawn in the session colour
+  - `session=SessionId`
+  - `viewed=boolean` — the file was marked viewed: the ok word replaces the button
+  - `proposed=boolean` — the fix card's hunk: a proposal, with how it was verified
+  - `verified=string` — how the proposal was verified, after `verified:` (e.g. `check green`)
+- slots:
+  - `(default)` — sett-hunk-line elements
+  - `remark` — a sett-remark under the lines
+- parts:
+  - `header` — the header row
+- events:
+  - `sett-viewed` — `{ viewed }`, the state asked for
+  - `sett-remark` — `r · remark` was pressed
+  - `sett-show` — `show on map` was pressed
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-hunk-line>`
+
+One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the bad tint, `ctx` plain, `flag` on the amber tint: the line a remark points at. The sign comes from the kind; the text is the code only.
+
+- attrs:
+  - `kind=HunkLineKind`
+- slots:
+  - `(default)` — the code
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-inspector>`
 
 The inspector, the right pane: it is about the selection (DESIGN.md "The shell" rule 6). A header (heading, sub, state), a scrolling body, a fixed verbs bar with its small note, and a composer row shown only when one is slotted. The top border says who the pane is about, in the thread family's words: a `session` takes the session colour; `kind` planner is amber, framer and fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with the heading as its title. Width is the app's (`size.shell.inspector`).
@@ -1480,6 +1743,14 @@ The inspector, the right pane: it is about the selection (DESIGN.md "The shell" 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -1559,6 +1830,14 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -1880,6 +2159,14 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -2176,6 +2463,14 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -2247,6 +2542,14 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -2323,6 +2626,14 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -2401,6 +2712,14 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -2474,6 +2793,14 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -2826,6 +3153,101 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-remark>`
+
+The block under a hunk: an author line (dot and name, like a message), the text, then the two exits: `ask for a change` (a plan element the session realizes) and `comment · no change needed` (an observation; never blocks). Once `kind` is set the verbs go: a change shows the pill `asks for a change` and the element line (`E7 · realized in the session`); a comment shows its plain pill. The remark reports and never sets `kind` itself.
+
+- attrs:
+  - `author=string`
+  - `place=string` — the line it points at, mono: `service.rs:23`
+  - `time=string`
+  - `kind=RemarkKind` — the exit taken; unset while the remark is being written
+  - `element=string` — the plan element a change became: `E7`
+- slots:
+  - `(default)` — the remark text
+- events:
+  - `sett-remark-kind` — `{ kind }`: `change` or `comment`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -2902,6 +3324,14 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -3117,6 +3547,14 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -3201,6 +3639,14 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -3380,6 +3826,14 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -3452,6 +3906,14 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -3531,6 +3993,14 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -3782,6 +4252,14 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -3883,6 +4361,14 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard

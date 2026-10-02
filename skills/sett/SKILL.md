@@ -169,6 +169,7 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-agent-row>`
@@ -242,6 +243,7 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-agent-strip>`
@@ -648,6 +650,7 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-changes-list>`
@@ -725,6 +728,7 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-changes-row>`
@@ -797,6 +801,7 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-chip>`
@@ -992,6 +997,7 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-composer>`
@@ -1116,6 +1122,7 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-files-view>`
@@ -1195,6 +1202,7 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-frame>`
@@ -1341,6 +1349,7 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-hint>`
@@ -1434,6 +1443,7 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-item>`
@@ -1739,6 +1749,7 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-node>`
@@ -2912,6 +2923,7 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-sessions-view>`
@@ -2990,6 +3002,7 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-sheet>`
@@ -3163,6 +3176,7 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-status-bar>`
@@ -3541,6 +3555,7 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-verbs>`
@@ -3636,6 +3651,7 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-status-bar--session` session · 2 behind main
   - `shell-status-bar--you-locked` you locked · 2 changed
   - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ## Recipes

@@ -2292,6 +2292,54 @@
             "name": "ROW_TAGS",
             "module": "./shell/tree.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "SettFilesView",
+          "declaration": {
+            "name": "SettFilesView",
+            "module": "./shell/sett-files-view.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettAgentStrip",
+          "declaration": {
+            "name": "SettAgentStrip",
+            "module": "./shell/sett-files-view.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettTreeRow",
+          "declaration": {
+            "name": "SettTreeRow",
+            "module": "./shell/sett-files-view.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Projection",
+          "declaration": {
+            "name": "Projection",
+            "module": "./shell/sett-files-view.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TreeKind",
+          "declaration": {
+            "name": "TreeKind",
+            "module": "./shell/sett-files-view.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "PresenceScope",
+          "declaration": {
+            "name": "PresenceScope",
+            "module": "./shell/sett-files-view.js"
+          }
         }
       ]
     },
@@ -7385,6 +7433,746 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/shell/sett-files-view.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The Files view: the focused worktree in two projections, directory and\nlayers, under the scope line (arch spec §4, LEFT-3). The projection seg\nreports and never switches itself; the filter is Theia's and sits in the\n`tools` slot as words. When a session is the scope, its agent strip sits\nunder the scope line (LEFT-8) and `scoped` lets the rows show who writes\neach file; the colour bar is the only presence mark otherwise (LEFT-6).\nA tree with the keyboard of the Sessions view.",
+          "name": "SettFilesView",
+          "cssParts": [
+            {
+              "description": "the scope line, the strip and the seg",
+              "name": "head"
+            },
+            {
+              "description": "the rows",
+              "name": "tree"
+            }
+          ],
+          "slots": [
+            {
+              "description": "a sett-scope-line",
+              "name": "scope"
+            },
+            {
+              "description": "a sett-agent-strip, when a session is the scope",
+              "name": "agents"
+            },
+            {
+              "description": "mute words at the right of the seg, e.g. `filter · ⌘⇧F`",
+              "name": "tools"
+            },
+            {
+              "description": "sett-tree-row elements",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "projection",
+              "type": {
+                "text": "Projection"
+              },
+              "default": "'directory'",
+              "description": "which projection the rows are: the seg marks it",
+              "attribute": "projection",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "scoped",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a session or a you session is the scope: rows show their writer",
+              "attribute": "scoped",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "keys",
+              "privacy": "private",
+              "default": "new TreeKeys(this)"
+            },
+            {
+              "kind": "field",
+              "name": "onSeg",
+              "privacy": "private",
+              "description": "the seg's own select is not a row's: it becomes the projection asked for"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ value }` from the seg; the app sets `projection`",
+              "name": "sett-projection"
+            },
+            {
+              "description": "from a row: `{ kind, name }`",
+              "name": "sett-select"
+            },
+            {
+              "description": "from a row's Enter or double click: `{ kind, name }`",
+              "name": "sett-open"
+            },
+            {
+              "description": "from a folder or area chevron: `{ kind, name, open }`",
+              "name": "sett-fold"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "projection",
+              "type": {
+                "text": "Projection"
+              },
+              "default": "'directory'",
+              "description": "which projection the rows are: the seg marks it",
+              "fieldName": "projection"
+            },
+            {
+              "name": "scoped",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a session or a you session is the scope: rows show their writer",
+              "fieldName": "scoped"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-files-view",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "The agent strip: the session's path under the scope line when a session is\nthe scope, `refund flow › group 1 › a2`, the selected agent in medium,\nwith a chevron. Open, it reveals the session's groups and sub-agents as\nrows (the same sett-group-row and sett-agent-row as the Sessions view);\nselecting one re-inks the tree and never changes the scope (LEFT-8). The\nheader asks to fold with `sett-fold`; the app sets `open`.",
+          "name": "SettAgentStrip",
+          "slots": [
+            {
+              "description": "sett-group-row and sett-agent-row elements, at their depth",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the session's name, first in the path",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "group",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the selected agent's group, e.g. `group 1`",
+              "attribute": "group"
+            },
+            {
+              "kind": "field",
+              "name": "agent",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the selected agent, e.g. `a2`, in medium",
+              "attribute": "agent"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "rows shown",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "keys",
+              "privacy": "private",
+              "default": "new TreeKeys(this)"
+            },
+            {
+              "kind": "field",
+              "name": "fold",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ kind: 'strip', name, open }` with the state asked for",
+              "name": "sett-fold"
+            },
+            {
+              "description": "from a row: `{ kind, name, session }`",
+              "name": "sett-select"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the session's name, first in the path",
+              "fieldName": "name"
+            },
+            {
+              "name": "group",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the selected agent's group, e.g. `group 1`",
+              "fieldName": "group"
+            },
+            {
+              "name": "agent",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the selected agent, e.g. `a2`, in medium",
+              "fieldName": "agent"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "rows shown",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-agent-strip",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A row of the Files view and of the Changes list's all-files mode: a folder\nor a file (directory), an area or an item (layers). Folders and areas fold.\nA file an agent is writing carries a bar in the session's colour on the\nleft edge, the only presence mark (LEFT-6); `scope=\"you\"` gives it `sel`.\nThe writer's mono label shows only when the Files view is `scoped`. The\nstatus letter marks a file changed in this worktree; `stage` is its stage's\nwords as a pill in all-files mode; `meta` is the item's file in layers, or\na count on a folder or area.",
+          "name": "SettTreeRow",
+          "slots": [
+            {
+              "description": "child rows; rendered only while open",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "RowKind"
+              },
+              "readonly": true,
+              "default": "'file'",
+              "description": "folder · file · area · item",
+              "attribute": "kind",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "letter",
+              "type": {
+                "text": "StatusLetter | undefined"
+              },
+              "description": "`M` `A` `D` `R` `?`, when the file changed in this worktree",
+              "attribute": "letter",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "the session writing this file: a bar in its colour. Alone, it means `scope=\"session\"`",
+              "attribute": "session",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "PresenceScope | undefined"
+              },
+              "description": "`you` for your own writes (a `sel` bar); `session` is implied by `session`",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "writer",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "who writes it, mono at the right; shown only in a scoped Files view",
+              "attribute": "writer"
+            },
+            {
+              "kind": "field",
+              "name": "meta",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "mono mute at the right: the item's file in layers, `4 items` on an area, `1 of 3` on a folder",
+              "attribute": "meta"
+            },
+            {
+              "kind": "field",
+              "name": "stage",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the stage's words as a pill: `not staged` · `E3` (all-files mode of the Changes list)",
+              "attribute": "stage"
+            },
+            {
+              "kind": "field",
+              "name": "foldable",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "a row with a chevron and children",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showWriter",
+              "privacy": "private",
+              "description": "the writer is for a scoped view: inside a Files view it waits for `scoped`; elsewhere it is simply shown",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what the row names",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "depth",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "nesting from 0; `space.3` of indent per level",
+              "attribute": "depth",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector is about: the sel tint",
+              "attribute": "selected",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dim",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a row that is not part of what matters here: name in mute",
+              "attribute": "dim",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "children shown (foldable rows only)",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "detail",
+              "type": {
+                "text": "Record<string, unknown>"
+              },
+              "privacy": "protected",
+              "description": "what every event of this row says",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "fire",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "extra",
+                  "default": "{}",
+                  "type": {
+                    "text": "Record<string, unknown>"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "description": "the app's selection: a click, or Space",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "activate",
+              "description": "Enter or a double click: open what the row names",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "fold",
+              "description": "the chevron, or Left/Right: asks for the other state",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onDblClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onChevron",
+              "privacy": "private",
+              "description": "the chevron is the fold and nothing else: its clicks never select or open the row",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "chevron",
+              "privacy": "protected",
+              "description": "the chevron column: a glyph on a foldable row, kept empty otherwise so names align",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "kids",
+              "privacy": "protected",
+              "description": "the children, rendered only while open",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ kind, name }`",
+              "name": "sett-select"
+            },
+            {
+              "description": "`{ kind, name }`",
+              "name": "sett-open"
+            },
+            {
+              "description": "`{ kind, name, open }`",
+              "name": "sett-fold"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "TreeKind"
+              },
+              "default": "'file'",
+              "description": "folder · file · area · item",
+              "fieldName": "kind"
+            },
+            {
+              "name": "letter",
+              "type": {
+                "text": "StatusLetter | undefined"
+              },
+              "description": "`M` `A` `D` `R` `?`, when the file changed in this worktree",
+              "fieldName": "letter"
+            },
+            {
+              "name": "session",
+              "type": {
+                "text": "SessionId | undefined"
+              },
+              "description": "the session writing this file: a bar in its colour. Alone, it means `scope=\"session\"`",
+              "fieldName": "session"
+            },
+            {
+              "name": "scope",
+              "type": {
+                "text": "PresenceScope | undefined"
+              },
+              "description": "`you` for your own writes (a `sel` bar); `session` is implied by `session`",
+              "fieldName": "scope"
+            },
+            {
+              "name": "writer",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "who writes it, mono at the right; shown only in a scoped Files view",
+              "fieldName": "writer"
+            },
+            {
+              "name": "meta",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "mono mute at the right: the item's file in layers, `4 items` on an area, `1 of 3` on a folder",
+              "fieldName": "meta"
+            },
+            {
+              "name": "stage",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the stage's words as a pill: `not staged` · `E3` (all-files mode of the Changes list)",
+              "fieldName": "stage"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what the row names",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "depth",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "nesting from 0; `space.3` of indent per level",
+              "fieldName": "depth",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector is about: the sel tint",
+              "fieldName": "selected",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "dim",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a row that is not part of what matters here: name in mute",
+              "fieldName": "dim",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "children shown (foldable rows only)",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "SettRow",
+            "module": "/src/shell/row.js"
+          },
+          "tagName": "sett-tree-row",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettFilesView",
+          "declaration": {
+            "name": "SettFilesView",
+            "module": "src/shell/sett-files-view.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-files-view",
+          "declaration": {
+            "name": "SettFilesView",
+            "module": "src/shell/sett-files-view.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettAgentStrip",
+          "declaration": {
+            "name": "SettAgentStrip",
+            "module": "src/shell/sett-files-view.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-agent-strip",
+          "declaration": {
+            "name": "SettAgentStrip",
+            "module": "src/shell/sett-files-view.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettTreeRow",
+          "declaration": {
+            "name": "SettTreeRow",
+            "module": "src/shell/sett-files-view.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-tree-row",
+          "declaration": {
+            "name": "SettTreeRow",
+            "module": "src/shell/sett-files-view.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/shell/sett-scope-line.ts",
       "declarations": [
         {
@@ -10074,6 +10862,15 @@
           "description": "the rows a tree of the left pane moves between"
         },
         {
+          "kind": "variable",
+          "name": "TREE_TAGS",
+          "type": {
+            "text": "string"
+          },
+          "default": "'sett-sessions-view, sett-files-view, sett-changes-list, sett-agent-strip'",
+          "description": "the elements that hold a tree of their own: a row belongs to the nearest one"
+        },
+        {
           "kind": "function",
           "name": "parentRow",
           "return": {
@@ -10175,6 +10972,14 @@
           "name": "ROW_TAGS",
           "declaration": {
             "name": "ROW_TAGS",
+            "module": "src/shell/tree.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TREE_TAGS",
+          "declaration": {
+            "name": "TREE_TAGS",
             "module": "src/shell/tree.ts"
           }
         },

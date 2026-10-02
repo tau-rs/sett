@@ -32,3 +32,4 @@ export { SettBottomPanel, SettPanelTab, SettPanelTable, SettPanelRow, SettPanelO
 export { SettSessionsView, SettViewSection, SettSessionRow, SettGroupRow, SettAgentRow, SettFileRow, SettChangesRow, SettNewSessionRow, GROUP_STATES, GROUP_TONE, AGENT_TONE, type SessionRowScope, type SessionTone } from './shell/sett-sessions-view.js';
 export { SettRow, rowStyles, letterStyles, type RowKind as ShellRowKind, type StatusLetter } from './shell/row.js';
 export { TreeKeys, visibleRows, ROW_TAGS } from './shell/tree.js';
+export { SettFilesView, SettAgentStrip, SettTreeRow, type Projection, type TreeKind, type PresenceScope } from './shell/sett-files-view.js';

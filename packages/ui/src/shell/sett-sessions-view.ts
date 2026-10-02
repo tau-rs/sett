@@ -60,7 +60,7 @@ export class SettSessionsView extends LitElement {
   private keys = new TreeKeys(this);
 
   static styles = css`
-    :host { display: flex; flex-direction: column; min-height: 0; box-sizing: border-box; padding: var(--sett-space-1) 0; background: var(--sett-color-paper); font-family: var(--sett-font-sans); font-size: var(--sett-font-size-base); color: var(--sett-color-ink2); }
+    :host { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; box-sizing: border-box; padding: var(--sett-space-1) 0; background: var(--sett-color-paper); font-family: var(--sett-font-sans); font-size: var(--sett-font-size-base); color: var(--sett-color-ink2); }
     .all { display: flex; align-items: center; gap: var(--sett-space-1); box-sizing: border-box; padding: var(--sett-space-2) var(--sett-space-3) calc(var(--sett-space-1) / 2); font-size: var(--sett-font-size-sm); color: var(--sett-color-mute); cursor: pointer; white-space: nowrap; }
     .all b { color: var(--sett-color-sel); font-weight: var(--sett-font-weight-normal); }
     .all:hover b { text-decoration: underline; }

@@ -125,6 +125,14 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -181,6 +189,76 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-agent-strip>`
+
+The agent strip: the session's path under the scope line when a session is the scope, `refund flow › group 1 › a2`, the selected agent in medium, with a chevron. Open, it reveals the session's groups and sub-agents as rows (the same sett-group-row and sett-agent-row as the Sessions view); selecting one re-inks the tree and never changes the scope (LEFT-8). The header asks to fold with `sett-fold`; the app sets `open`.
+
+- attrs:
+  - `name=string` — the session's name, first in the path
+  - `group=string` — the selected agent's group, e.g. `group 1`
+  - `agent=string` — the selected agent, e.g. `a2`, in medium
+  - `open=boolean` — rows shown
+- slots:
+  - `(default)` — sett-group-row and sett-agent-row elements, at their depth
+- events:
+  - `sett-fold` — `{ kind: 'strip', name, open }` with the state asked for
+  - `sett-select` — from a row: `{ kind, name, session }`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -326,6 +404,14 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -474,6 +560,14 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -697,6 +791,82 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-files-view>`
+
+The Files view: the focused worktree in two projections, directory and layers, under the scope line (arch spec §4, LEFT-3). The projection seg reports and never switches itself; the filter is Theia's and sits in the `tools` slot as words. When a session is the scope, its agent strip sits under the scope line (LEFT-8) and `scoped` lets the rows show who writes each file; the colour bar is the only presence mark otherwise (LEFT-6). A tree with the keyboard of the Sessions view.
+
+- attrs:
+  - `projection=Projection` — which projection the rows are: the seg marks it
+  - `scoped=boolean` — a session or a you session is the scope: rows show their writer
+- slots:
+  - `scope` — a sett-scope-line
+  - `agents` — a sett-agent-strip, when a session is the scope
+  - `tools` — mute words at the right of the seg, e.g. `filter · ⌘⇧F`
+  - `(default)` — sett-tree-row elements
+- parts:
+  - `head` — the scope line, the strip and the seg
+  - `tree` — the rows
+- events:
+  - `sett-projection` — `{ value }` from the seg; the app sets `projection`
+  - `sett-select` — from a row: `{ kind, name }`
+  - `sett-open` — from a row's Enter or double click: `{ kind, name }`
+  - `sett-fold` — from a folder or area chevron: `{ kind, name, open }`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -826,6 +996,14 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -1132,6 +1310,14 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -1403,6 +1589,14 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -1450,6 +1644,14 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -1502,6 +1704,14 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -1556,6 +1766,14 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -1605,6 +1823,14 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -1921,6 +2147,14 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -1973,6 +2207,14 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -2154,6 +2396,14 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -2213,6 +2463,14 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -2363,6 +2621,14 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -2418,6 +2684,14 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl
@@ -2601,6 +2875,78 @@ A tool block inside a message: mono, one line per call.
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
 
+### `<sett-tree-row>`
+
+A row of the Files view and of the Changes list's all-files mode: a folder or a file (directory), an area or an item (layers). Folders and areas fold. A file an agent is writing carries a bar in the session's colour on the left edge, the only presence mark (LEFT-6); `scope="you"` gives it `sel`. The writer's mono label shows only when the Files view is `scoped`. The status letter marks a file changed in this worktree; `stage` is its stage's words as a pill in all-files mode; `meta` is the item's file in layers, or a count on a folder or area.
+
+- attrs:
+  - `kind=TreeKind` — folder · file · area · item
+  - `letter=StatusLetter` — `M` `A` `D` `R` `?`, when the file changed in this worktree
+  - `session=SessionId` — the session writing this file: a bar in its colour. Alone, it means `scope="session"`
+  - `scope=PresenceScope` — `you` for your own writes (a `sel` bar); `session` is implied by `session`
+  - `writer=string` — who writes it, mono at the right; shown only in a scoped Files view
+  - `meta=string` — mono mute at the right: the item's file in layers, `4 items` on an area, `1 of 3` on a folder
+  - `stage=string` — the stage's words as a pill: `not staged` · `E3` (all-files mode of the Changes list)
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- slots:
+  - `(default)` — child rows; rendered only while open
+- events:
+  - `sett-select` — `{ kind, name }`
+  - `sett-open` — `{ kind, name }`
+  - `sett-fold` — `{ kind, name, open }`
+  - `type`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-verbs>`
 
 The fixed bar above the composer. With a `state`, it draws the take-over verbs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop` (hand back lives in the composer). Without one, the slots draw whatever the identity needs.
@@ -2650,6 +2996,14 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
   - `shell-scope-line--default` Default
   - `shell-scope-line--main` main · neutral, as on disk
   - `shell-scope-line--session` session · its colour and tint: yk, tl

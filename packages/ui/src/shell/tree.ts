@@ -3,6 +3,9 @@ import type { SettRow } from './row.js';
 /** the rows a tree of the left pane moves between */
 export const ROW_TAGS = 'sett-session-row, sett-group-row, sett-agent-row, sett-file-row, sett-changes-row, sett-tree-row, sett-commit-row';
 
+/** the elements that hold a tree of their own: a row belongs to the nearest one */
+export const TREE_TAGS = 'sett-sessions-view, sett-files-view, sett-changes-list, sett-agent-strip';
+
 const isRow = (n: unknown): n is SettRow => n instanceof HTMLElement && n.matches(ROW_TAGS);
 
 /** the row that holds this one, or null at the top of the tree */
@@ -17,9 +20,12 @@ const shown = (row: SettRow, host: Element) => {
   return true;
 };
 
+/** the rows that belong to this tree and not to one nested in it (the agent strip inside the Files view) */
+const ownRows = (host: Element): SettRow[] =>
+  (Array.from(host.querySelectorAll(ROW_TAGS)) as SettRow[]).filter((r) => r.parentElement?.closest(TREE_TAGS) === host);
+
 /** the rows of a tree, in document order, folded ones left out */
-export const visibleRows = (host: Element): SettRow[] =>
-  (Array.from(host.querySelectorAll(ROW_TAGS)) as SettRow[]).filter((r) => shown(r, host));
+export const visibleRows = (host: Element): SettRow[] => ownRows(host).filter((r) => shown(r, host));
 
 /**
  * The keyboard of a tree of rows, shared by the Sessions view, the Files view
@@ -35,7 +41,7 @@ export class TreeKeys {
 
   /** one tab stop among the shown rows */
   sync = () => {
-    const rows = Array.from(this.host.querySelectorAll(ROW_TAGS)) as SettRow[];
+    const rows = ownRows(this.host);
     const seen = visibleRows(this.host);
     const stop = seen.find((r) => r.selected) ?? seen[0];
     for (const r of rows) r.tabIndex = r === stop ? 0 : -1;

@@ -134,6 +134,73 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-agent-row>`
+
+A sub-agent row under a group: a dot in the session's sub shade, the element it is on (`a2 · PgOrderRepo: implement refund()`), its state as a tag: `done` (ok) · `writing` · `asks` (sug) · `paused`. The dot is the whole sub-agent idiom here: a 24 px row with a name and a state has no room for the session card's glyph run.
+
+- attrs:
+  - `session=SessionId` — session id; the dot takes its sub shade
+  - `state=string` — `done` · `writing` · `asks` · `paused`
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- slots:
+  - `(default)` — sett-file-row children; rendered only while open
+- events:
+  - `type`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -268,6 +335,17 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -368,6 +446,60 @@ The line that ends every agent reply: `changed · what`, or `no change` with `no
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+
+### `<sett-changes-row>`
+
+The Changes row of a session: `changes` and, at the right, what the branch holds (`2 ahead · MR !42 · gated`). Enter or a double click opens the Changes list.
+
+- attrs:
+  - `meta=string` — commits ahead and MR state, mono mute
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- events:
+  - `sett-open` — `{ kind: 'changes', name: 'changes' }`
+  - `type`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-chip>`
 
@@ -533,6 +665,65 @@ The agent left the plan. Reason, then the three ways back (and discuss).
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
 
+### `<sett-file-row>`
+
+A file row, shared by the Sessions view, the Files view and the Changes list: the status letter, the name in mono, `✓` in ok once viewed, the writer and the counts (`+18 −2`) in mono mute at the right. A click selects; Enter or a double click opens the file in the scope's worktree.
+
+- attrs:
+  - `letter=StatusLetter` — `M` `A` `D` `R` `?`
+  - `counts=string` — `+18 −2`, mono mute at the right
+  - `writer=string` — who wrote it, mono at the right before the counts
+  - `viewed=boolean` — reviewed: `✓` after the name
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- slots:
+  - `verb` — a row-level sett-button, when the app has one
+- events:
+  - `sett-open` — `{ kind: 'file', name }`
+  - `type`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-frame>`
 
 The one frame that changes colour: it says the state of the scope (DESIGN.md "The shell" rule 5). Wraps a pane; the slot is the pane's paper. idle grey · live session gradient (rotates) · waiting amber (pulses) · editing sel · collision bad · planning dashed amber, always still. `focus` is the sel ring for the selection, at the lit stroke inside the idle frame, not a state of the scope. The only two animations in the chrome live here (live and waiting); `prefers-reduced-motion` and the `still` attribute stop both. Planning is dashed because the waiting frame's still twin is solid amber. A state change never moves or resizes the pane inside.
@@ -605,6 +796,62 @@ The merge: a primary button that stays visibly primary while blocked, with its r
   - `buttons-buttons--gated-blocked` gated · blocked with pills
   - `buttons-buttons--gated-open` gated · open
   - `buttons-buttons--hand-back-disabled` hand back · disabled until the note is written
+
+### `<sett-group-row>`
+
+A group row: a lane of the plan with its gate, under a session. Its state is one of rule 7's words, `done` · `running` · `gate` · `failed n/m` · `waiting`, with the tone each implies. `kind="gate"` is the gate itself, `gate · group 1 → group 2`, with state `judge`; it has no children.
+
+- attrs:
+  - `kind='gate'` — `gate`: the gate row between two groups
+  - `state=string` — rule 7's words; `judge` on a gate row
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- slots:
+  - `(default)` — sett-agent-row children; rendered only while open
+- events:
+  - `type`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-hint>`
 
@@ -866,6 +1113,52 @@ A message. Yours sit on the right in the selection tint; an agent's on the left 
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
 
+### `<sett-new-session-row>`
+
+The door at the end of the Sessions view: `+ new session · delegate`, mute, the whole row a link (host-as-link, like the status items). The app opens the planner on its click.
+
+- attrs:
+  - `href=string` — where the door leads; renders an `<a>`. Without it the host is the link and its click is the app's
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-node>`
 
 A unit's box on the board, at one of four tiers. The host sets the box and the tier (from the on-screen width, see `tierFor`); the node never resizes itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the meta lines and badges; `card` adds the port rows in two columns; `sheet` hosts what is inside. A closed node has no foot and no link: opening is the host's, by double-click or ↩ on the node and by nothing else (rule 4). An open node keeps one link, `▴ close`. The head carries one dot per session with an agent on the unit (`sessions`). A session that is working here now (`live`) breathes when this box is the nearest thing you can see (DESIGN.md § Motion, "where it lands"): the unit is closed, or it is open and no item of that session is rendered inside. Open with the item on screen, the item (or the folded area's badge) carries the life and the dot is still. When `live` flips, the node plays the arrival or departure pulse on its box, the larger wave (`map.size.waveNode`).
@@ -1119,6 +1412,17 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -1155,6 +1459,17 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -1196,6 +1511,17 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -1239,6 +1565,17 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -1277,6 +1614,17 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -1582,6 +1930,17 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -1623,6 +1982,17 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -1746,6 +2116,129 @@ Pinned at the top of the left pane while a session owns the branch. Header: sess
   - `primitives-session-card--glyph-column` the glyph column
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
+
+### `<sett-session-row>`
+
+A session row: a dot in the session's colour (or `sel` for a you session), the name in semibold, and its state as a small tag at the right: `asks you` (sug), `gate · group 1 → group 2` (session tint), `done` (ok), `2 remarks` (default). A merged session is `dim` with `merged` as its meta. Selected, it shows the Focus button, the only way its worktree becomes the scope (DESIGN.md "The shell" rule 4); scoped, a `scope` tag in its tint takes the button's place. The dot breathes while `running`.
+
+- attrs:
+  - `scope=SessionRowScope` — an agent's session, your own detected work (dot and tint in `sel`), or a plan under planning (sug)
+  - `session=SessionId` — session id; unknown ids fall back to yk
+  - `state=string` — the state's words, lowercase
+  - `tone=SessionTone` — the state tag's tint
+  - `meta=string` — mono mute note after the name, e.g. `main · 2 files` or `merged`; hidden while selected or scoped
+  - `scoped=boolean` — this session's worktree is the scope: a `scope` tag instead of the Focus button
+  - `running=boolean` — the session is working now: the dot breathes
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- slots:
+  - `(default)` — its children: sett-group-row, sett-agent-row, sett-file-row, sett-changes-row; rendered only while open
+- parts:
+  - `row` — the line
+- events:
+  - `sett-focus` — the Focus button, Enter or a double click: `{ kind, name, session }`
+  - `type`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-sessions-view>`
+
+The Sessions view: every session, grouped by section, each unfolding into groups › sub-agents › files edited, with a Changes row per session and the new-session door at the end (arch spec §4). A tree with one tab stop: Up and Down move, Right and Left fold, Enter focuses a session or opens a file, Space selects. The view never changes its own rows: it fires, the app sets `selected`, `open`, `scoped`. `isolated`: the view shows one focused session under a header `‹ all sessions · N`, a link that gives the scope back; Esc does the same. Filtering is Theia's and is not here.
+
+- attrs:
+  - `isolated=boolean` — one focused session only, under the `‹ all sessions` header
+  - `count=string` — how many sessions the header's link leads back to
+- slots:
+  - `(default)` — sett-view-section elements (or rows, when isolated)
+  - `foot` — the sett-new-session-row door, after the tree
+- parts:
+  - `header` — the `‹ all sessions` line when isolated
+  - `tree` — the rows
+- events:
+  - `sett-unfocus` — the header link or Esc: the app returns to all sessions and to main
+  - `sett-focus` — from a session row: `{ kind, name, session }`
+  - `sett-select` — from a row: `{ kind, name, session? }`
+  - `sett-open` — from a file or changes row: `{ kind, name }`
+  - `sett-fold` — from a chevron, Left or Right: `{ kind, name, open }` with the state asked for
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ### `<sett-sheet>`
 
@@ -1879,6 +2372,17 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -1923,6 +2427,17 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-scope-line--session-locked` session locked
   - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
   - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
   - `shell-status-bar--session` session · 2 behind main
@@ -2112,6 +2627,55 @@ The fixed bar above the composer. With a `state`, it draws the take-over verbs: 
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+
+### `<sett-view-section>`
+
+A section of the Sessions view: a lowercase label and a count on the right, then its rows. The sections are fixed: planning · yours · needs you · running · in review · done.
+
+- attrs:
+  - `label=string` — the section's name, lowercase
+  - `count=string` — how many rows, mono at the right
+- slots:
+  - `(default)` — the rows
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
 
 ## Recipes
 

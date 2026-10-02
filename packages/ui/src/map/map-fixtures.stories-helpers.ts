@@ -2,7 +2,7 @@
 import { html, nothing } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Fixture, FixtureArea, FixtureItem, FixtureUnit, Port } from './fixtures.js';
-import { insideOf, itemKindOf, opKey, opsOf, portKey, sectionOf, unitOf, unitPorts } from './fixtures.js';
+import { insideOf, itemKindOf, linksOf, opKey, opsOf, portKey, sectionOf, unitOf, unitPorts, wiresOf, type FixtureLink } from './fixtures.js';
 import { sessionOrder } from '@tau-rs/sett-tokens';
 import ripgrepJson from './fixtures/ripgrep.json' with { type: 'json' };
 import zero2prodJson from './fixtures/zero2prod.json' with { type: 'json' };
@@ -16,6 +16,7 @@ import './sett-item.js';
 import './sett-area.js';
 import './sett-column.js';
 import './sett-sheet.js';
+import './sett-link.js';
 
 export const ripgrep = ripgrepJson as unknown as Fixture;
 export const zero2prod = zero2prodJson as unknown as Fixture;
@@ -74,9 +75,16 @@ export const areaEl = (a: FixtureArea, who: Who = {}, folded = !!a.folded) => ht
 export const columnsOf = (f: Fixture, id: string, who: Who = {}, foldedAreas: string[] = []) =>
   insideOf(f, id).map((c) => html`<sett-column kind=${c.kind} depth=${ifDefined(c.depth)} label=${c.label}>${c.areas.map((a) => areaEl(a, who, !!a.folded || foldedAreas.includes(a.id)))}</sett-column>`);
 
-/** the inside of a unit: exposes rail · columns · needs rail */
-export const sheetOf = (f: Fixture, id: string, who: Who = {}, opts: { folded?: boolean; foldedAreas?: string[]; slot?: string } = {}) => html`
-  <sett-sheet slot=${ifDefined(opts.slot)} ?folded=${opts.folded}>${rail(f, id, 'exposes', { slot: 'exposes' })}${columnsOf(f, id, who, opts.foldedAreas)}${rail(f, id, 'needs', { slot: 'needs' })}</sett-sheet>`;
+/** one `sett-link` from a fixture link; kinds on fixture links are derived from the items (illustrative) */
+export const linkEl = (l: FixtureLink) => html`
+  <sett-link from=${l.from} to=${l.to} kind=${l.kind} label=${ifDefined(l.label)} ?finding=${l.finding} ?wire=${l.wire}></sett-link>`;
+/** the links and port wires of a unit, as `sett-link` children for its sheet */
+export const linksEl = (f: Fixture, id: string, wires = true) => html`${linksOf(f, id).map(linkEl)}${wires ? wiresOf(f, id).map(linkEl) : nothing}`;
+
+export interface SheetOpts { folded?: boolean; foldedAreas?: string[]; slot?: string; links?: boolean; wires?: boolean; level?: 'items' | 'plugs'; filter?: string }
+/** the inside of a unit: exposes rail · columns · needs rail, and the links between the things inside */
+export const sheetOf = (f: Fixture, id: string, who: Who = {}, opts: SheetOpts = {}) => html`
+  <sett-sheet slot=${ifDefined(opts.slot)} ?folded=${opts.folded} level=${ifDefined(opts.level)} filter=${ifDefined(opts.filter)}>${rail(f, id, 'exposes', { slot: 'exposes' })}${columnsOf(f, id, who, opts.foldedAreas)}${rail(f, id, 'needs', { slot: 'needs' })}${opts.links === false ? nothing : linksEl(f, id, opts.wires !== false)}</sett-sheet>`;
 
 /** the sessions on a unit, read from who is on its items: every session named, and the ones live somewhere */
 export const sessionsOn = (who: Who) => {
@@ -86,5 +94,5 @@ export const sessionsOn = (who: Who) => {
 };
 
 /** an open unit: the node at its sheet tier hosting the inside; its head lists the sessions on its items */
-export const openUnit = (f: Fixture, id: string, who: Who = {}, opts: { folded?: boolean; foldedAreas?: string[] } = {}) =>
+export const openUnit = (f: Fixture, id: string, who: Who = {}, opts: SheetOpts = {}) =>
   node(f, id, 'sheet', { focused: true }, sheetOf(f, id, who, { ...opts, slot: 'inside' }), sessionsOn(who));

@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import { base, light, dark, sessionOrder } from '@tau-rs/sett-tokens';
+import { LINK_FAMILIES, LINK_KINDS, kindsOf } from '../../ui/src/map/link-kinds.js';
 
 <Meta title="docs/Map" />
 
@@ -34,6 +35,25 @@ One colour and one stroke per kind, used identically on port dots, edges, hint c
         <td><Line color={light.map.kind[k].color} dash={base.map.kind[k].stroke} /> <code>{base.map.kind[k].stroke}</code></td>
       </tr>
     ))}
+  </tbody>
+</table>
+
+## Links inside a unit
+
+Rule 12: the line pattern is the family, the head is the kind, a diamond at the start is ownership. Four patterns and a few heads to learn, not 22 shapes. The kind's name shows on hover only; `refers to` is the fallback when only an import is known.
+
+<table>
+  <thead><tr><th>family</th><th>pattern</th><th>docks at</th><th>kinds · head</th></tr></thead>
+  <tbody>
+    {LINK_FAMILIES.map((f) => (
+      <tr key={f}>
+        <td style={{ fontFamily: 'var(--sett-font-mono)' }}>{f}</td>
+        <td><Line color="var(--sett-color-mute)" dash={base.map.link[f].stroke} /> <code>{base.map.link[f].stroke}</code></td>
+        <td>{Math.round(base.map.link[f].dock * 100)} %</td>
+        <td>{kindsOf(f).map((k) => `${LINK_KINDS[k].label} · ${LINK_KINDS[k].head}${LINK_KINDS[k].tail ? ` · ${LINK_KINDS[k].tail} at the start` : ''}`).join(' — ')}</td>
+      </tr>
+    ))}
+    <tr><td style={{ fontFamily: 'var(--sett-font-mono)' }}>—</td><td><Line color="var(--sett-color-line2)" dash="solid" /></td><td>50 %</td><td>refers to · no head, the lightest ink</td></tr>
   </tbody>
 </table>
 

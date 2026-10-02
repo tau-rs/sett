@@ -2023,6 +2023,142 @@
         },
         {
           "kind": "js",
+          "name": "SettLink",
+          "declaration": {
+            "name": "SettLink",
+            "module": "./map/sett-link.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "route",
+          "declaration": {
+            "name": "route",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "simpleRoute",
+          "declaration": {
+            "name": "simpleRoute",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Route",
+          "declaration": {
+            "name": "Route",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RouteInput",
+          "declaration": {
+            "name": "RouteInput",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RouteOutput",
+          "declaration": {
+            "name": "RouteOutput",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RouteLink",
+          "declaration": {
+            "name": "RouteLink",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RouteEnd",
+          "declaration": {
+            "name": "RouteEnd",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Box",
+          "declaration": {
+            "name": "Box",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Pt",
+          "declaration": {
+            "name": "Pt",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "watch",
+          "declaration": {
+            "name": "watch",
+            "module": "./map/lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "unwatch",
+          "declaration": {
+            "name": "unwatch",
+            "module": "./map/lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "watching",
+          "declaration": {
+            "name": "watching",
+            "module": "./map/lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boxIn",
+          "declaration": {
+            "name": "boxIn",
+            "module": "./map/lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scaleOf",
+          "declaration": {
+            "name": "scaleOf",
+            "module": "./map/lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "signature",
+          "declaration": {
+            "name": "signature",
+            "module": "./map/lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Watched",
+          "declaration": {
+            "name": "Watched",
+            "module": "./map/lines.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "LINK_KINDS",
           "declaration": {
             "name": "LINK_KINDS",
@@ -2749,6 +2885,201 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/lines.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "watch",
+          "return": {
+            "type": {
+              "text": "void"
+            }
+          },
+          "parameters": [
+            {
+              "name": "w",
+              "type": {
+                "text": "Watched"
+              }
+            }
+          ],
+          "description": "start following `w`; the loop wakes if it was asleep"
+        },
+        {
+          "kind": "function",
+          "name": "unwatch",
+          "return": {
+            "type": {
+              "text": "void"
+            }
+          },
+          "parameters": [
+            {
+              "name": "w",
+              "type": {
+                "text": "Watched"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "watching",
+          "return": {
+            "type": {
+              "text": "number"
+            }
+          },
+          "description": "how many things the loop follows; 0 means it sleeps"
+        },
+        {
+          "kind": "function",
+          "name": "scaleOf",
+          "return": {
+            "type": {
+              "text": "number"
+            }
+          },
+          "parameters": [
+            {
+              "name": "host",
+              "type": {
+                "text": "HTMLElement"
+              }
+            }
+          ],
+          "description": "the scale a camera applied to `host`, read from its box against its layout size"
+        },
+        {
+          "kind": "function",
+          "name": "boxIn",
+          "return": {
+            "type": {
+              "text": "Box"
+            }
+          },
+          "parameters": [
+            {
+              "name": "el",
+              "type": {
+                "text": "Element"
+              }
+            },
+            {
+              "name": "host",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "origin",
+              "default": "host.getBoundingClientRect()"
+            },
+            {
+              "name": "scale",
+              "default": "scaleOf(host)"
+            }
+          ],
+          "description": "`el`'s box in `host`'s own coordinates"
+        },
+        {
+          "kind": "function",
+          "name": "signature",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "boxes",
+              "type": {
+                "text": "Box[]"
+              }
+            }
+          ],
+          "description": "a cheap signature of a list of boxes, to tell whether anything moved"
+        },
+        {
+          "kind": "function",
+          "name": "selectorFor",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "key",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the selector that finds what a key names: `key`, then `data-id`"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "watch",
+          "declaration": {
+            "name": "watch",
+            "module": "src/map/lines.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "unwatch",
+          "declaration": {
+            "name": "unwatch",
+            "module": "src/map/lines.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "watching",
+          "declaration": {
+            "name": "watching",
+            "module": "src/map/lines.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "scaleOf",
+          "declaration": {
+            "name": "scaleOf",
+            "module": "src/map/lines.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boxIn",
+          "declaration": {
+            "name": "boxIn",
+            "module": "src/map/lines.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "signature",
+          "declaration": {
+            "name": "signature",
+            "module": "src/map/lines.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "selectorFor",
+          "declaration": {
+            "name": "selectorFor",
+            "module": "src/map/lines.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/link-kinds.ts",
       "declarations": [
         {
@@ -3158,6 +3489,42 @@
         },
         {
           "kind": "function",
+          "name": "linkEl",
+          "parameters": [
+            {
+              "name": "l",
+              "type": {
+                "text": "FixtureLink"
+              }
+            }
+          ],
+          "description": "one `sett-link` from a fixture link; kinds on fixture links are derived from the items (illustrative)"
+        },
+        {
+          "kind": "function",
+          "name": "linksEl",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "wires",
+              "default": "true"
+            }
+          ],
+          "description": "the links and port wires of a unit, as `sett-link` children for its sheet"
+        },
+        {
+          "kind": "function",
           "name": "sheetOf",
           "parameters": [
             {
@@ -3183,11 +3550,11 @@
               "name": "opts",
               "default": "{}",
               "type": {
-                "text": "{ folded?: boolean; foldedAreas?: string[]; slot?: string }"
+                "text": "SheetOpts"
               }
             }
           ],
-          "description": "the inside of a unit: exposes rail · columns · needs rail"
+          "description": "the inside of a unit: exposes rail · columns · needs rail, and the links between the things inside"
         },
         {
           "kind": "function",
@@ -3229,7 +3596,7 @@
               "name": "opts",
               "default": "{}",
               "type": {
-                "text": "{ folded?: boolean; foldedAreas?: string[] }"
+                "text": "SheetOpts"
               }
             }
           ],
@@ -3354,6 +3721,22 @@
           "name": "columnsOf",
           "declaration": {
             "name": "columnsOf",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linkEl",
+          "declaration": {
+            "name": "linkEl",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linksEl",
+          "declaration": {
+            "name": "linksEl",
             "module": "src/map/map-fixtures.stories-helpers.ts"
           }
         },
@@ -3648,6 +4031,83 @@
           "declaration": {
             "name": "flash",
             "module": "src/map/motion.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/routes.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "route",
+          "return": {
+            "type": {
+              "text": "RouteOutput"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{ bands, links, spacing, channelTop }",
+              "type": {
+                "text": "RouteInput"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "stubs",
+          "type": {
+            "text": "array"
+          },
+          "default": "[{ y: ys, dir: back }, ...t.near.map((l) => ({ y: dockY(l.to), dir: l.to.band === l.from.band ? back : t.exit }))]"
+        },
+        {
+          "kind": "function",
+          "name": "simpleRoute",
+          "return": {
+            "type": {
+              "text": "Route"
+            }
+          },
+          "parameters": [
+            {
+              "name": "from",
+              "type": {
+                "text": "Box"
+              }
+            },
+            {
+              "name": "to",
+              "type": {
+                "text": "Box"
+              }
+            },
+            {
+              "name": "dock",
+              "default": "0.5"
+            }
+          ],
+          "description": "the simplest square route between two boxes, for a link outside any sheet"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "route",
+          "declaration": {
+            "name": "route",
+            "module": "src/map/routes.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "simpleRoute",
+          "declaration": {
+            "name": "simpleRoute",
+            "module": "src/map/routes.ts"
           }
         }
       ]
@@ -4054,7 +4514,7 @@
         },
         {
           "kind": "class",
-          "description": "One function, struct or trait inside an area: an 18 px box in a 22 px row,\nits name in mono at the base size. The name never moves, fades or resizes;\neverything else is drawn around or behind it (DESIGN.md § Motion):\nthe item's own colour, an agent's sheen, your selection tight to the box,\nthe session ring one step out, a change flash past everything.\n\n`session` alone is a thin still ring: an agent touched this earlier. With\n`live` the ring breathes and a sheen sweeps: an agent is here now. When\n`live` flips, the item plays its own arrival or departure pulse.",
+          "description": "One function, struct or trait inside an area: an 18 px box in a 22 px row,\nits name in mono at the base size. The name never moves, fades or resizes;\neverything else is drawn around or behind it (DESIGN.md § Motion):\nthe item's own colour, an agent's sheen, your selection tight to the box,\nthe session ring one step out, a change flash past everything.\n\n`session` alone is a thin still ring: an agent touched this earlier. With\n`live` the ring breathes and a sheen sweeps: an agent is here now. When\n`live` flips, the item plays its own arrival or departure pulse. `lit`\nis the response to a pointer on one of its links: a blue border.",
           "name": "SettItem",
           "cssParts": [
             {
@@ -4179,6 +4639,17 @@
               },
               "default": "false",
               "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response)",
+              "attribute": "lit",
               "reflects": true
             },
             {
@@ -4328,6 +4799,15 @@
               },
               "default": "false",
               "fieldName": "selected"
+            },
+            {
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response)",
+              "fieldName": "lit"
             }
           ],
           "superclass": {
@@ -4361,6 +4841,370 @@
           "declaration": {
             "name": "SettItem",
             "module": "src/map/sett-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-link.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One line between two things inside an open unit. It names its ends by\n`key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it\nroutes every link together (tracks, lanes, trunks, docks) and hands each\nits path; outside a sheet a link draws the simplest square route between\nits ends by itself. The grammar is fixed (#58, #68): the line pattern is\nthe family, the head is the kind, a diamond at the start is ownership; the\nlighter the line, the less the analyser knows. Links never carry presence.\n\nResponse (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`);\n`selected` draws it outward from the `anchor` end (`motion.draw`), then\nthe `flow` dashes travel, on the selection alone. A finding is red and\nheavier on any kind and never recedes.",
+          "name": "SettLink",
+          "cssParts": [
+            {
+              "description": "the drawing",
+              "name": "svg"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "from",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the dependent end",
+              "attribute": "from"
+            },
+            {
+              "kind": "field",
+              "name": "to",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of what it depends on",
+              "attribute": "to"
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "LinkKind"
+              },
+              "default": "'calls'",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the exact construct, shown with the kind's name on hover",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "finding",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a rule is broken on this line: red and heavier, on any kind",
+              "attribute": "finding",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "guessed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the analyser guessed this kind: a lighter line",
+              "attribute": "guessed",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "wire",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a port wire: the line takes the port kind's colour (`--_wire`)",
+              "attribute": "wire",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "pointed at, or an end is: blue",
+              "attribute": "lit",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "an end is selected: drawn outward, then flowing",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "anchor",
+              "type": {
+                "text": "'from' | 'to'"
+              },
+              "default": "'from'",
+              "description": "the end the selection sits at; the line is drawn outward from it",
+              "attribute": "anchor",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the selection or filtered out: `map.far`",
+              "attribute": "far",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "backward",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "points right to left: a smell (rule 11), set by the sheet from the route",
+              "attribute": "backward",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "plug",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the sheet's plugs level: a dot beside each end, the line on demand",
+              "attribute": "plug",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "route",
+              "type": {
+                "text": "Route | undefined"
+              },
+              "description": "the geometry, in the coordinates of the positioned ancestor; the sheet sets it"
+            },
+            {
+              "kind": "field",
+              "name": "drawing",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "flowing",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "seen",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "standalone",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "measure",
+              "description": "outside a sheet: find both ends among the siblings and draw the simplest square route"
+            },
+            {
+              "kind": "method",
+              "name": "draw",
+              "privacy": "private",
+              "description": "selecting draws the connections outward from the selection, then the flow dashes travel"
+            },
+            {
+              "kind": "field",
+              "name": "light",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ on }` when pointed at; the sheet lights it with both ends",
+              "name": "sett-light"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "from",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the dependent end",
+              "fieldName": "from"
+            },
+            {
+              "name": "to",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of what it depends on",
+              "fieldName": "to"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "LinkKind"
+              },
+              "default": "'calls'",
+              "fieldName": "kind"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the exact construct, shown with the kind's name on hover",
+              "fieldName": "label"
+            },
+            {
+              "name": "finding",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a rule is broken on this line: red and heavier, on any kind",
+              "fieldName": "finding"
+            },
+            {
+              "name": "guessed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the analyser guessed this kind: a lighter line",
+              "fieldName": "guessed"
+            },
+            {
+              "name": "wire",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a port wire: the line takes the port kind's colour (`--_wire`)",
+              "fieldName": "wire"
+            },
+            {
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "pointed at, or an end is: blue",
+              "fieldName": "lit"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "an end is selected: drawn outward, then flowing",
+              "fieldName": "selected"
+            },
+            {
+              "name": "anchor",
+              "type": {
+                "text": "'from' | 'to'"
+              },
+              "default": "'from'",
+              "description": "the end the selection sits at; the line is drawn outward from it",
+              "fieldName": "anchor"
+            },
+            {
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the selection or filtered out: `map.far`",
+              "fieldName": "far"
+            },
+            {
+              "name": "backward",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "points right to left: a smell (rule 11), set by the sheet from the route",
+              "fieldName": "backward"
+            },
+            {
+              "name": "plug",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the sheet's plugs level: a dot beside each end, the line on demand",
+              "fieldName": "plug"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-link",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettLink",
+          "declaration": {
+            "name": "SettLink",
+            "module": "src/map/sett-link.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-link",
+          "declaration": {
+            "name": "SettLink",
+            "module": "src/map/sett-link.ts"
           }
         }
       ]
@@ -5349,7 +6193,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The inside of an open unit: the exposes rail, the columns, the needs rail,\nin one row. `sett-node[tier=\"sheet\"]` hosts one in its `inside` slot, and a\nghost neighbour shows the same element folded. Everything inside is laid\nout by normal flow, so the links of lane 4 read their endpoints from the DOM.\n\n`folded` folds every area at once (the PoC's areas / items switch).",
+          "description": "The inside of an open unit: the exposes rail, the columns, the needs rail,\nin one row, and the `sett-link`s between the things inside, drawn over it.\nEverything is laid out by normal flow; the sheet is the one element that\nsees every link, so the rules are written once here and not by each app:\n\n- **routes**: square lines on tracks in the gutters (`map.size.track`\n  apart), one trunk per source item and family with a dot at each branch;\n  a link skipping a column takes a lane in the channel under the columns,\n  one inside a column runs beside it; a right-to-left line is a smell.\n- **the watcher**: each frame the ends are read and only the paths whose\n  ends moved are rewritten, so folding, pulses and re-renders never leave\n  a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown).\n- **response** (DESIGN.md § Motion): pointing at an item lights its links\n  and the item at the other end; selecting draws its links outward, the\n  flow travels on them alone and every other link recedes to `map.far`.\n- **folds**: an end hidden by a folded area rides the area's edge to the\n  chip; a selected one gets the blue dock dot where it plugs in.\n- **level**: `items` draws every link at rest, `plugs` a dot beside each\n  connected item with the line on demand. A finding is drawn in every level.\n- **filter**: kinds and families to keep; the rest recedes to `map.far`.\n\n`folded` folds every area at once.",
           "name": "SettSheet",
           "slots": [
             {
@@ -5357,7 +6201,7 @@
               "name": "exposes"
             },
             {
-              "description": "`sett-column` children",
+              "description": "`sett-column` children, then the `sett-link`s",
               "name": ""
             },
             {
@@ -5376,6 +6220,137 @@
               "description": "fold every area inside, or open them all again",
               "attribute": "folded",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "'items' | 'plugs'"
+              },
+              "default": "'items'",
+              "description": "what is drawn at rest: every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)",
+              "attribute": "level",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "filter",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "link kinds and families to keep, space-separated (`calls does`); the rest recedes; empty keeps all",
+              "attribute": "filter"
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "ends",
+              "privacy": "private",
+              "default": "new Map<string, Element | null>()"
+            },
+            {
+              "kind": "field",
+              "name": "seen",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "hovered",
+              "type": {
+                "text": "Element | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "hoveredLink",
+              "type": {
+                "text": "SettLink | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "links",
+              "type": {
+                "text": "SettLink[]"
+              },
+              "description": "the links the sheet coordinates",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "onMutation",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "records",
+                  "type": {
+                    "text": "MutationRecord[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "endOf",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Element | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "the element a key names, cached until the children change"
+            },
+            {
+              "kind": "field",
+              "name": "keyOf",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onOver",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onLeave",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onLight",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "apply",
+              "privacy": "private",
+              "description": "lights, selection, level and filter, written onto the links and the things they end on"
+            },
+            {
+              "kind": "method",
+              "name": "measure"
             }
           ],
           "events": [
@@ -5393,6 +6368,24 @@
               "default": "false",
               "description": "fold every area inside, or open them all again",
               "fieldName": "folded"
+            },
+            {
+              "name": "level",
+              "type": {
+                "text": "'items' | 'plugs'"
+              },
+              "default": "'items'",
+              "description": "what is drawn at rest: every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)",
+              "fieldName": "level"
+            },
+            {
+              "name": "filter",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "link kinds and families to keep, space-separated (`calls does`); the rest recedes; empty keeps all",
+              "fieldName": "filter"
             }
           ],
           "superclass": {

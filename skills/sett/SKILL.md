@@ -169,6 +169,9 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
   - `map-motion--three-agents` 7 · presence · a busy area, three agents
   - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
@@ -190,6 +193,18 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -220,7 +235,13 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
   - `map-sheet--open-api` in context · api open in its node
   - `map-sheet--open-rg` in context · rg open in its node
   - `map-sheet--open-gpui` in context · gpui open · five layers
@@ -429,6 +450,9 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
   - `map-motion--three-agents` 7 · presence · a busy area, three agents
   - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
@@ -450,6 +474,18 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -480,7 +516,13 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
   - `map-sheet--open-api` in context · api open in its node
   - `map-sheet--open-rg` in context · rg open in its node
   - `map-sheet--open-gpui` in context · gpui open · five layers
@@ -629,7 +671,7 @@ An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet 
 
 ### `<sett-item>`
 
-One function, struct or trait inside an area: an 18 px box in a 22 px row, its name in mono at the base size. The name never moves, fades or resizes; everything else is drawn around or behind it (DESIGN.md § Motion): the item's own colour, an agent's sheen, your selection tight to the box, the session ring one step out, a change flash past everything. `session` alone is a thin still ring: an agent touched this earlier. With `live` the ring breathes and a sheen sweeps: an agent is here now. When `live` flips, the item plays its own arrival or departure pulse.
+One function, struct or trait inside an area: an 18 px box in a 22 px row, its name in mono at the base size. The name never moves, fades or resizes; everything else is drawn around or behind it (DESIGN.md § Motion): the item's own colour, an agent's sheen, your selection tight to the box, the session ring one step out, a change flash past everything. `session` alone is a thin still ring: an agent touched this earlier. With `live` the ring breathes and a sheen sweeps: an agent is here now. When `live` flips, the item plays its own arrival or departure pulse. `lit` is the response to a pointer on one of its links: a blue border.
 
 - attrs:
   - `key=string` — the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`
@@ -643,6 +685,7 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `port=boolean` — a trait the domain depends on: amber pill shape
   - `finding=boolean` — a rule is broken here: dashed red
   - `selected=boolean`
+  - `lit=boolean` — at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response)
 - slots:
   - `(default)` — the item's name
 - parts:
@@ -658,6 +701,9 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
   - `map-motion--three-agents` 7 · presence · a busy area, three agents
   - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
@@ -679,6 +725,18 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -709,7 +767,123 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
+
+### `<sett-link>`
+
+One line between two things inside an open unit. It names its ends by `key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it routes every link together (tracks, lanes, trunks, docks) and hands each its path; outside a sheet a link draws the simplest square route between its ends by itself. The grammar is fixed (#58, #68): the line pattern is the family, the head is the kind, a diamond at the start is ownership; the lighter the line, the less the analyser knows. Links never carry presence. Response (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`); `selected` draws it outward from the `anchor` end (`motion.draw`), then the `flow` dashes travel, on the selection alone. A finding is red and heavier on any kind and never recedes.
+
+- attrs:
+  - `from=string` — the key of the dependent end
+  - `to=string` — the key of what it depends on
+  - `kind=LinkKind`
+  - `label=string` — the exact construct, shown with the kind's name on hover
+  - `finding=boolean` — a rule is broken on this line: red and heavier, on any kind
+  - `guessed=boolean` — the analyser guessed this kind: a lighter line
+  - `wire=boolean` — a port wire: the line takes the port kind's colour (`--_wire`)
+  - `lit=boolean` — pointed at, or an end is: blue
+  - `selected=boolean` — an end is selected: drawn outward, then flowing
+  - `anchor='from' | 'to'` — the end the selection sits at; the line is drawn outward from it
+  - `far=boolean` — unrelated to the selection or filtered out: `map.far`
+  - `backward=boolean` — points right to left: a smell (rule 11), set by the sheet from the route
+  - `plug=boolean` — the sheet's plugs level: a dot beside each end, the line on demand
+- parts:
+  - `svg` — the drawing
+- events:
+  - `sett-light` — `{ on }` when pointed at; the sheet lights it with both ends
+- stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
   - `map-sheet--open-api` in context · api open in its node
   - `map-sheet--open-rg` in context · rg open in its node
   - `map-sheet--open-gpui` in context · gpui open · five layers
@@ -903,6 +1077,9 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
   - `map-motion--three-agents` 7 · presence · a busy area, three agents
   - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
@@ -924,6 +1101,18 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -954,7 +1143,13 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
   - `map-sheet--open-api` in context · api open in its node
   - `map-sheet--open-rg` in context · rg open in its node
   - `map-sheet--open-gpui` in context · gpui open · five layers
@@ -990,6 +1185,9 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
   - `map-motion--three-agents` 7 · presence · a busy area, three agents
   - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
@@ -1011,6 +1209,18 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -1041,7 +1251,13 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
   - `map-sheet--open-api` in context · api open in its node
   - `map-sheet--open-rg` in context · rg open in its node
   - `map-sheet--open-gpui` in context · gpui open · five layers
@@ -1390,6 +1606,9 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
   - `map-motion--three-agents` 7 · presence · a busy area, three agents
   - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
@@ -1411,6 +1630,18 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -1441,7 +1672,13 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
   - `map-sheet--open-api` in context · api open in its node
   - `map-sheet--open-rg` in context · rg open in its node
   - `map-sheet--open-gpui` in context · gpui open · five layers
@@ -1493,6 +1730,9 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
   - `map-motion--three-agents` 7 · presence · a busy area, three agents
   - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
@@ -1514,6 +1754,18 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -1544,7 +1796,13 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
   - `map-sheet--open-api` in context · api open in its node
   - `map-sheet--open-rg` in context · rg open in its node
   - `map-sheet--open-gpui` in context · gpui open · five layers
@@ -1753,13 +2011,15 @@ Pinned at the top of the left pane while a session owns the branch. Header: sess
 
 ### `<sett-sheet>`
 
-The inside of an open unit: the exposes rail, the columns, the needs rail, in one row. `sett-node[tier="sheet"]` hosts one in its `inside` slot, and a ghost neighbour shows the same element folded. Everything inside is laid out by normal flow, so the links of lane 4 read their endpoints from the DOM. `folded` folds every area at once (the PoC's areas / items switch).
+The inside of an open unit: the exposes rail, the columns, the needs rail, in one row, and the `sett-link`s between the things inside, drawn over it. Everything is laid out by normal flow; the sheet is the one element that sees every link, so the rules are written once here and not by each app: - **routes**: square lines on tracks in the gutters (`map.size.track` apart), one trunk per source item and family with a dot at each branch; a link skipping a column takes a lane in the channel under the columns, one inside a column runs beside it; a right-to-left line is a smell. - **the watcher**: each frame the ends are read and only the paths whose ends moved are rewritten, so folding, pulses and re-renders never leave a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown). - **response** (DESIGN.md § Motion): pointing at an item lights its links and the item at the other end; selecting draws its links outward, the flow travels on them alone and every other link recedes to `map.far`. - **folds**: an end hidden by a folded area rides the area's edge to the chip; a selected one gets the blue dock dot where it plugs in. - **level**: `items` draws every link at rest, `plugs` a dot beside each connected item with the line on demand. A finding is drawn in every level. - **filter**: kinds and families to keep; the rest recedes to `map.far`. `folded` folds every area at once.
 
 - attrs:
   - `folded=boolean` — fold every area inside, or open them all again
+  - `level='items' | 'plugs'` — what is drawn at rest: every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)
+  - `filter=string` — link kinds and families to keep, space-separated (`calls does`); the rest recedes; empty keeps all
 - slots:
   - `exposes` — a `sett-rail side="exposes"`
-  - `(default)` — `sett-column` children
+  - `(default)` — `sett-column` children, then the `sett-link`s
   - `needs` — a `sett-rail side="needs"`
 - events:
   - `sett-fold` — bubbles from the areas inside
@@ -1772,6 +2032,9 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
   - `map-motion--three-agents` 7 · presence · a busy area, three agents
   - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
@@ -1793,6 +2056,18 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -1823,7 +2098,13 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
   - `map-sheet--open-api` in context · api open in its node
   - `map-sheet--open-rg` in context · rg open in its node
   - `map-sheet--open-gpui` in context · gpui open · five layers

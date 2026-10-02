@@ -22,6 +22,14 @@ const text = (el: any, sel: string) => el.shadowRoot.querySelector(sel).textCont
 
 beforeAll(() => Promise.all(TAGS.map((t) => customElements.whenDefined(t))));
 
+describe('sett-status-bar surface', () => {
+  it('sits on bg, never on well: its accent words are text (DESIGN.md "Colours")', () => {
+    const css = cssOf('sett-status-bar');
+    expect(css).toMatch(/background:\s*var\(--sett-color-bg\)/);
+    expect(css).not.toContain('--sett-color-well');
+  });
+});
+
 describe('status bar', () => {
   it('uses tokens only and never animates', () => {
     for (const t of TAGS) {

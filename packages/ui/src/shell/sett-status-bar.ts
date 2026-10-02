@@ -23,7 +23,7 @@ export class SettStatusBar extends LitElement {
       height: var(--sett-size-shell-status);
       padding: 0 var(--sett-space-3);
       border-top: var(--sett-stroke-hair) solid var(--sett-color-line2);
-      background: var(--sett-color-well);
+      background: var(--sett-color-bg);
       color: var(--sett-color-ink2);
       font-family: var(--sett-font-sans);
       font-size: var(--sett-font-size-md);

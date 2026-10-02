@@ -515,9 +515,15 @@
       "$type": "string",
       "$value": "⏸"
     },
+    "takenOver": {
+      "$type": "string",
+      "$value": "✋",
+      "$description": "taken over: you hold this element (DESIGN.md rule 9)"
+    },
     "steppedIn": {
       "$type": "string",
-      "$value": "✋"
+      "$value": "{glyph.takenOver}",
+      "$deprecated": "step in is gone from the vocabulary; use glyph.takenOver. Kept as an alias for one release (#63)."
     },
     "deviation": {
       "$type": "string",

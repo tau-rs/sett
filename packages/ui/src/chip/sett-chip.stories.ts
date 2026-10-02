@@ -19,7 +19,7 @@ const facts: Record<string, Record<string, string>> = {
 };
 const verbs: Record<string, [string, string, string?]> = {
   gate: ['', '', 'open'],
-  git: ['with Yokohama', 'update myself'], agent: ['follow', 'step in'], finding: ['with Yokohama', 'fix myself', 'allow'],
+  git: ['with Yokohama', 'update myself'], agent: ['follow', 'take over'], finding: ['with Yokohama', 'fix myself', 'allow'],
   review: ['with Yokohama', 'address myself', 'send back'], pipeline: ['fix with Yokohama', 'open log', 'rerun'], tree: ['with Yokohama', 'commit', 'discard'],
 };
 const chip = (kind: string, state: string, extra = {}) => {

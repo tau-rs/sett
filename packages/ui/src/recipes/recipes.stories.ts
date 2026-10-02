@@ -79,7 +79,7 @@ type Story = StoryObj;
 export const SessionLive: Story = { name: 'session · live', render: () => html`${shellCss}<div class="shell">
   ${top(html`<sett-selector state="working" session="yk">feat/refund</sett-selector>`, html`<sett-pill>●●●○</sett-pill>`)}
   <div class="strip"><span class="bn">feat/refund</span>
-    <sett-chip kind="agent" session="yk">Yokohama<span slot="count">· 3/6</span><a slot="agent">follow</a><a slot="manual">step in</a></sett-chip>
+    <sett-chip kind="agent" session="yk">Yokohama<span slot="count">· 3/6</span><a slot="agent">follow</a><a slot="manual">take over</a></sett-chip>
     <sett-chip kind="git">behind main<span slot="count">· 2</span><a slot="agent">with Yokohama</a><a slot="manual">update myself</a></sett-chip>
     <sett-chip kind="finding" state="blocking">rule<span slot="count">no-http-in-domain</span><a slot="agent">with Yokohama</a><a slot="manual">fix myself</a><a slot="verb">allow</a></sett-chip></div>
   <div class="body"><div class="left">${sessionCard}${tree}</div>

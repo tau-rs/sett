@@ -14,15 +14,15 @@ const you = (name: string) => scopeText({ kind: 'you', name });
 const session = (id: string, name: string) => scopeText({ kind: 'session', id, name });
 // main is a row of its own, then the six groups, by what a session needs
 const menu = () => html`<sett-menu slot="menu">
-  <sett-menu-item state="main">${main}<span slot="right">up to date</span></sett-menu-item>
-  <sett-menu-group label="planning"><sett-menu-item state="asks" count="1">${plan('order history')}<span slot="right">3 elements</span></sett-menu-item></sett-menu-group>
-  <sett-menu-group label="yours"><sett-menu-item state="yours">${you('fix-pool-size')}<span slot="right">3 changed</span></sett-menu-item></sett-menu-group>
-  <sett-menu-group label="needs you"><sett-menu-item state="asks" count="2">${session('w3', 'tax rounding')}<span slot="right">Malaga</span></sett-menu-item></sett-menu-group>
+  <sett-menu-item scope="main">${main}<span slot="right">up to date</span></sett-menu-item>
+  <sett-menu-group label="planning"><sett-menu-item scope="plan">${plan('order history')}<span slot="right">3 elements</span></sett-menu-item></sett-menu-group>
+  <sett-menu-group label="yours"><sett-menu-item scope="you">${you('fix-pool-size')}<span slot="right">3 changed</span></sett-menu-item></sett-menu-group>
+  <sett-menu-group label="needs you"><sett-menu-item scope="session" session="mg" state="asks" count="2">${session('w3', 'tax rounding')}<span slot="right">Malaga</span></sett-menu-item></sett-menu-group>
   <sett-menu-group label="running">
-    <sett-menu-item state="working" session="yk" selected>${session('w1', 'refund flow')}<span slot="right">Yokohama · 3/6</span></sett-menu-item>
-    <sett-menu-item state="working" session="tl">${session('w2', 'webhook retries')}<span slot="right">Lyon · 4/6</span></sett-menu-item>
+    <sett-menu-item scope="session" state="working" session="yk" selected>${session('w1', 'refund flow')}<span slot="right">Yokohama · 3/6</span></sett-menu-item>
+    <sett-menu-item scope="session" state="working" session="tl">${session('w2', 'webhook retries')}<span slot="right">Lyon · 4/6</span></sett-menu-item>
   </sett-menu-group>
-  <sett-menu-group label="in review"><sett-menu-item state="done">${session('w4', 'pg timeout')}<span slot="right">!44 · 2 remarks</span></sett-menu-item></sett-menu-group>
+  <sett-menu-group label="in review"><sett-menu-item scope="session" session="cy">${session('w4', 'pg timeout')}<span slot="right">!44 · 2 remarks</span></sett-menu-item></sett-menu-group>
   <sett-menu-group label="done"><sett-menu-item state="done">${session('w5', 'invoice export')}<span slot="right">merged</span></sett-menu-item></sett-menu-group>
 </sett-menu>`;
 
@@ -77,8 +77,8 @@ export const NarrowMenu: Story = {
   name: 'menu · narrow, rows never wrap',
   render: () => html`<sett-menu style="width:290px">
     <sett-menu-group label="running">
-      <sett-menu-item state="working" session="tl" selected>${session('w2', 'webhook retries')}<span slot="right">Lyon · 4/6</span></sett-menu-item>
-      <sett-menu-item state="working" session="mg">${session('w3', 'tax rounding for eu orders')}<span slot="right">Malaga</span></sett-menu-item>
+      <sett-menu-item scope="session" state="working" session="tl" selected>${session('w2', 'webhook retries')}<span slot="right">Lyon · 4/6</span></sett-menu-item>
+      <sett-menu-item scope="session" state="working" session="mg">${session('w3', 'tax rounding for eu orders')}<span slot="right">Malaga</span></sett-menu-item>
     </sett-menu-group></sett-menu>`,
 };
 export const ReducedMotion: Story = { name: 'reduced motion · working dot still', render: () => html`<sett-selector state="working" still>feat/refund</sett-selector>` };

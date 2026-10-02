@@ -760,6 +760,7 @@ One row: dot, name in mono, pill when the row has a state, then who or how far o
   - `state=BranchState`
   - `session=SessionId`
   - `count=number`
+  - `scope=ScopeKind` — the scope the row names: its dot takes the scope's colour, as in the selector and the scope line; `state` still gives the pill
   - `selected=boolean` — the current row
   - `still=boolean`
 - slots:

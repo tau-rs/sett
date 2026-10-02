@@ -1,6 +1,7 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { sessionStyles, type SessionId } from '../session.js';
+import { type SessionId } from '../session.js';
+import { scopeStyles, type ScopeKind } from '../scope.js';
 import { STATUS, dotStyles, pillWords, type BranchState } from '../status.js';
 import '../pill/sett-pill.js';
 
@@ -74,14 +75,17 @@ export class SettMenuItem extends LitElement {
   @property({ reflect: true }) state: BranchState = 'main';
   @property({ reflect: true }) session?: SessionId;
   @property({ type: Number }) count?: number;
+  /** the scope the row names: its dot takes the scope's colour, as in the selector and the scope line; `state` still gives the pill */
+  @property({ reflect: true }) scope?: ScopeKind;
   /** the current row */
   @property({ type: Boolean, reflect: true }) selected = false;
   @property({ type: Boolean, reflect: true }) still = false;
 
   static styles = [
-    sessionStyles,
+    scopeStyles,
     dotStyles,
     css`
+      .dot[data-kind='scope'] { background: var(--_scope); }
       :host {
         display: flex;
         align-items: center;
@@ -111,7 +115,7 @@ export class SettMenuItem extends LitElement {
   render() {
     const s = STATUS[this.state];
     return html`
-      <span class="dot" data-kind=${s.dot} ?data-pulse=${!!s.pulse}></span>
+      <span class="dot" data-kind=${this.scope ? 'scope' : s.dot} ?data-pulse=${!!s.pulse}></span>
       <span class="name"><slot></slot></span>
       ${s.pill ? html`<sett-pill kind=${s.pill} session=${this.session ?? ''}>${pillWords(this.state, this.count)}</sett-pill>` : ''}
       <span class="right"><slot name="right"></slot></span>`;

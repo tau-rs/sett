@@ -124,3 +124,27 @@ describe('the selector as scope selector', () => {
     expect(cssOf('sett-menu')).toContain('::slotted(sett-menu-item:first-child) { margin-top: var(--sett-space-1); }');
   });
 });
+
+describe('a menu row that names a scope', () => {
+  const row = async (attrs: string) => {
+    const el = await mount(`<sett-menu-item ${attrs}>row</sett-menu-item>`);
+    return el.shadowRoot!;
+  };
+  it('takes the scope colour on its dot, with no pill of its own: a plan row is amber without asking anything', async () => {
+    const r = await row('scope="plan"');
+    expect(r.querySelector('.dot')!.getAttribute('data-kind')).toBe('scope');
+    expect(r.querySelector('sett-pill')).toBeNull();
+    const css = cssOf('sett-menu-item');
+    expect(css).toMatch(/\.dot\[data-kind=['"]scope['"]\]\s*\{\s*background:\s*var\(--_scope\)/);
+    expect(css).toMatch(/:host\(\[scope=['"]plan['"]\]\)[^}]*--_scope:\s*var\(--sett-color-sug\)/);
+  });
+  it('keeps the pill of its state: a session that asks is still a pill with the same words', async () => {
+    const r = await row('scope="session" session="tl" state="asks" count="2"');
+    expect(r.querySelector('.dot')!.getAttribute('data-kind')).toBe('scope');
+    expect(r.querySelector('sett-pill')!.textContent!.trim()).toBe('asks · 2');
+  });
+  it('without scope the dot follows the state, as before', async () => {
+    const r = await row('state="working" session="yk"');
+    expect(r.querySelector('.dot')!.getAttribute('data-kind')).toBe('session');
+  });
+});

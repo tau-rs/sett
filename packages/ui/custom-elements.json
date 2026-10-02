@@ -4808,6 +4808,16 @@
             },
             {
               "kind": "field",
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "the scope the row names: its dot takes the scope's colour, as in the selector and the scope line; `state` still gives the pill",
+              "attribute": "scope",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "selected",
               "type": {
                 "text": "boolean"
@@ -4864,6 +4874,14 @@
                 "text": "number | undefined"
               },
               "fieldName": "count"
+            },
+            {
+              "name": "scope",
+              "type": {
+                "text": "ScopeKind | undefined"
+              },
+              "description": "the scope the row names: its dot takes the scope's colour, as in the selector and the scope line; `state` still gives the pill",
+              "fieldName": "scope"
             },
             {
               "name": "selected",

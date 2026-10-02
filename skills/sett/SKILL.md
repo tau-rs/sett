@@ -1356,7 +1356,7 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
 
 ### `<sett-hint>`
 
-An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet grey pill after the code. `kind` colours the text for the declaration's right-aligned facts (planned, finding, session, blame).
+An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet grey pill after the code. `kind` colours the text (planned, finding, session, blame). `planned` is the hint pill of a planned element, after the line at its site next to the `◇` in the gutter (DESIGN.md rule 12): the plan is never an inserted line.
 
 - attrs:
   - `kind=HintKind`
@@ -1365,8 +1365,9 @@ An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet 
 - stories:
   - `editor-decorations--syntax` syntax · seven classes at one lightness
   - `editor-decorations--session-working` a session is working · gutter bars, blame on the caret line
-  - `editor-decorations--you-stepped-in` you stepped in · blue bar
-  - `editor-decorations--planned` a plan targets this item · ◇ and an amber hint
+  - `editor-decorations--you-took-over` you took over · your bar is blue
+  - `editor-decorations--bars-per-author` change bars per author · Yokohama, Lyon, you
+  - `editor-decorations--planned` a planned element · ◇ in the gutter and the hint pill at its site, never an inserted line
   - `editor-decorations--finding` a finding · wavy underline, ⚠ in the gutter, count in the hints
   - `editor-decorations--witness` a witness · highlighted span, ◆
   - `editor-decorations--cross-repo` a symbol from another repo · italic

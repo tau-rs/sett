@@ -6,7 +6,7 @@ export { sessionOrder, type SessionId } from './session.js';
 export { SettSelector } from './selector/sett-selector.js';
 export { SettMenu, SettMenuGroup, SettMenuItem } from './menu/sett-menu.js';
 export { STATUS, pillWords, type BranchState } from './status.js';
-export { SettSessionCard, SettPlanRow, SettSubAgent, type PlanState, type SubState } from './session-card/sett-session-card.js';
+export { SettSessionCard, SettPlanRow, SettSubAgent, GATE_WORDS, gateOf, type PlanState, type SubState, type GateWord } from './session-card/sett-session-card.js';
 export { SettThread, SettMsg, SettTool, SettChanged, SettOption, SettQuestion, SettDeviation, SettVerbs, SettComposer, type ThreadIdentity, type MsgFrom, type VerbsState, type ComposerMode } from './thread/sett-thread.js';
 export { SettCard, SettCardRow, SettPipe, type CardVariant, type RowKind } from './card/sett-card.js';
 export { SettButton, SettSplitButton, SettGatedButton, type ButtonVariant, type ButtonSize } from './button/sett-button.js';

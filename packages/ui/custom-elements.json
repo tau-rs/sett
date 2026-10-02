@@ -1271,6 +1271,22 @@
         },
         {
           "kind": "js",
+          "name": "GATE_WORDS",
+          "declaration": {
+            "name": "GATE_WORDS",
+            "module": "./session-card/sett-session-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "gateOf",
+          "declaration": {
+            "name": "gateOf",
+            "module": "./session-card/sett-session-card.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "PlanState",
           "declaration": {
             "name": "PlanState",
@@ -1282,6 +1298,14 @@
           "name": "SubState",
           "declaration": {
             "name": "SubState",
+            "module": "./session-card/sett-session-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "GateWord",
+          "declaration": {
+            "name": "GateWord",
             "module": "./session-card/sett-session-card.js"
           }
         },
@@ -5900,27 +5924,66 @@
       "path": "src/session-card/sett-session-card.ts",
       "declarations": [
         {
+          "kind": "variable",
+          "name": "GATE_WORDS",
+          "type": {
+            "text": "['done', 'running', 'gate', 'failed n/m', 'waiting']"
+          },
+          "default": "['done', 'running', 'gate', 'failed n/m', 'waiting']"
+        },
+        {
+          "kind": "function",
+          "name": "gateOf",
+          "return": {
+            "type": {
+              "text": "GateWord"
+            }
+          },
+          "parameters": [
+            {
+              "name": "words",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the gate word of a group's `gate` attribute: its first word; anything else reads as waiting"
+        },
+        {
           "kind": "class",
-          "description": "Pinned at the top of the left pane while a session owns the branch. Header:\nsession name in its colour, the driver, then n/m. One sett-plan-row per plan\nelement. Foot: when it started and a link to the thread.",
+          "description": "The session card, in the inspector when a session is the selection\n(DESIGN.md \"The shell\" rule 6). Header: session name in its colour, the\ndriver, then n/m. One sett-plan-row per plan element, or one group row per\nlane with its elements inside. Foot: when it started, files and git, and a\nlink to the thread. Under the foot, its fixed bar: a sett-verbs in the\n`verbs` slot (rule 9: running `pause · stop`, paused `resume · take over ·\nstop`, taken over `stop`) and a sett-composer in the `composer` slot, which\nis the hand-back note (`mode=\"handback\"`) while you hold an element.",
           "name": "SettSessionCard",
           "cssParts": [
             {
               "description": "the header row",
               "name": "header"
+            },
+            {
+              "description": "the verbs bar and composer, when given",
+              "name": "bar"
             }
           ],
           "slots": [
             {
-              "description": "sett-plan-row elements",
+              "description": "sett-plan-row elements, or group rows",
               "name": ""
             },
             {
-              "description": "the foot text, e.g. `started 14 min ago`",
+              "description": "the foot text, e.g. `started 14 min ago · 4 changed · 2 ahead`",
               "name": "foot"
             },
             {
               "description": "the link to the thread",
               "name": "thread"
+            },
+            {
+              "description": "the fixed verbs bar, a sett-verbs",
+              "name": "verbs"
+            },
+            {
+              "description": "the composer under the verbs, a sett-composer",
+              "name": "composer"
             }
           ],
           "members": [
@@ -5992,6 +6055,24 @@
               "description": "force the reduced-motion rendering",
               "attribute": "still",
               "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "has",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "slot",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onSlotChange",
+              "privacy": "private"
             }
           ],
           "attributes": [
@@ -6064,12 +6145,16 @@
         },
         {
           "kind": "class",
-          "description": "One plan element: glyph, name in mono, and on the right only what the glyph\ncannot say (asks · n, paused, deviation, resolve, you). A `resolve` element is\nthe one a conflict adds to the plan, both intents in context (spec §13.19).\nSub-agents go in the `sub`\nslot and fold under the row, folded by default; the row then shows the\ncount and a glyph run.",
+          "description": "One plan element: glyph, name in mono, and on the right only what the glyph\ncannot say (asks · n, paused, deviation, resolve, you). A `resolve` element is\nthe one a conflict adds to the plan, both intents in context (spec §13.19).\n`taken-over` is you holding the element: `✋` in sel, `you` on the right\n(rule 9; `stepped-in` is its old name, accepted for one release).\n\nWith `kind=\"group\"` the row is a lane of the plan with its gate (rule 7):\nthe name is the group's (`group 1`), the right cell reads the gate in plain\nwords, `done` · `running` · `gate` · `failed n/m` · `waiting`, from the\n`gate` attribute, and the glyph says the same. Its elements go in the\n`element` slot, under it. Sub-agents go in the `sub` slot and fold under\ntheir group (under their element when the plan has no groups), folded by\ndefault; the row then shows the count and a glyph run.",
           "name": "SettPlanRow",
           "cssParts": [
             {
               "description": "the row itself",
               "name": "row"
+            },
+            {
+              "description": "a group's elements",
+              "name": "elements"
             },
             {
               "description": "the sub-agent list",
@@ -6078,8 +6163,12 @@
           ],
           "slots": [
             {
-              "description": "the element name",
+              "description": "the element name, or the group's",
               "name": ""
+            },
+            {
+              "description": "sett-plan-row elements of a group",
+              "name": "element"
             },
             {
               "description": "sett-sub-agent elements",
@@ -6096,6 +6185,25 @@
               "default": "'pending'",
               "attribute": "state",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "'group' | undefined"
+              },
+              "description": "`group`: a lane of the plan with its gate",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gate",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a group's gate words: `done` · `running` · `gate` · `failed n/m` · `waiting`",
+              "attribute": "gate"
             },
             {
               "kind": "field",
@@ -6189,6 +6297,22 @@
               "fieldName": "state"
             },
             {
+              "name": "kind",
+              "type": {
+                "text": "'group' | undefined"
+              },
+              "description": "`group`: a lane of the plan with its gate",
+              "fieldName": "kind"
+            },
+            {
+              "name": "gate",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "a group's gate words: `done` · `running` · `gate` · `failed n/m` · `waiting`",
+              "fieldName": "gate"
+            },
+            {
               "name": "current",
               "type": {
                 "text": "boolean"
@@ -6271,6 +6395,22 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "GATE_WORDS",
+          "declaration": {
+            "name": "GATE_WORDS",
+            "module": "src/session-card/sett-session-card.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "gateOf",
+          "declaration": {
+            "name": "gateOf",
+            "module": "src/session-card/sett-session-card.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "SettSessionCard",

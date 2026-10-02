@@ -18,7 +18,7 @@ describe('sett.css', () => {
   });
   it('names follow --sett-<dtcg-path> in kebab case', () => {
     const css = dist('sett.css');
-    for (const v of ['--sett-color-sel', '--sett-color-sel-bg', '--sett-session-yk-sub', '--sett-map-kind-rpc-color', '--sett-radius-chip', '--sett-map-threshold-fold-floor', '--sett-glyph-stepped-in'])
+    for (const v of ['--sett-color-sel', '--sett-color-sel-bg', '--sett-session-yk-sub', '--sett-map-kind-rpc-color', '--sett-radius-chip', '--sett-map-threshold-fold-floor', '--sett-glyph-taken-over', '--sett-glyph-stepped-in'])
       expect(css).toContain(`${v}:`);
     expect(css).not.toMatch(/--sett-[a-z0-9-]*[A-Z]/);
   });
@@ -27,7 +27,7 @@ describe('sett.css', () => {
 describe('tokens.json', () => {
   const j = JSON.parse(dist('tokens.json'));
   it('counts every token per source file', () => {
-    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 143, light: 94, dark: 94 });
+    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 144, light: 94, dark: 94 });
   });
   it('the shell sizes of the arch V1 spec §4 are tokens', () => {
     const px = Object.fromEntries(j.base.map((t: { name: string; css: string }) => [t.name, t.css]));

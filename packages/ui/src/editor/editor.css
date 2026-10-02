@@ -20,13 +20,22 @@
 .sett-ed-indent     { color: var(--sett-editor-indent-guide); }
 .sett-ed-bracket    { box-shadow: inset 0 0 0 var(--sett-stroke-hair) var(--sett-editor-bracket); border-radius: var(--sett-radius-item); }
 
-/* gutter: a change bar per line, in the author's colour */
+/* gutter: a change bar per line, in the author's colour (DESIGN.md rule 12). `--you` is sel; `--session` reads
+   the host's --_session; one class per session id lets the decoration API name the author line by line. */
 .sett-gutter-bar         { border-left: var(--sett-stroke-frame) solid transparent; }
 .sett-gutter-bar--you    { border-left-color: var(--sett-editor-gutter-you); }
 .sett-gutter-bar--session { border-left-color: var(--_session, var(--sett-session-yk-main)); }
+.sett-gutter-bar--yk     { border-left-color: var(--sett-session-yk-main); }
+.sett-gutter-bar--tl     { border-left-color: var(--sett-session-tl-main); }
+.sett-gutter-bar--mg     { border-left-color: var(--sett-session-mg-main); }
+.sett-gutter-bar--cy     { border-left-color: var(--sett-session-cy-main); }
+.sett-gutter-bar--ol     { border-left-color: var(--sett-session-ol-main); }
+.sett-gutter-bar--sn     { border-left-color: var(--sett-session-sn-main); }
+.sett-gutter-bar--pl     { border-left-color: var(--sett-session-pl-main); }
 .sett-gutter-glyph { display: inline-block; width: var(--sett-space-3); text-align: center; font-family: var(--sett-font-sans); font-size: var(--sett-font-size-xs); color: var(--sett-color-mute); }
 .sett-gutter-glyph--finding::before { content: var(--sett-glyph-finding); color: var(--sett-color-bad); }
 .sett-gutter-glyph--warning::before { content: var(--sett-glyph-finding); color: var(--sett-color-sug); }
+/* a planned element: this glyph in the gutter and a sett-hint pill after the line at its site, never an inserted line */
 .sett-gutter-glyph--planned::before { content: "\25C7"; color: var(--sett-color-sug); }
 .sett-gutter-glyph--witness::before { content: "\25C6"; color: var(--sett-color-sel); }
 

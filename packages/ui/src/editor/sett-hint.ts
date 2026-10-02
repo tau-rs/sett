@@ -5,8 +5,10 @@ export type HintKind = 'default' | 'planned' | 'finding' | 'session' | 'blame';
 
 /**
  * An inlay hint: rust-analyzer's type hints and arch's own use one shape, a
- * quiet grey pill after the code. `kind` colours the text for the
- * declaration's right-aligned facts (planned, finding, session, blame).
+ * quiet grey pill after the code. `kind` colours the text (planned, finding,
+ * session, blame). `planned` is the hint pill of a planned element, after the
+ * line at its site next to the `◇` in the gutter (DESIGN.md rule 12): the plan
+ * is never an inserted line.
  * @slot - the hint text
  */
 @customElement('sett-hint')

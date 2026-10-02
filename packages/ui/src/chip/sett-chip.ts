@@ -4,10 +4,10 @@ import { sessionStyles, type SessionId } from '../session.js';
 import '../tag/sett-tag.js';
 import type { TagKind } from '../tag/sett-tag.js';
 
-export type ChipKind = 'git' | 'agent' | 'finding' | 'review' | 'pipeline' | 'tree' | 'gate';
+export type ChipKind = 'git' | 'agent' | 'finding' | 'review' | 'pipeline' | 'tree' | 'gate' | 'detected';
 export type ChipState = 'normal' | 'blocking' | 'waiting' | 'done';
 
-const TAG_KIND: Record<ChipKind, TagKind> = { git: 'sel', agent: 'session', finding: 'bad', review: 'sug', pipeline: 'ok', tree: 'default', gate: 'session' };
+const TAG_KIND: Record<ChipKind, TagKind> = { git: 'sel', agent: 'session', finding: 'bad', review: 'sug', pipeline: 'ok', tree: 'default', gate: 'session', detected: 'sel' };
 
 /**
  * Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent
@@ -17,7 +17,11 @@ const TAG_KIND: Record<ChipKind, TagKind> = { git: 'sel', agent: 'session', find
  * contrast, its label turns ok with ✓ and it gains a plain `dismiss` verb.
  * The `gate` kind is a group's gate (`gate · group 1 → group 2 · judge
  * running`, verb `open`): its label takes the colour of the session that runs
- * it, and a failed gate (`failed 1/2`) is the `blocking` state. Never animates.
+ * it, and a failed gate (`failed 1/2`) is the `blocking` state. The
+ * `detected` kind is your own work, found by the watcher and never declared
+ * (`changes detected · 3 files`, spec §4 "Work by hand"): its label is `sel`
+ * like everything that is yours; agent door `delegate the rest`, manual door
+ * `commit`. Never animates.
  *
  * @slot - the fact, lowercase
  * @slot count - a mono count or identifier after the fact, e.g. `· 2`
@@ -36,7 +40,7 @@ export class SettChip extends LitElement {
   /** normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓) */
   @property({ reflect: true }) state: ChipState = 'normal';
 
-  /** session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label */
+  /** session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label; detected is yours and takes none */
   @property({ reflect: true }) session?: SessionId;
 
   /** the "me first" setting: manual door first and bold */

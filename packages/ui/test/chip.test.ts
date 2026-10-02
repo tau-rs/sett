@@ -58,6 +58,14 @@ describe('sett-chip', () => {
     expect((await tag('<sett-chip kind="gate" state="blocking" session="tl">failed 1/2<a slot="verb">open</a></sett-chip>')).getAttribute('kind')).toBe('bad');
     expect((await tag('<sett-chip kind="gate" state="done" session="tl">passed</sett-chip>')).getAttribute('kind')).toBe('ok');
   });
+  it('detected is yours: a sel label, no session colour', async () => {
+    const tag = async (m: string) => (await mount(m)).shadowRoot!.querySelector('sett-tag')!;
+    const t = await tag('<sett-chip kind="detected">changes detected<span slot="count">· 3 files</span><a slot="agent">delegate the rest</a><a slot="manual">commit</a></sett-chip>');
+    expect(t.getAttribute('kind')).toBe('sel');
+    expect(t.textContent).toBe('detected');
+    expect((await tag('<sett-chip kind="detected" state="blocking">changes collide with w1<a slot="agent">delegate the rest</a><a slot="manual">commit</a></sett-chip>')).getAttribute('kind')).toBe('bad');
+    expect((await tag('<sett-chip kind="detected" state="done">committed</sett-chip>')).getAttribute('kind')).toBe('ok');
+  });
   it('a separator stands only before a verb that is there', async () => {
     const seps = (el: HTMLElement) => el.shadowRoot!.querySelectorAll('.sep').length;
     const one = await mount('<sett-chip kind="gate" session="yk">group 1 → group 2 · judge running<a slot="verb">open</a></sett-chip>');
@@ -100,6 +108,11 @@ describe('every chip carries a verb', () => {
     host.innerHTML = '<sett-chip kind="git">behind main</sett-chip><sett-chip kind="git" state="done">updated</sett-chip>';
     const bare = Array.from(host.querySelectorAll('sett-chip')).filter((chip) => verbs(chip).length === 0 && chip.getAttribute('state') !== 'done');
     expect(bare.length).toBe(1);
+  });
+  it("a detected chip's doors are delegate the rest, then commit (spec §4 work by hand)", () => {
+    const detected = chipsOf(chipStories).filter(({ chip }) => chip.getAttribute('kind') === 'detected' && chip.getAttribute('state') !== 'done');
+    expect(detected.length).toBeGreaterThanOrEqual(3);
+    for (const { where, chip } of detected) expect(verbs(chip).map((v) => `${v.getAttribute('slot')}:${v.textContent}`), where).toEqual(['agent:delegate the rest', 'manual:commit']);
   });
   it("a gate chip's verb is open, never step in", () => {
     const gates = chipsOf(chipStories).filter(({ chip }) => chip.getAttribute('kind') === 'gate');

@@ -806,12 +806,12 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
 
 ### `<sett-chip>`
 
-Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door first and bold, manual door second and plain (P-1); `me-first` swaps them. A chip always carries a verb (DESIGN.md "The shell" rule 1); a separator stands before each verb that is there. A done chip keeps full contrast, its label turns ok with ✓ and it gains a plain `dismiss` verb. The `gate` kind is a group's gate (`gate · group 1 → group 2 · judge running`, verb `open`): its label takes the colour of the session that runs it, and a failed gate (`failed 1/2`) is the `blocking` state. Never animates.
+Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door first and bold, manual door second and plain (P-1); `me-first` swaps them. A chip always carries a verb (DESIGN.md "The shell" rule 1); a separator stands before each verb that is there. A done chip keeps full contrast, its label turns ok with ✓ and it gains a plain `dismiss` verb. The `gate` kind is a group's gate (`gate · group 1 → group 2 · judge running`, verb `open`): its label takes the colour of the session that runs it, and a failed gate (`failed 1/2`) is the `blocking` state. The `detected` kind is your own work, found by the watcher and never declared (`changes detected · 3 files`, spec §4 "Work by hand"): its label is `sel` like everything that is yours; agent door `delegate the rest`, manual door `commit`. Never animates.
 
 - attrs:
   - `kind=ChipKind` — what the chip is about
   - `state=ChipState` — normal · blocking (red border, red label) · waiting (amber fill and border) · done (ok label with ✓)
-  - `session=SessionId` — session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label
+  - `session=SessionId` — session id for the agent and gate kinds; unknown ids fall back to yk; a gate with no session keeps a neutral label; detected is yours and takes none
   - `me-first=boolean` — the "me first" setting: manual door first and bold
 - slots:
   - `(default)` — the fact, lowercase
@@ -834,6 +834,8 @@ Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door 
   - `primitives-chip--tree` Tree
   - `primitives-chip--gate-running` kind · gate · running, in the session's colour, verb open
   - `primitives-chip--gate-failed` kind · gate · failed n/m, blocking
+  - `primitives-chip--detected` kind · detected · your own work, found by the watcher · four states
+  - `primitives-chip--detected-in-bar` in context · a you session: the detected chip beside the agent chip
   - `primitives-chip--normal` Normal
   - `primitives-chip--blocking` Blocking
   - `primitives-chip--waiting` Waiting
@@ -1354,7 +1356,7 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
 
 ### `<sett-hint>`
 
-An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet grey pill after the code. `kind` colours the text for the declaration's right-aligned facts (planned, finding, session, blame).
+An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet grey pill after the code. `kind` colours the text (planned, finding, session, blame). `planned` is the hint pill of a planned element, after the line at its site next to the `◇` in the gutter (DESIGN.md rule 12): the plan is never an inserted line.
 
 - attrs:
   - `kind=HintKind`
@@ -1363,8 +1365,9 @@ An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet 
 - stories:
   - `editor-decorations--syntax` syntax · seven classes at one lightness
   - `editor-decorations--session-working` a session is working · gutter bars, blame on the caret line
-  - `editor-decorations--you-stepped-in` you stepped in · blue bar
-  - `editor-decorations--planned` a plan targets this item · ◇ and an amber hint
+  - `editor-decorations--you-took-over` you took over · your bar is blue
+  - `editor-decorations--bars-per-author` change bars per author · Yokohama, Lyon, you
+  - `editor-decorations--planned` a planned element · ◇ in the gutter and the hint pill at its site, never an inserted line
   - `editor-decorations--finding` a finding · wavy underline, ⚠ in the gutter, count in the hints
   - `editor-decorations--witness` a witness · highlighted span, ◆
   - `editor-decorations--cross-repo` a symbol from another repo · italic
@@ -2366,19 +2369,23 @@ The pipeline bar: one segment per step. `steps` is a comma list of ok | bad | ru
 
 ### `<sett-plan-row>`
 
-One plan element: glyph, name in mono, and on the right only what the glyph cannot say (asks · n, paused, deviation, resolve, you). A `resolve` element is the one a conflict adds to the plan, both intents in context (spec §13.19). Sub-agents go in the `sub` slot and fold under the row, folded by default; the row then shows the count and a glyph run.
+One plan element: glyph, name in mono, and on the right only what the glyph cannot say (asks · n, paused, deviation, resolve, you). A `resolve` element is the one a conflict adds to the plan, both intents in context (spec §13.19). `taken-over` is you holding the element: `✋` in sel, `you` on the right (rule 9; `stepped-in` is its old name, accepted for one release). With `kind="group"` the row is a lane of the plan with its gate (rule 7): the name is the group's (`group 1`), the right cell reads the gate in plain words, `done` · `running` · `gate` · `failed n/m` · `waiting`, from the `gate` attribute, and the glyph says the same. Its elements go in the `element` slot, under it. Sub-agents go in the `sub` slot and fold under their group (under their element when the plan has no groups), folded by default; the row then shows the count and a glyph run.
 
 - attrs:
   - `state=PlanState`
+  - `kind='group'` — `group`: a lane of the plan with its gate
+  - `gate=string` — a group's gate words, from one source with the Sessions view (`GROUP_STATES`): `done` · `running` · `gate` · `failed n/m` · `waiting`
   - `current=boolean` — the row the session is on now: takes the session tint
   - `count=number` — number of open asks, for the asks state
   - `who=string` — who is on it when it is not the session, e.g. `you`
   - `open=boolean` — sub-agent list unfolded
 - slots:
-  - `(default)` — the element name
+  - `(default)` — the element name, or the group's
+  - `element` — sett-plan-row elements of a group
   - `sub` — sett-sub-agent elements
 - parts:
   - `row` — the row itself
+  - `elements` — a group's elements
   - `subs` — the sub-agent list
 - events:
   - `sett-toggle` — when the sub-agent list folds or unfolds
@@ -2386,8 +2393,16 @@ One plan element: glyph, name in mono, and on the right only what the glyph cann
   - `primitives-session-card--running-with-sub-agents` running · element 3 of 6 · six sub-agents, folded
   - `primitives-session-card--sub-agents-open` running · sub-agents unfolded
   - `primitives-session-card--many-sub-agents` running · twelve sub-agents
-  - `primitives-session-card--trouble` asks · paused · stepped in · deviation
+  - `primitives-session-card--trouble` asks · paused · taken over · deviation
   - `primitives-session-card--resolve` resolve · a conflict added an element to the plan (spec §13.19)
+  - `primitives-session-card--groups` groups as lanes · done · running · waiting
+  - `primitives-session-card--groups-open` groups · sub-agents unfolded under their group
+  - `primitives-session-card--group-gate` gate · group 1 runs its gate, group 2 waits
+  - `primitives-session-card--group-gate-failed` gate failed 1/2 · a fix round runs
+  - `primitives-session-card--gate-column` the gate words · done · running · gate · failed n/m · waiting
+  - `primitives-session-card--verbs-running` with its bar · running · pause · stop
+  - `primitives-session-card--verbs-paused` with its bar · paused · resume · take over · stop
+  - `primitives-session-card--verbs-taken-over` with its bar · taken over · ✋ you · stop · the composer is the hand-back note
   - `primitives-session-card--glyph-column` the glyph column
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
@@ -2817,7 +2832,7 @@ The scope selector in the bar: dot, the words of the scope, a pill when it has a
 
 ### `<sett-session-card>`
 
-Pinned at the top of the left pane while a session owns the branch. Header: session name in its colour, the driver, then n/m. One sett-plan-row per plan element. Foot: when it started and a link to the thread.
+The session card, in the inspector when a session is the selection (DESIGN.md "The shell" rule 6). Header: session name in its colour, the driver, then n/m. One sett-plan-row per plan element, or one group row per lane with its elements inside. Foot: when it started, files and git, and a link to the thread. Under the foot, its fixed bar: a sett-verbs in the `verbs` slot (rule 9: running `pause · stop`, paused `resume · take over · stop`, taken over `stop`) and a sett-composer in the `composer` slot, which is the hand-back note (`mode="handback"`) while you hold an element.
 
 - attrs:
   - `name=string` — session name, shown in the session colour
@@ -2828,17 +2843,28 @@ Pinned at the top of the left pane while a session owns the branch. Header: sess
   - `running=boolean` — the session is working now: the dot pulses
   - `still=boolean` — force the reduced-motion rendering
 - slots:
-  - `(default)` — sett-plan-row elements
-  - `foot` — the foot text, e.g. `started 14 min ago`
+  - `(default)` — sett-plan-row elements, or group rows
+  - `foot` — the foot text, e.g. `started 14 min ago · 4 changed · 2 ahead`
   - `thread` — the link to the thread
+  - `verbs` — the fixed verbs bar, a sett-verbs
+  - `composer` — the composer under the verbs, a sett-composer
 - parts:
   - `header` — the header row
+  - `bar` — the verbs bar and composer, when given
 - stories:
   - `primitives-session-card--running-with-sub-agents` running · element 3 of 6 · six sub-agents, folded
   - `primitives-session-card--sub-agents-open` running · sub-agents unfolded
   - `primitives-session-card--many-sub-agents` running · twelve sub-agents
-  - `primitives-session-card--trouble` asks · paused · stepped in · deviation
+  - `primitives-session-card--trouble` asks · paused · taken over · deviation
   - `primitives-session-card--resolve` resolve · a conflict added an element to the plan (spec §13.19)
+  - `primitives-session-card--groups` groups as lanes · done · running · waiting
+  - `primitives-session-card--groups-open` groups · sub-agents unfolded under their group
+  - `primitives-session-card--group-gate` gate · group 1 runs its gate, group 2 waits
+  - `primitives-session-card--group-gate-failed` gate failed 1/2 · a fix round runs
+  - `primitives-session-card--gate-column` the gate words · done · running · gate · failed n/m · waiting
+  - `primitives-session-card--verbs-running` with its bar · running · pause · stop
+  - `primitives-session-card--verbs-paused` with its bar · paused · resume · take over · stop
+  - `primitives-session-card--verbs-taken-over` with its bar · taken over · ✋ you · stop · the composer is the hand-back note
   - `primitives-session-card--glyph-column` the glyph column
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
@@ -3332,8 +3358,16 @@ A sub-agent row under a plan element: glyph and name, same rhythm as the plan ro
   - `primitives-session-card--running-with-sub-agents` running · element 3 of 6 · six sub-agents, folded
   - `primitives-session-card--sub-agents-open` running · sub-agents unfolded
   - `primitives-session-card--many-sub-agents` running · twelve sub-agents
-  - `primitives-session-card--trouble` asks · paused · stepped in · deviation
+  - `primitives-session-card--trouble` asks · paused · taken over · deviation
   - `primitives-session-card--resolve` resolve · a conflict added an element to the plan (spec §13.19)
+  - `primitives-session-card--groups` groups as lanes · done · running · waiting
+  - `primitives-session-card--groups-open` groups · sub-agents unfolded under their group
+  - `primitives-session-card--group-gate` gate · group 1 runs its gate, group 2 waits
+  - `primitives-session-card--group-gate-failed` gate failed 1/2 · a fix round runs
+  - `primitives-session-card--gate-column` the gate words · done · running · gate · failed n/m · waiting
+  - `primitives-session-card--verbs-running` with its bar · running · pause · stop
+  - `primitives-session-card--verbs-paused` with its bar · paused · resume · take over · stop
+  - `primitives-session-card--verbs-taken-over` with its bar · taken over · ✋ you · stop · the composer is the hand-back note
   - `primitives-session-card--glyph-column` the glyph column
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still

@@ -1,5 +1,7 @@
 # sett · handoff to Claude Code
 
+> Superseded for the shell by the roadmap rebase of 2026-10-02 (arch V1 spec): what to keep, change and add, and the lanes, are issue #59 and the issues it lists. The phases below describe what was built before it; the states list still holds for those components.
+
 Repo: `tau-rs/sett`. Package name `@tau-rs/sett` (tokens `@tau-rs/sett-tokens`, crate `sett-tokens`). Custom-element prefix `sett-`. CSS variable prefix `--sett-`.
 
 ## Inputs in this folder

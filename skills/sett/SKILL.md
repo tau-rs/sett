@@ -477,6 +477,97 @@ A message. Yours sit on the right in the selection tint; an agent's on the left 
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
 
+### `<sett-node>`
+
+A unit's box on the board, at one of four tiers. The host sets the box and the tier (from the on-screen width, see `tierFor`); the node never resizes itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the meta lines and badges; `card` adds the port rows in two columns and the foot; `sheet` hosts what is inside.
+
+- attrs:
+  - `name=string`
+  - `kind=string` — app · library · external · … shown mute after the name
+  - `tier=NodeTier`
+  - `selected=boolean` — the selection: sel border and ring
+  - `focused=boolean` — the focused card: sel ring and the focus shadow, above its neighbours
+  - `far=boolean` — unrelated to the focus: recedes to mute ink and a faint border (text stays above 4.5:1; `map.far` opacity is for edges and dots)
+  - `declared=boolean` — declared by hand, nothing verified: dashed, secondary ink (rule 10)
+- slots:
+  - `(default)` — meta lines, one element each (`entry · hexagon`, `1 crate · 140 items`)
+  - `badges` — count badges in the head (a finding count, a session count)
+  - `exposes` — `sett-port-row side="exposes"` rows, left column of a card
+  - `needs` — `sett-port-row side="needs"` rows, right column of a card
+  - `inside` — the open unit (sheet tier)
+- parts:
+  - `hd` — the head: name · kind · badges
+  - `ports` — the two-column port grid
+  - `foot` — the foot with the open / enter acts
+- events:
+  - `sett-open` — `{ action: 'open' | 'enter' | 'close' }` from the foot
+- stories:
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+
+### `<sett-op-row>`
+
+One operation under a port in a rail: a route (method chip · path · return or `→ handler`), an rpc (`name(args) → out`), a schema line, a table, a cli flag, plain text, or the `… n more` fold line. One row = `map.size.opRow`.
+
+- attrs:
+  - `kind=OpKind`
+  - `method=string` — GET · POST · PUT · PATCH · DELETE for a route; the flag itself (`-i`) for a flag
+  - `path=string` — the route path, the rpc name, or the flag's description
+  - `returns=string` — what comes back, shown mute after the path when there is no handler
+  - `handler=string` — the item that handles the route; shown as `→ handler` in sel and reflected as `has-handler`
+  - `count=number` — hidden rows behind a `more` row
+  - `selected=boolean`
+- slots:
+  - `(default)` — the text of a schema, table, text or rpc-args row
+- parts:
+  - `method` — the method chip
+- events:
+  - `sett-expand` — from the `more` row
+  - `sett-select` — `{ kind, path }` when a row with a handler or a route is clicked
+- stories:
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+
 ### `<sett-option>`
 
 One option in a question or a deviation: a row that reads left to right, with what it changes on the right (`effect`) or a label on the left (`label`).
@@ -585,6 +676,51 @@ One plan element: glyph, name in mono, and on the right only what the glyph cann
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
 
+### `<sett-port-row>`
+
+One port of a unit: the dot on the border (the kind's colour), then `kind · name · count`. On the `exposes` side the dot is on the left; on `needs` the row mirrors and the dot is on the right. Op rows go in the default slot; past `fold` of them a `… n more` row appears until expanded.
+
+- attrs:
+  - `kind=PortKind`
+  - `name=string`
+  - `count=string` — a count or short fact, mono, tabular
+  - `side=PortSide`
+  - `format=string` — the contract's format, shown mute at the far end (rails only)
+  - `fold=number` — op rows shown before `… n more`
+  - `selected=boolean`
+  - `compact=boolean` — compact density: `map.size.portRowCompact`
+  - `expanded=boolean`
+- slots:
+  - `(default)` — `sett-op-row` children (a rail shows them; a card's rows have none)
+- parts:
+  - `dot` — the border dot
+  - `row` — the kind · name · count line
+- events:
+  - `sett-select` — `{ kind, name, side }` when the row is clicked
+- stories:
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+
 ### `<sett-question>`
 
 The agent asks. Each option says what it changes; `later` leaves it waiting.
@@ -609,6 +745,41 @@ The agent asks. Each option says what it changes; `later` leaves it waiting.
   - `thread-thread--verbs` verbs bar · running, paused, taken over
   - `thread-thread--composer` composer · send and hand back
   - `thread-thread--hand-back-moment` hand back · before and after
+
+### `<sett-rail>`
+
+A unit's API block on one flat side: `exposes` on the left, `needs` on the right. Ports go in the slot named after their section; the rail keeps the sections in the fixed order, labels them per side, and hides empty ones. Headers are lowercase and mute. Width is `map.size.rail`.
+
+- attrs:
+  - `side=PortSide`
+- slots:
+  - `services` — · third-party · events · data · system · crates - `sett-port-row` children
+- parts:
+  - `header` — the `exposes · n ports` line
+  - `section` — each section header
+- stories:
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside (lanes 3+)
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, lowercase headers
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
 
 ### `<sett-seg>`
 

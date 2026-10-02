@@ -13,3 +13,8 @@ export { SettButton, SettSplitButton, SettGatedButton, type ButtonVariant, type 
 export { SettTabbar, SettTab, SettSeg, SettSegItem, SettOverlayToggles, SettToggle } from './tabs/sett-tabs.js';
 export { SettHint, type HintKind } from './editor/sett-hint.js';
 export { SettFunnel, SettFunnelStep } from './funnel/sett-funnel.js';
+export { SettOpRow, type OpKind } from './map/sett-op-row.js';
+export { SettPortRow, PORT_KINDS, type PortKind, type PortSide } from './map/sett-port-row.js';
+export { SettRail, RAIL_SECTIONS, RAIL_LABEL, type RailSection } from './map/sett-rail.js';
+export { SettNode, tierFor, type NodeTier } from './map/sett-node.js';
+export { splitLabel, portOf, unitOf, unitPorts, opOf, opsOf, sectionOf, type Fixture, type FixtureUnit, type FixtureContract, type Port, type Op } from './map/fixtures.js';

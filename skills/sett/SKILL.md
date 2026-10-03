@@ -446,6 +446,12 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -1198,6 +1204,12 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -2351,6 +2363,12 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -2501,6 +2519,12 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -2690,6 +2714,123 @@ One row: dot, name in mono, pill when the row has a state, then who or how far o
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
 
+### `<sett-minimap>`
+
+The whole map at a glance: the world's rects and, over them, the viewport rect. `mode` says which world it draws: `board` (the units of the repo) or `sheet` (the columns and areas inside the open unit). A click or a drag pans: the minimap only says where, the camera is the host's. It draws what it is given and nothing animates: the viewport rect is where the camera is. The map design shows a minimap only when the map exceeds the viewport (MAP-13). That is the host's condition: the element is present or absent.
+
+- attrs:
+  - `mode=MinimapMode`
+  - `rects=MinimapRect[]` — the rects of the world, in paint order
+  - `view=MinimapBox` — what the camera shows, in world coordinates
+  - `world=MinimapBox` — the world's bounds; by default the union of the rects and the view
+- slots:
+  - `(default)` — the name of what is drawn, after the mode: `zed`, `gpui`
+- parts:
+  - `world` — the drawing
+- events:
+  - `sett-pan` — `{ x, y }`: the world point the viewport should centre on (click, drag, arrow keys)
+- stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-panel--default` Default
+  - `map-panel--status-line` status line · a message in the well tint · at rest the row keeps its height
+  - `map-panel--says-then-clears` says, then clears · after 1.9 s or at the next action, with no fade
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-position--default` Default
+  - `map-position--current` current · the trail ends where you are · ripgrep, zero2prod, zed
+  - `map-position--future` future · after going back, the places ahead stay listed, lighter
+  - `map-position--levels` one row per level reached · board only, then a unit, then an area
+  - `map-position--long-name` a name too long ends in an ellipsis · the number and the level stay
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
+  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
+  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` links · without the port wires
+  - `map-sheet--open-api` in context · api open in its node
+  - `map-sheet--open-rg` in context · rg open in its node
+  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
+
 ### `<sett-msg>`
 
 A message. Yours sit on the right in the selection tint; an agent's on the left outlined in its colour; a sub-agent's in the sub shade. Every message opens with an author line: dot, name in the author's colour, time.
@@ -2874,6 +3015,12 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -2990,6 +3137,12 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -3145,6 +3298,12 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -3806,6 +3965,12 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -3910,6 +4075,12 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -4020,6 +4191,12 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -4155,6 +4332,12 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip
@@ -4969,6 +5152,12 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
   - `map-node--default` Default
   - `map-node--mini` Mini
   - `map-node--chip` Chip

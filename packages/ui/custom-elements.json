@@ -2488,6 +2488,46 @@
         },
         {
           "kind": "js",
+          "name": "SettMinimap",
+          "declaration": {
+            "name": "SettMinimap",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "minimapPoint",
+          "declaration": {
+            "name": "minimapPoint",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MinimapMode",
+          "declaration": {
+            "name": "MinimapMode",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MinimapBox",
+          "declaration": {
+            "name": "MinimapBox",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MinimapRect",
+          "declaration": {
+            "name": "MinimapRect",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "scopeWords",
           "declaration": {
             "name": "scopeWords",
@@ -4202,6 +4242,67 @@
             }
           ],
           "description": "an open unit: the node at its sheet tier hosting the inside; its head lists the sessions on its items"
+        },
+        {
+          "kind": "function",
+          "name": "boardRects",
+          "return": {
+            "type": {
+              "text": "MinimapRect[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "selected",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the units of a fixture's own repo as the minimap's world: one chip-sized rect per unit, where the board places it"
+        },
+        {
+          "kind": "function",
+          "name": "sheetRects",
+          "return": {
+            "type": {
+              "text": "MinimapRect[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "selected",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the inside of a unit as the minimap's world: a tinted rect per column, then a rect per area, sized as the sheet lays them out"
+        },
+        {
+          "kind": "variable",
+          "name": "y",
+          "default": "head"
         }
       ],
       "exports": [
@@ -4362,6 +4463,22 @@
           "name": "openUnit",
           "declaration": {
             "name": "openUnit",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boardRects",
+          "declaration": {
+            "name": "boardRects",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sheetRects",
+          "declaration": {
+            "name": "sheetRects",
             "module": "src/map/map-fixtures.stories-helpers.ts"
           }
         }
@@ -5806,6 +5923,251 @@
           "declaration": {
             "name": "SettLink",
             "module": "src/map/sett-link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-minimap.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "minimapPoint",
+          "return": {
+            "type": {
+              "text": "{ x: number; y: number }"
+            }
+          },
+          "parameters": [
+            {
+              "name": "frame",
+              "type": {
+                "text": "MinimapBox"
+              }
+            },
+            {
+              "name": "world",
+              "type": {
+                "text": "MinimapBox"
+              }
+            },
+            {
+              "name": "clientX",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "clientY",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "description": "The world point under a pointer: `frame` is the drawing's box on screen,\n`world` what it shows, fitted whole and centred (the minimap never crops)."
+        },
+        {
+          "kind": "class",
+          "description": "The whole map at a glance: the world's rects and, over them, the viewport\nrect. `mode` says which world it draws: `board` (the units of the repo) or\n`sheet` (the columns and areas inside the open unit). A click or a drag\npans: the minimap only says where, the camera is the host's. It draws what\nit is given and nothing animates: the viewport rect is where the camera is.\n\nThe map design shows a minimap only when the map exceeds the viewport\n(MAP-13). That is the host's condition: the element is present or absent.",
+          "name": "SettMinimap",
+          "cssParts": [
+            {
+              "description": "the drawing",
+              "name": "world"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the name of what is drawn, after the mode: `zed`, `gpui`",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "MinimapMode"
+              },
+              "default": "'board'",
+              "attribute": "mode",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "rects",
+              "type": {
+                "text": "MinimapRect[]"
+              },
+              "default": "[]",
+              "description": "the rects of the world, in paint order",
+              "attribute": "rects"
+            },
+            {
+              "kind": "field",
+              "name": "view",
+              "type": {
+                "text": "MinimapBox | undefined"
+              },
+              "description": "what the camera shows, in world coordinates",
+              "attribute": "view"
+            },
+            {
+              "kind": "field",
+              "name": "world",
+              "type": {
+                "text": "MinimapBox | undefined"
+              },
+              "description": "the world's bounds; by default the union of the rects and the view",
+              "attribute": "world"
+            },
+            {
+              "kind": "field",
+              "name": "dragging",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "bounds",
+              "type": {
+                "text": "MinimapBox"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "pan",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "x",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "panTo",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "PointerEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "down",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "move",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "up",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "key",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-pan",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ x, y }`: the world point the viewport should centre on (click, drag, arrow keys)"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mode",
+              "type": {
+                "text": "MinimapMode"
+              },
+              "default": "'board'",
+              "fieldName": "mode"
+            },
+            {
+              "name": "rects",
+              "type": {
+                "text": "MinimapRect[]"
+              },
+              "default": "[]",
+              "description": "the rects of the world, in paint order",
+              "fieldName": "rects"
+            },
+            {
+              "name": "view",
+              "type": {
+                "text": "MinimapBox | undefined"
+              },
+              "description": "what the camera shows, in world coordinates",
+              "fieldName": "view"
+            },
+            {
+              "name": "world",
+              "type": {
+                "text": "MinimapBox | undefined"
+              },
+              "description": "the world's bounds; by default the union of the rects and the view",
+              "fieldName": "world"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-minimap",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "minimapPoint",
+          "declaration": {
+            "name": "minimapPoint",
+            "module": "src/map/sett-minimap.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMinimap",
+          "declaration": {
+            "name": "SettMinimap",
+            "module": "src/map/sett-minimap.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-minimap",
+          "declaration": {
+            "name": "SettMinimap",
+            "module": "src/map/sett-minimap.ts"
           }
         }
       ]

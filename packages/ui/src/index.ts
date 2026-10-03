@@ -30,6 +30,7 @@ export { watch, unwatch, watching, boxIn, scaleOf, signature, type Watched } fro
 export { LINK_KINDS, LINK_KIND_NAMES, LINK_FAMILIES, isLinkKind, familyOf, kindsOf, type LinkKind, type LinkFamily, type LinkHead, type LinkTail, type LinkKindSpec } from './map/link-kinds.js';
 export { SettPanel } from './map/sett-panel.js';
 export { SettPosition, SettPositionRow } from './map/sett-position.js';
+export { SettMinimap, minimapPoint, type MinimapMode, type MinimapBox, type MinimapRect } from './map/sett-minimap.js';
 export { scopeWords, scopeText, scopeStyles, SCOPE_LOCK, type Scope, type ScopeKind } from './scope.js';
 export { badgeStyles, type BadgeTone } from './badge.js';
 export { SettActivityRail, SettRailItem } from './shell/sett-activity-rail.js';

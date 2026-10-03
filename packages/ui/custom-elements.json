@@ -2056,6 +2056,22 @@
         },
         {
           "kind": "js",
+          "name": "FixtureCode",
+          "declaration": {
+            "name": "FixtureCode",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FixtureCodeLine",
+          "declaration": {
+            "name": "FixtureCodeLine",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "Port",
           "declaration": {
             "name": "Port",
@@ -2612,6 +2628,22 @@
           "declaration": {
             "name": "SettCue",
             "module": "./map/sett-cue.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettContractCard",
+          "declaration": {
+            "name": "SettContractCard",
+            "module": "./map/sett-contract-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ContractUse",
+          "declaration": {
+            "name": "ContractUse",
+            "module": "./map/sett-contract-card.js"
           }
         },
         {
@@ -5660,6 +5692,195 @@
           "declaration": {
             "name": "SettColumn",
             "module": "src/map/sett-column.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-contract-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "What a port promises: the kind chip (the kind's dot and word, the same\ncolour as on the port row), the name, the owner, then `format · witness`,\nthe ops in mono on the well tint, the schema, who uses it, and the notes.\nA part with nothing to say is absent. Every contract cites a witness\n`file:line` (map rule 10); one without is `declared`: dashed, and it says so.\n\nOne skeleton for every kind; the card never animates and holds no verb.",
+          "name": "SettContractCard",
+          "cssParts": [
+            {
+              "description": "the kind chip",
+              "name": "chip"
+            },
+            {
+              "description": "the ops block",
+              "name": "ops"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "PortKind"
+              },
+              "default": "'crate'",
+              "description": "the port kind, from the kind table (`PORT_KINDS`)",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "owner",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "who owns the contract: a unit, a repo, or `external`",
+              "attribute": "owner"
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how it is written down: `actix-web App · 12 routes`",
+              "attribute": "format"
+            },
+            {
+              "kind": "field",
+              "name": "witness",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where it is stated in code, `file:line`, several separated by ` · `; none means declared by hand",
+              "attribute": "witness"
+            },
+            {
+              "kind": "field",
+              "name": "ops",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "one line per operation, as written in the contract"
+            },
+            {
+              "kind": "field",
+              "name": "schema",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the shape it carries, one line",
+              "attribute": "schema"
+            },
+            {
+              "kind": "field",
+              "name": "used",
+              "type": {
+                "text": "ContractUse[]"
+              },
+              "default": "[]",
+              "description": "who uses it, and how"
+            },
+            {
+              "kind": "field",
+              "name": "notes",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "notes"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "PortKind"
+              },
+              "default": "'crate'",
+              "description": "the port kind, from the kind table (`PORT_KINDS`)",
+              "fieldName": "kind"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "owner",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "who owns the contract: a unit, a repo, or `external`",
+              "fieldName": "owner"
+            },
+            {
+              "name": "format",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how it is written down: `actix-web App · 12 routes`",
+              "fieldName": "format"
+            },
+            {
+              "name": "witness",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where it is stated in code, `file:line`, several separated by ` · `; none means declared by hand",
+              "fieldName": "witness"
+            },
+            {
+              "name": "schema",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the shape it carries, one line",
+              "fieldName": "schema"
+            },
+            {
+              "name": "notes",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "notes"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-contract-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettContractCard",
+          "declaration": {
+            "name": "SettContractCard",
+            "module": "src/map/sett-contract-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-contract-card",
+          "declaration": {
+            "name": "SettContractCard",
+            "module": "src/map/sett-contract-card.ts"
           }
         }
       ]

@@ -18,7 +18,7 @@ export { SettOpRow, type OpKind } from './map/sett-op-row.js';
 export { SettPortRow, PORT_KINDS, type PortKind, type PortSide } from './map/sett-port-row.js';
 export { SettRail, RAIL_SECTIONS, RAIL_LABEL, type RailSection } from './map/sett-rail.js';
 export { SettNode, tierFor, type NodeTier } from './map/sett-node.js';
-export { splitLabel, portOf, unitOf, unitPorts, opOf, opsOf, sectionOf, insideOf, itemKindOf, itemsOf, linkKindOf, linksOf, wiresOf, portKey, opKey, type FixtureLink, type FixtureLinkRow, type InsideColumn, type FixtureItem, type FixtureArea, type Fixture, type FixtureUnit, type FixtureContract, type Port, type Op } from './map/fixtures.js';
+export { splitLabel, portOf, unitOf, unitPorts, opOf, opsOf, sectionOf, insideOf, itemKindOf, itemsOf, linkKindOf, linksOf, wiresOf, portKey, opKey, type FixtureLink, type FixtureLinkRow, type InsideColumn, type FixtureItem, type FixtureArea, type Fixture, type FixtureUnit, type FixtureContract, type FixtureCode, type FixtureCodeLine, type Port, type Op } from './map/fixtures.js';
 export { presenceStyles, beatStyles, beatOf, wave, bloom, arrive, leave, flash, reducedMotion, durationMs, type WaveOptions } from './map/motion.js';
 export { SettItem, ITEM_KINDS, type ItemKind, type ItemDelta } from './map/sett-item.js';
 export { SettArea } from './map/sett-area.js';
@@ -35,6 +35,7 @@ export { SettMinimap, minimapPoint, type MinimapMode, type MinimapBox, type Mini
 export { SettCrumb } from './map/sett-crumb.js';
 export { SettBack } from './map/sett-back.js';
 export { SettCue } from './map/sett-cue.js';
+export { SettContractCard, type ContractUse } from './map/sett-contract-card.js';
 export { scopeWords, scopeText, scopeStyles, SCOPE_LOCK, type Scope, type ScopeKind } from './scope.js';
 export { badgeStyles, type BadgeTone } from './badge.js';
 export { SettActivityRail, SettRailItem } from './shell/sett-activity-rail.js';

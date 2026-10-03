@@ -5,7 +5,7 @@ import { ref } from 'lit/directives/ref.js';
 import '../index.js';
 import editorCss from '../editor/editor.css?raw';
 import type { Scope } from '../scope.js';
-import { openUnit, zero2prod, type Who } from '../map/map-fixtures.stories-helpers.js';
+import { openUnit, zero2prod, type Lines, type Who } from '../map/map-fixtures.stories-helpers.js';
 
 // The shell recipes (issue #67): one state of each arch flow page, rebuilt only from sett components.
 // One grid for all four: bar · body (rail · left pane · centre · inspector) · bottom panel · status bar,
@@ -79,10 +79,15 @@ const pan = (box?: Element) => {
 };
 // the plan overlay: five planned elements in their two groups
 const PLAN_OVERLAY: Who = { subscribe: { planned: true, group: 'g1' }, newsub: { planned: true, group: 'g1' }, subemail: { planned: true, group: 'g2' }, confirm: { planned: true, group: 'g2' }, subname: { planned: true, group: 'g2' } };
+// and the three links the plan adds between them
+const PLANNED_LINKS = ['subscribe>newsub', 'newsub>subemail', 'newsub>subname'];
+const planLines: Lines = (l) => (PLANNED_LINKS.includes(`${l.from}>${l.to}`) ? { planned: true } : undefined);
 // the delta overlay: every item of the unit stands somewhere against main; the session's ring stays on what it touched
 const delta = (touched: Record<string, 'added' | 'changed' | 'removed'>, session: string): Who =>
   Object.fromEntries(zero2prod.units.api.areas.flatMap((a) => a.items).map((it) => [it.id, touched[it.id] ? { delta: touched[it.id], session } : { delta: 'unchanged' as const }]));
-const map = (who: Who = {}) => html`<div class="map" tabindex="0" role="group" aria-label="map" ${ref(pan)}>${openUnit(zero2prod, 'api', who, { foldedAreas: ['admin', 'idem', 'email', 'startup'] })}</div>`;
+// the delta on the lines: a link is added or removed, every other one recedes
+const deltaLines = (touched: Record<string, 'added' | 'removed'>): Lines => (l) => ({ delta: touched[`${l.from}>${l.to}`] ?? 'unchanged' });
+const map = (who: Who = {}, lines?: Lines) => html`<div class="map" tabindex="0" role="group" aria-label="map" ${ref(pan)}>${openUnit(zero2prod, 'api', who, { foldedAreas: ['admin', 'idem', 'email', 'startup'], lines })}</div>`;
 // the bottom panel closed: a strip of its tabs with their counts
 const panelTabs = (o: { findings?: string; checks?: string; checksTone?: string; news?: string } = {}) => html`
   <sett-panel-tab slot="tabs" value="findings" count=${ifDefined(o.findings)} tone="bad">Findings</sett-panel-tab>
@@ -128,7 +133,7 @@ export const PlanShaping: Story = { name: 'plan · shaping', render: () => shell
     </sett-session-row>
   </sett-sessions-view>`,
   centre: html`<sett-tabbar><sett-tab pinned active>map</sett-tab>${toggles('plan', 'sessions')}</sett-tabbar>
-    <sett-intent-bar value=${INTENT} counts="5 elements · 2 groups"></sett-intent-bar>${map(PLAN_OVERLAY)}`,
+    <sett-intent-bar value=${INTENT} counts="5 elements · 2 groups"></sett-intent-bar>${map(PLAN_OVERLAY, planLines)}`,
   inspector: html`<sett-inspector heading="planner" sub="refund flow · shaping" state="draft" kind="planner">
     <sett-msg from="me" author="you" time="12:02">Could E5 go in group 1?</sett-msg>
     <sett-msg from="agent" author="planner" time="12:02" style="--_session:var(--sett-color-sug)">It calls refund(), which E1 defines, so it stays after the gate. I split pay() and close() into their own elements instead: one commit each.<sett-changed>changed · 2 elements</sett-changed></sett-msg>
@@ -228,7 +233,7 @@ export const ReviewGlance: Story = { name: 'review · glance', render: () => she
     </sett-session-row>
   </sett-sessions-view>`,
   centre: html`<sett-tabbar><sett-tab pinned active>map</sett-tab>${toggles('delta', 'plan')}</sett-tabbar>
-    ${map(delta({ subname: 'added', subscribe: 'changed', confirm: 'changed' }, 'mg'))}`,
+    ${map(delta({ subname: 'added', subscribe: 'changed', confirm: 'changed' }, 'mg'), deltaLines({ 'newsub>subname': 'added', 'subscribe>storetok': 'removed' }))}`,
   inspector: html`<sett-inspector heading="!44 · at a glance" sub="rate limits → main" state="2 lines block" tone="sug" kind="session" session="mg">
     <sett-card class="in" variant="checklist"><span slot="title">merge !44 → main</span><sett-pill slot="state" kind="sug">2 lines block</sett-pill>
       <sett-card-row mark="✓" kind="ok" nav="rate limits">plan 6/6 realized · 2 gates passed</sett-card-row>

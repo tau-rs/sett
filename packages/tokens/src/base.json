@@ -696,6 +696,14 @@
         },
         "$description": "a double line: several links between two areas, drawn as one"
       },
+      "band": {
+        "$type": "dimension",
+        "$value": {
+          "value": 7,
+          "unit": "px"
+        },
+        "$description": "the plan overlay's tint band under a planned link (rule 13)"
+      },
       "bundleGap": {
         "$type": "dimension",
         "$value": {

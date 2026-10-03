@@ -5,6 +5,7 @@ import type { Fixture, FixtureArea, FixtureItem, FixtureUnit, Port } from './fix
 import { insideOf, itemKindOf, linksOf, opKey, opsOf, portKey, sectionOf, unitOf, unitPorts, wiresOf, type FixtureLink } from './fixtures.js';
 import { base, sessionOrder } from '@tau-rs/sett-tokens';
 import type { MinimapRect } from './sett-minimap.js';
+import type { LinkDelta } from './sett-link.js';
 import ripgrepJson from './fixtures/ripgrep.json' with { type: 'json' };
 import zero2prodJson from './fixtures/zero2prod.json' with { type: 'json' };
 import zedJson from './fixtures/zed.json' with { type: 'json' };
@@ -76,16 +77,22 @@ export const areaEl = (a: FixtureArea, who: Who = {}, folded = !!a.folded) => ht
 export const columnsOf = (f: Fixture, id: string, who: Who = {}, foldedAreas: string[] = []) =>
   insideOf(f, id).map((c) => html`<sett-column kind=${c.kind} depth=${ifDefined(c.depth)} label=${c.label}>${c.areas.map((a) => areaEl(a, who, !!a.folded || foldedAreas.includes(a.id)))}</sett-column>`);
 
-/** one `sett-link` from a fixture link; kinds on fixture links are derived from the items (illustrative) */
-export const linkEl = (l: FixtureLink) => html`
-  <sett-link from=${l.from} to=${l.to} kind=${l.kind} label=${ifDefined(l.label)} ?finding=${l.finding} ?wire=${l.wire}></sett-link>`;
-/** the links and port wires of a unit, as `sett-link` children for its sheet */
-export const linksEl = (f: Fixture, id: string, wires = true) => html`${linksOf(f, id).map(linkEl)}${wires ? wiresOf(f, id).map(linkEl) : nothing}`;
+/** the overlays on one line in a story: the plan will add it, or where it stands against main */
+export interface LinkOn { planned?: boolean; delta?: LinkDelta }
+/** the overlays on a unit's lines, asked per line (its ends are `from` and `to`) */
+export type Lines = (l: FixtureLink) => LinkOn | undefined;
 
-export interface SheetOpts { folded?: boolean; foldedAreas?: string[]; slot?: string; links?: boolean; wires?: boolean; level?: 'items' | 'areas' | 'plugs'; filter?: string; open?: string; focus?: string }
+/** one `sett-link` from a fixture link; kinds on fixture links are derived from the items (illustrative) */
+export const linkEl = (l: FixtureLink, on: LinkOn = {}) => html`
+  <sett-link from=${l.from} to=${l.to} kind=${l.kind} label=${ifDefined(l.label)} ?finding=${l.finding} ?wire=${l.wire} ?planned=${on.planned} delta=${ifDefined(on.delta)}></sett-link>`;
+/** the links and port wires of a unit, as `sett-link` children for its sheet */
+export const linksEl = (f: Fixture, id: string, wires = true, lines: Lines = () => undefined) =>
+  html`${[...linksOf(f, id), ...(wires ? wiresOf(f, id) : [])].map((l) => linkEl(l, lines(l)))}`;
+
+export interface SheetOpts { folded?: boolean; foldedAreas?: string[]; slot?: string; links?: boolean; wires?: boolean; level?: 'items' | 'areas' | 'plugs'; filter?: string; open?: string; focus?: string; lines?: Lines }
 /** the inside of a unit: exposes rail · columns · needs rail, and the links between the things inside */
 export const sheetOf = (f: Fixture, id: string, who: Who = {}, opts: SheetOpts = {}) => html`
-  <sett-sheet slot=${ifDefined(opts.slot)} ?folded=${opts.folded} level=${ifDefined(opts.level)} filter=${ifDefined(opts.filter)} open=${ifDefined(opts.open)} focus=${ifDefined(opts.focus)}>${rail(f, id, 'exposes', { slot: 'exposes' })}${columnsOf(f, id, who, opts.foldedAreas)}${rail(f, id, 'needs', { slot: 'needs' })}${opts.links === false ? nothing : linksEl(f, id, opts.wires !== false)}</sett-sheet>`;
+  <sett-sheet slot=${ifDefined(opts.slot)} ?folded=${opts.folded} level=${ifDefined(opts.level)} filter=${ifDefined(opts.filter)} open=${ifDefined(opts.open)} focus=${ifDefined(opts.focus)}>${rail(f, id, 'exposes', { slot: 'exposes' })}${columnsOf(f, id, who, opts.foldedAreas)}${rail(f, id, 'needs', { slot: 'needs' })}${opts.links === false ? nothing : linksEl(f, id, opts.wires !== false, opts.lines)}</sett-sheet>`;
 
 /** the sessions on a unit, read from who is on its items: every session named, and the ones live somewhere */
 export const sessionsOn = (who: Who) => {

@@ -99,6 +99,7 @@
   --sett-map-size-branch: 4px;
   --sett-map-size-hit: 12px;
   --sett-map-size-bundle: 5px;
+  --sett-map-size-band: 7px;
   --sett-map-size-bundle-gap: 2.6px;
   --sett-map-size-halo: 2.6px;
   --sett-map-size-halo-lit: 3.5px;

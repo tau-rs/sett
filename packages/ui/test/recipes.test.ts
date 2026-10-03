@@ -33,6 +33,19 @@ describe('shell recipes', () => {
     expect(Object.values(shell.SCOPES).length).toBe(RECIPES.length);
   });
 
+  it('the map paints the overlays on its lines too: the plan adds three links, the review adds one and removes one', async () => {
+    const plan = await draw('PlanShaping');
+    expect(Array.from(plan.querySelectorAll('sett-link[planned]')).map((l) => `${l.getAttribute('from')}>${l.getAttribute('to')}`))
+      .toEqual(['subscribe>newsub', 'newsub>subemail', 'newsub>subname']);
+    document.body.innerHTML = '';
+    const review = await draw('ReviewGlance');
+    const links = Array.from(review.querySelectorAll('sett-link'));
+    const by = (d: string) => links.filter((l) => l.getAttribute('delta') === d).map((l) => `${l.getAttribute('from')}>${l.getAttribute('to')}`);
+    expect(by('added')).toEqual(['newsub>subname']);
+    expect(by('removed')).toEqual(['subscribe>storetok']);
+    expect(by('unchanged').length).toBe(links.length - 2);
+  });
+
   for (const { story, scope, frames } of RECIPES) {
     describe(String(story), () => {
       it('writes the scope with the same words in the three places: scope line, selector, status bar', async () => {

@@ -979,6 +979,53 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/fixtures.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "ripgrep",
+          "default": "ripgrepJson as unknown"
+        },
+        {
+          "kind": "variable",
+          "name": "zero2prod",
+          "default": "zero2prodJson as unknown"
+        },
+        {
+          "kind": "variable",
+          "name": "zed",
+          "default": "zedJson as unknown"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ripgrep",
+          "declaration": {
+            "name": "ripgrep",
+            "module": "src/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "zero2prod",
+          "declaration": {
+            "name": "zero2prod",
+            "module": "src/fixtures.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "zed",
+          "declaration": {
+            "name": "zed",
+            "module": "src/fixtures.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/frame/sett-frame.ts",
       "declarations": [
         {

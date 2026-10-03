@@ -15,7 +15,8 @@ export type FixturePort = [string, string, string, string];
 export interface FixtureUnit {
   id: string; name: string; kind: string; x: number; y: number; layout: 'hexagon' | 'layers';
   crates: number; items: number; areas: number; findings?: number; sessions?: number; meta?: string; declared?: boolean;
-  exposes: FixturePort[]; needs: FixturePort[];
+  /** absent on a unit only drawn as a neighbour (zed's `ext` and `cloud` repos): no ports */
+  exposes?: FixturePort[]; needs?: FixturePort[];
 }
 export interface FixtureContract {
   kind: string; name: string; owner: string; format?: string; witness?: string; ops?: string[];
@@ -60,7 +61,7 @@ export function unitOf(f: Fixture, id: string): FixtureUnit {
 }
 export const unitPorts = (f: Fixture, id: string) => {
   const u = unitOf(f, id);
-  return { exposes: u.exposes.map((p) => portOf(p, 'exposes')), needs: u.needs.map((p) => portOf(p, 'needs')) };
+  return { exposes: (u.exposes ?? []).map((p) => portOf(p, 'exposes')), needs: (u.needs ?? []).map((p) => portOf(p, 'needs')) };
 };
 
 const ROUTE = /^(GET|POST|PUT|PATCH|DELETE)\s+(\S+)(?:\s*→\s*(.+))?$/;

@@ -117,6 +117,8 @@ export function renderLlms(inputs) {
     '',
     `Storybook: ${STORYBOOK_URL}/ · a story is ${STORYBOOK_URL}/?path=/story/<id> · the stories index is ${STORYBOOK_URL}/index.json · the element manifest is packages/ui/custom-elements.json (custom-elements-manifest 1.0.0) · the rules are DESIGN.md · the agent brief is skills/sett/SKILL.md.`,
     '',
+    "Sample data: `import { ripgrep, zero2prod, zed } from '@tau-rs/sett/fixtures'`, three real repositories typed `Fixture`, read with `unitOf`, `unitPorts`, `insideOf`, `linksOf` from `@tau-rs/sett`; a separate entry, so the element bundle does not carry them.",
+    '',
     '## Elements',
     '',
     'One line per element: tag · what it is · attrs (name=type) · slots · CSS parts · events · the story ids that show each state, with the state in parentheses.',

@@ -114,7 +114,7 @@ export class SettLink extends LitElement {
     :host([family='knows']) { --_dash: var(--sett-map-link-knows-stroke); }
     :host([family='around']) { --_dash: var(--sett-map-link-around-stroke); }
     svg { display: block; width: 100%; height: 100%; overflow: visible; }
-    .hit { fill: none; stroke: transparent; stroke-width: var(--sett-map-size-hit); pointer-events: stroke; cursor: default; }
+    .hit { fill: none; stroke: transparent; stroke-width: var(--sett-map-size-hit); pointer-events: stroke; cursor: var(--_cursor, default); }
     .line { fill: none; stroke: currentColor; stroke-width: var(--sett-stroke-hair); stroke-dasharray: var(--_dash); transition: stroke var(--sett-motion-hover) ease, stroke-width var(--sett-motion-hover) ease; }
     :host([lit]) .line, :host([selected]) .line, :host([finding]) .line { stroke-width: var(--sett-stroke-lit); }
     .h, .t { transition: stroke var(--sett-motion-hover) ease, fill var(--sett-motion-hover) ease; }

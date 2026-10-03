@@ -80,8 +80,8 @@ export const TwoAgentsOneItem: Story = {
 };
 
 /** a small open unit: two columns, three areas, the links between them */
-const mini = (who: Record<string, string> = {}, folded: string[] = []) => html`
-  <sett-sheet>
+const mini = (who: Record<string, string> = {}, folded: string[] = [], level: 'items' | 'areas' = 'items') => html`
+  <sett-sheet level=${level}>
     <sett-column kind="driving" label="routes"><sett-area key="routes" name="routes · public" ?folded=${folded.includes('routes')}>
       <sett-item key="subscribe" entry ?selected=${who.subscribe === 'selected'}>subscribe()</sett-item><sett-item key="confirm" entry>confirm()</sett-item></sett-area></sett-column>
     <sett-column kind="domain" label="domain"><sett-area key="domain" name="domain" ?folded=${folded.includes('domain')}>
@@ -108,4 +108,9 @@ export const FoldHidesTheSelection: Story = {
   name: '11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands',
   render: () => scene(mini({ validate: 'selected' }), 'Click fold. The auth area eases shut; the selected item inside is hidden, so its lines ride the area\'s edge up to the chip, the header shows the blue count, and a blue dock dot lands on the border where the links plug in (port language). Unfold and the lines come back down to the item.',
     act('fold / unfold auth', (r) => toggleAttr(r, 'sett-area[key="auth"]', 'folded'))),
+};
+export const OpenByHand: Story = {
+  name: '12 · response · the areas level: open a pair by hand, pin an item',
+  render: () => scene(mini({}, [], 'areas'), 'At rest one line leaves the routes header: double where it carries the three links, a single line with a small dot for the one link to domain. Click the arrow end at auth: that pair becomes its two links, and no other line moves. Click one of them to close it. Click an item: its links are drawn outward and stay, the rest recedes; click a second item to pin it too. Nothing here animates except the draw-out of a pin.',
+    html`${act('open routes → auth', (r) => { const s = r.querySelector('sett-sheet')!; s.open = s.open ? '' : 'routes>auth'; })}${act('pin subscribe()', (r) => toggleAttr(r, 'sett-item[key="subscribe"]', 'selected'))}${act('pin confirm()', (r) => toggleAttr(r, 'sett-item[key="confirm"]', 'selected'))}`),
 };

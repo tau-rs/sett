@@ -82,10 +82,10 @@ export const linkEl = (l: FixtureLink) => html`
 /** the links and port wires of a unit, as `sett-link` children for its sheet */
 export const linksEl = (f: Fixture, id: string, wires = true) => html`${linksOf(f, id).map(linkEl)}${wires ? wiresOf(f, id).map(linkEl) : nothing}`;
 
-export interface SheetOpts { folded?: boolean; foldedAreas?: string[]; slot?: string; links?: boolean; wires?: boolean; level?: 'items' | 'plugs'; filter?: string }
+export interface SheetOpts { folded?: boolean; foldedAreas?: string[]; slot?: string; links?: boolean; wires?: boolean; level?: 'items' | 'areas' | 'plugs'; filter?: string; open?: string }
 /** the inside of a unit: exposes rail · columns · needs rail, and the links between the things inside */
 export const sheetOf = (f: Fixture, id: string, who: Who = {}, opts: SheetOpts = {}) => html`
-  <sett-sheet slot=${ifDefined(opts.slot)} ?folded=${opts.folded} level=${ifDefined(opts.level)} filter=${ifDefined(opts.filter)}>${rail(f, id, 'exposes', { slot: 'exposes' })}${columnsOf(f, id, who, opts.foldedAreas)}${rail(f, id, 'needs', { slot: 'needs' })}${opts.links === false ? nothing : linksEl(f, id, opts.wires !== false)}</sett-sheet>`;
+  <sett-sheet slot=${ifDefined(opts.slot)} ?folded=${opts.folded} level=${ifDefined(opts.level)} filter=${ifDefined(opts.filter)} open=${ifDefined(opts.open)}>${rail(f, id, 'exposes', { slot: 'exposes' })}${columnsOf(f, id, who, opts.foldedAreas)}${rail(f, id, 'needs', { slot: 'needs' })}${opts.links === false ? nothing : linksEl(f, id, opts.wires !== false)}</sett-sheet>`;
 
 /** the sessions on a unit, read from who is on its items: every session named, and the ones live somewhere */
 export const sessionsOn = (who: Who) => {

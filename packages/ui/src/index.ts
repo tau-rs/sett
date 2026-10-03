@@ -23,9 +23,10 @@ export { presenceStyles, beatStyles, beatOf, wave, bloom, arrive, leave, flash, 
 export { SettItem, ITEM_KINDS, type ItemKind } from './map/sett-item.js';
 export { SettArea } from './map/sett-area.js';
 export { SettColumn, COLUMN_KINDS, COLUMN_DEPTHS, type ColumnKind, type ColumnDepth } from './map/sett-column.js';
-export { SettSheet } from './map/sett-sheet.js';
+export { SettSheet, type SheetLevel } from './map/sett-sheet.js';
 export { SettLink } from './map/sett-link.js';
-export { route, simpleRoute, type Route, type RouteInput, type RouteOutput, type RouteLink, type RouteEnd, type Box, type Pt } from './map/routes.js';
+export { SettBundle, BUNDLE_ORIGINS, type BundleOrigin, type BundleBranch } from './map/sett-bundle.js';
+export { route, simpleRoute, stretches, type Stretch, type Route, type RouteInput, type RouteOutput, type RouteLink, type RouteEnd, type Box, type Pt } from './map/routes.js';
 export { watch, unwatch, watching, boxIn, scaleOf, signature, type Watched } from './map/lines.js';
 export { LINK_KINDS, LINK_KIND_NAMES, LINK_FAMILIES, isLinkKind, familyOf, kindsOf, type LinkKind, type LinkFamily, type LinkHead, type LinkTail, type LinkKindSpec } from './map/link-kinds.js';
 export { SettPanel } from './map/sett-panel.js';

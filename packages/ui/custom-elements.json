@@ -2240,10 +2240,50 @@
         },
         {
           "kind": "js",
+          "name": "SheetLevel",
+          "declaration": {
+            "name": "SheetLevel",
+            "module": "./map/sett-sheet.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettLink",
           "declaration": {
             "name": "SettLink",
             "module": "./map/sett-link.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettBundle",
+          "declaration": {
+            "name": "SettBundle",
+            "module": "./map/sett-bundle.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BUNDLE_ORIGINS",
+          "declaration": {
+            "name": "BUNDLE_ORIGINS",
+            "module": "./map/sett-bundle.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BundleOrigin",
+          "declaration": {
+            "name": "BundleOrigin",
+            "module": "./map/sett-bundle.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BundleBranch",
+          "declaration": {
+            "name": "BundleBranch",
+            "module": "./map/sett-bundle.js"
           }
         },
         {
@@ -2259,6 +2299,22 @@
           "name": "simpleRoute",
           "declaration": {
             "name": "simpleRoute",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "stretches",
+          "declaration": {
+            "name": "stretches",
+            "module": "./map/routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Stretch",
+          "declaration": {
+            "name": "Stretch",
             "module": "./map/routes.js"
           }
         },
@@ -4791,7 +4847,7 @@
           },
           "parameters": [
             {
-              "name": "{ bands, links, spacing, channelTop }",
+              "name": "{ bands, links, spacing, channelTop, avoid }",
               "type": {
                 "text": "RouteInput"
               }
@@ -4833,6 +4889,24 @@
             }
           ],
           "description": "the simplest square route between two boxes, for a link outside any sheet"
+        },
+        {
+          "kind": "function",
+          "name": "stretches",
+          "return": {
+            "type": {
+              "text": "Map<string, Stretch>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "lines",
+              "type": {
+                "text": "{ id: string; points: Pt[] }[]"
+              }
+            }
+          ],
+          "description": "The lines of one tree, each split where it leaves the others. A stretch\ncarried by two or more lines is drawn once, as a double line; past that\npoint a line is alone. A line that shares nothing has an empty `shared`."
         }
       ],
       "exports": [
@@ -4849,6 +4923,14 @@
           "name": "simpleRoute",
           "declaration": {
             "name": "simpleRoute",
+            "module": "src/map/routes.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "stretches",
+          "declaration": {
+            "name": "stretches",
             "module": "src/map/routes.ts"
           }
         }
@@ -5176,6 +5258,208 @@
           "declaration": {
             "name": "SettBack",
             "module": "src/map/sett-back.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-bundle.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "BUNDLE_ORIGINS",
+          "type": {
+            "text": "BundleOrigin[]"
+          },
+          "default": "['driving', 'domain', 'driven']"
+        },
+        {
+          "kind": "class",
+          "description": "The one line leaving an area at the areas level (rule 12). A stretch that\ncarries two or more links is a double line: `map.size.bundle` wide with a\n`map.size.bundleGap` inside, edges in `color.mute`, the inside in the hue\nof the column it leaves (`origin`, `map.origin.*`). Where it branches it\nopens like a pipe junction, no dot; it passes over another double line\nwith a halo. Each pair of two or more links ends in an arrow; a pair of\nexactly one link is that `sett-link`, which leaves the double line with a\nsmall dot.\n\nThe `sett-sheet` draws one per area and hands it its `branches`; it is not\nplaced by hand. Open by hand: the arrow end opens that pair, the shared\nstretch opens everything leaving the area. An opened pair is no longer\ndrawn but stays reachable by keyboard, to close it.",
+          "name": "SettBundle",
+          "cssParts": [
+            {
+              "description": "the drawing",
+              "name": "svg"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "from",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the group it leaves",
+              "attribute": "from"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the name of that group, for the labels",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "origin",
+              "type": {
+                "text": "BundleOrigin | undefined"
+              },
+              "description": "the column it leaves, which tints the inside; a rail has none",
+              "attribute": "origin",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the pins: `map.far`",
+              "attribute": "far",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "branches",
+              "type": {
+                "text": "BundleBranch[]"
+              },
+              "default": "[]",
+              "description": "the geometry, in the coordinates of the positioned ancestor; the sheet sets it"
+            },
+            {
+              "kind": "field",
+              "name": "hot",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private",
+              "description": "what is pointed at or focused: a branch's `to`, or `*` for the shared stretch"
+            },
+            {
+              "kind": "method",
+              "name": "fire",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "to",
+                  "type": {
+                    "text": "string | undefined"
+                  }
+                },
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "pipes",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "set",
+                  "type": {
+                    "text": "{ d: string; cls: string }[]"
+                  }
+                }
+              ],
+              "description": "halo, edges, insides, in that order over the whole set, so a junction opens like a pipe"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-open",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ from, to?, open }`: a pair (`to`) or everything leaving `from`"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "from",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the group it leaves",
+              "fieldName": "from"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the name of that group, for the labels",
+              "fieldName": "name"
+            },
+            {
+              "name": "origin",
+              "type": {
+                "text": "BundleOrigin | undefined"
+              },
+              "description": "the column it leaves, which tints the inside; a rail has none",
+              "fieldName": "origin"
+            },
+            {
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the pins: `map.far`",
+              "fieldName": "far"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-bundle",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BUNDLE_ORIGINS",
+          "declaration": {
+            "name": "BUNDLE_ORIGINS",
+            "module": "src/map/sett-bundle.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettBundle",
+          "declaration": {
+            "name": "SettBundle",
+            "module": "src/map/sett-bundle.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-bundle",
+          "declaration": {
+            "name": "SettBundle",
+            "module": "src/map/sett-bundle.ts"
           }
         }
       ]
@@ -7783,7 +8067,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The inside of an open unit: the exposes rail, the columns, the needs rail,\nin one row, and the `sett-link`s between the things inside, drawn over it.\nEverything is laid out by normal flow; the sheet is the one element that\nsees every link, so the rules are written once here and not by each app:\n\n- **routes**: square lines on tracks in the gutters (`map.size.track`\n  apart), one trunk per source item and family with a dot at each branch;\n  a link skipping a column takes a lane in the channel under the columns,\n  one inside a column runs beside it; a right-to-left line is a smell.\n- **the watcher**: each frame the ends are read and only the paths whose\n  ends moved are rewritten, so folding, pulses and re-renders never leave\n  a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown).\n- **response** (DESIGN.md § Motion): pointing at an item lights its links\n  and the item at the other end; selecting draws its links outward, the\n  flow travels on them alone and every other link recedes to `map.far`.\n- **folds**: an end hidden by a folded area rides the area's edge to the\n  chip; a selected one gets the blue dock dot where it plugs in.\n- **level**: `items` draws every link at rest, `plugs` a dot beside each\n  connected item with the line on demand. A finding is drawn in every level.\n- **filter**: kinds and families to keep; the rest recedes to `map.far`.\n\n`folded` folds every area at once.",
+          "description": "The inside of an open unit: the exposes rail, the columns, the needs rail,\nin one row, and the `sett-link`s between the things inside, drawn over it.\nEverything is laid out by normal flow; the sheet is the one element that\nsees every link, so the rules are written once here and not by each app:\n\n- **routes**: square lines on tracks in the gutters (`map.size.track`\n  apart), one trunk per source item and family with a dot at each branch;\n  a link skipping a column takes a lane in the channel under the columns,\n  one inside a column runs beside it; a right-to-left line is a smell.\n- **the watcher**: each frame the ends are read and only the paths whose\n  ends moved are rewritten, so folding, pulses and re-renders never leave\n  a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown).\n- **response** (DESIGN.md § Motion): pointing at an item lights its links\n  and the item at the other end; selecting draws its links outward, the\n  flow travels on them alone and every other link recedes to `map.far`.\n- **folds**: an end hidden by a folded area rides the area's edge to the\n  chip; a selected one gets the blue dock dot where it plugs in.\n- **level**: what is drawn at rest. `areas` (the default) draws one line\n  per pair of areas, header to header: a `sett-bundle` per area, double\n  where it carries two or more links; the item links appear when pointed\n  at, pinned or opened by hand. `items` draws every link; `plugs` a dot\n  beside each connected item with the line on demand. A finding is drawn\n  item to item in every level.\n- **open by hand**: the arrow end of a double line opens that pair into\n  its links, its shared stretch opens everything leaving the area, an\n  opened line closes its pair (`open`, `sett-open`). The level is the\n  default for whatever was not opened by hand. Opening never moves another\n  line: a pair keeps its track while open.\n- **pins**: a click on an item toggles its `selected`; several at once.\n  Their links are drawn item to item and everything else recedes.\n- **filter**: kinds and families to keep; the rest recedes to `map.far`.\n\n`folded` folds every area at once.",
           "name": "SettSheet",
           "slots": [
             {
@@ -7815,11 +8099,22 @@
               "kind": "field",
               "name": "level",
               "type": {
-                "text": "'items' | 'plugs'"
+                "text": "SheetLevel"
               },
-              "default": "'items'",
-              "description": "what is drawn at rest: every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)",
+              "default": "'areas'",
+              "description": "what is drawn at rest: one line per pair of areas (`areas`), every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)",
               "attribute": "level",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the pairs opened by hand, space-separated `from>to` area keys; a bare `from` is everything leaving it. Keys here hold no space and no `>`",
+              "attribute": "open",
               "reflects": true
             },
             {
@@ -7870,6 +8165,60 @@
                 "text": "SettLink | undefined"
               },
               "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "bundles",
+              "type": {
+                "text": "Bundle[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "pairs",
+              "privacy": "private",
+              "default": "new Map<SettLink, Pair>()",
+              "description": "what `apply` decided, read by `measure`: the pair of each link, the links drawn item to item, the ones the filter keeps"
+            },
+            {
+              "kind": "field",
+              "name": "direct",
+              "privacy": "private",
+              "default": "new Set<SettLink>()"
+            },
+            {
+              "kind": "field",
+              "name": "kept",
+              "privacy": "private",
+              "default": "new Set<SettLink>()"
+            },
+            {
+              "kind": "field",
+              "name": "pinned",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "litGroup",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
             },
             {
               "kind": "field",
@@ -7933,10 +8282,36 @@
               "privacy": "private"
             },
             {
+              "kind": "field",
+              "name": "opened",
+              "type": {
+                "text": "Set<string>"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "onOpen",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private",
+              "description": "a click on a line that stands for a pair: a single line opens it, an opened line closes it"
+            },
+            {
+              "kind": "field",
+              "name": "onSelect",
+              "privacy": "private",
+              "description": "a click on an item pins it: its links stay drawn, several items at once"
+            },
+            {
               "kind": "method",
               "name": "apply",
               "privacy": "private",
-              "description": "lights, selection, level and filter, written onto the links and the things they end on"
+              "description": "lights, selection, level, filter and what was opened by hand, written onto the links and the things they end on"
             },
             {
               "kind": "method",
@@ -7947,6 +8322,10 @@
             {
               "description": "bubbles from the areas inside",
               "name": "sett-fold"
+            },
+            {
+              "description": "`{ from, to?, open }` when a pair (`to`), or everything leaving `from`, is opened or closed by hand",
+              "name": "sett-open"
             }
           ],
           "attributes": [
@@ -7962,11 +8341,20 @@
             {
               "name": "level",
               "type": {
-                "text": "'items' | 'plugs'"
+                "text": "SheetLevel"
               },
-              "default": "'items'",
-              "description": "what is drawn at rest: every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)",
+              "default": "'areas'",
+              "description": "what is drawn at rest: one line per pair of areas (`areas`), every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)",
               "fieldName": "level"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the pairs opened by hand, space-separated `from>to` area keys; a bare `from` is everything leaving it. Keys here hold no space and no `>`",
+              "fieldName": "open"
             },
             {
               "name": "filter",

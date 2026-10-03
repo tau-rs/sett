@@ -688,6 +688,22 @@
         },
         "$description": "the invisible hit width of a link"
       },
+      "bundle": {
+        "$type": "dimension",
+        "$value": {
+          "value": 5,
+          "unit": "px"
+        },
+        "$description": "a double line: several links between two areas, drawn as one"
+      },
+      "bundleGap": {
+        "$type": "dimension",
+        "$value": {
+          "value": 2.6,
+          "unit": "px"
+        },
+        "$description": "the tinted inside of a double line"
+      },
       "halo": {
         "$type": "dimension",
         "$value": {

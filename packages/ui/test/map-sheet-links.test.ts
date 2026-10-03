@@ -20,7 +20,7 @@ beforeEach(() => {
 afterEach(() => { Element.prototype.getBoundingClientRect = realRect; document.body.innerHTML = ''; });
 
 const box = (x: number, y: number, w: number, h: number) => `data-x="${x}" data-y="${y}" data-w="${w}" data-h="${h}"`;
-const SHEET = `<sett-sheet ${box(0, 0, 800, 400)}>
+const SHEET = `<sett-sheet level="items" ${box(0, 0, 800, 400)}>
   <sett-rail slot="exposes" side="exposes" ${box(0, 0, 100, 400)}><sett-port-row key="p" kind="http" side="exposes" ${box(0, 20, 100, 24)}><sett-op-row key="op" kind="route" method="POST" path="/s" handler="a" ${box(0, 44, 100, 19)}></sett-op-row></sett-port-row></sett-rail>
   <sett-column kind="driving" ${box(156, 0, 220, 400)}>
     <sett-area key="r" name="routes" ${box(164, 10, 204, 120)}><sett-item key="a" ${box(172, 40, 188, 18)}>a</sett-item><sett-item key="c" ${box(172, 70, 188, 18)}>c</sett-item></sett-area>
@@ -146,5 +146,139 @@ describe('sett-sheet coordinates its links', () => {
     expect(watching()).toBe(before + 1);
     document.body.innerHTML = '';
     expect(watching()).toBe(before);
+  });
+});
+
+// the areas level: a → b and c → e join the same two areas; a third link makes routes → domain a bundle and routes → auth a single
+const AREAS = SHEET.replace(' level="items"', '').replace('<sett-link from="a"', `<sett-link from="a" to="e" kind="uses-type"></sett-link><sett-link from="c" to="f" kind="calls"></sett-link><sett-link from="b" to="e" kind="holds"></sett-link><sett-link from="a" to="g" kind="calls" finding></sett-link><sett-link from="a"`)
+  .replace('</sett-area>\n  </sett-column>\n  <sett-link', `</sett-area><sett-area key="auth" name="auth" ${box(440, 200, 204, 80)}><sett-item key="f" ${box(448, 230, 188, 18)}>f</sett-item><sett-item key="g" ${box(448, 252, 188, 18)}>g</sett-item></sett-area>\n  </sett-column>\n  <sett-link`);
+const mountAreas = async () => {
+  document.body.innerHTML = AREAS;
+  const sheet = document.body.firstElementChild as SettSheet & El;
+  const settle = async () => { await sheet.updateComplete; sheet.measure(); await sheet.updateComplete; await Promise.all(Array.from(sheet.shadowRoot!.querySelectorAll('sett-bundle')).map((b) => (b as unknown as El).updateComplete)); };
+  await settle();
+  return { sheet, settle };
+};
+const bundlesOf = (sheet: SettSheet) => Array.from(sheet.shadowRoot!.querySelectorAll('sett-bundle'));
+const to = (sheet: SettSheet, from: string, key: string) => sheet.querySelector(`sett-link[from="${from}"][to="${key}"]`) as SettLink;
+
+describe('sett-sheet at the areas level', () => {
+  it('is the default level', async () => {
+    const { sheet } = await mountAreas();
+    expect(sheet.level).toBe('areas'); expect(sheet.getAttribute('level')).toBe('areas');
+  });
+  it('draws one bundle per group with lines leaving: pairs counted, header to header, tinted by the column it leaves', async () => {
+    const { sheet } = await mountAreas();
+    const bs = bundlesOf(sheet);
+    expect(bs.map((b) => b.from)).toEqual(['r']);
+    const r = bs[0];
+    expect(r.origin).toBe('driving'); expect(r.name).toBe('routes');
+    expect(r.branches.map((b) => `${b.to}×${b.count}`)).toEqual(['d×3', 'auth×1']);
+    const d = r.branches[0], pts = [...d.shared, ...d.own.slice(1)];
+    expect(pts[0]).toEqual({ x: 368, y: 23 });                              // the right edge of the routes header, mid height
+    expect(pts.at(-1)).toEqual({ x: 440, y: 23 });                          // the left edge of the domain header
+    // a port with one wire: a single line from the port row's header to the area's
+    expect(link(sheet, 'op').route!.points[0]).toEqual({ x: 100, y: 32 });
+    expect(link(sheet, 'op').route!.points.at(-1)).toEqual({ x: 164, y: 23 });
+  });
+  it('nothing leaves an item: the links of a bundle are not drawn, a pair of one link is that link from the header, with a dot where it leaves the double line', async () => {
+    const { sheet } = await mountAreas();
+    expect(to(sheet, 'a', 'b').route).toBeUndefined();
+    expect(to(sheet, 'a', 'e').route).toBeUndefined();
+    const single = to(sheet, 'c', 'f').route!;
+    expect(single.points.at(-1)).toEqual({ x: 440, y: 213 });               // the auth header
+    expect(single.branches).toEqual([single.points[0]]);
+    expect(single.points[0].y).toBe(23);
+    expect(to(sheet, 'b', 'e').route).toBeUndefined();                       // inside one area: nothing leaves it
+  });
+  it('a finding stays item to item and is counted in no bundle', async () => {
+    const { sheet } = await mountAreas();
+    const f = to(sheet, 'a', 'g').route!;
+    expect(f.points[0]).toEqual({ x: 360, y: 49 }); expect(f.points.at(-1)).toEqual({ x: 448, y: 261 });
+  });
+  it('the arrow end opens a pair into its links; the pair keeps its track; an opened line closes it', async () => {
+    const { sheet, settle } = await mountAreas();
+    const before = bundlesOf(sheet)[0].branches[1].own[0].x;
+    const seen: any[] = [];
+    sheet.addEventListener('sett-open', (e) => seen.push((e as CustomEvent).detail));
+    bundlesOf(sheet)[0].shadowRoot!.querySelectorAll('g[role="button"]')[1].dispatchEvent(new Event('click'));
+    await settle();
+    expect(sheet.open).toBe('r>d'); expect(seen).toEqual([{ from: 'r', to: 'd', open: true }]);
+    expect(to(sheet, 'a', 'b').route!.points[0]).toEqual({ x: 360, y: 49 });
+    expect(to(sheet, 'c', 'e').route).toBeDefined();
+    const r = bundlesOf(sheet)[0];
+    expect(r.branches[0].open).toBe(true);
+    expect(to(sheet, 'c', 'f').route!.points[1].x).toBe(before);             // the single kept its track
+    expect(to(sheet, 'c', 'f').route!.branches).toEqual([]);                 // and is alone now: no double line to leave
+    to(sheet, 'a', 'b').dispatchEvent(new Event('click', { bubbles: true }));
+    await settle();
+    expect(sheet.open).toBe(''); expect(to(sheet, 'a', 'b').route).toBeUndefined();
+  });
+  it('the shared stretch opens everything leaving the area; closing one pair keeps the others open by name', async () => {
+    const { sheet, settle } = await mountAreas();
+    bundlesOf(sheet)[0].shadowRoot!.querySelectorAll('g[role="button"]')[0].dispatchEvent(new Event('click'));
+    await settle();
+    expect(sheet.open).toBe('r');
+    expect(to(sheet, 'a', 'b').route!.points[0].x).toBe(360); expect(to(sheet, 'c', 'f').route!.points[0].x).toBe(360);
+    to(sheet, 'c', 'f').dispatchEvent(new Event('click', { bubbles: true }));
+    await settle();
+    expect(sheet.open).toBe('r>d');
+  });
+  it('a click on a single line opens its pair', async () => {
+    const { sheet, settle } = await mountAreas();
+    to(sheet, 'c', 'f').dispatchEvent(new Event('click', { bubbles: true }));
+    await settle();
+    expect(sheet.open).toBe('r>auth'); expect(to(sheet, 'c', 'f').route!.points[0]).toEqual({ x: 360, y: 79 });
+  });
+  it('pointing at an item draws its links, lit, and the pair line still counts every link', async () => {
+    const { sheet, settle } = await mountAreas();
+    item(sheet, 'a').dispatchEvent(new Event('pointerover', { bubbles: true }));
+    await settle();
+    expect(to(sheet, 'a', 'b').lit).toBe(true); expect(to(sheet, 'a', 'b').route!.points[0].x).toBe(360);
+    expect(to(sheet, 'c', 'e').route).toBeUndefined();
+    expect(bundlesOf(sheet)[0].branches[0].count).toBe(3);
+  });
+  it('pointing at an area lights the lines that touch it', async () => {
+    const { sheet, settle } = await mountAreas();
+    sheet.querySelector('sett-area[key="auth"]')!.dispatchEvent(new Event('pointerover', { bubbles: true }));
+    await settle();
+    expect(bundlesOf(sheet)[0].branches.map((b) => b.lit)).toEqual([false, true]);
+    expect(to(sheet, 'c', 'f').lit).toBe(true);
+    expect(to(sheet, 'c', 'f').route!.points.at(-1)).toEqual({ x: 440, y: 213 });  // still header to header
+  });
+  it('a click on an item pins it, several at once: their links are drawn, everything else recedes', async () => {
+    const { sheet, settle } = await mountAreas();
+    item(sheet, 'a').dispatchEvent(new CustomEvent('sett-select', { bubbles: true, composed: true }));
+    item(sheet, 'f').dispatchEvent(new CustomEvent('sett-select', { bubbles: true, composed: true }));
+    await tick(); await settle();
+    expect(item(sheet, 'a').selected).toBe(true); expect(item(sheet, 'f').selected).toBe(true);
+    expect(to(sheet, 'a', 'b').selected).toBe(true); expect(to(sheet, 'a', 'b').route).toBeDefined();
+    expect(to(sheet, 'c', 'f').selected).toBe(true); expect(to(sheet, 'c', 'f').route!.points[0].x).toBe(360);
+    expect(bundlesOf(sheet).every((b) => b.far)).toBe(true);
+    item(sheet, 'a').dispatchEvent(new CustomEvent('sett-select', { bubbles: true, composed: true }));
+    await tick(); await settle();
+    expect(item(sheet, 'a').selected).toBe(false); expect(to(sheet, 'a', 'b').route).toBeUndefined();
+  });
+  it('a branch that carries nothing the filter keeps recedes', async () => {
+    const { sheet, settle } = await mountAreas();
+    sheet.filter = 'promises'; await settle();
+    expect(bundlesOf(sheet)[0].branches.map((b) => b.far)).toEqual([false, true]);
+  });
+  it('the level is the default for what was not opened by hand: at plugs an opened pair keeps its lines; at items there is no bundle', async () => {
+    const { sheet, settle } = await mountAreas();
+    sheet.level = 'plugs'; sheet.open = 'r>d'; await settle();
+    expect(bundlesOf(sheet).length).toBe(0);
+    expect(to(sheet, 'a', 'b').plug).toBe(false); expect(to(sheet, 'c', 'f').plug).toBe(true);
+    sheet.level = 'items'; await settle();
+    expect(bundlesOf(sheet).length).toBe(0); expect(to(sheet, 'c', 'f').route!.points[0].x).toBe(360);
+  });
+  it('item links drawn on demand run between the tracks of the pair lines', async () => {
+    const { sheet, settle } = await mountAreas();
+    const trunk = bundlesOf(sheet)[0].branches[0].shared[1].x;
+    item(sheet, 'a').dispatchEvent(new Event('pointerover', { bubbles: true }));
+    await settle();
+    expect(bundlesOf(sheet)[0].branches[0].shared[1].x).toBe(trunk);         // the summary did not move
+    const xs = ['b', 'e'].map((k) => to(sheet, 'a', k).route!.points[1].x);
+    for (const x of xs) expect(Math.abs(x - trunk) % 12).toBe(6);
   });
 });

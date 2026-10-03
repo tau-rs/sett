@@ -7786,6 +7786,24 @@
               "default": "[]"
             },
             {
+              "kind": "field",
+              "name": "pointed",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "parent",
+              "type": {
+                "text": "Element | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
               "kind": "method",
               "name": "ids",
               "privacy": "private",

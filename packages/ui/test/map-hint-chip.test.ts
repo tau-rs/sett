@@ -52,6 +52,15 @@ describe('sett-hint-chip', () => {
     el.shadowRoot!.querySelector('.pill')!.dispatchEvent(new Event('pointerleave'));
     expect(seen).toEqual([{ on: true, keys: ['x', 'y'] }, { on: false, keys: ['x', 'y'] }]);
   });
+  it('a pill removed under the pointer (its unit came into view) puts the light out from where it was', async () => {
+    const el = await mount('keys="x" names="x"');
+    const host = el.parentElement!;
+    const seen: boolean[] = [];
+    host.addEventListener('sett-light', (e) => seen.push((e as CustomEvent).detail.on));
+    el.shadowRoot!.querySelector('.pill')!.dispatchEvent(new Event('pointerenter'));
+    el.remove();
+    expect(seen).toEqual([true, false]);
+  });
   it('is reachable by keyboard', async () => {
     const el = await mount('keys="x" names="x"');
     const pill = el.shadowRoot!.querySelector('.pill')!;

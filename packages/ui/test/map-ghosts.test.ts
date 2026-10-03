@@ -31,3 +31,11 @@ describe('where the ghosts go', () => {
     expect(out.length).toBe(2);
   });
 });
+
+describe('where the ghosts go · after the clamp', () => {
+  it('a cluster pushed back inside the open unit\'s extent never overlaps the next ghost', () => {
+    const small: Box = { x: 0, y: 0, w: 200, h: 200 };
+    const out = placeGhosts({ open: small, size: (keys) => ({ w: 100, h: 40 * keys.length }), ghosts: [{ key: 'a', dir: { dx: 1000, dy: -100 } }, { key: 'b', dir: { dx: 1000, dy: -90 } }, { key: 'c', dir: { dx: 1000, dy: -10 } }] });
+    for (const p of out) for (const q of out) if (p !== q) expect(p.y + p.h <= q.y || q.y + q.h <= p.y).toBe(true);
+  });
+});

@@ -66,10 +66,25 @@ export function placeGhosts({ open: O, ghosts, size, gap = GUTTER }: GhostInput)
       }
       groups.push({ ...g, keys: [...g.keys], dirs: [...g.dirs] });
     }
-    for (const g of groups) {
+    // clamped with their own sizes, two groups can still meet: merge them until none does
+    const final = groups.map((g) => ({ keys: g.keys, at: g.at }));
+    const clampAt = (keys: string[], at: number) => { const { w, h } = size(keys); return vertical ? clamp(O.y + h / 2, at, O.y + O.h - h / 2) : clamp(O.x + w / 2, at, O.x + O.w - w / 2); };
+    for (let merged = true; merged;) {
+      merged = false;
+      for (const g of final) g.at = clampAt(g.keys, g.at);
+      final.sort((a, b) => a.at - b.at);
+      for (let k = 1; k < final.length; k++) {
+        const a = final[k - 1], b = final[k], sa = size(a.keys), sb = size(b.keys);
+        if (b.at - a.at < (vertical ? (sa.h + sb.h) / 2 : (sa.w + sb.w) / 2)) {
+          a.at = (a.at * a.keys.length + b.at * b.keys.length) / (a.keys.length + b.keys.length);
+          a.keys = [...a.keys, ...b.keys];
+          final.splice(k, 1); merged = true; break;
+        }
+      }
+    }
+    for (const g of final) {
       const { w, h } = size(g.keys);
-      const at = vertical ? clamp(O.y + h / 2, g.at, O.y + O.h - h / 2) : clamp(O.x + w / 2, g.at, O.x + O.w - w / 2);
-      out.push({ keys: g.keys, side, ...boxOf(side, at, w, h) });
+      out.push({ keys: g.keys, side, ...boxOf(side, g.at, w, h) });
     }
   }
   return out;

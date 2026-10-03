@@ -39,6 +39,8 @@ export class SettHintChip extends LitElement {
   @property() live = '';
 
   @state() private igniting: string[] = [];
+  private pointed = false;
+  private parent: Element | null = null;
 
   static styles = [presenceStyles, css`
     :host {
@@ -87,7 +89,18 @@ export class SettHintChip extends LitElement {
     if (went.length) void leave(this, false, went[0]);
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.parent = this.parentElement;
+  }
+  /** a pill goes the moment its unit is seen, often under the pointer: the light goes out from where it was */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.pointed) { this.pointed = false; this.parent?.dispatchEvent(new CustomEvent('sett-light', { bubbles: true, composed: true, detail: { on: false, keys: this.keys } })); }
+  }
+
   private point(on: boolean) {
+    this.pointed = on;
     this.dispatchEvent(new CustomEvent('sett-light', { bubbles: true, composed: true, detail: { on, keys: this.keys } }));
   }
 

@@ -130,3 +130,13 @@ describe('routes on the board · level ends', () => {
     expect(r.points.slice(-1)[0]).toEqual({ x: 700, y: 64 });
   });
 });
+
+describe('routes on the board · close boxes', () => {
+  it('two boxes a track or so apart, docks at two levels: one step, never a slant', () => {
+    const a: Box = { x: 0, y: 0, w: 100, h: 60 }, b: Box = { x: 140, y: 0, w: 100, h: 60 };
+    const r = boardRoutes({ obstacles: [a, b], edges: [{ id: 'e', from: { box: a, dock: { x: 100, y: 20 }, side: 'R' }, to: { box: b, dock: { x: 140, y: 25 }, side: 'L' } }], spacing: S }).get('e')!;
+    expect(square(r.points)).toBe(true);
+    expect(r.points[0]).toEqual({ x: 100, y: 20 });
+    expect(r.points.slice(-1)[0]).toEqual({ x: 140, y: 25 });
+  });
+});

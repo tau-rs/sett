@@ -73,6 +73,17 @@ describe('sett-edge', () => {
     document.body.innerHTML = '';
     expect(boardsWatched()).toBe(before);
   });
+  it('a route gone under the pointer lets go: the light goes out and the label does not come back', async () => {
+    const el = await mount('kind="crate" label="x"');
+    const seen: boolean[] = [];
+    el.addEventListener('sett-light', (e) => seen.push((e as CustomEvent).detail.on));
+    el.shadowRoot!.querySelector('.hit')!.dispatchEvent(new Event('pointerenter'));
+    await el.updateComplete;
+    el.route = undefined; await el.updateComplete;
+    el.route = ROUTE; await el.updateComplete;
+    expect(seen).toEqual([true, false]);
+    expect(el.shadowRoot!.querySelector('.label')).toBeNull();
+  });
   it('without a route it draws nothing', async () => {
     document.body.innerHTML = '<div><sett-edge from="x" to="y"></sett-edge></div>';
     const el = document.body.querySelector('sett-edge') as SettEdge;

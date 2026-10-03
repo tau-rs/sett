@@ -36,6 +36,8 @@ class Board implements Watched {
   readonly lines = new Set<BoardLine>();
   private seen = '';
   constructor(readonly host: HTMLElement) {}
+  /** an edge came or went: route again even if no box moved, routes are handed out by position */
+  invalidate() { this.seen = ''; }
 
   measure() {
     const host = this.host;
@@ -103,10 +105,12 @@ export function joinBoard(line: BoardLine): void {
   let b = boards.get(host);
   if (!b) { b = new Board(host); boards.set(host, b); watch(b); }
   b.lines.add(line);
+  b.invalidate();
 }
 export function leaveBoard(line: BoardLine): void {
   for (const [host, b] of boards) {
     if (!b.lines.delete(line)) continue;
+    b.invalidate();
     if (!b.lines.size) { unwatch(b); boards.delete(host); }
   }
 }

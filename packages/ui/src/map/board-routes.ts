@@ -263,7 +263,7 @@ export function boardRoutes({ obstacles, edges, spacing: S, margin = S, within }
       const horizontal = (side: BoardSide) => side === 'L' || side === 'R';
       const straight = horizontal(from.side) === horizontal(to.side) && grid.every((p) => (horizontal(from.side) ? p.y === grid[0].y : p.x === grid[0].x));
       const apart = horizontal(from.side) ? from.dock.y !== to.dock.y : from.dock.x !== to.dock.x;
-      if (straight && apart && grid.length > 1) {
+      if (straight && apart) {
         // the only run would have to sit at both levels: it steps halfway
         const m = grid.length >> 1, h = horizontal(from.side);
         grid.forEach((p, k) => { if (h) p.y = k < m ? from.dock.y : to.dock.y; else p.x = k < m ? from.dock.x : to.dock.x; });

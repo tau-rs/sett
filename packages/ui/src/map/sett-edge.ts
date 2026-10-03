@@ -112,6 +112,11 @@ export class SettEdge extends LitElement {
     leaveBoard(this);
   }
 
+  /** a route gone under the pointer (an end left the window) never gets a pointerleave: let go of the pointer */
+  willUpdate(changed: Map<string, unknown>) {
+    if (changed.has('route') && this.pointed && !(this.route && this.route.points.length >= 2)) this.point(false);
+  }
+
   private point = (on: boolean) => {
     this.pointed = on;
     this.dispatchEvent(new CustomEvent('sett-light', { bubbles: true, composed: true, detail: { on } }));

@@ -5418,6 +5418,7 @@ The row of overlay toggles on the map bar.
 
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
+  - `chrome-tabs-and-switches--narrow` tabbar · narrow · the tabs give way and scroll, the right end never wraps
   - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
   - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
   - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
@@ -7422,6 +7423,7 @@ A segmented control in a well. Never has a disabled item: a view with nothing in
   - `(default)` — sett-seg-item elements
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
+  - `chrome-tabs-and-switches--narrow` tabbar · narrow · the tabs give way and scroll, the right end never wraps
   - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
   - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
   - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
@@ -7442,6 +7444,7 @@ One item of a segmented control.
   - `active=boolean`
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
+  - `chrome-tabs-and-switches--narrow` tabbar · narrow · the tabs give way and scroll, the right end never wraps
   - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
   - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
   - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
@@ -8304,6 +8307,7 @@ A tab. `pinned` has no close mark; `dirty` carries an amber mark after the name 
   - `sett-select` — the tab was chosen
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
+  - `chrome-tabs-and-switches--narrow` tabbar · narrow · the tabs give way and scroll, the right end never wraps
   - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
   - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
   - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
@@ -8317,13 +8321,14 @@ A tab. `pinned` has no close mark; `dirty` carries an amber mark after the name 
 
 ### `<sett-tabbar>`
 
-The centre tab bar: map pinned first, file tabs in mono, shortcuts on the right.
+The centre tab bar: map pinned first, file tabs in mono, shortcuts on the right. The right end never wraps; when room runs out the tabs give way and scroll sideways (a wheel, a trackpad, or focus brings a tab into view), and no tab shrinks, so a file name is never cut.
 
 - slots:
   - `(default)` — sett-tab elements
   - `right` — what sits at the right end (level switch, overlay toggles, shortcuts)
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
+  - `chrome-tabs-and-switches--narrow` tabbar · narrow · the tabs give way and scroll, the right end never wraps
   - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
   - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
   - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)
@@ -8397,6 +8402,7 @@ One overlay toggle: a small square that fills when on.
   - `on=boolean`
 - stories:
   - `chrome-tabs-and-switches--tabbar` tabbar · pinned map, unsaved file, session tab, right end
+  - `chrome-tabs-and-switches--narrow` tabbar · narrow · the tabs give way and scroll, the right end never wraps
   - `chrome-tabs-and-switches--tab-states` tab · pinned, active, dirty, scoped (no mark while inactive), plain
   - `chrome-tabs-and-switches--scoped-session` file tab · opened in a session: underlined in the session's colour, the label stays ink
   - `chrome-tabs-and-switches--scoped-other-session` file tab · another session colour (session alone means scope session)

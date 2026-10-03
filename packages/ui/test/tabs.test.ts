@@ -63,4 +63,12 @@ describe('tabs and switches', () => {
     let d: any; t.addEventListener('sett-toggle', (e: any) => (d = e.detail));
     t.click(); await t.updateComplete; expect(d).toEqual({ value: 'plan', on: true }); expect(t.getAttribute('aria-checked')).toBe('true');
   });
+  it('the right end never wraps; when room runs out the tabs give way by scrolling, a tab never shrinks (#33)', async () => {
+    const bar = cssOf('sett-tabbar');
+    expect(bar).toMatch(/\.r \{[^}]*flex: none;[^}]*white-space: nowrap;/);
+    expect(bar).toMatch(/\.tabs \{[^}]*display: flex;[^}]*min-width: 0;[^}]*overflow-x: auto;/);
+    expect(cssOf('sett-tab')).toMatch(/:host \{[^}]*flex: none;/);
+    const el = await mount('<sett-tabbar><sett-tab pinned>map</sett-tab><span slot="right">⌘1 map</span></sett-tabbar>');
+    expect(el.shadowRoot.querySelector('.tabs').getAttribute('role'), 'only the tabs are the tablist').toBe('tablist');
+  });
 });

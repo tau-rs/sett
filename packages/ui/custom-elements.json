@@ -18246,7 +18246,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The centre tab bar: map pinned first, file tabs in mono, shortcuts on the right.",
+          "description": "The centre tab bar: map pinned first, file tabs in mono, shortcuts on the right.\nThe right end never wraps; when room runs out the tabs give way and scroll\nsideways (a wheel, a trackpad, or focus brings a tab into view), and no tab\nshrinks, so a file name is never cut.",
           "name": "SettTabbar",
           "slots": [
             {

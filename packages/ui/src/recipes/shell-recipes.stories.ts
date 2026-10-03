@@ -184,7 +184,7 @@ export const SessionGateFailed: Story = { name: 'session · gate failed', render
   centre: html`<sett-tabbar><sett-tab pinned active>map</sett-tab>${toggles('sessions', 'plan')}</sett-tabbar>
     ${map({ subscribe: { session: 'yk' }, newsub: { session: 'yk' }, subemail: { session: 'yk' } })}`,
   inspector: html`<sett-inspector heading="refund flow" sub="claude code · w1 · 31 min" state="asks" tone="sug" kind="session" session="yk">
-    <sett-session-card class="in" name="refund flow" driver="claude code" session="yk" step="2" of="4" still>
+    <sett-session-card class="in" headless name="refund flow" driver="claude code" session="yk" step="2" of="4" still>
       <sett-plan-row kind="group" gate="failed 2/2">group 1
         <sett-plan-row slot="element" state="done">OrderRepo: refund()</sett-plan-row>
         <sett-plan-row slot="element" state="asks" count="1" current>PgOrderRepo: refund()</sett-plan-row>

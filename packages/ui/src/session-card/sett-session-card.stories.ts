@@ -3,6 +3,7 @@ import { html } from 'lit';
 import { sessionOrder } from '@tau-rs/sett-tokens';
 import './sett-session-card.js';
 import '../thread/sett-thread.js';
+import '../shell/sett-inspector.js';
 
 const subs = (n: number) => ['store', 'tests/refund.rs', 'migrations', 'docs', 'bench', 'lint', 'types', 'ci', 'fixtures', 'perf', 'i18n', 'cleanup'].slice(0, n)
   .map((s, i) => html`<sett-sub-agent slot="sub" state=${i < 2 ? 'done' : i < 4 ? 'running' : 'pending'}>${s}</sett-sub-agent>`);
@@ -98,6 +99,21 @@ export const GlyphColumn: Story = {
   render: () => html`<sett-session-card name="glyphs" driver="" style="width:250px">
     ${(['done', 'running', 'paused', 'taken-over', 'deviation', 'asks', 'resolve', 'pending'] as const).map((s) => html`<sett-plan-row state=${s} count="2" who=${s === 'taken-over' ? 'you' : ''}>${s}</sett-plan-row>`)}
   </sett-session-card>`,
+};
+export const InTheInspector: Story = {
+  name: 'in the inspector · headless · the heading writes the name, the card keeps n/m in its foot',
+  render: () => html`<div style="width:var(--sett-size-shell-inspector);height:calc(var(--sett-space-6) * 12);display:flex;border:var(--sett-stroke-hair) solid var(--sett-color-line);border-radius:var(--sett-radius-card);overflow:hidden">
+    <sett-inspector heading="Yokohama" sub="claude code · w1 · 14 min" state="running" session="yk" style="flex:1">
+      <sett-session-card headless name="Yokohama" driver="claude code" session="yk" step="3" of="6" running style="margin:var(--sett-space-2) var(--sett-space-3)">
+        <sett-plan-row state="done">RefundRequest</sett-plan-row>
+        <sett-plan-row state="done">Refunds · port</sett-plan-row>
+        <sett-plan-row state="running" current>PgRefundRepo${subs(3)}</sett-plan-row>
+        <sett-plan-row state="pending">refund() in api</sett-plan-row>
+        <sett-plan-row state="pending">webhook · refund</sett-plan-row>
+        <span slot="foot">started 14 min ago</span><a slot="thread">thread ›</a>
+      </sett-session-card>
+    </sett-inspector>
+  </div>`,
 };
 export const OtherSession: Story = { name: 'another session colour', render: () => running(true, 6, 'mg') };
 export const ReducedMotion: Story = { name: 'reduced motion · dot still', render: () => running(false, 6, 'yk', true) };

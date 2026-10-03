@@ -12,7 +12,7 @@ const H = 'calc(var(--sett-space-6) * 20)';
 const pane = (inner: unknown, h = H) => html`<div style="width:var(--sett-size-shell-inspector);height:${h};display:flex;border:var(--sett-stroke-hair) solid var(--sett-color-line);border-radius:var(--sett-radius-card);overflow:hidden">${inner}</div>`;
 
 const sessionCard = html`<sett-inspector heading="refund flow" sub="claude code · w1 · 14 min" state="running" session="yk" style="flex:1">
-  <sett-session-card name="refund flow" driver="claude code" session="yk" step="2" of="4" running style="margin:var(--sett-space-2) var(--sett-space-3)">
+  <sett-session-card headless name="refund flow" driver="claude code" session="yk" step="2" of="4" running style="margin:var(--sett-space-2) var(--sett-space-3)">
     <sett-plan-row state="done">OrderRepo: refund()</sett-plan-row>
     <sett-plan-row state="running" current>PgOrderRepo: refund()<sett-sub-agent slot="sub" state="running">a2 · store/pg.rs</sett-sub-agent><sett-sub-agent slot="sub" state="pending">tests/lifecycle.rs</sett-sub-agent></sett-plan-row>
     <sett-plan-row state="pending">pay(), close() call refund()</sett-plan-row>

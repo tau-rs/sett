@@ -40,13 +40,15 @@ const rowStyles = css`
  * `verbs` slot (rule 9: running `pause · stop`, paused `resume · take over ·
  * stop`, taken over `stop`) and a sett-composer in the `composer` slot, which
  * is the hand-back note (`mode="handback"`) while you hold an element.
+ * Inside `sett-inspector`, whose heading already writes the name, the
+ * driver and the state, it is `headless`: no header, and n/m leads the foot.
  *
  * @slot - sett-plan-row elements, or group rows
  * @slot foot - the foot text, e.g. `started 14 min ago · 4 changed · 2 ahead`
  * @slot thread - the link to the thread
  * @slot verbs - the fixed verbs bar, a sett-verbs
  * @slot composer - the composer under the verbs, a sett-composer
- * @csspart header - the header row
+ * @csspart header - the header row, absent when `headless`
  * @csspart bar - the verbs bar and composer, when given
  */
 @customElement('sett-session-card')
@@ -64,6 +66,8 @@ export class SettSessionCard extends LitElement {
   @property({ type: Boolean, reflect: true }) running = false;
   /** force the reduced-motion rendering */
   @property({ type: Boolean, reflect: true }) still = false;
+  /** in the inspector: its heading carries name, driver and state, so no header here; n/m moves to the foot */
+  @property({ type: Boolean, reflect: true }) headless = false;
 
   static styles = [
     sessionStyles,
@@ -87,6 +91,7 @@ export class SettSessionCard extends LitElement {
       .h .n { margin-left: auto; font-family: var(--sett-font-mono); font-weight: var(--sett-font-weight-normal); color: var(--sett-color-ink2); font-size: var(--sett-font-size-sm); }
       .foot { margin-top: var(--sett-space-1); font-size: var(--sett-font-size-xs); color: var(--sett-color-mute); display: flex; gap: var(--sett-space-2); }
       .foot .thread { margin-left: auto; }
+      .foot .n { font-family: var(--sett-font-mono); color: var(--sett-color-ink2); }
       ::slotted(a), .foot a { color: var(--sett-color-sel); cursor: pointer; text-decoration: none; }
       /* the fixed bar runs edge to edge under the foot: the verbs bar's own border-top is the rule */
       .bar { margin: var(--sett-space-2) calc(-1 * var(--sett-space-2)) calc(-1 * var(--sett-space-2)); }
@@ -100,14 +105,15 @@ export class SettSessionCard extends LitElement {
 
   render() {
     const bar = this.has('verbs') || this.has('composer');
+    const n = this.step != null && this.of != null ? html`<span class="n">${this.step}/${this.of}</span>` : nothing;
     return html`
-      <div class="h" part="header">
+      ${this.headless ? nothing : html`<div class="h" part="header">
         <span class="dot" data-kind="session" ?data-pulse=${this.running}></span>
         <b>${this.name}</b><span class="driver">${this.driver}</span>
-        ${this.step != null && this.of != null ? html`<span class="n">${this.step}/${this.of}</span>` : nothing}
-      </div>
+        ${n}
+      </div>`}
       <slot @slotchange=${this.onSlotChange}></slot>
-      <div class="foot"><slot name="foot"></slot><span class="thread"><slot name="thread"></slot></span></div>
+      <div class="foot">${this.headless ? n : nothing}<slot name="foot"></slot><span class="thread"><slot name="thread"></slot></span></div>
       ${bar ? html`<div class="bar" part="bar"><slot name="verbs"></slot><slot name="composer"></slot></div>` : nothing}`;
   }
 }

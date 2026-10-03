@@ -6018,6 +6018,7 @@ One plan element: glyph, name in mono, and on the right only what the glyph cann
   - `primitives-session-card--verbs-paused` with its bar · paused · resume · take over · stop
   - `primitives-session-card--verbs-taken-over` with its bar · taken over · ✋ you · stop · the composer is the hand-back note
   - `primitives-session-card--glyph-column` the glyph column
+  - `primitives-session-card--in-the-inspector` in the inspector · headless · the heading writes the name, the card keeps n/m in its foot
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
 
@@ -7323,7 +7324,7 @@ The scope selector in the bar: dot, the words of the scope, a pill when it has a
 
 ### `<sett-session-card>`
 
-The session card, in the inspector when a session is the selection (DESIGN.md "The shell" rule 6). Header: session name in its colour, the driver, then n/m. One sett-plan-row per plan element, or one group row per lane with its elements inside. Foot: when it started, files and git, and a link to the thread. Under the foot, its fixed bar: a sett-verbs in the `verbs` slot (rule 9: running `pause · stop`, paused `resume · take over · stop`, taken over `stop`) and a sett-composer in the `composer` slot, which is the hand-back note (`mode="handback"`) while you hold an element.
+The session card, in the inspector when a session is the selection (DESIGN.md "The shell" rule 6). Header: session name in its colour, the driver, then n/m. One sett-plan-row per plan element, or one group row per lane with its elements inside. Foot: when it started, files and git, and a link to the thread. Under the foot, its fixed bar: a sett-verbs in the `verbs` slot (rule 9: running `pause · stop`, paused `resume · take over · stop`, taken over `stop`) and a sett-composer in the `composer` slot, which is the hand-back note (`mode="handback"`) while you hold an element. Inside `sett-inspector`, whose heading already writes the name, the driver and the state, it is `headless`: no header, and n/m leads the foot.
 
 - attrs:
   - `name=string` — session name, shown in the session colour
@@ -7333,6 +7334,7 @@ The session card, in the inspector when a session is the selection (DESIGN.md "T
   - `of=number`
   - `running=boolean` — the session is working now: the dot pulses
   - `still=boolean` — force the reduced-motion rendering
+  - `headless=boolean` — in the inspector: its heading carries name, driver and state, so no header here; n/m moves to the foot
 - slots:
   - `(default)` — sett-plan-row elements, or group rows
   - `foot` — the foot text, e.g. `started 14 min ago · 4 changed · 2 ahead`
@@ -7340,7 +7342,7 @@ The session card, in the inspector when a session is the selection (DESIGN.md "T
   - `verbs` — the fixed verbs bar, a sett-verbs
   - `composer` — the composer under the verbs, a sett-composer
 - parts:
-  - `header` — the header row
+  - `header` — the header row, absent when `headless`
   - `bar` — the verbs bar and composer, when given
 - stories:
   - `primitives-session-card--running-with-sub-agents` running · element 3 of 6 · six sub-agents, folded
@@ -7357,6 +7359,7 @@ The session card, in the inspector when a session is the selection (DESIGN.md "T
   - `primitives-session-card--verbs-paused` with its bar · paused · resume · take over · stop
   - `primitives-session-card--verbs-taken-over` with its bar · taken over · ✋ you · stop · the composer is the hand-back note
   - `primitives-session-card--glyph-column` the glyph column
+  - `primitives-session-card--in-the-inspector` in the inspector · headless · the heading writes the name, the card keeps n/m in its foot
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
 
@@ -8093,6 +8096,7 @@ A sub-agent row under a plan element: glyph and name, same rhythm as the plan ro
   - `primitives-session-card--verbs-paused` with its bar · paused · resume · take over · stop
   - `primitives-session-card--verbs-taken-over` with its bar · taken over · ✋ you · stop · the composer is the hand-back note
   - `primitives-session-card--glyph-column` the glyph column
+  - `primitives-session-card--in-the-inspector` in the inspector · headless · the heading writes the name, the card keeps n/m in its foot
   - `primitives-session-card--other-session` another session colour
   - `primitives-session-card--reduced-motion` reduced motion · dot still
 

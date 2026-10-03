@@ -2464,6 +2464,14 @@
         },
         {
           "kind": "js",
+          "name": "SettPanel",
+          "declaration": {
+            "name": "SettPanel",
+            "module": "./map/sett-panel.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "scopeWords",
           "declaration": {
             "name": "scopeWords",
@@ -6349,6 +6357,111 @@
           "declaration": {
             "name": "SettOpRow",
             "module": "src/map/sett-op-row.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-panel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The map's own panel, docked on the right edge of the map's pane (map rule 8:\nchrome docks, nothing floats over the drawing). It is not the shell's\ninspector: the inspector is about the selection, the panel is about where\nyou are on the map, and it goes away with the map tab.\n\nIts first row is the status line, the place of the toast sett does not\nhave: set `status` and the row takes the well tint and says it; the panel\nclears it after `map.statusHold`, or at the next action (a click or a key\ninside the panel, or the host calling `clear()` for an action on the map).\nThe row keeps its height when empty, so nothing under it moves, and it\nnever animates.",
+          "name": "SettPanel",
+          "cssParts": [
+            {
+              "description": "the status line",
+              "name": "status"
+            },
+            {
+              "description": "the scrolling body",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the panel's sections, top down: a sett-position, then whatever the map needs",
+              "name": ""
+            },
+            {
+              "description": "held at the bottom, outside the scroll: the sett-minimap, when the map exceeds the viewport",
+              "name": "foot"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the transient message of the status line; empty is no message",
+              "attribute": "status"
+            },
+            {
+              "kind": "field",
+              "name": "timer",
+              "type": {
+                "text": "ReturnType<typeof setTimeout> | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onAction",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "description": "clear the status line now: the host calls it at the next action on the map"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-status-clear",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "the status line was cleared, by the hold or by an action"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "status",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the transient message of the status line; empty is no message",
+              "fieldName": "status"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettPanel",
+          "declaration": {
+            "name": "SettPanel",
+            "module": "src/map/sett-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel",
+          "declaration": {
+            "name": "SettPanel",
+            "module": "src/map/sett-panel.ts"
           }
         }
       ]

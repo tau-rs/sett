@@ -21,7 +21,7 @@ const lastDir = (pts: Pt[]): Pt => { for (let i = pts.length - 1; i > 0; i--) if
 const firstDir = (pts: Pt[]): Pt => { for (let i = 1; i < pts.length; i++) if (pts[i].x !== pts[i - 1].x || pts[i].y !== pts[i - 1].y) return dir(pts[i - 1], pts[i]); return { x: 1, y: 0 }; };
 
 /** the head at `e`, arriving along `d`; `a` is `map.size.arrow` */
-function head(kind: LinkHead, e: Pt, d: Pt, a = ARROW) {
+export function linkHead(kind: LinkHead, e: Pt, d: Pt, a = ARROW) {
   const n = normal(d);
   const tri = (tip: Pt) => `M${fmt(tip)} L${fmt(add(add(tip, d, -a), n, a / 2.4))} L${fmt(add(add(tip, d, -a), n, -a / 2.4))} Z`;
   const chev = (tip: Pt) => `M${fmt(add(add(tip, d, -a * 0.8), n, a / 2))} L${fmt(tip)} L${fmt(add(add(tip, d, -a * 0.8), n, -a / 2))}`;
@@ -41,7 +41,7 @@ function head(kind: LinkHead, e: Pt, d: Pt, a = ARROW) {
   }
 }
 /** the ownership diamond at the start `s`, leaving along `d` */
-function tail(kind: LinkTail, s: Pt, d: Pt, a = ARROW) {
+export function linkTail(kind: LinkTail, s: Pt, d: Pt, a = ARROW) {
   const n = normal(d);
   const p = [s, add(add(s, d, a / 2), n, a / 3.2), add(s, d, a), add(add(s, d, a / 2), n, -a / 3.2)];
   return svg`<path class=${`t ${kind === 'diamond' ? 'filled' : 'hollow'}`} d=${`${pathOf(p)} Z`} />`;
@@ -210,7 +210,7 @@ export class SettLink extends LitElement {
       ${this.drawing ? svg`<mask id="reveal" mask-type="alpha" maskUnits="userSpaceOnUse" x="-100000" y="-100000" width="200000" height="200000"><path class="reveal" d=${full} /></mask>` : nothing}
       <path class="hit" d=${full} @pointerenter=${() => this.light(true)} @pointerleave=${() => this.light(false)} />
       <g mask=${this.drawing ? 'url(#reveal)' : nothing}>
-        ${quiet ? nothing : svg`<path class="line" d=${line} />${head(spec.head, e, d1)}${spec.tail ? tail(spec.tail, s, d0) : nothing}${r.branches.map((b) => svg`<circle class="b" cx=${b.x} cy=${b.y} r=${BRANCH / 2} />`)}`}
+        ${quiet ? nothing : svg`<path class="line" d=${line} />${linkHead(spec.head, e, d1)}${spec.tail ? linkTail(spec.tail, s, d0) : nothing}${r.branches.map((b) => svg`<circle class="b" cx=${b.x} cy=${b.y} r=${BRANCH / 2} />`)}`}
         ${this.flowing && !quiet ? svg`<path class="flow" d=${line} />` : nothing}
       </g>
       ${this.plug && !r.docked?.from ? svg`<circle class="plug" cx=${s.x + d0.x * (BRANCH / 2 + HAIR)} cy=${s.y + d0.y * (BRANCH / 2 + HAIR)} r=${BRANCH / 2} />` : nothing}

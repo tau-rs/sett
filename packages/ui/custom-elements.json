@@ -2280,6 +2280,22 @@
         },
         {
           "kind": "js",
+          "name": "linkHead",
+          "declaration": {
+            "name": "linkHead",
+            "module": "./map/sett-link.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linkTail",
+          "declaration": {
+            "name": "linkTail",
+            "module": "./map/sett-link.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettBundle",
           "declaration": {
             "name": "SettBundle",
@@ -2480,6 +2496,14 @@
         },
         {
           "kind": "js",
+          "name": "LINK_FAMILY_MEANS",
+          "declaration": {
+            "name": "LINK_FAMILY_MEANS",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "isLinkKind",
           "declaration": {
             "name": "isLinkKind",
@@ -2644,6 +2668,38 @@
           "declaration": {
             "name": "ContractUse",
             "module": "./map/sett-contract-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettLegend",
+          "declaration": {
+            "name": "SettLegend",
+            "module": "./map/sett-legend.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "keptOf",
+          "declaration": {
+            "name": "keptOf",
+            "module": "./map/sett-legend.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "filterOf",
+          "declaration": {
+            "name": "filterOf",
+            "module": "./map/sett-legend.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FILTER_NONE",
+          "declaration": {
+            "name": "FILTER_NONE",
+            "module": "./map/sett-legend.js"
           }
         },
         {
@@ -3885,6 +3941,15 @@
         },
         {
           "kind": "variable",
+          "name": "LINK_FAMILY_MEANS",
+          "type": {
+            "text": "Record<LinkFamily, string>"
+          },
+          "default": "{ does: 'runs something', promises: 'a contract', knows: 'depends on a shape', around: 'surrounds the code' }",
+          "description": "what a family says, in the words of `map.link.<family>`"
+        },
+        {
+          "kind": "variable",
           "name": "LINK_KINDS",
           "type": {
             "text": "Record<LinkKind, LinkKindSpec>"
@@ -3956,6 +4021,14 @@
           "name": "LINK_FAMILIES",
           "declaration": {
             "name": "LINK_FAMILIES",
+            "module": "src/map/link-kinds.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LINK_FAMILY_MEANS",
+          "declaration": {
+            "name": "LINK_FAMILY_MEANS",
             "module": "src/map/link-kinds.ts"
           }
         },
@@ -6733,8 +6806,410 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/sett-legend.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "FILTER_NONE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'none'",
+          "description": "the filter value that keeps nothing: no kind or family has this name, so every link recedes"
+        },
+        {
+          "kind": "function",
+          "name": "keptOf",
+          "return": {
+            "type": {
+              "text": "Set<LinkKind>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "filter",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the kinds a `sett-sheet` filter keeps: a family name stands for its kinds; empty keeps everything"
+        },
+        {
+          "kind": "function",
+          "name": "filterOf",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "kept",
+              "type": {
+                "text": "Set<LinkKind>"
+              }
+            }
+          ],
+          "description": "the shortest `sett-sheet` filter that keeps exactly these kinds: empty for all, a family's name when the family is whole"
+        },
+        {
+          "kind": "class",
+          "description": "The key to the map, on demand (map rule 8): a section of `sett-panel`,\nfolded to one row until `open`. It is also the control that filters the\nlinks: one toggle per family (does · promises · knows · around), one per\nkind inside it, and one for the fallback. Its rows come from the kind\ntables (`LINK_KINDS`, `LINK_FAMILIES`, `PORT_KINDS`), never a second list:\na swatch is the family's line pattern and the kind's head, as `sett-link`\ndraws them. The port kinds are a key only, as is the finding, which never\nrecedes.\n\nIt holds no map state. `filter` is the value of `sett-sheet filter` (the\nfamilies and kinds to keep; empty keeps everything); a toggle fires\n`sett-filter` with the next value and the host copies it onto the sheet\nand back here. Folded, the row says how many kinds are shown while a\nfilter is on. Opening the section and listing a family's kinds are the\nlegend's own. Pointing eases a row's background (`motion.hover`).",
+          "name": "SettLegend",
+          "cssParts": [
+            {
+              "description": "the row that opens and closes the section",
+              "name": "head"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "filter",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the families and kinds kept, as `sett-sheet filter` takes them; empty keeps everything",
+              "attribute": "filter"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the section is unfolded",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the families whose kinds are listed, separated by spaces",
+              "attribute": "expanded"
+            },
+            {
+              "kind": "field",
+              "name": "kept",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "listed",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "say",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "kept",
+                  "type": {
+                    "text": "Set<LinkKind>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleKind",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "kind",
+                  "type": {
+                    "text": "LinkKind"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleFamily",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "family",
+                  "type": {
+                    "text": "LinkFamily"
+                  }
+                }
+              ],
+              "description": "a family that is whole goes off; one that is off or partial comes back whole"
+            },
+            {
+              "kind": "method",
+              "name": "list",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "family",
+                  "type": {
+                    "text": "LinkFamily"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "swatch",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "cls",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "kind",
+                  "optional": true,
+                  "type": {
+                    "text": "LinkKind"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "check",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "Check"
+                  }
+                },
+                {
+                  "name": "label",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "toggle",
+                  "type": {
+                    "text": "() => void"
+                  }
+                },
+                {
+                  "name": "body",
+                  "type": {
+                    "text": "unknown"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "family",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "f",
+                  "type": {
+                    "text": "LinkFamily"
+                  }
+                },
+                {
+                  "name": "kept",
+                  "type": {
+                    "text": "Set<LinkKind>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "kind",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "k",
+                  "type": {
+                    "text": "LinkKind"
+                  }
+                },
+                {
+                  "name": "kept",
+                  "type": {
+                    "text": "Set<LinkKind>"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-filter",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ filter }`, the next value for `sett-sheet filter`, when a family or a kind is toggled"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "filter",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the families and kinds kept, as `sett-sheet filter` takes them; empty keeps everything",
+              "fieldName": "filter"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the section is unfolded",
+              "fieldName": "open"
+            },
+            {
+              "name": "expanded",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the families whose kinds are listed, separated by spaces",
+              "fieldName": "expanded"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-legend",
+          "customElement": true
+        },
+        {
+          "kind": "variable",
+          "name": "y"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FILTER_NONE",
+          "declaration": {
+            "name": "FILTER_NONE",
+            "module": "src/map/sett-legend.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "keptOf",
+          "declaration": {
+            "name": "keptOf",
+            "module": "src/map/sett-legend.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "filterOf",
+          "declaration": {
+            "name": "filterOf",
+            "module": "src/map/sett-legend.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettLegend",
+          "declaration": {
+            "name": "SettLegend",
+            "module": "src/map/sett-legend.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-legend",
+          "declaration": {
+            "name": "SettLegend",
+            "module": "src/map/sett-legend.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/sett-link.ts",
       "declarations": [
+        {
+          "kind": "function",
+          "name": "linkHead",
+          "parameters": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "LinkHead"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "Pt"
+              }
+            },
+            {
+              "name": "d",
+              "type": {
+                "text": "Pt"
+              }
+            },
+            {
+              "name": "a",
+              "default": "ARROW"
+            }
+          ],
+          "description": "the head at `e`, arriving along `d`; `a` is `map.size.arrow`"
+        },
+        {
+          "kind": "function",
+          "name": "linkTail",
+          "parameters": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "LinkTail"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "text": "Pt"
+              }
+            },
+            {
+              "name": "d",
+              "type": {
+                "text": "Pt"
+              }
+            },
+            {
+              "name": "a",
+              "default": "ARROW"
+            }
+          ],
+          "description": "the ownership diamond at the start `s`, leaving along `d`"
+        },
         {
           "kind": "class",
           "description": "One line between two things inside an open unit. It names its ends by\n`key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it\nroutes every link together (tracks, lanes, trunks, docks) and hands each\nits path; outside a sheet a link draws the simplest square route between\nits ends by itself. The grammar is fixed (#58, #68): the line pattern is\nthe family, the head is the kind, a diamond at the start is ownership; the\nlighter the line, the less the analyser knows. Links never carry presence.\n\nResponse (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`);\n`selected` draws it outward from the `anchor` end (`motion.draw`), then\nthe `flow` dashes travel, on the selection alone. A finding is red and\nheavier on any kind and never recedes.",
@@ -7077,6 +7552,22 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "linkHead",
+          "declaration": {
+            "name": "linkHead",
+            "module": "src/map/sett-link.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linkTail",
+          "declaration": {
+            "name": "linkTail",
+            "module": "src/map/sett-link.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "SettLink",

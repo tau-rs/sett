@@ -17,7 +17,7 @@ export { SettFunnel, SettFunnelStep } from './funnel/sett-funnel.js';
 export { SettOpRow, type OpKind } from './map/sett-op-row.js';
 export { SettPortRow, PORT_KINDS, type PortKind, type PortSide } from './map/sett-port-row.js';
 export { SettRail, RAIL_SECTIONS, RAIL_LABEL, type RailSection } from './map/sett-rail.js';
-export { SettNode, tierFor, type NodeTier } from './map/sett-node.js';
+export { SettNode, tierFor, foldFor, type NodeTier, type UnitFold } from './map/sett-node.js';
 export { splitLabel, portOf, unitOf, unitPorts, opOf, opsOf, sectionOf, insideOf, itemKindOf, itemsOf, linkKindOf, linksOf, wiresOf, portKey, opKey, type FixtureLink, type FixtureLinkRow, type InsideColumn, type FixtureItem, type FixtureArea, type Fixture, type FixtureUnit, type FixtureContract, type FixtureCode, type FixtureCodeLine, type Port, type Op } from './map/fixtures.js';
 export { presenceStyles, beatStyles, beatOf, wave, bloom, arrive, leave, flash, reducedMotion, durationMs, type WaveOptions } from './map/motion.js';
 export { SettItem, ITEM_KINDS, type ItemKind, type ItemDelta } from './map/sett-item.js';

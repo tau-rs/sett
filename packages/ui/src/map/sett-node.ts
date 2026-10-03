@@ -5,7 +5,7 @@ import { arrive, beatOf, durationMs, leave, presenceStyles } from './motion.js';
 import type { NodeTier } from './tier.js';
 
 export type { NodeTier } from './tier.js';
-export { tierFor } from './tier.js';
+export { tierFor, foldFor, type UnitFold } from './tier.js';
 
 /**
  * A unit's box on the board, at one of four tiers. The host sets the box and

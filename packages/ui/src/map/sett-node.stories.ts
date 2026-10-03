@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import { UNITS, node, openUnit, zed, zero2prod } from './map-fixtures.stories-helpers.js';
-import type { SettNode } from './sett-node.js';
+import { foldFor, type SettNode, type UnitFold } from './sett-node.js';
 
 const TIERS = ['mini', 'chip', 'card', 'sheet'] as const;
 const STATES = ['plain', 'selected', 'focused', 'far', 'declared'] as const;
@@ -92,3 +92,19 @@ export const ReducedMotion: Story = {
     'With prefers-reduced-motion on, the same scenes: the dots neither breathe nor ignite, and an arrival or departure skips the wave and the bloom. Press the button under reduced motion: nothing moves, Taipei\'s dot simply appears live.',
     act('Taipei arrives', (r) => { theNode(r).live = 'yk tl'; })),
 };
+
+// the camera zooming out from an open unit (rule 3): the scale against the one it opened at picks the fold, through foldFor
+const zoomed = (ratio: number): Story => {
+  const fold: UnitFold = foldFor(ratio, 1);
+  return {
+    name: `camera · zoomed out to ${ratio} of the opening scale · ${fold === 'items' ? 'items' : fold === 'areas' ? 'its areas fold' : 'closed back to a card'} · rg, api, gpui`,
+    parameters: { layout: 'fullscreen' },
+    render: () => html`<div style="display:grid;gap:var(--sett-space-4);padding:var(--sett-space-4)">
+      <p style="margin:0;max-width:64ch;color:var(--sett-color-ink2);font-family:var(--sett-font-sans)">foldFor(${ratio}, 1) = <b>${fold}</b>. An open unit keeps its place while you zoom out; text never shrinks, so under the opening scale its areas fold, down to map.threshold.foldFloor of it, and below that it closes back to a card. The app scales the board; sett draws what foldFor says.</p>
+      ${UNITS.map(([f, id]) => (fold === 'closed' ? node(f, id, 'card') : openUnit(f, id, {}, { folded: fold === 'areas' })))}
+    </div>`,
+  };
+};
+export const ZoomOpening = zoomed(1);
+export const ZoomAreasFold = zoomed(0.85);
+export const ZoomClosed = zoomed(0.6);

@@ -1911,9 +1911,25 @@
         },
         {
           "kind": "js",
+          "name": "foldFor",
+          "declaration": {
+            "name": "foldFor",
+            "module": "./map/sett-node.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "NodeTier",
           "declaration": {
             "name": "NodeTier",
+            "module": "./map/sett-node.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "UnitFold",
+          "declaration": {
+            "name": "UnitFold",
             "module": "./map/sett-node.js"
           }
         },
@@ -8366,6 +8382,22 @@
         },
         {
           "kind": "js",
+          "name": "foldFor",
+          "declaration": {
+            "name": "foldFor",
+            "module": "./tier.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "UnitFold",
+          "declaration": {
+            "name": "UnitFold",
+            "module": "./tier.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettNode",
           "declaration": {
             "name": "SettNode",
@@ -9715,6 +9747,37 @@
             }
           ],
           "description": "The tier for an on-screen width. With `previous`, folding back one tier waits\nuntil the width is a `hysteresis` band under the threshold, so a wheel zoom\nhovering around a threshold does not flicker between two row layouts."
+        },
+        {
+          "kind": "function",
+          "name": "foldFor",
+          "return": {
+            "type": {
+              "text": "UnitFold"
+            }
+          },
+          "parameters": [
+            {
+              "name": "scale",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "openedAt",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "previous",
+              "optional": true,
+              "type": {
+                "text": "UnitFold"
+              }
+            }
+          ],
+          "description": "The fold of an open unit for the camera's `scale`, against the scale it\nwas `openedAt` (DESIGN.md map rule 3). An open unit keeps its place on the\nboard while you zoom out; text never shrinks, so its areas fold (`areas`)\nas soon as the scale is under the opening scale, down to\n`map.threshold.foldFloor` of it; below that it closes back to a card\n(`closed`). At or above the opening scale it shows its items (`items`).\nWith `previous`, folding one step waits for the tiers' `hysteresis` band,\nso a wheel zoom hovering at a boundary does not flicker; zooming back in\nis immediate. A fold by hand is not this: an area folded by hand stays a\nchip at any scale."
         }
       ],
       "exports": [
@@ -9723,6 +9786,14 @@
           "name": "tierFor",
           "declaration": {
             "name": "tierFor",
+            "module": "src/map/tier.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "foldFor",
+          "declaration": {
+            "name": "foldFor",
             "module": "src/map/tier.ts"
           }
         }

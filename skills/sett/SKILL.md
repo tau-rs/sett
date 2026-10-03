@@ -413,12 +413,23 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
   - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
   - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
   - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -476,16 +487,25 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
-  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
-  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
-  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
-  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
-  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
-  - `map-sheet--no-wires` links · without the port wires
-  - `map-sheet--open-api` in context · api open in its node
-  - `map-sheet--open-rg` in context · rg open in its node
-  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
@@ -687,6 +707,127 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-status-bar--plan` plan
   - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
   - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-bundle>`
+
+The one line leaving an area at the areas level (rule 12). A stretch that carries two or more links is a double line: `map.size.bundle` wide with a `map.size.bundleGap` inside, edges in `color.mute`, the inside in the hue of the column it leaves (`origin`, `map.origin.*`). Where it branches it opens like a pipe junction, no dot; it passes over another double line with a halo. Each pair of two or more links ends in an arrow; a pair of exactly one link is that `sett-link`, which leaves the double line with a small dot. The `sett-sheet` draws one per area and hands it its `branches`; it is not placed by hand. Open by hand: the arrow end opens that pair, the shared stretch opens everything leaving the area. An opened pair is no longer drawn but stays reachable by keyboard, to close it.
+
+- attrs:
+  - `from=string` — the key of the group it leaves
+  - `name=string` — the name of that group, for the labels
+  - `origin=BundleOrigin` — the column it leaves, which tints the inside; a rail has none
+  - `far=boolean` — unrelated to the pins: `map.far`
+- parts:
+  - `svg` — the drawing
+- events:
+  - `sett-open` — `{ from, to?, open }`: a pair (`to`) or everything leaving `from`
+- stories:
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-button>`
 
@@ -1157,12 +1298,23 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
   - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
   - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
   - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -1220,16 +1372,25 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
-  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
-  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
-  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
-  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
-  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
-  - `map-sheet--no-wires` links · without the port wires
-  - `map-sheet--open-api` in context · api open in its node
-  - `map-sheet--open-rg` in context · rg open in its node
-  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
@@ -2302,12 +2463,23 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
   - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
   - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
   - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -2365,16 +2537,25 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
-  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
-  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
-  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
-  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
-  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
-  - `map-sheet--no-wires` links · without the port wires
-  - `map-sheet--open-api` in context · api open in its node
-  - `map-sheet--open-rg` in context · rg open in its node
-  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
@@ -2444,12 +2625,23 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
   - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
   - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
   - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -2507,16 +2699,25 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
-  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
-  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
-  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
-  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
-  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
-  - `map-sheet--no-wires` links · without the port wires
-  - `map-sheet--open-api` in context · api open in its node
-  - `map-sheet--open-rg` in context · rg open in its node
-  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
@@ -2809,12 +3010,23 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
   - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
   - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
   - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -2872,16 +3084,25 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
-  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
-  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
-  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
-  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
-  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
-  - `map-sheet--no-wires` links · without the port wires
-  - `map-sheet--open-api` in context · api open in its node
-  - `map-sheet--open-rg` in context · rg open in its node
-  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
@@ -2917,12 +3138,23 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
   - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
   - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
   - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -2980,16 +3212,25 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
-  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
-  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
-  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
-  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
-  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
-  - `map-sheet--no-wires` links · without the port wires
-  - `map-sheet--open-api` in context · api open in its node
-  - `map-sheet--open-rg` in context · rg open in its node
-  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
@@ -3615,12 +3856,23 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
   - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
   - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
   - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -3678,16 +3930,25 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
-  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
-  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
-  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
-  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
-  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
-  - `map-sheet--no-wires` links · without the port wires
-  - `map-sheet--open-api` in context · api open in its node
-  - `map-sheet--open-rg` in context · rg open in its node
-  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
@@ -3742,12 +4003,23 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
   - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
   - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
   - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -3805,16 +4077,25 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
-  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
-  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
-  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
-  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
-  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
-  - `map-sheet--no-wires` links · without the port wires
-  - `map-sheet--open-api` in context · api open in its node
-  - `map-sheet--open-rg` in context · rg open in its node
-  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
@@ -4524,11 +4805,12 @@ The Sessions view: every session, grouped by section, each unfolding into groups
 
 ### `<sett-sheet>`
 
-The inside of an open unit: the exposes rail, the columns, the needs rail, in one row, and the `sett-link`s between the things inside, drawn over it. Everything is laid out by normal flow; the sheet is the one element that sees every link, so the rules are written once here and not by each app: - **routes**: square lines on tracks in the gutters (`map.size.track` apart), one trunk per source item and family with a dot at each branch; a link skipping a column takes a lane in the channel under the columns, one inside a column runs beside it; a right-to-left line is a smell. - **the watcher**: each frame the ends are read and only the paths whose ends moved are rewritten, so folding, pulses and re-renders never leave a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown). - **response** (DESIGN.md § Motion): pointing at an item lights its links and the item at the other end; selecting draws its links outward, the flow travels on them alone and every other link recedes to `map.far`. - **folds**: an end hidden by a folded area rides the area's edge to the chip; a selected one gets the blue dock dot where it plugs in. - **level**: `items` draws every link at rest, `plugs` a dot beside each connected item with the line on demand. A finding is drawn in every level. - **filter**: kinds and families to keep; the rest recedes to `map.far`. `folded` folds every area at once.
+The inside of an open unit: the exposes rail, the columns, the needs rail, in one row, and the `sett-link`s between the things inside, drawn over it. Everything is laid out by normal flow; the sheet is the one element that sees every link, so the rules are written once here and not by each app: - **routes**: square lines on tracks in the gutters (`map.size.track` apart), one trunk per source item and family with a dot at each branch; a link skipping a column takes a lane in the channel under the columns, one inside a column runs beside it; a right-to-left line is a smell. - **the watcher**: each frame the ends are read and only the paths whose ends moved are rewritten, so folding, pulses and re-renders never leave a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown). - **response** (DESIGN.md § Motion): pointing at an item lights its links and the item at the other end; selecting draws its links outward, the flow travels on them alone and every other link recedes to `map.far`. - **folds**: an end hidden by a folded area rides the area's edge to the chip; a selected one gets the blue dock dot where it plugs in. - **level**: what is drawn at rest. `areas` (the default) draws one line per pair of areas, header to header: a `sett-bundle` per area, double where it carries two or more links; the item links appear when pointed at, pinned or opened by hand. `items` draws every link; `plugs` a dot beside each connected item with the line on demand. A finding is drawn item to item in every level. - **open by hand**: the arrow end of a double line opens that pair into its links, its shared stretch opens everything leaving the area, an opened line closes its pair (`open`, `sett-open`). The level is the default for whatever was not opened by hand. Opening never moves another line: a pair keeps its track while open. - **pins**: a click on an item toggles its `selected`; several at once. Their links are drawn item to item and everything else recedes. - **filter**: kinds and families to keep; the rest recedes to `map.far`. `folded` folds every area at once.
 
 - attrs:
   - `folded=boolean` — fold every area inside, or open them all again
-  - `level='items' | 'plugs'` — what is drawn at rest: every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)
+  - `level=SheetLevel` — what is drawn at rest: one line per pair of areas (`areas`), every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)
+  - `open=string` — the pairs opened by hand, space-separated `from>to` area keys; a bare `from` is everything leaving it. Keys here hold no space and no `>`
   - `filter=string` — link kinds and families to keep, space-separated (`calls does`); the rest recedes; empty keeps all
 - slots:
   - `exposes` — a `sett-rail side="exposes"`
@@ -4536,6 +4818,7 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `needs` — a `sett-rail side="needs"`
 - events:
   - `sett-fold` — bubbles from the areas inside
+  - `sett-open` — `{ from, to?, open }` when a pair (`to`), or everything leaving `from`, is opened or closed by hand
 - stories:
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
@@ -4548,12 +4831,23 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
   - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
   - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
   - `map-area--default` Default
   - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
   - `map-area--empty` empty
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -4611,16 +4905,25 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-rail--selected-and-compact` states · a selected port · compact density
   - `map-rail--empty` empty · a worker exposes nothing
   - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
-  - `map-sheet--default` the inside of a unit · rail · columns · rail · links
-  - `map-sheet--links` links · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
-  - `map-sheet--plugs` links · plugs level · a dot beside each connected item, lines on demand
-  - `map-sheet--filtered` links · filter="knows" · one family kept, the rest recedes
-  - `map-sheet--selected` links · a selection · drawn outward, the flow on it alone, the rest recedes
-  - `map-sheet--selected-hidden` links · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
-  - `map-sheet--no-wires` links · without the port wires
-  - `map-sheet--open-api` in context · api open in its node
-  - `map-sheet--open-rg` in context · rg open in its node
-  - `map-sheet--open-gpui` in context · gpui open · five layers
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 

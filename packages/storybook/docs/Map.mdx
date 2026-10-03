@@ -57,6 +57,19 @@ Rule 12: the line pattern is the family, the head is the kind, a diamond at the 
   </tbody>
 </table>
 
+## The areas level
+
+At rest a sheet draws one line per pair of areas, header to header. A stretch that carries two or more links is a double line, {base.map.size.bundle} wide with a {base.map.size.bundleGap} inside, on tracks {base.map.size.track} apart; the edges are `color.mute`, and the inside says the column the line leaves. A line leaving a rail has no column: its inside is `color.line2`. The arrow end opens a pair, the shared stretch everything leaving the area, an opened line closes it.
+
+<table>
+  <thead><tr><th>the line leaves</th><th>light</th><th>dark</th></tr></thead>
+  <tbody>
+    {Object.keys(light.map.origin).map((k) => (
+      <tr key={k}><td style={{ fontFamily: 'var(--sett-font-mono)' }}>{k}</td><Sw l={light.map.origin[k]} d={dark.map.origin[k]} /></tr>
+    ))}
+  </tbody>
+</table>
+
 ## HTTP methods
 
 Weight {base.map.method.weight}, {base.map.method.size}, in a fixed {base.map.size.methodColumn} column.

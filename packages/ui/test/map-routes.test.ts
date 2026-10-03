@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { route, simpleRoute, type Box, type RouteLink } from '../src/index.js';
+import { route, simpleRoute, stretches, type Box, type RouteLink } from '../src/index.js';
 
 const col = (i: number): Box => ({ x: i * 276, y: 0, w: 220, h: 400 });
 const bands = [col(0), col(1), col(2)];
@@ -68,5 +68,48 @@ describe('routes inside a sheet', () => {
     const r = simpleRoute({ x: 0, y: 0, w: 100, h: 18 }, { x: 200, y: 50, w: 100, h: 18 });
     expect(r.points).toEqual([{ x: 100, y: 9 }, { x: 150, y: 9 }, { x: 150, y: 59 }, { x: 200, y: 59 }]);
     expect(simpleRoute({ x: 200, y: 0, w: 100, h: 18 }, { x: 0, y: 0, w: 100, h: 18 }).backward).toBe(true);
+  });
+  it('says how many tracks each gutter took, and a second pass runs between them', () => {
+    const first = run([link('a', [0, 100], [1, 300])]);
+    expect(first.tracks).toEqual([1, 0]);
+    const second = route({ bands, links: [link('b', [0, 150], [1, 250])], spacing: 12, channelTop: 420, avoid: first.tracks });
+    expect(second.routes.get('b')!.points[1].x - first.routes.get('a')!.points[1].x).toBe(6);
+    const two = route({ bands, links: [link('b', [0, 100], [1, 300]), link('c', [0, 150], [1, 250])], spacing: 12, channelTop: 420, avoid: first.tracks });
+    expect(two.routes.get('b')!.points[1].x - first.routes.get('a')!.points[1].x).toBe(-6);   // an even pass already sits between
+  });
+});
+
+describe('the stretches of a tree', () => {
+  const tree = (...ys: number[]) => {
+    const links = ys.map((y, i) => link(`l${i}`, [0, 100], [1, y], 't'));
+    const { routes } = run(links);
+    return stretches(links.map((l) => ({ id: l.id, points: routes.get(l.id)!.points })));
+  };
+  it('a line alone shares nothing', () => {
+    const s = tree(200).get('l0')!;
+    expect(s.shared).toEqual([]); expect(s.own.length).toBe(4);
+  });
+  it('two lines share the trunk down to where the nearer one turns; the farther goes on alone', () => {
+    const s = tree(200, 300);
+    const x = s.get('l0')!.own[0].x;
+    expect(s.get('l0')!.shared).toEqual([{ x: 210, y: 109 }, { x, y: 109 }, { x, y: 209 }]);
+    expect(s.get('l0')!.own).toEqual([{ x, y: 209 }, { x: 286, y: 209 }]);
+    expect(s.get('l1')!.shared).toEqual([{ x: 210, y: 109 }, { x, y: 109 }, { x, y: 209 }]);
+    expect(s.get('l1')!.own).toEqual([{ x, y: 209 }, { x, y: 309 }, { x: 286, y: 309 }]);
+  });
+  it('lines leaving up and down share only the stub out of the source', () => {
+    const s = tree(50, 300);
+    const x = s.get('l0')!.own[0].x;
+    expect(s.get('l0')!.shared).toEqual([{ x: 210, y: 109 }, { x, y: 109 }]);
+    expect(s.get('l1')!.own[0]).toEqual({ x, y: 109 });
+  });
+  it('a line through the channel shares the trunk as far as another one follows it', () => {
+    const links = [link('near', [0, 100], [1, 300], 't'), link('far', [0, 100], [2, 150], 't')];
+    const { routes } = run(links);
+    const s = stretches(links.map((l) => ({ id: l.id, points: routes.get(l.id)!.points })));
+    const x = routes.get('near')!.points[1].x;
+    expect(s.get('far')!.shared.at(-1)).toEqual({ x, y: 309 });
+    expect(s.get('far')!.own[0]).toEqual({ x, y: 309 });
+    expect(s.get('near')!.own).toEqual([{ x, y: 309 }, { x: 286, y: 309 }]);
   });
 });

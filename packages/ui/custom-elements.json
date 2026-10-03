@@ -2536,6 +2536,14 @@
         },
         {
           "kind": "js",
+          "name": "SettBack",
+          "declaration": {
+            "name": "SettBack",
+            "module": "./map/sett-back.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "scopeWords",
           "declaration": {
             "name": "scopeWords",
@@ -5082,6 +5090,84 @@
           "declaration": {
             "name": "SettArea",
             "module": "src/map/sett-area.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-back.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The way back up, as a pill: `‹` and the place it leads to, with the key\nthat does the same (`esc`) when the host gives one. It docks at the start\nof the map's strip, before the crumb (map rule 8): it never floats over the\ndrawing. Pointing eases its border (`motion.hover`); its words never move.",
+          "name": "SettBack",
+          "slots": [
+            {
+              "description": "where back leads: `board`, `api`; default `back`",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the key that does the same, shown after the words: `esc`",
+              "attribute": "hint"
+            },
+            {
+              "kind": "field",
+              "name": "back",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "on click, Enter or Space",
+              "name": "sett-back"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "hint",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the key that does the same, shown after the words: `esc`",
+              "fieldName": "hint"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-back",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettBack",
+          "declaration": {
+            "name": "SettBack",
+            "module": "src/map/sett-back.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-back",
+          "declaration": {
+            "name": "SettBack",
+            "module": "src/map/sett-back.ts"
           }
         }
       ]

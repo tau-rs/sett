@@ -3,6 +3,7 @@ import { render } from 'lit';
 import '../src/index.js';
 import * as chipStories from '../src/chip/sett-chip.stories.js';
 import * as recipeStories from '../src/recipes/recipes.stories.js';
+import * as shellRecipeStories from '../src/recipes/shell-recipes.stories.js';
 
 const mount = async (markup: string) => {
   document.body.innerHTML = markup;
@@ -87,6 +88,7 @@ describe('every chip carries a verb', () => {
     const { default: meta, ...stories } = mod;
     const found: { where: string; chip: Element }[] = [];
     for (const [name, story] of Object.entries(stories)) {
+      if (meta.excludeStories?.includes(name)) continue;
       const draw = story.render ?? meta.render;
       const host = document.createElement('div');
       render(draw({ ...meta.args, ...story.args }), host);
@@ -97,7 +99,7 @@ describe('every chip carries a verb', () => {
   const verbs = (chip: Element) => Array.from(chip.children).filter((c) => ['agent', 'manual', 'verb'].includes(c.getAttribute('slot') ?? ''));
 
   it('in the chip stories and in the recipes: an agent, a manual or a verb slot child, or the dismiss of a done chip', () => {
-    const chips = [...chipsOf(chipStories), ...chipsOf(recipeStories)];
+    const chips = [...chipsOf(chipStories), ...chipsOf(recipeStories), ...chipsOf(shellRecipeStories)];
     expect(chips.length).toBeGreaterThan(40);
     expect(chipsOf(recipeStories).length).toBeGreaterThanOrEqual(5);
     const bare = chips.filter(({ chip }) => verbs(chip).length === 0 && chip.getAttribute('state') !== 'done');

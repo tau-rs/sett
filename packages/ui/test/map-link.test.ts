@@ -92,6 +92,47 @@ describe('sett-link', () => {
     expect(c).toMatch(/:host\(\[backward\]\) \{ color: var\(--sett-map-status-smell-color\); \}/);
     expect(c).toMatch(/:host\(\[kind='refers-to'\]\) \{ color: var\(--sett-color-line2\); \}/);
   });
+  it('a planned link is amber and one step heavier on an amber band under its own line, keeping its pattern and head', async () => {
+    const c = cssOf('sett-link');
+    expect(c).toMatch(/:host\(\[planned\]\) \{ color: var\(--sett-color-sug\); \}/);
+    expect(c).toMatch(/:host\(\[planned\]\) \.line/);
+    expect(c).toMatch(/\.band \{[^}]*stroke: var\(--sett-color-sug-bg\);[^}]*stroke-width: var\(--sett-map-size-band\);/);
+    // a finding, the smell, a pointer and the selection all outrank the plan's colour
+    const order = (sel: string) => c.indexOf(`:host(${sel})`);
+    for (const sel of ['[backward]', '[lit]', '[finding]']) expect(order('[planned]')).toBeLessThan(order(sel));
+    const el = await mount('from="a" to="b" kind="implements" planned');
+    const root = el.shadowRoot!;
+    const band = root.querySelector('.band')!;
+    expect(band.getAttribute('d')).toBe(root.querySelector('.line')!.getAttribute('d'));
+    expect(band.compareDocumentPosition(root.querySelector('.line')!) & Node.DOCUMENT_POSITION_FOLLOWING, 'the band is under the line').toBeTruthy();
+    expect(el.getAttribute('family')).toBe('promises');
+    expect(root.querySelectorAll('.h.hollow').length).toBe(1);
+    el.finding = true; await el.updateComplete;
+    expect(root.querySelector('.band'), 'a finding outranks the plan').toBeNull();
+    el.finding = false; el.selected = true; await el.updateComplete;
+    expect(root.querySelector('.band'), 'the selection keeps the band').not.toBeNull();
+  });
+  it('at the plugs level an overlay line is drawn, as a finding is', async () => {
+    for (const a of ['planned', 'delta="added"', 'delta="removed"']) {
+      const el = await mount(`from="a" to="b" plug ${a}`);
+      expect(el.shadowRoot!.querySelector('.line'), a).not.toBeNull();
+    }
+    const el = await mount('from="a" to="b" plug delta="unchanged"');
+    expect(el.shadowRoot!.querySelector('.line')).toBeNull();
+  });
+  it('in the delta a removed link is a ghost cut across its middle; an unchanged one recedes, a finding never', async () => {
+    const c = cssOf('sett-link');
+    expect(c).toMatch(/:host\(\[delta='removed'\]\) \{ color: var\(--sett-color-line\); \}/);
+    expect(c).toMatch(/:host\(\[delta='unchanged'\]\) \{ opacity: var\(--sett-map-far\); \}/);
+    expect(c).toMatch(/:host\(\[delta='unchanged'\]\[finding\]\) \{ opacity: 1; \}/);
+    const el = await mount('from="a" to="b" delta="removed"');
+    const cut = el.shadowRoot!.querySelectorAll('.cut');
+    expect(cut.length).toBe(2);
+    // the route is 130 long; its middle (65) is on the vertical segment at x = 40, y = 34
+    for (const p of cut) expect(p.getAttribute('d')).toMatch(/^M3\d\.\d 3\d\.\d L4\d\.\d 3\d\.\d$/);
+    el.delta = 'added'; await el.updateComplete;
+    expect(el.shadowRoot!.querySelector('.cut')).toBeNull();
+  });
   it('outside a sheet it watches its own ends; inside one the sheet does', async () => {
     document.body.innerHTML = '<div style="position:relative"><sett-item key="a">a</sett-item><sett-item key="b">b</sett-item><sett-link from="a" to="b"></sett-link></div>';
     await (document.body.querySelector('sett-link') as SettLink).updateComplete;

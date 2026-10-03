@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, nothing } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LINK_KINDS, kindsOf, type LinkFamily, type LinkKind } from './link-kinds.js';
-import type { ItemKind } from './sett-item.js';
+import type { ItemDelta, ItemKind } from './sett-item.js';
+import type { LinkDelta } from './sett-link.js';
 import './sett-item.js';
 import './sett-op-row.js';
 import './sett-link.js';
@@ -17,16 +18,16 @@ const meta: Meta = { title: 'map/link', component: 'sett-link' };
 export default meta;
 type Story = StoryObj;
 
-interface End { name: string; kind?: ItemKind; port?: boolean; entry?: boolean; finding?: boolean; selected?: boolean; lit?: boolean }
-interface Row { kind: LinkKind; from: End; to: End; finding?: boolean; guessed?: boolean; lit?: boolean; selected?: boolean; far?: boolean; plug?: boolean; label?: string; caption?: string; swap?: boolean; anchor?: 'from' | 'to' }
+interface End { name: string; kind?: ItemKind; port?: boolean; entry?: boolean; finding?: boolean; selected?: boolean; lit?: boolean; planned?: boolean; group?: string; delta?: ItemDelta }
+interface Row { kind: LinkKind; from: End; to: End; finding?: boolean; guessed?: boolean; lit?: boolean; selected?: boolean; far?: boolean; plug?: boolean; label?: string; caption?: string; swap?: boolean; anchor?: 'from' | 'to'; planned?: boolean; delta?: LinkDelta; wire?: string }
 
-const item = (key: string, e: End) => html`<sett-item key=${key} kind=${e.kind ?? 'fn'} ?port=${e.port} ?entry=${e.entry} ?finding=${e.finding} ?selected=${e.selected} ?lit=${e.lit}>${e.name}</sett-item>`;
+const item = (key: string, e: End) => html`<sett-item key=${key} kind=${e.kind ?? 'fn'} ?port=${e.port} ?entry=${e.entry} ?finding=${e.finding} ?selected=${e.selected} ?lit=${e.lit} ?planned=${e.planned} group=${ifDefined(e.group)} delta=${ifDefined(e.delta)}>${e.name}</sett-item>`;
 const row = (id: string, r: Row) => html`
   <span class="cap">${r.caption ?? LINK_KINDS[r.kind].label}</span>
   <div class="pair" style=${r.swap ? 'direction: rtl' : nothing}>
     <div>${item(`${id}-a`, r.from)}</div>
     <div>${item(`${id}-b`, r.to)}</div>
-    <sett-link from=${`${id}-a`} to=${`${id}-b`} kind=${r.kind} label=${ifDefined(r.label)} anchor=${ifDefined(r.anchor)} ?finding=${r.finding} ?guessed=${r.guessed} ?lit=${r.lit} ?selected=${r.selected} ?far=${r.far} ?plug=${r.plug}></sett-link>
+    <sett-link from=${`${id}-a`} to=${`${id}-b`} kind=${r.kind} label=${ifDefined(r.label)} anchor=${ifDefined(r.anchor)} ?finding=${r.finding} ?guessed=${r.guessed} ?lit=${r.lit} ?selected=${r.selected} ?far=${r.far} ?plug=${r.plug} ?planned=${r.planned} delta=${ifDefined(r.delta)} ?wire=${!!r.wire} style=${r.wire ? `--_wire: var(--sett-map-kind-${r.wire}-color)` : nothing}></sett-link>
   </div>`;
 const table = (rows: Row[], note: string) => html`
   <style>
@@ -108,6 +109,30 @@ export const Backward: Story = {
     { kind: 'calls', from: fn('subscribe()', { entry: true }), to: fn('insert_subscriber()'), caption: 'uses, left to right' },
     { kind: 'calls', from: fn('insert_subscriber()'), to: fn('subscribe()', { entry: true }), swap: true, caption: 'right to left' },
   ], 'Uses points left to right under both column rules (rule 11). A link that points the other way is drawn in the smell colour, whatever its kind.'),
+};
+const P = (e: End): End => ({ ...e, planned: true, group: e.group ?? 'g1' });
+export const Plan: Story = {
+  name: 'plan overlay · a planned link is amber and heavier on the amber band',
+  render: () => table([
+    { kind: 'calls', from: fn('subscribe()', { entry: true }), to: fn('insert_subscriber()'), caption: 'today · at rest' },
+    { kind: 'calls', from: { name: 'order.paid', kind: 'external' }, to: fn('on_paid()'), wire: 'topic', caption: 'today · a topic wire' },
+    { kind: 'calls', from: P(fn('refund()')), to: P(fn('insert_refund()')), planned: true, caption: 'planned · calls' },
+    { kind: 'implements', from: P(st('StripeRefunds')), to: P(tr('Refunds', { port: true })), planned: true, caption: 'planned · implements' },
+    { kind: 'calls', from: { name: 'refund.asked', kind: 'external' }, to: P(fn('refund()')), wire: 'topic', planned: true, caption: 'planned · a topic wire' },
+    { kind: 'calls', from: P(fn('refund()', { selected: true })), to: P(fn('insert_refund()')), planned: true, selected: true, caption: 'planned · selected' },
+    { kind: 'calls', from: P(fn('refund()', { finding: true })), to: fn('insert_order()'), planned: true, finding: true, label: 'the domain calls an adapter', caption: 'planned · a finding' },
+  ], 'The plan will add these links; nothing is written yet. A planned link keeps its pattern and its head (the dash is the family, so it cannot take the planned item\'s dashes): it turns amber, one step heavier, on the amber tint band. The weight and the band tell it from a topic wire, a thin bare amber line. A finding outranks the plan; the selection turns it blue and keeps the band.'),
+};
+export const Delta: Story = {
+  name: 'delta overlay · removed is a ghost cut across its middle, unchanged recedes',
+  render: () => table([
+    { kind: 'calls', from: fn('subscribe()', { entry: true }), to: fn('insert_subscriber()'), guessed: true, caption: 'today · guessed' },
+    { kind: 'calls', from: fn('subscribe()', { entry: true, delta: 'changed' }), to: fn('insert_subscriber()', { delta: 'unchanged' }), delta: 'unchanged', caption: 'delta · unchanged' },
+    { kind: 'calls', from: fn('subscribe()', { entry: true, delta: 'changed' }), to: st('SubscriberName::parse', { delta: 'added' }), delta: 'added', caption: 'delta · added' },
+    { kind: 'calls', from: fn('subscribe()', { entry: true, delta: 'changed' }), to: fn('store_token()', { delta: 'unchanged' }), delta: 'removed', caption: 'delta · removed' },
+    { kind: 'implements', from: st('OldStore', { delta: 'removed' }), to: tr('Store', { port: true }), delta: 'removed', caption: 'delta · removed, dashed kind' },
+    { kind: 'calls', from: fn('publish_newsletter()', { entry: true, finding: true }), to: fn('insert_newsletter_issue()', { delta: 'unchanged' }), finding: true, delta: 'unchanged', caption: 'delta · unchanged finding' },
+  ], 'Against main: what the branch adds is drawn as it is, what it removes stays as a ghost in the palest ink with a cut across its middle (the line\'s struck-through), what it leaves alone recedes to map.far. A finding never recedes.'),
 };
 export const Plugs: Story = {
   name: 'plugs · a dot beside each connected item, the line on demand',

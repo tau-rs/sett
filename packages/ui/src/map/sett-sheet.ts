@@ -57,7 +57,8 @@ const originOf = (group: Element): BundleOrigin | undefined => {
  *   where it carries two or more links; the item links appear when pointed
  *   at, pinned or opened by hand. `items` draws every link; `plugs` a dot
  *   beside each connected item with the line on demand. A finding is drawn
- *   item to item in every level.
+ *   item to item in every level, and so is a line an overlay marks: planned,
+ *   or added or removed in the delta.
  * - **open by hand**: the arrow end of a double line opens that pair into
  *   its links, its shared stretch opens everything leaving the area, an
  *   opened line closes its pair (`open`, `sett-open`). The level is the
@@ -118,7 +119,7 @@ export class SettSheet extends LitElement implements Watched {
     watch(this);
     if (typeof MutationObserver === 'function') {
       this.observer = new MutationObserver((rs) => this.onMutation(rs));
-      this.observer.observe(this, { childList: true, subtree: true, attributes: true, attributeFilter: ['selected', 'key', 'data-id', 'kind', 'from', 'to', 'finding'] });
+      this.observer.observe(this, { childList: true, subtree: true, attributes: true, attributeFilter: ['selected', 'key', 'data-id', 'kind', 'from', 'to', 'finding', 'planned', 'delta'] });
     }
     this.addEventListener('pointerover', this.onOver);
     this.addEventListener('pointerleave', this.onLeave);
@@ -244,8 +245,10 @@ export class SettSheet extends LitElement implements Watched {
       const from = this.endOf(l.from)?.closest(GROUP), to = this.endOf(l.to)?.closest(GROUP);
       const fromKey = this.keyOf(from ?? null), toKey = this.keyOf(to ?? null);
       const inside = !!from && from === to;
+      // a finding, and a line an overlay marks, is never summed into a pair
+      const marked = l.finding || l.planned || l.delta === 'added' || l.delta === 'removed';
       let pair: Pair | undefined;
-      if (from && to && fromKey && toKey && !inside && !l.finding) {
+      if (from && to && fromKey && toKey && !inside && !marked) {
         const id = `${fromKey}>${toKey}`;
         const hand = opened.has(id) || opened.has(fromKey);
         pair = { id, from, to, fromKey, toKey, hand, open: hand || (!!focus && (from === focus || to === focus)) };
@@ -265,8 +268,8 @@ export class SettSheet extends LitElement implements Watched {
       if (kept) this.kept.add(l);
       l.far = ((selected.size > 0 || !!focus) && !sel && !touches) || !kept;
       l.plug = this.level === 'plugs' && !pair?.open;
-      // a link is drawn item to item when the level says so, and always when it is a finding, pointed at, pinned or opened by hand
-      if (!areas || l.finding || touchesHover || sel || touches || pair?.open || (!pair && !inside)) this.direct.add(l);
+      // a link is drawn item to item when the level says so, and always when it is marked, pointed at, pinned or opened by hand
+      if (!areas || marked || touchesHover || sel || touches || pair?.open || (!pair && !inside)) this.direct.add(l);
       l.style.setProperty('--_cursor', pair && this.level !== 'items' && (pair.hand || (!pair.open && !this.direct.has(l))) ? 'pointer' : 'default');
     }
     for (const el of this.querySelectorAll(LIT)) {
@@ -282,7 +285,7 @@ export class SettSheet extends LitElement implements Watched {
     }
     this.pinned = selected.size > 0 || !!focus;
     this.litGroup = group;
-    this.mode = `${this.level}|${this.open}|${this.filter}|${focus ? this.focusArea : ''}|${group ?? ''}|${this.pinned}|${links.map((l) => (this.direct.has(l) ? 1 : 0)).join('')}`;
+    this.mode = `${this.level}|${this.open}|${this.filter}|${focus ? this.focusArea : ''}|${group ?? ''}|${this.pinned}|${links.map((l) => (this.direct.has(l) ? 1 : 0) + (l.delta === 'unchanged' ? 2 : 0)).join('')}`;
   }
 
   // ── the watcher: routes follow the DOM ─────────────────────────────────────
@@ -350,6 +353,7 @@ export class SettSheet extends LitElement implements Watched {
       for (const [key, tree] of trees) {
         const split = stretches(tree.filter((m) => !m.pair.open).map((m) => ({ id: m.pair.id, points: first.routes.get(m.pair.id)!.points })));
         // a pair that focus holds open is drawn as its links and has nothing to close: it leaves the bundle while focus lasts
+        // a branch recedes when every link it stands for is filtered out, or unchanged in the delta
         const branches = tree.filter((m) => !m.pair.open || m.pair.hand).map(({ pair, links: ls }): BundleBranch => {
           const r = first.routes.get(pair.id)!;
           const st = split.get(pair.id) ?? { shared: [], own: r.points };
@@ -360,7 +364,7 @@ export class SettSheet extends LitElement implements Watched {
           }
           return {
             to: pair.toKey, name: pair.to.getAttribute('name') ?? pair.toKey, count: ls.length, shared: st.shared, own: st.own, open: pair.open, backward: r.backward,
-            lit: this.litGroup === pair.fromKey || this.litGroup === pair.toKey, far: !ls.some((l) => this.kept.has(l)),
+            lit: this.litGroup === pair.fromKey || this.litGroup === pair.toKey, far: !ls.some((l) => this.kept.has(l) && l.delta !== 'unchanged'),
           };
         });
         if (!branches.some((b) => b.count > 1 || b.shared.length)) continue;

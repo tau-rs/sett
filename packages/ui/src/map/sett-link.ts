@@ -11,11 +11,29 @@ const BRANCH = parseFloat(base.map.size.branch);
 const DOT = parseFloat(base.map.size.dot);
 const HAIR = parseFloat(base.stroke.hair);
 
+/** where a link stands against main, for the delta overlay; a link is there or not, it has no `changed` */
+export type LinkDelta = 'added' | 'removed' | 'unchanged';
+
 const fmt = (p: Pt) => `${p.x.toFixed(1)} ${p.y.toFixed(1)}`;
 const pathOf = (pts: Pt[]) => pts.map((p, i) => `${i ? 'L' : 'M'}${fmt(p)}`).join(' ');
 const dir = (a: Pt, b: Pt): Pt => { const dx = b.x - a.x, dy = b.y - a.y, l = Math.hypot(dx, dy) || 1; return { x: dx / l, y: dy / l }; };
 const add = (p: Pt, d: Pt, k: number): Pt => ({ x: p.x + d.x * k, y: p.y + d.y * k });
 const normal = (d: Pt): Pt => ({ x: -d.y, y: d.x });
+/** the point halfway along the polyline, and the direction there */
+function middle(pts: Pt[]): { p: Pt; d: Pt } {
+  const lens = pts.slice(1).map((p, i) => Math.hypot(p.x - pts[i].x, p.y - pts[i].y));
+  let left = lens.reduce((a, b) => a + b, 0) / 2;
+  for (let i = 0; i < lens.length; i++) {
+    if (left <= lens[i] && lens[i] > 0) { const d = dir(pts[i], pts[i + 1]); return { p: add(pts[i], d, left), d }; }
+    left -= lens[i];
+  }
+  return { p: pts[0], d: { x: 1, y: 0 } };
+}
+/** the removed link's cut: two short strokes across the middle, the line's struck-through */
+function cut(pts: Pt[]) {
+  const { p, d } = middle(pts), n = normal(d), h = ARROW / 2, g = BRANCH / 2;
+  return [-g, g].map((k) => { const c = add(p, d, k); return svg`<path class="cut" d=${`M${fmt(add(add(c, n, h), d, -g))} L${fmt(add(add(c, n, -h), d, g))}`} />`; });
+}
 /** the last segment with a length, so a degenerate corner never flips the head */
 const lastDir = (pts: Pt[]): Pt => { for (let i = pts.length - 1; i > 0; i--) if (pts[i].x !== pts[i - 1].x || pts[i].y !== pts[i - 1].y) return dir(pts[i - 1], pts[i]); return { x: 1, y: 0 }; };
 const firstDir = (pts: Pt[]): Pt => { for (let i = 1; i < pts.length; i++) if (pts[i].x !== pts[i - 1].x || pts[i].y !== pts[i - 1].y) return dir(pts[i - 1], pts[i]); return { x: 1, y: 0 }; };
@@ -61,6 +79,12 @@ export function linkTail(kind: LinkTail, s: Pt, d: Pt, a = ARROW) {
  * the `flow` dashes travel, on the selection alone. A finding is red and
  * heavier on any kind and never recedes.
  *
+ * Overlays (rule 13) paint, never move: a planned link is amber and one
+ * step heavier on the amber tint band, keeping its pattern and head (the
+ * dash is the family, so it cannot take the planned item's dashes); in the
+ * delta a removed link is a ghost cut across its middle, an unchanged one
+ * recedes to `map.far`.
+ *
  * @fires sett-light - `{ on }` when pointed at; the sheet lights it with both ends
  * @csspart svg - the drawing
  */
@@ -89,6 +113,10 @@ export class SettLink extends LitElement {
   @property({ type: Boolean, reflect: true }) far = false;
   /** points right to left: a smell (rule 11), set by the sheet from the route */
   @property({ type: Boolean, reflect: true }) backward = false;
+  /** the plan overlay: the plan will add this link, nothing is written yet: amber, heavier, on the amber band */
+  @property({ type: Boolean, reflect: true }) planned = false;
+  /** the delta overlay, against main: `removed` is a ghost cut across its middle, `unchanged` recedes, `added` is drawn as it is */
+  @property({ reflect: true }) delta?: LinkDelta;
   /** the sheet's plugs level: a dot beside each end, the line on demand */
   @property({ type: Boolean, reflect: true }) plug = false;
   /** the geometry, in the coordinates of the positioned ancestor; the sheet sets it */
@@ -104,11 +132,15 @@ export class SettLink extends LitElement {
     :host([guessed]) { color: var(--sett-color-line); }
     :host([kind='refers-to']) { color: var(--sett-color-line2); }
     :host([wire]) { color: var(--_wire, var(--sett-color-mute)); }
+    :host([delta='removed']) { color: var(--sett-color-line); }
+    :host([planned]) { color: var(--sett-color-sug); }
     :host([backward]) { color: var(--sett-map-status-smell-color); }
     :host([lit]), :host([selected]) { color: var(--sett-color-sel); }
     :host([finding]) { color: var(--sett-color-bad); }
     :host([far]) { opacity: var(--sett-map-far); }
     :host([far][finding]) { opacity: 1; }
+    :host([delta='unchanged']) { opacity: var(--sett-map-far); }
+    :host([delta='unchanged'][finding]) { opacity: 1; }
     :host([family='does']) { --_dash: var(--sett-map-link-does-stroke); }
     :host([family='promises']) { --_dash: var(--sett-map-link-promises-stroke); }
     :host([family='knows']) { --_dash: var(--sett-map-link-knows-stroke); }
@@ -116,13 +148,16 @@ export class SettLink extends LitElement {
     svg { display: block; width: 100%; height: 100%; overflow: visible; }
     .hit { fill: none; stroke: transparent; stroke-width: var(--sett-map-size-hit); pointer-events: stroke; cursor: var(--_cursor, default); }
     .line { fill: none; stroke: currentColor; stroke-width: var(--sett-stroke-hair); stroke-dasharray: var(--_dash); transition: stroke var(--sett-motion-hover) ease, stroke-width var(--sett-motion-hover) ease; }
-    :host([lit]) .line, :host([selected]) .line, :host([finding]) .line { stroke-width: var(--sett-stroke-lit); }
+    :host([lit]) .line, :host([selected]) .line, :host([finding]) .line, :host([planned]) .line { stroke-width: var(--sett-stroke-lit); }
+    .band { fill: none; stroke: var(--sett-color-sug-bg); stroke-width: var(--sett-map-size-band); stroke-linejoin: round; }
+    .cut { fill: none; stroke: var(--sett-color-mute); stroke-width: var(--sett-stroke-lit); stroke-linecap: round; }
     .h, .t { transition: stroke var(--sett-motion-hover) ease, fill var(--sett-motion-hover) ease; }
     .filled { fill: currentColor; stroke: none; }
     .hollow { fill: var(--sett-color-paper); stroke: currentColor; stroke-width: var(--sett-stroke-hair); }
     .open { fill: none; stroke: currentColor; stroke-width: var(--sett-stroke-hair); stroke-linecap: round; stroke-linejoin: round; }
     :host([lit]) .hollow, :host([selected]) .hollow, :host([finding]) .hollow,
-    :host([lit]) .open, :host([selected]) .open, :host([finding]) .open { stroke-width: var(--sett-stroke-lit); }
+    :host([lit]) .open, :host([selected]) .open, :host([finding]) .open,
+    :host([planned]) .hollow, :host([planned]) .open { stroke-width: var(--sett-stroke-lit); }
     .b { fill: currentColor; }
     .plug { fill: currentColor; }
     .dock { fill: var(--sett-color-sel); stroke: var(--sett-color-paper); stroke-width: var(--sett-map-size-dot-border); }
@@ -203,15 +238,18 @@ export class SettLink extends LitElement {
     const trim = spec.head === 'socket' ? ARROW / 2 : 0;
     const line = pathOf(trim ? [...pts.slice(0, -1), add(e, d1, -trim)] : pts);
     const full = pathOf(pts);
-    const quiet = this.plug && !this.lit && !this.selected && !this.finding;
+    // at the plugs level the line waits to be asked for, unless a finding or an overlay marks it
+    const quiet = this.plug && !this.lit && !this.selected && !this.finding && !this.planned && this.delta !== 'added' && this.delta !== 'removed';
     const title = `${spec.label}${this.label ? ` · ${this.label}` : ''}`;
     return html`<svg part="svg" aria-label=${title} role="img">
       <title>${title}</title>
       ${this.drawing ? svg`<mask id="reveal" mask-type="alpha" maskUnits="userSpaceOnUse" x="-100000" y="-100000" width="200000" height="200000"><path class="reveal" d=${full} /></mask>` : nothing}
       <path class="hit" d=${full} @pointerenter=${() => this.light(true)} @pointerleave=${() => this.light(false)} />
       <g mask=${this.drawing ? 'url(#reveal)' : nothing}>
+        ${this.planned && !this.finding ? svg`<path class="band" d=${line} />` : nothing}
         ${quiet ? nothing : svg`<path class="line" d=${line} />${linkHead(spec.head, e, d1)}${spec.tail ? linkTail(spec.tail, s, d0) : nothing}${r.branches.map((b) => svg`<circle class="b" cx=${b.x} cy=${b.y} r=${BRANCH / 2} />`)}`}
         ${this.flowing && !quiet ? svg`<path class="flow" d=${line} />` : nothing}
+        ${this.delta === 'removed' ? cut(pts) : nothing}
       </g>
       ${this.plug && !r.docked?.from ? svg`<circle class="plug" cx=${s.x + d0.x * (BRANCH / 2 + HAIR)} cy=${s.y + d0.y * (BRANCH / 2 + HAIR)} r=${BRANCH / 2} />` : nothing}
       ${this.plug && !r.docked?.to ? svg`<circle class="plug" cx=${e.x - d1.x * (BRANCH / 2 + HAIR)} cy=${e.y - d1.y * (BRANCH / 2 + HAIR)} r=${BRANCH / 2} />` : nothing}

@@ -23,7 +23,7 @@ export interface BundleBranch {
   /** opened by hand: its links are drawn instead, and it keeps its track */
   open?: boolean;
   lit?: boolean;
-  /** filtered out: `map.far` */
+  /** filtered out, or unchanged in the delta: `map.far` */
   far?: boolean;
   /** points right to left: a smell (rule 11) */
   backward?: boolean;

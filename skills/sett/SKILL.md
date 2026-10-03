@@ -512,6 +512,8 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -804,6 +806,8 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -1102,6 +1106,8 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -1746,6 +1752,8 @@ The page around the code of an item, in a tab of `sett-tabbar` (map rule 4). It 
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -1942,6 +1950,8 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -2371,6 +2381,8 @@ What a port promises: the kind chip (the kind's dot and word, the same colour as
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -2563,6 +2575,8 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -2758,6 +2772,8 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -3773,6 +3789,8 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -4001,6 +4019,8 @@ The key to the map, on demand (map rule 8): a section of `sett-panel`, folded to
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -4081,7 +4101,7 @@ The key to the map, on demand (map rule 8): a section of `sett-panel`, folded to
 
 ### `<sett-link>`
 
-One line between two things inside an open unit. It names its ends by `key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it routes every link together (tracks, lanes, trunks, docks) and hands each its path; outside a sheet a link draws the simplest square route between its ends by itself. The grammar is fixed (#58, #68): the line pattern is the family, the head is the kind, a diamond at the start is ownership; the lighter the line, the less the analyser knows. Links never carry presence. Response (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`); `selected` draws it outward from the `anchor` end (`motion.draw`), then the `flow` dashes travel, on the selection alone. A finding is red and heavier on any kind and never recedes.
+One line between two things inside an open unit. It names its ends by `key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it routes every link together (tracks, lanes, trunks, docks) and hands each its path; outside a sheet a link draws the simplest square route between its ends by itself. The grammar is fixed (#58, #68): the line pattern is the family, the head is the kind, a diamond at the start is ownership; the lighter the line, the less the analyser knows. Links never carry presence. Response (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`); `selected` draws it outward from the `anchor` end (`motion.draw`), then the `flow` dashes travel, on the selection alone. A finding is red and heavier on any kind and never recedes. Overlays (rule 13) paint, never move: a planned link is amber and one step heavier on the amber tint band, keeping its pattern and head (the dash is the family, so it cannot take the planned item's dashes); in the delta a removed link is a ghost cut across its middle, an unchanged one recedes to `map.far`.
 
 - attrs:
   - `from=string` — the key of the dependent end
@@ -4096,6 +4116,8 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `anchor='from' | 'to'` — the end the selection sits at; the line is drawn outward from it
   - `far=boolean` — unrelated to the selection or filtered out: `map.far`
   - `backward=boolean` — points right to left: a smell (rule 11), set by the sheet from the route
+  - `planned=boolean` — the plan overlay: the plan will add this link, nothing is written yet: amber, heavier, on the amber band
+  - `delta=LinkDelta` — the delta overlay, against main: `removed` is a ghost cut across its middle, `unchanged` recedes, `added` is drawn as it is
   - `plug=boolean` — the sheet's plugs level: a dot beside each end, the line on demand
 - parts:
   - `svg` — the drawing
@@ -4207,6 +4229,8 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -4552,6 +4576,8 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -4875,6 +4901,8 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -5079,6 +5107,8 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -5322,6 +5352,8 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -6071,6 +6103,8 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -6263,6 +6297,8 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -6461,6 +6497,8 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -6684,6 +6722,8 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
@@ -7468,7 +7508,7 @@ The Sessions view: every session, grouped by section, each unfolding into groups
 
 ### `<sett-sheet>`
 
-The inside of an open unit: the exposes rail, the columns, the needs rail, in one row, and the `sett-link`s between the things inside, drawn over it. Everything is laid out by normal flow; the sheet is the one element that sees every link, so the rules are written once here and not by each app: - **routes**: square lines on tracks in the gutters (`map.size.track` apart), one trunk per source item and family with a dot at each branch; a link skipping a column takes a lane in the channel under the columns, one inside a column runs beside it; a right-to-left line is a smell. - **the watcher**: each frame the ends are read and only the paths whose ends moved are rewritten, so folding, pulses and re-renders never leave a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown). - **response** (DESIGN.md § Motion): pointing at an item lights its links and the item at the other end; selecting draws its links outward, the flow travels on them alone and every other link recedes to `map.far`. - **folds**: an end hidden by a folded area rides the area's edge to the chip; a selected one gets the blue dock dot where it plugs in. - **level**: what is drawn at rest. `areas` (the default) draws one line per pair of areas, header to header: a `sett-bundle` per area, double where it carries two or more links; the item links appear when pointed at, pinned or opened by hand. `items` draws every link; `plugs` a dot beside each connected item with the line on demand. A finding is drawn item to item in every level. - **open by hand**: the arrow end of a double line opens that pair into its links, its shared stretch opens everything leaving the area, an opened line closes its pair (`open`, `sett-open`). The level is the default for whatever was not opened by hand. Opening never moves another line: a pair keeps its track while open. - **pins**: a click on an item toggles its `selected`; several at once. Their links are drawn item to item and everything else recedes. - **filter**: kinds and families to keep; the rest recedes to `map.far`. - **focus**: an area's name asks for it (`sett-focus`), `focus` holds its key. The area's links are drawn down to the items, in, out and inside it; the items they reach keep full ink; every other item and area gets `far` (mute ink, by colour) and every other line `map.far`. A finding never recedes. Esc, or the name again, leaves. Nothing moves: the pair lines keep their tracks, and what was opened by hand comes back as it was. `folded` folds every area at once.
+The inside of an open unit: the exposes rail, the columns, the needs rail, in one row, and the `sett-link`s between the things inside, drawn over it. Everything is laid out by normal flow; the sheet is the one element that sees every link, so the rules are written once here and not by each app: - **routes**: square lines on tracks in the gutters (`map.size.track` apart), one trunk per source item and family with a dot at each branch; a link skipping a column takes a lane in the channel under the columns, one inside a column runs beside it; a right-to-left line is a smell. - **the watcher**: each frame the ends are read and only the paths whose ends moved are rewritten, so folding, pulses and re-renders never leave a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown). - **response** (DESIGN.md § Motion): pointing at an item lights its links and the item at the other end; selecting draws its links outward, the flow travels on them alone and every other link recedes to `map.far`. - **folds**: an end hidden by a folded area rides the area's edge to the chip; a selected one gets the blue dock dot where it plugs in. - **level**: what is drawn at rest. `areas` (the default) draws one line per pair of areas, header to header: a `sett-bundle` per area, double where it carries two or more links; the item links appear when pointed at, pinned or opened by hand. `items` draws every link; `plugs` a dot beside each connected item with the line on demand. A finding is drawn item to item in every level, and so is a line an overlay marks: planned, or added or removed in the delta. - **open by hand**: the arrow end of a double line opens that pair into its links, its shared stretch opens everything leaving the area, an opened line closes its pair (`open`, `sett-open`). The level is the default for whatever was not opened by hand. Opening never moves another line: a pair keeps its track while open. - **pins**: a click on an item toggles its `selected`; several at once. Their links are drawn item to item and everything else recedes. - **filter**: kinds and families to keep; the rest recedes to `map.far`. - **focus**: an area's name asks for it (`sett-focus`), `focus` holds its key. The area's links are drawn down to the items, in, out and inside it; the items they reach keep full ink; every other item and area gets `far` (mute ink, by colour) and every other line `map.far`. A finding never recedes. Esc, or the name again, leaves. Nothing moves: the pair lines keep their tracks, and what was opened by hand comes back as it was. `folded` folds every area at once.
 
 - attrs:
   - `folded=boolean` — fold every area inside, or open them all again
@@ -7590,6 +7630,8 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-link--finding` finding · red and heavier, on any kind, never recedes
   - `map-link--guessed` guessed · the analyser is not sure: a lighter line
   - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
   - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
   - `map-link--wire` wire · a port wire takes the port kind's colour
   - `map-link--select-draws` motion · select draws the connections outward, then the flow travels

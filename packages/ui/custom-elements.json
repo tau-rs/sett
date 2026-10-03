@@ -2296,6 +2296,14 @@
         },
         {
           "kind": "js",
+          "name": "LinkDelta",
+          "declaration": {
+            "name": "LinkDelta",
+            "module": "./map/sett-link.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettBundle",
           "declaration": {
             "name": "SettBundle",
@@ -7212,7 +7220,7 @@
         },
         {
           "kind": "class",
-          "description": "One line between two things inside an open unit. It names its ends by\n`key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it\nroutes every link together (tracks, lanes, trunks, docks) and hands each\nits path; outside a sheet a link draws the simplest square route between\nits ends by itself. The grammar is fixed (#58, #68): the line pattern is\nthe family, the head is the kind, a diamond at the start is ownership; the\nlighter the line, the less the analyser knows. Links never carry presence.\n\nResponse (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`);\n`selected` draws it outward from the `anchor` end (`motion.draw`), then\nthe `flow` dashes travel, on the selection alone. A finding is red and\nheavier on any kind and never recedes.",
+          "description": "One line between two things inside an open unit. It names its ends by\n`key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it\nroutes every link together (tracks, lanes, trunks, docks) and hands each\nits path; outside a sheet a link draws the simplest square route between\nits ends by itself. The grammar is fixed (#58, #68): the line pattern is\nthe family, the head is the kind, a diamond at the start is ownership; the\nlighter the line, the less the analyser knows. Links never carry presence.\n\nResponse (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`);\n`selected` draws it outward from the `anchor` end (`motion.draw`), then\nthe `flow` dashes travel, on the selection alone. A finding is red and\nheavier on any kind and never recedes.\n\nOverlays (rule 13) paint, never move: a planned link is amber and one\nstep heavier on the amber tint band, keeping its pattern and head (the\ndash is the family, so it cannot take the planned item's dashes); in the\ndelta a removed link is a ghost cut across its middle, an unchanged one\nrecedes to `map.far`.",
           "name": "SettLink",
           "cssParts": [
             {
@@ -7346,6 +7354,27 @@
               "default": "false",
               "description": "points right to left: a smell (rule 11), set by the sheet from the route",
               "attribute": "backward",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "planned",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the plan overlay: the plan will add this link, nothing is written yet: amber, heavier, on the amber band",
+              "attribute": "planned",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "delta",
+              "type": {
+                "text": "LinkDelta | undefined"
+              },
+              "description": "the delta overlay, against main: `removed` is a ghost cut across its middle, `unchanged` recedes, `added` is drawn as it is",
+              "attribute": "delta",
               "reflects": true
             },
             {
@@ -7532,6 +7561,23 @@
               "default": "false",
               "description": "points right to left: a smell (rule 11), set by the sheet from the route",
               "fieldName": "backward"
+            },
+            {
+              "name": "planned",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the plan overlay: the plan will add this link, nothing is written yet: amber, heavier, on the amber band",
+              "fieldName": "planned"
+            },
+            {
+              "name": "delta",
+              "type": {
+                "text": "LinkDelta | undefined"
+              },
+              "description": "the delta overlay, against main: `removed` is a ghost cut across its middle, `unchanged` recedes, `added` is drawn as it is",
+              "fieldName": "delta"
             },
             {
               "name": "plug",
@@ -9129,7 +9175,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The inside of an open unit: the exposes rail, the columns, the needs rail,\nin one row, and the `sett-link`s between the things inside, drawn over it.\nEverything is laid out by normal flow; the sheet is the one element that\nsees every link, so the rules are written once here and not by each app:\n\n- **routes**: square lines on tracks in the gutters (`map.size.track`\n  apart), one trunk per source item and family with a dot at each branch;\n  a link skipping a column takes a lane in the channel under the columns,\n  one inside a column runs beside it; a right-to-left line is a smell.\n- **the watcher**: each frame the ends are read and only the paths whose\n  ends moved are rewritten, so folding, pulses and re-renders never leave\n  a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown).\n- **response** (DESIGN.md § Motion): pointing at an item lights its links\n  and the item at the other end; selecting draws its links outward, the\n  flow travels on them alone and every other link recedes to `map.far`.\n- **folds**: an end hidden by a folded area rides the area's edge to the\n  chip; a selected one gets the blue dock dot where it plugs in.\n- **level**: what is drawn at rest. `areas` (the default) draws one line\n  per pair of areas, header to header: a `sett-bundle` per area, double\n  where it carries two or more links; the item links appear when pointed\n  at, pinned or opened by hand. `items` draws every link; `plugs` a dot\n  beside each connected item with the line on demand. A finding is drawn\n  item to item in every level.\n- **open by hand**: the arrow end of a double line opens that pair into\n  its links, its shared stretch opens everything leaving the area, an\n  opened line closes its pair (`open`, `sett-open`). The level is the\n  default for whatever was not opened by hand. Opening never moves another\n  line: a pair keeps its track while open.\n- **pins**: a click on an item toggles its `selected`; several at once.\n  Their links are drawn item to item and everything else recedes.\n- **filter**: kinds and families to keep; the rest recedes to `map.far`.\n- **focus**: an area's name asks for it (`sett-focus`), `focus` holds its\n  key. The area's links are drawn down to the items, in, out and inside\n  it; the items they reach keep full ink; every other item and area gets\n  `far` (mute ink, by colour) and every other line `map.far`. A finding\n  never recedes. Esc, or the name again, leaves. Nothing moves: the pair\n  lines keep their tracks, and what was opened by hand comes back as it was.\n\n`folded` folds every area at once.",
+          "description": "The inside of an open unit: the exposes rail, the columns, the needs rail,\nin one row, and the `sett-link`s between the things inside, drawn over it.\nEverything is laid out by normal flow; the sheet is the one element that\nsees every link, so the rules are written once here and not by each app:\n\n- **routes**: square lines on tracks in the gutters (`map.size.track`\n  apart), one trunk per source item and family with a dot at each branch;\n  a link skipping a column takes a lane in the channel under the columns,\n  one inside a column runs beside it; a right-to-left line is a smell.\n- **the watcher**: each frame the ends are read and only the paths whose\n  ends moved are rewritten, so folding, pulses and re-renders never leave\n  a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown).\n- **response** (DESIGN.md § Motion): pointing at an item lights its links\n  and the item at the other end; selecting draws its links outward, the\n  flow travels on them alone and every other link recedes to `map.far`.\n- **folds**: an end hidden by a folded area rides the area's edge to the\n  chip; a selected one gets the blue dock dot where it plugs in.\n- **level**: what is drawn at rest. `areas` (the default) draws one line\n  per pair of areas, header to header: a `sett-bundle` per area, double\n  where it carries two or more links; the item links appear when pointed\n  at, pinned or opened by hand. `items` draws every link; `plugs` a dot\n  beside each connected item with the line on demand. A finding is drawn\n  item to item in every level, and so is a line an overlay marks: planned,\n  or added or removed in the delta.\n- **open by hand**: the arrow end of a double line opens that pair into\n  its links, its shared stretch opens everything leaving the area, an\n  opened line closes its pair (`open`, `sett-open`). The level is the\n  default for whatever was not opened by hand. Opening never moves another\n  line: a pair keeps its track while open.\n- **pins**: a click on an item toggles its `selected`; several at once.\n  Their links are drawn item to item and everything else recedes.\n- **filter**: kinds and families to keep; the rest recedes to `map.far`.\n- **focus**: an area's name asks for it (`sett-focus`), `focus` holds its\n  key. The area's links are drawn down to the items, in, out and inside\n  it; the items they reach keep full ink; every other item and area gets\n  `far` (mute ink, by colour) and every other line `map.far`. A finding\n  never recedes. Esc, or the name again, leaves. Nothing moves: the pair\n  lines keep their tracks, and what was opened by hand comes back as it was.\n\n`folded` folds every area at once.",
           "name": "SettSheet",
           "slots": [
             {

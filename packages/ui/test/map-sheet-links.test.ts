@@ -196,6 +196,26 @@ describe('sett-sheet at the areas level', () => {
     const f = to(sheet, 'a', 'g').route!;
     expect(f.points[0]).toEqual({ x: 360, y: 49 }); expect(f.points.at(-1)).toEqual({ x: 448, y: 261 });
   });
+  it('an overlay line stays item to item like a finding: planned, added or removed, even inside one area; unchanged joins its bundle', async () => {
+    const { sheet, settle } = await mountAreas();
+    to(sheet, 'a', 'b').planned = true;
+    to(sheet, 'b', 'e').delta = 'removed';
+    to(sheet, 'a', 'e').delta = 'unchanged';
+    await Promise.all(sheet.links.map((l) => l.updateComplete)); await tick(); await settle();
+    expect(to(sheet, 'a', 'b').route!.points[0]).toEqual({ x: 360, y: 49 });   // from the item, not the header
+    expect(to(sheet, 'b', 'e').route, 'inside one area, still drawn').toBeDefined();
+    expect(to(sheet, 'a', 'e').route).toBeUndefined();
+    expect(bundlesOf(sheet)[0].branches.map((b) => `${b.to}×${b.count}`)).toEqual(['d×2', 'auth×1']);
+    expect(bundlesOf(sheet)[0].branches[0].far, 'c → e has no delta yet').toBe(false);
+    to(sheet, 'c', 'e').delta = 'unchanged';
+    await Promise.all(sheet.links.map((l) => l.updateComplete)); await tick(); await settle();
+    expect(bundlesOf(sheet)[0].branches[0].far, 'every link it stands for is unchanged: it recedes').toBe(true);
+    expect(bundlesOf(sheet)[0].branches[1].far).toBe(false);
+    to(sheet, 'a', 'b').planned = false; to(sheet, 'b', 'e').delta = 'added';
+    await Promise.all(sheet.links.map((l) => l.updateComplete)); await tick(); await settle();
+    expect(to(sheet, 'a', 'b').route).toBeUndefined();
+    expect(to(sheet, 'b', 'e').route).toBeDefined();
+  });
   it('the arrow end opens a pair into its links; the pair keeps its track; an opened line closes it', async () => {
     const { sheet, settle } = await mountAreas();
     const before = bundlesOf(sheet)[0].branches[1].own[0].x;

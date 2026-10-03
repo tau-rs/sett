@@ -107,4 +107,39 @@ describe('sett-legend', () => {
     expect(checks(el)).toHaveLength(LINK_FAMILIES.length + 1 + kindsOf('does').length);
     expect(got).toHaveLength(1);
   });
+  it('keys an overlay only while it is on: the plan, the delta; the sessions and the findings need none here', async () => {
+    const heads = (el: El) => all(el, 'h6').map((h) => h.textContent);
+    const el = await mount('<sett-legend open></sett-legend>');
+    expect(heads(el)).toEqual(['links', 'ports']);
+    el.overlays = 'sessions plan findings delta'; await el.updateComplete;
+    expect(heads(el)).toEqual(['links', 'plan', 'delta', 'ports']);
+    el.overlays = 'delta'; await el.updateComplete;
+    expect(heads(el)).toEqual(['links', 'delta', 'ports']);
+    expect(checks(el).every((c) => !c.closest('[aria-label="delta"]')), 'a key, not a filter').toBe(true);
+  });
+  it('the plan key: a planned item, dashed amber on the amber tint; a planned link, amber and heavier on its band', async () => {
+    const el = await mount('<sett-legend open overlays="plan"></sett-legend>');
+    const plan = el.shadowRoot!.querySelector('[aria-label="plan"]')!;
+    expect(Array.from(plan.querySelectorAll('.nm'), (n) => n.textContent)).toEqual(['planned item', 'planned link']);
+    expect(plan.querySelector('.it.planned')).not.toBeNull();
+    const svg = plan.querySelector('svg.planned')!;
+    expect(svg.querySelector('.band')!.getAttribute('d')).toBe(svg.querySelector('.line')!.getAttribute('d'));
+    const css = cssOf('sett-legend');
+    expect(css).toMatch(/\.it\.planned \{[^}]*background: var\(--sett-color-sug-bg\);[^}]*border-color: var\(--sett-color-sug\);[^}]*border-style: dashed;/);
+    expect(css).toMatch(/svg\.planned \{ color: var\(--sett-color-sug\); \}/);
+    expect(css).toMatch(/svg\.planned \.line \{ stroke-width: var\(--sett-stroke-lit\); \}/);
+    expect(css).toMatch(/\.band \{[^}]*stroke: var\(--sett-color-sug-bg\);[^}]*stroke-width: var\(--sett-map-size-band\);/);
+  });
+  it('the delta key: removed, a ghost item and a link cut across its middle; unchanged recedes; added is drawn as it is', async () => {
+    const el = await mount('<sett-legend open overlays="delta"></sett-legend>');
+    const delta = el.shadowRoot!.querySelector('[aria-label="delta"]')!;
+    expect(Array.from(delta.querySelectorAll('.nm'), (n) => n.textContent)).toEqual(['added or changed', 'removed', 'unchanged']);
+    expect(delta.querySelector('.it.removed')).not.toBeNull();
+    expect(delta.querySelectorAll('svg.removed .cut')).toHaveLength(2);
+    expect(delta.querySelector('.it.unchanged')).not.toBeNull();
+    const css = cssOf('sett-legend');
+    expect(css).toMatch(/svg\.removed \{ color: var\(--sett-color-line\); \}/);
+    expect(css).toMatch(/svg\.unchanged \{ opacity: var\(--sett-map-far\); \}/);
+    expect(css).toMatch(/\.it\.removed \{[^}]*border-style: dashed;/);
+  });
 });

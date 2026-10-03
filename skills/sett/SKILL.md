@@ -500,9 +500,11 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -794,9 +796,11 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -1094,9 +1098,11 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -1740,9 +1746,11 @@ The page around the code of an item, in a tab of `sett-tabbar` (map rule 4). It 
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -1938,9 +1946,11 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -2369,9 +2379,11 @@ What a port promises: the kind chip (the kind's dot and word, the same colour as
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -2563,9 +2575,11 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -2760,9 +2774,11 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -3777,9 +3793,11 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -3903,12 +3921,13 @@ A key · value row of an inspector layout (the pages' `kv`): a mute label in a f
 
 ### `<sett-legend>`
 
-The key to the map, on demand (map rule 8): a section of `sett-panel`, folded to one row until `open`. It is also the control that filters the links: one toggle per family (does · promises · knows · around), one per kind inside it, and one for the fallback. Its rows come from the kind tables (`LINK_KINDS`, `LINK_FAMILIES`, `PORT_KINDS`), never a second list: a swatch is the family's line pattern and the kind's head, as `sett-link` draws them. The port kinds are a key only, as is the finding, which never recedes. It holds no map state. `filter` is the value of `sett-sheet filter` (the families and kinds to keep; empty keeps everything); a toggle fires `sett-filter` with the next value and the host copies it onto the sheet and back here. Folded, the row says how many kinds are shown while a filter is on. Opening the section and listing a family's kinds are the legend's own. Pointing eases a row's background (`motion.hover`).
+The key to the map, on demand (map rule 8): a section of `sett-panel`, folded to one row until `open`. It is also the control that filters the links: one toggle per family (does · promises · knows · around), one per kind inside it, and one for the fallback. Its rows come from the kind tables (`LINK_KINDS`, `LINK_FAMILIES`, `PORT_KINDS`), never a second list: a swatch is the family's line pattern and the kind's head, as `sett-link` draws them. The port kinds are a key only, as is the finding, which never recedes. `overlays` names the overlay toggles that are on (the values of the `sett-toggle`s, separated by spaces), copied by the host. While the plan or the delta is on, the legend keys it (rule 13): a planned item and a planned link; what is added, removed and unchanged. Those rows are a key, not a filter. The sessions and the findings need no row here: a session ring names itself, and the finding is keyed with the links. It holds no map state. `filter` is the value of `sett-sheet filter` (the families and kinds to keep; empty keeps everything); a toggle fires `sett-filter` with the next value and the host copies it onto the sheet and back here. Folded, the row says how many kinds are shown while a filter is on. Opening the section and listing a family's kinds are the legend's own. Pointing eases a row's background (`motion.hover`).
 
 - attrs:
   - `filter=string` — the families and kinds kept, as `sett-sheet filter` takes them; empty keeps everything
   - `open=boolean` — the section is unfolded
   - `expanded=string` — the families whose kinds are listed, separated by spaces
+  - `overlays=string` — the overlays that are on, as the `sett-toggle` values (`sessions plan findings delta`); the plan and the delta get a key
 - parts:
   - `head` — the row that opens and closes the section
 - events:
@@ -4007,9 +4026,11 @@ The key to the map, on demand (map rule 8): a section of `sett-panel`, folded to
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -4217,9 +4238,11 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -4564,9 +4587,11 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -4889,9 +4914,11 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -5095,9 +5122,11 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -5340,9 +5369,11 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -6091,9 +6122,11 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -6285,9 +6318,11 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -6485,9 +6520,11 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -6710,9 +6747,11 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -7618,9 +7657,11 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
   - `map-legend--kind-off` a kind off · its family is partly on (mixed)
   - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
   - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
   - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
   - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads

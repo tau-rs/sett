@@ -24,7 +24,7 @@ export { SettItem, ITEM_KINDS, type ItemKind, type ItemDelta } from './map/sett-
 export { SettArea } from './map/sett-area.js';
 export { SettColumn, COLUMN_KINDS, COLUMN_DEPTHS, type ColumnKind, type ColumnDepth } from './map/sett-column.js';
 export { SettSheet, type SheetLevel } from './map/sett-sheet.js';
-export { SettLink, linkHead, linkTail, type LinkDelta } from './map/sett-link.js';
+export { SettLink, linkHead, linkTail, linkCut, type LinkDelta } from './map/sett-link.js';
 export { SettBundle, BUNDLE_ORIGINS, type BundleOrigin, type BundleBranch } from './map/sett-bundle.js';
 export { route, simpleRoute, stretches, type Stretch, type Route, type RouteInput, type RouteOutput, type RouteLink, type RouteEnd, type Box, type Pt } from './map/routes.js';
 export { watch, unwatch, watching, boxIn, scaleOf, signature, type Watched } from './map/lines.js';

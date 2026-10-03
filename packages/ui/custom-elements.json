@@ -2528,6 +2528,14 @@
         },
         {
           "kind": "js",
+          "name": "SettCrumb",
+          "declaration": {
+            "name": "SettCrumb",
+            "module": "./map/sett-crumb.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "scopeWords",
           "declaration": {
             "name": "scopeWords",
@@ -5214,6 +5222,86 @@
           "declaration": {
             "name": "SettColumn",
             "module": "src/map/sett-column.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-crumb.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Where the map is, as one mono line: `orderly › api › routes › subscribe()`.\nEvery step but the last is a click that goes up to it; the last is where\nyou are. A step changes ink at once when pointed at: text never eases.\nWith no room the earlier steps end in an ellipsis; the last one stays whole.",
+          "name": "SettCrumb",
+          "members": [
+            {
+              "kind": "field",
+              "name": "steps",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "the steps from the repo down, e.g. `[\"orderly\",\"api\",\"routes\"]`; the last is where you are",
+              "attribute": "steps"
+            },
+            {
+              "kind": "method",
+              "name": "go",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-go",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ index, step }`: go up to that step"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "steps",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "the steps from the repo down, e.g. `[\"orderly\",\"api\",\"routes\"]`; the last is where you are",
+              "fieldName": "steps"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-crumb",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettCrumb",
+          "declaration": {
+            "name": "SettCrumb",
+            "module": "src/map/sett-crumb.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-crumb",
+          "declaration": {
+            "name": "SettCrumb",
+            "module": "src/map/sett-crumb.ts"
           }
         }
       ]

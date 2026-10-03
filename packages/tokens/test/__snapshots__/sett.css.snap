@@ -152,6 +152,7 @@
   --sett-map-kind-fs-stroke: 1 3;
   --sett-map-kind-tty-stroke: 1 3;
   --sett-map-kind-declared-stroke: 5 4;
+  --sett-map-status-hold: 1.9s;
   --sett-map-presence-breath-min: 0.6;
   --sett-map-presence-touched: 0.5;
   --sett-map-presence-sheen: 0.26;

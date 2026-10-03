@@ -19,6 +19,18 @@ const bar = html`<sett-tabbar style="width:900px">
   <span slot="right">⌘1 map · ⌘W close</span>
 </sett-tabbar>`;
 export const Tabbar: Story = { name: 'tabbar · pinned map, unsaved file, session tab, right end', render: () => bar };
+export const Narrow: Story = {
+  name: 'tabbar · narrow · the tabs give way and scroll, the right end never wraps',
+  render: () => html`<sett-tabbar style="width:640px">
+    <sett-tab pinned active>map</sett-tab>
+    <sett-tab mono dirty>ports.rs</sett-tab>
+    <sett-tab mono>service.rs</sett-tab>
+    <sett-tab mono scope="session" session="yk">pg.rs <sett-pill kind="session" session="yk">w1 · a2</sett-pill></sett-tab>
+    <sett-tab>review · !44</sett-tab>
+    <sett-overlay-toggles slot="right"><sett-toggle value="sessions" on>sessions</sett-toggle><sett-toggle value="plan" on>plan</sett-toggle><sett-toggle value="findings">findings</sett-toggle><sett-toggle value="delta">delta</sett-toggle></sett-overlay-toggles>
+    <span slot="right">⌘1 map · ⌘W close</span>
+  </sett-tabbar>`,
+};
 export const TabStates: Story = { name: 'tab · pinned, active, dirty, scoped (no mark while inactive), plain', render: () => html`<sett-tabbar style="width:600px"><sett-tab pinned>map</sett-tab><sett-tab mono active>active.rs</sett-tab><sett-tab mono dirty>unsaved.rs</sett-tab><sett-tab mono scope="session" session="tl">by Lyon</sett-tab><sett-tab>plain</sett-tab></sett-tabbar>` };
 const files = (tab: unknown) => html`<sett-tabbar style="width:600px"><sett-tab pinned>map</sett-tab><sett-tab mono>service.rs</sett-tab>${tab}</sett-tabbar>`;
 export const ScopedSession: Story = {

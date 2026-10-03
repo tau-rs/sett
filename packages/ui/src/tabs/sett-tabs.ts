@@ -8,6 +8,9 @@ export type TabScope = Extract<ScopeKind, 'session' | 'you'>;
 
 /**
  * The centre tab bar: map pinned first, file tabs in mono, shortcuts on the right.
+ * The right end never wraps; when room runs out the tabs give way and scroll
+ * sideways (a wheel, a trackpad, or focus brings a tab into view), and no tab
+ * shrinks, so a file name is never cut.
  * @slot - sett-tab elements
  * @slot right - what sits at the right end (level switch, overlay toggles, shortcuts)
  */
@@ -15,9 +18,11 @@ export type TabScope = Extract<ScopeKind, 'session' | 'you'>;
 export class SettTabbar extends LitElement {
   static styles = css`
     :host { display: flex; align-items: stretch; height: calc(var(--sett-space-4) * 2); border-bottom: var(--sett-stroke-hair) solid var(--sett-color-line2); background: var(--sett-color-well); font-family: var(--sett-font-sans); font-size: var(--sett-font-size-base); color: var(--sett-color-ink2); }
-    .tabs { display: contents; }
+    /* when room runs out the tabs give way, scrolling as an IDE's do; the right end never wraps (#33) */
+    .tabs { display: flex; align-items: stretch; flex: 0 1 auto; min-width: 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
     .sp { flex: 1; }
-    .r { display: flex; align-items: center; gap: var(--sett-space-2); padding: 0 var(--sett-space-2); color: var(--sett-color-mute); font-size: var(--sett-font-size-sm); }
+    .r { display: flex; align-items: center; gap: var(--sett-space-2); flex: none; white-space: nowrap; padding: 0 var(--sett-space-2); color: var(--sett-color-mute); font-size: var(--sett-font-size-sm); }
   `;
   // only the tabs are the tablist; the right end holds switches and a seg of its own
   render() { return html`<div class="tabs" role="tablist"><slot></slot></div><span class="sp"></span><span class="r"><slot name="right"></slot></span>`; }
@@ -48,7 +53,7 @@ export class SettTab extends LitElement {
   static styles = [
     scopeStyles,
     css`
-      :host { --_bar: var(--sett-color-sel); display: flex; align-items: center; gap: var(--sett-space-2); padding: 0 var(--sett-space-3); border-right: var(--sett-stroke-hair) solid var(--sett-color-line2); color: var(--sett-color-ink2); cursor: pointer; white-space: nowrap; }
+      :host { --_bar: var(--sett-color-sel); display: flex; flex: none; align-items: center; gap: var(--sett-space-2); padding: 0 var(--sett-space-3); border-right: var(--sett-stroke-hair) solid var(--sett-color-line2); color: var(--sett-color-ink2); cursor: pointer; white-space: nowrap; }
       :host([mono]) { font-family: var(--sett-font-mono); font-size: var(--sett-font-size-md); }
       :host([pinned]) { padding-left: var(--sett-space-2); font-weight: var(--sett-font-weight-medium); }
       :host([active]) { background: var(--sett-color-paper); color: var(--sett-color-ink); box-shadow: inset 0 var(--sett-stroke-lit) 0 var(--_bar); }

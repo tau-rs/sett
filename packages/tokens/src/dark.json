@@ -323,6 +323,47 @@
         "$value": "{color.sugBg}"
       }
     },
+    "origin": {
+      "driving": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2031,
+            0.3129,
+            0.4413
+          ],
+          "hex": "#345071"
+        },
+        "$description": "the inside of a double line leaving a driving column"
+      },
+      "domain": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4074,
+            0.3197,
+            0.1602
+          ],
+          "hex": "#685229"
+        },
+        "$description": "the inside of a double line leaving a domain column"
+      },
+      "driven": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1803,
+            0.3474,
+            0.2693
+          ],
+          "hex": "#2E5945"
+        },
+        "$description": "the inside of a double line leaving a driven column"
+      }
+    },
     "kind": {
       "rpc": {
         "color": {

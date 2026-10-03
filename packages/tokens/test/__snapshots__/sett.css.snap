@@ -98,6 +98,8 @@
   --sett-map-size-track: 12px;
   --sett-map-size-branch: 4px;
   --sett-map-size-hit: 12px;
+  --sett-map-size-bundle: 5px;
+  --sett-map-size-bundle-gap: 2.6px;
   --sett-map-size-halo: 2.6px;
   --sett-map-size-halo-lit: 3.5px;
   --sett-map-size-minimap-w: 276px;
@@ -179,6 +181,9 @@
   --sett-map-surface-outbound: #F1EEF7;
   --sett-map-surface-code: #FBFBFA;
   --sett-map-surface-unresolved: #FBF2DE;
+  --sett-map-origin-driving: #A5BFDD;
+  --sett-map-origin-domain: #D5C099;
+  --sett-map-origin-driven: #ABCABB;
   --sett-map-kind-rpc-color: #1F5FA8;
   --sett-map-kind-http-color: #287857;
   --sett-map-kind-cli-color: #287857;
@@ -276,6 +281,9 @@
     --sett-map-surface-outbound: #26232E;
     --sett-map-surface-code: #171E22;
     --sett-map-surface-unresolved: #3D3116;
+    --sett-map-origin-driving: #345071;
+    --sett-map-origin-domain: #685229;
+    --sett-map-origin-driven: #2E5945;
     --sett-map-kind-rpc-color: #629DE8;
     --sett-map-kind-http-color: #4DB388;
     --sett-map-kind-cli-color: #4DB388;
@@ -373,6 +381,9 @@
   --sett-map-surface-outbound: #26232E;
   --sett-map-surface-code: #171E22;
   --sett-map-surface-unresolved: #3D3116;
+  --sett-map-origin-driving: #345071;
+  --sett-map-origin-domain: #685229;
+  --sett-map-origin-driven: #2E5945;
   --sett-map-kind-rpc-color: #629DE8;
   --sett-map-kind-http-color: #4DB388;
   --sett-map-kind-cli-color: #4DB388;
@@ -469,6 +480,9 @@
   --sett-map-surface-outbound: #F1EEF7;
   --sett-map-surface-code: #FBFBFA;
   --sett-map-surface-unresolved: #FBF2DE;
+  --sett-map-origin-driving: #A5BFDD;
+  --sett-map-origin-domain: #D5C099;
+  --sett-map-origin-driven: #ABCABB;
   --sett-map-kind-rpc-color: #1F5FA8;
   --sett-map-kind-http-color: #287857;
   --sett-map-kind-cli-color: #287857;

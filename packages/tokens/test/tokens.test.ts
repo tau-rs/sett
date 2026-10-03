@@ -27,7 +27,7 @@ describe('sett.css', () => {
 describe('tokens.json', () => {
   const j = JSON.parse(dist('tokens.json'));
   it('counts every token per source file', () => {
-    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 155, light: 94, dark: 94 });
+    expect({ base: j.base.length, light: j.light.length, dark: j.dark.length }).toEqual({ base: 157, light: 97, dark: 97 });
   });
   it('the shell sizes of the arch V1 spec §4 are tokens', () => {
     const px = Object.fromEntries(j.base.map((t: { name: string; css: string }) => [t.name, t.css]));

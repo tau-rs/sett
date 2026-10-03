@@ -2472,6 +2472,22 @@
         },
         {
           "kind": "js",
+          "name": "SettPosition",
+          "declaration": {
+            "name": "SettPosition",
+            "module": "./map/sett-position.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPositionRow",
+          "declaration": {
+            "name": "SettPositionRow",
+            "module": "./map/sett-position.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "scopeWords",
           "declaration": {
             "name": "scopeWords",
@@ -6739,6 +6755,215 @@
           "declaration": {
             "name": "SettPortRow",
             "module": "src/map/sett-port-row.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-position.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Where you are on the map, as the trail that led there: numbered rows, the\noldest first. The rows before the `current` one are where you came from: a\nclick goes back to that place. After going back, the rows past the current\none are `future`: still listed, lighter, a click goes forward again. The\nlist numbers its rows itself.",
+          "name": "SettPosition",
+          "slots": [
+            {
+              "description": "sett-position-row elements, in the order they were visited",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "number",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ n, key, future }` from a row: go to that place",
+              "name": "sett-go"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-position",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One place of the trail: its number, its name in mono, and the level it is\nat in plain words (`board`, `unit`, `area`, `item`). A past or future row\nis a button; the `current` row is where you are and leads nowhere. Pointing\neases the row's background (`motion.hover`); the name never moves or fades.",
+          "name": "SettPositionRow",
+          "slots": [
+            {
+              "description": "the place's name",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "n",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "the row's number in the trail; set by sett-position",
+              "attribute": "n"
+            },
+            {
+              "kind": "field",
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the host knows this place by",
+              "attribute": "key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the level of the place: `board`, `unit`, `area`, `item`",
+              "attribute": "level"
+            },
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "where you are now",
+              "attribute": "current",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "future",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "ahead of where you are, after going back",
+              "attribute": "future",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "go",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ n, key, future }` on click, Enter or Space",
+              "name": "sett-go"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "n",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "the row's number in the trail; set by sett-position",
+              "fieldName": "n"
+            },
+            {
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the host knows this place by",
+              "fieldName": "key"
+            },
+            {
+              "name": "level",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the level of the place: `board`, `unit`, `area`, `item`",
+              "fieldName": "level"
+            },
+            {
+              "name": "current",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "where you are now",
+              "fieldName": "current"
+            },
+            {
+              "name": "future",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "ahead of where you are, after going back",
+              "fieldName": "future"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-position-row",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettPosition",
+          "declaration": {
+            "name": "SettPosition",
+            "module": "src/map/sett-position.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-position",
+          "declaration": {
+            "name": "SettPosition",
+            "module": "src/map/sett-position.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPositionRow",
+          "declaration": {
+            "name": "SettPositionRow",
+            "module": "src/map/sett-position.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-position-row",
+          "declaration": {
+            "name": "SettPositionRow",
+            "module": "src/map/sett-position.ts"
           }
         }
       ]

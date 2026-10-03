@@ -1,6 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
 import '../src/index.js';
-import { tierFor } from '../src/index.js';
+import { foldFor, tierFor } from '../src/index.js';
+import { base } from '@tau-rs/sett-tokens';
 
 const mount = async (markup: string) => {
   document.body.innerHTML = markup;
@@ -37,6 +38,31 @@ describe('tierFor', () => {
     expect(tierFor(370, 'chip')).toBe('chip');
     expect(tierFor(100, 'sheet')).toBe('mini');
     expect(tierFor(900, 'chip')).toBe('sheet');
+  });
+});
+
+describe('foldFor (rule 3: the camera folds an open unit, then closes it)', () => {
+  const FLOOR = Number(base.map.threshold.foldFloor);
+  it('reads the fold from the scale against the scale the unit opened at: items, areas folded, closed under the floor', () => {
+    expect(FLOOR).toBe(0.7);
+    expect(foldFor(1, 1)).toBe('items');
+    expect(foldFor(1.5, 1)).toBe('items');
+    expect(foldFor(0.99, 1)).toBe('areas');
+    expect(foldFor(FLOOR, 1)).toBe('areas');
+    expect(foldFor(0.69, 1)).toBe('closed');
+    // relative to where it opened, not to scale 1
+    expect(foldFor(1.4, 2)).toBe('areas');
+    expect(foldFor(1.38, 2)).toBe('closed');
+    expect(foldFor(0.5, 0.5)).toBe('items');
+  });
+  it('folds and closes only past the hysteresis band, the same band as the tiers; zooming back in is immediate', () => {
+    expect(foldFor(0.96, 1, 'items')).toBe('items');
+    expect(foldFor(0.94, 1, 'items')).toBe('areas');
+    expect(foldFor(0.66, 1, 'areas')).toBe('areas');
+    expect(foldFor(0.64, 1, 'areas')).toBe('closed');
+    expect(foldFor(0.5, 1, 'items'), 'two steps at once: no band').toBe('closed');
+    expect(foldFor(0.8, 1, 'closed')).toBe('areas');
+    expect(foldFor(1, 1, 'areas')).toBe('items');
   });
 });
 

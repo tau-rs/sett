@@ -21,3 +21,31 @@ export function tierFor(width: number, previous?: NodeTier): NodeTier {
   const keep = previous === 'mini' ? 0 : UP[previous] - px(T.hysteresis);
   return width >= keep && rank(previous) === rank(raw) + 1 ? previous : raw;
 }
+
+/** what an open unit shows while the camera zooms out from the scale it was opened at */
+export type UnitFold = 'items' | 'areas' | 'closed';
+const FOLDS: UnitFold[] = ['closed', 'areas', 'items'];
+/** where each fold starts, as a fraction of the opening scale */
+const FROM: Record<Exclude<UnitFold, 'closed'>, number> = { areas: Number(T.foldFloor), items: 1 };
+/** the tiers' hysteresis, as a fraction of the width a sheet opens at */
+const BAND = px(T.hysteresis) / UP.sheet;
+
+/**
+ * The fold of an open unit for the camera's `scale`, against the scale it
+ * was `openedAt` (DESIGN.md map rule 3). An open unit keeps its place on the
+ * board while you zoom out; text never shrinks, so its areas fold (`areas`)
+ * as soon as the scale is under the opening scale, down to
+ * `map.threshold.foldFloor` of it; below that it closes back to a card
+ * (`closed`). At or above the opening scale it shows its items (`items`).
+ * With `previous`, folding one step waits for the tiers' `hysteresis` band,
+ * so a wheel zoom hovering at a boundary does not flicker; zooming back in
+ * is immediate. A fold by hand is not this: an area folded by hand stays a
+ * chip at any scale.
+ */
+export function foldFor(scale: number, openedAt: number, previous?: UnitFold): UnitFold {
+  const ratio = scale / openedAt;
+  const raw: UnitFold = ratio >= FROM.items ? 'items' : ratio >= FROM.areas ? 'areas' : 'closed';
+  if (!previous || previous === 'closed') return raw;
+  const at = FOLDS.indexOf(previous), now = FOLDS.indexOf(raw);
+  return now === at - 1 && ratio >= FROM[previous] - BAND ? previous : raw;
+}

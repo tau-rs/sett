@@ -541,6 +541,9 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -839,6 +842,9 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -1143,6 +1149,9 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -1796,6 +1805,9 @@ The page around the code of an item, in a tab of `sett-tabbar` (map rule 4). It 
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -1997,6 +2009,9 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -2433,6 +2448,9 @@ What a port promises: the kind chip (the kind's dot and word, the same colour as
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -2630,6 +2648,9 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -2830,6 +2851,9 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -3950,6 +3974,9 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -4184,6 +4211,9 @@ The key to the map, on demand (map rule 8): a section of `sett-panel`, folded to
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -4397,6 +4427,9 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -4747,6 +4780,9 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -5076,6 +5112,9 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -5285,6 +5324,9 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -5533,6 +5575,9 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -6293,6 +6338,9 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -6490,6 +6538,9 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -6693,6 +6744,9 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -6921,6 +6975,9 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
@@ -7840,6 +7897,9 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
   - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
   - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
   - `map-op-row--default` Default
   - `map-op-row--routes` route · five methods · return vs → handler · selected
   - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures

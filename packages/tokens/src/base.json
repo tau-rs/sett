@@ -1207,6 +1207,14 @@
         }
       }
     },
+    "statusHold": {
+      "$type": "duration",
+      "$value": {
+        "value": 1.9,
+        "unit": "s"
+      },
+      "$description": "how long the panel's status line keeps a message before clearing it, unless an action comes first (map rule 8); a hold, not a motion: nothing animates"
+    },
     "presence": {
       "$description": "how strong an agent's marks are",
       "breathMin": {

@@ -3,7 +3,8 @@ import { html, nothing } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Fixture, FixtureArea, FixtureItem, FixtureUnit, Port } from './fixtures.js';
 import { insideOf, itemKindOf, linksOf, opKey, opsOf, portKey, sectionOf, unitOf, unitPorts, wiresOf, type FixtureLink } from './fixtures.js';
-import { sessionOrder } from '@tau-rs/sett-tokens';
+import { base, sessionOrder } from '@tau-rs/sett-tokens';
+import type { MinimapRect } from './sett-minimap.js';
 import ripgrepJson from './fixtures/ripgrep.json' with { type: 'json' };
 import zero2prodJson from './fixtures/zero2prod.json' with { type: 'json' };
 import zedJson from './fixtures/zed.json' with { type: 'json' };
@@ -96,3 +97,24 @@ export const sessionsOn = (who: Who) => {
 /** an open unit: the node at its sheet tier hosting the inside; its head lists the sessions on its items */
 export const openUnit = (f: Fixture, id: string, who: Who = {}, opts: SheetOpts = {}) =>
   node(f, id, 'sheet', { focused: true }, sheetOf(f, id, who, { ...opts, slot: 'inside' }), sessionsOn(who));
+
+const num = (v: string) => parseFloat(v);
+const S = base.map.size;
+/** the units of a fixture's own repo as the minimap's world: one chip-sized rect per unit, where the board places it */
+export const boardRects = (f: Fixture, selected?: string): MinimapRect[] =>
+  Object.values(f.repos)[0].units
+    .map((u) => ({ key: u.id, x: u.x, y: u.y, w: num(S.nodeChipW), h: num(S.nodeChipH), selected: u.id === selected }));
+/** the inside of a unit as the minimap's world: a tinted rect per column, then a rect per area, sized as the sheet lays them out */
+export const sheetRects = (f: Fixture, id: string, selected?: string): MinimapRect[] => {
+  const pad = num(base.space['2']), head = num(S.areaFolded), row = num(S.itemRow), gap = num(base.space['3']);
+  const height = (a: FixtureArea) => (a.folded ? head : num(S.areaHeader) + a.items.length * row + pad);
+  const cols = insideOf(f, id);
+  const tall = Math.max(...cols.map((c) => head + c.areas.reduce((h, a) => h + height(a) + gap, 0)));
+  return cols.flatMap((c, i) => {
+    const x = i * (num(S.column) + num(S.columnGutter));
+    const tone = c.kind === 'layer' ? (c.depth === 'api' ? 'driving' : c.depth === 'leaf' ? 'driven' : 'domain') : (c.kind as 'driving' | 'domain' | 'driven');
+    let y = head;
+    const areas = c.areas.map((a) => { const r = { key: a.id, x: x + pad, y, w: num(S.column) - pad * 2, h: height(a), selected: a.id === selected }; y += r.h + gap; return r; });
+    return [{ key: `col:${i}`, x, y: 0, w: num(S.column), h: tall, tone }, ...areas];
+  });
+};

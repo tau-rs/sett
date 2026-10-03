@@ -2520,6 +2520,94 @@
         },
         {
           "kind": "js",
+          "name": "SettPanel",
+          "declaration": {
+            "name": "SettPanel",
+            "module": "./map/sett-panel.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPosition",
+          "declaration": {
+            "name": "SettPosition",
+            "module": "./map/sett-position.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPositionRow",
+          "declaration": {
+            "name": "SettPositionRow",
+            "module": "./map/sett-position.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMinimap",
+          "declaration": {
+            "name": "SettMinimap",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "minimapPoint",
+          "declaration": {
+            "name": "minimapPoint",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MinimapMode",
+          "declaration": {
+            "name": "MinimapMode",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MinimapBox",
+          "declaration": {
+            "name": "MinimapBox",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MinimapRect",
+          "declaration": {
+            "name": "MinimapRect",
+            "module": "./map/sett-minimap.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettCrumb",
+          "declaration": {
+            "name": "SettCrumb",
+            "module": "./map/sett-crumb.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettBack",
+          "declaration": {
+            "name": "SettBack",
+            "module": "./map/sett-back.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettCue",
+          "declaration": {
+            "name": "SettCue",
+            "module": "./map/sett-cue.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "scopeWords",
           "declaration": {
             "name": "scopeWords",
@@ -4234,6 +4322,67 @@
             }
           ],
           "description": "an open unit: the node at its sheet tier hosting the inside; its head lists the sessions on its items"
+        },
+        {
+          "kind": "function",
+          "name": "boardRects",
+          "return": {
+            "type": {
+              "text": "MinimapRect[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "selected",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the units of a fixture's own repo as the minimap's world: one chip-sized rect per unit, where the board places it"
+        },
+        {
+          "kind": "function",
+          "name": "sheetRects",
+          "return": {
+            "type": {
+              "text": "MinimapRect[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "selected",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the inside of a unit as the minimap's world: a tinted rect per column, then a rect per area, sized as the sheet lays them out"
+        },
+        {
+          "kind": "variable",
+          "name": "y",
+          "default": "head"
         }
       ],
       "exports": [
@@ -4394,6 +4543,22 @@
           "name": "openUnit",
           "declaration": {
             "name": "openUnit",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boardRects",
+          "declaration": {
+            "name": "boardRects",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "sheetRects",
+          "declaration": {
+            "name": "sheetRects",
             "module": "src/map/map-fixtures.stories-helpers.ts"
           }
         }
@@ -5021,6 +5186,84 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/sett-back.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The way back up, as a pill: `‹` and the place it leads to, with the key\nthat does the same (`esc`) when the host gives one. It docks at the start\nof the map's strip, before the crumb (map rule 8): it never floats over the\ndrawing. Pointing eases its border (`motion.hover`); its words never move.",
+          "name": "SettBack",
+          "slots": [
+            {
+              "description": "where back leads: `board`, `api`; default `back`",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the key that does the same, shown after the words: `esc`",
+              "attribute": "hint"
+            },
+            {
+              "kind": "field",
+              "name": "back",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "on click, Enter or Space",
+              "name": "sett-back"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "hint",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the key that does the same, shown after the words: `esc`",
+              "fieldName": "hint"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-back",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettBack",
+          "declaration": {
+            "name": "SettBack",
+            "module": "src/map/sett-back.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-back",
+          "declaration": {
+            "name": "SettBack",
+            "module": "src/map/sett-back.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/sett-bundle.ts",
       "declarations": [
         {
@@ -5357,6 +5600,217 @@
           "declaration": {
             "name": "SettColumn",
             "module": "src/map/sett-column.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-crumb.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Where the map is, as one mono line: `orderly › api › routes › subscribe()`.\nEvery step but the last is a click that goes up to it; the last is where\nyou are. A step changes ink at once when pointed at: text never eases.\nWith no room the earlier steps end in an ellipsis; the last one stays whole.",
+          "name": "SettCrumb",
+          "members": [
+            {
+              "kind": "field",
+              "name": "steps",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "the steps from the repo down, e.g. `[\"orderly\",\"api\",\"routes\"]`; the last is where you are",
+              "attribute": "steps"
+            },
+            {
+              "kind": "method",
+              "name": "go",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-go",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ index, step }`: go up to that step"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "steps",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "the steps from the repo down, e.g. `[\"orderly\",\"api\",\"routes\"]`; the last is where you are",
+              "fieldName": "steps"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-crumb",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettCrumb",
+          "declaration": {
+            "name": "SettCrumb",
+            "module": "src/map/sett-crumb.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-crumb",
+          "declaration": {
+            "name": "SettCrumb",
+            "module": "src/map/sett-crumb.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-cue.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A label and a bar that fills toward a threshold: it says how far the hand\nis from something the map does by on-screen size (a tier, the fold floor).\nThe values are the host's: `value` now, `from` where the cue starts,\n`threshold` where the thing happens. The bar is a reading, not a motion: it\nfollows the wheel and never eases. Once the threshold is `reached` the bar\nturns `sel`.",
+          "name": "SettCue",
+          "slots": [
+            {
+              "description": "the label, lowercase: `keep zooming · areas fold`",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "where the hand is now, in the threshold's unit (px of on-screen width, a scale)",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "from",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "where the bar starts, e.g. `map.threshold.cue`",
+              "attribute": "from"
+            },
+            {
+              "kind": "field",
+              "name": "threshold",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "where the bar is full",
+              "attribute": "threshold"
+            },
+            {
+              "kind": "field",
+              "name": "reached",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the value is at or past the threshold; set by the element",
+              "attribute": "reached",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "progress",
+              "type": {
+                "text": "number"
+              },
+              "description": "how full the bar is, 0 to 1",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "where the hand is now, in the threshold's unit (px of on-screen width, a scale)",
+              "fieldName": "value"
+            },
+            {
+              "name": "from",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "where the bar starts, e.g. `map.threshold.cue`",
+              "fieldName": "from"
+            },
+            {
+              "name": "threshold",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "where the bar is full",
+              "fieldName": "threshold"
+            },
+            {
+              "name": "reached",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the value is at or past the threshold; set by the element",
+              "fieldName": "reached"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-cue",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettCue",
+          "declaration": {
+            "name": "SettCue",
+            "module": "src/map/sett-cue.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-cue",
+          "declaration": {
+            "name": "SettCue",
+            "module": "src/map/sett-cue.ts"
           }
         }
       ]
@@ -6072,6 +6526,251 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/sett-minimap.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "minimapPoint",
+          "return": {
+            "type": {
+              "text": "{ x: number; y: number }"
+            }
+          },
+          "parameters": [
+            {
+              "name": "frame",
+              "type": {
+                "text": "MinimapBox"
+              }
+            },
+            {
+              "name": "world",
+              "type": {
+                "text": "MinimapBox"
+              }
+            },
+            {
+              "name": "clientX",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "clientY",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "description": "The world point under a pointer: `frame` is the drawing's box on screen,\n`world` what it shows, fitted whole and centred (the minimap never crops)."
+        },
+        {
+          "kind": "class",
+          "description": "The whole map at a glance: the world's rects and, over them, the viewport\nrect. `mode` says which world it draws: `board` (the units of the repo) or\n`sheet` (the columns and areas inside the open unit). A click or a drag\npans: the minimap only says where, the camera is the host's. It draws what\nit is given and nothing animates: the viewport rect is where the camera is.\n\nThe map design shows a minimap only when the map exceeds the viewport\n(MAP-13). That is the host's condition: the element is present or absent.",
+          "name": "SettMinimap",
+          "cssParts": [
+            {
+              "description": "the drawing",
+              "name": "world"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the name of what is drawn, after the mode: `zed`, `gpui`",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "MinimapMode"
+              },
+              "default": "'board'",
+              "attribute": "mode",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "rects",
+              "type": {
+                "text": "MinimapRect[]"
+              },
+              "default": "[]",
+              "description": "the rects of the world, in paint order",
+              "attribute": "rects"
+            },
+            {
+              "kind": "field",
+              "name": "view",
+              "type": {
+                "text": "MinimapBox | undefined"
+              },
+              "description": "what the camera shows, in world coordinates",
+              "attribute": "view"
+            },
+            {
+              "kind": "field",
+              "name": "world",
+              "type": {
+                "text": "MinimapBox | undefined"
+              },
+              "description": "the world's bounds; by default the union of the rects and the view",
+              "attribute": "world"
+            },
+            {
+              "kind": "field",
+              "name": "dragging",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "bounds",
+              "type": {
+                "text": "MinimapBox"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "pan",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "x",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "panTo",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "PointerEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "down",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "move",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "up",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "key",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-pan",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ x, y }`: the world point the viewport should centre on (click, drag, arrow keys)"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mode",
+              "type": {
+                "text": "MinimapMode"
+              },
+              "default": "'board'",
+              "fieldName": "mode"
+            },
+            {
+              "name": "rects",
+              "type": {
+                "text": "MinimapRect[]"
+              },
+              "default": "[]",
+              "description": "the rects of the world, in paint order",
+              "fieldName": "rects"
+            },
+            {
+              "name": "view",
+              "type": {
+                "text": "MinimapBox | undefined"
+              },
+              "description": "what the camera shows, in world coordinates",
+              "fieldName": "view"
+            },
+            {
+              "name": "world",
+              "type": {
+                "text": "MinimapBox | undefined"
+              },
+              "description": "the world's bounds; by default the union of the rects and the view",
+              "fieldName": "world"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-minimap",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "minimapPoint",
+          "declaration": {
+            "name": "minimapPoint",
+            "module": "src/map/sett-minimap.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettMinimap",
+          "declaration": {
+            "name": "SettMinimap",
+            "module": "src/map/sett-minimap.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-minimap",
+          "declaration": {
+            "name": "SettMinimap",
+            "module": "src/map/sett-minimap.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/sett-node.ts",
       "declarations": [
         {
@@ -6639,6 +7338,111 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/sett-panel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The map's own panel, docked on the right edge of the map's pane (map rule 8:\nchrome docks, nothing floats over the drawing). It is not the shell's\ninspector: the inspector is about the selection, the panel is about where\nyou are on the map, and it goes away with the map tab.\n\nIts first row is the status line, the place of the toast sett does not\nhave: set `status` and the row takes the well tint and says it; the panel\nclears it after `map.statusHold`, or at the next action (a click or a key\ninside the panel, or the host calling `clear()` for an action on the map).\nThe row keeps its height when empty, so nothing under it moves, and it\nnever animates.",
+          "name": "SettPanel",
+          "cssParts": [
+            {
+              "description": "the status line",
+              "name": "status"
+            },
+            {
+              "description": "the scrolling body",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the panel's sections, top down: a sett-position, then whatever the map needs",
+              "name": ""
+            },
+            {
+              "description": "held at the bottom, outside the scroll: the sett-minimap, when the map exceeds the viewport",
+              "name": "foot"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the transient message of the status line; empty is no message",
+              "attribute": "status"
+            },
+            {
+              "kind": "field",
+              "name": "timer",
+              "type": {
+                "text": "ReturnType<typeof setTimeout> | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onAction",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "description": "clear the status line now: the host calls it at the next action on the map"
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-status-clear",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "the status line was cleared, by the hold or by an action"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "status",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the transient message of the status line; empty is no message",
+              "fieldName": "status"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-panel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettPanel",
+          "declaration": {
+            "name": "SettPanel",
+            "module": "src/map/sett-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-panel",
+          "declaration": {
+            "name": "SettPanel",
+            "module": "src/map/sett-panel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/sett-port-row.ts",
       "declarations": [
         {
@@ -6910,6 +7714,215 @@
           "declaration": {
             "name": "SettPortRow",
             "module": "src/map/sett-port-row.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-position.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Where you are on the map, as the trail that led there: numbered rows, the\noldest first. The rows before the `current` one are where you came from: a\nclick goes back to that place. After going back, the rows past the current\none are `future`: still listed, lighter, a click goes forward again. The\nlist numbers its rows itself.",
+          "name": "SettPosition",
+          "slots": [
+            {
+              "description": "sett-position-row elements, in the order they were visited",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "number",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ n, key, future }` from a row: go to that place",
+              "name": "sett-go"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-position",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "One place of the trail: its number, its name in mono, and the level it is\nat in plain words (`board`, `unit`, `area`, `item`). A past or future row\nis a button; the `current` row is where you are and leads nowhere. Pointing\neases the row's background (`motion.hover`); the name never moves or fades.",
+          "name": "SettPositionRow",
+          "slots": [
+            {
+              "description": "the place's name",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "n",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "the row's number in the trail; set by sett-position",
+              "attribute": "n"
+            },
+            {
+              "kind": "field",
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the host knows this place by",
+              "attribute": "key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the level of the place: `board`, `unit`, `area`, `item`",
+              "attribute": "level"
+            },
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "where you are now",
+              "attribute": "current",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "future",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "ahead of where you are, after going back",
+              "attribute": "future",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "go",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ n, key, future }` on click, Enter or Space",
+              "name": "sett-go"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "n",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "the row's number in the trail; set by sett-position",
+              "fieldName": "n"
+            },
+            {
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the host knows this place by",
+              "fieldName": "key"
+            },
+            {
+              "name": "level",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the level of the place: `board`, `unit`, `area`, `item`",
+              "fieldName": "level"
+            },
+            {
+              "name": "current",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "where you are now",
+              "fieldName": "current"
+            },
+            {
+              "name": "future",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "ahead of where you are, after going back",
+              "fieldName": "future"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-position-row",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettPosition",
+          "declaration": {
+            "name": "SettPosition",
+            "module": "src/map/sett-position.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-position",
+          "declaration": {
+            "name": "SettPosition",
+            "module": "src/map/sett-position.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettPositionRow",
+          "declaration": {
+            "name": "SettPositionRow",
+            "module": "src/map/sett-position.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-position-row",
+          "declaration": {
+            "name": "SettPositionRow",
+            "module": "src/map/sett-position.ts"
           }
         }
       ]

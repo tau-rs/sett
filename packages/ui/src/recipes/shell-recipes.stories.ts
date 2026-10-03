@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, unsafeStatic } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { ref } from 'lit/directives/ref.js';
 import '../index.js';
 import editorCss from '../editor/editor.css?raw';
 import type { Scope } from '../scope.js';
@@ -14,6 +15,7 @@ import { openUnit, zero2prod, type Who } from '../map/map-fixtures.stories-helpe
 /** the scope of each recipe, declared once: the scope line, the selector and the status bar all read it */
 export const SCOPES = {
   planShaping: { kind: 'plan', name: 'refund flow' },
+  sessionGateFailed: { kind: 'session', id: 'w1', name: 'refund flow' },
 } satisfies Record<string, Scope>;
 
 /** a scope and the session colour it takes, when a session is the scope */
@@ -41,7 +43,7 @@ const css = html`<style>${unsafeStatic(editorCss)}
 .sh .ln .t { flex: 1; min-width: 0; }
 .sh .insp { display: flex; border-left: var(--sett-stroke-hair) solid var(--sett-color-line2); }
 .sh .insp > sett-inspector { flex: 1; min-width: 0; }
-.sh .in { margin: var(--sett-space-2) var(--sett-space-3); }
+.sh .in { flex: none; margin: var(--sett-space-2) var(--sett-space-3); }
 .sh p.in { color: var(--sett-color-ink2); font-size: var(--sett-font-size-lg); }
 </style>`;
 
@@ -65,7 +67,15 @@ const rail = (o: Of, on: 'sessions' | 'files' | 'findings', asks = 0) => html`<s
 </sett-activity-rail>`;
 const toggles = (...on: string[]) => html`<sett-overlay-toggles slot="right">${['sessions', 'plan', 'findings', 'delta'].map((v) => html`<sett-toggle value=${v} ?on=${on.includes(v)}>${v}</sett-toggle>`)}</sett-overlay-toggles>`;
 // the Map: a real open unit from the fixtures, in a box that scrolls; `who` is the overlay
-const map = (who: Who = {}) => html`<div class="map" tabindex="0" role="group" aria-label="map">${openUnit(zero2prod, 'api', who, { foldedAreas: ['admin', 'idem', 'email', 'startup'] })}</div>`;
+// the camera: the open unit is wider than the centre, so the box is panned once to the unit's first column (no motion)
+const pan = (box?: Element) => {
+  if (!box) return;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const col = box.querySelector('sett-column');
+    if (col) box.scrollLeft += col.getBoundingClientRect().left - box.getBoundingClientRect().left;
+  }));
+};
+const map = (who: Who = {}) => html`<div class="map" tabindex="0" role="group" aria-label="map" ${ref(pan)}>${openUnit(zero2prod, 'api', who, { foldedAreas: ['admin', 'idem', 'email', 'startup'] })}</div>`;
 // the bottom panel closed: a strip of its tabs with their counts
 const panelTabs = (o: { findings?: string; checks?: string; checksTone?: string; news?: string } = {}) => html`
   <sett-panel-tab slot="tabs" value="findings" count=${ifDefined(o.findings)} tone="bad">Findings</sett-panel-tab>
@@ -129,4 +139,66 @@ export const PlanShaping: Story = { name: 'plan · shaping', render: () => shell
     <sett-status-item label="Sessions"><b>2</b> running</sett-status-item>
     <sett-status-item label="Findings"><b>0</b> on the planned shape</sett-status-item>
     <sett-status-item label="Checks"><span data-tone="ok">all passed</span></sett-status-item>${mapItem}</sett-status-bar>`,
+}) };
+
+// ── session · gate failed (session flow, step 4b) ──
+const w1: Of = { scope: SCOPES.sessionGateFailed, session: 'yk' };
+const GATE = 'group 1 → group 2';
+const JUDGE = `judge · round 2 of 2 · gate ${GATE}
+  ✗ PgOrderRepo::refund() swallows the pool error at store/pg.rs:58
+    the port contract says it propagates (domain/ports.rs:21)
+  round 1: same reason at store/pg.rs:44, fixed
+  budget 2/2 spent: the session stops and asks`;
+export const SessionGateFailed: Story = { name: 'session · gate failed', render: () => shell({
+  of: w1, frame: 'waiting',
+  bar: bar(selector(w1, 'asks', 1), html`
+    <sett-chip kind="gate" state="blocking" session="yk">${GATE}<span slot="count">· failed 2/2</span><a slot="verb">open</a></sett-chip>
+    <sett-chip kind="agent" state="waiting" session="yk">refund flow asks<span slot="count">· 1</span><a slot="verb">answer</a></sett-chip>`),
+  rail: rail(w1, 'sessions', 1),
+  left: html`${scopeLine(w1, '4 changed')}<sett-sessions-view isolated count="5">
+    <sett-session-row scope="session" session="yk" name="refund flow" state="gate failed · asks" tone="sug" open selected scoped>
+      <sett-group-row name="group 1" state="done" depth="1" open>
+        <sett-agent-row session="yk" name="a1 · OrderRepo: add refund()" state="done" depth="2"></sett-agent-row>
+        <sett-agent-row session="yk" name="a2 · PgOrderRepo: implement refund()" state="done" depth="2" open>
+          <sett-file-row letter="M" name="store/pg.rs" counts="+18 −2" depth="3"></sett-file-row>
+          <sett-file-row letter="A" name="tests/lifecycle.rs" counts="+31" depth="3"></sett-file-row>
+        </sett-agent-row>
+      </sett-group-row>
+      <sett-group-row kind="gate" name=${`gate · ${GATE}`} state="failed 2/2" depth="1" selected></sett-group-row>
+      <sett-group-row name="group 2" state="waiting" depth="1"></sett-group-row>
+      <sett-changes-row depth="1" meta="2 ahead · no MR yet"></sett-changes-row>
+    </sett-session-row>
+  </sett-sessions-view>`,
+  centre: html`<sett-tabbar><sett-tab pinned active>map</sett-tab>${toggles('sessions', 'plan')}</sett-tabbar>
+    ${map({ subscribe: { session: 'yk' }, newsub: { session: 'yk' }, subemail: { session: 'yk' } })}`,
+  inspector: html`<sett-inspector heading="refund flow" sub="claude code · w1 · 31 min" state="asks" tone="sug" kind="session" session="yk">
+    <sett-session-card class="in" name="refund flow" driver="claude code" session="yk" step="2" of="4" still>
+      <sett-plan-row kind="group" gate="failed 2/2">group 1
+        <sett-plan-row slot="element" state="done">OrderRepo: refund()</sett-plan-row>
+        <sett-plan-row slot="element" state="asks" count="1" current>PgOrderRepo: refund()</sett-plan-row>
+      </sett-plan-row>
+      <sett-plan-row kind="group" gate="waiting">group 2</sett-plan-row>
+      <span slot="foot">2 changed · +49 −2 · 2 ahead</span><a slot="thread">thread ›</a>
+    </sett-session-card>
+    <sett-question class="in" author="refund flow">gate · ${GATE} failed twice: judge says refund() does not honour the port contract
+      <input slot="input" placeholder="a hint for one more round · what the judge keeps missing…" aria-label="hint">
+      <sett-option slot="option" value="round" effect="round 3 of 2">one more round with a hint</sett-option>
+      <sett-option slot="option" value="take-over" effect="pause a2 · you hold E2">take over</sett-option>
+      <sett-option slot="option" value="accept" effect="recorded override">accept as is</sett-option>
+      <sett-option slot="option" value="re-plan" effect="opens the planner" quiet>re-plan</sett-option>
+    </sett-question>
+    <sett-button slot="verbs">pause</sett-button><sett-button slot="verbs" variant="quiet">stop</sett-button>
+    <sett-composer slot="composer" placeholder="reply to refund flow…"></sett-composer>
+  </sett-inspector>`,
+  panel: html`<sett-bottom-panel active="checks" style="height:calc(var(--sett-space-5) * 8)">${panelTabs({ checks: '1', checksTone: 'bad', news: '2' })}
+    <sett-panel-table slot="checks" kind="checks">
+      <sett-panel-row level="bad" selected><span>judge · refund() honours the port contract</span><span>refund flow · w1 · round 2 of 2</span><span data-mono data-tone="bad">failed 2/2</span><span data-mono>12:58</span></sett-panel-row>
+      <sett-panel-row level="ok"><span>cargo nextest run · gate ${GATE}</span><span>refund flow · w1 · round 2 of 2</span><span data-mono data-tone="ok">41 passed</span><span data-mono>12:57</span></sett-panel-row>
+    </sett-panel-table>
+    <sett-panel-output slot="checks">${JUDGE}</sett-panel-output>
+  </sett-bottom-panel>`,
+  status: html`<sett-status-bar>${scopeItem(w1, html`<span data-tone="sug">asks you</span>`)}
+    <sett-status-item label="Sessions"><b>2</b> running · <span data-tone="sug">1 asks</span></sett-status-item>
+    <sett-status-item label="Findings"><b>0</b> new</sett-status-item>
+    <sett-status-item label="Checks"><span data-tone="bad">1 failed</span></sett-status-item>${mapItem}</sett-status-bar>`,
 }) };

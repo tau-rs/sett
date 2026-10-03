@@ -8,6 +8,7 @@ import * as shell from '../src/recipes/shell-recipes.stories.js';
 // selector, the status bar's scope item), and rule 5: the frame says the state of the scope.
 const RECIPES: { story: keyof typeof shell; scope: Scope; frames: string[] }[] = [
   { story: 'PlanShaping', scope: shell.SCOPES.planShaping, frames: ['planning'] },
+  { story: 'SessionGateFailed', scope: shell.SCOPES.sessionGateFailed, frames: ['waiting'] },
 ];
 
 const text = (el: Element, sel: string) => el.shadowRoot!.querySelector(sel)!.textContent!.replace(/\s+/g, ' ').trim();

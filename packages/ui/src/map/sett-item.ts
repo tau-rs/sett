@@ -5,6 +5,8 @@ import { sessionOrder, sessionStyles, type SessionId } from '../session.js';
 import { arrive, beatStyles, durationMs, flash, leave, presenceStyles } from './motion.js';
 import '../tag/sett-tag.js';
 
+/** where an item stands against main, for the delta overlay */
+export type ItemDelta = 'added' | 'changed' | 'removed' | 'unchanged';
 export type ItemKind = 'fn' | 'struct' | 'enum' | 'trait' | 'impl' | 'mod' | 'macro' | 'external';
 export const ITEM_KINDS: ItemKind[] = ['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external'];
 
@@ -47,6 +49,12 @@ export class SettItem extends LitElement {
   @property({ type: Boolean, reflect: true }) port = false;
   /** a rule is broken here: dashed red */
   @property({ type: Boolean, reflect: true }) finding = false;
+  /** the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 13) */
+  @property({ type: Boolean, reflect: true }) planned = false;
+  /** the plan group the item belongs to, shown as a plain tag at the end (`g1`) */
+  @property() group?: string;
+  /** the delta overlay, against main: `unchanged` recedes, `removed` is a dashed ghost with its name struck, `added` and `changed` are drawn as they are */
+  @property({ reflect: true }) delta?: ItemDelta;
   @property({ type: Boolean, reflect: true }) selected = false;
   /** at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response) */
   @property({ type: Boolean, reflect: true }) lit = false;
@@ -90,6 +98,12 @@ export class SettItem extends LitElement {
       :host([kind='external']) { background: var(--sett-map-status-external-bg); border-color: var(--sett-map-status-external-border); }
       :host([entry]) { background: var(--sett-map-status-entry-bg); border-color: var(--sett-map-status-entry-border); }
       :host([port]) { --_radius: var(--sett-map-radius-pill); background: var(--sett-map-status-port-bg); border-color: var(--sett-map-status-port-border); }
+      /* the delta overlay recedes by colour, never by opacity: the name stays above 4.5:1 */
+      :host([delta='unchanged']) { color: var(--sett-color-mute); border-color: var(--sett-color-line2); }
+      :host([delta='removed']) { color: var(--sett-color-mute); background: transparent; border-color: var(--sett-color-line); border-style: dashed; }
+      :host([delta='removed']) .t { text-decoration: line-through; }
+      /* the plan overlay is a fill; a finding outranks it, the selection keeps its line */
+      :host([planned]) { background: var(--sett-color-sug-bg); border-color: var(--sett-color-sug); border-style: dashed; }
       :host([finding]) { background: var(--sett-map-status-finding-bg); border-color: var(--sett-map-status-finding-border); border-style: dashed; }
       :host([far]:not([finding]):not([selected])) { color: var(--sett-color-mute); border-color: var(--sett-color-line2); }
       :host([far]:not([finding]):not([selected]):hover) { border-color: var(--sett-color-ink2); }
@@ -192,7 +206,8 @@ export class SettItem extends LitElement {
       ${this.session && this.live ? html`<i class="sheen ${this.kick ? 'kick' : ''}"></i>` : nothing}
       <span class="t"><slot></slot></span>
       ${this.family ? html`<sett-tag kind="sug">${this.family}</sett-tag>` : nothing}
-      ${this.unresolved ? html`<sett-tag kind="sug" title="unresolved links">${this.unresolved} unresolved</sett-tag>` : nothing}`;
+      ${this.unresolved ? html`<sett-tag kind="sug" title="unresolved links">${this.unresolved} unresolved</sett-tag>` : nothing}
+      ${this.group ? html`<sett-tag class="group" title="plan group">${this.group}</sett-tag>` : nothing}`;
   }
 }
 

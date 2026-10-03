@@ -465,6 +465,9 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -720,6 +723,9 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -981,6 +987,9 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -1585,6 +1594,9 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -1970,6 +1982,9 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -2128,6 +2143,9 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -3035,6 +3053,9 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `entry=boolean` — called from outside the unit: blue fill
   - `port=boolean` — a trait the domain depends on: amber pill shape
   - `finding=boolean` — a rule is broken here: dashed red
+  - `planned=boolean` — the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 13)
+  - `group=string` — the plan group the item belongs to, shown as a plain tag at the end (`g1`)
+  - `delta=ItemDelta` — the delta overlay, against main: `unchanged` recedes, `removed` is a dashed ghost with its name struck, `added` and `changed` are drawn as they are
   - `selected=boolean`
   - `lit=boolean` — at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response)
   - `far=boolean` — unrelated to the focused area: recedes to mute ink and a faint border (the name stays above 4.5:1); a finding ignores it
@@ -3103,6 +3124,9 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -3304,6 +3328,9 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -3612,6 +3639,9 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -3898,6 +3928,9 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -4065,6 +4098,9 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -4271,6 +4307,9 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -4983,6 +5022,9 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -5138,6 +5180,9 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -5299,6 +5344,9 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -5485,6 +5533,9 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
@@ -6354,6 +6405,9 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port

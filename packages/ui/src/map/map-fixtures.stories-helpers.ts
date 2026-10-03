@@ -63,11 +63,11 @@ export const rail = (f: Fixture, id: string, side: 'exposes' | 'needs', extra: {
 };
 
 /** who is on which item in a story: a session touching it, working on it now, a second session, or your selection */
-export interface On { session?: string; live?: boolean; also?: string; selected?: boolean }
+export interface On { session?: string; live?: boolean; also?: string; selected?: boolean; planned?: boolean; group?: string; delta?: 'added' | 'changed' | 'removed' | 'unchanged' }
 export type Who = Record<string, On>;
 
 export const itemEl = (it: FixtureItem, on: On = {}) => html`
-  <sett-item key=${it.id} kind=${itemKindOf(it)} ?entry=${!!it.entry} ?port=${!!it.port} ?finding=${!!it.finding} family=${ifDefined(it.fam)} session=${ifDefined(on.session)} also=${ifDefined(on.also)} ?live=${on.live} ?selected=${on.selected}>${it.name}</sett-item>`;
+  <sett-item key=${it.id} kind=${itemKindOf(it)} ?entry=${!!it.entry} ?port=${!!it.port} ?finding=${!!it.finding} family=${ifDefined(it.fam)} session=${ifDefined(on.session)} also=${ifDefined(on.also)} ?live=${on.live} ?selected=${on.selected} ?planned=${on.planned} group=${ifDefined(on.group)} delta=${ifDefined(on.delta)}>${it.name}</sett-item>`;
 
 export const areaEl = (a: FixtureArea, who: Who = {}, folded = !!a.folded) => html`
   <sett-area key=${a.id} name=${a.name} ?folded=${folded}>${a.items.map((it) => itemEl(it, who[it.id]))}</sett-area>`;

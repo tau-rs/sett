@@ -59,6 +59,30 @@ export const Sessions: Story = {
     stack(html`<sett-item entry session="yk" live>subscribe()</sett-item><sett-item entry finding session="tl" live>confirm()</sett-item><sett-item kind="trait" port session="mg" live>EmailSender · trait</sett-item>`, 'the item keeps its own colour'),
   ),
 };
+export const PlanOverlay: Story = {
+  name: 'overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent',
+  render: () => row(
+    stack(html`<sett-item kind="struct">Order</sett-item><sett-item kind="trait" port>OrderRepo · trait</sett-item><sett-item finding>pay()</sett-item><sett-item selected>close()</sett-item>`, 'what it must differ from'),
+    stack(html`<sett-item planned group="g1">refund()</sett-item><sett-item kind="struct" planned group="g1">RefundReceipt</sett-item><sett-item planned group="g2">handle_webhook()</sett-item><sett-item kind="trait" port planned group="g1">Refunds · trait</sett-item>`, 'planned · on a port too'),
+    stack(html`<sett-item planned group="g1" session="yk">refund()</sett-item><sett-item planned group="g1" selected>RefundReceipt</sett-item><sett-item planned finding group="g2">handle_webhook()</sett-item><sett-item planned family="3 impls" unresolved="2" group="g1">Refunds::issue()</sett-item>`, 'with a ring · selected · a finding wins · beside the amber pills'),
+  ),
+};
+export const DeltaOverlay: Story = {
+  name: 'overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost',
+  render: () => row(
+    stack(html`<sett-item delta="unchanged">health_check()</sett-item><sett-item entry delta="unchanged">subscribe()</sett-item><sett-item kind="trait" port delta="unchanged">EmailSender · trait</sett-item><sett-item kind="external" delta="unchanged">sqlx::PgPool</sett-item>`, 'unchanged · mute ink, faint line, own fill kept'),
+    stack(html`<sett-item kind="trait" port delta="added">RateLimit · trait</sett-item><sett-item kind="struct" delta="added">TokenBucket</sett-item><sett-item entry delta="changed">pay()</sett-item>`, 'added · changed · as they are'),
+    stack(html`<sett-item delta="removed">save_notified()</sett-item><sett-item kind="struct" delta="removed">Notifier</sett-item>`, 'removed · dashed, struck'),
+    stack(html`<sett-item delta="added" session="mg">check()</sett-item><sett-item delta="unchanged" selected>close()</sett-item><sett-item delta="changed" finding>pay()</sett-item>`, 'with a ring · selected · a finding'),
+  ),
+};
+export const AllFour: Story = {
+  name: 'overlays · an item may carry all four: session outline, plan fill, finding, delta',
+  render: () => row(
+    stack(html`<sett-item planned group="g1" delta="added" session="yk">refund()</sett-item>`, 'planned · added · an agent on it'),
+    stack(html`<sett-item planned finding group="g1" delta="changed" session="yk" selected>pay()</sett-item>`, 'all four, and your selection'),
+  ),
+};
 export const Collisions: Story = {
   name: 'collisions · selected and live · two agents on one item',
   render: () => row(

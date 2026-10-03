@@ -2,7 +2,7 @@ import { LitElement, css, html, nothing, svg, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { base } from '@tau-rs/sett-tokens';
 import { LINK_FAMILIES, LINK_FAMILY_MEANS, LINK_KINDS, LINK_KIND_NAMES, isLinkKind, kindsOf, type LinkFamily, type LinkKind } from './link-kinds.js';
-import { linkHead, linkTail } from './sett-link.js';
+import { linkCut, linkHead, linkTail } from './sett-link.js';
 import { PORT_KINDS } from './sett-port-row.js';
 
 const ARROW = parseFloat(base.map.size.arrow);
@@ -49,6 +49,13 @@ type Check = 'true' | 'false' | 'mixed';
  * draws them. The port kinds are a key only, as is the finding, which never
  * recedes.
  *
+ * `overlays` names the overlay toggles that are on (the values of the
+ * `sett-toggle`s, separated by spaces), copied by the host. While the plan
+ * or the delta is on, the legend keys it (rule 13): a planned item and a
+ * planned link; what is added, removed and unchanged. Those rows are a key,
+ * not a filter. The sessions and the findings need no row here: a session
+ * ring names itself, and the finding is keyed with the links.
+ *
  * It holds no map state. `filter` is the value of `sett-sheet filter` (the
  * families and kinds to keep; empty keeps everything); a toggle fires
  * `sett-filter` with the next value and the host copies it onto the sheet
@@ -67,6 +74,8 @@ export class SettLegend extends LitElement {
   @property({ type: Boolean, reflect: true }) open = false;
   /** the families whose kinds are listed, separated by spaces */
   @property() expanded = '';
+  /** the overlays that are on, as the `sett-toggle` values (`sessions plan findings delta`); the plan and the delta get a key */
+  @property() overlays = '';
 
   static styles = css`
     :host {
@@ -118,6 +127,18 @@ export class SettLegend extends LitElement {
     ${unsafeCSS(LINK_FAMILIES.map((f) => `svg.${f} { --_dash: var(--sett-map-link-${f}-stroke); }`).join('\n'))}
     .line { fill: none; stroke: currentColor; stroke-width: var(--sett-stroke-hair); stroke-dasharray: var(--_dash); }
     svg.finding .line { stroke-width: var(--sett-stroke-lit); }
+    svg.planned { color: var(--sett-color-sug); }
+    svg.planned .line { stroke-width: var(--sett-stroke-lit); }
+    svg.planned .hollow, svg.planned .open { stroke-width: var(--sett-stroke-lit); }
+    svg.removed { color: var(--sett-color-line); }
+    svg.unchanged { opacity: var(--sett-map-far); }
+    .band { fill: none; stroke: var(--sett-color-sug-bg); stroke-width: var(--sett-map-size-band); stroke-linejoin: round; }
+    .cut { fill: none; stroke: var(--sett-color-mute); stroke-width: var(--sett-stroke-lit); stroke-linecap: round; }
+    /* an item's box at the overlay keys, with sett-item's own fills and lines */
+    .it { flex: none; box-sizing: border-box; width: var(--sett-space-6); height: var(--sett-space-3); border: var(--sett-stroke-hair) solid var(--sett-color-line); border-radius: var(--sett-radius-item); background: var(--sett-color-paper); }
+    .it.planned { background: var(--sett-color-sug-bg); border-color: var(--sett-color-sug); border-style: dashed; }
+    .it.removed { background: transparent; border-color: var(--sett-color-line); border-style: dashed; }
+    .it.unchanged { border-color: var(--sett-color-line2); }
     .filled { fill: currentColor; stroke: none; }
     .hollow { fill: var(--sett-color-paper); stroke: currentColor; stroke-width: var(--sett-stroke-hair); }
     .open { fill: none; stroke: currentColor; stroke-width: var(--sett-stroke-hair); stroke-linecap: round; stroke-linejoin: round; }
@@ -161,7 +182,8 @@ export class SettLegend extends LitElement {
     const spec = kind ? LINK_KINDS[kind] : undefined;
     const y = H / 2, s = { x: 0, y }, e = { x: W, y }, d = { x: 1, y: 0 };
     const end = spec?.head === 'socket' ? W - ARROW / 2 : W;
-    return html`<svg class=${cls} width=${W} height=${H} viewBox="0 0 ${W} ${H}" aria-hidden="true">${svg`<path class="line" d=${`M0 ${y} L${end} ${y}`} />${spec ? linkHead(spec.head, e, d) : nothing}${spec?.tail ? linkTail(spec.tail, s, d) : nothing}`}</svg>`;
+    const line = `M0 ${y} L${end} ${y}`, overlay = cls.split(' ');
+    return html`<svg class=${cls} width=${W} height=${H} viewBox="0 0 ${W} ${H}" aria-hidden="true">${svg`${overlay.includes('planned') ? svg`<path class="band" d=${line} />` : nothing}<path class="line" d=${line} />${spec ? linkHead(spec.head, e, d) : nothing}${spec?.tail ? linkTail(spec.tail, s, d) : nothing}${overlay.includes('removed') ? linkCut([s, { x: end, y }]) : nothing}`}</svg>`;
   }
   private check(state: Check, label: string, toggle: () => void, body: unknown) {
     return html`<span class="check" role="checkbox" tabindex="0" aria-checked=${state} aria-label=${label} @click=${toggle} @keydown=${this.onKey}><span class="box" aria-hidden="true"></span>${body}</span>`;
@@ -183,8 +205,14 @@ export class SettLegend extends LitElement {
     return html`<div class="row kind" title=${spec.means}>${this.check(kept.has(k) ? 'true' : 'false', spec.label, () => this.toggleKind(k), html`${this.swatch(spec.family ?? k, k)}<span class="nm">${spec.label}</span>`)}</div>`;
   }
 
+  /** one row of an overlay's key: no toggle, a box for the item and a swatch for the link */
+  private key(name: string, means: string, item?: string, link?: string) {
+    return html`<div class="row key"><span class="box none" aria-hidden="true"></span>${item !== undefined ? html`<span class=${`it ${item}`} aria-hidden="true"></span>` : nothing}${link !== undefined ? this.swatch(`does ${link}`, 'calls') : nothing}<span class="nm">${name}</span><span class="mu">${means}</span></div>`;
+  }
+
   render() {
     const kept = this.kept, total = LINK_KIND_NAMES.length;
+    const on = new Set(this.overlays.split(/\s+/).filter(Boolean));
     const fallback = LINK_KIND_NAMES.filter((k) => !LINK_KINDS[k].family);
     return html`
       <button class="head" part="head" type="button" aria-expanded=${this.open ? 'true' : 'false'} @click=${() => { this.open = !this.open; }}>
@@ -197,6 +225,17 @@ export class SettLegend extends LitElement {
           ${fallback.map((k) => html`<div class="row" title=${LINK_KINDS[k].means}>${this.check(kept.has(k) ? 'true' : 'false', LINK_KINDS[k].label, () => this.toggleKind(k), html`${this.swatch(k)}<span class="nm">${LINK_KINDS[k].label}</span><span class="mu">the least known</span>`)}</div>`)}
           <div class="row key"><span class="box none" aria-hidden="true"></span>${this.swatch('finding', 'calls')}<span class="nm">finding</span><span class="mu">on any kind, never recedes</span></div>
         </div>
+        ${on.has('plan') ? html`<h6>plan</h6>
+        <div role="group" aria-label="plan">
+          ${this.key('planned item', 'not written yet; g1, its group', 'planned')}
+          ${this.key('planned link', 'keeps its pattern', undefined, 'planned')}
+        </div>` : nothing}
+        ${on.has('delta') ? html`<h6>delta</h6>
+        <div role="group" aria-label="delta">
+          ${this.key('added or changed', 'drawn as it is', '', '')}
+          ${this.key('removed', 'a ghost, struck', 'removed', 'removed')}
+          ${this.key('unchanged', 'recedes', 'unchanged', 'unchanged')}
+        </div>` : nothing}
         <h6>ports</h6>
         <div class="ports" role="group" aria-label="ports">${PORT_KINDS.map((k) => html`<span class="pk ${k}"><span class="dot"></span>${k}</span>`)}</div>` : nothing}`;
   }

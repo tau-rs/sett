@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import type { Fixture } from './fixtures.js';
-import { openUnit, ripgrep, zed, zero2prod } from './map-fixtures.stories-helpers.js';
+import { openUnit, ripgrep, zed, zero2prod, type Lines, type Who } from './map-fixtures.stories-helpers.js';
 import './sett-legend.js';
 import './sett-panel.js';
 import './sett-position.js';
@@ -23,14 +23,14 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-interface Opts { filter?: string; open?: boolean; expanded?: string }
+interface Opts { filter?: string; open?: boolean; expanded?: string; overlays?: string }
 const host = (e: Event) => {
   const filter = (e as CustomEvent<{ filter: string }>).detail.filter;
   (e.target as SettLegend).filter = filter;
   const sheet = (e.currentTarget as HTMLElement).closest('[data-scene]')?.querySelector('sett-sheet') as SettSheet | null;
   if (sheet) sheet.filter = filter;
 };
-const legend = (o: Opts = {}) => html`<sett-legend filter=${o.filter ?? ''} ?open=${o.open ?? true} expanded=${o.expanded ?? ''} @sett-filter=${host}></sett-legend>`;
+const legend = (o: Opts = {}) => html`<sett-legend filter=${o.filter ?? ''} ?open=${o.open ?? true} expanded=${o.expanded ?? ''} overlays=${o.overlays ?? ''} @sett-filter=${host}></sett-legend>`;
 const holder = (p: unknown, label = '') => html`<div style="width:var(--sett-map-size-panel)">${label ? html`<div style="font-size:var(--sett-font-size-xs);color:var(--sett-color-mute);margin-bottom:var(--sett-space-1)">${label}</div>` : ''}<div class="sett-paper" style="padding:0">${p}</div></div>`;
 const row = (...cols: unknown[]) => html`<div class="sett-row" style="align-items:flex-start;gap:var(--sett-space-4)">${cols}</div>`;
 
@@ -57,9 +57,14 @@ export const OnlyOneKind: Story = {
   render: () => holder(legend({ expanded: 'promises', filter: 'implements' })),
 };
 
-const scene = (f: Fixture, id: string, o: Opts) => html`
+export const Overlays: Story = {
+  name: 'overlays · the plan and the delta are keyed while their toggle is on',
+  render: () => row(holder(legend({ overlays: 'plan' }), 'plan on'), holder(legend({ overlays: 'delta' }), 'delta on'), holder(legend({ overlays: 'sessions findings' }), 'sessions and findings: no key needed')),
+};
+
+const scene = (f: Fixture, id: string, o: Opts, who: Who = {}, lines?: Lines) => html`
   <div data-scene style="display:flex;height:calc(var(--sett-map-size-minimap-h) * 5);border:var(--sett-stroke-hair) solid var(--sett-color-line2)">
-    <div style="flex:1;min-width:0;overflow:auto;padding:var(--sett-space-4)">${openUnit(f, id, {}, { filter: o.filter, level: 'items' })}</div>
+    <div style="flex:1;min-width:0;overflow:auto;padding:var(--sett-space-4)">${openUnit(f, id, who, { filter: o.filter, level: 'items', lines })}</div>
     <sett-panel>
       <sett-position><sett-position-row key=${f.name} level="board">${f.name}</sett-position-row><sett-position-row key=${id} level="unit" current>${id}</sett-position-row></sett-position>
       ${legend(o)}
@@ -80,4 +85,12 @@ export const InThePanelZed: Story = {
   name: 'zed · in the panel: folded, everything shown',
   parameters: full,
   render: () => scene(zed, 'gpui', { open: false }),
+};
+// the plan overlay on zero2prod: three planned elements and the two links the plan adds between them
+const PLAN: Who = { subscribe: { planned: true, group: 'g1' }, newsub: { planned: true, group: 'g1' }, subname: { planned: true, group: 'g2' } };
+const planLines: Lines = (l) => (['subscribe>newsub', 'newsub>subname'].includes(`${l.from}>${l.to}`) ? { planned: true } : undefined);
+export const InThePanelPlan: Story = {
+  name: 'zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints',
+  parameters: full,
+  render: () => scene(zero2prod, 'api', { overlays: 'plan', expanded: '' }, PLAN, planLines),
 };

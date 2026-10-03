@@ -2343,6 +2343,14 @@
         },
         {
           "kind": "js",
+          "name": "linkCut",
+          "declaration": {
+            "name": "linkCut",
+            "module": "./map/sett-link.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "LinkDelta",
           "declaration": {
             "name": "LinkDelta",
@@ -6924,7 +6932,7 @@
         },
         {
           "kind": "class",
-          "description": "The key to the map, on demand (map rule 8): a section of `sett-panel`,\nfolded to one row until `open`. It is also the control that filters the\nlinks: one toggle per family (does · promises · knows · around), one per\nkind inside it, and one for the fallback. Its rows come from the kind\ntables (`LINK_KINDS`, `LINK_FAMILIES`, `PORT_KINDS`), never a second list:\na swatch is the family's line pattern and the kind's head, as `sett-link`\ndraws them. The port kinds are a key only, as is the finding, which never\nrecedes.\n\nIt holds no map state. `filter` is the value of `sett-sheet filter` (the\nfamilies and kinds to keep; empty keeps everything); a toggle fires\n`sett-filter` with the next value and the host copies it onto the sheet\nand back here. Folded, the row says how many kinds are shown while a\nfilter is on. Opening the section and listing a family's kinds are the\nlegend's own. Pointing eases a row's background (`motion.hover`).",
+          "description": "The key to the map, on demand (map rule 8): a section of `sett-panel`,\nfolded to one row until `open`. It is also the control that filters the\nlinks: one toggle per family (does · promises · knows · around), one per\nkind inside it, and one for the fallback. Its rows come from the kind\ntables (`LINK_KINDS`, `LINK_FAMILIES`, `PORT_KINDS`), never a second list:\na swatch is the family's line pattern and the kind's head, as `sett-link`\ndraws them. The port kinds are a key only, as is the finding, which never\nrecedes.\n\n`overlays` names the overlay toggles that are on (the values of the\n`sett-toggle`s, separated by spaces), copied by the host. While the plan\nor the delta is on, the legend keys it (rule 13): a planned item and a\nplanned link; what is added, removed and unchanged. Those rows are a key,\nnot a filter. The sessions and the findings need no row here: a session\nring names itself, and the finding is keyed with the links.\n\nIt holds no map state. `filter` is the value of `sett-sheet filter` (the\nfamilies and kinds to keep; empty keeps everything); a toggle fires\n`sett-filter` with the next value and the host copies it onto the sheet\nand back here. Folded, the row says how many kinds are shown while a\nfilter is on. Opening the section and listing a family's kinds are the\nlegend's own. Pointing eases a row's background (`motion.hover`).",
           "name": "SettLegend",
           "cssParts": [
             {
@@ -6963,6 +6971,16 @@
               "default": "''",
               "description": "the families whose kinds are listed, separated by spaces",
               "attribute": "expanded"
+            },
+            {
+              "kind": "field",
+              "name": "overlays",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the overlays that are on, as the `sett-toggle` values (`sessions plan findings delta`); the plan and the delta get a key",
+              "attribute": "overlays"
             },
             {
               "kind": "field",
@@ -7122,6 +7140,40 @@
                   }
                 }
               ]
+            },
+            {
+              "kind": "method",
+              "name": "key",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "means",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "item",
+                  "optional": true,
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "link",
+                  "optional": true,
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "one row of an overlay's key: no toggle, a box for the item and a swatch for the link"
             }
           ],
           "events": [
@@ -7160,6 +7212,15 @@
               "default": "''",
               "description": "the families whose kinds are listed, separated by spaces",
               "fieldName": "expanded"
+            },
+            {
+              "name": "overlays",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the overlays that are on, as the `sett-toggle` values (`sessions plan findings delta`); the plan and the delta get a key",
+              "fieldName": "overlays"
             }
           ],
           "superclass": {
@@ -7221,6 +7282,19 @@
       "kind": "javascript-module",
       "path": "src/map/sett-link.ts",
       "declarations": [
+        {
+          "kind": "function",
+          "name": "linkCut",
+          "parameters": [
+            {
+              "name": "pts",
+              "type": {
+                "text": "Pt[]"
+              }
+            }
+          ],
+          "description": "the removed link's cut: two short strokes across the middle, the line's struck-through; the legend draws its key with it"
+        },
         {
           "kind": "function",
           "name": "linkHead",
@@ -7659,6 +7733,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "linkCut",
+          "declaration": {
+            "name": "linkCut",
+            "module": "src/map/sett-link.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "linkHead",

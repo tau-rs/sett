@@ -29,8 +29,8 @@ function middle(pts: Pt[]): { p: Pt; d: Pt } {
   }
   return { p: pts[0], d: { x: 1, y: 0 } };
 }
-/** the removed link's cut: two short strokes across the middle, the line's struck-through */
-function cut(pts: Pt[]) {
+/** the removed link's cut: two short strokes across the middle, the line's struck-through; the legend draws its key with it */
+export function linkCut(pts: Pt[]) {
   const { p, d } = middle(pts), n = normal(d), h = ARROW / 2, g = BRANCH / 2;
   return [-g, g].map((k) => { const c = add(p, d, k); return svg`<path class="cut" d=${`M${fmt(add(add(c, n, h), d, -g))} L${fmt(add(add(c, n, -h), d, g))}`} />`; });
 }
@@ -249,7 +249,7 @@ export class SettLink extends LitElement {
         ${this.planned && !this.finding ? svg`<path class="band" d=${line} />` : nothing}
         ${quiet ? nothing : svg`<path class="line" d=${line} />${linkHead(spec.head, e, d1)}${spec.tail ? linkTail(spec.tail, s, d0) : nothing}${r.branches.map((b) => svg`<circle class="b" cx=${b.x} cy=${b.y} r=${BRANCH / 2} />`)}`}
         ${this.flowing && !quiet ? svg`<path class="flow" d=${line} />` : nothing}
-        ${this.delta === 'removed' ? cut(pts) : nothing}
+        ${this.delta === 'removed' ? linkCut(pts) : nothing}
       </g>
       ${this.plug && !r.docked?.from ? svg`<circle class="plug" cx=${s.x + d0.x * (BRANCH / 2 + HAIR)} cy=${s.y + d0.y * (BRANCH / 2 + HAIR)} r=${BRANCH / 2} />` : nothing}
       ${this.plug && !r.docked?.to ? svg`<circle class="plug" cx=${e.x - d1.x * (BRANCH / 2 + HAIR)} cy=${e.y - d1.y * (BRANCH / 2 + HAIR)} r=${BRANCH / 2} />` : nothing}

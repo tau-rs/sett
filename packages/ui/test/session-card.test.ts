@@ -109,4 +109,15 @@ describe('session card', () => {
     expect(h.textContent).toContain('Yokohama'); expect(h.textContent).toContain('3/6');
     expect(h.querySelector('.dot').hasAttribute('data-pulse')).toBe(true);
   });
+  it('headless: in the inspector the heading carries name, driver and state, so the card drops its header and keeps n/m in its foot', async () => {
+    const el = await mount('<sett-session-card headless name="refund flow" driver="claude code" session="yk" step="2" of="4" running><span slot="foot">group 1 · gate after</span></sett-session-card>');
+    const root = el.shadowRoot;
+    expect(root.querySelector('[part="header"]')).toBeNull();
+    expect(root.textContent).not.toContain('refund flow');
+    expect(root.textContent).not.toContain('claude code');
+    expect(root.querySelector('.foot .n').textContent).toBe('2/4');
+    el.headless = false; await el.updateComplete;
+    expect(root.querySelector('[part="header"]')).not.toBeNull();
+    expect(root.querySelector('.foot .n')).toBeNull();
+  });
 });

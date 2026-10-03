@@ -26,9 +26,11 @@ export { SettColumn, COLUMN_KINDS, COLUMN_DEPTHS, type ColumnKind, type ColumnDe
 export { SettSheet, type SheetLevel } from './map/sett-sheet.js';
 export { SettEdge } from './map/sett-edge.js';
 export { SettHintChip } from './map/sett-hint-chip.js';
+export { SettGhost, type GhostBody } from './map/sett-ghost.js';
 export { joinBoard, leaveBoard, boardsWatched, type BoardLine, type BoardPill } from './map/board-lines.js';
 export { SettLink, linkHead, linkTail, linkCut, type LinkDelta } from './map/sett-link.js';
 export { SettBundle, BUNDLE_ORIGINS, type BundleOrigin, type BundleBranch } from './map/sett-bundle.js';
+export { placeGhosts, type Ghost, type GhostIn, type GhostInput, type GhostSide } from './map/ghosts.js';
 export { placeHints, offscreenNeighbours, type Hint, type HintInput, type HintUnit, type HintSide } from './map/hints.js';
 export { boardRoutes, type BoardEdge, type BoardEnd, type BoardInput, type BoardRoute, type BoardSide } from './map/board-routes.js';
 export { route, simpleRoute, stretches, type Stretch, type Route, type RouteInput, type RouteOutput, type RouteLink, type RouteEnd, type Box, type Pt } from './map/routes.js';

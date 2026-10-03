@@ -127,8 +127,8 @@ export function insideOf(f: Fixture, id: string): InsideColumn[] {
 /** one line inside a unit, ready for `sett-link`: ends by key, a kind, the finding overlay, and whether it is a port wire */
 export interface FixtureLink { from: string; to: string; kind: LinkKind; finding?: boolean; label?: string; wire?: boolean }
 
-/** the key of a port row in a story: side and contract, unique inside a unit */
-export const portKey = (p: Port): string => `${p.side}:${p.contract}`;
+/** the key of a port row in a story: side and contract (else name, zed's ports name no contract), unique inside a unit */
+export const portKey = (p: Port): string => `${p.side}:${p.contract ?? p.name}`;
 /** the key of an op row in a story: its contract and the op as written */
 export const opKey = (contract: string, op: string): string => `${contract}:${op}`;
 

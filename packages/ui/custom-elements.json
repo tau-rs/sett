@@ -2359,6 +2359,22 @@
         },
         {
           "kind": "js",
+          "name": "SettGhost",
+          "declaration": {
+            "name": "SettGhost",
+            "module": "./map/sett-ghost.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "GhostBody",
+          "declaration": {
+            "name": "GhostBody",
+            "module": "./map/sett-ghost.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "joinBoard",
           "declaration": {
             "name": "joinBoard",
@@ -2467,6 +2483,46 @@
           "declaration": {
             "name": "BundleBranch",
             "module": "./map/sett-bundle.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "placeGhosts",
+          "declaration": {
+            "name": "placeGhosts",
+            "module": "./map/ghosts.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Ghost",
+          "declaration": {
+            "name": "Ghost",
+            "module": "./map/ghosts.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "GhostIn",
+          "declaration": {
+            "name": "GhostIn",
+            "module": "./map/ghosts.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "GhostInput",
+          "declaration": {
+            "name": "GhostInput",
+            "module": "./map/ghosts.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "GhostSide",
+          "declaration": {
+            "name": "GhostSide",
+            "module": "./map/ghosts.js"
           }
         },
         {
@@ -3836,7 +3892,7 @@
               }
             }
           ],
-          "description": "the key of a port row in a story: side and contract, unique inside a unit"
+          "description": "the key of a port row in a story: side and contract (else name, zed's ports name no contract), unique inside a unit"
         },
         {
           "kind": "function",
@@ -4085,6 +4141,39 @@
           "declaration": {
             "name": "wiresOf",
             "module": "src/map/fixtures.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/ghosts.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "placeGhosts",
+          "return": {
+            "type": {
+              "text": "Ghost[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{ open: O, ghosts, size, gap = GUTTER }",
+              "type": {
+                "text": "GhostInput"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "placeGhosts",
+          "declaration": {
+            "name": "placeGhosts",
+            "module": "src/map/ghosts.ts"
           }
         }
       ]
@@ -5121,6 +5210,137 @@
             }
           ],
           "description": "the hint pills of a window onto the board: one per off-screen neighbour, merged when they would touch"
+        },
+        {
+          "kind": "function",
+          "name": "systemDir",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "from",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "to",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "where `to` lies from `from` on the system map"
+        },
+        {
+          "kind": "function",
+          "name": "ghostPortKey",
+          "parameters": [
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "side",
+              "type": {
+                "text": "'exposes' | 'needs'"
+              }
+            },
+            {
+              "name": "i",
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "systemGhost",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "an outside system as a ghost: its port list"
+        },
+        {
+          "kind": "function",
+          "name": "clusterGhost",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "ids",
+              "type": {
+                "text": "string[]"
+              }
+            }
+          ],
+          "description": "ghosts that would overlap, merged: one row per member, each with the port the open unit reaches"
+        },
+        {
+          "kind": "function",
+          "name": "unitGhost",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "another repository's unit as a ghost: its folded sheet"
+        },
+        {
+          "kind": "function",
+          "name": "ghostScene",
+          "parameters": [
+            {
+              "name": "open",
+              "type": {
+                "text": "unknown"
+              }
+            },
+            {
+              "name": "ghosts",
+              "type": {
+                "text": "GhostSpec[]"
+              }
+            },
+            {
+              "name": "lines",
+              "type": {
+                "text": "GhostLine[]"
+              }
+            }
+          ],
+          "description": "An open unit with its ghosts beside it and the lines between them, as an app would draw it: the open unit is\nmeasured once it has rendered, `placeGhosts` places the ghosts beside it, and the board coordinator routes the lines."
         }
       ],
       "exports": [
@@ -5345,6 +5565,54 @@
           "name": "hintsOf",
           "declaration": {
             "name": "hintsOf",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "systemDir",
+          "declaration": {
+            "name": "systemDir",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ghostPortKey",
+          "declaration": {
+            "name": "ghostPortKey",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "systemGhost",
+          "declaration": {
+            "name": "systemGhost",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "clusterGhost",
+          "declaration": {
+            "name": "clusterGhost",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "unitGhost",
+          "declaration": {
+            "name": "unitGhost",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ghostScene",
+          "declaration": {
+            "name": "ghostScene",
             "module": "src/map/map-fixtures.stories-helpers.ts"
           }
         }
@@ -7267,6 +7535,165 @@
           "declaration": {
             "name": "SettEdge",
             "module": "src/map/sett-edge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-ghost.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A neighbour from outside the repository, shown beside the open unit\n(#56): a unit of another repository, or a system from the system map.\nWhere it goes is `placeGhosts` (`ghosts.ts`): on the side where it lies on\nthe system map, never callers-left / dependencies-right. Three bodies:\n\n- `unit`: another repository's unit, a folded `sett-sheet` in the `inside`\n  slot (its areas closed into chips, so a line lands on the area it reaches);\n- `system`: an outside system, its port rows in `exposes` and `needs`\n  (dashed when `declared`);\n- `cluster`: ghosts that would overlap, merged; one row per member in\n  `members`.\n\nA ghost recedes by colour, never by opacity, and so does everything it\nholds: inside it the ink tokens are the mute ones and the borders the\nfaint ones, inherited down into every element it hosts, a folded sheet's\nareas and items included (text stays above 4.5:1). It never carries `▴ close`: it is not open.\nIts `key` is what a `sett-edge` ends on.",
+          "name": "SettGhost",
+          "cssParts": [
+            {
+              "description": "the head: name · kind",
+              "name": "hd"
+            }
+          ],
+          "slots": [
+            {
+              "description": "one or two meta lines",
+              "name": ""
+            },
+            {
+              "description": "the folded `sett-sheet` (body `unit`)",
+              "name": "inside"
+            },
+            {
+              "description": "`sett-port-row side=\"exposes\"` rows (body `system`)",
+              "name": "exposes"
+            },
+            {
+              "description": "`sett-port-row side=\"needs\"` rows (body `system`)",
+              "name": "needs"
+            },
+            {
+              "description": "one `sett-port-row side=\"exposes\"` per member (body `cluster`)",
+              "name": "members"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-edge` ends on",
+              "attribute": "key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "data store · third-party · app · … shown mute after the name",
+              "attribute": "kind"
+            },
+            {
+              "kind": "field",
+              "name": "body",
+              "type": {
+                "text": "GhostBody"
+              },
+              "default": "'system'",
+              "attribute": "body",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "declared",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "declared by hand, nothing verified: dashed (rule 10)",
+              "attribute": "declared",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-edge` ends on",
+              "fieldName": "key"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "data store · third-party · app · … shown mute after the name",
+              "fieldName": "kind"
+            },
+            {
+              "name": "body",
+              "type": {
+                "text": "GhostBody"
+              },
+              "default": "'system'",
+              "fieldName": "body"
+            },
+            {
+              "name": "declared",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "declared by hand, nothing verified: dashed (rule 10)",
+              "fieldName": "declared"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-ghost",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettGhost",
+          "declaration": {
+            "name": "SettGhost",
+            "module": "src/map/sett-ghost.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-ghost",
+          "declaration": {
+            "name": "SettGhost",
+            "module": "src/map/sett-ghost.ts"
           }
         }
       ]

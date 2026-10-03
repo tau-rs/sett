@@ -140,8 +140,11 @@ export function boardRoutes({ obstacles, edges, spacing: S, margin = S, within }
   const xs = [...obstacles.flatMap((b) => [b.x, b.x + b.w]), ...[...docks.values()].flatMap((d) => [d.from.dock.x, d.to.dock.x])];
   const ys = [...obstacles.flatMap((b) => [b.y, b.y + b.h]), ...[...docks.values()].flatMap((d) => [d.from.dock.y, d.to.dock.y])];
   const pad = margin + 6 * S;
-  const gx = Math.floor((Math.min(...xs) - pad) / S), gy = Math.floor((Math.min(...ys) - pad) / S);
-  const ni = Math.ceil((Math.max(...xs) + pad) / S) - gx + 1, nj = Math.ceil((Math.max(...ys) + pad) / S) - gy + 1;
+  // inside a window the grid is the window: re-routing while panning costs the window, not the board
+  const x0 = within ? within.x : Math.min(...xs) - pad, x1 = within ? within.x + within.w : Math.max(...xs) + pad;
+  const y0 = within ? within.y : Math.min(...ys) - pad, y1 = within ? within.y + within.h : Math.max(...ys) + pad;
+  const gx = Math.floor(x0 / S), gy = Math.floor(y0 / S);
+  const ni = Math.ceil(x1 / S) - gx + 1, nj = Math.ceil(y1 / S) - gy + 1;
   const blocked = new Uint8Array(ni * nj);
   for (const b of obstacles) {
     for (let i = Math.max(0, Math.ceil((b.x - margin) / S) - gx); i <= Math.min(ni - 1, Math.floor((b.x + b.w + margin) / S) - gx); i++)
@@ -234,9 +237,10 @@ export function boardRoutes({ obstacles, edges, spacing: S, margin = S, within }
     const { from, to } = docks.get(e.id)!;
     const trunk = key(from.dock), join = key(to.dock);
     const st = outside(from), en = outside(to);
-    blocked[st.i * nj + st.j] = 0;
     const tId = idOf(`t:${trunk}`), jId = idOf(`j:${join}`);
-    const goal = search(st, OUT[from.side], en, (OUT[to.side] + 2) & 3, tId, jId);
+    const inGrid = (c: { i: number; j: number }) => c.i >= 0 && c.j >= 0 && c.i < ni && c.j < nj;
+    if (inGrid(st)) blocked[st.i * nj + st.j] = 0;
+    const goal = inGrid(st) && inGrid(en) ? search(st, OUT[from.side], en, (OUT[to.side] + 2) & 3, tId, jId) : -1;
     let pts: Pt[];
     if (goal < 0) {
       // nowhere free: the plainest square line, so something is drawn

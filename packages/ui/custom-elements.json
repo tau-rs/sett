@@ -2351,6 +2351,14 @@
         },
         {
           "kind": "js",
+          "name": "SettHintChip",
+          "declaration": {
+            "name": "SettHintChip",
+            "module": "./map/sett-hint-chip.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "joinBoard",
           "declaration": {
             "name": "joinBoard",
@@ -2459,6 +2467,54 @@
           "declaration": {
             "name": "BundleBranch",
             "module": "./map/sett-bundle.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "placeHints",
+          "declaration": {
+            "name": "placeHints",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "offscreenNeighbours",
+          "declaration": {
+            "name": "offscreenNeighbours",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Hint",
+          "declaration": {
+            "name": "Hint",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HintInput",
+          "declaration": {
+            "name": "HintInput",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HintUnit",
+          "declaration": {
+            "name": "HintUnit",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HintSide",
+          "declaration": {
+            "name": "HintSide",
+            "module": "./map/hints.js"
           }
         },
         {
@@ -4035,6 +4091,65 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/hints.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "placeHints",
+          "return": {
+            "type": {
+              "text": "Hint[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{ view: v, units, cards = [], size }",
+              "type": {
+                "text": "HintInput"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "offscreenNeighbours",
+          "return": {
+            "type": {
+              "text": "string[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{ view, boxes, edges }",
+              "type": {
+                "text": "{ view: Box; boxes: Record<string, Box>; edges: { f: string; t: string }[] }"
+              }
+            }
+          ],
+          "description": "the units outside the window joined by an edge to one any part of which is inside it"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "placeHints",
+          "declaration": {
+            "name": "placeHints",
+            "module": "src/map/hints.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "offscreenNeighbours",
+          "declaration": {
+            "name": "offscreenNeighbours",
+            "module": "src/map/hints.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/lines.ts",
       "declarations": [
         {
@@ -4924,6 +5039,88 @@
             }
           ],
           "description": "the units of a repository at a tier, with their edges, in one positioned board"
+        },
+        {
+          "kind": "function",
+          "name": "boardBoxes",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "repo",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tier",
+              "type": {
+                "text": "'chip' | 'card'"
+              }
+            }
+          ],
+          "description": "where a repository's units sit on the board at a tier, as boxes (a card's height estimated from its port rows)"
+        },
+        {
+          "kind": "function",
+          "name": "pointAt",
+          "parameters": [
+            {
+              "name": "root",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "f",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "t",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "put the pointer on the edge from `f` to `t` in a story, to show its label"
+        },
+        {
+          "kind": "function",
+          "name": "hintsOf",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "repo",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "view",
+              "type": {
+                "text": "{ x: number; y: number; w: number; h: number }"
+              }
+            },
+            {
+              "name": "opts",
+              "default": "{}",
+              "type": {
+                "text": "{ lit?: string; live?: Record<string, string> }"
+              }
+            }
+          ],
+          "description": "the hint pills of a window onto the board: one per off-screen neighbour, merged when they would touch"
         }
       ],
       "exports": [
@@ -5124,6 +5321,30 @@
           "name": "boardOf",
           "declaration": {
             "name": "boardOf",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boardBoxes",
+          "declaration": {
+            "name": "boardBoxes",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "pointAt",
+          "declaration": {
+            "name": "pointAt",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "hintsOf",
+          "declaration": {
+            "name": "hintsOf",
             "module": "src/map/map-fixtures.stories-helpers.ts"
           }
         }
@@ -6810,7 +7031,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "One line between two units on the board. It names its ends by `key`\n(`from`, `to`) and, at card zoom, the port rows it leaves and reaches\n(`from-port`, `to-port`); it never gets coordinates. The edges under one\nparent are routed together (`board-lines.ts`): square lines in the gaps\nbetween the boxes, one trunk per source with a dot where it branches,\nlines into one dock joining before it, a line going back around the near\nend of its own box (#56). At chip zoom a line leaves the middle of a side;\nat card zoom it docks on the port dots. An end off-screen ends on the hint\npill that stands in for it.\n\nColour and dash are the port kind (`map.kind.*`); the arrow says who uses\nwhom and the line stops `map.size.arrow` before it; a halo parts it from\nthe lines it crosses. Nothing is written on it at rest: the kind and the\n`label` show when it is pointed at (`lit` on this edge, or the pointer on\nit). `lit` turns it blue and keeps its dash; `selected` (the selected\nunit's edges) adds the `flow`: a dashed kind's own dashes march, a solid\none carries travelling gaps. `far` recedes it to `map.far`.",
+          "description": "One line between two units on the board. It names its ends by `key`\n(`from`, `to`) and, at card zoom, the port rows it leaves and reaches\n(`from-port`, `to-port`); it never gets coordinates. The edges under one\nparent are routed together (`board-lines.ts`): square lines in the gaps\nbetween the boxes, one trunk per source with a dot where it branches,\nlines into one dock joining before it, a line going back around the near\nend of its own box (#56). At chip zoom a line leaves the middle of a side;\nat card zoom it docks on the port dots. An end off-screen ends on the hint\npill that stands in for it.\n\nColour and dash are the port kind (`map.kind.*`); the arrow says who uses\nwhom and the line stops `map.size.arrow` before it; a halo parts it from\nthe lines it crosses. Nothing is written on it at rest: the kind and the\n`label` show under the pointer. `lit` (an end is pointed at, or its hint\npill) turns it blue and keeps its dash; `selected` (the selected\nunit's edges) adds the `flow`: a dashed kind's own dashes march, a solid\none carries travelling gaps. `far` recedes it to `map.far`.",
           "name": "SettEdge",
           "cssParts": [
             {
@@ -6818,7 +7039,7 @@
               "name": "svg"
             },
             {
-              "description": "the label pill, when pointed at",
+              "description": "the label pill, under the pointer",
               "name": "label"
             }
           ],
@@ -6879,7 +7100,7 @@
               "type": {
                 "text": "string | undefined"
               },
-              "description": "what and how much, shown with the kind when pointed at (`crate · 31 uses`)",
+              "description": "what and how much, shown with the kind under the pointer (`crate · 31 uses`)",
               "attribute": "label"
             },
             {
@@ -6889,7 +7110,7 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "pointed at, or an end is: blue, its dash kept",
+              "description": "an end is pointed at, or the hint pill it ends on: blue, its dash kept",
               "attribute": "lit",
               "reflects": true
             },
@@ -6992,7 +7213,7 @@
               "type": {
                 "text": "string | undefined"
               },
-              "description": "what and how much, shown with the kind when pointed at (`crate · 31 uses`)",
+              "description": "what and how much, shown with the kind under the pointer (`crate · 31 uses`)",
               "fieldName": "label"
             },
             {
@@ -7001,7 +7222,7 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "pointed at, or an end is: blue, its dash kept",
+              "description": "an end is pointed at, or the hint pill it ends on: blue, its dash kept",
               "fieldName": "lit"
             },
             {
@@ -7046,6 +7267,217 @@
           "declaration": {
             "name": "SettEdge",
             "module": "src/map/sett-edge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-hint-chip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The pill on the window's border for a neighbour that is off-screen\n(DESIGN.md rule 2). It stands for one unit, or for several merged when\ntheir pills would touch: then a double border and `n neighbours · ` the\nfirst two names. Where it goes is `placeHints` (`hints.ts`): the app sets\n`left`/`top` to its anchor and the pill hangs from it by its `side`. It is\ngone the moment its unit is seen. It stands in for its units on the board: the\n`sett-edge`s to them end on it (#56).\n\nWhen an agent works in an off-screen unit, the pill is the nearest thing\nyou can see (DESIGN.md § Motion, where it lands): its session dot breathes\nhere, and a session arriving plays the pulse (`arrive`).",
+          "name": "SettHintChip",
+          "cssParts": [
+            {
+              "description": "the pill",
+              "name": "pill"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "keys",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "the keys of the units it stands for, space-separated",
+              "attribute": "keys",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "names",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "their names, comma-separated, in the order of `keys`",
+              "attribute": "names"
+            },
+            {
+              "kind": "field",
+              "name": "side",
+              "type": {
+                "text": "HintSide"
+              },
+              "default": "'right'",
+              "description": "the border it sits on; its edges reach it from the other side",
+              "attribute": "side",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "pointed at, or one of its edges is: blue",
+              "attribute": "lit",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "sessions",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions with an agent in its units, space-separated ids, one dot each",
+              "attribute": "sessions"
+            },
+            {
+              "kind": "field",
+              "name": "live",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions working there right now: their dots breathe; a change plays the pulse",
+              "attribute": "live"
+            },
+            {
+              "kind": "field",
+              "name": "igniting",
+              "type": {
+                "text": "string[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "method",
+              "name": "ids",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string[]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "v",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "point",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "on",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-light",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ on, keys }` when pointed at; the app lights its edges"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "keys",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "the keys of the units it stands for, space-separated",
+              "fieldName": "keys"
+            },
+            {
+              "name": "names",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "their names, comma-separated, in the order of `keys`",
+              "fieldName": "names"
+            },
+            {
+              "name": "side",
+              "type": {
+                "text": "HintSide"
+              },
+              "default": "'right'",
+              "description": "the border it sits on; its edges reach it from the other side",
+              "fieldName": "side"
+            },
+            {
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "pointed at, or one of its edges is: blue",
+              "fieldName": "lit"
+            },
+            {
+              "name": "sessions",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions with an agent in its units, space-separated ids, one dot each",
+              "fieldName": "sessions"
+            },
+            {
+              "name": "live",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions working there right now: their dots breathe; a change plays the pulse",
+              "fieldName": "live"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-hint-chip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettHintChip",
+          "declaration": {
+            "name": "SettHintChip",
+            "module": "src/map/sett-hint-chip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-hint-chip",
+          "declaration": {
+            "name": "SettHintChip",
+            "module": "src/map/sett-hint-chip.ts"
           }
         }
       ]

@@ -40,14 +40,14 @@ const period = (k: PortKind) => { const s = base.map.kind[k]?.stroke ?? 'solid';
  * Colour and dash are the port kind (`map.kind.*`); the arrow says who uses
  * whom and the line stops `map.size.arrow` before it; a halo parts it from
  * the lines it crosses. Nothing is written on it at rest: the kind and the
- * `label` show when it is pointed at (`lit` on this edge, or the pointer on
- * it). `lit` turns it blue and keeps its dash; `selected` (the selected
+ * `label` show under the pointer. `lit` (an end is pointed at, or its hint
+ * pill) turns it blue and keeps its dash; `selected` (the selected
  * unit's edges) adds the `flow`: a dashed kind's own dashes march, a solid
  * one carries travelling gaps. `far` recedes it to `map.far`.
  *
  * @fires sett-light - `{ on }` when pointed at
  * @csspart svg - the drawing
- * @csspart label - the label pill, when pointed at
+ * @csspart label - the label pill, under the pointer
  */
 @customElement('sett-edge')
 export class SettEdge extends LitElement {
@@ -60,9 +60,9 @@ export class SettEdge extends LitElement {
   /** the key of the port row it reaches, on a card */
   @property({ attribute: 'to-port' }) toPort?: string;
   @property({ reflect: true }) kind: PortKind = 'crate';
-  /** what and how much, shown with the kind when pointed at (`crate · 31 uses`) */
+  /** what and how much, shown with the kind under the pointer (`crate · 31 uses`) */
   @property() label?: string;
-  /** pointed at, or an end is: blue, its dash kept */
+  /** an end is pointed at, or the hint pill it ends on: blue, its dash kept */
   @property({ type: Boolean, reflect: true }) lit = false;
   /** an edge of the selected unit: blue, with the flow */
   @property({ type: Boolean, reflect: true }) selected = false;
@@ -137,7 +137,7 @@ export class SettEdge extends LitElement {
         <path class="h" d=${head(e, d)} />
         ${r.branches.map((b) => svg`<circle class="b" cx=${b.x} cy=${b.y} r=${BRANCH / 2} />`)}
       </svg>
-      ${(this.lit || this.pointed) && this.label ? html`<span part="label" class="label" style=${`left: ${at.x}px; top: ${at.y}px`}>${title}</span>` : nothing}`;
+      ${this.pointed && this.label ? html`<span part="label" class="label" style=${`left: ${at.x}px; top: ${at.y}px`}>${title}</span>` : nothing}`;
   }
 }
 

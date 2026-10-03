@@ -70,17 +70,20 @@ class Board implements Watched {
       return { box: b };
     };
 
-    const lines = [...this.lines];
-    const edges: BoardEdge[] = [];
-    const ends = lines.map((l) => [end(l.from, l.fromPort, 'from'), end(l.to, l.toPort, 'to')] as const);
-    const obstacles: Box[] = [...nodes.map(box), ...pillBoxes.values(), ...ghosts.map(box)];
-    ends.forEach(([a, b], i) => { if (a && b) edges.push({ id: String(i), from: a, to: b }); });
     let within: Box | undefined;
     if (pills.length) {
       let w = host.parentElement;
       while (w && getComputedStyle(w).overflow === 'visible') w = w.parentElement;
       if (w) within = box(w);
     }
+    const lines = [...this.lines];
+    const edges: BoardEdge[] = [];
+    const ends = lines.map((l) => [end(l.from, l.fromPort, 'from'), end(l.to, l.toPort, 'to')] as const);
+    const obstacles: Box[] = [...nodes.map(box), ...pillBoxes.values(), ...ghosts.map(box)];
+    const isPill = (e: BoardEnd) => [...pillBoxes.values()].includes(e.box);
+    const seen = (e: BoardEnd) => !within || isPill(e) || (e.box.x < within.x + within.w && e.box.x + e.box.w > within.x && e.box.y < within.y + within.h && e.box.y + e.box.h > within.y);
+    // with pills on the board, a line is drawn when its ends are in the window or on a pill, and not pill to pill
+    ends.forEach(([a, b], i) => { if (a && b && seen(a) && seen(b) && !(isPill(a) && isPill(b))) edges.push({ id: String(i), from: a, to: b }); });
     const sig = `${signature(obstacles)}|${within ? signature([within]) : ''}|${edges.map((e) => `${signature([e.from.box, e.to.box])}:${e.from.dock?.x},${e.from.dock?.y}:${e.to.dock?.x},${e.to.dock?.y}`).join(';')}`;
     if (sig === this.seen) return;
     this.seen = sig;

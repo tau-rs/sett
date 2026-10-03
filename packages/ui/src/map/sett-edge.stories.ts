@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import { PORT_KINDS } from './sett-port-row.js';
-import { boardOf, ripgrep, zed, zero2prod, type BoardScene } from './map-fixtures.stories-helpers.js';
+import { boardOf, pointAt, ripgrep, zed, zero2prod, type BoardScene } from './map-fixtures.stories-helpers.js';
 import type { Fixture } from './fixtures.js';
 import './sett-edge.js';
 
@@ -26,7 +26,8 @@ export const RipgrepAtRest: Story = {
 };
 export const RipgrepSelected: Story = {
   name: 'ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at',
-  render: () => scene(ripgrep, 'ripgrep', { tier: 'chip', selected: 'grep-searcher', point: ['grep-printer', 'grep-matcher'] }, 'The selected unit\'s lines turn blue and carry the flow (a dotted kind\'s own dots march); the pointed line is blue with its label; every other line recedes to map.far and unrelated units recede by colour.'),
+  render: () => scene(ripgrep, 'ripgrep', { tier: 'chip', selected: 'grep-searcher', point: ['grep-printer', 'grep-matcher'] }, 'The selected unit\'s lines turn blue and carry the flow (a dotted kind\'s own dots march); the line under the pointer is blue with its label; every other line recedes to map.far and unrelated units recede by colour.'),
+  play: ({ canvasElement }) => pointAt(canvasElement, 'grep-printer', 'grep-matcher'),
 };
 export const ZedHub: Story = {
   name: 'zed · chips · the hub gpui selected',
@@ -34,7 +35,8 @@ export const ZedHub: Story = {
 };
 export const Zero2prodPointed: Story = {
   name: 'zero2prod · chips · the queue line pointed at',
-  render: () => scene(zero2prod, 'z2p', { tier: 'chip', point: ['api', 'worker'] }, 'A sql edge (dotted, the kind\'s colour): api enqueues rows the worker dequeues. Its label shows only when pointed at or selected.'),
+  render: () => scene(zero2prod, 'z2p', { tier: 'chip', point: ['api', 'worker'] }, 'A sql edge (dotted, the kind\'s colour): api enqueues rows the worker dequeues. Its label shows only under the pointer.'),
+  play: ({ canvasElement }) => pointAt(canvasElement, 'api', 'worker'),
 };
 export const ZedCards: Story = {
   name: 'zed · cards · lines going back to the hub',
@@ -52,7 +54,7 @@ export const RipgrepCards: Story = {
 /** one line per port kind, to check every colour and dash in both themes */
 export const Kinds: Story = {
   name: 'kinds · one line per port kind, at rest and lit',
-  render: () => html`${note('Colour and dash are the kind (map.kind.*), as on the port rows. Left: at rest; right: lit, the dash kept.')}
+  render: () => html`${note('Colour and dash are the kind (map.kind.*), as on the port rows. Left: at rest; right: lit (an end pointed at), the dash kept.')}
     <div style="display:grid;grid-template-columns:repeat(2, max-content);gap:var(--sett-space-3) var(--sett-space-6)">
       ${PORT_KINDS.flatMap((k) => [false, true].map((lit) => html`
         <div style="position:relative;width:520px;height:64px">

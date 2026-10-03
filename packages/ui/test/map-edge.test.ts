@@ -38,14 +38,15 @@ describe('sett-edge', () => {
     expect(root.querySelector('.h')?.getAttribute('d')).toMatch(/^M100\.0 60\.0 L92\.0/);
     expect(root.querySelectorAll('.b').length).toBe(1);
   });
-  it('nothing is written at rest; pointing at it shows the kind and the label; selecting the unit does not', async () => {
+  it('nothing is written at rest; the pointer on it shows the kind and the label; lit or selected alone do not', async () => {
     const el = await mount('kind="sql" label="issue_delivery_queue"');
     const root = el.shadowRoot!;
     expect(root.querySelector('.label')).toBeNull();
     el.selected = true; await el.updateComplete;
     expect(root.querySelector('.label')).toBeNull();
     el.selected = false; el.lit = true; await el.updateComplete;
-    expect(root.querySelector('.label')?.textContent).toBe('sql · issue_delivery_queue');
+    expect(root.querySelector('.label')).toBeNull();
+    expect(root.querySelector('svg')?.classList.contains('on')).toBe(true);
     el.lit = false; await el.updateComplete;
     root.querySelector('.hit')!.dispatchEvent(new Event('pointerenter'));
     await el.updateComplete;

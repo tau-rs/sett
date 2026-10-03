@@ -485,6 +485,25 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -786,6 +805,25 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -1093,6 +1131,25 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -1749,6 +1806,25 @@ The page around the code of an item, in a tab of `sett-tabbar` (map rule 4). It 
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -1953,6 +2029,25 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -2392,6 +2487,25 @@ What a port promises: the kind chip (the kind's dot and word, the same colour as
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -2592,6 +2706,25 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -2795,6 +2928,25 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -2935,6 +3087,236 @@ The agent left the plan. Reason, then the three ways back (and discuss). A denie
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+
+### `<sett-edge>`
+
+One line between two units on the board. It names its ends by `key` (`from`, `to`) and, at card zoom, the port rows it leaves and reaches (`from-port`, `to-port`); it never gets coordinates. The edges under one parent are routed together (`board-lines.ts`): square lines in the gaps between the boxes, one trunk per source with a dot where it branches, lines into one dock joining before it, a line going back around the near end of its own box (#56). At chip zoom a line leaves the middle of a side; at card zoom it docks on the port dots. An end off-screen ends on the hint pill that stands in for it. Colour and dash are the port kind (`map.kind.*`); the arrow says who uses whom and the line stops `map.size.arrow` before it; a halo parts it from the lines it crosses. Nothing is written on it at rest: the kind and the `label` show under the pointer. `lit` (an end is pointed at, or its hint pill) turns it blue and keeps its dash; `selected` (the selected unit's edges) adds the `flow`: a dashed kind's own dashes march, a solid one carries travelling gaps. `far` recedes it to `map.far`.
+
+- attrs:
+  - `from=string` — the key of the unit that uses
+  - `to=string` — the key of the unit it uses
+  - `from-port=string` — the key of the port row it leaves, on a card
+  - `to-port=string` — the key of the port row it reaches, on a card
+  - `kind=PortKind`
+  - `label=string` — what and how much, shown with the kind under the pointer (`crate · 31 uses`)
+  - `lit=boolean` — an end is pointed at, or the hint pill it ends on: blue, its dash kept
+  - `selected=boolean` — an edge of the selected unit: blue, with the flow
+  - `far=boolean` — unrelated to the selection: `map.far`
+- parts:
+  - `svg` — the drawing
+  - `label` — the label pill, under the pointer
+- events:
+  - `sett-light` — `{ on }` when pointed at
+- stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
+  - `map-area--empty` empty
+  - `map-back--default` Default
+  - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
+  - `map-back--plain` plain · no words given, no key shown
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
+  - `map-crumb--default` Default
+  - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
+  - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
+  - `map-crumb--no-room` no room · the earlier steps end in an ellipsis, where you are stays whole
+  - `map-cue--default` Default
+  - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
+  - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-panel--default` Default
+  - `map-panel--status-line` status line · a message in the well tint · at rest the row keeps its height
+  - `map-panel--says-then-clears` says, then clears · after 1.9 s or at the next action, with no fade
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-position--default` Default
+  - `map-position--current` current · the trail ends where you are · ripgrep, zero2prod, zed
+  - `map-position--future` future · after going back, the places ahead stay listed, lighter
+  - `map-position--levels` one row per level reached · board only, then a unit, then an area
+  - `map-position--long-name` a name too long ends in an ellipsis · the number and the level stay
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-element-row>`
 
@@ -3304,6 +3686,235 @@ The merge: a primary button that stays visibly primary while blocked, with its r
   - `buttons-buttons--gated-open` gated · open
   - `buttons-buttons--hand-back-disabled` hand back · disabled until the note is written
 
+### `<sett-ghost>`
+
+A neighbour from outside the repository, shown beside the open unit (#56): a unit of another repository, or a system from the system map. Where it goes is `placeGhosts` (`ghosts.ts`): on the side where it lies on the system map, never callers-left / dependencies-right. Three bodies: - `unit`: another repository's unit, a folded `sett-sheet` in the `inside` slot (its areas closed into chips, so a line lands on the area it reaches); - `system`: an outside system, its port rows in `exposes` and `needs` (dashed when `declared`); - `cluster`: ghosts that would overlap, merged; one row per member in `members`. A ghost recedes by colour, never by opacity, and so does everything it holds: inside it the ink tokens are the mute ones and the borders the faint ones, inherited down into every element it hosts, a folded sheet's areas and items included (text stays above 4.5:1). It never carries `▴ close`: it is not open. Its `key` is what a `sett-edge` ends on.
+
+- attrs:
+  - `key=string` — the name a `sett-edge` ends on
+  - `name=string`
+  - `kind=string` — data store · third-party · app · … shown mute after the name
+  - `body=GhostBody`
+  - `declared=boolean` — declared by hand, nothing verified: dashed (rule 10)
+- slots:
+  - `(default)` — one or two meta lines
+  - `inside` — the folded `sett-sheet` (body `unit`)
+  - `exposes` — `sett-port-row side="exposes"` rows (body `system`)
+  - `needs` — `sett-port-row side="needs"` rows (body `system`)
+  - `members` — one `sett-port-row side="exposes"` per member (body `cluster`)
+- parts:
+  - `hd` — the head: name · kind
+- stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
+  - `map-area--empty` empty
+  - `map-back--default` Default
+  - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
+  - `map-back--plain` plain · no words given, no key shown
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
+  - `map-crumb--default` Default
+  - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
+  - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
+  - `map-crumb--no-room` no room · the earlier steps end in an ellipsis, where you are stays whole
+  - `map-cue--default` Default
+  - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
+  - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-panel--default` Default
+  - `map-panel--status-line` status line · a message in the well tint · at rest the row keeps its height
+  - `map-panel--says-then-clears` says, then clears · after 1.9 s or at the next action, with no fade
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-position--default` Default
+  - `map-position--current` current · the trail ends where you are · ripgrep, zero2prod, zed
+  - `map-position--future` future · after going back, the places ahead stay listed, lighter
+  - `map-position--levels` one row per level reached · board only, then a unit, then an area
+  - `map-position--long-name` a name too long ends in an ellipsis · the number and the level stay
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
+
 ### `<sett-group-row>`
 
 A group row: a lane of the plan with its gate, under a session. Its state is one of rule 7's words, `done` · `running` · `gate` · `failed n/m` · `waiting`, with the tone each implies. `kind="gate"` is the gate itself, `gate · group 1 → group 2`, with state `judge`; it has no children.
@@ -3420,6 +4031,232 @@ An inlay hint: rust-analyzer's type hints and arch's own use one shape, a quiet 
   - `editor-decorations--busy-day` a busy day · session, plan, finding
   - `editor-decorations--hints` sett-hint · kinds
   - `editor-decorations--all-situations` all eight situations
+
+### `<sett-hint-chip>`
+
+The pill on the window's border for a neighbour that is off-screen (DESIGN.md rule 2). It stands for one unit, or for several merged when their pills would touch: then a double border and `n neighbours · ` the first two names. Where it goes is `placeHints` (`hints.ts`): the app sets `left`/`top` to its anchor and the pill hangs from it by its `side`. It is gone the moment its unit is seen. It stands in for its units on the board: the `sett-edge`s to them end on it (#56). When an agent works in an off-screen unit, the pill is the nearest thing you can see (DESIGN.md § Motion, where it lands): its session dot breathes here, and a session arriving plays the pulse (`arrive`).
+
+- attrs:
+  - `keys=string[]` — the keys of the units it stands for, space-separated
+  - `names=string[]` — their names, comma-separated, in the order of `keys`
+  - `side=HintSide` — the border it sits on; its edges reach it from the other side
+  - `lit=boolean` — pointed at, or one of its edges is: blue
+  - `sessions=string` — the sessions with an agent in its units, space-separated ids, one dot each
+  - `live=string` — the sessions working there right now: their dots breathe; a change plays the pulse
+- parts:
+  - `pill` — the pill
+- events:
+  - `sett-light` — `{ on, keys }` when pointed at; the app lights its edges
+- stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
+  - `map-area--empty` empty
+  - `map-back--default` Default
+  - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
+  - `map-back--plain` plain · no words given, no key shown
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
+  - `map-crumb--default` Default
+  - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
+  - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
+  - `map-crumb--no-room` no room · the earlier steps end in an ellipsis, where you are stays whole
+  - `map-cue--default` Default
+  - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
+  - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--overlays` overlays · the plan and the delta are keyed while their toggle is on
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-legend--in-the-panel-plan` zero2prod · in the panel, the plan overlay on: the legend keys what the sheet paints
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plan` plan overlay · a planned link is amber and heavier on the amber band
+  - `map-link--delta` delta overlay · removed is a ghost cut across its middle, unchanged recedes
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-node--zoom-opening` Zoom Opening
+  - `map-node--zoom-areas-fold` Zoom Areas Fold
+  - `map-node--zoom-closed` Zoom Closed
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-panel--default` Default
+  - `map-panel--status-line` status line · a message in the well tint · at rest the row keeps its height
+  - `map-panel--says-then-clears` says, then clears · after 1.9 s or at the next action, with no fade
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-position--default` Default
+  - `map-position--current` current · the trail ends where you are · ripgrep, zero2prod, zed
+  - `map-position--future` future · after going back, the places ahead stay listed, lighter
+  - `map-position--levels` one row per level reached · board only, then a unit, then an area
+  - `map-position--long-name` a name too long ends in an ellipsis · the number and the level stay
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
 ### `<sett-hunk>`
 
@@ -3918,6 +4755,25 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -4155,6 +5011,25 @@ The key to the map, on demand (map rule 8): a section of `sett-panel`, folded to
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -4371,6 +5246,25 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -4724,6 +5618,25 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -4959,6 +5872,7 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
 A unit's box on the board, at one of four tiers. The host sets the box and the tier (from the on-screen width, see `tierFor`); the node never resizes itself, the camera moves (rule 3). `mini` is the name only; `chip` adds the meta lines and badges; `card` adds the port rows in two columns; `sheet` hosts what is inside. A closed node has no foot and no link: opening is the host's, by double-click or ↩ on the node and by nothing else (rule 4). An open node keeps one link, `▴ close`. The head carries one dot per session with an agent on the unit (`sessions`). A session that is working here now (`live`) breathes when this box is the nearest thing you can see (DESIGN.md § Motion, "where it lands"): the unit is closed, or it is open and no item of that session is rendered inside. Open with the item on screen, the item (or the folded area's badge) carries the life and the dot is still. When `live` flips, the node plays the arrival or departure pulse on its box, the larger wave (`map.size.waveNode`).
 
 - attrs:
+  - `key=string` — the name a `sett-edge` ends on (`from`, `to`); the board also accepts `data-id`
   - `name=string`
   - `kind=string` — app · library · external · … shown mute after the name
   - `tier=NodeTier`
@@ -5056,6 +5970,25 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -5268,6 +6201,25 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -5520,6 +6472,25 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -6283,6 +7254,25 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -6483,6 +7473,25 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -6689,6 +7698,25 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -6920,6 +7948,25 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
@@ -7844,6 +8891,25 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-cue--default` Default
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-edge--ripgrep-at-rest` ripgrep · chips · at rest
+  - `map-edge--ripgrep-selected` ripgrep · chips · grep-searcher selected, grep-printer → grep-matcher pointed at
+  - `map-edge--zed-hub` zed · chips · the hub gpui selected
+  - `map-edge--zero-2-prod-pointed` zero2prod · chips · the queue line pointed at
+  - `map-edge--zed-cards` zed · cards · lines going back to the hub
+  - `map-edge--zed-cards-selected` zed · cards · gpui selected
+  - `map-edge--ripgrep-cards` ripgrep · cards · one port, six lines; one line back
+  - `map-edge--kinds` kinds · one line per port kind, at rest and lit
+  - `map-ghost--recedes` a ghost beside a unit of this repository and a receded one
+  - `map-ghost--bodies` the three bodies · folded sheet, port list, cluster
+  - `map-ghost--zero-2-prod-api` zero2prod · api open · four outside systems where the system map puts them
+  - `map-ghost--zed-agent` zed · agent open · the llm proxy of the cloud repository, below-right
+  - `map-ghost--cluster` zero2prod · api open · ghosts that would overlap merge into a cluster
+  - `map-hint-chip--anatomy` anatomy · one neighbour, merged neighbours, an agent inside, pointed at
+  - `map-hint-chip--ripgrep-window` ripgrep · a window at card zoom · the lines end on the pills
+  - `map-hint-chip--ripgrep-agents` ripgrep · agents working in two off-screen units
+  - `map-hint-chip--ripgrep-pointed` ripgrep · pointing at the pill grep-searcher lights its lines
+  - `map-hint-chip--clear-of-cards` ripgrep · a pill that would land on a card slides along the border
+  - `map-hint-chip--zed-window` zed · around the hub gpui
   - `map-item--default` Default
   - `map-item--kinds` kinds · twelve
   - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state

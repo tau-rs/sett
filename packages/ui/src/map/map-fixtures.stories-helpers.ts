@@ -3,6 +3,9 @@ import { html, nothing } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Fixture, FixtureArea, FixtureItem, FixtureUnit, Port } from './fixtures.js';
 import { insideOf, itemKindOf, linksOf, opKey, opsOf, portKey, sectionOf, unitOf, unitPorts, wiresOf, type FixtureLink } from './fixtures.js';
+import { offscreenNeighbours, placeHints } from './hints.js';
+import { placeGhosts } from './ghosts.js';
+import { ref } from 'lit/directives/ref.js';
 import { base, sessionOrder } from '@tau-rs/sett-tokens';
 import type { MinimapRect } from './sett-minimap.js';
 import type { LinkDelta } from './sett-link.js';
@@ -19,6 +22,9 @@ import './sett-area.js';
 import './sett-column.js';
 import './sett-sheet.js';
 import './sett-link.js';
+import './sett-edge.js';
+import './sett-hint-chip.js';
+import './sett-ghost.js';
 
 export const ripgrep = ripgrepJson as unknown as Fixture;
 export const zero2prod = zero2prodJson as unknown as Fixture;
@@ -48,7 +54,7 @@ export const node = (f: Fixture, id: string, tier: 'mini' | 'chip' | 'card' | 's
   const { exposes, needs } = unitPorts(f, id);
   const width = tier === 'mini' ? 'var(--sett-map-threshold-mini)' : tier === 'chip' ? 'var(--sett-map-size-node-chip-w)' : tier === 'card' ? 'var(--sett-map-size-card-interface)' : inside === nothing ? 'var(--sett-map-size-card-open)' : 'max-content';
   const height = tier === 'mini' ? 'auto' : tier === 'chip' ? 'var(--sett-map-size-node-chip-h)' : 'auto';
-  return html`<sett-node style="width:${width};height:${height}" name=${u.name} kind=${u.kind} tier=${tier} ?selected=${state.selected} ?focused=${state.focused} ?far=${state.far} ?declared=${state.declared || !!u.declared} sessions=${who.sessions ?? sessionsOf(u)} live=${who.live ?? ''}>
+  return html`<sett-node key=${u.id} style="width:${width};height:${height}" name=${u.name} kind=${u.kind} tier=${tier} ?selected=${state.selected} ?focused=${state.focused} ?far=${state.far} ?declared=${state.declared || !!u.declared} sessions=${who.sessions ?? sessionsOf(u)} live=${who.live ?? ''}>
     ${metaLines(u).map((m) => html`<span>${m}</span>`)}${badges(u)}
     ${tier === 'card' || (tier === 'sheet' && inside === nothing) ? html`${exposes.map((p) => portRow(p))}${needs.map((p) => portRow(p))}` : nothing}
     ${inside}
@@ -125,3 +131,154 @@ export const sheetRects = (f: Fixture, id: string, selected?: string): MinimapRe
     return [{ key: `col:${i}`, x, y: 0, w: num(S.column), h: tall, tone }, ...areas];
   });
 };
+
+// ---- the board: units where the fixture places them, the edges between them (sett-edge, #56)
+
+/** the port a board edge leaves and the one it reaches: the row that names the other unit or shares its contract, else the first of its kind */
+export function edgePorts(f: Fixture, e: { f: string; t: string; kind?: string }): { from: number; to: number } {
+  const s = unitPorts(f, e.f), t = unitPorts(f, e.t);
+  const first = (x: string) => x.split(' · ')[0].trim();
+  const tName = first(unitOf(f, e.t).name);
+  let from = s.needs.findIndex((p) => !!p.contract && t.exposes.some((q) => q.contract === p.contract));
+  if (from < 0) from = s.needs.findIndex((p) => first(p.name) === tName || first(p.name) === e.t);
+  if (from < 0) from = Math.max(0, s.needs.findIndex((p) => p.kind === (e.kind ?? 'crate')));
+  let to = t.exposes.findIndex((q) => !!q.contract && q.contract === s.needs[from]?.contract);
+  if (to < 0) to = 0;
+  return { from, to };
+}
+/** a port row's key on the board: unique per unit, side and row, so two units' ports never collide */
+export const boardPortKey = (unit: string, side: 'exposes' | 'needs', i: number) => `${unit}/${side}/${i}`;
+
+export interface BoardScene {
+  tier: 'chip' | 'card';
+  /** the unit whose edges are lit, with the flow; unrelated units and edges recede */
+  selected?: string;
+  /** the edge pointed at: lit (a story's play puts the pointer on it to show its label) */
+  point?: [string, string];
+  /** the unit pointed at, or its hint pill: its edges are lit */
+  pointUnit?: string;
+  /** the window onto the board, in board pixels; omitted, the whole board */
+  view?: { x: number; y: number; w: number; h: number };
+  /** units with an agent working now, by id: session ids */
+  live?: Record<string, string>;
+}
+/** the units of a repository at a tier, with their edges, in one positioned board */
+export function boardOf(f: Fixture, repo: string, s: BoardScene, extra: unknown = nothing) {
+  if (s.view && extra === nothing && s.tier === 'card') extra = hintsOf(f, repo, s.view, { lit: s.pointUnit, live: s.live });
+  const R = f.repos[repo], pad = 60, boxes = boardBoxes(f, repo, s.tier);
+  const at = (u: FixtureUnit) => boxes[u.id];
+  const near = new Set(s.selected ? [s.selected, ...R.edges.filter((e) => e.f === s.selected || e.t === s.selected).flatMap((e) => [e.f, e.t])] : []);
+  const w = Math.max(...R.units.map((u) => at(u).x)) + (s.tier === 'card' ? parseFloat(base.map.size.cardInterface) : parseFloat(base.map.size.nodeChipW)) + pad;
+  const h = Math.max(...R.units.map((u) => at(u).y + at(u).h)) + pad;
+  const unit = (u: FixtureUnit) => {
+    const { exposes, needs } = unitPorts(f, u.id), p = at(u);
+    const width = s.tier === 'card' ? 'var(--sett-map-size-card-interface)' : 'var(--sett-map-size-node-chip-w)';
+    const height = s.tier === 'card' ? 'auto' : 'var(--sett-map-size-node-chip-h)';
+    return html`<sett-node key=${u.id} style=${`position:absolute;left:${p.x}px;top:${p.y}px;width:${width};height:${height}`} name=${u.name} kind=${u.kind} tier=${s.tier}
+      ?selected=${u.id === s.selected} ?far=${!!s.selected && !near.has(u.id)} ?declared=${!!u.declared} sessions=${s.live?.[u.id] ?? sessionsOf(u)} live=${s.live?.[u.id] ?? ''}>
+      ${metaLines(u).map((m) => html`<span>${m}</span>`)}${badges(u)}
+      ${s.tier === 'card' ? html`${exposes.map((q, i) => html`<sett-port-row key=${boardPortKey(u.id, 'exposes', i)} slot="exposes" side="exposes" kind=${q.kind} name=${q.name} count=${q.count ?? ''}></sett-port-row>`)}${needs.map((q, i) => html`<sett-port-row key=${boardPortKey(u.id, 'needs', i)} slot="needs" side="needs" kind=${q.kind} name=${q.name} count=${q.count ?? ''}></sett-port-row>`)}` : nothing}
+    </sett-node>`;
+  };
+  const edge = (e: (typeof R.edges)[number]) => {
+    const { from, to } = edgePorts(f, e);
+    const mine = !!s.selected && (e.f === s.selected || e.t === s.selected), pointed = (!!s.point && s.point[0] === e.f && s.point[1] === e.t) || (!!s.pointUnit && (e.f === s.pointUnit || e.t === s.pointUnit));
+    const label = e.label ?? (e.n ? `${e.n} use${e.n > 1 ? 's' : ''}` : e.how);
+    return html`<sett-edge from=${e.f} to=${e.t} from-port=${ifDefined(s.tier === 'card' ? boardPortKey(e.f, 'needs', from) : undefined)} to-port=${ifDefined(s.tier === 'card' ? boardPortKey(e.t, 'exposes', to) : undefined)}
+      kind=${e.kind ?? 'crate'} label=${ifDefined(label)} ?selected=${mine} ?lit=${pointed} ?far=${!mine && !pointed && (!!s.selected || !!s.point || !!s.pointUnit)}></sett-edge>`;
+  };
+  const board = html`<div class="board" style=${`position:relative;width:${w}px;height:${h}px`}>${R.units.map(unit)}${R.edges.map(edge)}${extra}</div>`;
+  if (!s.view) return board;
+  return html`<div class="window" style=${`position:relative;overflow:hidden;width:${s.view.w}px;height:${s.view.h}px;box-shadow:0 0 0 var(--sett-stroke-hair) var(--sett-color-line)`}>
+    <div style=${`position:absolute;left:${-s.view.x}px;top:${-s.view.y}px`}>${board}</div></div>`;
+}
+
+/** where a repository's units sit on the board at a tier, as boxes (a card's height estimated from its port rows) */
+export function boardBoxes(f: Fixture, repo: string, tier: 'chip' | 'card') {
+  const R = f.repos[repo], K = tier === 'card' ? parseFloat(base.map.size.cardInterface) / parseFloat(base.map.size.nodeChipW) : 1, pad = 60;
+  const minx = Math.min(...R.units.map((u) => u.x)), miny = Math.min(...R.units.map((u) => u.y));
+  const row = parseFloat(base.map.size.portRow);
+  return Object.fromEntries(R.units.map((u) => {
+    const { exposes, needs } = unitPorts(f, u.id);
+    const w = tier === 'card' ? parseFloat(base.map.size.cardInterface) : parseFloat(base.map.size.nodeChipW);
+    const h = tier === 'card' ? 70 + Math.max(exposes.length, needs.length) * row + 24 : parseFloat(base.map.size.nodeChipH);
+    return [u.id, { x: Math.round((u.x - minx) * K + pad), y: Math.round((u.y - miny) * K + pad), w, h }];
+  }));
+}
+/** put the pointer on the edge from `f` to `t` in a story, to show its label */
+export async function pointAt(root: HTMLElement, f: string, t: string) {
+  const el = root.querySelector(`sett-edge[from="${f}"][to="${t}"]`) as (HTMLElement & { updateComplete: Promise<unknown> }) | null;
+  if (!el) return;
+  for (let k = 0; k < 20 && !el.shadowRoot?.querySelector('.hit'); k++) await new Promise((r) => setTimeout(r, 50));
+  el.shadowRoot?.querySelector('.hit')?.dispatchEvent(new Event('pointerenter'));
+}
+/** the hint pills of a window onto the board: one per off-screen neighbour, merged when they would touch */
+export function hintsOf(f: Fixture, repo: string, view: { x: number; y: number; w: number; h: number }, opts: { lit?: string; live?: Record<string, string> } = {}) {
+  const boxes = boardBoxes(f, repo, 'card'), R = f.repos[repo];
+  const nameOf = (k: string) => unitOf(f, k).name;
+  const keys = offscreenNeighbours({ view, boxes, edges: R.edges });
+  const cards = Object.entries(boxes).filter(([, b]) => b.x < view.x + view.w && b.x + b.w > view.x && b.y < view.y + view.h && b.y + b.h > view.y).map(([, b]) => b);
+  const size = (ks: string[]) => ({ w: Math.round((ks.length > 1 ? `${ks.length} neighbours · ${ks.slice(0, 2).map(nameOf).join(', ')}` : nameOf(ks[0])).length * 6.8 + 2 * parseFloat(base.space['3'])), h: 2 * parseFloat(base.map.radius.hint) });
+  return placeHints({ view, units: keys.map((k) => ({ key: k, box: boxes[k] })), cards, size }).map((h) => {
+    const sessions = h.keys.map((k) => opts.live?.[k]).filter(Boolean).join(' ');
+    return html`<sett-hint-chip style=${`left:${h.anchor.x}px;top:${h.anchor.y}px`} keys=${h.keys.join(' ')} names=${h.keys.map(nameOf).join(', ')} side=${h.side}
+      ?lit=${!!opts.lit && h.keys.includes(opts.lit)} sessions=${sessions} live=${sessions}></sett-hint-chip>`;
+  });
+}
+
+// ---- ghosts beside an open unit (sett-ghost, #56)
+
+/** a system node of the fixture's system map */
+interface SystemNode { id: string; name: string; kind: string; x: number; y: number; meta?: string; declared?: boolean; exposes: [string, string, string?, string?][]; needs: [string, string, string?, string?][] }
+const systemOf = (f: Fixture, id: string) => (f.system as { nodes: SystemNode[] }).nodes.find((n) => n.id === id)!;
+/** where `to` lies from `from` on the system map */
+export const systemDir = (f: Fixture, from: string, to: string) => { const a = systemOf(f, from), b = systemOf(f, to); return { dx: b.x - a.x, dy: b.y - a.y }; };
+export const ghostPortKey = (id: string, side: 'exposes' | 'needs', i: number) => `${id}/${side}/${i}`;
+const ghostRow = (id: string, side: 'exposes' | 'needs', i: number, p: [string, string, ...unknown[]], slot: string = side) =>
+  html`<sett-port-row key=${ghostPortKey(id, side, i)} slot=${slot} side=${side} kind=${p[0]} name=${p[1]}></sett-port-row>`;
+/** an outside system as a ghost: its port list */
+export const systemGhost = (f: Fixture, id: string) => {
+  const n = systemOf(f, id);
+  return html`<sett-ghost key=${id} body="system" name=${n.name} kind=${n.kind} ?declared=${!!n.declared} style="width:var(--sett-map-size-card-interface)"><span>${n.meta ?? ''}</span>
+    ${n.exposes.map((p, i) => ghostRow(id, 'exposes', i, p))}${n.needs.map((p, i) => ghostRow(id, 'needs', i, p))}</sett-ghost>`;
+};
+/** ghosts that would overlap, merged: one row per member, each with the port the open unit reaches */
+export const clusterGhost = (f: Fixture, ids: string[]) => html`<sett-ghost key=${ids.join('+')} body="cluster" name=${`${ids.length} neighbours`} kind="cluster" style="width:var(--sett-map-size-card-interface)">
+  <span>${ids.map((id) => systemOf(f, id).name).join(' · ')}</span>
+  ${ids.map((id) => { const n = systemOf(f, id), p = n.exposes[0]; return html`<sett-port-row key=${ghostPortKey(id, 'exposes', 0)} slot="members" side="exposes" kind=${p[0]} name=${`${n.name} · ${p[1]}`}></sett-port-row>`; })}</sett-ghost>`;
+/** another repository's unit as a ghost: its folded sheet */
+export const unitGhost = (f: Fixture, id: string) => {
+  const u = unitOf(f, id);
+  return html`<sett-ghost key=${id} body="unit" name=${u.name} kind=${u.kind}>${metaLines(u).map((m) => html`<span>${m}</span>`)}${sheetOf(f, id, {}, { folded: true, slot: 'inside' })}</sett-ghost>`;
+};
+
+export interface GhostSpec { body: unknown; dir: { dx: number; dy: number } }
+export interface GhostLine { from: string; fromPort: string; to: string; toPort: string; kind: string }
+/**
+ * An open unit with its ghosts beside it and the lines between them, as an app would draw it: the open unit is
+ * measured once it has rendered, `placeGhosts` places the ghosts beside it, and the board coordinator routes the lines.
+ */
+export function ghostScene(open: unknown, ghosts: GhostSpec[], lines: GhostLine[]) {
+  const place = async (board?: Element) => {
+    if (!board) return;
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    await Promise.all([...board.querySelectorAll('sett-node, sett-ghost, sett-sheet, sett-area, sett-rail, sett-port-row')].map((e) => (e as HTMLElement & { updateComplete?: Promise<unknown> }).updateComplete));
+    const o = board.getBoundingClientRect();
+    const rel = (e: Element) => { const r = e.getBoundingClientRect(); return { x: r.left - o.left, y: r.top - o.top, w: r.width, h: r.height }; };
+    const openEl = board.querySelector(':scope > .open')!, ghostEls = [...board.querySelectorAll(':scope > .ghost')] as HTMLElement[];
+    const sizes = ghostEls.map((g) => rel(g));
+    const placed = placeGhosts({ open: rel(openEl), ghosts: ghosts.map((g, i) => ({ key: String(i), dir: g.dir })), size: (keys) => sizes[Number(keys[0])] });
+    let maxx = 0, maxy = 0, minx = 0, miny = 0;
+    for (const p of placed) { minx = Math.min(minx, p.x); miny = Math.min(miny, p.y); }
+    const sx = -minx, sy = -miny;
+    (openEl as HTMLElement).style.left = `${sx}px`; (openEl as HTMLElement).style.top = `${sy}px`;
+    const ob = rel(openEl); maxx = ob.x + ob.w; maxy = ob.y + ob.h;
+    for (const p of placed) { const el = ghostEls[Number(p.keys[0])]; el.style.left = `${p.x + sx}px`; el.style.top = `${p.y + sy}px`; el.style.visibility = 'visible'; maxx = Math.max(maxx, p.x + sx + p.w); maxy = Math.max(maxy, p.y + sy + p.h); }
+    (board as HTMLElement).style.width = `${maxx}px`; (board as HTMLElement).style.height = `${maxy}px`;
+  };
+  return html`<div class="ghost-board" style="position:relative;width:100%;height:900px" ${ref(place)}>
+    <div class="open" style="position:absolute;left:0;top:0">${open}</div>
+    ${ghosts.map((g) => html`<div class="ghost" style="position:absolute;left:0;top:0;visibility:hidden">${g.body}</div>`)}
+    ${lines.map((l) => html`<sett-edge from=${l.from} from-port=${l.fromPort} to=${l.to} to-port=${l.toPort} kind=${l.kind}></sett-edge>`)}
+  </div>`;
+}

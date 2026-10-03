@@ -2071,6 +2071,14 @@
         },
         {
           "kind": "js",
+          "name": "FixtureEdge",
+          "declaration": {
+            "name": "FixtureEdge",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "InsideColumn",
           "declaration": {
             "name": "InsideColumn",
@@ -2335,6 +2343,78 @@
         },
         {
           "kind": "js",
+          "name": "SettEdge",
+          "declaration": {
+            "name": "SettEdge",
+            "module": "./map/sett-edge.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettHintChip",
+          "declaration": {
+            "name": "SettHintChip",
+            "module": "./map/sett-hint-chip.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettGhost",
+          "declaration": {
+            "name": "SettGhost",
+            "module": "./map/sett-ghost.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "GhostBody",
+          "declaration": {
+            "name": "GhostBody",
+            "module": "./map/sett-ghost.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "joinBoard",
+          "declaration": {
+            "name": "joinBoard",
+            "module": "./map/board-lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "leaveBoard",
+          "declaration": {
+            "name": "leaveBoard",
+            "module": "./map/board-lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boardsWatched",
+          "declaration": {
+            "name": "boardsWatched",
+            "module": "./map/board-lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BoardLine",
+          "declaration": {
+            "name": "BoardLine",
+            "module": "./map/board-lines.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BoardPill",
+          "declaration": {
+            "name": "BoardPill",
+            "module": "./map/board-lines.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettLink",
           "declaration": {
             "name": "SettLink",
@@ -2403,6 +2483,142 @@
           "declaration": {
             "name": "BundleBranch",
             "module": "./map/sett-bundle.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "placeGhosts",
+          "declaration": {
+            "name": "placeGhosts",
+            "module": "./map/ghosts.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Ghost",
+          "declaration": {
+            "name": "Ghost",
+            "module": "./map/ghosts.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "GhostIn",
+          "declaration": {
+            "name": "GhostIn",
+            "module": "./map/ghosts.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "GhostInput",
+          "declaration": {
+            "name": "GhostInput",
+            "module": "./map/ghosts.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "GhostSide",
+          "declaration": {
+            "name": "GhostSide",
+            "module": "./map/ghosts.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "placeHints",
+          "declaration": {
+            "name": "placeHints",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "offscreenNeighbours",
+          "declaration": {
+            "name": "offscreenNeighbours",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Hint",
+          "declaration": {
+            "name": "Hint",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HintInput",
+          "declaration": {
+            "name": "HintInput",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HintUnit",
+          "declaration": {
+            "name": "HintUnit",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HintSide",
+          "declaration": {
+            "name": "HintSide",
+            "module": "./map/hints.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boardRoutes",
+          "declaration": {
+            "name": "boardRoutes",
+            "module": "./map/board-routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BoardEdge",
+          "declaration": {
+            "name": "BoardEdge",
+            "module": "./map/board-routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BoardEnd",
+          "declaration": {
+            "name": "BoardEnd",
+            "module": "./map/board-routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BoardInput",
+          "declaration": {
+            "name": "BoardInput",
+            "module": "./map/board-routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BoardRoute",
+          "declaration": {
+            "name": "BoardRoute",
+            "module": "./map/board-routes.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "BoardSide",
+          "declaration": {
+            "name": "BoardSide",
+            "module": "./map/board-routes.js"
           }
         },
         {
@@ -3353,6 +3569,116 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/board-lines.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "joinBoard",
+          "return": {
+            "type": {
+              "text": "void"
+            }
+          },
+          "parameters": [
+            {
+              "name": "line",
+              "type": {
+                "text": "BoardLine"
+              }
+            }
+          ],
+          "description": "an edge joins the board of its parent; the first one wakes the watcher for it"
+        },
+        {
+          "kind": "function",
+          "name": "leaveBoard",
+          "return": {
+            "type": {
+              "text": "void"
+            }
+          },
+          "parameters": [
+            {
+              "name": "line",
+              "type": {
+                "text": "BoardLine"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "boardsWatched",
+          "return": {
+            "type": {
+              "text": "number"
+            }
+          },
+          "description": "how many boards are being followed; for tests"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "joinBoard",
+          "declaration": {
+            "name": "joinBoard",
+            "module": "src/map/board-lines.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "leaveBoard",
+          "declaration": {
+            "name": "leaveBoard",
+            "module": "src/map/board-lines.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boardsWatched",
+          "declaration": {
+            "name": "boardsWatched",
+            "module": "src/map/board-lines.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/board-routes.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "boardRoutes",
+          "return": {
+            "type": {
+              "text": "Map<string, BoardRoute>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{ obstacles, edges, spacing: S, margin = S, within }",
+              "type": {
+                "text": "BoardInput"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "boardRoutes",
+          "declaration": {
+            "name": "boardRoutes",
+            "module": "src/map/board-routes.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/fixtures.ts",
       "declarations": [
         {
@@ -3566,7 +3892,7 @@
               }
             }
           ],
-          "description": "the key of a port row in a story: side and contract, unique inside a unit"
+          "description": "the key of a port row in a story: side and contract (else name, zed's ports name no contract), unique inside a unit"
         },
         {
           "kind": "function",
@@ -3815,6 +4141,98 @@
           "declaration": {
             "name": "wiresOf",
             "module": "src/map/fixtures.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/ghosts.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "placeGhosts",
+          "return": {
+            "type": {
+              "text": "Ghost[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{ open: O, ghosts, size, gap = GUTTER }",
+              "type": {
+                "text": "GhostInput"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "placeGhosts",
+          "declaration": {
+            "name": "placeGhosts",
+            "module": "src/map/ghosts.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/hints.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "placeHints",
+          "return": {
+            "type": {
+              "text": "Hint[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{ view: v, units, cards = [], size }",
+              "type": {
+                "text": "HintInput"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "offscreenNeighbours",
+          "return": {
+            "type": {
+              "text": "string[]"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{ view, boxes, edges }",
+              "type": {
+                "text": "{ view: Box; boxes: Record<string, Box>; edges: { f: string; t: string }[] }"
+              }
+            }
+          ],
+          "description": "the units outside the window joined by an edge to one any part of which is inside it"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "placeHints",
+          "declaration": {
+            "name": "placeHints",
+            "module": "src/map/hints.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "offscreenNeighbours",
+          "declaration": {
+            "name": "offscreenNeighbours",
+            "module": "src/map/hints.ts"
           }
         }
       ]
@@ -4629,6 +5047,300 @@
           "kind": "variable",
           "name": "y",
           "default": "head"
+        },
+        {
+          "kind": "function",
+          "name": "edgePorts",
+          "return": {
+            "type": {
+              "text": "{ from: number; to: number }"
+            }
+          },
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "{ f: string; t: string; kind?: string }"
+              }
+            }
+          ],
+          "description": "the port a board edge leaves and the one it reaches: the row that names the other unit or shares its contract, else the first of its kind"
+        },
+        {
+          "kind": "function",
+          "name": "boardPortKey",
+          "parameters": [
+            {
+              "name": "unit",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "side",
+              "type": {
+                "text": "'exposes' | 'needs'"
+              }
+            },
+            {
+              "name": "i",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "description": "a port row's key on the board: unique per unit, side and row, so two units' ports never collide"
+        },
+        {
+          "kind": "function",
+          "name": "boardOf",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "repo",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "text": "BoardScene"
+              }
+            },
+            {
+              "name": "extra",
+              "default": "nothing",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ],
+          "description": "the units of a repository at a tier, with their edges, in one positioned board"
+        },
+        {
+          "kind": "function",
+          "name": "boardBoxes",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "repo",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tier",
+              "type": {
+                "text": "'chip' | 'card'"
+              }
+            }
+          ],
+          "description": "where a repository's units sit on the board at a tier, as boxes (a card's height estimated from its port rows)"
+        },
+        {
+          "kind": "function",
+          "name": "pointAt",
+          "parameters": [
+            {
+              "name": "root",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "f",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "t",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "put the pointer on the edge from `f` to `t` in a story, to show its label"
+        },
+        {
+          "kind": "function",
+          "name": "hintsOf",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "repo",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "view",
+              "type": {
+                "text": "{ x: number; y: number; w: number; h: number }"
+              }
+            },
+            {
+              "name": "opts",
+              "default": "{}",
+              "type": {
+                "text": "{ lit?: string; live?: Record<string, string> }"
+              }
+            }
+          ],
+          "description": "the hint pills of a window onto the board: one per off-screen neighbour, merged when they would touch"
+        },
+        {
+          "kind": "function",
+          "name": "systemDir",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "from",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "to",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "where `to` lies from `from` on the system map"
+        },
+        {
+          "kind": "function",
+          "name": "ghostPortKey",
+          "parameters": [
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "side",
+              "type": {
+                "text": "'exposes' | 'needs'"
+              }
+            },
+            {
+              "name": "i",
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "systemGhost",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "an outside system as a ghost: its port list"
+        },
+        {
+          "kind": "function",
+          "name": "clusterGhost",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "ids",
+              "type": {
+                "text": "string[]"
+              }
+            }
+          ],
+          "description": "ghosts that would overlap, merged: one row per member, each with the port the open unit reaches"
+        },
+        {
+          "kind": "function",
+          "name": "unitGhost",
+          "parameters": [
+            {
+              "name": "f",
+              "type": {
+                "text": "Fixture"
+              }
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "another repository's unit as a ghost: its folded sheet"
+        },
+        {
+          "kind": "function",
+          "name": "ghostScene",
+          "parameters": [
+            {
+              "name": "open",
+              "type": {
+                "text": "unknown"
+              }
+            },
+            {
+              "name": "ghosts",
+              "type": {
+                "text": "GhostSpec[]"
+              }
+            },
+            {
+              "name": "lines",
+              "type": {
+                "text": "GhostLine[]"
+              }
+            }
+          ],
+          "description": "An open unit with its ghosts beside it and the lines between them, as an app would draw it: the open unit is\nmeasured once it has rendered, `placeGhosts` places the ghosts beside it, and the board coordinator routes the lines."
         }
       ],
       "exports": [
@@ -4805,6 +5517,102 @@
           "name": "sheetRects",
           "declaration": {
             "name": "sheetRects",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "edgePorts",
+          "declaration": {
+            "name": "edgePorts",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boardPortKey",
+          "declaration": {
+            "name": "boardPortKey",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boardOf",
+          "declaration": {
+            "name": "boardOf",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "boardBoxes",
+          "declaration": {
+            "name": "boardBoxes",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "pointAt",
+          "declaration": {
+            "name": "pointAt",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "hintsOf",
+          "declaration": {
+            "name": "hintsOf",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "systemDir",
+          "declaration": {
+            "name": "systemDir",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ghostPortKey",
+          "declaration": {
+            "name": "ghostPortKey",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "systemGhost",
+          "declaration": {
+            "name": "systemGhost",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "clusterGhost",
+          "declaration": {
+            "name": "clusterGhost",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "unitGhost",
+          "declaration": {
+            "name": "unitGhost",
+            "module": "src/map/map-fixtures.stories-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ghostScene",
+          "declaration": {
+            "name": "ghostScene",
             "module": "src/map/map-fixtures.stories-helpers.ts"
           }
         }
@@ -6487,6 +7295,640 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/sett-edge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One line between two units on the board. It names its ends by `key`\n(`from`, `to`) and, at card zoom, the port rows it leaves and reaches\n(`from-port`, `to-port`); it never gets coordinates. The edges under one\nparent are routed together (`board-lines.ts`): square lines in the gaps\nbetween the boxes, one trunk per source with a dot where it branches,\nlines into one dock joining before it, a line going back around the near\nend of its own box (#56). At chip zoom a line leaves the middle of a side;\nat card zoom it docks on the port dots. An end off-screen ends on the hint\npill that stands in for it.\n\nColour and dash are the port kind (`map.kind.*`); the arrow says who uses\nwhom and the line stops `map.size.arrow` before it; a halo parts it from\nthe lines it crosses. Nothing is written on it at rest: the kind and the\n`label` show under the pointer. `lit` (an end is pointed at, or its hint\npill) turns it blue and keeps its dash; `selected` (the selected\nunit's edges) adds the `flow`: a dashed kind's own dashes march, a solid\none carries travelling gaps. `far` recedes it to `map.far`.",
+          "name": "SettEdge",
+          "cssParts": [
+            {
+              "description": "the drawing",
+              "name": "svg"
+            },
+            {
+              "description": "the label pill, under the pointer",
+              "name": "label"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "from",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the unit that uses",
+              "attribute": "from",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "to",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the unit it uses",
+              "attribute": "to",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fromPort",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the key of the port row it leaves, on a card",
+              "attribute": "from-port"
+            },
+            {
+              "kind": "field",
+              "name": "toPort",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the key of the port row it reaches, on a card",
+              "attribute": "to-port"
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "PortKind"
+              },
+              "default": "'crate'",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what and how much, shown with the kind under the pointer (`crate · 31 uses`)",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "an end is pointed at, or the hint pill it ends on: blue, its dash kept",
+              "attribute": "lit",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "an edge of the selected unit: blue, with the flow",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the selection: `map.far`",
+              "attribute": "far",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "route",
+              "type": {
+                "text": "Route | undefined"
+              },
+              "description": "the geometry, in the parent's coordinates; the board coordinator sets it"
+            },
+            {
+              "kind": "field",
+              "name": "pointed",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "point",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "`{ on }` when pointed at",
+              "name": "sett-light"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "from",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the unit that uses",
+              "fieldName": "from"
+            },
+            {
+              "name": "to",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the unit it uses",
+              "fieldName": "to"
+            },
+            {
+              "name": "from-port",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the key of the port row it leaves, on a card",
+              "fieldName": "fromPort"
+            },
+            {
+              "name": "to-port",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the key of the port row it reaches, on a card",
+              "fieldName": "toPort"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "PortKind"
+              },
+              "default": "'crate'",
+              "fieldName": "kind"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what and how much, shown with the kind under the pointer (`crate · 31 uses`)",
+              "fieldName": "label"
+            },
+            {
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "an end is pointed at, or the hint pill it ends on: blue, its dash kept",
+              "fieldName": "lit"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "an edge of the selected unit: blue, with the flow",
+              "fieldName": "selected"
+            },
+            {
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the selection: `map.far`",
+              "fieldName": "far"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-edge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettEdge",
+          "declaration": {
+            "name": "SettEdge",
+            "module": "src/map/sett-edge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-edge",
+          "declaration": {
+            "name": "SettEdge",
+            "module": "src/map/sett-edge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-ghost.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A neighbour from outside the repository, shown beside the open unit\n(#56): a unit of another repository, or a system from the system map.\nWhere it goes is `placeGhosts` (`ghosts.ts`): on the side where it lies on\nthe system map, never callers-left / dependencies-right. Three bodies:\n\n- `unit`: another repository's unit, a folded `sett-sheet` in the `inside`\n  slot (its areas closed into chips, so a line lands on the area it reaches);\n- `system`: an outside system, its port rows in `exposes` and `needs`\n  (dashed when `declared`);\n- `cluster`: ghosts that would overlap, merged; one row per member in\n  `members`.\n\nA ghost recedes by colour, never by opacity, and so does everything it\nholds: inside it the ink tokens are the mute ones and the borders the\nfaint ones, inherited down into every element it hosts, a folded sheet's\nareas and items included (text stays above 4.5:1). It never carries `▴ close`: it is not open.\nIts `key` is what a `sett-edge` ends on.",
+          "name": "SettGhost",
+          "cssParts": [
+            {
+              "description": "the head: name · kind",
+              "name": "hd"
+            }
+          ],
+          "slots": [
+            {
+              "description": "one or two meta lines",
+              "name": ""
+            },
+            {
+              "description": "the folded `sett-sheet` (body `unit`)",
+              "name": "inside"
+            },
+            {
+              "description": "`sett-port-row side=\"exposes\"` rows (body `system`)",
+              "name": "exposes"
+            },
+            {
+              "description": "`sett-port-row side=\"needs\"` rows (body `system`)",
+              "name": "needs"
+            },
+            {
+              "description": "one `sett-port-row side=\"exposes\"` per member (body `cluster`)",
+              "name": "members"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-edge` ends on",
+              "attribute": "key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "data store · third-party · app · … shown mute after the name",
+              "attribute": "kind"
+            },
+            {
+              "kind": "field",
+              "name": "body",
+              "type": {
+                "text": "GhostBody"
+              },
+              "default": "'system'",
+              "attribute": "body",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "declared",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "declared by hand, nothing verified: dashed (rule 10)",
+              "attribute": "declared",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-edge` ends on",
+              "fieldName": "key"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "kind",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "data store · third-party · app · … shown mute after the name",
+              "fieldName": "kind"
+            },
+            {
+              "name": "body",
+              "type": {
+                "text": "GhostBody"
+              },
+              "default": "'system'",
+              "fieldName": "body"
+            },
+            {
+              "name": "declared",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "declared by hand, nothing verified: dashed (rule 10)",
+              "fieldName": "declared"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-ghost",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettGhost",
+          "declaration": {
+            "name": "SettGhost",
+            "module": "src/map/sett-ghost.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-ghost",
+          "declaration": {
+            "name": "SettGhost",
+            "module": "src/map/sett-ghost.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-hint-chip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The pill on the window's border for a neighbour that is off-screen\n(DESIGN.md rule 2). It stands for one unit, or for several merged when\ntheir pills would touch: then a double border and `n neighbours · ` the\nfirst two names. Where it goes is `placeHints` (`hints.ts`): the app sets\n`left`/`top` to its anchor and the pill hangs from it by its `side`. It is\ngone the moment its unit is seen. It stands in for its units on the board: the\n`sett-edge`s to them end on it (#56).\n\nWhen an agent works in an off-screen unit, the pill is the nearest thing\nyou can see (DESIGN.md § Motion, where it lands): its session dot breathes\nhere, and a session arriving plays the pulse (`arrive`).",
+          "name": "SettHintChip",
+          "cssParts": [
+            {
+              "description": "the pill",
+              "name": "pill"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "keys",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "the keys of the units it stands for, space-separated",
+              "attribute": "keys",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "names",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "their names, comma-separated, in the order of `keys`",
+              "attribute": "names"
+            },
+            {
+              "kind": "field",
+              "name": "side",
+              "type": {
+                "text": "HintSide"
+              },
+              "default": "'right'",
+              "description": "the border it sits on; its edges reach it from the other side",
+              "attribute": "side",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "pointed at, or one of its edges is: blue",
+              "attribute": "lit",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "sessions",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions with an agent in its units, space-separated ids, one dot each",
+              "attribute": "sessions"
+            },
+            {
+              "kind": "field",
+              "name": "live",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions working there right now: their dots breathe; a change plays the pulse",
+              "attribute": "live"
+            },
+            {
+              "kind": "field",
+              "name": "igniting",
+              "type": {
+                "text": "string[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "pointed",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "parent",
+              "type": {
+                "text": "Element | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "ids",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string[]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "v",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "point",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "on",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-light",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ on, keys }` when pointed at; the app lights its edges"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "keys",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "the keys of the units it stands for, space-separated",
+              "fieldName": "keys"
+            },
+            {
+              "name": "names",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "their names, comma-separated, in the order of `keys`",
+              "fieldName": "names"
+            },
+            {
+              "name": "side",
+              "type": {
+                "text": "HintSide"
+              },
+              "default": "'right'",
+              "description": "the border it sits on; its edges reach it from the other side",
+              "fieldName": "side"
+            },
+            {
+              "name": "lit",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "pointed at, or one of its edges is: blue",
+              "fieldName": "lit"
+            },
+            {
+              "name": "sessions",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions with an agent in its units, space-separated ids, one dot each",
+              "fieldName": "sessions"
+            },
+            {
+              "name": "live",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the sessions working there right now: their dots breathe; a change plays the pulse",
+              "fieldName": "live"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-hint-chip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettHintChip",
+          "declaration": {
+            "name": "SettHintChip",
+            "module": "src/map/sett-hint-chip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-hint-chip",
+          "declaration": {
+            "name": "SettHintChip",
+            "module": "src/map/sett-hint-chip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/sett-item.ts",
       "declarations": [
         {
@@ -8091,6 +9533,16 @@
           "members": [
             {
               "kind": "field",
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-edge` ends on (`from`, `to`); the board also accepts `data-id`",
+              "attribute": "key",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "name",
               "type": {
                 "text": "string"
@@ -8275,6 +9727,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "key",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the name a `sett-edge` ends on (`from`, `to`); the board also accepts `data-id`",
+              "fieldName": "key"
+            },
             {
               "name": "name",
               "type": {

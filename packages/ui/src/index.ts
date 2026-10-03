@@ -36,6 +36,7 @@ export { SettCrumb } from './map/sett-crumb.js';
 export { SettBack } from './map/sett-back.js';
 export { SettCue } from './map/sett-cue.js';
 export { SettContractCard, type ContractUse } from './map/sett-contract-card.js';
+export { SettCodePage, type CodeLine, type CodePortal, type CodePortalSide } from './map/sett-code-page.js';
 export { scopeWords, scopeText, scopeStyles, SCOPE_LOCK, type Scope, type ScopeKind } from './scope.js';
 export { badgeStyles, type BadgeTone } from './badge.js';
 export { SettActivityRail, SettRailItem } from './shell/sett-activity-rail.js';

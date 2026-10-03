@@ -2648,6 +2648,38 @@
         },
         {
           "kind": "js",
+          "name": "SettCodePage",
+          "declaration": {
+            "name": "SettCodePage",
+            "module": "./map/sett-code-page.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodeLine",
+          "declaration": {
+            "name": "CodeLine",
+            "module": "./map/sett-code-page.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodePortal",
+          "declaration": {
+            "name": "CodePortal",
+            "module": "./map/sett-code-page.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodePortalSide",
+          "declaration": {
+            "name": "CodePortalSide",
+            "module": "./map/sett-code-page.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "scopeWords",
           "declaration": {
             "name": "scopeWords",
@@ -5552,6 +5584,189 @@
           "declaration": {
             "name": "SettBundle",
             "module": "src/map/sett-bundle.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-code-page.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The page around the code of an item, in a tab of `sett-tabbar` (map rule\n4). It is not an editor (rule 12: the editor is Theia's): it is the head\n(`file:line`, the unit) and the two portals, `callers` and `calls`, each a\nrow of pills that lead to the item at the other end of a call.\n\nThe body is the host's: in Theia, put the editor in the default slot and\nmark its lines through the decoration classes of `editor.css`\n(`sett-ed-line`, `sett-ed-line--bad`). With nothing slotted the body is a\nread-only listing of `lines`: numbers, the item's span highlighted, a bad\nline tinted with `⚠` in its gutter. No caret, no selection model, no\nsyntax engine. Pointing eases a portal's border (`motion.hover`).",
+          "name": "SettCodePage",
+          "cssParts": [
+            {
+              "description": "the file line and the portals",
+              "name": "head"
+            },
+            {
+              "description": "the listing, or the slotted editor",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the host's editor; replaces the listing",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "file",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "file"
+            },
+            {
+              "kind": "field",
+              "name": "line",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "the line the item starts at",
+              "attribute": "line"
+            },
+            {
+              "kind": "field",
+              "name": "unit",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the unit the item lives in",
+              "attribute": "unit"
+            },
+            {
+              "kind": "field",
+              "name": "lines",
+              "type": {
+                "text": "CodeLine[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "callers",
+              "type": {
+                "text": "CodePortal[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "calls",
+              "type": {
+                "text": "CodePortal[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "method",
+              "name": "go",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "side",
+                  "type": {
+                    "text": "CodePortalSide"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "where",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "side",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "side",
+                  "type": {
+                    "text": "CodePortalSide"
+                  }
+                },
+                {
+                  "name": "portals",
+                  "type": {
+                    "text": "CodePortal[]"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-portal",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ key, side }` when a portal is chosen"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "file",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "file"
+            },
+            {
+              "name": "line",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "the line the item starts at",
+              "fieldName": "line"
+            },
+            {
+              "name": "unit",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the unit the item lives in",
+              "fieldName": "unit"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-code-page",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettCodePage",
+          "declaration": {
+            "name": "SettCodePage",
+            "module": "src/map/sett-code-page.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-code-page",
+          "declaration": {
+            "name": "SettCodePage",
+            "module": "src/map/sett-code-page.ts"
           }
         }
       ]

@@ -2056,6 +2056,22 @@
         },
         {
           "kind": "js",
+          "name": "FixtureCode",
+          "declaration": {
+            "name": "FixtureCode",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FixtureCodeLine",
+          "declaration": {
+            "name": "FixtureCodeLine",
+            "module": "./map/fixtures.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "Port",
           "declaration": {
             "name": "Port",
@@ -2264,6 +2280,22 @@
         },
         {
           "kind": "js",
+          "name": "linkHead",
+          "declaration": {
+            "name": "linkHead",
+            "module": "./map/sett-link.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linkTail",
+          "declaration": {
+            "name": "linkTail",
+            "module": "./map/sett-link.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettBundle",
           "declaration": {
             "name": "SettBundle",
@@ -2464,6 +2496,14 @@
         },
         {
           "kind": "js",
+          "name": "LINK_FAMILY_MEANS",
+          "declaration": {
+            "name": "LINK_FAMILY_MEANS",
+            "module": "./map/link-kinds.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "isLinkKind",
           "declaration": {
             "name": "isLinkKind",
@@ -2612,6 +2652,86 @@
           "declaration": {
             "name": "SettCue",
             "module": "./map/sett-cue.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettContractCard",
+          "declaration": {
+            "name": "SettContractCard",
+            "module": "./map/sett-contract-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ContractUse",
+          "declaration": {
+            "name": "ContractUse",
+            "module": "./map/sett-contract-card.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettLegend",
+          "declaration": {
+            "name": "SettLegend",
+            "module": "./map/sett-legend.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "keptOf",
+          "declaration": {
+            "name": "keptOf",
+            "module": "./map/sett-legend.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "filterOf",
+          "declaration": {
+            "name": "filterOf",
+            "module": "./map/sett-legend.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FILTER_NONE",
+          "declaration": {
+            "name": "FILTER_NONE",
+            "module": "./map/sett-legend.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettCodePage",
+          "declaration": {
+            "name": "SettCodePage",
+            "module": "./map/sett-code-page.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodeLine",
+          "declaration": {
+            "name": "CodeLine",
+            "module": "./map/sett-code-page.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodePortal",
+          "declaration": {
+            "name": "CodePortal",
+            "module": "./map/sett-code-page.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CodePortalSide",
+          "declaration": {
+            "name": "CodePortalSide",
+            "module": "./map/sett-code-page.js"
           }
         },
         {
@@ -3821,6 +3941,15 @@
         },
         {
           "kind": "variable",
+          "name": "LINK_FAMILY_MEANS",
+          "type": {
+            "text": "Record<LinkFamily, string>"
+          },
+          "default": "{ does: 'runs something', promises: 'a contract', knows: 'depends on a shape', around: 'surrounds the code' }",
+          "description": "what a family says, in the words of `map.link.<family>`"
+        },
+        {
+          "kind": "variable",
           "name": "LINK_KINDS",
           "type": {
             "text": "Record<LinkKind, LinkKindSpec>"
@@ -3892,6 +4021,14 @@
           "name": "LINK_FAMILIES",
           "declaration": {
             "name": "LINK_FAMILIES",
+            "module": "src/map/link-kinds.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LINK_FAMILY_MEANS",
+          "declaration": {
+            "name": "LINK_FAMILY_MEANS",
             "module": "src/map/link-kinds.ts"
           }
         },
@@ -5526,6 +5663,189 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/sett-code-page.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The page around the code of an item, in a tab of `sett-tabbar` (map rule\n4). It is not an editor (rule 12: the editor is Theia's): it is the head\n(`file:line`, the unit) and the two portals, `callers` and `calls`, each a\nrow of pills that lead to the item at the other end of a call.\n\nThe body is the host's: in Theia, put the editor in the default slot and\nmark its lines through the decoration classes of `editor.css`\n(`sett-ed-line`, `sett-ed-line--bad`). With nothing slotted the body is a\nread-only listing of `lines`: numbers, the item's span highlighted, a bad\nline tinted with `⚠` in its gutter. No caret, no selection model, no\nsyntax engine. Pointing eases a portal's border (`motion.hover`).",
+          "name": "SettCodePage",
+          "cssParts": [
+            {
+              "description": "the file line and the portals",
+              "name": "head"
+            },
+            {
+              "description": "the listing, or the slotted editor",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the host's editor; replaces the listing",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "file",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "file"
+            },
+            {
+              "kind": "field",
+              "name": "line",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "the line the item starts at",
+              "attribute": "line"
+            },
+            {
+              "kind": "field",
+              "name": "unit",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the unit the item lives in",
+              "attribute": "unit"
+            },
+            {
+              "kind": "field",
+              "name": "lines",
+              "type": {
+                "text": "CodeLine[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "callers",
+              "type": {
+                "text": "CodePortal[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "calls",
+              "type": {
+                "text": "CodePortal[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "method",
+              "name": "go",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "side",
+                  "type": {
+                    "text": "CodePortalSide"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "where",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "side",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "side",
+                  "type": {
+                    "text": "CodePortalSide"
+                  }
+                },
+                {
+                  "name": "portals",
+                  "type": {
+                    "text": "CodePortal[]"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-portal",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ key, side }` when a portal is chosen"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "file",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "file"
+            },
+            {
+              "name": "line",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "the line the item starts at",
+              "fieldName": "line"
+            },
+            {
+              "name": "unit",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the unit the item lives in",
+              "fieldName": "unit"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-code-page",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettCodePage",
+          "declaration": {
+            "name": "SettCodePage",
+            "module": "src/map/sett-code-page.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-code-page",
+          "declaration": {
+            "name": "SettCodePage",
+            "module": "src/map/sett-code-page.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/sett-column.ts",
       "declarations": [
         {
@@ -5660,6 +5980,195 @@
           "declaration": {
             "name": "SettColumn",
             "module": "src/map/sett-column.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-contract-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "What a port promises: the kind chip (the kind's dot and word, the same\ncolour as on the port row), the name, the owner, then `format · witness`,\nthe ops in mono on the well tint, the schema, who uses it, and the notes.\nA part with nothing to say is absent. Every contract cites a witness\n`file:line` (map rule 10); one without is `declared`: dashed, and it says so.\n\nOne skeleton for every kind; the card never animates and holds no verb.",
+          "name": "SettContractCard",
+          "cssParts": [
+            {
+              "description": "the kind chip",
+              "name": "chip"
+            },
+            {
+              "description": "the ops block",
+              "name": "ops"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "PortKind"
+              },
+              "default": "'crate'",
+              "description": "the port kind, from the kind table (`PORT_KINDS`)",
+              "attribute": "kind",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "owner",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "who owns the contract: a unit, a repo, or `external`",
+              "attribute": "owner"
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how it is written down: `actix-web App · 12 routes`",
+              "attribute": "format"
+            },
+            {
+              "kind": "field",
+              "name": "witness",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where it is stated in code, `file:line`, several separated by ` · `; none means declared by hand",
+              "attribute": "witness"
+            },
+            {
+              "kind": "field",
+              "name": "ops",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "one line per operation, as written in the contract"
+            },
+            {
+              "kind": "field",
+              "name": "schema",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the shape it carries, one line",
+              "attribute": "schema"
+            },
+            {
+              "kind": "field",
+              "name": "used",
+              "type": {
+                "text": "ContractUse[]"
+              },
+              "default": "[]",
+              "description": "who uses it, and how"
+            },
+            {
+              "kind": "field",
+              "name": "notes",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "notes"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "PortKind"
+              },
+              "default": "'crate'",
+              "description": "the port kind, from the kind table (`PORT_KINDS`)",
+              "fieldName": "kind"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "name"
+            },
+            {
+              "name": "owner",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "who owns the contract: a unit, a repo, or `external`",
+              "fieldName": "owner"
+            },
+            {
+              "name": "format",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "how it is written down: `actix-web App · 12 routes`",
+              "fieldName": "format"
+            },
+            {
+              "name": "witness",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "where it is stated in code, `file:line`, several separated by ` · `; none means declared by hand",
+              "fieldName": "witness"
+            },
+            {
+              "name": "schema",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the shape it carries, one line",
+              "fieldName": "schema"
+            },
+            {
+              "name": "notes",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "notes"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-contract-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettContractCard",
+          "declaration": {
+            "name": "SettContractCard",
+            "module": "src/map/sett-contract-card.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-contract-card",
+          "declaration": {
+            "name": "SettContractCard",
+            "module": "src/map/sett-contract-card.ts"
           }
         }
       ]
@@ -6297,8 +6806,410 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/map/sett-legend.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "FILTER_NONE",
+          "type": {
+            "text": "string"
+          },
+          "default": "'none'",
+          "description": "the filter value that keeps nothing: no kind or family has this name, so every link recedes"
+        },
+        {
+          "kind": "function",
+          "name": "keptOf",
+          "return": {
+            "type": {
+              "text": "Set<LinkKind>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "filter",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "the kinds a `sett-sheet` filter keeps: a family name stands for its kinds; empty keeps everything"
+        },
+        {
+          "kind": "function",
+          "name": "filterOf",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          },
+          "parameters": [
+            {
+              "name": "kept",
+              "type": {
+                "text": "Set<LinkKind>"
+              }
+            }
+          ],
+          "description": "the shortest `sett-sheet` filter that keeps exactly these kinds: empty for all, a family's name when the family is whole"
+        },
+        {
+          "kind": "class",
+          "description": "The key to the map, on demand (map rule 8): a section of `sett-panel`,\nfolded to one row until `open`. It is also the control that filters the\nlinks: one toggle per family (does · promises · knows · around), one per\nkind inside it, and one for the fallback. Its rows come from the kind\ntables (`LINK_KINDS`, `LINK_FAMILIES`, `PORT_KINDS`), never a second list:\na swatch is the family's line pattern and the kind's head, as `sett-link`\ndraws them. The port kinds are a key only, as is the finding, which never\nrecedes.\n\nIt holds no map state. `filter` is the value of `sett-sheet filter` (the\nfamilies and kinds to keep; empty keeps everything); a toggle fires\n`sett-filter` with the next value and the host copies it onto the sheet\nand back here. Folded, the row says how many kinds are shown while a\nfilter is on. Opening the section and listing a family's kinds are the\nlegend's own. Pointing eases a row's background (`motion.hover`).",
+          "name": "SettLegend",
+          "cssParts": [
+            {
+              "description": "the row that opens and closes the section",
+              "name": "head"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "filter",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the families and kinds kept, as `sett-sheet filter` takes them; empty keeps everything",
+              "attribute": "filter"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the section is unfolded",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the families whose kinds are listed, separated by spaces",
+              "attribute": "expanded"
+            },
+            {
+              "kind": "field",
+              "name": "kept",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "listed",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "say",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "kept",
+                  "type": {
+                    "text": "Set<LinkKind>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleKind",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "kind",
+                  "type": {
+                    "text": "LinkKind"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleFamily",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "family",
+                  "type": {
+                    "text": "LinkFamily"
+                  }
+                }
+              ],
+              "description": "a family that is whole goes off; one that is off or partial comes back whole"
+            },
+            {
+              "kind": "method",
+              "name": "list",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "family",
+                  "type": {
+                    "text": "LinkFamily"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "swatch",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "cls",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "kind",
+                  "optional": true,
+                  "type": {
+                    "text": "LinkKind"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "check",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "Check"
+                  }
+                },
+                {
+                  "name": "label",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "toggle",
+                  "type": {
+                    "text": "() => void"
+                  }
+                },
+                {
+                  "name": "body",
+                  "type": {
+                    "text": "unknown"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "family",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "f",
+                  "type": {
+                    "text": "LinkFamily"
+                  }
+                },
+                {
+                  "name": "kept",
+                  "type": {
+                    "text": "Set<LinkKind>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "kind",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "k",
+                  "type": {
+                    "text": "LinkKind"
+                  }
+                },
+                {
+                  "name": "kept",
+                  "type": {
+                    "text": "Set<LinkKind>"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "sett-filter",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "`{ filter }`, the next value for `sett-sheet filter`, when a family or a kind is toggled"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "filter",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the families and kinds kept, as `sett-sheet filter` takes them; empty keeps everything",
+              "fieldName": "filter"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the section is unfolded",
+              "fieldName": "open"
+            },
+            {
+              "name": "expanded",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the families whose kinds are listed, separated by spaces",
+              "fieldName": "expanded"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-legend",
+          "customElement": true
+        },
+        {
+          "kind": "variable",
+          "name": "y"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FILTER_NONE",
+          "declaration": {
+            "name": "FILTER_NONE",
+            "module": "src/map/sett-legend.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "keptOf",
+          "declaration": {
+            "name": "keptOf",
+            "module": "src/map/sett-legend.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "filterOf",
+          "declaration": {
+            "name": "filterOf",
+            "module": "src/map/sett-legend.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettLegend",
+          "declaration": {
+            "name": "SettLegend",
+            "module": "src/map/sett-legend.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-legend",
+          "declaration": {
+            "name": "SettLegend",
+            "module": "src/map/sett-legend.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/map/sett-link.ts",
       "declarations": [
+        {
+          "kind": "function",
+          "name": "linkHead",
+          "parameters": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "LinkHead"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "Pt"
+              }
+            },
+            {
+              "name": "d",
+              "type": {
+                "text": "Pt"
+              }
+            },
+            {
+              "name": "a",
+              "default": "ARROW"
+            }
+          ],
+          "description": "the head at `e`, arriving along `d`; `a` is `map.size.arrow`"
+        },
+        {
+          "kind": "function",
+          "name": "linkTail",
+          "parameters": [
+            {
+              "name": "kind",
+              "type": {
+                "text": "LinkTail"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "text": "Pt"
+              }
+            },
+            {
+              "name": "d",
+              "type": {
+                "text": "Pt"
+              }
+            },
+            {
+              "name": "a",
+              "default": "ARROW"
+            }
+          ],
+          "description": "the ownership diamond at the start `s`, leaving along `d`"
+        },
         {
           "kind": "class",
           "description": "One line between two things inside an open unit. It names its ends by\n`key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it\nroutes every link together (tracks, lanes, trunks, docks) and hands each\nits path; outside a sheet a link draws the simplest square route between\nits ends by itself. The grammar is fixed (#58, #68): the line pattern is\nthe family, the head is the kind, a diamond at the start is ownership; the\nlighter the line, the less the analyser knows. Links never carry presence.\n\nResponse (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`);\n`selected` draws it outward from the `anchor` end (`motion.draw`), then\nthe `flow` dashes travel, on the selection alone. A finding is red and\nheavier on any kind and never recedes.",
@@ -6641,6 +7552,22 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "linkHead",
+          "declaration": {
+            "name": "linkHead",
+            "module": "src/map/sett-link.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "linkTail",
+          "declaration": {
+            "name": "linkTail",
+            "module": "src/map/sett-link.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "SettLink",

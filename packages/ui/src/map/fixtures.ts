@@ -19,8 +19,12 @@ export interface FixtureUnit {
 }
 export interface FixtureContract {
   kind: string; name: string; owner: string; format?: string; witness?: string; ops?: string[];
-  handlers?: Record<string, string>; schema?: string[]; used?: string[]; notes?: string;
+  handlers?: Record<string, string>; schema?: string; used?: [string, string][]; notes?: string;
 }
+/** `[n, text, state?]`: a line of code; `hl` is the item's own span, `bad` the line a finding points at */
+export type FixtureCodeLine = [number, string, ('hl' | 'bad')?];
+/** the code of an item: where it is, who calls it, what it calls (`[item id, label]`), and its lines */
+export interface FixtureCode { file: string; line: number; unit: string; callers: [string, string][]; calls: [string, string][]; lines: FixtureCodeLine[] }
 export interface FixtureItem { id: string; name: string; k: string; entry?: number; port?: number; finding?: number; session?: number; fam?: string; ext?: number }
 export interface FixtureArea { id: string; col: number; name: string; folded?: number; items: FixtureItem[] }
 /** `[from, to, { impl?, smell?, label? }]` as the PoC stores a link; a layered unit stores leaf → public */
@@ -31,6 +35,7 @@ export interface Fixture {
   name: string; tagline: string; system: unknown;
   repos: Record<string, { units: FixtureUnit[] }>;
   contracts: Record<string, FixtureContract>;
+  code: Record<string, FixtureCode>;
 }
 
 export interface Port { kind: PortKind; name: string; count?: string; area: string; contract: string; side: PortSide }

@@ -8,6 +8,8 @@
  */
 export type LinkFamily = 'does' | 'promises' | 'knows' | 'around';
 export const LINK_FAMILIES: LinkFamily[] = ['does', 'promises', 'knows', 'around'];
+/** what a family says, in the words of `map.link.<family>` */
+export const LINK_FAMILY_MEANS: Record<LinkFamily, string> = { does: 'runs something', promises: 'a contract', knows: 'depends on a shape', around: 'surrounds the code' };
 
 export type LinkKind =
   | 'calls' | 'calls-port' | 'hands-off' | 'constructs' | 'wires' | 'calls-out' | 'listens-to'

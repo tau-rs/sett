@@ -410,6 +410,8 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -443,6 +445,15 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -451,6 +462,19 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -469,6 +493,16 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -668,6 +702,8 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -701,6 +737,15 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -709,6 +754,19 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -727,6 +785,16 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -932,6 +1000,8 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -965,6 +1035,15 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -973,6 +1052,19 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -991,6 +1083,16 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -1523,22 +1625,27 @@ Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door 
   - `primitives-chip--me-first` me first · manual door first and bold
   - `primitives-chip--actions-strip` in context · actions strip
 
-### `<sett-column>`
+### `<sett-code-page>`
 
-A tinted band inside an open unit, holding areas. In a hexagon the three columns are driving (what calls in), domain (the core) and driven (what is called out to); a layered unit has one `layer` column per layer, public API first and leaves last, so "uses" points left to right under both rules (rule 11). A layer has no tint of its own: its `depth` takes the driving tint (`api`), the domain tint (`internal`) or the driven tint (`leaf`). Externals are never a column: they are ports on the needs rail (rule 6).
+The page around the code of an item, in a tab of `sett-tabbar` (map rule 4). It is not an editor (rule 12: the editor is Theia's): it is the head (`file:line`, the unit) and the two portals, `callers` and `calls`, each a row of pills that lead to the item at the other end of a call. The body is the host's: in Theia, put the editor in the default slot and mark its lines through the decoration classes of `editor.css` (`sett-ed-line`, `sett-ed-line--bad`). With nothing slotted the body is a read-only listing of `lines`: numbers, the item's span highlighted, a bad line tinted with `⚠` in its gutter. No caret, no selection model, no syntax engine. Pointing eases a portal's border (`motion.hover`).
 
 - attrs:
-  - `kind=ColumnKind`
-  - `depth=ColumnDepth` — a `layer` column's place by depth, which picks its tint; other kinds ignore it
-  - `label=string` — e.g. `routes · driving`; the kind is appended when the label does not already say it
+  - `file=string`
+  - `line=number` — the line the item starts at
+  - `unit=string` — the unit the item lives in
 - slots:
-  - `(default)` — `sett-area` children, stacked by normal flow
+  - `(default)` — the host's editor; replaces the listing
 - parts:
-  - `header` — the column's label
+  - `head` — the file line and the portals
+  - `body` — the listing, or the slotted editor
+- events:
+  - `sett-portal` — `{ key, side }` when a portal is chosen
 - stories:
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -1572,6 +1679,15 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -1580,6 +1696,19 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -1598,6 +1727,212 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-panel--default` Default
+  - `map-panel--status-line` status line · a message in the well tint · at rest the row keeps its height
+  - `map-panel--says-then-clears` says, then clears · after 1.9 s or at the next action, with no fade
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-position--default` Default
+  - `map-position--current` current · the trail ends where you are · ripgrep, zero2prod, zed
+  - `map-position--future` future · after going back, the places ahead stay listed, lighter
+  - `map-position--levels` one row per level reached · board only, then a unit, then an area
+  - `map-position--long-name` a name too long ends in an ellipsis · the number and the level stay
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
+
+### `<sett-column>`
+
+A tinted band inside an open unit, holding areas. In a hexagon the three columns are driving (what calls in), domain (the core) and driven (what is called out to); a layered unit has one `layer` column per layer, public API first and leaves last, so "uses" points left to right under both rules (rule 11). A layer has no tint of its own: its `depth` takes the driving tint (`api`), the domain tint (`internal`) or the driven tint (`leaf`). Externals are never a column: they are ports on the needs rail (rule 6).
+
+- attrs:
+  - `kind=ColumnKind`
+  - `depth=ColumnDepth` — a `layer` column's place by depth, which picks its tint; other kinds ignore it
+  - `label=string` — e.g. `routes · driving`; the kind is appended when the label does not already say it
+- slots:
+  - `(default)` — `sett-area` children, stacked by normal flow
+- parts:
+  - `header` — the column's label
+- stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
+  - `map-area--empty` empty
+  - `map-back--default` Default
+  - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
+  - `map-back--plain` plain · no words given, no key shown
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
+  - `map-crumb--default` Default
+  - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
+  - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
+  - `map-crumb--no-room` no room · the earlier steps end in an ellipsis, where you are stays whole
+  - `map-cue--default` Default
+  - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
+  - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -1915,18 +2250,27 @@ The composer. `send` is an input and a send button. `handback` turns it into the
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
-### `<sett-crumb>`
+### `<sett-contract-card>`
 
-Where the map is, as one mono line: `orderly › api › routes › subscribe()`. Every step but the last is a click that goes up to it; the last is where you are. A step changes ink at once when pointed at: text never eases. With no room the earlier steps end in an ellipsis; the last one stays whole.
+What a port promises: the kind chip (the kind's dot and word, the same colour as on the port row), the name, the owner, then `format · witness`, the ops in mono on the well tint, the schema, who uses it, and the notes. A part with nothing to say is absent. Every contract cites a witness `file:line` (map rule 10); one without is `declared`: dashed, and it says so. One skeleton for every kind; the card never animates and holds no verb.
 
 - attrs:
-  - `steps=string[]` — the steps from the repo down, e.g. `["orderly","api","routes"]`; the last is where you are
-- events:
-  - `sett-go` — `{ index, step }`: go up to that step
+  - `kind=PortKind` — the port kind, from the kind table (`PORT_KINDS`)
+  - `name=string`
+  - `owner=string` — who owns the contract: a unit, a repo, or `external`
+  - `format=string` — how it is written down: `actix-web App · 12 routes`
+  - `witness=string` — where it is stated in code, `file:line`, several separated by ` · `; none means declared by hand
+  - `schema=string` — the shape it carries, one line
+  - `notes=string`
+- parts:
+  - `chip` — the kind chip
+  - `ops` — the ops block
 - stories:
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -1960,6 +2304,15 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -1968,6 +2321,19 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -1986,6 +2352,208 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-panel--default` Default
+  - `map-panel--status-line` status line · a message in the well tint · at rest the row keeps its height
+  - `map-panel--says-then-clears` says, then clears · after 1.9 s or at the next action, with no fade
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-position--default` Default
+  - `map-position--current` current · the trail ends where you are · ripgrep, zero2prod, zed
+  - `map-position--future` future · after going back, the places ahead stay listed, lighter
+  - `map-position--levels` one row per level reached · board only, then a unit, then an area
+  - `map-position--long-name` a name too long ends in an ellipsis · the number and the level stay
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
+
+### `<sett-crumb>`
+
+Where the map is, as one mono line: `orderly › api › routes › subscribe()`. Every step but the last is a click that goes up to it; the last is where you are. A step changes ink at once when pointed at: text never eases. With no room the earlier steps end in an ellipsis; the last one stays whole.
+
+- attrs:
+  - `steps=string[]` — the steps from the repo down, e.g. `["orderly","api","routes"]`; the last is where you are
+- events:
+  - `sett-go` — `{ index, step }`: go up to that step
+- stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
+  - `map-area--empty` empty
+  - `map-back--default` Default
+  - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
+  - `map-back--plain` plain · no words given, no key shown
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
+  - `map-crumb--default` Default
+  - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
+  - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
+  - `map-crumb--no-room` no room · the earlier steps end in an ellipsis, where you are stays whole
+  - `map-cue--default` Default
+  - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
+  - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -2088,6 +2656,8 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -2121,6 +2691,15 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -2129,6 +2708,19 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -2147,6 +2739,16 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -3069,6 +3671,8 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -3102,6 +3706,15 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -3110,6 +3723,19 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -3128,6 +3754,16 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -3247,32 +3883,24 @@ A key · value row of an inspector layout (the pages' `kv`): a mute label in a f
   - `cards-card--fix-card` fix card · site, rule, fix, the proposed hunk, both doors and allow
   - `cards-card--fix-card-in-inspector` fix card · in the inspector
 
-### `<sett-link>`
+### `<sett-legend>`
 
-One line between two things inside an open unit. It names its ends by `key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it routes every link together (tracks, lanes, trunks, docks) and hands each its path; outside a sheet a link draws the simplest square route between its ends by itself. The grammar is fixed (#58, #68): the line pattern is the family, the head is the kind, a diamond at the start is ownership; the lighter the line, the less the analyser knows. Links never carry presence. Response (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`); `selected` draws it outward from the `anchor` end (`motion.draw`), then the `flow` dashes travel, on the selection alone. A finding is red and heavier on any kind and never recedes.
+The key to the map, on demand (map rule 8): a section of `sett-panel`, folded to one row until `open`. It is also the control that filters the links: one toggle per family (does · promises · knows · around), one per kind inside it, and one for the fallback. Its rows come from the kind tables (`LINK_KINDS`, `LINK_FAMILIES`, `PORT_KINDS`), never a second list: a swatch is the family's line pattern and the kind's head, as `sett-link` draws them. The port kinds are a key only, as is the finding, which never recedes. It holds no map state. `filter` is the value of `sett-sheet filter` (the families and kinds to keep; empty keeps everything); a toggle fires `sett-filter` with the next value and the host copies it onto the sheet and back here. Folded, the row says how many kinds are shown while a filter is on. Opening the section and listing a family's kinds are the legend's own. Pointing eases a row's background (`motion.hover`).
 
 - attrs:
-  - `from=string` — the key of the dependent end
-  - `to=string` — the key of what it depends on
-  - `kind=LinkKind`
-  - `label=string` — the exact construct, shown with the kind's name on hover
-  - `finding=boolean` — a rule is broken on this line: red and heavier, on any kind
-  - `guessed=boolean` — the analyser guessed this kind: a lighter line
-  - `wire=boolean` — a port wire: the line takes the port kind's colour (`--_wire`)
-  - `lit=boolean` — pointed at, or an end is: blue
-  - `selected=boolean` — an end is selected: drawn outward, then flowing
-  - `anchor='from' | 'to'` — the end the selection sits at; the line is drawn outward from it
-  - `far=boolean` — unrelated to the selection or filtered out: `map.far`
-  - `backward=boolean` — points right to left: a smell (rule 11), set by the sheet from the route
-  - `plug=boolean` — the sheet's plugs level: a dot beside each end, the line on demand
+  - `filter=string` — the families and kinds kept, as `sett-sheet filter` takes them; empty keeps everything
+  - `open=boolean` — the section is unfolded
+  - `expanded=string` — the families whose kinds are listed, separated by spaces
 - parts:
-  - `svg` — the drawing
+  - `head` — the row that opens and closes the section
 - events:
-  - `sett-light` — `{ on }` when pointed at; the sheet lights it with both ends
+  - `sett-filter` — `{ filter }`, the next value for `sett-sheet filter`, when a family or a kind is toggled
 - stories:
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -3306,6 +3934,15 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -3314,6 +3951,19 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -3332,6 +3982,222 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
+  - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
+  - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
+  - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
+  - `map-link--around` family · around · dash-dot: tests, re-exports, expands, decorates
+  - `map-link--refers-to` the fallback · refers to · the lightest line, no head
+  - `map-link--states` states · at rest · lit · selected · far
+  - `map-link--finding` finding · red and heavier, on any kind, never recedes
+  - `map-link--guessed` guessed · the analyser is not sure: a lighter line
+  - `map-link--backward` backward · a line pointing right to left is a smell
+  - `map-link--plugs` plugs · a dot beside each connected item, the line on demand
+  - `map-link--wire` wire · a port wire takes the port kind's colour
+  - `map-link--select-draws` motion · select draws the connections outward, then the flow travels
+  - `map-minimap--default` Default
+  - `map-minimap--board` board · the units and the viewport rect · ripgrep, zed
+  - `map-minimap--sheet` sheet · the columns in their tints and the areas · rg, api, gpui
+  - `map-minimap--selected` selected · your selection keeps its blue border on the minimap
+  - `map-minimap--click-pans` click or drag pans · the viewport rect follows the camera, at once
+  - `map-minimap--no-view` no view · the world alone, before the camera reports
+  - `map-node--default` Default
+  - `map-node--mini` Mini
+  - `map-node--chip` Chip
+  - `map-node--card` Card
+  - `map-node--sheet` tier · sheet · hosts the inside and keeps one link, ▴ close
+  - `map-node--on-the-board` in context · a board: one focused card, chips, a far chip
+  - `map-node--an-agent-inside` presence · closed, an agent inside · the badge breathes · mini, chip, card
+  - `map-node--closed-and-open` presence · the same unit closed and open · open, the item carries the life and the dot is still
+  - `map-node--arrival` event · an agent arrives on a closed unit · the box blooms, two waves, the badge ignites
+  - `map-node--departure` event · an agent leaves a closed unit · one wave closes in, the badge goes still
+  - `map-node--three-agents` presence · three agents on one closed unit · each on its own beat
+  - `map-node--reduced-motion` reduced motion · the still twin · nothing moves, the dots stay
+  - `map-op-row--default` Default
+  - `map-op-row--routes` route · five methods · return vs → handler · selected
+  - `map-op-row--kinds` kinds · rpc, schema, table, flag, text, more · from the fixtures
+  - `map-op-row--all-fixtures` in context · every contract of api, as op rows
+  - `map-panel--default` Default
+  - `map-panel--status-line` status line · a message in the well tint · at rest the row keeps its height
+  - `map-panel--says-then-clears` says, then clears · after 1.9 s or at the next action, with no fade
+  - `map-port-row--default` Default
+  - `map-port-row--kinds` kinds · eleven, dot colour = kind · both sides
+  - `map-port-row--states` states · selected · compact · both sides · api
+  - `map-port-row--with-ops` with ops · folded past six with … n more · rg cli flags, api routes
+  - `map-port-row--expanded` with ops · expanded
+  - `map-position--default` Default
+  - `map-position--current` current · the trail ends where you are · ripgrep, zero2prod, zed
+  - `map-position--future` future · after going back, the places ahead stay listed, lighter
+  - `map-position--levels` one row per level reached · board only, then a unit, then an area
+  - `map-position--long-name` a name too long ends in an ellipsis · the number and the level stay
+  - `map-rail--default` Default
+  - `map-rail--exposes` exposes · rg, api, gpui
+  - `map-rail--needs` needs · rg, api, gpui
+  - `map-rail--every-section` every section · fixed order, unresolved last, lowercase headers
+  - `map-rail--unresolved` unresolved · externals without an owner, last, on their own tint · zed agent, collab · beside api, where every owner is known
+  - `map-rail--unresolved-states` unresolved · a selected port · compact density · nothing else needed
+  - `map-rail--selected-and-compact` states · a selected port · compact density
+  - `map-rail--empty` empty · a worker exposes nothing
+  - `map-rail--on-the-flat-sides` in context · both rails on a unit, ports docked on the outer borders
+  - `map-sheet--default` the inside of a unit · rail · columns · rail · the areas level at rest
+  - `map-sheet--areas` areas · api · at rest · one line per area, double where it carries several links
+  - `map-sheet--areas-rg` areas · rg · at rest
+  - `map-sheet--areas-gpui` areas · gpui · at rest · layers tint by depth
+  - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
+  - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
+  - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
+  - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
+  - `map-sheet--areas-no-wires` areas · without the port wires
+  - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
+  - `map-sheet--plugs` plugs · a dot beside each connected item, lines on demand
+  - `map-sheet--plugs-open` plugs · a pair opened by hand keeps its lines
+  - `map-sheet--filtered` items · filter="knows" · one family kept, the rest recedes
+  - `map-sheet--selected` items · a selection · drawn outward, the flow on it alone, the rest recedes
+  - `map-sheet--selected-hidden` items · the selection is inside a folded area · the link rides the edge, a blue dock dot lands
+  - `map-sheet--no-wires` items · without the port wires
+  - `map-sheet--open-api` items · in context · api open in its node
+  - `map-sheet--open-rg` items · in context · rg open in its node
+  - `map-sheet--open-gpui` items · in context · gpui open · five layers
+  - `map-sheet--areas-folded` folded · every area at once
+  - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
+
+### `<sett-link>`
+
+One line between two things inside an open unit. It names its ends by `key` (`from`, `to`) and never gets coordinates: the `sett-sheet` around it routes every link together (tracks, lanes, trunks, docks) and hands each its path; outside a sheet a link draws the simplest square route between its ends by itself. The grammar is fixed (#58, #68): the line pattern is the family, the head is the kind, a diamond at the start is ownership; the lighter the line, the less the analyser knows. Links never carry presence. Response (DESIGN.md § Motion): `lit` turns it blue (`motion.hover`); `selected` draws it outward from the `anchor` end (`motion.draw`), then the `flow` dashes travel, on the selection alone. A finding is red and heavier on any kind and never recedes.
+
+- attrs:
+  - `from=string` — the key of the dependent end
+  - `to=string` — the key of what it depends on
+  - `kind=LinkKind`
+  - `label=string` — the exact construct, shown with the kind's name on hover
+  - `finding=boolean` — a rule is broken on this line: red and heavier, on any kind
+  - `guessed=boolean` — the analyser guessed this kind: a lighter line
+  - `wire=boolean` — a port wire: the line takes the port kind's colour (`--_wire`)
+  - `lit=boolean` — pointed at, or an end is: blue
+  - `selected=boolean` — an end is selected: drawn outward, then flowing
+  - `anchor='from' | 'to'` — the end the selection sits at; the line is drawn outward from it
+  - `far=boolean` — unrelated to the selection or filtered out: `map.far`
+  - `backward=boolean` — points right to left: a smell (rule 11), set by the sheet from the route
+  - `plug=boolean` — the sheet's plugs level: a dot beside each end, the line on demand
+- parts:
+  - `svg` — the drawing
+- events:
+  - `sett-light` — `{ on }` when pointed at; the sheet lights it with both ends
+- stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
+  - `map-motion--an-agent-is-here` 1 · presence · an agent is here
+  - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
+  - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
+  - `map-motion--a-finding-is-fixed` 4 · event · a finding is fixed
+  - `map-motion--you-fold-an-area` 5 · response · you fold an area
+  - `map-motion--into-a-folded-area` 6 · event · the agent walks into a folded area
+  - `map-motion--three-agents` 7 · presence · a busy area, three agents
+  - `map-motion--two-agents-one-item` 8 · collision · two agents on the same item
+  - `map-motion--pointing-lights` 9 · response · pointing lights an item's links and the item at the other end
+  - `map-motion--select-draws-outward` 10 · response · selecting draws the connections outward, then the flow travels
+  - `map-motion--fold-hides-the-selection` 11 · response · folding hides the selection: the link rides the edge, a blue dock dot lands
+  - `map-motion--open-by-hand` 12 · response · the areas level: open a pair by hand, pin an item
+  - `map-area--default` Default
+  - `map-area--expanded-and-folded` expanded · folded · api, rg, gpui
+  - `map-area--header-badges` header · count · findings · one dot per session
+  - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
+  - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
+  - `map-area--empty` empty
+  - `map-back--default` Default
+  - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
+  - `map-back--plain` plain · no words given, no key shown
+  - `map-bundle--default` a double line · three links between two areas, one arrow
+  - `map-bundle--origins` origin · the inside says the column it leaves · driving · domain · driven · a rail has none
+  - `map-bundle--junction` a branch · opens like a pipe junction, no dot · point at an arrow end, or at the shared stretch
+  - `map-bundle--single-leaving` a single link leaves a double line with a small dot (the link draws itself)
+  - `map-bundle--lit` lit · an area at one end is pointed at · blue edges, sel-bg inside
+  - `map-bundle--far` far · something else is pinned
+  - `map-bundle--filtered-branch` far · one branch carries nothing the filter keeps
+  - `map-bundle--backward` backward · a pair pointing right to left is a smell
+  - `map-bundle--crossing` crossing · one double line passes cleanly over another
+  - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
+  - `map-column--default` Default
+  - `map-column--hexagon` driving · domain · driven · api
+  - `map-column--hexagon-rg` driving · domain · driven · rg
+  - `map-column--layers` layers · public api left, leaves right · five layers · gpui
+  - `map-column--layers-rg` layers · public api left, leaves right · four layers · grep-searcher
+  - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
+  - `map-column--layer-alone` layers · a single layer is the public api · grep
+  - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
+  - `map-crumb--default` Default
+  - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
+  - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
+  - `map-crumb--no-room` no room · the earlier steps end in an ellipsis, where you are stays whole
+  - `map-cue--default` Default
+  - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
+  - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
+  - `map-item--default` Default
+  - `map-item--kinds` kinds · eight
+  - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
+  - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
+  - `map-item--long-names` long names · ellipsis, the pill is never squeezed
+  - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
+  - `map-item--plan-overlay` overlay · plan · dashed amber beside a port, a finding, the selection; with its group; under an agent
+  - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
+  - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
+  - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -3584,6 +4450,8 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -3617,6 +4485,15 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -3625,6 +4502,19 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -3643,6 +4533,16 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -3873,6 +4773,8 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -3906,6 +4808,15 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -3914,6 +4825,19 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -3932,6 +4856,16 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -4043,6 +4977,8 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -4076,6 +5012,15 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -4084,6 +5029,19 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -4102,6 +5060,16 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -4252,6 +5220,8 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -4285,6 +5255,15 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -4293,6 +5272,19 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -4311,6 +5303,16 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -4967,6 +5969,8 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -5000,6 +6004,15 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -5008,6 +6021,19 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -5026,6 +6052,16 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -5125,6 +6161,8 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -5158,6 +6196,15 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -5166,6 +6213,19 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -5184,6 +6244,16 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -5289,6 +6359,8 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -5322,6 +6394,15 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -5330,6 +6411,19 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -5348,6 +6442,16 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -5478,6 +6582,8 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -5511,6 +6617,15 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -5519,6 +6634,19 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -5537,6 +6665,16 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads
@@ -6350,6 +7488,8 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
   - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
+  - `map-kinds--kinds` kinds · the kind table as ports, edges and chips, side by side
+  - `map-kinds--with-the-legend` the legend beside the table · the same dots, from the same list
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -6383,6 +7523,15 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-bundle--backward` backward · a pair pointing right to left is a smell
   - `map-bundle--crossing` crossing · one double line passes cleanly over another
   - `map-bundle--opened` opened by hand · the pair is no longer drawn, the other keeps its place · Tab reaches it to close it
+  - `map-code-page--default` Default
+  - `map-code-page--highlighted` highlighted · the item's own span on the line tint, its context plain · zed
+  - `map-code-page--bad-line` bad line · a finding: tinted, ⚠ in the gutter · zero2prod, zed
+  - `map-code-page--portals` portals · callers and calls lead to the item at the other end · ripgrep run()
+  - `map-code-page--no-callers` portals · an entry point has no callers: the side says none · ripgrep main()
+  - `map-code-page--fixtures` the three fixtures · ripgrep, zero2prod, zed
+  - `map-code-page--long-line` a long line scrolls the body, never the head · zero2prod subscribe()
+  - `map-code-page--in-a-tab` in a tab · the map pinned first, the file tab in mono (rule 11)
+  - `map-code-page--host-editor` the host's editor in the body · the line states are editor.css decoration classes (rule 12)
   - `map-column--default` Default
   - `map-column--hexagon` driving · domain · driven · api
   - `map-column--hexagon-rg` driving · domain · driven · rg
@@ -6391,6 +7540,19 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-column--layer-depths` layer · tint by depth: api (driving tint) · internal (domain tint) · leaf (driven tint)
   - `map-column--layer-alone` layers · a single layer is the public api · grep
   - `map-column--kind-said` header · the kind is said only when the label does not
+  - `map-contract-card--default` Default
+  - `map-contract-card--http` http · zero2prod · ours, and a third party's (postmark)
+  - `map-contract-card--rpc` rpc · zed · protobuf over websocket
+  - `map-contract-card--cli` cli · ripgrep · a long ops block wraps inside the well
+  - `map-contract-card--topic` topic · illustrative: no fixture has an event port
+  - `map-contract-card--crate` crate · zed, zero2prod · a library and a dependency list
+  - `map-contract-card--sql` sql · zero2prod · tables, and a table with its schema
+  - `map-contract-card--pub` pub · ripgrep · a trait and its users
+  - `map-contract-card--redis` redis · zero2prod · the session store
+  - `map-contract-card--fs-and-tty` fs · tty · ripgrep · the system
+  - `map-contract-card--declared` declared · zed · no witness: dashed, and it says so
+  - `map-contract-card--nothing-to-say` absent parts · no users, no notes, no schema: the card is shorter
+  - `map-contract-card--long-name` a name too long ends in an ellipsis · the chip stays
   - `map-crumb--default` Default
   - `map-crumb--levels` one step per level · board, unit, area, item · zero2prod
   - `map-crumb--fixtures` ripgrep · zero2prod · zed · down to an item
@@ -6409,6 +7571,16 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-item--delta-overlay` overlay · delta · unchanged recedes, added and changed are drawn, removed is a ghost
   - `map-item--all-four` overlays · an item may carry all four: session outline, plan fill, finding, delta
   - `map-item--collisions` collisions · selected and live · two agents on one item
+  - `map-legend--default` Default
+  - `map-legend--on-demand` on demand · folded to one row; with a filter on, the row says how much is shown
+  - `map-legend--open` open · four families, the fallback, the finding, the port kinds
+  - `map-legend--families` families · a toggle each: all on, one off, nothing shown
+  - `map-legend--kinds` kinds · every family listed: one toggle per kind, the swatch is the family's line and the kind's head
+  - `map-legend--kind-off` a kind off · its family is partly on (mixed)
+  - `map-legend--only-one-kind` only one kind kept · implements
+  - `map-legend--in-the-panel` zero2prod · in the panel, under the position: knows is off and its lines recede on the sheet
+  - `map-legend--in-the-panel-ripgrep` ripgrep · in the panel: only the promises family is kept
+  - `map-legend--in-the-panel-zed` zed · in the panel: folded, everything shown
   - `map-link--does` family · does · solid: calls, calls port, hands off, constructs, wires, calls out, listens to
   - `map-link--promises` family · promises · dashed: implements, inherits, refines, depends on port
   - `map-link--knows` family · knows · dotted: uses type, holds, shares state, matches on, translates, reads

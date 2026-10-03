@@ -49,7 +49,7 @@ export class SettItem extends LitElement {
   @property({ type: Boolean, reflect: true }) port = false;
   /** a rule is broken here: dashed red */
   @property({ type: Boolean, reflect: true }) finding = false;
-  /** the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 12) */
+  /** the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 13) */
   @property({ type: Boolean, reflect: true }) planned = false;
   /** the plan group the item belongs to, shown as a plain tag at the end (`g1`) */
   @property() group?: string;

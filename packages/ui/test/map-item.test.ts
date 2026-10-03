@@ -121,7 +121,7 @@ describe('sett-item', () => {
   });
 });
 
-describe('sett-item overlays: plan and delta (DESIGN.md "The map" rule 12)', () => {
+describe('sett-item overlays: plan and delta (DESIGN.md "The map" rule 13)', () => {
   const css = () => cssOf('sett-item');
   it('a planned item is dashed amber on the amber tint, and says its group in a plain tag', async () => {
     const el = await mount('<sett-item planned group="g1">refund()</sett-item>');

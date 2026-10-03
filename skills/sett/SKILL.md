@@ -3053,7 +3053,7 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `entry=boolean` — called from outside the unit: blue fill
   - `port=boolean` — a trait the domain depends on: amber pill shape
   - `finding=boolean` — a rule is broken here: dashed red
-  - `planned=boolean` — the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 12)
+  - `planned=boolean` — the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 13)
   - `group=string` — the plan group the item belongs to, shown as a plain tag at the end (`g1`)
   - `delta=ItemDelta` — the delta overlay, against main: `unchanged` recedes, `removed` is a dashed ghost with its name struck, `added` and `changed` are drawn as they are
   - `selected=boolean`

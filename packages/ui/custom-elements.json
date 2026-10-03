@@ -6013,7 +6013,7 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 12)",
+              "description": "the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 13)",
               "attribute": "planned",
               "reflects": true
             },
@@ -6214,7 +6214,7 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 12)",
+              "description": "the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 13)",
               "fieldName": "planned"
             },
             {

@@ -9,6 +9,7 @@ import * as shell from '../src/recipes/shell-recipes.stories.js';
 const RECIPES: { story: keyof typeof shell; scope: Scope; frames: string[] }[] = [
   { story: 'PlanShaping', scope: shell.SCOPES.planShaping, frames: ['planning'] },
   { story: 'SessionGateFailed', scope: shell.SCOPES.sessionGateFailed, frames: ['waiting'] },
+  { story: 'ReviewGlance', scope: shell.SCOPES.reviewGlance, frames: ['live'] },
 ];
 
 const text = (el: Element, sel: string) => el.shadowRoot!.querySelector(sel)!.textContent!.replace(/\s+/g, ' ').trim();

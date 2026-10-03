@@ -16,6 +16,7 @@ import { openUnit, zero2prod, type Who } from '../map/map-fixtures.stories-helpe
 export const SCOPES = {
   planShaping: { kind: 'plan', name: 'refund flow' },
   sessionGateFailed: { kind: 'session', id: 'w1', name: 'refund flow' },
+  reviewGlance: { kind: 'session', id: 'w3', name: 'rate limits' },
 } satisfies Record<string, Scope>;
 
 /** a scope and the session colour it takes, when a session is the scope */
@@ -201,4 +202,45 @@ export const SessionGateFailed: Story = { name: 'session · gate failed', render
     <sett-status-item label="Sessions"><b>2</b> running · <span data-tone="sug">1 asks</span></sett-status-item>
     <sett-status-item label="Findings"><b>0</b> new</sett-status-item>
     <sett-status-item label="Checks"><span data-tone="bad">1 failed</span></sett-status-item>${mapItem}</sett-status-bar>`,
+}) };
+
+// ── review · glance (review flow, step 1) ──
+const w3: Of = { scope: SCOPES.reviewGlance, session: 'mg' };
+export const ReviewGlance: Story = { name: 'review · glance', render: () => shell({
+  of: w3, frame: 'live',
+  bar: bar(selector(w3), html`<sett-chip kind="review">!44<span slot="count">· 1 remark</span><a slot="verb">open</a></sett-chip>`),
+  rail: rail(w3, 'sessions'),
+  left: html`${scopeLine(w3, 'in review · !44')}<sett-sessions-view isolated count="5">
+    <sett-session-row scope="session" session="mg" name="rate limits" state="review · 2/6 viewed" open selected scoped>
+      <sett-file-row letter="M" name="domain/ports.rs" counts="+4" depth="1" viewed></sett-file-row>
+      <sett-file-row letter="A" name="domain/limits.rs" counts="+22" depth="1" viewed></sett-file-row>
+      <sett-file-row letter="M" name="api/service.rs" counts="+6 −1" depth="1"></sett-file-row>
+      <sett-file-row letter="A" name="clients/limiter.rs" counts="+38" depth="1"></sett-file-row>
+      <sett-file-row letter="M" name="tests/lifecycle.rs" counts="+9" depth="1"></sett-file-row>
+      <sett-file-row letter="A" name="tests/limits.rs" counts="+41" depth="1"></sett-file-row>
+      <sett-changes-row depth="1" meta="5 ahead · MR !44 · 1 remark"></sett-changes-row>
+    </sett-session-row>
+  </sett-sessions-view>`,
+  centre: html`<sett-tabbar><sett-tab pinned active>map</sett-tab>${toggles('delta', 'plan')}</sett-tabbar>
+    ${map({ subscribe: { session: 'mg' }, confirm: { session: 'mg' }, subname: { session: 'mg' } })}`,
+  inspector: html`<sett-inspector heading="!44 · at a glance" sub="rate limits → main" state="2 lines block" tone="sug" kind="session" session="mg">
+    <sett-card class="in" variant="checklist"><span slot="title">merge !44 → main</span><sett-pill slot="state" kind="sug">2 lines block</sett-pill>
+      <sett-card-row mark="✓" kind="ok" nav="rate limits">plan 6/6 realized · 2 gates passed</sett-card-row>
+      <sett-card-row mark="✓" kind="ok" nav="open">findings 0 new · 1 allowed</sett-card-row>
+      <sett-card-row mark="✓" kind="ok" nav="checks">pipeline #9129 passed · judge pass</sett-card-row>
+      <sett-card-row mark="⚠" kind="sug" nav="jump">remarks asking for a change · 1 open</sett-card-row>
+      <sett-card-row mark="⚠" kind="sug" nav="next unread">files viewed · 2 / 6</sett-card-row>
+      <sett-card-row mark="✓" kind="ok">current with main<span slot="right">40 min</span></sett-card-row>
+      <sett-card-row mark="·" kind="mute">approved<span slot="right">not yet</span></sett-card-row>
+      <span slot="how">squash · from the forge's default · delete branch · archive session</span>
+      <sett-gated-button slot="acts" blocked>approve · merge<sett-pill slot="reason" kind="sug">1 remark open</sett-pill><sett-pill slot="reason" kind="sug">4 files unviewed</sett-pill></sett-gated-button>
+      <sett-button slot="acts">review in detail</sett-button>
+      <span slot="note">what main gains: a RateLimit port in domain, TokenBucket in clients; pay() and close() now depend on RateLimit · each line is a fact with its source</span>
+    </sett-card>
+  </sett-inspector>`,
+  panel: html`<sett-bottom-panel active="findings" closed>${panelTabs({ checks: '3', news: '1' })}</sett-bottom-panel>`,
+  status: html`<sett-status-bar>${scopeItem(w3, 'in review · !44')}
+    <sett-status-item label="Sessions"><b>2</b> running · <b>1</b> in review</sett-status-item>
+    <sett-status-item label="Findings"><b>0</b> new</sett-status-item>
+    <sett-status-item label="Checks"><span data-tone="ok">all passed</span></sett-status-item>${mapItem}</sett-status-bar>`,
 }) };

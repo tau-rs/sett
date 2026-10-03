@@ -4942,12 +4942,20 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "A module-sized group of items inside a column. The header carries what the\narea holds: its name, how many items, a red count for findings, and one dot\nper session with an item here. It counts its own `sett-item` children; the\n`count`, `findings` and `sessions` attributes override that for a folded\narea whose items the application chose not to render.\n\nFolded, the header also carries what the fold hides (DESIGN.md § Motion,\n\"where it lands\"): a session whose live item is hidden keeps its dot\nbreathing, the area takes that agent's arrival and departure pulse, and a\nblue count says how many selected items are inside.",
+          "description": "A module-sized group of items inside a column. The header carries what the\narea holds: its name, how many items, a red count for findings, and one dot\nper session with an item here. It counts its own `sett-item` children; the\n`count`, `findings` and `sessions` attributes override that for a folded\narea whose items the application chose not to render.\n\nFolded, the header also carries what the fold hides (DESIGN.md § Motion,\n\"where it lands\"): a session whose live item is hidden keeps its dot\nbreathing, the area takes that agent's arrival and departure pulse, and a\nblue count says how many selected items are inside.\n\nThe header holds two controls: the name focuses the area, the arrow folds\nit. The area only asks: the name fires `sett-focus` and the `sett-sheet`\naround it sets `focused` here and `far` on what is unrelated. `far`\nrecedes by colour, never by opacity; the red count of findings stays red.",
           "name": "SettArea",
           "cssParts": [
             {
               "description": "the header row",
               "name": "header"
+            },
+            {
+              "description": "the name, the control that focuses the area",
+              "name": "name"
+            },
+            {
+              "description": "the arrow, the control that folds the area",
+              "name": "fold"
             },
             {
               "description": "the items' container",
@@ -4988,6 +4996,28 @@
               },
               "default": "false",
               "attribute": "folded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "focused",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focused area: its links are drawn down to the items, everything unrelated recedes; the sheet sets it",
+              "attribute": "focused",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the focused area: recedes to mute ink and a faint border (the name stays above 4.5:1); the sheet sets it",
+              "attribute": "far",
               "reflects": true
             },
             {
@@ -5097,14 +5127,18 @@
             },
             {
               "kind": "field",
-              "name": "onKey",
+              "name": "ask",
               "privacy": "private"
             }
           ],
           "events": [
             {
-              "description": "`{ folded }` when the header is used",
+              "description": "`{ folded }` when the arrow is used",
               "name": "sett-fold"
+            },
+            {
+              "description": "`{ key, focused }` when the name is used: `focused` is what the reader asks for",
+              "name": "sett-focus"
             }
           ],
           "attributes": [
@@ -5131,6 +5165,24 @@
               },
               "default": "false",
               "fieldName": "folded"
+            },
+            {
+              "name": "focused",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the focused area: its links are drawn down to the items, everything unrelated recedes; the sheet sets it",
+              "fieldName": "focused"
+            },
+            {
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the focused area: recedes to mute ink and a faint border (the name stays above 4.5:1); the sheet sets it",
+              "fieldName": "far"
             },
             {
               "name": "count",
@@ -5829,7 +5881,7 @@
         },
         {
           "kind": "class",
-          "description": "One function, struct or trait inside an area: an 18 px box in a 22 px row,\nits name in mono at the base size. The name never moves, fades or resizes;\neverything else is drawn around or behind it (DESIGN.md § Motion):\nthe item's own colour, an agent's sheen, your selection tight to the box,\nthe session ring one step out, a change flash past everything.\n\n`session` alone is a thin still ring: an agent touched this earlier. With\n`live` the ring breathes and a sheen sweeps: an agent is here now. When\n`live` flips, the item plays its own arrival or departure pulse. `lit`\nis the response to a pointer on one of its links: a blue border.",
+          "description": "One function, struct or trait inside an area: an 18 px box in a 22 px row,\nits name in mono at the base size. The name never moves, fades or resizes;\neverything else is drawn around or behind it (DESIGN.md § Motion):\nthe item's own colour, an agent's sheen, your selection tight to the box,\nthe session ring one step out, a change flash past everything.\n\n`session` alone is a thin still ring: an agent touched this earlier. With\n`live` the ring breathes and a sheen sweeps: an agent is here now. When\n`live` flips, the item plays its own arrival or departure pulse. `lit`\nis the response to a pointer on one of its links: a blue border. `far`\nis an item unrelated to the focused area: it recedes by colour, never by\nopacity, so its name stays readable; a finding never recedes.",
           "name": "SettItem",
           "cssParts": [
             {
@@ -5965,6 +6017,17 @@
               "default": "false",
               "description": "at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response)",
               "attribute": "lit",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the focused area: recedes to mute ink and a faint border (the name stays above 4.5:1); a finding ignores it",
+              "attribute": "far",
               "reflects": true
             },
             {
@@ -6123,6 +6186,15 @@
               "default": "false",
               "description": "at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response)",
               "fieldName": "lit"
+            },
+            {
+              "name": "far",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "unrelated to the focused area: recedes to mute ink and a faint border (the name stays above 4.5:1); a finding ignores it",
+              "fieldName": "far"
             }
           ],
           "superclass": {
@@ -8067,7 +8139,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The inside of an open unit: the exposes rail, the columns, the needs rail,\nin one row, and the `sett-link`s between the things inside, drawn over it.\nEverything is laid out by normal flow; the sheet is the one element that\nsees every link, so the rules are written once here and not by each app:\n\n- **routes**: square lines on tracks in the gutters (`map.size.track`\n  apart), one trunk per source item and family with a dot at each branch;\n  a link skipping a column takes a lane in the channel under the columns,\n  one inside a column runs beside it; a right-to-left line is a smell.\n- **the watcher**: each frame the ends are read and only the paths whose\n  ends moved are rewritten, so folding, pulses and re-renders never leave\n  a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown).\n- **response** (DESIGN.md § Motion): pointing at an item lights its links\n  and the item at the other end; selecting draws its links outward, the\n  flow travels on them alone and every other link recedes to `map.far`.\n- **folds**: an end hidden by a folded area rides the area's edge to the\n  chip; a selected one gets the blue dock dot where it plugs in.\n- **level**: what is drawn at rest. `areas` (the default) draws one line\n  per pair of areas, header to header: a `sett-bundle` per area, double\n  where it carries two or more links; the item links appear when pointed\n  at, pinned or opened by hand. `items` draws every link; `plugs` a dot\n  beside each connected item with the line on demand. A finding is drawn\n  item to item in every level.\n- **open by hand**: the arrow end of a double line opens that pair into\n  its links, its shared stretch opens everything leaving the area, an\n  opened line closes its pair (`open`, `sett-open`). The level is the\n  default for whatever was not opened by hand. Opening never moves another\n  line: a pair keeps its track while open.\n- **pins**: a click on an item toggles its `selected`; several at once.\n  Their links are drawn item to item and everything else recedes.\n- **filter**: kinds and families to keep; the rest recedes to `map.far`.\n\n`folded` folds every area at once.",
+          "description": "The inside of an open unit: the exposes rail, the columns, the needs rail,\nin one row, and the `sett-link`s between the things inside, drawn over it.\nEverything is laid out by normal flow; the sheet is the one element that\nsees every link, so the rules are written once here and not by each app:\n\n- **routes**: square lines on tracks in the gutters (`map.size.track`\n  apart), one trunk per source item and family with a dot at each branch;\n  a link skipping a column takes a lane in the channel under the columns,\n  one inside a column runs beside it; a right-to-left line is a smell.\n- **the watcher**: each frame the ends are read and only the paths whose\n  ends moved are rewritten, so folding, pulses and re-renders never leave\n  a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown).\n- **response** (DESIGN.md § Motion): pointing at an item lights its links\n  and the item at the other end; selecting draws its links outward, the\n  flow travels on them alone and every other link recedes to `map.far`.\n- **folds**: an end hidden by a folded area rides the area's edge to the\n  chip; a selected one gets the blue dock dot where it plugs in.\n- **level**: what is drawn at rest. `areas` (the default) draws one line\n  per pair of areas, header to header: a `sett-bundle` per area, double\n  where it carries two or more links; the item links appear when pointed\n  at, pinned or opened by hand. `items` draws every link; `plugs` a dot\n  beside each connected item with the line on demand. A finding is drawn\n  item to item in every level.\n- **open by hand**: the arrow end of a double line opens that pair into\n  its links, its shared stretch opens everything leaving the area, an\n  opened line closes its pair (`open`, `sett-open`). The level is the\n  default for whatever was not opened by hand. Opening never moves another\n  line: a pair keeps its track while open.\n- **pins**: a click on an item toggles its `selected`; several at once.\n  Their links are drawn item to item and everything else recedes.\n- **filter**: kinds and families to keep; the rest recedes to `map.far`.\n- **focus**: an area's name asks for it (`sett-focus`), `focus` holds its\n  key. The area's links are drawn down to the items, in, out and inside\n  it; the items they reach keep full ink; every other item and area gets\n  `far` (mute ink, by colour) and every other line `map.far`. A finding\n  never recedes. Esc, or the name again, leaves. Nothing moves: the pair\n  lines keep their tracks, and what was opened by hand comes back as it was.\n\n`folded` folds every area at once.",
           "name": "SettSheet",
           "slots": [
             {
@@ -8126,6 +8198,17 @@
               "default": "''",
               "description": "link kinds and families to keep, space-separated (`calls does`); the rest recedes; empty keeps all",
               "attribute": "filter"
+            },
+            {
+              "kind": "field",
+              "name": "focusArea",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the focused area: its links are drawn down to the items, everything unrelated recedes; empty is no focus. The attribute is `focus`",
+              "attribute": "focus",
+              "reflects": true
             },
             {
               "kind": "field",
@@ -8308,10 +8391,21 @@
               "description": "a click on an item pins it: its links stay drawn, several items at once"
             },
             {
+              "kind": "field",
+              "name": "onFocus",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private",
+              "description": "Esc gives the focus back (rule 9); it is used up here, so the level above does not also step out"
+            },
+            {
               "kind": "method",
               "name": "apply",
               "privacy": "private",
-              "description": "lights, selection, level, filter and what was opened by hand, written onto the links and the things they end on"
+              "description": "lights, selection, level, filter, focus and what was opened by hand, written onto the links and the things they end on"
             },
             {
               "kind": "method",
@@ -8326,6 +8420,10 @@
             {
               "description": "`{ from, to?, open }` when a pair (`to`), or everything leaving `from`, is opened or closed by hand",
               "name": "sett-open"
+            },
+            {
+              "description": "`{ key, focused }`: bubbles from an area's name, and fired by the sheet itself when Esc leaves focus",
+              "name": "sett-focus"
             }
           ],
           "attributes": [
@@ -8364,6 +8462,15 @@
               "default": "''",
               "description": "link kinds and families to keep, space-separated (`calls does`); the rest recedes; empty keeps all",
               "fieldName": "filter"
+            },
+            {
+              "name": "focus",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "the key of the focused area: its links are drawn down to the items, everything unrelated recedes; empty is no focus. The attribute is `focus`",
+              "fieldName": "focusArea"
             }
           ],
           "superclass": {

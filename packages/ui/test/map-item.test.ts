@@ -34,6 +34,11 @@ describe('sett-item', () => {
     const nameRule = css.match(/\.t \{[^}]*\}/)![0];
     expect(nameRule).not.toMatch(/animation|transition|opacity|transform|font-size/);
   });
+  it('far recedes by colour, never by opacity; a finding and a pin ignore it', () => {
+    const css = cssOf('sett-item');
+    expect(css).toContain(':host([far]:not([finding]):not([selected])) { color: var(--sett-color-mute); border-color: var(--sett-color-line2); }');
+    expect(css).not.toMatch(/:host\(\[far\][^{]*{[^}]*opacity/);
+  });
   it('is a button you can reach and use from the keyboard', async () => {
     const el = await mount('<sett-item kind="fn">subscribe()</sett-item>');
     expect(el.getAttribute('role')).toBe('button');

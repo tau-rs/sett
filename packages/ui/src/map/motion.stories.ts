@@ -60,7 +60,7 @@ export const AFindingIsFixed: Story = {
 export const YouFoldAnArea: Story = {
   name: '5 · response · you fold an area',
   render: () => scene(box(html`<sett-area name="routes · public"><sett-item entry>health_check()</sett-item><sett-item entry session="yk" live>subscribe()</sett-item><sett-item selected>SubscriptionToken</sett-item></sett-area>`),
-    'Click the header. The area eases shut, its arrow turns, the agent\'s dot starts breathing, and a blue count says your selection is inside: the header carries what the fold hides.'),
+    'Click the arrow. The area eases shut, its arrow turns, the agent\'s dot starts breathing, and a blue count says your selection is inside: the header carries what the fold hides.'),
 };
 export const IntoAFoldedArea: Story = {
   name: '6 · event · the agent walks into a folded area',

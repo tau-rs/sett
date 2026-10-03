@@ -282,3 +282,97 @@ describe('sett-sheet at the areas level', () => {
     for (const x of xs) expect(Math.abs(x - trunk) % 12).toBe(6);
   });
 });
+
+describe('sett-sheet focuses an area', () => {
+  const area = (sheet: SettSheet, key: string) => sheet.querySelector(`sett-area[key="${key}"]`) as El;
+  const far = (sheet: SettSheet, sel: string) => Array.from(sheet.querySelectorAll(sel)).filter((e) => (e as El).far).map((e) => e.getAttribute('key') ?? `${e.getAttribute('from')}>${e.getAttribute('to')}`);
+  it('draws the links arriving in the focused area down to the items, and the ones inside it', async () => {
+    const { sheet, settle } = await mountAreas();
+    sheet.setAttribute('focus', 'd'); await settle();
+    expect(sheet.focusArea).toBe('d'); expect(area(sheet, 'd').focused).toBe(true);
+    expect(to(sheet, 'a', 'b').route!.points[0]).toEqual({ x: 360, y: 49 });
+    expect(to(sheet, 'a', 'e').route).toBeDefined(); expect(to(sheet, 'c', 'e').route).toBeDefined();
+    expect(to(sheet, 'b', 'e').route, 'inside the focused area').toBeDefined();
+    expect(sheet.open, 'what was opened by hand is not touched').toBe('');
+  });
+  it('everything unrelated recedes: items and areas by colour, lines to map.far; what it touches and a finding keep full ink', async () => {
+    const { sheet, settle } = await mountAreas();
+    sheet.focusArea = 'd'; await settle();
+    expect(far(sheet, 'sett-item')).toEqual(['f', 'g']);                     // a and c are touched, b and e are inside
+    item(sheet, 'g').setAttribute('finding', ''); await tick(); await settle();
+    expect(far(sheet, 'sett-item'), 'a finding never recedes').toEqual(['f']);
+    expect(far(sheet, 'sett-area')).toEqual(['r', 'auth']);
+    expect(far(sheet, 'sett-link')).toEqual(['c>f', 'a>g', 'op>a']);         // the finding link ignores `far` in its own styles
+    expect(to(sheet, 'c', 'f').route!.points.at(-1), 'an unrelated single stays header to header').toEqual({ x: 440, y: 213 });
+    expect(bundlesOf(sheet).length, 'routes > domain is drawn as its links: no double line is left').toBe(0);
+    expect(cssOf('sett-link')).toContain(':host([far][finding]) { opacity: 1; }');
+  });
+  it('opens the leaving side too, and a bundle that does not touch the focus recedes whole', async () => {
+    const { sheet, settle } = await mountAreas();
+    sheet.focusArea = 'auth'; await settle();
+    expect(to(sheet, 'c', 'f').route!.points[0]).toEqual({ x: 360, y: 79 });
+    expect(far(sheet, 'sett-item'), 'c calls f, and the finding from a lands on g').toEqual(['b', 'e']);
+    expect(bundlesOf(sheet).map((b) => [b.from, b.far, b.branches.map((x) => x.to)])).toEqual([['r', true, ['d']]]);
+    sheet.focusArea = 'r'; await settle();
+    expect(link(sheet, 'op').far).toBe(false);
+    expect(link(sheet, 'op').route!.points.at(-1), 'a wire arriving in the area lands on its item').toEqual({ x: 172, y: 49 });
+    expect(far(sheet, 'sett-item')).toEqual([]);
+  });
+  it('nothing moves: a pair line keeps its track while focus holds another open', async () => {
+    const { sheet, settle } = await mountAreas();
+    const before = to(sheet, 'c', 'f').route!.points[1].x;
+    sheet.focusArea = 'd'; await settle();
+    expect(to(sheet, 'c', 'f').route!.points[1].x).toBe(before);
+  });
+  it('the name of an area focuses it, the name again leaves; another name moves the focus', async () => {
+    const { sheet, settle } = await mountAreas();
+    const name = (key: string) => area(sheet, key).shadowRoot!.querySelector('[part="name"]') as HTMLElement;
+    await area(sheet, 'd').updateComplete;
+    name('d').click(); await settle();
+    expect(sheet.getAttribute('focus')).toBe('d'); expect(area(sheet, 'r').far).toBe(true);
+    name('auth').click(); await settle();
+    expect(sheet.focusArea).toBe('auth'); expect(area(sheet, 'd').focused).toBe(false); expect(area(sheet, 'd').far).toBe(true);
+    await area(sheet, 'auth').updateComplete;
+    name('auth').click(); await settle();
+    expect(sheet.focusArea).toBe('');
+    expect(far(sheet, 'sett-item, sett-area, sett-link')).toEqual([]);
+    expect(to(sheet, 'c', 'f').route!.points.at(-1)).toEqual({ x: 440, y: 213 });
+  });
+  it('Esc leaves focus, says so, and is used up; without a focus it passes through', async () => {
+    const { sheet, settle } = await mountAreas();
+    const seen: any[] = []; let outside = 0;
+    sheet.addEventListener('sett-focus', (e) => seen.push((e as CustomEvent).detail));
+    document.body.addEventListener('keydown', () => { outside++; });
+    const esc = () => item(sheet, 'a').dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, composed: true }));
+    esc(); expect(outside).toBe(1);
+    sheet.focusArea = 'd'; await settle();
+    esc(); await settle();
+    expect(sheet.focusArea).toBe(''); expect(seen).toEqual([{ key: 'd', focused: false }]); expect(outside).toBe(1);
+    expect(area(sheet, 'r').far).toBe(false);
+  });
+  it('what was opened by hand comes back as it was; a line that focus holds open does not close its pair', async () => {
+    const { sheet, settle } = await mountAreas();
+    sheet.open = 'r>auth'; sheet.focusArea = 'd'; await settle();
+    const seen: any[] = [];
+    sheet.addEventListener('sett-open', (e) => seen.push((e as CustomEvent).detail));
+    to(sheet, 'a', 'b').dispatchEvent(new Event('click', { bubbles: true }));
+    await settle();
+    expect(seen).toEqual([]); expect(sheet.open).toBe('r>auth');
+    expect(to(sheet, 'c', 'f').far, 'opened by hand, but unrelated to the focus').toBe(true);
+    sheet.focusArea = ''; await settle();
+    expect(to(sheet, 'a', 'b').route).toBeUndefined();
+    expect(to(sheet, 'c', 'f').route!.points[0]).toEqual({ x: 360, y: 79 });
+  });
+  it('a pin keeps full ink under focus, with its links', async () => {
+    const { sheet, settle } = await mountAreas();
+    sheet.focusArea = 'd'; await settle();
+    item(sheet, 'f').dispatchEvent(new CustomEvent('sett-select', { bubbles: true, composed: true }));
+    await tick(); await settle();
+    expect(item(sheet, 'f').far).toBe(false); expect(to(sheet, 'c', 'f').far).toBe(false);
+  });
+  it('a key that names nothing is no focus', async () => {
+    const { sheet, settle } = await mountAreas();
+    sheet.focusArea = 'nope'; await settle();
+    expect(far(sheet, 'sett-item, sett-area, sett-link')).toEqual([]);
+  });
+});

@@ -16,6 +16,8 @@ const stubAnimate = () => {
   return calls;
 };
 const header = (el: El) => el.shadowRoot!.querySelector('[part="header"]') as HTMLElement;
+const name = (el: El) => el.shadowRoot!.querySelector('[part="name"]') as HTMLElement;
+const arrow = (el: El) => el.shadowRoot!.querySelector('[part="fold"]') as HTMLElement;
 const tags = (el: El) => Array.from(el.shadowRoot!.querySelectorAll('sett-tag')).map((t) => `${t.getAttribute('kind')}:${t.textContent}`);
 const dots = (el: El) => Array.from(el.shadowRoot!.querySelectorAll('.sd')) as HTMLElement[];
 const ROUTES = `<sett-area name="routes · public">
@@ -49,19 +51,42 @@ describe('sett-area', () => {
     const el = await mount(ROUTES);
     expect(dots(el).some((d) => d.classList.contains('live'))).toBe(false);
   });
-  it('folding hands the life to the header: the live session breathes, the touched one stays still', async () => {
+  it('the arrow folds, and hands the life to the header: the live session breathes, the touched one stays still', async () => {
     const el = await mount(ROUTES);
     let detail: any; el.addEventListener('sett-fold', (e: Event) => { detail = (e as CustomEvent).detail; });
-    header(el).click(); await el.updateComplete;
+    expect(arrow(el).tagName).toBe('BUTTON');
+    arrow(el).click(); await el.updateComplete;
     expect(el.hasAttribute('folded')).toBe(true);
     expect(detail).toEqual({ folded: true });
-    expect(header(el).getAttribute('aria-expanded')).toBe('false');
+    expect(arrow(el).getAttribute('aria-expanded')).toBe('false');
+    expect(arrow(el).getAttribute('aria-label')).toBe('open routes · public');
     expect(el.shadowRoot!.querySelector('[part="body"]')!.hasAttribute('inert')).toBe(true);
     const [yk, tl] = dots(el);
     expect(yk.classList.contains('live')).toBe(true);
     expect(tl.classList.contains('live')).toBe(false);
-    header(el).dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' })); await el.updateComplete;
+    arrow(el).click(); await el.updateComplete;
     expect(el.hasAttribute('folded')).toBe(false);
+  });
+  it('the header is two controls: the name asks for focus and never folds, the rest of the header does nothing', async () => {
+    const el = await mount(ROUTES.replace('<sett-area ', '<sett-area key="routes" '));
+    const seen: any[] = []; let folds = 0;
+    el.addEventListener('sett-focus', (e: Event) => seen.push((e as CustomEvent).detail));
+    el.addEventListener('sett-fold', () => { folds++; });
+    expect(name(el).tagName).toBe('BUTTON'); expect(name(el).getAttribute('aria-pressed')).toBe('false');
+    name(el).click(); header(el).click(); await el.updateComplete;
+    expect(seen).toEqual([{ key: 'routes', focused: true }]);
+    expect(folds).toBe(0); expect(el.hasAttribute('folded')).toBe(false);
+    expect(el.focused, 'the area only asks: the sheet owns the state').toBe(false);
+    el.focused = true; await el.updateComplete;
+    expect(name(el).getAttribute('aria-pressed')).toBe('true');
+    name(el).click();
+    expect(seen[1]).toEqual({ key: 'routes', focused: false });
+  });
+  it('both controls take a focus-visible ring; far recedes by colour, never by opacity', () => {
+    const css = cssOf('sett-area');
+    expect(css).toMatch(/button:focus-visible\s*{\s*outline: var\(--sett-stroke-lit\) solid var\(--sett-color-sel\)/);
+    expect(css).toMatch(/:host\(\[far\]\)\s*{\s*color: var\(--sett-color-mute\); border-color: var\(--sett-color-line2\);/);
+    expect(css).not.toMatch(/\[far\][^{]*{[^}]*opacity/);
   });
   it('folded, it says how many selected items it hides', async () => {
     const el = await mount(ROUTES);

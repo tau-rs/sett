@@ -70,6 +70,17 @@ At rest a sheet draws one line per pair of areas, header to header. A stretch th
   </tbody>
 </table>
 
+## Focus inside a unit
+
+An area's header holds two controls: the name focuses the area, the arrow folds it. Focused, the area's links open down to the items, in, out and inside it, and the items they reach keep full ink. Every other item and area recedes **by colour**, to `color.mute` ink and a `color.line2` border, so a name stays readable; every other line goes to **{base.map.far}**. A finding never recedes. Esc, or the name again, leaves. Nothing moves.
+
+| | focused area | what its links reach | everything else |
+|---|---|---|---|
+| items | full ink | full ink | mute ink, `line2` border |
+| area header | name in `color.sel`, `sel` border | mute ink, `line2` border | mute ink, `line2` border |
+| lines | item to item | item to item | `map.far` |
+| a finding | red | red | red |
+
 ## HTTP methods
 
 Weight {base.map.method.weight}, {base.map.method.size}, in a fixed {base.map.size.methodColumn} column.

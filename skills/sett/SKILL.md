@@ -483,7 +483,8 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -779,7 +780,8 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -1081,7 +1083,8 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -1729,7 +1732,8 @@ The page around the code of an item, in a tab of `sett-tabbar` (map rule 4). It 
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -1929,7 +1933,8 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -2362,7 +2367,8 @@ What a port promises: the kind chip (the kind's dot and word, the same colour as
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -2558,7 +2564,8 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -2757,7 +2764,8 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -3674,7 +3682,7 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
 
 ### `<sett-item>`
 
-One function, struct or trait inside an area: an 18 px box in a 22 px row, its name in mono at the base size. The name never moves, fades or resizes; everything else is drawn around or behind it (DESIGN.md § Motion): the item's own colour, an agent's sheen, your selection tight to the box, the session ring one step out, a change flash past everything. `session` alone is a thin still ring: an agent touched this earlier. With `live` the ring breathes and a sheen sweeps: an agent is here now. When `live` flips, the item plays its own arrival or departure pulse. `lit` is the response to a pointer on one of its links: a blue border. `far` is an item unrelated to the focused area: it recedes by colour, never by opacity, so its name stays readable; a finding never recedes.
+One function, struct or trait inside an area: an 18 px box in a 22 px row, its name in mono at the base size. The name says the kind (`subscribe()`, `impl PgSubscriberRepo`, `mod routes`); a `const`, `static`, `type-alias` or `union` writes its Rust word before the bare name itself (`const` SESSION_TTL), the word alone in its kind's syntax colour: values amber, types teal. The name never moves, fades or resizes; everything else is drawn around or behind it (DESIGN.md § Motion): the item's own colour, an agent's sheen, your selection tight to the box, the session ring one step out, a change flash past everything. `session` alone is a thin still ring: an agent touched this earlier. With `live` the ring breathes and a sheen sweeps: an agent is here now. When `live` flips, the item plays its own arrival or departure pulse. `lit` is the response to a pointer on one of its links: a blue border. `far` is an item unrelated to the focused area: it recedes by colour, never by opacity, so its name stays readable; a finding never recedes.
 
 - attrs:
   - `key=string` — the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`
@@ -3776,7 +3784,8 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -4009,7 +4018,8 @@ The key to the map, on demand (map rule 8): a section of `sett-panel`, folded to
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -4221,7 +4231,8 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -4570,7 +4581,8 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -4897,7 +4909,8 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -5105,7 +5118,8 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -5352,7 +5366,8 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -6105,7 +6120,8 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -6301,7 +6317,8 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -6503,7 +6520,8 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -6730,7 +6748,8 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
@@ -7640,7 +7659,8 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-cue--toward-the-threshold` toward the threshold · just started, halfway, almost, reached (the bar turns blue)
   - `map-cue--clamped` clamped · under the start the bar is empty, past the threshold it stays full
   - `map-item--default` Default
-  - `map-item--kinds` kinds · eight
+  - `map-item--kinds` kinds · twelve
+  - `map-item--words` words · const, static, type, union write their word in the kind's colour (values amber, types teal), the name in ink · every state
   - `map-item--states` states · entry · port · finding · selected · family · and together
   - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill

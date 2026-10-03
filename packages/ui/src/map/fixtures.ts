@@ -98,7 +98,7 @@ export function sectionOf(p: Port, f: Fixture): RailSection {
   }
 }
 
-const ITEM_KINDS: ItemKind[] = ['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external'];
+const ITEM_KINDS: ItemKind[] = ['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external', 'const', 'static', 'type-alias', 'union'];
 /** the item kind for a fixture item; an item of an outbound column is external */
 export const itemKindOf = (it: FixtureItem): ItemKind => (it.ext ? 'external' : ITEM_KINDS.includes(it.k as ItemKind) ? (it.k as ItemKind) : 'fn');
 
@@ -132,13 +132,16 @@ export const opKey = (contract: string, op: string): string => `${contract}:${op
 /**
  * The kind of a fixture link, derived from the two items (illustrative: the
  * fixtures carry `impl` and `smell` only; the analyser will emit a kind per
- * link, #58). A smell is the finding overlay, not a kind.
+ * link, #58). A smell is the finding overlay, not a kind. A const or a static
+ * is read, a union holds like a struct, an alias is a type in use, as
+ * arch-analyze derives them; none of the three datasets has such an item yet.
  */
 export function linkKindOf(from: FixtureItem, to: FixtureItem, opts: FixtureLinkRow[2] = {}): LinkKind {
   if (to.ext) return 'calls-out';
   if (opts.impl) return 'implements';
   if (to.k === 'macro') return 'expands';
   if (from.k === 'mod') return from.name.startsWith('pub use') ? 're-exports' : 'calls';
+  if (to.k === 'const' || to.k === 'static') return 'reads';
   if (to.k === 'trait') {
     if (from.k === 'impl' || from.k === 'struct' || from.k === 'enum') return 'implements';
     if (from.k === 'trait') return 'refines';
@@ -149,11 +152,13 @@ export function linkKindOf(from: FixtureItem, to: FixtureItem, opts: FixtureLink
     case 'impl':
       if (to.k === 'fn') return 'calls';
       if (to.k === 'enum') return 'matches-on';
-      if (to.k === 'struct') return /::(parse|new|build|from)\b/.test(to.name) ? 'constructs' : 'uses-type';
+      if (to.k === 'struct' || to.k === 'union') return /::(parse|new|build|from)\b/.test(to.name) ? 'constructs' : 'uses-type';
+      if (to.k === 'type-alias') return 'uses-type';
       return 'refers-to';
     case 'struct':
+    case 'union':
       if (to.k === 'fn') return 'calls';
-      if (to.k === 'struct' || to.k === 'enum') return 'holds';
+      if (to.k === 'struct' || to.k === 'enum' || to.k === 'union') return 'holds';
       return 'uses-type';
     case 'enum':
     case 'trait':

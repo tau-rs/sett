@@ -21,8 +21,28 @@ const row = (...cols: unknown[]) => html`<div class="sett-row" style="align-item
 
 export const Default: Story = {};
 export const Kinds: Story = {
-  name: 'kinds · eight',
-  render: () => stack(ITEM_KINDS.map((k) => html`<sett-item kind=${k}>${{ fn: 'subscribe()', struct: 'NewSubscriber', enum: 'ConfirmationError', trait: 'EmailSender · trait', impl: 'impl PgSubscriberRepo', mod: 'mod routes', macro: 'register_extension!', external: 'sqlx::PgPool' }[k]}</sett-item>`)),
+  name: 'kinds · twelve',
+  render: () => stack(ITEM_KINDS.map((k) => html`<sett-item kind=${k}>${{ fn: 'subscribe()', struct: 'NewSubscriber', enum: 'ConfirmationError', trait: 'EmailSender · trait', impl: 'impl PgSubscriberRepo', mod: 'mod routes', macro: 'register_extension!', external: 'sqlx::PgPool', const: 'SESSION_TTL', static: 'TRACING', 'type-alias': 'PgTransaction', union: 'RawHeader' }[k]}</sett-item>`)),
+};
+interface ItemState { entry?: boolean; selected?: boolean; lit?: boolean; finding?: boolean; planned?: boolean; group?: string; far?: boolean; delta?: string; session?: string; live?: boolean }
+const WORD_ITEMS = [['const', 'SESSION_TTL'], ['static', 'TRACING'], ['type-alias', 'PgTransaction'], ['union', 'RawHeader']] as const;
+const words = (s: ItemState = {}) => WORD_ITEMS.map(([k, name]) => html`<sett-item kind=${k} ?entry=${s.entry} ?selected=${s.selected} ?lit=${s.lit} ?finding=${s.finding} ?planned=${s.planned} group=${ifDefined(s.group)} ?far=${s.far} delta=${ifDefined(s.delta)} session=${ifDefined(s.session)} ?live=${s.live}>${name}</sett-item>`);
+export const Words: Story = {
+  name: 'words · const, static, type, union write their word in the kind\'s colour (values amber, types teal), the name in ink · every state',
+  render: () => html`<div class="sett-row" style="flex-wrap:wrap;align-items:flex-start;gap:var(--sett-space-4)">
+    ${stack(html`<sett-item>subscribe()</sett-item><sett-item kind="struct">NewSubscriber</sett-item><sett-item kind="impl">impl PgSubscriberRepo</sett-item><sett-item kind="mod">mod routes</sett-item>`, 'what they must differ from')}
+    ${stack(words(), 'plain')}
+    ${stack(words({ entry: true }), 'entry')}
+    ${stack(words({ selected: true }), 'selected')}
+    ${stack(words({ lit: true }), 'lit by a pointed link')}
+    ${stack(words({ finding: true }), 'finding')}
+    ${stack(words({ planned: true, group: 'g1' }), 'planned, with its group')}
+    ${stack(words({ far: true }), 'far · the word recedes with the name')}
+    ${stack(words({ far: true, finding: true }), 'far, but a finding · keeps its word')}
+    ${stack(words({ delta: 'unchanged' }), 'delta · unchanged')}
+    ${stack(words({ delta: 'removed' }), 'delta · removed')}
+    ${stack(words({ session: 'yk', live: true }), 'an agent working on it')}
+  </div>`,
 };
 export const States: Story = {
   name: 'states · entry · port · finding · selected · family · and together',

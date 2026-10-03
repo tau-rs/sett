@@ -3597,7 +3597,7 @@
               }
             }
           ],
-          "description": "The kind of a fixture link, derived from the two items (illustrative: the\nfixtures carry `impl` and `smell` only; the analyser will emit a kind per\nlink, #58). A smell is the finding overlay, not a kind."
+          "description": "The kind of a fixture link, derived from the two items (illustrative: the\nfixtures carry `impl` and `smell` only; the analyser will emit a kind per\nlink, #58). A smell is the finding overlay, not a kind. A const or a static\nis read, a union holds like a struct, an alias is a type in use, as\narch-analyze derives them; none of the three datasets has such an item yet."
         },
         {
           "kind": "function",
@@ -6471,11 +6471,11 @@
           "type": {
             "text": "ItemKind[]"
           },
-          "default": "['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external']"
+          "default": "['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external', 'const', 'static', 'type-alias', 'union']"
         },
         {
           "kind": "class",
-          "description": "One function, struct or trait inside an area: an 18 px box in a 22 px row,\nits name in mono at the base size. The name never moves, fades or resizes;\neverything else is drawn around or behind it (DESIGN.md § Motion):\nthe item's own colour, an agent's sheen, your selection tight to the box,\nthe session ring one step out, a change flash past everything.\n\n`session` alone is a thin still ring: an agent touched this earlier. With\n`live` the ring breathes and a sheen sweeps: an agent is here now. When\n`live` flips, the item plays its own arrival or departure pulse. `lit`\nis the response to a pointer on one of its links: a blue border. `far`\nis an item unrelated to the focused area: it recedes by colour, never by\nopacity, so its name stays readable; a finding never recedes.",
+          "description": "One function, struct or trait inside an area: an 18 px box in a 22 px row,\nits name in mono at the base size. The name says the kind (`subscribe()`,\n`impl PgSubscriberRepo`, `mod routes`); a `const`, `static`, `type-alias` or\n`union` writes its Rust word before the bare name itself (`const` SESSION_TTL),\nthe word alone in its kind's syntax colour: values amber, types teal.\nThe name never moves, fades or resizes;\neverything else is drawn around or behind it (DESIGN.md § Motion):\nthe item's own colour, an agent's sheen, your selection tight to the box,\nthe session ring one step out, a change flash past everything.\n\n`session` alone is a thin still ring: an agent touched this earlier. With\n`live` the ring breathes and a sheen sweeps: an agent is here now. When\n`live` flips, the item plays its own arrival or departure pulse. `lit`\nis the response to a pointer on one of its links: a blue border. `far`\nis an item unrelated to the focused area: it recedes by colour, never by\nopacity, so its name stays readable; a finding never recedes.",
           "name": "SettItem",
           "cssParts": [
             {

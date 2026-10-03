@@ -52,7 +52,7 @@ describe('sett-item', () => {
   it('reflects its kind and states for styling', async () => {
     const css = cssOf('sett-item');
     for (const s of ['entry', 'port', 'finding', 'selected']) expect(css).toContain(`:host([${s}])`);
-    expect(ITEM_KINDS).toEqual(['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external']);
+    expect(ITEM_KINDS).toEqual(['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external', 'const', 'static', 'type-alias', 'union']);
     const el = await mount('<sett-item kind="trait" port family="214 impls">Element · trait</sett-item>');
     expect(el.shadowRoot!.querySelector('sett-tag')!.textContent).toBe('214 impls');
     expect(el.hasAttribute('port')).toBe(true);
@@ -151,5 +151,26 @@ describe('sett-item overlays: plan and delta (DESIGN.md "The map" rule 13)', () 
     expect(c).not.toMatch(/:host\(\[delta[^{]*\{[^}]*opacity/);
     const el = await mount('<sett-item delta="removed">save_notified()</sett-item>');
     expect(el.getAttribute('delta')).toBe('removed');
+  });
+  it('a const, a static, an alias and a union write their Rust word before the name; the other kinds write none', async () => {
+    const words = { const: 'const', static: 'static', 'type-alias': 'type', union: 'union' } as const;
+    for (const [kind, word] of Object.entries(words)) {
+      const el = await mount(`<sett-item kind="${kind}">SESSION_TTL</sett-item>`);
+      const w = el.shadowRoot!.querySelector('.t .kw')!;
+      expect(w.textContent).toBe(word);
+      expect(w.nextElementSibling!.tagName).toBe('SLOT');
+    }
+    for (const kind of ['fn', 'struct', 'impl', 'mod', 'external']) {
+      const el = await mount(`<sett-item kind="${kind}">x</sett-item>`);
+      expect(el.shadowRoot!.querySelector('.kw')).toBeNull();
+    }
+  });
+  it('the word takes its kind\'s syntax colour, values amber and types teal; receding takes it back to the name\'s ink', () => {
+    const css = cssOf('sett-item');
+    expect(css).toContain(":host([kind='const']), :host([kind='static']) { --_word: var(--sett-syntax-constant); }");
+    expect(css).toContain(":host([kind='type-alias']), :host([kind='union']) { --_word: var(--sett-syntax-type); }");
+    expect(css).toMatch(/\.kw \{[^}]*color: var\(--_word, inherit\)/);
+    expect(css).toContain(":host([far]:not([finding]):not([selected])) .kw, :host([delta='unchanged']) .kw, :host([delta='removed']) .kw { color: inherit; }");
+    expect(css.match(/\.kw \{[^}]*\}/)![0]).not.toMatch(/animation|transition|opacity|transform|font-size/);
   });
 });

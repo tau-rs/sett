@@ -25,6 +25,8 @@ Synced to: no ADR yet (`arch-design` holds none on 2026-10-02). DESIGN.md wins o
 | 2026-10-02 | analyser output | lane 4 needs a kind per link and how the analyser knows it; `sett-item` needs the kinds const · static · alias · union | #69, #68 |
 | 2026-10-02 | shell page, daily flow | no page draws the **`detected` chip** of a `you` session (spec §4: "the git chip counts the changes; commit is one click from the chip; `Delegate the rest`") | sett draws it with a `sel` label, `changes detected · n files`, doors `delegate the rest` · `commit` (#63); to confirm or redraw |
 | 2026-10-02 | session flow, shell page | the **gate of a group has no glyph** on any page (the pages write `judge` as a tag; DESIGN.md rule 7 writes `gate`); the session card's glyph column needs one per gate word | sett reads the gate through the existing glyphs: `✓` done · `●` running · `●` gate in amber · `!` failed in red · `·` waiting (#63); no new glyph |
+| 2026-10-03 | map design spec, `sett-cue` | the cue's subject is gone: the PoC's bar counted toward "zoom in to enter" (`map.threshold.cue` → `enter`), and DESIGN.md opens a unit by double-click or ↩ only (rule 4, #65). What the bar counts toward in V1 is not said | `sett-cue` is built with the host's values (`value` · `from` · `threshold`) and no subject of its own; the stories count toward the next tier (#39). To name: the tier, the fold floor (#75), or drop the cue |
+| 2026-10-03 | map design spec, lane 5 | the PoC page is in no workspace any more; position, back and cue have no readable drawing (the flow pages draw only a breadcrumb and a floating minimap) | looks taken from DESIGN.md and the tokens (#39); to confirm or redraw |
 
 ## Deviations (what sett changed from the pages, and why)
 
@@ -46,6 +48,10 @@ Synced to: no ADR yet (`arch-design` holds none on 2026-10-02). DESIGN.md wins o
 | 2026-10-02 | session | the session card's group row is `sett-plan-row kind="group"`, with its elements inside it and its sub-agents folded under the group | the Sessions view (lane C) owns `sett-group-row`; one name per element (#63) |
 | 2026-10-02 | session | `stepped-in` is `taken-over` on the card's rows; the old value still draws for one release | step in is gone from the vocabulary (rule 9) |
 | 2026-10-02 | plan, daily | a planned element's hint is a `sett-hint` pill after the code at its site, next to `◇`, not a right-aligned count | rule 12: the hint sits at the site; the counts stay the declaration's |
+| 2026-10-03 | map | `sett-back` and `sett-crumb` sit in a docked strip on top of the map's pane, with the cue at its right end; the map design spec has the back pill floating top-left | map rule 8: nothing floats over the drawing (#39) |
+| 2026-10-03 | map | the minimap is in the foot of `sett-panel`; `flows/map-focus.html` floats it bottom-right over the map | map rule 8 (#39) |
+| 2026-10-03 | map | `sett-panel` is the map's own pane, inside the centre, beside the shell's inspector and never in it | the inspector is about the selection (shell rule 6); the panel is about where you are (#39) |
+| 2026-10-03 | map | pointing eases a border or a background (`motion.hover`) on the back pill and a position row; #39 and the map design spec said "no hover transitions" | DESIGN.md § Motion (#52) replaced that line; text still never eases |
 ||||||| parent of e9a9746 (feat(ui): card layouts: checklist rows and how, result pills, plan delta, What's new doors, fix card (shell lane E))
 | 2026-10-02 | review (merge) | the how is one plain line, `squash · from the forge's default · delete branch · archive session`; no radios, no checkboxes | the strategy is read from the forge, never chosen in arch (ADR 0016); the gated button under it is the only verb |
 | 2026-10-02 | review (merged) | two pills on the result, `merged` in ok and `archived` plain; the page has one `merged · archived` | merged is the forge's fact, archived is arch's, restorable (ADR 0003) |

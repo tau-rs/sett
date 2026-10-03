@@ -402,6 +402,9 @@ A module-sized group of items inside a column. The header carries what the area 
 - events:
   - `sett-fold` — `{ folded }` when the header is used
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -622,6 +625,9 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
 - events:
   - `sett-back` — on click, Enter or Space
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -1292,6 +1298,9 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
 - parts:
   - `header` — the column's label
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -1642,6 +1651,9 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
 - events:
   - `sett-go` — `{ index, step }`: go up to that step
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -1765,6 +1777,9 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
 - slots:
   - `(default)` — the label, lowercase: `keep zooming · areas fold`
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -2704,6 +2719,9 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
 - events:
   - `sett-select` — `{ kind }` on click, Enter or Space
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -2870,6 +2888,9 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
 - events:
   - `sett-light` — `{ on }` when pointed at; the sheet lights it with both ends
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -3135,6 +3156,9 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
 - events:
   - `sett-pan` — `{ x, y }`: the world point the viewport should centre on (click, drag, arrow keys)
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -3386,6 +3410,9 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
 - events:
   - `sett-open` — `{ action: 'close' }` from `▴ close` on an open node; the node never asks to open
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -3518,6 +3545,9 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `sett-expand` — from the `more` row
   - `sett-select` — `{ kind, path }` when a row with a handler or a route is clicked
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -3689,6 +3719,9 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
 - events:
   - `sett-status-clear` — the status line was cleared, by the hold or by an action
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -4366,6 +4399,9 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
 - events:
   - `sett-select` — `{ kind, name, side }` when the row is clicked
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -4486,6 +4522,9 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
 - events:
   - `sett-go` — `{ n, key, future }` from a row: go to that place
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -4612,6 +4651,9 @@ One place of the trail: its number, its name in mono, and the level it is at in 
 - events:
   - `sett-go` — `{ n, key, future }` on click, Enter or Space
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -4763,6 +4805,9 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `header` — the `exposes · n ports` line
   - `section` — each section header
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something
@@ -5593,6 +5638,9 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
 - events:
   - `sett-fold` — bubbles from the areas inside
 - stories:
+  - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
+  - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
+  - `map-chrome--inside-a-unit` ripgrep · inside rg: back, the crumb down to an area, the cue, the sheet on the minimap
   - `map-motion--an-agent-is-here` 1 · presence · an agent is here
   - `map-motion--the-agent-moves-on` 2 · event · the agent moves on (a jump, as a pulse)
   - `map-motion--the-agent-changed-something` 3 · event · the agent changed something

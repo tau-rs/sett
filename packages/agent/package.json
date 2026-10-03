@@ -1,6 +1,6 @@
 {
   "name": "@tau-rs/sett-agent",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "private": true,
   "description": "sett · agent layer. llms.txt and skills/sett/SKILL.md are generated at the repo root by scripts/gen-agent-layer.mjs (root pnpm build); the test here fails when they are stale.",
   "license": "MIT",

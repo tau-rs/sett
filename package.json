@@ -1,7 +1,7 @@
 {
   "name": "sett",
   "private": true,
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "sett · design system for tau-rs developer tools",
   "license": "MIT",
   "packageManager": "pnpm@10.14.0",

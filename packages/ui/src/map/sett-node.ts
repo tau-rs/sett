@@ -36,6 +36,8 @@ export { tierFor, foldFor, type UnitFold } from './tier.js';
  */
 @customElement('sett-node')
 export class SettNode extends LitElement {
+  /** the name a `sett-edge` ends on (`from`, `to`); the board also accepts `data-id` */
+  @property({ reflect: true }) key?: string;
   @property() name = '';
   /** app · library · external · … shown mute after the name */
   @property() kind = '';

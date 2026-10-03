@@ -34,10 +34,13 @@ export interface FixtureInside { layout: 'hexagon' | 'layers'; columns: [string,
 export interface Fixture {
   units: Record<string, FixtureInside>;
   name: string; tagline: string; system: unknown;
-  repos: Record<string, { units: FixtureUnit[] }>;
+  repos: Record<string, { units: FixtureUnit[]; edges: FixtureEdge[] }>;
   contracts: Record<string, FixtureContract>;
   code: Record<string, FixtureCode>;
 }
+
+/** an edge between two units of a repository: who uses whom, through which kind, and how much */
+export interface FixtureEdge { f: string; t: string; kind?: PortKind; n?: number; label?: string; how?: string; witness?: string; c?: string }
 
 export interface Port { kind: PortKind; name: string; count?: string; area: string; contract: string; side: PortSide }
 export interface Op { kind: OpKind; method?: string; path?: string; returns?: string; handler?: string; text?: string; args?: string }

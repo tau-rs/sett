@@ -125,3 +125,62 @@ export const sheetRects = (f: Fixture, id: string, selected?: string): MinimapRe
     return [{ key: `col:${i}`, x, y: 0, w: num(S.column), h: tall, tone }, ...areas];
   });
 };
+
+// ---- the board: units where the fixture places them, the edges between them (sett-edge, #56)
+
+/** the port a board edge leaves and the one it reaches: the row that names the other unit or shares its contract, else the first of its kind */
+export function edgePorts(f: Fixture, e: { f: string; t: string; kind?: string }): { from: number; to: number } {
+  const s = unitPorts(f, e.f), t = unitPorts(f, e.t);
+  const first = (x: string) => x.split(' · ')[0].trim();
+  const tName = first(unitOf(f, e.t).name);
+  let from = s.needs.findIndex((p) => !!p.contract && t.exposes.some((q) => q.contract === p.contract));
+  if (from < 0) from = s.needs.findIndex((p) => first(p.name) === tName || first(p.name) === e.t);
+  if (from < 0) from = Math.max(0, s.needs.findIndex((p) => p.kind === (e.kind ?? 'crate')));
+  let to = t.exposes.findIndex((q) => !!q.contract && q.contract === s.needs[from]?.contract);
+  if (to < 0) to = 0;
+  return { from, to };
+}
+/** a port row's key on the board: unique per unit, side and row, so two units' ports never collide */
+export const boardPortKey = (unit: string, side: 'exposes' | 'needs', i: number) => `${unit}/${side}/${i}`;
+
+export interface BoardScene {
+  tier: 'chip' | 'card';
+  /** the unit whose edges are lit, with the flow; unrelated units and edges recede */
+  selected?: string;
+  /** the edge pointed at: lit, its label shown */
+  point?: [string, string];
+  /** the window onto the board, in board pixels; omitted, the whole board */
+  view?: { x: number; y: number; w: number; h: number };
+  /** units with an agent working now, by id: session ids */
+  live?: Record<string, string>;
+}
+/** the units of a repository at a tier, with their edges, in one positioned board */
+export function boardOf(f: Fixture, repo: string, s: BoardScene, extra: unknown = nothing) {
+  const R = f.repos[repo], K = s.tier === 'card' ? parseFloat(base.map.size.cardInterface) / parseFloat(base.map.size.nodeChipW) : 1, pad = 60;
+  const minx = Math.min(...R.units.map((u) => u.x)), miny = Math.min(...R.units.map((u) => u.y));
+  const at = (u: FixtureUnit) => ({ x: Math.round((u.x - minx) * K + pad), y: Math.round((u.y - miny) * K + pad) });
+  const near = new Set(s.selected ? [s.selected, ...R.edges.filter((e) => e.f === s.selected || e.t === s.selected).flatMap((e) => [e.f, e.t])] : []);
+  const w = Math.max(...R.units.map((u) => at(u).x)) + (s.tier === 'card' ? parseFloat(base.map.size.cardInterface) : parseFloat(base.map.size.nodeChipW)) + pad;
+  const h = Math.max(...R.units.map((u) => at(u).y)) + (s.tier === 'card' ? 320 : parseFloat(base.map.size.nodeChipH)) + pad;
+  const unit = (u: FixtureUnit) => {
+    const { exposes, needs } = unitPorts(f, u.id), p = at(u);
+    const width = s.tier === 'card' ? 'var(--sett-map-size-card-interface)' : 'var(--sett-map-size-node-chip-w)';
+    const height = s.tier === 'card' ? 'auto' : 'var(--sett-map-size-node-chip-h)';
+    return html`<sett-node key=${u.id} style=${`position:absolute;left:${p.x}px;top:${p.y}px;width:${width};height:${height}`} name=${u.name} kind=${u.kind} tier=${s.tier}
+      ?selected=${u.id === s.selected} ?far=${!!s.selected && !near.has(u.id)} ?declared=${!!u.declared} sessions=${s.live?.[u.id] ?? sessionsOf(u)} live=${s.live?.[u.id] ?? ''}>
+      ${metaLines(u).map((m) => html`<span>${m}</span>`)}${badges(u)}
+      ${s.tier === 'card' ? html`${exposes.map((q, i) => html`<sett-port-row key=${boardPortKey(u.id, 'exposes', i)} slot="exposes" side="exposes" kind=${q.kind} name=${q.name} count=${q.count ?? ''}></sett-port-row>`)}${needs.map((q, i) => html`<sett-port-row key=${boardPortKey(u.id, 'needs', i)} slot="needs" side="needs" kind=${q.kind} name=${q.name} count=${q.count ?? ''}></sett-port-row>`)}` : nothing}
+    </sett-node>`;
+  };
+  const edge = (e: (typeof R.edges)[number]) => {
+    const { from, to } = edgePorts(f, e);
+    const mine = !!s.selected && (e.f === s.selected || e.t === s.selected), pointed = !!s.point && s.point[0] === e.f && s.point[1] === e.t;
+    const label = e.label ?? (e.n ? `${e.n} use${e.n > 1 ? 's' : ''}` : e.how);
+    return html`<sett-edge from=${e.f} to=${e.t} from-port=${ifDefined(s.tier === 'card' ? boardPortKey(e.f, 'needs', from) : undefined)} to-port=${ifDefined(s.tier === 'card' ? boardPortKey(e.t, 'exposes', to) : undefined)}
+      kind=${e.kind ?? 'crate'} label=${ifDefined(label)} ?selected=${mine} ?lit=${pointed} ?far=${!mine && !pointed && (!!s.selected || !!s.point)}></sett-edge>`;
+  };
+  const board = html`<div class="board" style=${`position:relative;width:${w}px;height:${h}px`}>${R.units.map(unit)}${R.edges.map(edge)}${extra}</div>`;
+  if (!s.view) return board;
+  return html`<div class="window" style=${`position:relative;overflow:hidden;width:${s.view.w}px;height:${s.view.h}px;box-shadow:0 0 0 var(--sett-stroke-hair) var(--sett-color-line)`}>
+    <div style=${`position:absolute;left:${-s.view.x}px;top:${-s.view.y}px`}>${board}</div></div>`;
+}

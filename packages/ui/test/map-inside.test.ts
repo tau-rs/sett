@@ -32,5 +32,6 @@ describe('the inside of a unit, read from the fixtures', () => {
     expect(itemKindOf({ id: 'a', name: 'A', k: 'trait' })).toBe('trait');
     expect(itemKindOf({ id: 'a', name: 'A', k: 'struct', ext: 1 })).toBe('external');
     expect(itemKindOf({ id: 'a', name: 'A', k: 'weird' })).toBe('fn');
+    for (const k of ['const', 'static', 'type-alias', 'union']) expect(itemKindOf({ id: 'a', name: 'A', k })).toBe(k);
   });
 });

@@ -7,12 +7,19 @@ import '../tag/sett-tag.js';
 
 /** where an item stands against main, for the delta overlay */
 export type ItemDelta = 'added' | 'changed' | 'removed' | 'unchanged';
-export type ItemKind = 'fn' | 'struct' | 'enum' | 'trait' | 'impl' | 'mod' | 'macro' | 'external';
-export const ITEM_KINDS: ItemKind[] = ['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external'];
+/** the item kinds, spelled as arch's analyser emits them, so an app passes `Item.kind` through */
+export type ItemKind = 'fn' | 'struct' | 'enum' | 'trait' | 'impl' | 'mod' | 'macro' | 'external' | 'const' | 'static' | 'type-alias' | 'union';
+export const ITEM_KINDS: ItemKind[] = ['fn', 'struct', 'enum', 'trait', 'impl', 'mod', 'macro', 'external', 'const', 'static', 'type-alias', 'union'];
+/** the Rust word an item writes before its name, coloured as its kind is in the editor; the other kinds write none */
+const WORDS: Partial<Record<ItemKind, string>> = { const: 'const', static: 'static', 'type-alias': 'type', union: 'union' };
 
 /**
  * One function, struct or trait inside an area: an 18 px box in a 22 px row,
- * its name in mono at the base size. The name never moves, fades or resizes;
+ * its name in mono at the base size. The name says the kind (`subscribe()`,
+ * `impl PgSubscriberRepo`, `mod routes`); a `const`, `static`, `type-alias` or
+ * `union` writes its Rust word before the bare name itself (`const` SESSION_TTL),
+ * the word alone in its kind's syntax colour: values amber, types teal.
+ * The name never moves, fades or resizes;
  * everything else is drawn around or behind it (DESIGN.md § Motion):
  * the item's own colour, an agent's sheen, your selection tight to the box,
  * the session ring one step out, a change flash past everything.
@@ -95,6 +102,8 @@ export class SettItem extends LitElement {
       :host([lit]) { border-color: var(--sett-color-sel); }
       :host(:focus-visible) { outline: var(--sett-stroke-lit) solid var(--sett-color-sel); outline-offset: var(--sett-stroke-hair); }
       :host([kind='trait']) { font-weight: var(--sett-font-weight-medium); }
+      :host([kind='const']), :host([kind='static']) { --_word: var(--sett-syntax-constant); }
+      :host([kind='type-alias']), :host([kind='union']) { --_word: var(--sett-syntax-type); }
       :host([kind='external']) { background: var(--sett-map-status-external-bg); border-color: var(--sett-map-status-external-border); }
       :host([entry]) { background: var(--sett-map-status-entry-bg); border-color: var(--sett-map-status-entry-border); }
       :host([port]) { --_radius: var(--sett-map-radius-pill); background: var(--sett-map-status-port-bg); border-color: var(--sett-map-status-port-border); }
@@ -110,6 +119,9 @@ export class SettItem extends LitElement {
       :host([far][lit]:not([finding]):not([selected])) { border-color: var(--sett-color-sel); }
       :host([selected]) { border-color: var(--sett-color-sel); border-style: solid; box-shadow: 0 0 0 var(--sett-stroke-hair) var(--sett-color-sel); }
       .t { position: relative; z-index: 1; flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+      .kw { color: var(--_word, inherit); }
+      /* receding takes the word back to the name's ink, like every other colour on the item */
+      :host([far]:not([finding]):not([selected])) .kw, :host([delta='unchanged']) .kw, :host([delta='removed']) .kw { color: inherit; }
       sett-tag { position: relative; z-index: 1; flex: 0 0 auto; }
 
       /* the session ring: one step outside the box, so the item's own border stays readable */
@@ -204,7 +216,7 @@ export class SettItem extends LitElement {
     return html`
       ${this.session ? html`<i class="ring ${this.live ? 'live' : ''} ${this.cooling ? 'cool' : ''}" part="ring"></i>` : nothing}
       ${this.session && this.live ? html`<i class="sheen ${this.kick ? 'kick' : ''}"></i>` : nothing}
-      <span class="t"><slot></slot></span>
+      <span class="t">${WORDS[this.kind] ? html`<span class="kw">${WORDS[this.kind]}</span> ` : nothing}<slot></slot></span>
       ${this.family ? html`<sett-tag kind="sug">${this.family}</sett-tag>` : nothing}
       ${this.unresolved ? html`<sett-tag kind="sug" title="unresolved links">${this.unresolved} unresolved</sett-tag>` : nothing}
       ${this.group ? html`<sett-tag class="group" title="plan group">${this.group}</sett-tag>` : nothing}`;

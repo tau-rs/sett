@@ -68,6 +68,20 @@ describe('links read from the fixtures', () => {
     expect(linkKindOf(fn('a'), fn('b'), { smell: 1 })).toBe('calls');
     expect(linkKindOf(st('A'), { id: 't', name: 'T', k: 'trait' }, { impl: 1 })).toBe('implements');
   });
+  it('a const or a static is read; a union is a type that holds fields; an alias is a type in use (arch-analyze does the same)', () => {
+    const fn = (id: string, name = id) => ({ id, name, k: 'fn' });
+    const of = (k: string, name = k) => ({ id: k, name, k });
+    expect(linkKindOf(fn('a'), of('const'))).toBe('reads');
+    expect(linkKindOf(fn('a'), of('static'))).toBe('reads');
+    expect(linkKindOf(of('struct'), of('const'))).toBe('reads');
+    expect(linkKindOf({ id: 'm', name: 'pub use a · MAX', k: 'mod' }, of('const'))).toBe('re-exports');
+    expect(linkKindOf(fn('a'), of('union'))).toBe('uses-type');
+    expect(linkKindOf(fn('a'), of('union', 'Raw::new'))).toBe('constructs');
+    expect(linkKindOf(of('struct'), of('union'))).toBe('holds');
+    expect(linkKindOf(of('union'), of('struct'))).toBe('holds');
+    expect(linkKindOf(fn('a'), of('type-alias'))).toBe('uses-type');
+    expect(linkKindOf(of('struct'), of('type-alias'))).toBe('uses-type');
+  });
   it('every fixture link resolves both ends to an item of the unit', () => {
     for (const [f, ids] of [[z2p, Object.keys(z2p.units)], [zd, Object.keys(zd.units)], [rg, Object.keys(rg.units)]] as const)
       for (const id of ids) {

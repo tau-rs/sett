@@ -1,7 +1,7 @@
 import type { SettRow } from './row.js';
 
 /** the rows a tree of the left pane moves between */
-export const ROW_TAGS = 'sett-session-row, sett-group-row, sett-agent-row, sett-file-row, sett-changes-row, sett-tree-row, sett-commit-row';
+export const ROW_TAGS = 'sett-session-row, sett-group-row, sett-agent-row, sett-element-row, sett-file-row, sett-changes-row, sett-tree-row, sett-commit-row';
 
 /** the elements that hold a tree of their own: a row belongs to the nearest one */
 export const TREE_TAGS = 'sett-sessions-view, sett-files-view, sett-changes-list, sett-agent-strip';

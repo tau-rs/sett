@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import '../src/index.js';
 import { GROUP_STATES, GROUP_TONE } from '../src/shell/sett-sessions-view.js';
 
-const TAGS = ['sett-sessions-view', 'sett-view-section', 'sett-session-row', 'sett-group-row', 'sett-agent-row', 'sett-file-row', 'sett-changes-row', 'sett-new-session-row'];
+const TAGS = ['sett-sessions-view', 'sett-view-section', 'sett-session-row', 'sett-group-row', 'sett-agent-row', 'sett-element-row', 'sett-file-row', 'sett-changes-row', 'sett-new-session-row'];
 const cssOf = (tag: string) => ([] as any[]).concat((customElements.get(tag) as any).styles).flat().map((s: any) => s.cssText).join('\n');
 // the session dot's breath (dotStyles) is the one motion allowed in these rows; everything else must be still
 const stillCss = (tag: string) => cssOf(tag).replace(/\.dot\[data-pulse\][^}]*\}/g, '').replace(/@keyframes sett-dot-pulse[^}]*\}[^}]*\}/g, '').replace(/@media \(prefers-reduced-motion: reduce\)[^}]*\}[^}]*\}/g, '');
@@ -72,6 +72,15 @@ describe('sessions view', () => {
     await settle(session);
     expect(session.shadowRoot.querySelector('.kids slot')).not.toBeNull();
     expect(session.shadowRoot.querySelector('.cv').textContent).toBe('▾');
+  });
+  it('a click on a nested row selects that row only, never the rows around it (#115)', async () => {
+    const v = await mount(VIEW());
+    const agent = v.querySelector('sett-agent-row'), file = v.querySelector('sett-file-row');
+    const selects = heard(v, 'sett-select'), opens = heard(v, 'sett-open');
+    agent.shadowRoot.querySelector('.row').click();
+    expect(selects.map((d: any) => d.kind)).toEqual(['agent']);
+    file.dispatchEvent(new MouseEvent('dblclick', { bubbles: true, composed: true }));
+    expect(opens.map((d: any) => d.kind)).toEqual(['file']);
   });
   it('a click selects, Enter and the Focus button focus, and nothing changes the row itself', async () => {
     const v = await mount(VIEW());
@@ -184,5 +193,29 @@ describe('sessions view', () => {
     expect(door.shadowRoot.textContent.replace(/\s+/g, ' ').trim()).toBe('+ new session · delegate');
     expect(v.shadowRoot.querySelector('[role="tree"] slot[name="foot"]')).toBeNull();
     expect(cssOf('sett-new-session-row')).toMatch(/color: var\(--sett-color-mute\)/);
+  });
+  it('a plan element has its own row: a sug dot, its name, no fold; the keyboard reaches it and a click selects it', async () => {
+    const v = await mount(`<sett-sessions-view>
+      <sett-session-row scope="plan" name="refund flow" state="shaping" tone="sug" open>
+        <sett-group-row name="group 1" state="2 elements" depth="1" open>
+          <sett-element-row name="E1 · OrderRepo: add refund()" depth="2"></sett-element-row>
+          <sett-element-row name="E2 · PgOrderRepo: implement refund()" depth="2" state="asks"></sett-element-row>
+        </sett-group-row>
+      </sett-session-row>
+    </sett-sessions-view>`);
+    const [plan, group, e1, e2] = Array.from(v.querySelectorAll('sett-session-row, sett-group-row, sett-element-row')) as any[];
+    expect(e1.kind).toBe('element');
+    expect(e1.foldable).toBe(false);
+    expect(e1.shadowRoot.querySelector('.cv').textContent).toBe('');
+    expect(e1.shadowRoot.querySelector('.nm').textContent).toBe('E1 · OrderRepo: add refund()');
+    expect(e1.shadowRoot.querySelector('sett-tag')).toBeNull();
+    expect(e2.shadowRoot.querySelector('sett-tag').getAttribute('kind')).toBe('sug');
+    expect(cssOf('sett-element-row')).toMatch(/\.dot \{[^}]*background: var\(--sett-color-sug\);/);
+    plan.focus();
+    key(plan, 'ArrowDown'); key(group, 'ArrowDown'); expect(document.activeElement).toBe(e1);
+    key(e1, 'ArrowDown'); expect(document.activeElement).toBe(e2);
+    const picked = heard(v, 'sett-select');
+    e2.shadowRoot.querySelector('.row').click();
+    expect(picked.at(-1)).toMatchObject({ kind: 'element', name: 'E2 · PgOrderRepo: implement refund()' });
   });
 });

@@ -739,7 +739,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent\ndoor first and bold, manual door second and plain (P-1); `me-first` swaps\nthem. A chip always carries a verb (DESIGN.md \"The shell\" rule 1); a\nseparator stands before each verb that is there. A done chip keeps full\ncontrast, its label turns ok with ✓ and it gains a plain `dismiss` verb.\nThe `gate` kind is a group's gate (`gate · group 1 → group 2 · judge\nrunning`, verb `open`): its label takes the colour of the session that runs\nit, and a failed gate (`failed 1/2`) is the `blocking` state. The\n`detected` kind is your own work, found by the watcher and never declared\n(`changes detected · 3 files`, spec §4 \"Work by hand\"): its label is `sel`\nlike everything that is yours; agent door `delegate the rest`, manual door\n`commit`. Never animates.",
+          "description": "Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent\ndoor first and bold, manual door second and plain (P-1); `me-first` swaps\nthem. A chip always carries a verb (DESIGN.md \"The shell\" rule 1); a\nseparator stands before each verb that is there. A done chip keeps full\ncontrast, its label turns ok with ✓ and it gains a plain `dismiss` verb.\nThe `gate` kind is a group's gate (`gate · group 1 → group 2 · judge\nrunning`, verb `open`): its label takes the colour of the session that runs\nit, and a failed gate (`failed 1/2`) is the `blocking` state. The\n`detected` kind is your own work, found by the watcher and never declared\n(`changes detected · 3 files`, spec §4 \"Work by hand\"): its label is `sel`\nlike everything that is yours; agent door `delegate the rest`, manual door\n`commit`. The `plan` kind is a plan being shaped (`plan · refund flow · 5\nelements`, verb `open`): its label is `sug`, the plan's colour on the\nscope line and the selector. An agent that asks you is the `agent` kind in\nthe `waiting` state, not a kind of its own. Never animates.",
           "name": "SettChip",
           "cssParts": [
             {
@@ -3002,6 +3002,14 @@
           "name": "SettAgentRow",
           "declaration": {
             "name": "SettAgentRow",
+            "module": "./shell/sett-sessions-view.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettElementRow",
+          "declaration": {
+            "name": "SettElementRow",
             "module": "./shell/sett-sessions-view.js"
           }
         },
@@ -11201,6 +11209,12 @@
             },
             {
               "kind": "field",
+              "name": "mine",
+              "privacy": "private",
+              "description": "rows nest: a click is the innermost row's alone, never the rows around it (#115)"
+            },
+            {
+              "kind": "field",
               "name": "onClick",
               "privacy": "private"
             },
@@ -12949,6 +12963,16 @@
             },
             {
               "kind": "field",
+              "name": "mine",
+              "privacy": "private",
+              "description": "rows nest: a click is the innermost row's alone, never the rows around it (#115)",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
               "name": "onClick",
               "privacy": "private",
               "inheritedFrom": {
@@ -13890,6 +13914,16 @@
               "kind": "method",
               "name": "fold",
               "description": "the chevron, or Left/Right: asks for the other state",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mine",
+              "privacy": "private",
+              "description": "rows nest: a click is the innermost row's alone, never the rows around it (#115)",
               "inheritedFrom": {
                 "name": "SettRow",
                 "module": "src/shell/row.ts"
@@ -15510,6 +15544,16 @@
             },
             {
               "kind": "field",
+              "name": "mine",
+              "privacy": "private",
+              "description": "rows nest: a click is the innermost row's alone, never the rows around it (#115)",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
               "name": "onClick",
               "privacy": "private",
               "inheritedFrom": {
@@ -15903,6 +15947,16 @@
             },
             {
               "kind": "field",
+              "name": "mine",
+              "privacy": "private",
+              "description": "rows nest: a click is the innermost row's alone, never the rows around it (#115)",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
               "name": "onClick",
               "privacy": "private",
               "inheritedFrom": {
@@ -16246,6 +16300,16 @@
             },
             {
               "kind": "field",
+              "name": "mine",
+              "privacy": "private",
+              "description": "rows nest: a click is the innermost row's alone, never the rows around it (#115)",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
               "name": "onClick",
               "privacy": "private",
               "inheritedFrom": {
@@ -16390,6 +16454,335 @@
             "module": "/src/shell/row.js"
           },
           "tagName": "sett-agent-row",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A plan element under a group of a plan being shaped (`E1 · OrderRepo: add\nrefund()`): a dot in `sug`, the plan's colour, then the element. Nothing\nruns on it yet, so it has no session shade, no sub-agents and no fold; a\nstate tag only when the planner asks about it (`asks`, sug).",
+          "name": "SettElementRow",
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "RowKind"
+              },
+              "readonly": true,
+              "default": "'element'",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the planner says of it, e.g. `asks`; most elements have none",
+              "attribute": "state"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what the row names",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "depth",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "nesting from 0; `space.3` of indent per level",
+              "attribute": "depth",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector is about: the sel tint",
+              "attribute": "selected",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dim",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a row that is not part of what matters here: name in mute",
+              "attribute": "dim",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "children shown (foldable rows only)",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "foldable",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "a row with a chevron and children",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "detail",
+              "type": {
+                "text": "Record<string, unknown>"
+              },
+              "privacy": "protected",
+              "description": "what every event of this row says",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "fire",
+              "privacy": "protected",
+              "parameters": [
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "extra",
+                  "default": "{}",
+                  "type": {
+                    "text": "Record<string, unknown>"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "description": "the app's selection: a click, or Space",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "activate",
+              "description": "Enter or a double click: open what the row names",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "fold",
+              "description": "the chevron, or Left/Right: asks for the other state",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mine",
+              "privacy": "private",
+              "description": "rows nest: a click is the innermost row's alone, never the rows around it (#115)",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onDblClick",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onKey",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onChevron",
+              "privacy": "private",
+              "description": "the chevron is the fold and nothing else: its clicks never select or open the row",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "chevron",
+              "privacy": "protected",
+              "description": "the chevron column: a glyph on a foldable row, kept empty otherwise so names align",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "kids",
+              "privacy": "protected",
+              "description": "the children, rendered only while open",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "what the planner says of it, e.g. `asks`; most elements have none",
+              "fieldName": "state"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "what the row names",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "depth",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "nesting from 0; `space.3` of indent per level",
+              "fieldName": "depth",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the row the inspector is about: the sel tint",
+              "fieldName": "selected",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "dim",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "a row that is not part of what matters here: name in mute",
+              "fieldName": "dim",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "children shown (foldable rows only)",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "SettRow",
+            "module": "/src/shell/row.js"
+          },
+          "tagName": "sett-element-row",
           "customElement": true
         },
         {
@@ -16602,6 +16995,16 @@
               "kind": "method",
               "name": "fold",
               "description": "the chevron, or Left/Right: asks for the other state",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mine",
+              "privacy": "private",
+              "description": "rows nest: a click is the innermost row's alone, never the rows around it (#115)",
               "inheritedFrom": {
                 "name": "SettRow",
                 "module": "src/shell/row.ts"
@@ -16959,6 +17362,16 @@
             },
             {
               "kind": "field",
+              "name": "mine",
+              "privacy": "private",
+              "description": "rows nest: a click is the innermost row's alone, never the rows around it (#115)",
+              "inheritedFrom": {
+                "name": "SettRow",
+                "module": "src/shell/row.ts"
+              }
+            },
+            {
+              "kind": "field",
               "name": "onClick",
               "privacy": "private",
               "inheritedFrom": {
@@ -17238,6 +17651,22 @@
           "name": "sett-agent-row",
           "declaration": {
             "name": "SettAgentRow",
+            "module": "src/shell/sett-sessions-view.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettElementRow",
+          "declaration": {
+            "name": "SettElementRow",
+            "module": "src/shell/sett-sessions-view.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-element-row",
+          "declaration": {
+            "name": "SettElementRow",
             "module": "src/shell/sett-sessions-view.ts"
           }
         },
@@ -17523,7 +17952,7 @@
           "type": {
             "text": "string"
           },
-          "default": "'sett-session-row, sett-group-row, sett-agent-row, sett-file-row, sett-changes-row, sett-tree-row, sett-commit-row'",
+          "default": "'sett-session-row, sett-group-row, sett-agent-row, sett-element-row, sett-file-row, sett-changes-row, sett-tree-row, sett-commit-row'",
           "description": "the rows a tree of the left pane moves between"
         },
         {

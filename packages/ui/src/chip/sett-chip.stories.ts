@@ -60,6 +60,13 @@ export const GateRunning: Story = {
 };
 export const GateFailed: Story = { name: 'kind · gate · failed n/m, blocking', render: () => chip('gate', 'blocking', { session: 'yk' }) };
 export const Detected: Story = { name: 'kind · detected · your own work, found by the watcher · four states', render: () => html`<div class="sett-row">${STATES.map((s) => chip('detected', s))}</div>` };
+export const Plan: Story = {
+  name: 'kind · plan · a plan being shaped, in sug, verb open',
+  render: () => html`<div class="sett-row">
+    <sett-chip kind="plan">refund flow<span slot="count">· 5 elements</span><a slot="verb">open</a></sett-chip>
+    <sett-chip kind="plan" state="waiting">rate limit headers<span slot="count">· the planner asks</span><a slot="verb">open</a></sett-chip>
+  </div>`,
+};
 export const DetectedInBar: Story = {
   name: 'in context · a you session: the detected chip beside the agent chip',
   render: () => html`<div class="sett-paper sett-row"><span style="font-family:var(--sett-font-mono);font-weight:var(--sett-font-weight-medium)">you · fix-pool-size</span>${chip('detected', 'normal')}${chip('agent', 'normal')}${chip('git', 'normal')}</div>`,

@@ -282,6 +282,38 @@ export class SettAgentRow extends SettRow {
 }
 
 /**
+ * A plan element under a group of a plan being shaped (`E1 · OrderRepo: add
+ * refund()`): a dot in `sug`, the plan's colour, then the element. Nothing
+ * runs on it yet, so it has no session shade, no sub-agents and no fold; a
+ * state tag only when the planner asks about it (`asks`, sug).
+ */
+@customElement('sett-element-row')
+export class SettElementRow extends SettRow {
+  readonly kind = 'element' as const;
+
+  /** what the planner says of it, e.g. `asks`; most elements have none */
+  @property() state?: string;
+
+  static styles = [
+    rowStyles,
+    css`
+      .dot { flex: none; width: var(--sett-space-2); height: var(--sett-space-2); border-radius: var(--sett-radius-chip); background: var(--sett-color-sug); }
+      .nm { color: var(--sett-color-ink); }
+      .st { flex: none; margin-left: auto; }
+    `,
+  ];
+
+  render() {
+    return html`<div class="row" part="row">
+      ${this.chevron()}
+      <span class="dot"></span>
+      <span class="nm">${this.name}</span>
+      ${this.state ? html`<sett-tag class="st" kind=${toneOf(AGENT_TONE, this.state)}>${this.state}</sett-tag>` : nothing}
+    </div>`;
+  }
+}
+
+/**
  * A file row, shared by the Sessions view, the Files view and the Changes
  * list: the status letter, the name in mono, `✓` in ok once viewed, the
  * writer and the counts (`+18 −2`) in mono mute at the right. A click
@@ -391,6 +423,6 @@ export class SettNewSessionRow extends LitElement {
 declare global {
   interface HTMLElementTagNameMap {
     'sett-sessions-view': SettSessionsView; 'sett-view-section': SettViewSection; 'sett-session-row': SettSessionRow; 'sett-group-row': SettGroupRow;
-    'sett-agent-row': SettAgentRow; 'sett-file-row': SettFileRow; 'sett-changes-row': SettChangesRow; 'sett-new-session-row': SettNewSessionRow;
+    'sett-agent-row': SettAgentRow; 'sett-element-row': SettElementRow; 'sett-file-row': SettFileRow; 'sett-changes-row': SettChangesRow; 'sett-new-session-row': SettNewSessionRow;
   }
 }

@@ -106,6 +106,24 @@ export const FileRows: Story = {
     </sett-view-section>
   </sett-sessions-view>`),
 };
+export const PlanElements: Story = {
+  name: 'a plan being shaped · its elements under their groups, one the planner asks about',
+  render: () => pane(html`<sett-sessions-view isolated count="5">
+    <sett-session-row scope="plan" name="refund flow" state="shaping" tone="sug" open selected scoped>
+      <sett-group-row name="group 1" state="2 elements" depth="1" open>
+        <sett-element-row name="E1 · OrderRepo: add refund()" depth="2"></sett-element-row>
+        <sett-element-row name="E2 · PgOrderRepo: implement refund()" depth="2"></sett-element-row>
+      </sett-group-row>
+      <sett-group-row kind="gate" name="gate · group 1 → group 2" state="tests green" depth="1"></sett-group-row>
+      <sett-group-row name="group 2" state="3 elements" depth="1" open>
+        <sett-element-row name="E3 · pay() calls refund()" depth="2"></sett-element-row>
+        <sett-element-row name="E4 · close() calls refund()" depth="2"></sett-element-row>
+        <sett-element-row name="E5 · handle_webhook(): fail fast" depth="2" state="asks" selected></sett-element-row>
+      </sett-group-row>
+      <sett-changes-row depth="1" meta="no branch yet · created at accept"></sett-changes-row>
+    </sett-session-row>
+  </sett-sessions-view>`),
+};
 export const Empty: Story = {
   name: 'empty · no session yet: the sections stay, the door names the way',
   render: () => pane(html`<sett-sessions-view>

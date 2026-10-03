@@ -59,6 +59,12 @@ describe('sett-chip', () => {
     expect((await tag('<sett-chip kind="gate" state="blocking" session="tl">failed 1/2<a slot="verb">open</a></sett-chip>')).getAttribute('kind')).toBe('bad');
     expect((await tag('<sett-chip kind="gate" state="done" session="tl">passed</sett-chip>')).getAttribute('kind')).toBe('ok');
   });
+  it('plan is a plan being shaped: a sug label, the verb open', async () => {
+    const el = await mount('<sett-chip kind="plan">refund flow<span slot="count">· 5 elements</span><a slot="verb">open</a></sett-chip>');
+    const t = el.shadowRoot!.querySelector('sett-tag')!;
+    expect(t.getAttribute('kind')).toBe('sug');
+    expect(t.textContent).toBe('plan');
+  });
   it('detected is yours: a sel label, no session colour', async () => {
     const tag = async (m: string) => (await mount(m)).shadowRoot!.querySelector('sett-tag')!;
     const t = await tag('<sett-chip kind="detected">changes detected<span slot="count">· 3 files</span><a slot="agent">delegate the rest</a><a slot="manual">commit</a></sett-chip>');

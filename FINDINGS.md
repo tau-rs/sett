@@ -52,7 +52,6 @@ Synced to: no ADR yet (`arch-design` holds none on 2026-10-02). DESIGN.md wins o
 | 2026-10-03 | map | the minimap is in the foot of `sett-panel`; `flows/map-focus.html` floats it bottom-right over the map | map rule 8 (#39) |
 | 2026-10-03 | map | `sett-panel` is the map's own pane, inside the centre, beside the shell's inspector and never in it | the inspector is about the selection (shell rule 6); the panel is about where you are (#39) |
 | 2026-10-03 | map | pointing eases a border or a background (`motion.hover`) on the back pill and a position row; #39 and the map design spec said "no hover transitions" | DESIGN.md § Motion (#52) replaced that line; text still never eases |
-||||||| parent of e9a9746 (feat(ui): card layouts: checklist rows and how, result pills, plan delta, What's new doors, fix card (shell lane E))
 | 2026-10-02 | review (merge) | the how is one plain line, `squash · from the forge's default · delete branch · archive session`; no radios, no checkboxes | the strategy is read from the forge, never chosen in arch (ADR 0016); the gated button under it is the only verb |
 | 2026-10-02 | review (merged) | two pills on the result, `merged` in ok and `archived` plain; the page has one `merged · archived` | merged is the forge's fact, archived is arch's, restorable (ADR 0003) |
 | 2026-10-02 | daily (What's new) | the door words `show · open · place · follow` are grey and end with `›`; the page draws them in blue | rule 10: the row is the link, blue is left to buttons |

@@ -278,7 +278,7 @@ export const DailyEditByHand: Story = { name: 'daily · edit by hand', render: (
   bar: bar(selector(you, 'yours'), html`<sett-chip kind="detected">changes detected<span slot="count">· 2 files</span><a slot="agent">delegate the rest</a><a slot="manual">commit</a></sett-chip>`),
   rail: rail(you, 'files'),
   left: html`<sett-files-view projection="directory" scoped>
-    ${scopeLine(you, 'manual', 'scope')}<span slot="tools">filter · ⌘⇧F</span>
+    ${scopeLine(you, 'detected', 'scope')}<span slot="tools">filter · ⌘⇧F</span>
     <sett-tree-row kind="folder" name="store" open>
       <sett-tree-row kind="file" name="pg.rs" depth="1" scope="you" letter="M" writer="you"></sett-tree-row>
       <sett-tree-row kind="file" name="pool.rs" depth="1" scope="you" letter="A" writer="you" selected></sett-tree-row>

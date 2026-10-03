@@ -21,7 +21,7 @@ export type SheetLevel = 'items' | 'areas' | 'plugs';
 /** what a link's end resolved to: the element, and the folded area hiding it if any */
 interface End { el: Element; band: number; hidden?: Element }
 /** the two groups a link joins, when they differ: at the areas level every link of a pair is one line */
-interface Pair { id: string; from: Element; to: Element; fromKey: string; toKey: string; open: boolean }
+interface Pair { id: string; from: Element; to: Element; fromKey: string; toKey: string; open: boolean; hand: boolean }
 /** one `sett-bundle`: the line leaving a group on one side */
 interface Bundle { key: string; from: string; name: string; origin?: BundleOrigin; far: boolean; branches: BundleBranch[] }
 
@@ -66,6 +66,12 @@ const originOf = (group: Element): BundleOrigin | undefined => {
  * - **pins**: a click on an item toggles its `selected`; several at once.
  *   Their links are drawn item to item and everything else recedes.
  * - **filter**: kinds and families to keep; the rest recedes to `map.far`.
+ * - **focus**: an area's name asks for it (`sett-focus`), `focus` holds its
+ *   key. The area's links are drawn down to the items, in, out and inside
+ *   it; the items they reach keep full ink; every other item and area gets
+ *   `far` (mute ink, by colour) and every other line `map.far`. A finding
+ *   never recedes. Esc, or the name again, leaves. Nothing moves: the pair
+ *   lines keep their tracks, and what was opened by hand comes back as it was.
  *
  * `folded` folds every area at once.
  *
@@ -74,6 +80,7 @@ const originOf = (group: Element): BundleOrigin | undefined => {
  * @slot needs - a `sett-rail side="needs"`
  * @fires sett-fold - bubbles from the areas inside
  * @fires sett-open - `{ from, to?, open }` when a pair (`to`), or everything leaving `from`, is opened or closed by hand
+ * @fires sett-focus - `{ key, focused }`: bubbles from an area's name, and fired by the sheet itself when Esc leaves focus
  */
 @customElement('sett-sheet')
 export class SettSheet extends LitElement implements Watched {
@@ -85,6 +92,8 @@ export class SettSheet extends LitElement implements Watched {
   @property({ reflect: true }) open = '';
   /** link kinds and families to keep, space-separated (`calls does`); the rest recedes; empty keeps all */
   @property() filter = '';
+  /** the key of the focused area: its links are drawn down to the items, everything unrelated recedes; empty is no focus. The attribute is `focus` */
+  @property({ attribute: 'focus', reflect: true }) focusArea = '';
 
   private observer?: MutationObserver;
   private ends = new Map<string, Element | null>();
@@ -117,6 +126,8 @@ export class SettSheet extends LitElement implements Watched {
     this.addEventListener('sett-open', this.onOpen as EventListener);
     this.addEventListener('sett-select', this.onSelect);
     this.addEventListener('click', this.onClick);
+    this.addEventListener('sett-focus', this.onFocus as EventListener);
+    this.addEventListener('keydown', this.onKey);
   }
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -128,10 +139,12 @@ export class SettSheet extends LitElement implements Watched {
     this.removeEventListener('sett-open', this.onOpen as EventListener);
     this.removeEventListener('sett-select', this.onSelect);
     this.removeEventListener('click', this.onClick);
+    this.removeEventListener('sett-focus', this.onFocus as EventListener);
+    this.removeEventListener('keydown', this.onKey);
   }
 
   updated(changed: Map<string, unknown>) {
-    if (changed.has('level') || changed.has('filter') || changed.has('open')) this.apply();
+    if (changed.has('level') || changed.has('filter') || changed.has('open') || changed.has('focusArea')) this.apply();
     if (!changed.has('folded') || (changed.get('folded') === undefined && !this.folded)) return;
     this.querySelectorAll('sett-area').forEach((a) => { (a as HTMLElement & { folded: boolean }).folded = this.folded; });
   }
@@ -187,7 +200,8 @@ export class SettSheet extends LitElement implements Watched {
   private onClick = (e: Event) => {
     const link = (e.target as Element).closest?.('sett-link') as SettLink | null;
     const pair = link && this.level !== 'items' ? this.pairs.get(link) : undefined;
-    if (!pair || (!pair.open && this.direct.has(link!))) return;
+    // a pair that focus holds open is not the reader's to close from a line
+    if (!pair || (pair.open && !pair.hand) || (!pair.open && this.direct.has(link!))) return;
     this.dispatchEvent(new CustomEvent('sett-open', { bubbles: true, composed: true, detail: { from: pair.fromKey, to: pair.toKey, open: !pair.open } }));
   };
   /** a click on an item pins it: its links stay drawn, several items at once */
@@ -196,7 +210,22 @@ export class SettSheet extends LitElement implements Watched {
     if (it.tagName === 'SETT-ITEM') it.selected = !it.selected;
   };
 
-  /** lights, selection, level, filter and what was opened by hand, written onto the links and the things they end on */
+  // ── focus: one area, its relations, the items it touches ────────────────────
+  private onFocus = (e: CustomEvent<{ key?: string; focused: boolean }>) => {
+    if (e.target === this) return;
+    const { key, focused } = e.detail;
+    if (key) this.focusArea = focused ? key : this.focusArea === key ? '' : this.focusArea;
+  };
+  /** Esc gives the focus back (rule 9); it is used up here, so the level above does not also step out */
+  private onKey = (e: KeyboardEvent) => {
+    if (e.key !== 'Escape' || !this.focusArea) return;
+    e.stopPropagation();
+    const key = this.focusArea;
+    this.focusArea = '';
+    this.dispatchEvent(new CustomEvent('sett-focus', { bubbles: true, composed: true, detail: { key, focused: false } }));
+  };
+
+  /** lights, selection, level, filter, focus and what was opened by hand, written onto the links and the things they end on */
   private apply() {
     const links = this.links;
     const areas = this.level === 'areas';
@@ -207,6 +236,9 @@ export class SettSheet extends LitElement implements Watched {
     const keep = this.filter.split(/\s+/).filter(Boolean);
     const opened = this.opened;
     const litEnds = new Set<string>();
+    // the focused area, and what its links reach: those keep full ink
+    const focus = (this.focusArea && this.endOf(this.focusArea)?.closest(GROUP)) || undefined;
+    const near = new Set<Element>();
     this.pairs.clear(); this.direct.clear(); this.kept.clear();
     for (const l of links) {
       const from = this.endOf(l.from)?.closest(GROUP), to = this.endOf(l.to)?.closest(GROUP);
@@ -215,9 +247,12 @@ export class SettSheet extends LitElement implements Watched {
       let pair: Pair | undefined;
       if (from && to && fromKey && toKey && !inside && !l.finding) {
         const id = `${fromKey}>${toKey}`;
-        pair = { id, from, to, fromKey, toKey, open: opened.has(id) || opened.has(fromKey) };
+        const hand = opened.has(id) || opened.has(fromKey);
+        pair = { id, from, to, fromKey, toKey, hand, open: hand || (!!focus && (from === focus || to === focus)) };
         this.pairs.set(l, pair);
       }
+      const touches = !!focus && (from === focus || to === focus);
+      if (touches) for (const k of [l.from, l.to]) { const el = this.endOf(k); if (el) near.add(el); }
       const touchesHover = !!hoveredKey && !group && (l.from === hoveredKey || l.to === hoveredKey);
       const lit = touchesHover || l === this.hoveredLink || (!!group && !!pair && (pair.fromKey === group || pair.toKey === group));
       l.lit = lit;
@@ -228,19 +263,26 @@ export class SettSheet extends LitElement implements Watched {
       l.selected = sel;
       const kept = !keep.length || keep.includes(l.kind) || keep.includes(familyOf(l.kind) ?? '');
       if (kept) this.kept.add(l);
-      l.far = (selected.size > 0 && !sel) || !kept;
+      l.far = ((selected.size > 0 || !!focus) && !sel && !touches) || !kept;
       l.plug = this.level === 'plugs' && !pair?.open;
       // a link is drawn item to item when the level says so, and always when it is a finding, pointed at, pinned or opened by hand
-      if (!areas || l.finding || touchesHover || sel || pair?.open || (!pair && !inside)) this.direct.add(l);
-      l.style.setProperty('--_cursor', pair && this.level !== 'items' && (pair.open || !this.direct.has(l)) ? 'pointer' : 'default');
+      if (!areas || l.finding || touchesHover || sel || touches || pair?.open || (!pair && !inside)) this.direct.add(l);
+      l.style.setProperty('--_cursor', pair && this.level !== 'items' && (pair.hand || (!pair.open && !this.direct.has(l))) ? 'pointer' : 'default');
     }
     for (const el of this.querySelectorAll(LIT)) {
       const k = this.keyOf(el);
       (el as HTMLElement & { lit?: boolean }).lit = !!k && litEnds.has(k) && k !== hoveredKey;
     }
-    this.pinned = selected.size > 0;
+    // recede by colour: every item and area the focus does not reach; a finding and a pin never do
+    for (const el of this.querySelectorAll('sett-item, sett-area') as NodeListOf<HTMLElement & { far?: boolean; focused?: boolean }>) {
+      const area = el.tagName === 'SETT-AREA';
+      const far = !!focus && (area ? el !== focus : el.parentElement !== focus && !near.has(el) && !el.hasAttribute('finding') && !el.hasAttribute('selected'));
+      if (!!el.far !== far) el.far = far;
+      if (area && !!el.focused !== (el === focus)) el.focused = el === focus;
+    }
+    this.pinned = selected.size > 0 || !!focus;
     this.litGroup = group;
-    this.mode = `${this.level}|${this.open}|${this.filter}|${group ?? ''}|${this.pinned}|${links.map((l) => (this.direct.has(l) ? 1 : 0)).join('')}`;
+    this.mode = `${this.level}|${this.open}|${this.filter}|${focus ? this.focusArea : ''}|${group ?? ''}|${this.pinned}|${links.map((l) => (this.direct.has(l) ? 1 : 0)).join('')}`;
   }
 
   // ── the watcher: routes follow the DOM ─────────────────────────────────────
@@ -307,7 +349,8 @@ export class SettSheet extends LitElement implements Watched {
       const bundles: Bundle[] = [];
       for (const [key, tree] of trees) {
         const split = stretches(tree.filter((m) => !m.pair.open).map((m) => ({ id: m.pair.id, points: first.routes.get(m.pair.id)!.points })));
-        const branches = tree.map(({ pair, links: ls }): BundleBranch => {
+        // a pair that focus holds open is drawn as its links and has nothing to close: it leaves the bundle while focus lasts
+        const branches = tree.filter((m) => !m.pair.open || m.pair.hand).map(({ pair, links: ls }): BundleBranch => {
           const r = first.routes.get(pair.id)!;
           const st = split.get(pair.id) ?? { shared: [], own: r.points };
           if (ls.length === 1 && !pair.open && !this.direct.has(ls[0])) {

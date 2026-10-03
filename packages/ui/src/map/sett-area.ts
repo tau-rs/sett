@@ -19,9 +19,17 @@ const EMPTY: Counts = { count: 0, findings: 0, selected: 0, sessions: [], live: 
  * breathing, the area takes that agent's arrival and departure pulse, and a
  * blue count says how many selected items are inside.
  *
+ * The header holds two controls: the name focuses the area, the arrow folds
+ * it. The area only asks: the name fires `sett-focus` and the `sett-sheet`
+ * around it sets `focused` here and `far` on what is unrelated. `far`
+ * recedes by colour, never by opacity; the red count of findings stays red.
+ *
  * @slot - `sett-item` children
- * @fires sett-fold - `{ folded }` when the header is used
+ * @fires sett-fold - `{ folded }` when the arrow is used
+ * @fires sett-focus - `{ key, focused }` when the name is used: `focused` is what the reader asks for
  * @csspart header - the header row
+ * @csspart name - the name, the control that focuses the area
+ * @csspart fold - the arrow, the control that folds the area
  * @csspart body - the items' container
  */
 @customElement('sett-area')
@@ -30,6 +38,10 @@ export class SettArea extends LitElement {
   @property({ reflect: true }) key?: string;
   @property() name = '';
   @property({ type: Boolean, reflect: true }) folded = false;
+  /** the focused area: its links are drawn down to the items, everything unrelated recedes; the sheet sets it */
+  @property({ type: Boolean, reflect: true }) focused = false;
+  /** unrelated to the focused area: recedes to mute ink and a faint border (the name stays above 4.5:1); the sheet sets it */
+  @property({ type: Boolean, reflect: true }) far = false;
   /** override: how many items, when they are not rendered */
   @property({ type: Number }) count?: number;
   /** override: how many findings, when the items are not rendered */
@@ -58,6 +70,8 @@ export class SettArea extends LitElement {
         font-family: var(--sett-font-sans);
         font-size: var(--sett-font-size-base);
       }
+      :host([focused]) { border-color: var(--sett-color-sel); }
+      :host([far]) { color: var(--sett-color-mute); border-color: var(--sett-color-line2); }
       .ah {
         display: flex;
         align-items: center;
@@ -67,13 +81,24 @@ export class SettArea extends LitElement {
         padding: 0 var(--sett-space-2);
         border-radius: inherit;
         white-space: nowrap;
-        cursor: pointer;
         user-select: none;
-        transition: background-color var(--sett-motion-hover) ease, height var(--sett-motion-fold) var(--sett-motion-ease-fold);
+        transition: height var(--sett-motion-fold) var(--sett-motion-ease-fold);
       }
       :host([folded]) .ah { height: var(--sett-map-size-area-folded); }
-      .ah:hover { background: var(--sett-color-well); }
-      .ah:focus-visible { outline: var(--sett-stroke-lit) solid var(--sett-color-sel); outline-offset: calc(-1 * var(--sett-stroke-lit)); }
+      button {
+        all: unset;
+        box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        align-self: stretch;
+        border-radius: var(--sett-map-radius-item);
+        cursor: pointer;
+        transition: background-color var(--sett-motion-hover) ease;
+      }
+      button:hover { background: var(--sett-color-well); }
+      button:focus-visible { outline: var(--sett-stroke-lit) solid var(--sett-color-sel); outline-offset: calc(-1 * var(--sett-stroke-lit)); }
+      .nm { min-width: 0; margin-inline-start: calc(-1 * var(--sett-space-1)); padding-inline: var(--sett-space-1); }
+      :host([focused]) .nm { color: var(--sett-color-sel); }
       b { font-weight: var(--sett-font-weight-semibold); min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       em { font-style: normal; font-family: var(--sett-font-mono); font-size: var(--sett-font-size-sm); color: var(--sett-color-mute); flex: 0 0 auto; font-variant-numeric: tabular-nums; }
       sett-tag, .sd, .tw { flex: 0 0 auto; }
@@ -81,15 +106,16 @@ export class SettArea extends LitElement {
       .sd { width: var(--sett-space-2); height: var(--sett-space-2); border-radius: 50%; background: var(--_session); }
       .sd.live { animation: sett-badge var(--sett-motion-breath) ease-in-out infinite; animation-delay: calc(var(--sett-motion-breath) * var(--_beat, 0) / -4); }
       .sd.ignite { animation: sett-ignite var(--sett-motion-ignite) var(--sett-motion-ease-spring) 1; }
-      .tw { margin-left: auto; display: inline-block; color: var(--sett-color-mute); font-size: var(--sett-font-size-xs); transition: transform var(--sett-motion-fold) var(--sett-motion-ease-fold); }
-      :host([folded]) .tw { transform: rotate(-90deg); }
+      .tw { margin-inline: auto calc(-1 * var(--sett-space-1)); padding-inline: var(--sett-space-1); color: var(--sett-color-mute); font-size: var(--sett-font-size-xs); }
+      .tw span { display: inline-block; transition: transform var(--sett-motion-fold) var(--sett-motion-ease-fold); }
+      :host([folded]) .tw span { transform: rotate(-90deg); }
       .body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows var(--sett-motion-fold) var(--sett-motion-ease-fold); }
       :host([folded]) .body { grid-template-rows: 0fr; }
       .inner { min-height: 0; overflow: hidden; }
       .pad { padding-block: var(--sett-map-size-ring-gap); }
       ::slotted(sett-item) { margin-inline: var(--sett-space-2); }
       @media (prefers-reduced-motion: reduce) {
-        .ah, .tw, .body { transition: none; }
+        .ah, button, .tw span, .body { transition: none; }
         sett-tag.pop, .sd.live, .sd.ignite { animation: none; }
       }
     `,
@@ -152,8 +178,8 @@ export class SettArea extends LitElement {
     this.folded = !this.folded;
     this.dispatchEvent(new CustomEvent('sett-fold', { bubbles: true, composed: true, detail: { folded: this.folded } }));
   };
-  private onKey = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.toggle(); }
+  private ask = () => {
+    this.dispatchEvent(new CustomEvent('sett-focus', { bubbles: true, composed: true, detail: { key: this.key ?? this.dataset.id, focused: !this.focused } }));
   };
 
   render() {
@@ -161,12 +187,12 @@ export class SettArea extends LitElement {
     const findings = this.findings ?? (this.seen.findings || this.leavingFindings);
     const sessions = this.sessions ? this.sessions.split(/\s+/).filter(Boolean) : this.seen.sessions;
     return html`
-      <div class="ah" part="header" role="button" tabindex="0" aria-expanded=${String(!this.folded)} @click=${this.toggle} @keydown=${this.onKey}>
-        <b>${this.name}</b><em>${count}</em>
+      <div class="ah" part="header">
+        <button class="nm" part="name" type="button" aria-pressed=${String(this.focused)} title=${this.focused ? 'leave focus' : 'focus this area'} @click=${this.ask}><b>${this.name}</b></button><em>${count}</em>
         ${findings ? html`<sett-tag kind="bad" class=${this.popping ? 'pop' : ''} title="findings">${findings}</sett-tag>` : nothing}
         ${this.folded && this.seen.selected ? html`<sett-tag kind="sel" title="selected inside">${this.seen.selected}</sett-tag>` : nothing}
         ${sessions.map((id) => html`<i class="sd ${this.igniting === id ? 'ignite' : this.folded && this.seen.live.includes(id) ? 'live' : ''}" style="--_session: var(--sett-session-${id}-main); --_beat: ${beatOf(id)}" title=${id}></i>`)}
-        <span class="tw">▾</span>
+        <button class="tw" part="fold" type="button" aria-expanded=${String(!this.folded)} aria-label=${`${this.folded ? 'open' : 'fold'} ${this.name}`} @click=${this.toggle}><span>▾</span></button>
       </div>
       <div class="body" part="body" ?inert=${this.folded}><div class="inner"><div class="pad"><slot @slotchange=${this.recount}></slot></div></div></div>`;
   }

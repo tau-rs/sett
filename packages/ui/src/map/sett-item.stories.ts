@@ -31,6 +31,14 @@ export const States: Story = {
     stack(html`<sett-item entry finding>confirm()</sett-item><sett-item entry selected>subscribe()</sett-item><sett-item finding selected>store_token()</sett-item><sett-item kind="external" selected>sqlx::PgPool</sett-item>`, 'together'),
   ),
 };
+export const Far: Story = {
+  name: 'far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do',
+  render: () => row(
+    stack(html`<sett-item>plain()</sett-item><sett-item entry>health_check()</sett-item><sett-item kind="trait" port family="214 impls">Element · trait</sett-item><sett-item kind="external">sqlx::PgPool</sett-item><sett-item unresolved="2">dispatch()</sett-item><sett-item session="yk" live>try_execute_task()</sett-item>`, 'at rest'),
+    stack(html`<sett-item far>plain()</sett-item><sett-item far entry>health_check()</sett-item><sett-item far kind="trait" port family="214 impls">Element · trait</sett-item><sett-item far kind="external">sqlx::PgPool</sett-item><sett-item far unresolved="2">dispatch()</sett-item><sett-item far session="yk" live>try_execute_task()</sett-item>`, 'far: mute ink, a faint border; fills and presence stay'),
+    stack(html`<sett-item far finding>confirm()</sett-item><sett-item far selected>subscribe()</sett-item><sett-item far lit>store_token()</sett-item>`, 'far, but a finding · a pin · lit by a pointed link'),
+  ),
+};
 export const Unresolved: Story = {
   name: 'unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill',
   render: () => row(

@@ -27,6 +27,24 @@ export const AreasPins: Story = {
   name: 'areas · pins · two items pinned, their links drawn, the rest recedes',
   render: () => openUnit(zero2prod, 'api', { subscribe: { selected: true }, publish: { selected: true } }),
 };
+export const Focus: Story = {
+  name: 'focus · api · persistence · its links open down to the items, the rest recedes by colour',
+  render: () => note('focus="persistence": the name of that area was clicked. The links arriving in it are drawn item to item, the items they leave keep full ink; every other item and area recedes to mute ink and a faint border, every other line to map.far. The red finding does not recede. Nothing moved: compare with the areas story at rest. Click the name again, or press Esc, to leave; click another name to move the focus.', openUnit(zero2prod, 'api', {}, { focus: 'persistence' })),
+};
+export const FocusOut: Story = { name: 'focus · api · routes · everything leaving it, and the wires arriving from the rail', render: () => openUnit(zero2prod, 'api', {}, { focus: 'routes' }) };
+export const FocusInside: Story = { name: 'focus · api · auth · in, and the link inside the area', render: () => openUnit(zero2prod, 'api', {}, { focus: 'auth' }) };
+export const FocusRg: Story = { name: 'focus · rg · search · in, out and inside', render: () => openUnit(ripgrep, 'rg', {}, { focus: 'search' }) };
+export const FocusGpui: Story = { name: 'focus · gpui · views · five layers, the finding keeps its red', render: () => openUnit(zed, 'gpui', {}, { focus: 'views' }) };
+export const FocusFolded: Story = { name: 'focus · rg · a folded area · its links ride its edge', render: () => openUnit(ripgrep, 'rg', {}, { focus: 'index' }) };
+export const FocusPins: Story = {
+  name: 'focus · api · with a pin elsewhere · the pin and its links keep full ink',
+  render: () => openUnit(zero2prod, 'api', { publish: { selected: true } }, { focus: 'auth' }),
+};
+export const FocusOpen: Story = {
+  name: 'focus · api · with a pair opened by hand · it recedes, and comes back as it was',
+  render: () => openUnit(zero2prod, 'api', {}, { focus: 'auth', open: 'routes>persistence' }),
+};
+export const FocusItems: Story = { name: 'focus · api · at the items level · only the receding changes', render: () => openUnit(zero2prod, 'api', {}, { focus: 'persistence', level: 'items' }) };
 export const AreasFiltered: Story = { name: 'areas · filter="knows" · lines that carry none of it recede', render: () => openUnit(zero2prod, 'api', {}, { filter: 'knows' }) };
 export const AreasNoWires: Story = { name: 'areas · without the port wires', render: () => sheetOf(zero2prod, 'api', {}, { wires: false }) };
 export const Links: Story = {

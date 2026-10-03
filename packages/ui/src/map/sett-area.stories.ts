@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import { insideOf } from './fixtures.js';
-import { areaEl, ripgrep, zed, zero2prod } from './map-fixtures.stories-helpers.js';
+import { insideOf, itemKindOf } from './fixtures.js';
+import { areaEl, itemEl, ripgrep, zed, zero2prod } from './map-fixtures.stories-helpers.js';
 
 const meta: Meta = {
   title: 'map/area',
@@ -42,5 +42,21 @@ export const FoldedHidesSelection: Story = {
 export const Overrides: Story = {
   name: 'overrides · numbers for a folded area whose items are not rendered',
   render: () => holder(html`<sett-area name="elements" folded count="214" findings="3" sessions="yk mg"></sett-area>`),
+};
+export const HeaderControls: Story = {
+  name: 'header · two controls · the name focuses, the arrow folds',
+  render: () => row(
+    holder(areaEl(routes), 'at rest: Tab reaches the name, then the arrow; each takes its own ring'),
+    holder(html`<sett-area key="routes" name=${routes.name} focused>${routes.items.map((it) => itemEl(it))}</sett-area>`, 'focused: the sheet set it after the name was used'),
+    holder(html`<sett-area key="routes" name=${routes.name} focused folded>${routes.items.map((it) => itemEl(it))}</sett-area>`, 'focused · folded'),
+  ),
+};
+export const Far: Story = {
+  name: 'far · unrelated to the focus · recedes by colour, the red count stays',
+  render: () => row(
+    holder(areaEl(routes), 'at rest'),
+    holder(html`<sett-area key="routes" name=${routes.name} far>${routes.items.map((it) => html`<sett-item key=${it.id} kind=${itemKindOf(it)} ?entry=${!!it.entry} ?finding=${!!it.finding} far>${it.name}</sett-item>`)}</sett-area>`, 'far: mute ink, a faint border; the finding keeps its ink'),
+    holder(html`<sett-area key="routes" name=${routes.name} far folded>${routes.items.map((it) => itemEl(it))}</sett-area>`, 'far · folded'),
+  ),
 };
 export const Empty: Story = { name: 'empty', render: () => holder(html`<sett-area name="adapters"></sett-area>`) };

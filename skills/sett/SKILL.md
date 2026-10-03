@@ -385,12 +385,14 @@ The agent strip: the session's path under the scope line when a session is the s
 
 ### `<sett-area>`
 
-A module-sized group of items inside a column. The header carries what the area holds: its name, how many items, a red count for findings, and one dot per session with an item here. It counts its own `sett-item` children; the `count`, `findings` and `sessions` attributes override that for a folded area whose items the application chose not to render. Folded, the header also carries what the fold hides (DESIGN.md § Motion, "where it lands"): a session whose live item is hidden keeps its dot breathing, the area takes that agent's arrival and departure pulse, and a blue count says how many selected items are inside.
+A module-sized group of items inside a column. The header carries what the area holds: its name, how many items, a red count for findings, and one dot per session with an item here. It counts its own `sett-item` children; the `count`, `findings` and `sessions` attributes override that for a folded area whose items the application chose not to render. Folded, the header also carries what the fold hides (DESIGN.md § Motion, "where it lands"): a session whose live item is hidden keeps its dot breathing, the area takes that agent's arrival and departure pulse, and a blue count says how many selected items are inside. The header holds two controls: the name focuses the area, the arrow folds it. The area only asks: the name fires `sett-focus` and the `sett-sheet` around it sets `focused` here and `far` on what is unrelated. `far` recedes by colour, never by opacity; the red count of findings stays red.
 
 - attrs:
   - `key=string` — the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`
   - `name=string`
   - `folded=boolean`
+  - `focused=boolean` — the focused area: its links are drawn down to the items, everything unrelated recedes; the sheet sets it
+  - `far=boolean` — unrelated to the focused area: recedes to mute ink and a faint border (the name stays above 4.5:1); the sheet sets it
   - `count=number` — override: how many items, when they are not rendered
   - `findings=number` — override: how many findings, when the items are not rendered
   - `sessions=string` — override: the session ids present, space-separated, when the items are not rendered
@@ -398,9 +400,12 @@ A module-sized group of items inside a column. The header carries what the area 
   - `(default)` — `sett-item` children
 - parts:
   - `header` — the header row
+  - `name` — the name, the control that focuses the area
+  - `fold` — the arrow, the control that folds the area
   - `body` — the items' container
 - events:
-  - `sett-fold` — `{ folded }` when the header is used
+  - `sett-fold` — `{ folded }` when the arrow is used
+  - `sett-focus` — `{ key, focused }` when the name is used: `focused` is what the reader asks for
 - stories:
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
@@ -422,6 +427,8 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -454,6 +461,7 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -521,6 +529,15 @@ A module-sized group of items inside a column. The header carries what the area 
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -665,6 +682,8 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -697,6 +716,7 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -764,6 +784,15 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -914,6 +943,8 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -946,6 +977,7 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -1013,6 +1045,15 @@ The one line leaving an area at the areas level (rule 12). A stretch that carrie
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -1506,6 +1547,8 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -1538,6 +1581,7 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -1605,6 +1649,15 @@ A tinted band inside an open unit, holding areas. In a hexagon the three columns
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -1879,6 +1932,8 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -1911,6 +1966,7 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -1978,6 +2034,15 @@ Where the map is, as one mono line: `orderly › api › routes › subscribe()`
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -2025,6 +2090,8 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -2057,6 +2124,7 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -2124,6 +2192,15 @@ A label and a bar that fills toward a threshold: it says how far the hand is fro
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -2945,7 +3022,7 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
 
 ### `<sett-item>`
 
-One function, struct or trait inside an area: an 18 px box in a 22 px row, its name in mono at the base size. The name never moves, fades or resizes; everything else is drawn around or behind it (DESIGN.md § Motion): the item's own colour, an agent's sheen, your selection tight to the box, the session ring one step out, a change flash past everything. `session` alone is a thin still ring: an agent touched this earlier. With `live` the ring breathes and a sheen sweeps: an agent is here now. When `live` flips, the item plays its own arrival or departure pulse. `lit` is the response to a pointer on one of its links: a blue border.
+One function, struct or trait inside an area: an 18 px box in a 22 px row, its name in mono at the base size. The name never moves, fades or resizes; everything else is drawn around or behind it (DESIGN.md § Motion): the item's own colour, an agent's sheen, your selection tight to the box, the session ring one step out, a change flash past everything. `session` alone is a thin still ring: an agent touched this earlier. With `live` the ring breathes and a sheen sweeps: an agent is here now. When `live` flips, the item plays its own arrival or departure pulse. `lit` is the response to a pointer on one of its links: a blue border. `far` is an item unrelated to the focused area: it recedes by colour, never by opacity, so its name stays readable; a finding never recedes.
 
 - attrs:
   - `key=string` — the name a `sett-link` ends on (`from` / `to`); the sheet also accepts `data-id`
@@ -2960,6 +3037,7 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `finding=boolean` — a rule is broken here: dashed red
   - `selected=boolean`
   - `lit=boolean` — at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response)
+  - `far=boolean` — unrelated to the focused area: recedes to mute ink and a faint border (the name stays above 4.5:1); a finding ignores it
 - slots:
   - `(default)` — the item's name
 - parts:
@@ -2987,6 +3065,8 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -3019,6 +3099,7 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -3086,6 +3167,15 @@ One function, struct or trait inside an area: an 18 px box in a 22 px row, its n
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -3176,6 +3266,8 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -3208,6 +3300,7 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -3275,6 +3368,15 @@ One line between two things inside an open unit. It names its ends by `key` (`fr
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -3472,6 +3574,8 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -3504,6 +3608,7 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -3571,6 +3676,15 @@ The whole map at a glance: the world's rects and, over them, the viewport rect. 
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -3746,6 +3860,8 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -3778,6 +3894,7 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -3845,6 +3962,15 @@ A unit's box on the board, at one of four tiers. The host sets the box and the t
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -3901,6 +4027,8 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -3933,6 +4061,7 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -4000,6 +4129,15 @@ One operation under a port in a rail: a route (method chip · path · return or 
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -4095,6 +4233,8 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -4127,6 +4267,7 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -4194,6 +4335,15 @@ The map's own panel, docked on the right edge of the map's pane (map rule 8: chr
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -4795,6 +4945,8 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -4827,6 +4979,7 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -4894,6 +5047,15 @@ One port of a unit: the dot on the border (the kind's colour), then `kind · nam
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -4938,6 +5100,8 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -4970,6 +5134,7 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -5037,6 +5202,15 @@ Where you are on the map, as the trail that led there: numbered rows, the oldest
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -5087,6 +5261,8 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -5119,6 +5295,7 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -5186,6 +5363,15 @@ One place of the trail: its number, its name in mono, and the level it is at in 
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -5261,6 +5447,8 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -5293,6 +5481,7 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -5360,6 +5549,15 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family
@@ -6081,13 +6279,14 @@ The Sessions view: every session, grouped by section, each unfolding into groups
 
 ### `<sett-sheet>`
 
-The inside of an open unit: the exposes rail, the columns, the needs rail, in one row, and the `sett-link`s between the things inside, drawn over it. Everything is laid out by normal flow; the sheet is the one element that sees every link, so the rules are written once here and not by each app: - **routes**: square lines on tracks in the gutters (`map.size.track` apart), one trunk per source item and family with a dot at each branch; a link skipping a column takes a lane in the channel under the columns, one inside a column runs beside it; a right-to-left line is a smell. - **the watcher**: each frame the ends are read and only the paths whose ends moved are rewritten, so folding, pulses and re-renders never leave a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown). - **response** (DESIGN.md § Motion): pointing at an item lights its links and the item at the other end; selecting draws its links outward, the flow travels on them alone and every other link recedes to `map.far`. - **folds**: an end hidden by a folded area rides the area's edge to the chip; a selected one gets the blue dock dot where it plugs in. - **level**: what is drawn at rest. `areas` (the default) draws one line per pair of areas, header to header: a `sett-bundle` per area, double where it carries two or more links; the item links appear when pointed at, pinned or opened by hand. `items` draws every link; `plugs` a dot beside each connected item with the line on demand. A finding is drawn item to item in every level. - **open by hand**: the arrow end of a double line opens that pair into its links, its shared stretch opens everything leaving the area, an opened line closes its pair (`open`, `sett-open`). The level is the default for whatever was not opened by hand. Opening never moves another line: a pair keeps its track while open. - **pins**: a click on an item toggles its `selected`; several at once. Their links are drawn item to item and everything else recedes. - **filter**: kinds and families to keep; the rest recedes to `map.far`. `folded` folds every area at once.
+The inside of an open unit: the exposes rail, the columns, the needs rail, in one row, and the `sett-link`s between the things inside, drawn over it. Everything is laid out by normal flow; the sheet is the one element that sees every link, so the rules are written once here and not by each app: - **routes**: square lines on tracks in the gutters (`map.size.track` apart), one trunk per source item and family with a dot at each branch; a link skipping a column takes a lane in the channel under the columns, one inside a column runs beside it; a right-to-left line is a smell. - **the watcher**: each frame the ends are read and only the paths whose ends moved are rewritten, so folding, pulses and re-renders never leave a line pointing at nothing (`lines.ts`; it sleeps when no sheet is shown). - **response** (DESIGN.md § Motion): pointing at an item lights its links and the item at the other end; selecting draws its links outward, the flow travels on them alone and every other link recedes to `map.far`. - **folds**: an end hidden by a folded area rides the area's edge to the chip; a selected one gets the blue dock dot where it plugs in. - **level**: what is drawn at rest. `areas` (the default) draws one line per pair of areas, header to header: a `sett-bundle` per area, double where it carries two or more links; the item links appear when pointed at, pinned or opened by hand. `items` draws every link; `plugs` a dot beside each connected item with the line on demand. A finding is drawn item to item in every level. - **open by hand**: the arrow end of a double line opens that pair into its links, its shared stretch opens everything leaving the area, an opened line closes its pair (`open`, `sett-open`). The level is the default for whatever was not opened by hand. Opening never moves another line: a pair keeps its track while open. - **pins**: a click on an item toggles its `selected`; several at once. Their links are drawn item to item and everything else recedes. - **filter**: kinds and families to keep; the rest recedes to `map.far`. - **focus**: an area's name asks for it (`sett-focus`), `focus` holds its key. The area's links are drawn down to the items, in, out and inside it; the items they reach keep full ink; every other item and area gets `far` (mute ink, by colour) and every other line `map.far`. A finding never recedes. Esc, or the name again, leaves. Nothing moves: the pair lines keep their tracks, and what was opened by hand comes back as it was. `folded` folds every area at once.
 
 - attrs:
   - `folded=boolean` — fold every area inside, or open them all again
   - `level=SheetLevel` — what is drawn at rest: one line per pair of areas (`areas`), every link (`items`), or a plug beside each connected item with the lines on demand (`plugs`)
   - `open=string` — the pairs opened by hand, space-separated `from>to` area keys; a bare `from` is everything leaving it. Keys here hold no space and no `>`
   - `filter=string` — link kinds and families to keep, space-separated (`calls does`); the rest recedes; empty keeps all
+  - `focus=string` — the key of the focused area: its links are drawn down to the items, everything unrelated recedes; empty is no focus. The attribute is `focus`
 - slots:
   - `exposes` — a `sett-rail side="exposes"`
   - `(default)` — `sett-column` children, then the `sett-link`s
@@ -6095,6 +6294,7 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
 - events:
   - `sett-fold` — bubbles from the areas inside
   - `sett-open` — `{ from, to?, open }` when a pair (`to`), or everything leaving `from`, is opened or closed by hand
+  - `sett-focus` — `{ key, focused }`: bubbles from an area's name, and fired by the sheet itself when Esc leaves focus
 - stories:
   - `map-chrome--fits` zero2prod · the map fits the viewport: no minimap, no back at the top level
   - `map-chrome--exceeds` zed · the map exceeds the viewport: the minimap is in the panel's foot
@@ -6116,6 +6316,8 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-area--header-badges` header · count · findings · one dot per session
   - `map-area--folded-hides-selection` folded · a blue count for the selection it hides
   - `map-area--overrides` overrides · numbers for a folded area whose items are not rendered
+  - `map-area--header-controls` header · two controls · the name focuses, the arrow folds
+  - `map-area--far` far · unrelated to the focus · recedes by colour, the red count stays
   - `map-area--empty` empty
   - `map-back--default` Default
   - `map-back--places` names where it leads · the board, a unit, an area · ripgrep, zero2prod, zed
@@ -6148,6 +6350,7 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-item--default` Default
   - `map-item--kinds` kinds · eight
   - `map-item--states` states · entry · port · finding · selected · family · and together
+  - `map-item--far` far · unrelated to the focused area · recedes by colour, still readable · a finding and a pin never do
   - `map-item--unresolved` unresolved · links the analyser could not follow fold to one pill · on every fill · beside a family pill
   - `map-item--long-names` long names · ellipsis, the pill is never squeezed
   - `map-item--sessions` sessions · touched earlier (still ring) vs working now (breathes, sheen)
@@ -6215,6 +6418,15 @@ The inside of an open unit: the exposes rail, the columns, the needs rail, in on
   - `map-sheet--areas-open-pair` areas · a pair opened by hand · its links are drawn, every other line keeps its track
   - `map-sheet--areas-open-area` areas · everything leaving an area opened by hand
   - `map-sheet--areas-pins` areas · pins · two items pinned, their links drawn, the rest recedes
+  - `map-sheet--focus` focus · api · persistence · its links open down to the items, the rest recedes by colour
+  - `map-sheet--focus-out` focus · api · routes · everything leaving it, and the wires arriving from the rail
+  - `map-sheet--focus-inside` focus · api · auth · in, and the link inside the area
+  - `map-sheet--focus-rg` focus · rg · search · in, out and inside
+  - `map-sheet--focus-gpui` focus · gpui · views · five layers, the finding keeps its red
+  - `map-sheet--focus-folded` focus · rg · a folded area · its links ride its edge
+  - `map-sheet--focus-pins` focus · api · with a pin elsewhere · the pin and its links keep full ink
+  - `map-sheet--focus-open` focus · api · with a pair opened by hand · it recedes, and comes back as it was
+  - `map-sheet--focus-items` focus · api · at the items level · only the receding changes
   - `map-sheet--areas-filtered` areas · filter="knows" · lines that carry none of it recede
   - `map-sheet--areas-no-wires` areas · without the port wires
   - `map-sheet--links` items · api · every link at rest · 30 links and 10 port wires, one trunk per source and family

@@ -18,7 +18,9 @@ export const ITEM_KINDS: ItemKind[] = ['fn', 'struct', 'enum', 'trait', 'impl', 
  * `session` alone is a thin still ring: an agent touched this earlier. With
  * `live` the ring breathes and a sheen sweeps: an agent is here now. When
  * `live` flips, the item plays its own arrival or departure pulse. `lit`
- * is the response to a pointer on one of its links: a blue border.
+ * is the response to a pointer on one of its links: a blue border. `far`
+ * is an item unrelated to the focused area: it recedes by colour, never by
+ * opacity, so its name stays readable; a finding never recedes.
  *
  * @slot - the item's name
  * @fires sett-select - `{ kind }` on click, Enter or Space
@@ -48,6 +50,8 @@ export class SettItem extends LitElement {
   @property({ type: Boolean, reflect: true }) selected = false;
   /** at the other end of a link being pointed at: blue border, with the link (DESIGN.md § Motion, response) */
   @property({ type: Boolean, reflect: true }) lit = false;
+  /** unrelated to the focused area: recedes to mute ink and a faint border (the name stays above 4.5:1); a finding ignores it */
+  @property({ type: Boolean, reflect: true }) far = false;
 
   @state() private kick = false;
   @state() private cooling = false;
@@ -87,6 +91,9 @@ export class SettItem extends LitElement {
       :host([entry]) { background: var(--sett-map-status-entry-bg); border-color: var(--sett-map-status-entry-border); }
       :host([port]) { --_radius: var(--sett-map-radius-pill); background: var(--sett-map-status-port-bg); border-color: var(--sett-map-status-port-border); }
       :host([finding]) { background: var(--sett-map-status-finding-bg); border-color: var(--sett-map-status-finding-border); border-style: dashed; }
+      :host([far]:not([finding]):not([selected])) { color: var(--sett-color-mute); border-color: var(--sett-color-line2); }
+      :host([far]:not([finding]):not([selected]):hover) { border-color: var(--sett-color-ink2); }
+      :host([far][lit]:not([finding]):not([selected])) { border-color: var(--sett-color-sel); }
       :host([selected]) { border-color: var(--sett-color-sel); border-style: solid; box-shadow: 0 0 0 var(--sett-stroke-hair) var(--sett-color-sel); }
       .t { position: relative; z-index: 1; flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       sett-tag { position: relative; z-index: 1; flex: 0 0 auto; }

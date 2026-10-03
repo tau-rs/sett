@@ -17,6 +17,7 @@ export const SCOPES = {
   planShaping: { kind: 'plan', name: 'refund flow' },
   sessionGateFailed: { kind: 'session', id: 'w1', name: 'refund flow' },
   reviewGlance: { kind: 'session', id: 'w3', name: 'rate limits' },
+  dailyEditByHand: { kind: 'you', name: 'fix-pool-size', locked: true },
 } satisfies Record<string, Scope>;
 
 /** a scope and the session colour it takes, when a session is the scope */
@@ -243,4 +244,62 @@ export const ReviewGlance: Story = { name: 'review · glance', render: () => she
     <sett-status-item label="Sessions"><b>2</b> running · <b>1</b> in review</sett-status-item>
     <sett-status-item label="Findings"><b>0</b> new</sett-status-item>
     <sett-status-item label="Checks"><span data-tone="ok">all passed</span></sett-status-item>${mapItem}</sett-status-bar>`,
+}) };
+
+// ── daily · edit by hand (daily flow, step 4, with the commit of step 7 open) ──
+const you: Of = { scope: SCOPES.dailyEditByHand };
+// the editor is Theia's; these are sett's decoration classes (editor.css) on a few lines: your change bars are sel
+const K = (t: string) => html`<span class="sett-syn-keyword">${t}</span>`;
+const T = (t: string) => html`<span class="sett-syn-type">${t}</span>`;
+const D = (t: string) => html`<span class="sett-syn-definition">${t}</span>`;
+const L = (n: number, t: unknown, o: { mine?: boolean; caret?: boolean } = {}) => html`<div class="ln sett-gutter-bar ${o.mine ? 'sett-gutter-bar--you' : ''} ${o.caret ? 'sett-ed-line' : ''}"><span class="sett-gutter-glyph"></span><span class="n">${n}</span><span class="t">${t}</span></div>`;
+const poolRs = html`<div class="file" tabindex="0" role="group" aria-label="store/pool.rs">
+  ${L(1, html`<span class="sett-syn-comment">//! the pg pool, sized from config</span>`)}
+  ${L(2, html`${K('use')} sqlx::postgres::{${T('PgPool')}, ${T('PgPoolOptions')}};`)}
+  ${L(3, html`${K('use')} crate::config::${T('PgConfig')};`)}
+  ${L(4, '')}
+  ${L(5, html`${K('pub const')} ${D('DEFAULT_POOL_SIZE')}: ${T('u32')} = <span class="sett-syn-constant">8</span>;`, { mine: true })}
+  ${L(6, '')}
+  ${L(7, html`${K('pub struct')} ${D('Pool')} {`)}
+  ${L(8, html`    inner: ${T('PgPool')},`)}
+  ${L(9, '}')}
+  ${L(10, '')}
+  ${L(11, html`${K('impl')} ${T('Pool')} {`)}
+  ${L(12, html`    ${K('pub async fn')} ${D('connect')}(cfg: &${T('PgConfig')}) -> ${T('Result')}&lt;${T('Pool')}&gt; {`)}
+  ${L(13, html`        ${K('let')} size = cfg.pool_size.<span class="sett-syn-function">unwrap_or</span>(DEFAULT_POOL_SIZE);`, { mine: true })}
+  ${L(14, html`        ${K('let')} inner = ${T('PgPoolOptions')}::<span class="sett-syn-function">new</span>().<span class="sett-syn-function">max_connections</span>(size)`, { mine: true, caret: true })}
+  ${L(15, html`            .<span class="sett-syn-function">connect</span>(&cfg.url).${K('await')}?;`, { mine: true })}
+  ${L(16, html`        ${T('Ok')}(${T('Pool')} { inner })`)}
+  ${L(17, '    }')}
+  ${L(18, '}')}
+</div>`;
+export const DailyEditByHand: Story = { name: 'daily · edit by hand', render: () => shell({
+  of: you, frame: 'editing',
+  bar: bar(selector(you, 'yours'), html`<sett-chip kind="detected">changes detected<span slot="count">· 2 files</span><a slot="agent">delegate the rest</a><a slot="manual">commit</a></sett-chip>`),
+  rail: rail(you, 'files'),
+  left: html`<sett-files-view projection="directory" scoped>
+    ${scopeLine(you, 'manual', 'scope')}<span slot="tools">filter · ⌘⇧F</span>
+    <sett-tree-row kind="folder" name="store" open>
+      <sett-tree-row kind="file" name="pg.rs" depth="1" scope="you" letter="M" writer="you"></sett-tree-row>
+      <sett-tree-row kind="file" name="pool.rs" depth="1" scope="you" letter="A" writer="you" selected></sett-tree-row>
+    </sett-tree-row>
+    <sett-tree-row kind="folder" name="api" dim></sett-tree-row>
+    <sett-tree-row kind="folder" name="domain" dim></sett-tree-row>
+    <sett-tree-row kind="folder" name="clients" dim></sett-tree-row>
+    <sett-tree-row kind="folder" name="tests" dim></sett-tree-row>
+    <sett-tree-row kind="folder" name=".arch" dim></sett-tree-row>
+    <sett-tree-row kind="file" name="Cargo.toml" dim></sett-tree-row>
+  </sett-files-view>`,
+  centre: html`<sett-tabbar><sett-tab pinned>map</sett-tab><sett-tab mono active dirty scope="you">pool.rs <sett-pill kind="sel">you</sett-pill></sett-tab>${toggles('delta', 'sessions')}</sett-tabbar>${poolRs}`,
+  inspector: html`<sett-inspector heading="commit · you · fix-pool-size" sub="main" state="2 files">
+    <sett-commit-form value="store: size the pg pool from config" description="Reads pool size from PgConfig; defaults to 8. No behaviour change at defaults." files="store/pg.rs +12 · store/pool.rs +8" checks="ran on save · check 0 · tests 41 ✓" then="main" behind="main moved 2 commits" style="flex:1">
+      <span slot="note">one click from the detected chip</span>
+    </sett-commit-form>
+  </sett-inspector>`,
+  panel: html`<sett-bottom-panel active="findings" closed>${panelTabs({ checks: '2', news: '1' })}</sett-bottom-panel>`,
+  status: html`<sett-status-bar>${scopeItem(you, '2 changed')}
+    <sett-status-item label="Sessions"><b>2</b> running</sett-status-item>
+    <sett-status-item label="Findings"><b>0</b> new</sett-status-item>
+    <sett-status-item label="Checks"><span data-tone="ok">all passed</span></sett-status-item>
+    <sett-status-item slot="right">Ln 14, Col 9 · rust</sett-status-item>${mapItem}</sett-status-bar>`,
 }) };

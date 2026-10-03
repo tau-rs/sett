@@ -4370,6 +4370,13 @@
               "type": {
                 "text": "FixtureLink"
               }
+            },
+            {
+              "name": "on",
+              "default": "{}",
+              "type": {
+                "text": "LinkOn"
+              }
             }
           ],
           "description": "one `sett-link` from a fixture link; kinds on fixture links are derived from the items (illustrative)"
@@ -4393,6 +4400,13 @@
             {
               "name": "wires",
               "default": "true"
+            },
+            {
+              "name": "lines",
+              "default": "() => undefined",
+              "type": {
+                "text": "Lines"
+              }
             }
           ],
           "description": "the links and port wires of a unit, as `sett-link` children for its sheet"

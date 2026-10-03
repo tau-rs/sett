@@ -33,6 +33,7 @@ export { SettPosition, SettPositionRow } from './map/sett-position.js';
 export { SettMinimap, minimapPoint, type MinimapMode, type MinimapBox, type MinimapRect } from './map/sett-minimap.js';
 export { SettCrumb } from './map/sett-crumb.js';
 export { SettBack } from './map/sett-back.js';
+export { SettCue } from './map/sett-cue.js';
 export { scopeWords, scopeText, scopeStyles, SCOPE_LOCK, type Scope, type ScopeKind } from './scope.js';
 export { badgeStyles, type BadgeTone } from './badge.js';
 export { SettActivityRail, SettRailItem } from './shell/sett-activity-rail.js';

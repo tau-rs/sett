@@ -2544,6 +2544,14 @@
         },
         {
           "kind": "js",
+          "name": "SettCue",
+          "declaration": {
+            "name": "SettCue",
+            "module": "./map/sett-cue.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "scopeWords",
           "declaration": {
             "name": "scopeWords",
@@ -5388,6 +5396,137 @@
           "declaration": {
             "name": "SettCrumb",
             "module": "src/map/sett-crumb.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/map/sett-cue.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A label and a bar that fills toward a threshold: it says how far the hand\nis from something the map does by on-screen size (a tier, the fold floor).\nThe values are the host's: `value` now, `from` where the cue starts,\n`threshold` where the thing happens. The bar is a reading, not a motion: it\nfollows the wheel and never eases. Once the threshold is `reached` the bar\nturns `sel`.",
+          "name": "SettCue",
+          "slots": [
+            {
+              "description": "the label, lowercase: `keep zooming · areas fold`",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "where the hand is now, in the threshold's unit (px of on-screen width, a scale)",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "from",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "where the bar starts, e.g. `map.threshold.cue`",
+              "attribute": "from"
+            },
+            {
+              "kind": "field",
+              "name": "threshold",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "where the bar is full",
+              "attribute": "threshold"
+            },
+            {
+              "kind": "field",
+              "name": "reached",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the value is at or past the threshold; set by the element",
+              "attribute": "reached",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "progress",
+              "type": {
+                "text": "number"
+              },
+              "description": "how full the bar is, 0 to 1",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "where the hand is now, in the threshold's unit (px of on-screen width, a scale)",
+              "fieldName": "value"
+            },
+            {
+              "name": "from",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "where the bar starts, e.g. `map.threshold.cue`",
+              "fieldName": "from"
+            },
+            {
+              "name": "threshold",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "where the bar is full",
+              "fieldName": "threshold"
+            },
+            {
+              "name": "reached",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the value is at or past the threshold; set by the element",
+              "fieldName": "reached"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-cue",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettCue",
+          "declaration": {
+            "name": "SettCue",
+            "module": "src/map/sett-cue.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-cue",
+          "declaration": {
+            "name": "SettCue",
+            "module": "src/map/sett-cue.ts"
           }
         }
       ]

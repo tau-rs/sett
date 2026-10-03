@@ -31,8 +31,6 @@ const css = html`<style>${unsafeStatic(editorCss)}
 .sh .repo { color: var(--sett-color-ink2); }
 .sh .chips { margin-left: auto; display: flex; align-items: center; gap: var(--sett-space-2); min-width: 0; }
 .sh .ask { color: var(--sett-color-mute); text-decoration: none; }
-.sh .planchip { display: inline-flex; align-items: center; gap: var(--sett-space-2); padding: var(--sett-space-1) var(--sett-space-2); border: var(--sett-stroke-hair) solid var(--sett-color-line); border-radius: var(--sett-radius-chip); background: var(--sett-color-paper); color: var(--sett-color-ink2); }
-.sh .planchip a { color: var(--sett-color-sel); font-weight: var(--sett-font-weight-semibold); cursor: pointer; }
 .sh .body { display: grid; grid-template-columns: var(--sett-size-shell-rail) var(--sett-size-shell-pane-max) minmax(0, 1fr) var(--sett-size-shell-inspector); min-height: 0; }
 .sh .body > * { min-width: 0; min-height: 0; }
 .sh .left { display: flex; flex-direction: column; overflow: hidden; background: var(--sett-color-paper); border-right: var(--sett-stroke-hair) solid var(--sett-color-line2); }
@@ -110,24 +108,22 @@ type Story = StoryObj;
 
 // ── plan · shaping (plan flow, step 3) ──
 const plan: Of = { scope: SCOPES.planShaping };
-// a planned element has no row of its own in the Sessions view: the sub-agent row, its dot turned to sug (planned)
-const PLANNED = '--_session-sub:var(--sett-color-sug)';
 const INTENT = 'Refunds: add refund() to the OrderRepo port and the Postgres impl, expose it on pay()/close()';
 export const PlanShaping: Story = { name: 'plan · shaping', render: () => shell({
   of: plan, frame: 'planning',
-  bar: bar(selector(plan), html`<span class="planchip"><sett-tag kind="sug">plan</sett-tag><span>refund flow · 5 elements</span><a>open</a></span>`),
+  bar: bar(selector(plan), html`<sett-chip kind="plan">refund flow<span slot="count">· 5 elements</span><a slot="verb">open</a></sett-chip>`),
   rail: rail(plan, 'sessions'),
   left: html`${scopeLine(plan, 'from main')}<sett-sessions-view isolated count="5">
     <sett-session-row scope="plan" name="refund flow" state="shaping" tone="sug" open selected scoped>
       <sett-group-row name="group 1" state="2 elements" depth="1" open>
-        <sett-agent-row style=${PLANNED} name="E1 · OrderRepo: add refund()" depth="2"></sett-agent-row>
-        <sett-agent-row style=${PLANNED} name="E2 · PgOrderRepo: implement refund()" depth="2"></sett-agent-row>
+        <sett-element-row name="E1 · OrderRepo: add refund()" depth="2"></sett-element-row>
+        <sett-element-row name="E2 · PgOrderRepo: implement refund()" depth="2"></sett-element-row>
       </sett-group-row>
       <sett-group-row kind="gate" name="gate · group 1 → group 2" state="tests green" depth="1"></sett-group-row>
       <sett-group-row name="group 2" state="3 elements" depth="1" open>
-        <sett-agent-row style=${PLANNED} name="E3 · pay() calls refund()" depth="2"></sett-agent-row>
-        <sett-agent-row style=${PLANNED} name="E4 · close() calls refund()" depth="2"></sett-agent-row>
-        <sett-agent-row style=${PLANNED} name="E5 · handle_webhook(): fail fast" depth="2" selected></sett-agent-row>
+        <sett-element-row name="E3 · pay() calls refund()" depth="2"></sett-element-row>
+        <sett-element-row name="E4 · close() calls refund()" depth="2"></sett-element-row>
+        <sett-element-row name="E5 · handle_webhook(): fail fast" depth="2" state="asks" selected></sett-element-row>
       </sett-group-row>
       <sett-changes-row depth="1" meta="no branch yet · created at accept"></sett-changes-row>
     </sett-session-row>
@@ -143,7 +139,7 @@ export const PlanShaping: Story = { name: 'plan · shaping', render: () => shell
       <sett-option slot="option" value="queue" effect="+1 item in clients · +1 link">queue it for later</sett-option>
     </sett-question>
     <sett-split-button slot="verbs" variant="primary">accept · delegate<sett-menu slot="menu" label="driver"><sett-menu-item state="main" selected>claude code</sett-menu-item><sett-menu-item state="main">codex</sett-menu-item></sett-menu></sett-split-button>
-    <sett-button slot="verbs">save plan</sett-button><sett-button slot="verbs" variant="quiet">discard</sett-button>
+    <sett-button slot="verbs">save plan</sett-button><sett-button slot="verbs" variant="quiet">start over</sett-button><sett-button slot="verbs" variant="quiet">discard</sett-button>
     <sett-composer slot="composer" placeholder="answer, or say how to shape it…"></sett-composer>
   </sett-inspector>`,
   panel: html`<sett-bottom-panel active="findings" closed>${panelTabs({ checks: '1', news: '2' })}</sett-bottom-panel>`,

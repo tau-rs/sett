@@ -184,6 +184,7 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -279,6 +280,7 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -374,6 +376,7 @@ The agent strip: the session's path under the scope line when a session is the s
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -684,6 +687,7 @@ The Ask thread in the inspector (spec §6 Daily): your question on the right in 
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -984,6 +988,7 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -1398,6 +1403,7 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -1497,6 +1503,7 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -1591,6 +1598,7 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -1602,7 +1610,7 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
 
 ### `<sett-chip>`
 
-Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door first and bold, manual door second and plain (P-1); `me-first` swaps them. A chip always carries a verb (DESIGN.md "The shell" rule 1); a separator stands before each verb that is there. A done chip keeps full contrast, its label turns ok with ✓ and it gains a plain `dismiss` verb. The `gate` kind is a group's gate (`gate · group 1 → group 2 · judge running`, verb `open`): its label takes the colour of the session that runs it, and a failed gate (`failed 1/2`) is the `blocking` state. The `detected` kind is your own work, found by the watcher and never declared (`changes detected · 3 files`, spec §4 "Work by hand"): its label is `sel` like everything that is yours; agent door `delegate the rest`, manual door `commit`. Never animates.
+Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door first and bold, manual door second and plain (P-1); `me-first` swaps them. A chip always carries a verb (DESIGN.md "The shell" rule 1); a separator stands before each verb that is there. A done chip keeps full contrast, its label turns ok with ✓ and it gains a plain `dismiss` verb. The `gate` kind is a group's gate (`gate · group 1 → group 2 · judge running`, verb `open`): its label takes the colour of the session that runs it, and a failed gate (`failed 1/2`) is the `blocking` state. The `detected` kind is your own work, found by the watcher and never declared (`changes detected · 3 files`, spec §4 "Work by hand"): its label is `sel` like everything that is yours; agent door `delegate the rest`, manual door `commit`. The `plan` kind is a plan being shaped (`plan · refund flow · 5 elements`, verb `open`): its label is `sug`, the plan's colour on the scope line and the selector. An agent that asks you is the `agent` kind in the `waiting` state, not a kind of its own. Never animates.
 
 - attrs:
   - `kind=ChipKind` — what the chip is about
@@ -1631,6 +1639,7 @@ Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent door 
   - `primitives-chip--gate-running` kind · gate · running, in the session's colour, verb open
   - `primitives-chip--gate-failed` kind · gate · failed n/m, blocking
   - `primitives-chip--detected` kind · detected · your own work, found by the watcher · four states
+  - `primitives-chip--plan` kind · plan · a plan being shaped, in sug, verb open
   - `primitives-chip--detected-in-bar` in context · a you session: the detected chip beside the agent chip
   - `primitives-chip--normal` Normal
   - `primitives-chip--blocking` Blocking
@@ -2139,6 +2148,7 @@ The ready commit in the inspector, one click from the `you` chip (spec §4, §6 
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -2239,6 +2249,7 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -2901,6 +2912,99 @@ The agent left the plan. Reason, then the three ways back (and discuss). A denie
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
 
+### `<sett-element-row>`
+
+A plan element under a group of a plan being shaped (`E1 · OrderRepo: add refund()`): a dot in `sug`, the plan's colour, then the element. Nothing runs on it yet, so it has no session shade, no sub-agents and no fold; a state tag only when the planner asks about it (`asks`, sug).
+
+- attrs:
+  - `state=string` — what the planner says of it, e.g. `asks`; most elements have none
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
+  - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
+  - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
+  - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-commit-form--clean` commit · message, description, files · pick hunks, checks, then stay on main
+  - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
+  - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
+  - `shell-commit-form--alone` form alone · no inspector
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-file-row>`
 
 A file row, shared by the Sessions view, the Files view and the Changes list: the status letter, the name in mono, `✓` in ok once viewed, the writer and the counts (`+18 −2`) in mono mute at the right. A click selects; Enter or a double click opens the file in the scope's worktree.
@@ -2991,6 +3095,7 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -3092,6 +3197,7 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -3260,6 +3366,7 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -3383,6 +3490,7 @@ One hunk of a review, or the fix card's proposed change. Header: `file:line · i
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -3472,6 +3580,7 @@ One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the bad ti
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -3576,6 +3685,7 @@ The inspector, the right pane: it is about the selection (DESIGN.md "The shell" 
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -3671,6 +3781,7 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -4797,6 +4908,7 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -5559,6 +5671,7 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -5646,6 +5759,7 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -5738,6 +5852,7 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -5832,6 +5947,7 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -5921,6 +6037,7 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -6946,6 +7063,7 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -7041,6 +7159,7 @@ The block under a hunk: an author line (dot and name, like a message), the text,
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -7133,6 +7252,7 @@ A resolve row of a judgement: `⇄` in amber (it needs a hand, not a fix), the f
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -7225,6 +7345,7 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -7458,6 +7579,7 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -7558,6 +7680,7 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -7881,6 +8004,7 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -7969,6 +8093,7 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -8064,6 +8189,7 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -8336,6 +8462,7 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date
@@ -8455,6 +8582,7 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
   - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
   - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
   - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
   - `shell-status-bar--default` Default
   - `shell-status-bar--main` main · up to date

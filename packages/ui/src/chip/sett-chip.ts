@@ -4,10 +4,10 @@ import { sessionStyles, type SessionId } from '../session.js';
 import '../tag/sett-tag.js';
 import type { TagKind } from '../tag/sett-tag.js';
 
-export type ChipKind = 'git' | 'agent' | 'finding' | 'review' | 'pipeline' | 'tree' | 'gate' | 'detected';
+export type ChipKind = 'git' | 'agent' | 'finding' | 'review' | 'pipeline' | 'tree' | 'gate' | 'detected' | 'plan';
 export type ChipState = 'normal' | 'blocking' | 'waiting' | 'done';
 
-const TAG_KIND: Record<ChipKind, TagKind> = { git: 'sel', agent: 'session', finding: 'bad', review: 'sug', pipeline: 'ok', tree: 'default', gate: 'session', detected: 'sel' };
+const TAG_KIND: Record<ChipKind, TagKind> = { git: 'sel', agent: 'session', finding: 'bad', review: 'sug', pipeline: 'ok', tree: 'default', gate: 'session', detected: 'sel', plan: 'sug' };
 
 /**
  * Actions-strip chip: a kind label, a fact, then the verbs. Two doors, agent
@@ -21,7 +21,10 @@ const TAG_KIND: Record<ChipKind, TagKind> = { git: 'sel', agent: 'session', find
  * `detected` kind is your own work, found by the watcher and never declared
  * (`changes detected · 3 files`, spec §4 "Work by hand"): its label is `sel`
  * like everything that is yours; agent door `delegate the rest`, manual door
- * `commit`. Never animates.
+ * `commit`. The `plan` kind is a plan being shaped (`plan · refund flow · 5
+ * elements`, verb `open`): its label is `sug`, the plan's colour on the
+ * scope line and the selector. An agent that asks you is the `agent` kind in
+ * the `waiting` state, not a kind of its own. Never animates.
  *
  * @slot - the fact, lowercase
  * @slot count - a mono count or identifier after the fact, e.g. `· 2`

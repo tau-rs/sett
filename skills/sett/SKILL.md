@@ -3306,6 +3306,7 @@ The list under the scope selector: sessions grouped by what they need, `planning
   - `buttons-buttons--gated-blocked` gated · blocked with pills
   - `buttons-buttons--gated-open` gated · open
   - `buttons-buttons--hand-back-disabled` hand back · disabled until the note is written
+  - `recipes-shell--plan-shaping` plan · shaping
   - `primitives-selector--default` Default
   - `primitives-selector--main` Main
   - `primitives-selector--yours` Yours
@@ -3399,6 +3400,7 @@ One row: dot, name in mono, pill when the row has a state, then who or how far o
   - `buttons-buttons--gated-blocked` gated · blocked with pills
   - `buttons-buttons--gated-open` gated · open
   - `buttons-buttons--hand-back-disabled` hand back · disabled until the note is written
+  - `recipes-shell--plan-shaping` plan · shaping
   - `primitives-selector--default` Default
   - `primitives-selector--main` Main
   - `primitives-selector--yours` Yours
@@ -6917,6 +6919,7 @@ Screens composed from the elements; the reference for how they sit together.
 
 - `recipes-screens--session-live` session · live
 - `recipes-screens--map-edit-at-scale` map · edit at scale
+- `recipes-shell--plan-shaping` plan · shaping
 
 ## Docs pages
 

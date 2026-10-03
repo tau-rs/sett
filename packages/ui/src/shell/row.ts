@@ -2,7 +2,7 @@ import { LitElement, css, html, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
 /** what a row of the left pane names, in the detail of its events */
-export type RowKind = 'session' | 'group' | 'agent' | 'file' | 'changes' | 'folder' | 'area' | 'item' | 'commit';
+export type RowKind = 'session' | 'group' | 'agent' | 'element' | 'file' | 'changes' | 'folder' | 'area' | 'item' | 'commit';
 
 /** the status letters of a changed file, as git writes them */
 export type StatusLetter = 'M' | 'A' | 'D' | 'R' | '?';
@@ -100,8 +100,10 @@ export abstract class SettRow extends LitElement {
   /** the chevron, or Left/Right: asks for the other state */
   fold() { if (this.foldable) this.fire('sett-fold', { open: !this.open }); }
 
-  private onClick = (e: Event) => { if (!e.defaultPrevented) this.select(); };
-  private onDblClick = (e: Event) => { if (!e.defaultPrevented) this.activate(); };
+  /** rows nest: a click is the innermost row's alone, never the rows around it (#115) */
+  private mine = (e: Event) => !e.defaultPrevented && e.composedPath().find((n) => n instanceof SettRow) === this;
+  private onClick = (e: Event) => { if (this.mine(e)) this.select(); };
+  private onDblClick = (e: Event) => { if (this.mine(e)) this.activate(); };
   private onKey = (e: KeyboardEvent) => {
     if (e.target !== this) return;
     if (e.key === 'Enter') { e.preventDefault(); this.activate(); }

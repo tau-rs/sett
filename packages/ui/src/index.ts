@@ -20,7 +20,7 @@ export { SettRail, RAIL_SECTIONS, RAIL_LABEL, type RailSection } from './map/set
 export { SettNode, tierFor, type NodeTier } from './map/sett-node.js';
 export { splitLabel, portOf, unitOf, unitPorts, opOf, opsOf, sectionOf, insideOf, itemKindOf, itemsOf, linkKindOf, linksOf, wiresOf, portKey, opKey, type FixtureLink, type FixtureLinkRow, type InsideColumn, type FixtureItem, type FixtureArea, type Fixture, type FixtureUnit, type FixtureContract, type Port, type Op } from './map/fixtures.js';
 export { presenceStyles, beatStyles, beatOf, wave, bloom, arrive, leave, flash, reducedMotion, durationMs, type WaveOptions } from './map/motion.js';
-export { SettItem, ITEM_KINDS, type ItemKind } from './map/sett-item.js';
+export { SettItem, ITEM_KINDS, type ItemKind, type ItemDelta } from './map/sett-item.js';
 export { SettArea } from './map/sett-area.js';
 export { SettColumn, COLUMN_KINDS, COLUMN_DEPTHS, type ColumnKind, type ColumnDepth } from './map/sett-column.js';
 export { SettSheet, type SheetLevel } from './map/sett-sheet.js';

@@ -2184,6 +2184,14 @@
         },
         {
           "kind": "js",
+          "name": "ItemDelta",
+          "declaration": {
+            "name": "ItemDelta",
+            "module": "./map/sett-item.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettArea",
           "declaration": {
             "name": "SettArea",
@@ -6000,6 +6008,36 @@
             },
             {
               "kind": "field",
+              "name": "planned",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 12)",
+              "attribute": "planned",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "group",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the plan group the item belongs to, shown as a plain tag at the end (`g1`)",
+              "attribute": "group"
+            },
+            {
+              "kind": "field",
+              "name": "delta",
+              "type": {
+                "text": "ItemDelta | undefined"
+              },
+              "description": "the delta overlay, against main: `unchanged` recedes, `removed` is a dashed ghost with its name struck, `added` and `changed` are drawn as they are",
+              "attribute": "delta",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "selected",
               "type": {
                 "text": "boolean"
@@ -6169,6 +6207,31 @@
               "default": "false",
               "description": "a rule is broken here: dashed red",
               "fieldName": "finding"
+            },
+            {
+              "name": "planned",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the plan overlay: the plan will add or change this item, nothing is written yet: dashed amber on the amber tint (rule 12)",
+              "fieldName": "planned"
+            },
+            {
+              "name": "group",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the plan group the item belongs to, shown as a plain tag at the end (`g1`)",
+              "fieldName": "group"
+            },
+            {
+              "name": "delta",
+              "type": {
+                "text": "ItemDelta | undefined"
+              },
+              "description": "the delta overlay, against main: `unchanged` recedes, `removed` is a dashed ghost with its name struck, `added` and `changed` are drawn as they are",
+              "fieldName": "delta"
             },
             {
               "name": "selected",

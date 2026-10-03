@@ -120,3 +120,36 @@ describe('sett-item', () => {
     expect(cssOf('sett-item')).toContain(':host([also="tl"]) { --_also: var(--sett-session-tl-main); }');
   });
 });
+
+describe('sett-item overlays: plan and delta (DESIGN.md "The map" rule 12)', () => {
+  const css = () => cssOf('sett-item');
+  it('a planned item is dashed amber on the amber tint, and says its group in a plain tag', async () => {
+    const el = await mount('<sett-item planned group="g1">refund()</sett-item>');
+    expect(el.hasAttribute('planned')).toBe(true);
+    expect(css()).toMatch(/:host\(\[planned\]\)\s*\{[^}]*background:\s*var\(--sett-color-sug-bg\)[^}]*border-color:\s*var\(--sett-color-sug\)[^}]*border-style:\s*dashed/);
+    const tag = el.shadowRoot!.querySelector('sett-tag.group') as HTMLElement;
+    expect(tag.textContent!.trim()).toBe('g1');
+    expect(tag.getAttribute('kind')).toBe('default');
+  });
+  it('no group, no tag; a group alone does not paint the item', async () => {
+    const el = await mount('<sett-item planned>refund()</sett-item>');
+    expect(el.shadowRoot!.querySelector('sett-tag.group')).toBeNull();
+  });
+  it('a finding outranks the plan and the selection keeps its solid blue line: their rules come after planned', () => {
+    const c = css();
+    const at = (sel: string) => c.indexOf(sel);
+    expect(at(':host([planned])')).toBeGreaterThan(at(':host([port])'));
+    expect(at(':host([finding])')).toBeGreaterThan(at(':host([planned])'));
+    expect(at(':host([selected])')).toBeGreaterThan(at(':host([finding])'));
+  });
+  it('delta: unchanged recedes by colour, never by opacity; removed is a dashed ghost with its name struck; added and changed are drawn as they are', async () => {
+    const c = css();
+    expect(c).toMatch(/:host\(\[delta=['"]unchanged['"]\]\)\s*\{[^}]*color:\s*var\(--sett-color-mute\)[^}]*border-color:\s*var\(--sett-color-line2\)/);
+    expect(c).toMatch(/:host\(\[delta=['"]removed['"]\]\)\s*\{[^}]*border-style:\s*dashed/);
+    expect(c).toMatch(/:host\(\[delta=['"]removed['"]\]\)\s*\.t\s*\{[^}]*text-decoration:\s*line-through/);
+    expect(c).not.toMatch(/:host\(\[delta=['"](added|changed)['"]\]\)/);
+    expect(c).not.toMatch(/:host\(\[delta[^{]*\{[^}]*opacity/);
+    const el = await mount('<sett-item delta="removed">save_notified()</sett-item>');
+    expect(el.getAttribute('delta')).toBe('removed');
+  });
+});

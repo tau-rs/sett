@@ -57,6 +57,7 @@ export { TreeKeys, visibleRows, ROW_TAGS } from './shell/tree.js';
 export { SettFilesView, SettAgentStrip, SettTreeRow, type Projection, type TreeKind, type PresenceScope } from './shell/sett-files-view.js';
 export { SettChangesList, SettChangesHeader, SettStage, SettCommitRow, type ChangesMode, type ChangesWhat } from './shell/sett-changes-list.js';
 export { SettIntentBar } from './shell/sett-intent-bar.js';
+export { SettBar } from './shell/sett-bar.js';
 export { SettInspector, type InspectorTone } from './shell/sett-inspector.js';
 export { SettHunk, SettHunkLine, SettRemark, type HunkLineKind, type RemarkKind } from './shell/sett-hunk.js';
 export { SettCommitForm, type CommitThen } from './shell/sett-commit-form.js';

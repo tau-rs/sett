@@ -3479,6 +3479,14 @@
         },
         {
           "kind": "js",
+          "name": "SettBar",
+          "declaration": {
+            "name": "SettBar",
+            "module": "./shell/sett-bar.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettInspector",
           "declaration": {
             "name": "SettInspector",
@@ -13343,6 +13351,142 @@
           "declaration": {
             "name": "SettResolveRow",
             "module": "src/shell/sett-ask.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The bar: the one line on top of the shell (DESIGN.md \"The shell\" rule 1):\nbrand, repo › scope selector, chips, Ask. The bar writes the `›` after the\nrepo, so the consumer never does. A chip sits in the bar only if it carries\na verb. The chips and the Ask entry hold the right end; when room runs out\nthe chips give way and scroll sideways (a wheel, a trackpad, or focus brings\na chip into view; while they scroll, their strip is a tab stop the arrow keys\nscroll), and nothing else wraps or shrinks. The bar never clips,\nso the selector's menu hangs under it.\n\nWithout anything in the `ask` slot the bar shows its own Ask entry, a word\ndoor in mute ink followed by `shortcut`; choosing it fires `sett-ask`. The\nshortcut is only written here: binding the key is the host's.",
+          "name": "SettBar",
+          "cssParts": [
+            {
+              "description": "the bar's own Ask entry",
+              "name": "ask"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the tool's name: `arch`",
+              "name": "brand"
+            },
+            {
+              "description": "the repo's name: `orderly`; the bar writes the `›` after it",
+              "name": "repo"
+            },
+            {
+              "description": "the scope selector, a sett-selector",
+              "name": ""
+            },
+            {
+              "description": "sett-chip elements, each carrying a verb",
+              "name": "chips"
+            },
+            {
+              "description": "the Ask entry, when the host brings its own; the bar's own entry stands in while it is empty",
+              "name": "ask"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "shortcut",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the shortcut written after the bar's own Ask entry: `⌘K`",
+              "attribute": "shortcut"
+            },
+            {
+              "kind": "field",
+              "name": "scrolls",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "description": "whether the chips overflow their strip, which then takes a tab stop so the keyboard can scroll it"
+            },
+            {
+              "kind": "field",
+              "name": "chips",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "ResizeObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "hasRepo",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onSlot",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "measure",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "ask",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "the bar's own Ask entry was chosen",
+              "name": "sett-ask"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "shortcut",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the shortcut written after the bar's own Ask entry: `⌘K`",
+              "fieldName": "shortcut"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettBar",
+          "declaration": {
+            "name": "SettBar",
+            "module": "src/shell/sett-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-bar",
+          "declaration": {
+            "name": "SettBar",
+            "module": "src/shell/sett-bar.ts"
           }
         }
       ]

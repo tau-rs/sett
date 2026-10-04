@@ -151,6 +151,6 @@ Rejected, keep out: stepped zoom · Bring & Go (moving neighbours to the ports) 
 
 ## Components (v0.1)
 
-shell (activity-rail, scope-line, sessions-view, files-view, changes-list, intent-bar, inspector, hunk, bottom-panel, status-bar) · chip · frame · selector · session-card · thread (msg, tool, changed, question, deviation, verbs, composer) · map (node, port-row, rail, op-row, sheet, column, area, item, edge, link, bundle, hint-chip, ghost, panel, position, minimap, crumb, back, cue, code-page, contract-card, legend) · editor inlays · cards (fix, delta, impact, checklist, pipeline, result, what's-new) · split-button · gated-button · tabbar · seg · overlay-toggles · funnel.
+shell (bar, activity-rail, scope-line, sessions-view, files-view, changes-list, intent-bar, inspector, hunk, bottom-panel, status-bar) · chip · frame · selector · session-card · thread (msg, tool, changed, question, deviation, verbs, composer) · map (node, port-row, rail, op-row, sheet, column, area, item, edge, link, bundle, hint-chip, ghost, panel, position, minimap, crumb, back, cue, code-page, contract-card, legend) · editor inlays · cards (fix, delta, impact, checklist, pipeline, result, what's-new) · split-button · gated-button · tabbar · seg · overlay-toggles · funnel.
 
 Reference rendering: `design/arch-design-system.html` (the page this file was extracted from). Where the page and this file disagree, this file wins.

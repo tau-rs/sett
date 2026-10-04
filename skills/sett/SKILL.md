@@ -4066,14 +4066,14 @@ The Files view: the focused worktree in two projections, directory and layers, u
 
 ### `<sett-frame>`
 
-The one frame that changes colour: it says the state of the scope (DESIGN.md "The shell" rule 5). Wraps a pane; the slot is the pane's paper. idle grey · live session gradient (rotates) · waiting amber (pulses) · editing sel · collision bad · planning dashed amber, always still. `focus` is the sel ring for the selection, at the lit stroke inside the idle frame, not a state of the scope. The only two animations in the chrome live here (live and waiting); `prefers-reduced-motion` and the `still` attribute stop both. Planning is dashed because the waiting frame's still twin is solid amber. A state change never moves or resizes the pane inside.
+The one frame that changes colour: it says the state of the scope (DESIGN.md "The shell" rule 5). Wraps a pane; the slot is the pane's paper. idle grey · live session gradient (rotates) · waiting amber (pulses) · editing sel · collision bad · planning dashed amber, always still. `focus` is the sel ring for the selection, at the lit stroke inside the idle frame, not a state of the scope. The only two animations in the chrome live here (live and waiting); `prefers-reduced-motion` and the `still` attribute stop both. Planning is dashed because the waiting frame's still twin is solid amber. A state change never moves or resizes the pane inside. A host with a height is filled: the paper takes the whole frame and the pane the whole paper (a Theia dock panel, a terminal); a host without one takes its height from the pane, as before.
 
 - attrs:
   - `state=FrameState`
   - `session=SessionId` — session id for the live state; unknown ids fall back to yk
   - `still=boolean` — force the reduced-motion rendering (solid colours, no animation)
 - slots:
-  - `(default)` — the pane content
+  - `(default)` — the pane content; with a host height, it fills the paper
 - parts:
   - `inner` — the paper inside the frame
 - stories:
@@ -4088,6 +4088,7 @@ The one frame that changes colour: it says the state of the scope (DESIGN.md "Th
   - `primitives-frame--reduced-motion` reduced motion · live and waiting go still
   - `primitives-frame--planning-next-to-waiting` planning next to waiting · motion off
   - `primitives-frame--all-states` All States
+  - `primitives-frame--fills-host` fills a host with a height · the pane takes the whole paper
 
 ### `<sett-funnel>`
 

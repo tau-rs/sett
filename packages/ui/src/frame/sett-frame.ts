@@ -13,9 +13,12 @@ export type FrameState = 'idle' | 'live' | 'waiting' | 'editing' | 'collision' |
  * the scope. The only two animations in the chrome live here (live and
  * waiting); `prefers-reduced-motion` and the `still` attribute stop both.
  * Planning is dashed because the waiting frame's still twin is solid amber.
- * A state change never moves or resizes the pane inside.
+ * A state change never moves or resizes the pane inside. A host with a
+ * height is filled: the paper takes the whole frame and the pane the whole
+ * paper (a Theia dock panel, a terminal); a host without one takes its
+ * height from the pane, as before.
  *
- * @slot - the pane content
+ * @slot - the pane content; with a host height, it fills the paper
  * @csspart inner - the paper inside the frame
  */
 @customElement('sett-frame')
@@ -32,19 +35,26 @@ export class SettFrame extends LitElement {
     sessionStyles,
     css`
       :host {
-        display: block;
+        display: flex;
+        flex-direction: column;
         position: relative;
         padding: var(--sett-stroke-frame);
         border-radius: var(--sett-radius-pane);
         background: var(--sett-color-line2);
       }
       .inner {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
         position: relative;
         z-index: 1;
         background: var(--sett-color-paper);
         border-radius: calc(var(--sett-radius-pane) - var(--sett-stroke-frame));
         overflow: hidden;
       }
+      /* the pane fills the paper; with no host height there is no room to grow into */
+      ::slotted(*) { flex: 1 1 auto; min-height: 0; }
       :host([state='editing']) { background: var(--sett-color-sel); }
       :host([state='collision']) { background: var(--sett-color-bad); }
       :host([state='planning']) { padding: 0; border: var(--sett-stroke-frame) dashed var(--sett-color-sug); background: var(--sett-color-paper); }

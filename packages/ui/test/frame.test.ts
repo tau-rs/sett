@@ -43,6 +43,16 @@ describe('sett-frame', () => {
     for (const r of waiting) expect(r).not.toMatch(/dashed/);
     expect(c.match(/dashed/g)).toHaveLength(1);
   });
+  it('fills a host with a height: the paper takes the frame, the pane takes the paper', () => {
+    const c = cssText();
+    expect(c).toMatch(/:host \{[^}]*display: flex;[^}]*flex-direction: column;/);
+    expect(c).toMatch(/\.inner \{[^}]*flex: 1 1 auto;[^}]*min-height: 0;[^}]*display: flex;[^}]*flex-direction: column;/);
+    expect(c).toContain('::slotted(*) { flex: 1 1 auto; min-height: 0; }');
+  });
+  it('fills by flex only: no fixed height, so a host without one takes its height from the pane', () => {
+    const c = cssText();
+    expect(c).not.toMatch(/(^|[^-])height:/m);
+  });
   it('renders the slot inside the inner paper', async () => {
     document.body.innerHTML = '<sett-frame state="live" session="tl"><p>pane</p></sett-frame>';
     const el = document.body.firstElementChild as HTMLElement & { updateComplete: Promise<boolean> };

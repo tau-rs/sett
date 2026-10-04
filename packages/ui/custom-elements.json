@@ -1030,7 +1030,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The one frame that changes colour: it says the state of the scope (DESIGN.md\n\"The shell\" rule 5). Wraps a pane; the slot is the pane's paper. idle grey ·\nlive session gradient (rotates) · waiting amber (pulses) · editing sel ·\ncollision bad · planning dashed amber, always still. `focus` is the sel ring\nfor the selection, at the lit stroke inside the idle frame, not a state of\nthe scope. The only two animations in the chrome live here (live and\nwaiting); `prefers-reduced-motion` and the `still` attribute stop both.\nPlanning is dashed because the waiting frame's still twin is solid amber.\nA state change never moves or resizes the pane inside.",
+          "description": "The one frame that changes colour: it says the state of the scope (DESIGN.md\n\"The shell\" rule 5). Wraps a pane; the slot is the pane's paper. idle grey ·\nlive session gradient (rotates) · waiting amber (pulses) · editing sel ·\ncollision bad · planning dashed amber, always still. `focus` is the sel ring\nfor the selection, at the lit stroke inside the idle frame, not a state of\nthe scope. The only two animations in the chrome live here (live and\nwaiting); `prefers-reduced-motion` and the `still` attribute stop both.\nPlanning is dashed because the waiting frame's still twin is solid amber.\nA state change never moves or resizes the pane inside. A host with a\nheight is filled: the paper takes the whole frame and the pane the whole\npaper (a Theia dock panel, a terminal); a host without one takes its\nheight from the pane, as before.",
           "name": "SettFrame",
           "cssParts": [
             {
@@ -1040,7 +1040,7 @@
           ],
           "slots": [
             {
-              "description": "the pane content",
+              "description": "the pane content; with a host height, it fills the paper",
               "name": ""
             }
           ],

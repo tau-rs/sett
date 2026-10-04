@@ -14,7 +14,9 @@ export type InspectorTone = 'default' | 'bad' | 'sug' | 'ok' | 'mute';
  * verbs bar with its small note, and a composer row shown only when one is
  * slotted. The top border says who the pane is about, in the thread family's
  * words: a `session` takes the session colour; `kind` planner is amber, framer
- * and fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with
+ * and fixer blue. The header ends with the fold control, `›`: like the bottom
+ * panel's caret it reports (`sett-fold`) and never folds the pane itself; the
+ * app sets `folded`. `folded`, it is the handle (`size.shell.handle` wide) with
  * the heading as its title. Width is the app's (`size.shell.inspector`).
  * Holding a conversation (sett-msg, sett-question, sett-deviation, sett-ask),
  * the body is a `log` that opens at its end and follows new entries while you
@@ -25,6 +27,7 @@ export type InspectorTone = 'default' | 'bad' | 'sug' | 'ok' | 'mute';
  * @slot verbs - the fixed bar's sett-button elements, agent door first
  * @slot note - the small mute line under the verbs
  * @slot composer - a sett-composer; the row exists only when slotted
+ * @fires sett-fold - the header's fold control was pressed; the app sets `folded`
  * @fires sett-unfold - the folded handle was pressed
  * @csspart header - the header row
  * @csspart body - the scrolling body
@@ -75,6 +78,11 @@ export class SettInspector extends LitElement {
       :host([session]) .hd b { color: var(--_session); }
       .hd .sub { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       .st { margin-left: auto; flex: none; font-family: var(--sett-font-mono); font-size: var(--sett-font-size-sm); color: var(--sett-color-mute); }
+      /* the fold control fills the header's height, like the bottom panel's caret fills its strip */
+      .fold { flex: none; align-self: stretch; display: flex; align-items: center; margin-left: auto; margin-top: calc(-1 * var(--sett-space-2)); margin-bottom: calc(-1 * var(--sett-space-2)); margin-right: calc(-1 * var(--sett-space-3)); padding: 0 var(--sett-space-3); border: 0; background: none; font: inherit; font-size: var(--sett-font-size-h); color: var(--sett-color-mute); cursor: pointer; }
+      .st ~ .fold { margin-left: calc(-1 * var(--sett-space-1)); }
+      .fold:hover { color: var(--sett-color-ink); }
+      .fold:focus-visible { outline: var(--sett-stroke-lit) solid var(--sett-color-sel); outline-offset: calc(-1 * var(--sett-stroke-lit)); }
       :host([tone='bad']) .st { color: var(--sett-color-bad); }
       :host([tone='sug']) .st { color: var(--sett-color-sug); }
       :host([tone='ok']) .st { color: var(--sett-color-ok); }
@@ -97,6 +105,7 @@ export class SettInspector extends LitElement {
   /** the body is a conversation when it holds one of the thread's entries */
   private talk = () => Array.from(this.children).some((c) => !c.slot && /^SETT-(MSG|QUESTION|DEVIATION|ASK)$/.test(c.tagName));
   private chat = new ChatEnd(this, () => this.renderRoot.querySelector<HTMLElement>('.body'), this.talk);
+  private fold = () => this.dispatchEvent(new CustomEvent('sett-fold', { bubbles: true, composed: true }));
   private unfold = () => this.dispatchEvent(new CustomEvent('sett-unfold', { bubbles: true, composed: true }));
 
   connectedCallback() {
@@ -114,7 +123,7 @@ export class SettInspector extends LitElement {
     const unseen = this.chat.unseen;
     if (this.folded) return html`<button class="handle" type="button" title=${this.heading} aria-label=${`unfold · ${this.heading}`} @click=${this.unfold}>›</button>`;
     return html`
-      <div class="hd" part="header"><b>${this.heading}</b>${this.sub ? html`<span class="sub">${this.sub}</span>` : nothing}${this.state ? html`<span class="st">${this.state}</span>` : nothing}</div>
+      <div class="hd" part="header"><b>${this.heading}</b>${this.sub ? html`<span class="sub">${this.sub}</span>` : nothing}${this.state ? html`<span class="st">${this.state}</span>` : nothing}<button class="fold" type="button" aria-label=${`fold · ${this.heading}`} @click=${this.fold}>›</button></div>
       <div class="body" part="body" tabindex="0" role=${ifDefined(talk ? 'log' : undefined)} aria-relevant=${ifDefined(talk ? 'additions' : undefined)} aria-label=${ifDefined(talk ? 'messages' : undefined)}><slot></slot></div>
       ${this.has('verbs') || unseen ? html`<div class="verbs" part="verbs">${unseen ? html`<sett-button class="latest" variant="quiet" @click=${this.chat.jump}>${unseen} new · latest</sett-button>` : nothing}<slot name="verbs"></slot>${this.has('note') ? html`<span class="n"><slot name="note"></slot></span>` : nothing}</div>` : nothing}
       ${this.has('composer') ? html`<div class="comp"><slot name="composer"></slot></div>` : nothing}`;

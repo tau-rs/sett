@@ -54,6 +54,21 @@ export const SessionCard: Story = { name: 'session card · pause · stop, a note
 export const SubAgentThread: Story = { name: 'sub-agent thread · messages and tool lines', render: () => pane(subAgent) };
 export const Planner: Story = { name: 'planner · accept · delegate ▾, save plan, discard', render: () => pane(planner) };
 export const Folded: Story = { name: 'folded · the handle, the heading as its title', render: () => html`<div style="height:${H};display:flex;border:var(--sett-stroke-hair) solid var(--sett-color-line);border-radius:var(--sett-radius-card);overflow:hidden"><sett-inspector heading="refund flow" session="yk" folded><p>hidden while folded</p></sett-inspector></div>` };
+// the story plays the app: the pane reports sett-fold and sett-unfold, the app sets folded
+const toggle = (folded: boolean) => (e: Event) => { (e.currentTarget as HTMLElement & { folded: boolean }).folded = folded; };
+const foldable = html`<div style="width:var(--sett-size-shell-inspector);height:${H};display:flex;justify-content:flex-end;border:var(--sett-stroke-hair) solid var(--sett-color-line);border-radius:var(--sett-radius-card);overflow:hidden">
+  <sett-inspector heading="refund flow" sub="claude code · w1" state="running" session="yk" style="flex:1" @sett-fold=${toggle(true)} @sett-unfold=${toggle(false)}><p style="margin:var(--sett-space-2) var(--sett-space-3);color:var(--sett-color-ink2)">press › to fold, the handle to unfold</p></sett-inspector>
+</div>`;
+export const FoldControl: Story = { name: 'fold control · › ends the header, sett-fold; the app folds the pane', render: () => foldable };
+export const FoldFocus: Story = {
+  name: 'fold control · keyboard focus, the sel ring',
+  render: () => foldable,
+  play: async ({ canvasElement }) => {
+    const p = canvasElement.querySelector('sett-inspector') as HTMLElement & { updateComplete: Promise<unknown> };
+    await p.updateComplete;
+    (p.shadowRoot!.querySelector('.fold') as HTMLElement).focus({ focusVisible: true } as FocusOptions);
+  },
+};
 export const States: Story = { name: 'states · running, draft, 🔒 locked, new in bad', render: () => html`<div style="display:grid;gap:var(--sett-space-2)">
   ${pane(html`<sett-inspector heading="refund flow" sub="claude code · w1" state="running" session="yk" style="flex:1"><p style="margin:var(--sett-space-2) var(--sett-space-3);color:var(--sett-color-ink2)">a running session</p></sett-inspector>`, 'auto')}
   ${pane(html`<sett-inspector heading="planner" sub="refund flow" state="draft" kind="planner" style="flex:1"><p style="margin:var(--sett-space-2) var(--sett-space-3);color:var(--sett-color-ink2)">a plan being shaped</p></sett-inspector>`, 'auto')}

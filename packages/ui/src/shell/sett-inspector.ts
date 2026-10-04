@@ -1,7 +1,10 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { sessionStyles, type SessionId } from '../session.js';
 import type { ThreadIdentity } from '../thread/sett-thread.js';
+import { ChatEnd } from '../thread/chat-end.js';
+import '../button/sett-button.js';
 
 export type InspectorTone = 'default' | 'bad' | 'sug' | 'ok' | 'mute';
 
@@ -13,6 +16,10 @@ export type InspectorTone = 'default' | 'bad' | 'sug' | 'ok' | 'mute';
  * words: a `session` takes the session colour; `kind` planner is amber, framer
  * and fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with
  * the heading as its title. Width is the app's (`size.shell.inspector`).
+ * Holding a conversation (sett-msg, sett-question, sett-deviation, sett-ask),
+ * the body is a `log` that opens at its end and follows new entries while you
+ * are there; scroll up and it stays put, and the verbs bar opens with
+ * `n new · latest` (rule 13). A form or a card opens at the top.
  *
  * @slot - the body: a card, kv rows, messages, a hunk, a form
  * @slot verbs - the fixed bar's sett-button elements, agent door first
@@ -85,6 +92,9 @@ export class SettInspector extends LitElement {
 
   private observer?: MutationObserver;
   private has = (name: string) => Array.from(this.children).some((c) => c.slot === name);
+  /** the body is a conversation when it holds one of the thread's entries */
+  private talk = () => Array.from(this.children).some((c) => !c.slot && /^SETT-(MSG|QUESTION|DEVIATION|ASK)$/.test(c.tagName));
+  private chat = new ChatEnd(this, () => this.renderRoot.querySelector<HTMLElement>('.body'), this.talk);
   private unfold = () => this.dispatchEvent(new CustomEvent('sett-unfold', { bubbles: true, composed: true }));
 
   connectedCallback() {
@@ -98,11 +108,13 @@ export class SettInspector extends LitElement {
   }
 
   render() {
+    const talk = this.talk();
+    const unseen = this.chat.unseen;
     if (this.folded) return html`<button class="handle" type="button" title=${this.heading} aria-label=${`unfold · ${this.heading}`} @click=${this.unfold}>›</button>`;
     return html`
       <div class="hd" part="header"><b>${this.heading}</b>${this.sub ? html`<span class="sub">${this.sub}</span>` : nothing}${this.state ? html`<span class="st">${this.state}</span>` : nothing}</div>
-      <div class="body" part="body" tabindex="0"><slot></slot></div>
-      ${this.has('verbs') ? html`<div class="verbs" part="verbs"><slot name="verbs"></slot>${this.has('note') ? html`<span class="n"><slot name="note"></slot></span>` : nothing}</div>` : nothing}
+      <div class="body" part="body" tabindex="0" role=${ifDefined(talk ? 'log' : undefined)} aria-relevant=${ifDefined(talk ? 'additions' : undefined)} aria-label=${ifDefined(talk ? 'messages' : undefined)}><slot></slot></div>
+      ${this.has('verbs') || unseen ? html`<div class="verbs" part="verbs">${unseen ? html`<sett-button variant="quiet" @click=${this.chat.jump}>${unseen} new · latest</sett-button>` : nothing}<slot name="verbs"></slot>${this.has('note') ? html`<span class="n"><slot name="note"></slot></span>` : nothing}</div>` : nothing}
       ${this.has('composer') ? html`<div class="comp"><slot name="composer"></slot></div>` : nothing}`;
   }
 }

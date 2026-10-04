@@ -30,8 +30,8 @@ const thread = `<sett-thread><sett-msg from="me" author="you">one</sett-msg><set
 
 describe('chat-end rule · thread (rule 13)', () => {
   it('the distance is the token', () => expect(FOLLOW).toBe(48));
-  it('no scroll animation in the thread', () => {
-    for (const t of ['sett-thread', 'sett-verbs']) expect(cssOf(t), t).not.toMatch(/scroll-behavior/);
+  it('no scroll animation in the thread or the inspector', () => {
+    for (const t of ['sett-thread', 'sett-verbs', 'sett-inspector']) expect(cssOf(t), t).not.toMatch(/scroll-behavior/);
   });
   it('the messages area is a log', async () => {
     const el = await mount(thread);
@@ -117,3 +117,43 @@ describe('chat-end rule · thread (rule 13)', () => {
   });
 });
 
+describe('chat-end rule · inspector (rule 13)', () => {
+  const question = `<sett-inspector heading="refund flow"><sett-msg from="agent" author="w1">one</sett-msg><sett-question author="refund flow">fails?</sett-question>
+    <sett-button slot="verbs">pause</sett-button></sett-inspector>`;
+  it('holding a conversation, it opens at its end and its body is a log', async () => {
+    const el = await mount(question);
+    const b = el.shadowRoot.querySelector('.body');
+    expect(b.scrollTop).toBe(1000);
+    expect(b.getAttribute('role')).toBe('log');
+  });
+  it('holding a form, it opens at the top and is no log', async () => {
+    const el = await mount('<sett-inspector heading="commit"><sett-commit-form></sett-commit-form></sett-inspector>');
+    const b = el.shadowRoot.querySelector('.body');
+    expect(b.scrollTop).toBe(0);
+    expect(b.hasAttribute('role')).toBe(false);
+  });
+  it('scrolled up, the verbs row says how many arrived, even with nothing in verbs', async () => {
+    const el = await mount('<sett-inspector heading="w1"><sett-msg from="agent" author="w1">one</sett-msg></sett-inspector>');
+    const b = el.shadowRoot.querySelector('.body');
+    expect(el.shadowRoot.querySelector('.verbs')).toBeNull();
+    scrollTo(b, 0);
+    el.append(msg('two'), msg('three'));
+    await settle(el);
+    const latest = latestIn(el.shadowRoot)!;
+    expect(latest.closest('.verbs')).not.toBeNull();
+    expect(latest.textContent!.trim()).toBe('2 new · latest');
+    latest.click();
+    await settle(el);
+    expect(b.scrollTop).toBe(H);
+    expect(el.shadowRoot.querySelector('.verbs')).toBeNull();
+  });
+  it('unfolded, it opens at its end again', async () => {
+    const el = await mount(question);
+    el.folded = true;
+    await settle(el);
+    el.folded = false;
+    H = 1300;
+    await settle(el);
+    expect(el.shadowRoot.querySelector('.body').scrollTop).toBe(1300);
+  });
+});

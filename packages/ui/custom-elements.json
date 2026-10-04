@@ -16120,7 +16120,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The inspector, the right pane: it is about the selection (DESIGN.md \"The\nshell\" rule 6). A header (heading, sub, state), a scrolling body, a fixed\nverbs bar with its small note, and a composer row shown only when one is\nslotted. The top border says who the pane is about, in the thread family's\nwords: a `session` takes the session colour; `kind` planner is amber, framer\nand fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with\nthe heading as its title. Width is the app's (`size.shell.inspector`).",
+          "description": "The inspector, the right pane: it is about the selection (DESIGN.md \"The\nshell\" rule 6). A header (heading, sub, state), a scrolling body, a fixed\nverbs bar with its small note, and a composer row shown only when one is\nslotted. The top border says who the pane is about, in the thread family's\nwords: a `session` takes the session colour; `kind` planner is amber, framer\nand fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with\nthe heading as its title. Width is the app's (`size.shell.inspector`).\nHolding a conversation (sett-msg, sett-question, sett-deviation, sett-ask),\nthe body is a `log` that opens at its end and follows new entries while you\nare there; scroll up and it stays put, and the verbs bar opens with\n`n new · latest` (rule 13). A form or a card opens at the top.",
           "name": "SettInspector",
           "cssParts": [
             {
@@ -16239,6 +16239,18 @@
               "kind": "field",
               "name": "has",
               "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "talk",
+              "privacy": "private",
+              "description": "the body is a conversation when it holds one of the thread's entries"
+            },
+            {
+              "kind": "field",
+              "name": "chat",
+              "privacy": "private",
+              "default": "new ChatEnd(this, () => this.renderRoot.querySelector<HTMLElement>('.body'), this.talk)"
             },
             {
               "kind": "field",

@@ -1,6 +1,6 @@
 ---
 name: sett
-version: 0.14.0
+version: 0.15.0
 description: Design system for tau-rs developer tools (arch first). Dense, quiet, dark-first, plain DOM.
 tokens: ./packages/tokens/src        # DTCG 2025.10 — the normative values; this front matter is a resolved summary
 colors:

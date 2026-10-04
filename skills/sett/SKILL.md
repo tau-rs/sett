@@ -103,7 +103,7 @@ Tag · attributes (name=type) · slots · CSS parts · events, then the stories 
 
 ### `<sett-activity-rail>`
 
-The activity rail: the always-visible column that picks what the left pane shows (DESIGN.md "The shell" rule 2). Three items, Sessions · Files · Findings, each a glyph over a horizontal label. It never hides: `closed` only records that the left pane is folded, and changes nothing here, so the badges and the scope bar stay. When the scope is not main, the active item's bar takes the scope's colour. Arrow up and down move focus between the items, Enter or Space activates. The rail reports and never changes `active` itself. Give it an `aria-label`.
+The activity rail: the always-visible column that picks what the left pane shows (DESIGN.md "The shell" rule 2). Two items, Sessions · Files, each a glyph over a horizontal label; findings live in the bottom panel. It never hides: `closed` only records that the left pane is folded, and changes nothing here, so the badges and the scope bar stay. When the scope is not main, the active item's bar takes the scope's colour. Arrow up and down move focus between the items, Enter or Space activates. The rail reports and never changes `active` itself. Give it an `aria-label`.
 
 - attrs:
   - `scope=ScopeKind` — what the shell is about; anything but main colours the active item's bar
@@ -115,10 +115,10 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `sett-view` — `{ value, active }` when an item is activated; `active` is true when it already was the active one (the consumer closes the pane)
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -228,10 +228,10 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `(default)` — sett-file-row children; rendered only while open
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -341,10 +341,10 @@ The agent strip: the session's path under the scope line when a session is the s
   - `sett-select` — from a row: `{ kind, name, session }`
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -691,10 +691,10 @@ The Ask thread in the inspector (spec §6 Daily): your question on the right in 
   - `sett-plan` — make it so was pressed
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -1027,10 +1027,10 @@ The bar: the one line on top of the shell (DESIGN.md "The shell" rule 1): brand,
   - `sett-ask` — the bar's own Ask entry was chosen
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -1146,10 +1146,10 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `sett-select` — `{ value }` from a tab that was chosen (choosing a tab implies open)
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -1602,10 +1602,10 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `sett-open` — `{ what: 'mr' | 'plan' }` from a row
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -1719,10 +1719,10 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `sett-fold` — from a folder or commit chevron
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -1831,10 +1831,10 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `sett-open` — `{ kind: 'changes', name: 'changes' }`
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -2442,10 +2442,10 @@ The ready commit in the inspector, one click from the `you` chip (spec §4, §6 
   - `sett-update` — `{ door: 'agent' | 'manual' }` from the behind line
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -2560,10 +2560,10 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `sett-fold` — `{ kind: 'commit', name, sha, open }`
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -3623,10 +3623,10 @@ A plan element under a group of a plan being shaped (`E1 · OrderRepo: add refun
   - `open=boolean` — children shown (foldable rows only)
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -3731,10 +3731,10 @@ An empty state: what a view with nothing in it opens to. Views are never disable
   - `door` — sett-button elements, the agent door first (`variant="primary"`), then the manual door; none, one or two
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -3848,10 +3848,10 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `sett-open` — `{ kind: 'file', name }`
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -3967,10 +3967,10 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `sett-fold` — from a folder or area chevron: `{ kind, name, open }`
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -4382,10 +4382,10 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `(default)` — sett-agent-row children; rendered only while open
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -4749,10 +4749,10 @@ One hunk of a review, or the fix card's proposed change. Header: `file:line · i
   - `sett-show` — `show on map` was pressed
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -4856,10 +4856,10 @@ One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the bad ti
   - `(default)` — the code
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -4978,10 +4978,10 @@ The inspector, the right pane: it is about the selection (DESIGN.md "The shell" 
   - `sett-unfold` — the folded handle was pressed
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -5091,10 +5091,10 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `sett-intent` — `{ value }` on Enter
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -6356,10 +6356,10 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `href=string` — where the door leads; renders an `<a>`. Without it the host is the link and its click is the app's
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -7206,10 +7206,10 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `(default)` — the sentence; `b` is its subject (ink, medium)
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -7311,10 +7311,10 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `(default)` — the text; its line breaks and spaces are kept
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -7421,10 +7421,10 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `sett-open` — the row was clicked or Enter was pressed on it (the consumer moves the map or opens the fix card)
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -7533,10 +7533,10 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `sett-select` — `{ value }` when the tab is chosen
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -7640,10 +7640,10 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `(default)` — sett-panel-row elements
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -8760,23 +8760,23 @@ A unit's API block on one flat side: `exposes` on the left, `needs` on the right
 
 ### `<sett-rail-item>`
 
-One view of the activity rail: a glyph over a horizontal label, never the glyph alone. Active, it is ink on paper with a bar on its left: `sel`, or the scope's colour when the rail has one. A badge sits top right: `sug` for what asks you, `bad` for a new blocking finding.
+One view of the activity rail: a glyph over a horizontal label, never the glyph alone. Active, it is ink on paper with a bar on its left: `sel`, or the scope's colour when the rail has one. A badge sits top right: `sug` for what asks you, `bad` for something that blocks.
 
 - attrs:
   - `value=string` — the view this item picks, reported by the rail's `sett-view`
   - `active=boolean`
   - `badge=string` — a count shown top right; no attribute, no badge
-  - `tone=BadgeTone` — the badge's fill: sug (asks you) or bad (a new blocking finding)
+  - `tone=BadgeTone` — the badge's fill: sug (asks you) or bad (something that blocks)
   - `badge-label=string` — what the badge says to a screen reader, e.g. `1 asks you`
 - slots:
   - `(default)` — the label, always shown
   - `glyph` — an inline SVG drawn with `currentColor`; sized and stroked here
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -8886,10 +8886,10 @@ The block under a hunk: an author line (dot and name, like a message), the text,
   - `sett-remark-kind` — `{ kind }`: `change` or `comment`
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -8996,10 +8996,10 @@ A resolve row of a judgement: `⇄` in amber (it needs a hand, not a fix), the f
   - `sett-resolve` — `{ source }` from the resolve link
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -9106,10 +9106,10 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `locked=boolean` — the focus is pinned: shows 🔒 after the words
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -9359,10 +9359,10 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `sett-focus` — the Focus button, Enter or a double click: `{ kind, name, session }`
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -9477,10 +9477,10 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `sett-fold` — from a chevron, Left or Right: `{ kind, name, open }` with the state asked for
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -9840,10 +9840,10 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `(default)` — sett-tree-row folders with sett-file-row rows, or sett-commit-row rows
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -9946,10 +9946,10 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `right` — sett-status-item elements pushed to the right end (the caret's place in a file, the map's freshness)
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -10059,10 +10059,10 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `(default)` — the count or state: `b` is a count (ink, medium); `[data-tone="sug" | "bad" | "ok"]` takes that accent; `[data-tone="mute"]` is the lightest ink, for what is known least (a crate guessed, bins not analyzed: spec §13.7, §13.10)
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -10356,10 +10356,10 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `sett-fold` — `{ kind, name, open }`
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
@@ -10496,10 +10496,10 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `(default)` — the rows
 - stories:
   - `shell-activity-rail--default` Default
-  - `shell-activity-rail--active` active · Sessions, Files, Findings
-  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--active` active · Sessions, Files
+  - `shell-activity-rail--badge` badge · asks you on Sessions, on the active item too
   - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
-  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-activity-rail--pane-closed` pane closed · the badge and the scope bar stay
   - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links

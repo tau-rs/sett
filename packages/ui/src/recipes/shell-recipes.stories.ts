@@ -42,11 +42,10 @@ const css = html`<style>${unsafeStatic(editorCss)}
 .sh p.in { color: var(--sett-color-ink2); font-size: var(--sett-font-size-lg); }
 </style>`;
 
-// the three glyphs of the rail stories, drawn with currentColor
+// the two glyphs of the rail stories, drawn with currentColor
 const G = {
   sessions: html`<svg slot="glyph" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="5" rx="1.5"/><rect x="4" y="14" width="10" height="5" rx="1.5"/><circle cx="18" cy="16.5" r="2"/></svg>`,
   files: html`<svg slot="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h6l2 2h8v12H4z"/></svg>`,
-  findings: html`<svg slot="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg>`,
 };
 
 // the scope is never typed: each of the three places takes the same attributes and writes the words itself (scope.ts)
@@ -56,10 +55,9 @@ const scopeItem = (o: Of, state: unknown) => html`<sett-status-item scope=${o.sc
 
 // the bar writes the › and its own Ask entry; each chip carries a verb (DESIGN.md "The shell" rule 1)
 const bar = (sel: unknown, chips: unknown) => html`<sett-bar shortcut="⌘K"><span slot="brand">arch</span><span slot="repo">orderly</span>${sel}${chips}</sett-bar>`;
-const rail = (o: Of, on: 'sessions' | 'files' | 'findings', asks = 0) => html`<sett-activity-rail aria-label="views" scope=${o.scope.kind} session=${ifDefined(o.session)}>
+const rail = (o: Of, on: 'sessions' | 'files', asks = 0) => html`<sett-activity-rail aria-label="views" scope=${o.scope.kind} session=${ifDefined(o.session)}>
   <sett-rail-item value="sessions" ?active=${on === 'sessions'} badge=${ifDefined(asks || undefined)} badge-label=${ifDefined(asks ? `${asks} asks you` : undefined)}>${G.sessions}Sessions</sett-rail-item>
   <sett-rail-item value="files" ?active=${on === 'files'}>${G.files}Files</sett-rail-item>
-  <sett-rail-item value="findings" ?active=${on === 'findings'} tone="bad">${G.findings}Findings</sett-rail-item>
 </sett-activity-rail>`;
 const toggles = (...on: string[]) => html`<sett-overlay-toggles slot="right">${['sessions', 'plan', 'findings', 'delta'].map((v) => html`<sett-toggle value=${v} ?on=${on.includes(v)}>${v}</sett-toggle>`)}</sett-overlay-toggles>`;
 // the Map: a real open unit from the fixtures, in a box that scrolls; `who` is the overlay

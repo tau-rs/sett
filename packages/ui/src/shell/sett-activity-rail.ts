@@ -6,11 +6,11 @@ import type { SessionId } from '../session.js';
 
 /**
  * The activity rail: the always-visible column that picks what the left pane
- * shows (DESIGN.md "The shell" rule 2). Three items, Sessions · Files ·
- * Findings, each a glyph over a horizontal label. It never hides: `closed`
- * only records that the left pane is folded, and changes nothing here, so the
- * badges and the scope bar stay. When the scope is not main, the active
- * item's bar takes the scope's colour.
+ * shows (DESIGN.md "The shell" rule 2). Two items, Sessions · Files, each a
+ * glyph over a horizontal label; findings live in the bottom panel. It never
+ * hides: `closed` only records that the left pane is folded, and changes
+ * nothing here, so the badges and the scope bar stay. When the scope is not
+ * main, the active item's bar takes the scope's colour.
  *
  * Arrow up and down move focus between the items, Enter or Space activates.
  * The rail reports and never changes `active` itself. Give it an `aria-label`.
@@ -108,7 +108,7 @@ export class SettActivityRail extends LitElement {
  * One view of the activity rail: a glyph over a horizontal label, never the
  * glyph alone. Active, it is ink on paper with a bar on its left: `sel`, or
  * the scope's colour when the rail has one. A badge sits top right: `sug` for
- * what asks you, `bad` for a new blocking finding.
+ * what asks you, `bad` for something that blocks.
  *
  * @slot - the label, always shown
  * @slot glyph - an inline SVG drawn with `currentColor`; sized and stroked here
@@ -123,7 +123,7 @@ export class SettRailItem extends LitElement {
   /** a count shown top right; no attribute, no badge */
   @property() badge?: string;
 
-  /** the badge's fill: sug (asks you) or bad (a new blocking finding) */
+  /** the badge's fill: sug (asks you) or bad (something that blocks) */
   @property({ reflect: true }) tone: BadgeTone = 'sug';
 
   /** what the badge says to a screen reader, e.g. `1 asks you` */

@@ -5,7 +5,7 @@ import '../button/sett-button.js';
 import './sett-empty.js';
 
 type Tab = 'findings' | 'checks' | 'terminal' | 'whatsnew';
-interface PanelOpts { active?: Tab; closed?: boolean; empty?: boolean }
+interface PanelOpts { active?: Tab; closed?: boolean; empty?: boolean; pane?: boolean }
 
 const OPEN = 'calc(var(--sett-space-5) * 11)';
 
@@ -34,6 +34,13 @@ const terminal = html`<sett-panel-output slot="terminal">${`orderly (w1 · refun
     Finished dev [unoptimized + debuginfo] target(s) in 3.21s
 orderly (w1 · refund flow) $`}</sett-panel-output>`;
 
+// arch-app's terminal slot: a dock panel with no height of its own, it fills the body
+const pane = html`<div slot="terminal" style="display:flex;flex-direction:column">
+  <sett-panel-output>${`orderly (w1 · refund flow) $ cargo build
+    Finished dev [unoptimized + debuginfo] target(s) in 3.21s`}</sett-panel-output>
+  <div style="margin-top:auto;padding:var(--sett-space-1) var(--sett-space-3);border-top:var(--sett-stroke-hair) solid var(--sett-color-line2);color:var(--sett-color-mute);font-size:var(--sett-font-size-sm)">the pane's last line, at the panel's bottom edge</div>
+</div>`;
+
 const whatsnew = html`
   <sett-panel-line slot="whatsnew" when="3 min"><b>main</b> moved: 2 commits by m.durand · pg pool sizing merged</sett-panel-line>
   <sett-panel-line slot="whatsnew" when="3 min"><b>refund flow</b> is 2 behind main · reconcile touches store/pg.rs (a2 is in it)</sett-panel-line>`;
@@ -49,7 +56,7 @@ const panel = (o: PanelOpts = {}) => {
     <sett-panel-tab slot="tabs" value="terminal">Terminal</sett-panel-tab>
     <sett-panel-tab slot="tabs" value="whatsnew" count="2">What's new</sett-panel-tab>
     ${active === 'terminal' && !o.closed ? html`<span slot="act">w1 · refund flow</span>` : nothing}
-    ${o.empty ? noFindings : findings}${checks}${terminal}${whatsnew}
+    ${o.empty ? noFindings : findings}${checks}${o.pane ? pane : terminal}${whatsnew}
   </sett-bottom-panel>`;
 };
 
@@ -70,3 +77,4 @@ export const Checks: Story = { name: 'checks · passed, running, ok, pipeline gr
 export const Terminal: Story = { name: 'terminal · the worktree name at the right of the strip', render: () => panel({ active: 'terminal' }) };
 export const WhatsNew: Story = { name: "what's new · each line a link, its time at the right", render: () => panel({ active: 'whatsnew' }) };
 export const EmptyFindings: Story = { name: 'findings · empty: the state names the two doors', render: () => panel({ active: 'findings', empty: true }) };
+export const FillsHost: Story = { name: 'fills a host with a height · the terminal takes the whole body', render: () => panel({ active: 'terminal', pane: true }) };

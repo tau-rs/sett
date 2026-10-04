@@ -13505,7 +13505,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The bottom panel, under the centre: it lists what already exists, Findings ·\nChecks · Terminal · What's new, nothing else (DESIGN.md \"The shell\" rule 7).\nOpen, it shows the body of the `active` tab; `closed`, it is a strip of its\ntabs with their counts. It reports and never changes `active` or `closed`\nitself; it only marks which of its tabs is the open one.",
+          "description": "The bottom panel, under the centre: it lists what already exists, Findings ·\nChecks · Terminal · What's new, nothing else (DESIGN.md \"The shell\" rule 7).\nOpen, it shows the body of the `active` tab; `closed`, it is a strip of its\ntabs with their counts. It reports and never changes `active` or `closed`\nitself; it only marks which of its tabs is the open one. A host with a\nheight is filled: the body takes what the strip leaves, and the Terminal\ntab's element takes the whole body (Theia's terminal, a dock panel); the\nother three tabs are lists that scroll in it. A host without a height takes\nits height from the open body, as before.",
           "name": "SettBottomPanel",
           "cssParts": [
             {
@@ -13535,7 +13535,7 @@
               "name": "checks"
             },
             {
-              "description": "the body of the Terminal tab",
+              "description": "the body of the Terminal tab; with a host height, it fills the body",
               "name": "terminal"
             },
             {

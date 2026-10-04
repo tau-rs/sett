@@ -46,6 +46,21 @@ describe('bottom panel', () => {
     await settle(p);
     expect(bodySlots(p)).toEqual(['terminal']);
   });
+  it('fills a host with a height: the body takes what the strip leaves, the terminal takes the body', () => {
+    const c = cssOf('sett-bottom-panel');
+    expect(c).toMatch(/:host \{[^}]*display: flex;[^}]*flex-direction: column;/);
+    expect(c).toMatch(/\.strip \{[^}]*flex: none;/);
+    expect(c).toMatch(/\.body \{[^}]*flex: 1;[^}]*min-height: 0;[^}]*overflow: auto;/);
+    expect(c).toContain(":host([active='terminal']) .body { display: flex; flex-direction: column; }");
+    expect(c).toContain("::slotted([slot='terminal']) { flex: 1 1 auto; min-height: 0; }");
+  });
+  it('the lists keep their flow: only the terminal grows, and nothing is a fixed height but the strip', () => {
+    const c = cssOf('sett-bottom-panel');
+    expect(c.match(/::slotted\([^)]*\)/g)).toEqual(["::slotted([slot='terminal'])"]);
+    // the one flex body is the terminal's (asserted above): findings, checks and what's new stay in block flow
+    expect(c.match(/\.body \{ display: flex/g)).toHaveLength(1);
+    expect(c.match(/(^|[^-])height:[^;]*/gm)?.map((h) => h.trim())).toEqual(['height: var(--sett-size-shell-strip)']);
+  });
   it('closed keeps the tabs and their counts on a strip, and shows no body', async () => {
     const p = await mount(PANEL('active="findings" closed'));
     expect(p.shadowRoot.querySelector('.body')).toBeNull();

@@ -8,13 +8,17 @@ import { clickOnEnter, hostLinkStyles, syncHostLink } from './host-link.js';
  * Checks · Terminal · What's new, nothing else (DESIGN.md "The shell" rule 7).
  * Open, it shows the body of the `active` tab; `closed`, it is a strip of its
  * tabs with their counts. It reports and never changes `active` or `closed`
- * itself; it only marks which of its tabs is the open one.
+ * itself; it only marks which of its tabs is the open one. A host with a
+ * height is filled: the body takes what the strip leaves, and the Terminal
+ * tab's element takes the whole body (Theia's terminal, a dock panel); the
+ * other three tabs are lists that scroll in it. A host without a height takes
+ * its height from the open body, as before.
  *
  * @slot tabs - sett-panel-tab elements
  * @slot act - the right end of the strip, e.g. the terminal's worktree name
  * @slot findings - the body of the Findings tab (a sett-panel-table, or an empty state). A body's slot is its tab's value; only the active one is shown
  * @slot checks - the body of the Checks tab (a sett-panel-table, then a sett-panel-output)
- * @slot terminal - the body of the Terminal tab
+ * @slot terminal - the body of the Terminal tab; with a host height, it fills the body
  * @slot whatsnew - the body of the What's new tab (sett-panel-line elements)
  * @fires sett-select - `{ value }` from a tab that was chosen (choosing a tab implies open)
  * @fires sett-toggle - `{ closed }` from the caret: the state asked for
@@ -58,6 +62,9 @@ export class SettBottomPanel extends LitElement {
     .caret:hover { color: var(--sett-color-ink); }
     .caret:focus-visible, .body:focus-visible { outline: var(--sett-stroke-lit) solid var(--sett-color-sel); outline-offset: calc(-1 * var(--sett-stroke-lit)); }
     .body { flex: 1; min-height: 0; overflow: auto; font-size: var(--sett-font-size-lg); }
+    /* the terminal is a pane, not a list: it fills the body; with no host height there is no room to grow into */
+    :host([active='terminal']) .body { display: flex; flex-direction: column; }
+    ::slotted([slot='terminal']) { flex: 1 1 auto; min-height: 0; }
   `;
 
   /** the open tab is the selected one; closed, none is */

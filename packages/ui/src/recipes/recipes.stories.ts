@@ -26,27 +26,6 @@ const shellCss = html`<style>${unsafeStatic(editorCss)}
 .ed { font-family: var(--sett-font-mono); font-size: var(--sett-font-size-md); line-height: var(--sett-font-line-height-code); padding: var(--sett-space-1) 0; --_session: var(--sett-session-yk-main); }
 .ln { display: flex; align-items: baseline; white-space: nowrap; overflow: hidden; padding: 0 var(--sett-space-2) 0 var(--sett-space-1); }
 .ln .n { width: var(--sett-space-6); text-align: right; color: var(--sett-color-mute); margin: 0 var(--sett-space-2); flex: none; } .ln .t { flex: 1; min-width: 0; }
-/* map, static svg on the same values as tokens.rs */
-.mapbg { flex: 1; min-height: 0; background: var(--sett-color-bg); border-radius: var(--sett-radius-card); position: relative; overflow: hidden; }
-svg.map { font-family: var(--sett-font-mono); font-size: var(--sett-font-map-label); display: block; width: 100%; height: 100%; }
-svg.map .area { fill: none; stroke: var(--sett-color-line); stroke-dasharray: 3 3; }
-svg.map .area.editing { stroke: var(--sett-color-sel); stroke-dasharray: none; }
-svg.map .area-h { font-family: var(--sett-font-sans); fill: var(--sett-color-ink2); }
-svg.map .item { fill: var(--sett-color-paper); stroke: var(--sett-color-line); stroke-width: var(--sett-stroke-hair); }
-svg.map .item.port { rx: 9; }
-svg.map .item.ext { fill: var(--sett-map-status-external-bg); stroke-dasharray: 2 2; }
-svg.map .item.sel { fill: var(--sett-color-sel-bg); stroke: var(--sett-color-sel); stroke-width: var(--sett-stroke-lit); }
-svg.map .item.planned { fill: var(--sett-color-sug-bg); stroke: var(--sett-color-sug); stroke-dasharray: 3 2; }
-svg.map .item.s { fill: var(--_session-bg, var(--sett-session-yk-bg)); stroke: var(--_session, var(--sett-session-yk-main)); }
-svg.map .item.finding { stroke: var(--sett-color-bad); }
-svg.map .lbl { fill: var(--sett-color-ink); } svg.map .lbl.sel { fill: var(--sett-color-sel-ink); } svg.map .lbl.planned { fill: var(--sett-color-sug); }
-svg.map g.faded { opacity: var(--sett-map-far); }
-svg.map .link { fill: none; stroke: var(--sett-color-mute); stroke-width: var(--sett-stroke-hair); }
-svg.map .link.lit { stroke: var(--sett-color-sel); stroke-width: var(--sett-stroke-lit); }
-svg.map .link.planned { stroke: var(--sett-color-sug); stroke-dasharray: 3 2; }
-svg.map .selbox { fill: none; stroke: var(--sett-color-sel); stroke-dasharray: 4 3; stroke-width: var(--sett-stroke-hair); }
-.legend { display: flex; gap: var(--sett-space-3); font-size: var(--sett-font-size-sm); color: var(--sett-color-ink2); padding: var(--sett-space-1) var(--sett-space-2); flex-wrap: wrap; }
-.legend i { display: inline-block; width: var(--sett-space-2); height: var(--sett-space-2); border-radius: var(--sett-radius-item); vertical-align: middle; margin-right: var(--sett-space-1); border: var(--sett-stroke-hair) solid var(--sett-color-line); background: var(--sett-color-paper); }
 </style>`;
 
 const top = (sel: unknown, right: unknown) => html`<div class="top"><span class="brand">arch</span><span class="lbl">orderly</span>${sel}<span class="right">${right}<span>ask ⌘K</span></span></div>`;
@@ -86,39 +65,3 @@ export const SessionLive: Story = { name: 'session · live', render: () => html`
     <div class="center"><sett-tabbar><sett-tab pinned>map</sett-tab><sett-tab mono active dirty scope="session" session="yk">ports.rs</sett-tab><sett-tab mono session="yk">pg.rs · Yokohama</sett-tab><span slot="right">⌘1 map · ⌘W close</span></sett-tabbar><sett-frame state="live" session="yk">${editor}</sett-frame></div>
     <div class="right">${thread}</div></div>
   <div class="status"><span>main · up to date</span><span>2 sessions</span><span class="r">ln 8, col 14 · rust-analyzer ✓</span></div></div>` };
-
-const mapSvg = html`<svg class="map" viewBox="0 0 880 440" role="img"><title>map · edit at scale</title>
-  <rect class="area" x="10" y="10" width="270" height="420" rx="6"/><text class="area-h" x="18" y="26">api · driving</text>
-  <rect class="area editing" x="300" y="10" width="270" height="420" rx="6"/><text class="area-h" x="308" y="26" style="fill:var(--sett-color-sel)">domain · editing</text>
-  <rect class="area" x="590" y="10" width="280" height="420" rx="6"/><text class="area-h" x="598" y="26">store · outbound</text>
-  ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => html`<rect class="item" x="20" y=${40 + i * 30} width="240" height="18" rx="3"/><text class="lbl" x="26" y=${52.5 + i * 30}>api::${['pay', 'close', 'handle_webhook', 'router', 'notify', 'cancel', 'list', 'get', 'auth', 'metrics', 'health', 'retry'][i]}()</text>`)}
-  <g class="faded">${[0, 1, 2, 3, 4, 5].map((i) => html`<rect class="item port" x="310" y=${40 + i * 30} width="250" height="18"/><text class="lbl" x="322" y=${52.5 + i * 30}>port · ${['OrderRepo', 'Payments', 'Notifier', 'Clock', 'Ids', 'Audit'][i]}</text>`)}</g>
-  <rect class="selbox" x="304" y="224" width="262" height="130" rx="4"/>
-  <rect class="item sel" x="310" y="230" width="250" height="18" rx="3"/><text class="lbl sel" x="316" y="242.5">RefundRequest</text>
-  <rect class="item sel" x="310" y="260" width="250" height="18" rx="3"/><text class="lbl sel" x="316" y="272.5">Refund</text>
-  <rect class="item planned" x="310" y="290" width="250" height="18" rx="3"/><text class="lbl planned" x="316" y="302.5">planned · RefundPolicy</text>
-  <rect class="item sel" x="310" y="320" width="250" height="18" rx="3"/><text class="lbl sel" x="316" y="332.5">RefundId</text>
-  <rect class="item s" x="600" y="40" width="260" height="18" rx="3"/><text class="lbl" x="606" y="52.5">PgRefundRepo · Yokohama</text>
-  <rect class="item" x="600" y="70" width="260" height="18" rx="3"/><text class="lbl" x="606" y="82.5">PgOrderRepo</text>
-  <rect class="item ext" x="600" y="100" width="260" height="18" rx="3"/><text class="lbl" x="606" y="112.5">billing::Invoice · other repo</text>
-  <rect class="item finding" x="600" y="130" width="260" height="18" rx="3"/><text class="lbl" x="606" y="142.5">HttpNotifier · ⚠ no-http-in-domain</text>
-  <path class="link lit" d="M260,49 C290,49 290,239 310,239"/><path class="link" d="M260,79 C290,79 290,269 310,269"/><path class="link planned" d="M560,299 C580,299 580,49 600,49"/><path class="link" d="M560,239 C580,239 580,79 600,79"/>
-</svg>`;
-export const MapEditAtScale: Story = { name: 'map · edit at scale', render: () => html`${shellCss}<div class="shell" style="--_session:var(--sett-session-yk-main);--_session-bg:var(--sett-session-yk-bg)">
-  ${top(html`<sett-selector state="yours">chore/split-domain</sett-selector>`, html`<sett-pill>●●●●</sett-pill>`)}
-  <div class="strip"><span class="bn">chore/split-domain</span>
-    <sett-chip kind="tree" state="blocking">map edits · 4<span slot="count">· not kept</span><a slot="agent">with Yokohama</a><a slot="manual">keep</a><a slot="verb">undo all</a></sett-chip>
-    <sett-chip kind="finding">rule<span slot="count">no-cycles · 1</span><a slot="agent">with Yokohama</a><a slot="manual">fix myself</a></sett-chip></div>
-  <div class="body"><div class="left"><sett-seg fill><sett-seg-item value="files" active>files</sett-seg-item><sett-seg-item value="changes">changes · 4</sett-seg-item><sett-seg-item value="review">review</sett-seg-item></sett-seg>${tree}</div>
-    <div class="center"><sett-tabbar><sett-tab pinned active>map</sett-tab><sett-tab mono>ports.rs</sett-tab><sett-seg slot="right"><sett-seg-item value="repo">repo</sett-seg-item><sett-seg-item value="areas">areas</sett-seg-item><sett-seg-item value="items" active>items</sett-seg-item></sett-seg><sett-overlay-toggles slot="right"><sett-toggle value="sessions" on>sessions</sett-toggle><sett-toggle value="plan" on>plan</sett-toggle><sett-toggle value="findings" on>findings</sett-toggle><sett-toggle value="delta">delta</sett-toggle></sett-overlay-toggles></sett-tabbar>
-      <sett-frame state="editing"><div class="mapbg">${mapSvg}</div><div class="legend"><span><i></i>item</span><span><i style="border-radius:var(--sett-radius-node)"></i>port</span><span><i style="border-style:dashed;background:var(--sett-map-status-external-bg)"></i>other repo</span><span><i style="border-color:var(--sett-color-sel);background:var(--sett-color-sel-bg)"></i>selected · 3</span><span><i style="border-color:var(--sett-color-sug);background:var(--sett-color-sug-bg);border-style:dashed"></i>planned</span><span><i style="border-color:var(--sett-session-yk-main);background:var(--sett-session-yk-bg)"></i>Yokohama</span><span><i style="border-color:var(--sett-color-bad)"></i>finding</span></div></sett-frame></div>
-    <div class="right"><sett-thread identity="planner"><span slot="name">planner</span><span slot="context">shaping · 3 elements</span><span slot="role">plan</span>
-      <sett-msg from="me" author="intention">Split the domain: refunds get their own area.</sett-msg>
-      <sett-msg from="agent" author="planner" style="--_session:var(--sett-color-sug)">Three elements moved, one policy planned. The delta is below.<sett-changed>changed · 3 elements drafted</sett-changed></sett-msg>
-      <sett-card variant="delta"><span slot="title">plan delta</span><sett-tag slot="state" kind="sug">3 elements</sett-tag>
-        <sett-card-row mark="+" kind="sug"><b>RefundPolicy</b> · domain<span slot="right">new</span></sett-card-row>
-        <sett-card-row mark="~" kind="sug"><b>RefundRequest</b> · moved<span slot="right">changed</span></sett-card-row>
-        <sett-card-row mark="·" kind="mute">keeps: OrderRepo, Payments<span slot="right">unchanged</span></sett-card-row>
-        <sett-split-button slot="acts">accept · delegate to Yokohama</sett-split-button><sett-button slot="acts">save plan</sett-button><sett-button slot="acts" variant="quiet">discard</sett-button></sett-card>
-      <sett-verbs slot="verbs">draft · 1 question open</sett-verbs><sett-composer slot="composer" placeholder="answer, or say how…"></sett-composer></sett-thread></div></div>
-  <div class="status"><span>main · up to date</span><span>1 session</span><span class="r">4 edits not kept · ⌘S keep</span></div></div>` };

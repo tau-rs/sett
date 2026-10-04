@@ -9729,7 +9729,6 @@ A section of the Sessions view: a lowercase label and a count on the right, then
 Screens composed from the elements; the reference for how they sit together.
 
 - `recipes-screens--session-live` session · live
-- `recipes-screens--map-edit-at-scale` map · edit at scale
 - `recipes-shell--plan-shaping` plan · shaping
 - `recipes-shell--session-gate-failed` session · gate failed
 - `recipes-shell--review-glance` review · glance

@@ -107,7 +107,7 @@ describe('every chip carries a verb', () => {
   it('in the chip stories and in the recipes: an agent, a manual or a verb slot child, or the dismiss of a done chip', () => {
     const chips = [...chipsOf(chipStories), ...chipsOf(recipeStories), ...chipsOf(shellRecipeStories)];
     expect(chips.length).toBeGreaterThan(40);
-    expect(chipsOf(recipeStories).length).toBeGreaterThanOrEqual(5);
+    expect(chipsOf(recipeStories).length).toBeGreaterThanOrEqual(3);
     const bare = chips.filter(({ chip }) => verbs(chip).length === 0 && chip.getAttribute('state') !== 'done');
     expect(bare.map(({ where, chip }) => `${where}: ${chip.textContent!.trim()}`)).toEqual([]);
   });

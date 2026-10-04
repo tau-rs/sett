@@ -110,7 +110,6 @@ One line per element: tag · what it is · attrs (name=type) · slots · CSS par
 Screens composed from the elements above; the reference for how they sit together.
 
 - recipes-screens--session-live (session · live)
-- recipes-screens--map-edit-at-scale (map · edit at scale)
 - recipes-shell--plan-shaping (plan · shaping)
 - recipes-shell--session-gate-failed (session · gate failed)
 - recipes-shell--review-glance (review · glance)

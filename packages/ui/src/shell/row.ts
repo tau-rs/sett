@@ -2,7 +2,7 @@ import { LitElement, css, html, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
 /** what a row of the left pane names, in the detail of its events */
-export type RowKind = 'session' | 'group' | 'agent' | 'element' | 'file' | 'changes' | 'folder' | 'area' | 'item' | 'commit';
+export type RowKind = 'session' | 'group' | 'agent' | 'element' | 'file' | 'changes' | 'folder' | 'area' | 'item' | 'commit' | 'rule' | 'finding';
 
 /** the status letters of a changed file, as git writes them */
 export type StatusLetter = 'M' | 'A' | 'D' | 'R' | '?';

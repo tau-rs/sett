@@ -1,10 +1,10 @@
 import type { SettRow } from './row.js';
 
 /** the rows a tree of the left pane moves between */
-export const ROW_TAGS = 'sett-session-row, sett-group-row, sett-agent-row, sett-element-row, sett-file-row, sett-changes-row, sett-tree-row, sett-commit-row';
+export const ROW_TAGS = 'sett-session-row, sett-group-row, sett-agent-row, sett-element-row, sett-file-row, sett-changes-row, sett-tree-row, sett-commit-row, sett-rule-row, sett-finding-row';
 
 /** the elements that hold a tree of their own: a row belongs to the nearest one */
-export const TREE_TAGS = 'sett-sessions-view, sett-files-view, sett-changes-list, sett-agent-strip';
+export const TREE_TAGS = 'sett-sessions-view, sett-files-view, sett-changes-list, sett-agent-strip, sett-findings-view';
 
 const isRow = (n: unknown): n is SettRow => n instanceof HTMLElement && n.matches(ROW_TAGS);
 
@@ -28,8 +28,8 @@ const ownRows = (host: Element): SettRow[] =>
 export const visibleRows = (host: Element): SettRow[] => ownRows(host).filter((r) => shown(r, host));
 
 /**
- * The keyboard of a tree of rows, shared by the Sessions view, the Files view
- * and the Changes list: one tab stop (the selected row, else the first shown),
+ * The keyboard of a tree of rows, shared by the Sessions view, the Files view,
+ * the Changes list and the Findings view: one tab stop (the selected row, else the first shown),
  * Up and Down move between the shown rows, Right unfolds or steps into a row,
  * Left folds or steps out, Home and End. Enter and Space are the row's own
  * (row.ts). Folding is asked for with `sett-fold`; the app sets `open`.

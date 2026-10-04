@@ -148,6 +148,11 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -246,6 +251,11 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -344,6 +354,11 @@ The agent strip: the session's path under the scope line when a session is the s
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -679,6 +694,11 @@ The Ask thread in the inspector (spec §6 Daily): your question on the right in 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -1004,6 +1024,11 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -1445,6 +1470,11 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -1547,6 +1577,11 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -1644,6 +1679,11 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -2240,6 +2280,11 @@ The ready commit in the inspector, one click from the `you` chip (spec §4, §6 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -2343,6 +2388,11 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -3391,6 +3441,11 @@ A plan element under a group of a plan being shaped (`E1 · OrderRepo: add refun
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -3493,6 +3548,11 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -3597,6 +3657,220 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-finding-row>`
+
+A finding row, under its rule: what breaks it, a link (`Order → PaymentsHttp`) or an item, on the first line, and where, the witness's `file:line` in mono mute, on the second. Selecting it is the app's cue to move the Map to the finding and show the fix card.
+
+- attrs:
+  - `at=string` — the witness, `file:line`, e.g. `order.rs:41`
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- events:
+  - `sett-select` — `{ kind: 'finding', name, rule, at }`
+  - `sett-open` — `{ kind: 'finding', name, rule, at }`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
+  - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
+  - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
+  - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-commit-form--clean` commit · message, description, files · pick hunks, checks, then stay on main
+  - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
+  - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
+  - `shell-commit-form--alone` form alone · no inspector
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-findings-view>`
+
+The Findings view: the scope's findings grouped by rule, for navigating while reading code (arch spec §4, arch-design#40). Under the scope line, a count line (`2 · 1 block`), then a rule row per rule with its findings under it. Only what the scope introduced, the same set as the panel's Findings tab, which stays the full table. The view computes nothing: the app orders the rules (blocking first), writes the counts, and answers a finding row's `sett-select` by moving the Map to it with the findings overlay and the fix card. With nothing in it, the body is a sett-empty. A tree with the keyboard of the Sessions view.
+
+- attrs:
+  - `count=string` — how many findings the scope introduced, first on the count line
+  - `blocks=string` — how many of them block: `· 1 block` after the count, left out at 0
+- slots:
+  - `scope` — a sett-scope-line
+  - `(default)` — sett-rule-row elements, blocking rules first; or a sett-empty
+- parts:
+  - `head` — the scope line and the count line
+  - `tree` — the rows
+- events:
+  - `sett-select` — from a row: `{ kind, name }`; a finding adds `{ rule, at }`
+  - `sett-open` — from a row's Enter or double click, the same detail
+  - `sett-fold` — from a rule's chevron, Left or Right: `{ kind, name, open }` with the state asked for
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
+  - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
+  - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
+  - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-commit-form--clean` commit · message, description, files · pick hunks, checks, then stay on main
+  - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
+  - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
+  - `shell-commit-form--alone` form alone · no inspector
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -3997,6 +4271,11 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -4349,6 +4628,11 @@ One hunk of a review, or the fix card's proposed change. Header: `file:line · i
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -4441,6 +4725,11 @@ One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the bad ti
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -4548,6 +4837,11 @@ The inspector, the right pane: it is about the selection (DESIGN.md "The shell" 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -4646,6 +4940,11 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -5869,6 +6168,11 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -6704,6 +7008,11 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -6794,6 +7103,11 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -6889,6 +7203,11 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -6986,6 +7305,11 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -7078,6 +7402,11 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -8196,6 +8525,11 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -8294,6 +8628,11 @@ The block under a hunk: an author line (dot and name, like a message), the text,
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -8389,6 +8728,118 @@ A resolve row of a judgement: `⇄` in amber (it needs a hand, not a fix), the f
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-rule-row>`
+
+A rule row of the Findings view: the rule's name in medium, then at the right its count (mono, mute) and the finding glyph `⚠` in its level's colour, `bad` when it blocks, `sug` when it warns. It folds to its findings with the chevron; the app sets `open`.
+
+- attrs:
+  - `level=FindingLevel` — blocks (`bad`) or warns (`sug`): the glyph's colour, and its spoken word
+  - `count=string` — how many findings break the rule in this scope
+  - `name=string` — what the row names
+  - `depth=number` — nesting from 0; `space.3` of indent per level
+  - `selected=boolean` — the row the inspector is about: the sel tint
+  - `dim=boolean` — a row that is not part of what matters here: name in mute
+  - `open=boolean` — children shown (foldable rows only)
+- slots:
+  - `(default)` — sett-finding-row children; rendered only while open
+- events:
+  - `sett-select` — `{ kind: 'rule', name }`
+  - `sett-open` — `{ kind: 'rule', name }`
+  - `sett-fold` — `{ kind: 'rule', name, open }`
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
+  - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
+  - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
+  - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-commit-form--clean` commit · message, description, files · pick hunks, checks, then stay on main
+  - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
+  - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
+  - `shell-commit-form--alone` form alone · no inspector
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -8484,6 +8935,11 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -8722,6 +9178,11 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -8825,6 +9286,11 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -9173,6 +9639,11 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -9264,6 +9735,11 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -9362,6 +9838,11 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -9644,6 +10125,11 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
@@ -9769,6 +10255,11 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
   - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
   - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-findings-view--default` default · on main, rules that warn; a row selects, a chevron folds
+  - `shell-findings-view--blocking` blocking · the blocking rule first, its count on the count line
+  - `shell-findings-view--empty` empty · the state names the two doors
+  - `shell-findings-view--scoped` scoped · a session is the scope: what it introduced, under its tint
+  - `shell-findings-view--selected-row` selected row · the app moved the Map to it and shows the fix card
   - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
   - `shell-hunk--viewed` hunk · viewed: the ok word
   - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice

@@ -139,6 +139,7 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -252,6 +253,7 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -365,6 +367,7 @@ The agent strip: the session's path under the scope line when a session is the s
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -715,6 +718,7 @@ The Ask thread in the inspector (spec §6 Daily): your question on the right in 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -1051,6 +1055,7 @@ The bar: the one line on top of the shell (DESIGN.md "The shell" rule 1): brand,
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -1126,7 +1131,7 @@ The bar: the one line on top of the shell (DESIGN.md "The shell" rule 1): brand,
 
 ### `<sett-bottom-panel>`
 
-The bottom panel, under the centre: it lists what already exists, Findings · Checks · Terminal · What's new, nothing else (DESIGN.md "The shell" rule 7). Open, it shows the body of the `active` tab; `closed`, it is a strip of its tabs with their counts. It reports and never changes `active` or `closed` itself; it only marks which of its tabs is the open one.
+The bottom panel, under the centre: it lists what already exists, Findings · Checks · Terminal · What's new, nothing else (DESIGN.md "The shell" rule 7). Open, it shows the body of the `active` tab; `closed`, it is a strip of its tabs with their counts. It reports and never changes `active` or `closed` itself; it only marks which of its tabs is the open one. A host with a height is filled: the body takes what the strip leaves, and the Terminal tab's element takes the whole body (Theia's terminal, a dock panel); the other three tabs are lists that scroll in it. A host without a height takes its height from the open body, as before.
 
 - attrs:
   - `active=string` — the value of the open tab
@@ -1136,7 +1141,7 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `act` — the right end of the strip, e.g. the terminal's worktree name
   - `findings` — the body of the Findings tab (a sett-panel-table, or an empty state). A body's slot is its tab's value; only the active one is shown
   - `checks` — the body of the Checks tab (a sett-panel-table, then a sett-panel-output)
-  - `terminal` — the body of the Terminal tab
+  - `terminal` — the body of the Terminal tab; with a host height, it fills the body
   - `whatsnew` — the body of the What's new tab (sett-panel-line elements)
 - parts:
   - `strip` — the row of tabs
@@ -1170,6 +1175,7 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -1626,6 +1632,7 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -1743,6 +1750,7 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -1855,6 +1863,7 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -2466,6 +2475,7 @@ The ready commit in the inspector, one click from the `you` chip (spec §4, §6 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -2584,6 +2594,7 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -3647,6 +3658,7 @@ A plan element under a group of a plan being shaped (`E1 · OrderRepo: add refun
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -3755,6 +3767,7 @@ An empty state: what a view with nothing in it opens to. Views are never disable
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -3872,6 +3885,7 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -3991,6 +4005,7 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -4066,14 +4081,14 @@ The Files view: the focused worktree in two projections, directory and layers, u
 
 ### `<sett-frame>`
 
-The one frame that changes colour: it says the state of the scope (DESIGN.md "The shell" rule 5). Wraps a pane; the slot is the pane's paper. idle grey · live session gradient (rotates) · waiting amber (pulses) · editing sel · collision bad · planning dashed amber, always still. `focus` is the sel ring for the selection, at the lit stroke inside the idle frame, not a state of the scope. The only two animations in the chrome live here (live and waiting); `prefers-reduced-motion` and the `still` attribute stop both. Planning is dashed because the waiting frame's still twin is solid amber. A state change never moves or resizes the pane inside.
+The one frame that changes colour: it says the state of the scope (DESIGN.md "The shell" rule 5). Wraps a pane; the slot is the pane's paper. idle grey · live session gradient (rotates) · waiting amber (pulses) · editing sel · collision bad · planning dashed amber, always still. `focus` is the sel ring for the selection, at the lit stroke inside the idle frame, not a state of the scope. The only two animations in the chrome live here (live and waiting); `prefers-reduced-motion` and the `still` attribute stop both. Planning is dashed because the waiting frame's still twin is solid amber. A state change never moves or resizes the pane inside. A host with a height is filled: the paper takes the whole frame and the pane the whole paper (a Theia dock panel, a terminal); a host without one takes its height from the pane, as before.
 
 - attrs:
   - `state=FrameState`
   - `session=SessionId` — session id for the live state; unknown ids fall back to yk
   - `still=boolean` — force the reduced-motion rendering (solid colours, no animation)
 - slots:
-  - `(default)` — the pane content
+  - `(default)` — the pane content; with a host height, it fills the paper
 - parts:
   - `inner` — the paper inside the frame
 - stories:
@@ -4088,6 +4103,7 @@ The one frame that changes colour: it says the state of the scope (DESIGN.md "Th
   - `primitives-frame--reduced-motion` reduced motion · live and waiting go still
   - `primitives-frame--planning-next-to-waiting` planning next to waiting · motion off
   - `primitives-frame--all-states` All States
+  - `primitives-frame--fills-host` fills a host with a height · the pane takes the whole paper
 
 ### `<sett-funnel>`
 
@@ -4406,6 +4422,7 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -4773,6 +4790,7 @@ One hunk of a review, or the fix card's proposed change. Header: `file:line · i
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -4880,6 +4898,7 @@ One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the bad ti
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -5002,6 +5021,7 @@ The inspector, the right pane: it is about the selection (DESIGN.md "The shell" 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -5115,6 +5135,7 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -6380,6 +6401,7 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -7230,6 +7252,7 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -7335,6 +7358,7 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -7445,6 +7469,7 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -7557,6 +7582,7 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -7664,6 +7690,7 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -8797,6 +8824,7 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -8910,6 +8938,7 @@ The block under a hunk: an author line (dot and name, like a message), the text,
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -9020,6 +9049,7 @@ A resolve row of a judgement: `⇄` in amber (it needs a hand, not a fix), the f
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -9130,6 +9160,7 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -9383,6 +9414,7 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -9501,6 +9533,7 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -9864,6 +9897,7 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -9970,6 +10004,7 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -10083,6 +10118,7 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -10380,6 +10416,7 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
@@ -10520,6 +10557,7 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
   - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
   - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-bottom-panel--fills-host` fills a host with a height · the terminal takes the whole body
   - `shell-changes-list--default` Default
   - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
   - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3

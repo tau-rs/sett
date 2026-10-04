@@ -55,3 +55,14 @@ export const AllStates: Story = {
     ${['idle', 'live', 'waiting', 'editing', 'collision', 'planning', 'focus'].map((s) => html`<sett-frame state=${s}>${pane(html`<sett-pill>${s}</sett-pill>` as never, s)}</sett-frame>`)}
   </div>`,
 };
+// arch-app's centre: the host gets its height from the area, the pane has none of its own and fills the paper
+export const FillsHost: Story = {
+  name: 'fills a host with a height · the pane takes the whole paper',
+  render: () => html`<sett-frame state="idle" style="box-sizing:border-box;width:420px;height:calc(var(--sett-space-5) * 9)">
+    <div style="display:flex;flex-direction:column">
+      <div style="padding:var(--sett-space-1) var(--sett-space-2);border-bottom:var(--sett-stroke-hair) solid var(--sett-color-line2)"><span style="font-weight:var(--sett-font-weight-medium)">arch</span> <span style="color:var(--sett-color-mute)">orderly</span></div>
+      <div style="flex:1;display:grid;place-items:center;color:var(--sett-color-mute);font-size:var(--sett-font-size-sm)">no height of its own</div>
+      <div style="padding:var(--sett-space-1) var(--sett-space-2);border-top:var(--sett-stroke-hair) solid var(--sett-color-line2);color:var(--sett-color-mute);font-size:var(--sett-font-size-sm)">the pane's last line, at the frame's bottom edge</div>
+    </div>
+  </sett-frame>`,
+};

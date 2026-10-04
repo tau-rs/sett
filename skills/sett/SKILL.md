@@ -1380,6 +1380,8 @@ The line that ends every agent reply: `changed · what`, or `no change` with `no
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-changes-header>`
 
@@ -2395,6 +2397,8 @@ The composer. `send` is an input and a send button. `handback` turns it into the
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-contract-card>`
 
@@ -3087,6 +3091,8 @@ The agent left the plan. Reason, then the three ways back (and discuss). A denie
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-edge>`
 
@@ -5778,6 +5784,8 @@ A message. Yours sit on the right in the selection tint; an agent's on the left 
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-new-session-row>`
 
@@ -6363,6 +6371,8 @@ One option in a question or a deviation: a row that reads left to right, with wh
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-overlay-toggles>`
 
@@ -7860,6 +7870,8 @@ The agent asks. Each option says what it changes; `later` leaves it waiting. A g
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-rail>`
 
@@ -9429,7 +9441,7 @@ Small badge: a kind label, a count, a glyph, or a mono identifier such as `servi
 
 ### `<sett-thread>`
 
-One pane shape for every conversation. The top border says who you talk to: the session colour for a session, amber for the planner, blue for the framer and the fixer. Header, scrolling messages, fixed verbs bar, composer.
+One pane shape for every conversation. The top border says who you talk to: the session colour for a session, amber for the planner, blue for the framer and the fixer. Header, scrolling messages, fixed verbs bar, composer. The messages open at their end and follow new ones while you are there; scroll up and they stay put, and the slotted sett-verbs shows `n new · latest` (rule 13). The messages area is a `log`.
 
 - attrs:
   - `identity=ThreadIdentity`
@@ -9458,6 +9470,8 @@ One pane shape for every conversation. The top border says who you talk to: the 
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-toggle>`
 
@@ -9498,6 +9512,8 @@ A tool block inside a message: mono, one line per call.
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-tree-row>`
 
@@ -9606,18 +9622,19 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
 
 ### `<sett-verbs>`
 
-The fixed bar above the composer. With a `state`, it draws the take-over verbs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop` (hand back lives in the composer). Without one, the slots draw whatever the identity needs.
+The fixed bar above the composer. With a `state`, it draws the take-over verbs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop` (hand back lives in the composer). Without one, the slots draw whatever the identity needs. While you are scrolled up in the thread and something new arrives, `unseen` is set by the thread and the bar opens its verbs with `n new · latest` (rule 13).
 
 - attrs:
   - `state=VerbsState`
   - `subject=string` — what the session is on, e.g. `PgRefundRepo`
   - `session=SessionId`
   - `still=boolean`
+  - `unseen=number` — entries that arrived below while you were scrolled up; set by the thread
 - slots:
   - `(default)` — the status words on the left (used when no state)
   - `actions` — extra verbs on the right
 - events:
-  - `sett-verb` — with `{ verb }`
+  - `sett-verb` — with `{ verb }`; `latest` asks the thread for its end
 - stories:
   - `thread-thread--session` session · every content kind
   - `thread-thread--planner` planner · amber top
@@ -9632,6 +9649,8 @@ The fixed bar above the composer. With a `state`, it draws the take-over verbs: 
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-view-section>`
 

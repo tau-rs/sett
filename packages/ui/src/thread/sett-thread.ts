@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { sessionStyles, type SessionId } from '../session.js';
 import { dotStyles } from '../status.js';
 import { buttonStyles } from './buttons.js';
+import { ChatEnd } from './chat-end.js';
 import { state } from 'lit/decorators.js';
 
 export type ThreadIdentity = 'session' | 'planner' | 'framer' | 'fixer';
@@ -14,6 +15,9 @@ export type ComposerMode = 'send' | 'handback';
  * One pane shape for every conversation. The top border says who you talk to:
  * the session colour for a session, amber for the planner, blue for the framer
  * and the fixer. Header, scrolling messages, fixed verbs bar, composer.
+ * The messages open at their end and follow new ones while you are there;
+ * scroll up and they stay put, and the slotted sett-verbs shows
+ * `n new · latest` (rule 13). The messages area is a `log`.
  *
  * @slot - messages (sett-msg, sett-question, sett-deviation)
  * @slot name - who, in the header
@@ -28,10 +32,15 @@ export type ComposerMode = 'send' | 'handback';
 export class SettThread extends LitElement {
   @property({ reflect: true }) identity: ThreadIdentity = 'session';
   @property({ reflect: true }) session?: SessionId;
+  private chat = new ChatEnd(this, () => this.renderRoot.querySelector<HTMLElement>('.msgs'));
+  constructor() {
+    super();
+    this.addEventListener('sett-verb', (e) => { if ((e as CustomEvent).detail?.verb === 'latest') this.chat.jump(); });
+  }
   static styles = [
     sessionStyles,
     css`
-      :host { display: flex; flex-direction: column; min-height: 0; background: var(--sett-color-paper); font-family: var(--sett-font-sans); font-size: var(--sett-font-size-lg); color: var(--sett-color-ink); border-top: var(--sett-stroke-frame) solid var(--_session); }
+      :host { display: flex; flex-direction: column; min-height: 0; min-width: 0; background: var(--sett-color-paper); font-family: var(--sett-font-sans); font-size: var(--sett-font-size-lg); color: var(--sett-color-ink); border-top: var(--sett-stroke-frame) solid var(--_session); }
       :host([identity='planner']) { border-top-color: var(--sett-color-sug); }
       :host([identity='framer']), :host([identity='fixer']) { border-top-color: var(--sett-color-sel); }
       .hd { display: flex; gap: var(--sett-space-2); align-items: baseline; padding: var(--sett-space-2) var(--sett-space-3); border-bottom: var(--sett-stroke-hair) solid var(--sett-color-line2); font-size: var(--sett-font-size-md); color: var(--sett-color-mute); }
@@ -43,10 +52,16 @@ export class SettThread extends LitElement {
   render() {
     return html`
       <div class="hd" part="header"><slot name="name"></slot><slot name="context"></slot><span class="r"><slot name="role"></slot></span></div>
-      <div class="msgs" part="messages" tabindex="0"><slot></slot></div>
-      <slot name="verbs"></slot>
+      <div class="msgs" part="messages" tabindex="0" role="log" aria-relevant="additions" aria-label="messages"><slot></slot></div>
+      <slot name="verbs" @slotchange=${this.tell}></slot>
       <slot name="composer"></slot>`;
   }
+  updated() { this.tell(); }
+  /** the verbs bar draws the unseen count; the thread owns it */
+  private tell = () => {
+    const verbs = this.querySelector<SettVerbs>(':scope > sett-verbs[slot="verbs"]');
+    if (verbs) verbs.unseen = this.chat.unseen;
+  };
 }
 
 /**
@@ -189,11 +204,13 @@ export class SettDeviation extends LitElement {
  * The fixed bar above the composer. With a `state`, it draws the take-over
  * verbs: running `pause · stop`, paused `resume · take over · stop`, taken
  * over `stop` (hand back lives in the composer). Without one, the slots draw
- * whatever the identity needs.
+ * whatever the identity needs. While you are scrolled up in the thread and
+ * something new arrives, `unseen` is set by the thread and the bar opens its
+ * verbs with `n new · latest` (rule 13).
  *
  * @slot - the status words on the left (used when no state)
  * @slot actions - extra verbs on the right
- * @fires sett-verb - with `{ verb }`
+ * @fires sett-verb - with `{ verb }`; `latest` asks the thread for its end
  */
 @customElement('sett-verbs')
 export class SettVerbs extends LitElement {
@@ -202,6 +219,8 @@ export class SettVerbs extends LitElement {
   @property() subject = '';
   @property({ reflect: true }) session?: SessionId;
   @property({ type: Boolean, reflect: true }) still = false;
+  /** entries that arrived below while you were scrolled up; set by the thread */
+  @property({ type: Number }) unseen = 0;
   static styles = [
     sessionStyles,
     dotStyles,
@@ -223,7 +242,8 @@ export class SettVerbs extends LitElement {
     const verbs = st === 'running' ? html`${b('pause')}${b('stop', 'quiet')}`
       : st === 'paused' ? html`${b('resume', 'primary')}${b('take over')}${b('stop', 'quiet')}`
       : st === 'taken-over' ? html`${b('stop', 'quiet')}` : '';
-    return html`<span class="st">${status}</span><span class="ac">${verbs}<slot name="actions"></slot></span>`;
+    const latest = this.unseen > 0 ? html`<button class="quiet latest" @click=${() => this.verb('latest')}>${this.unseen} new · latest</button>` : '';
+    return html`<span class="st">${status}</span><span class="ac">${latest}${verbs}<slot name="actions"></slot></span>`;
   }
 }
 

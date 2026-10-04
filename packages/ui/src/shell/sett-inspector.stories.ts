@@ -60,3 +60,26 @@ export const States: Story = { name: 'states · running, draft, 🔒 locked, new
   ${pane(html`<sett-inspector heading="you · fix-pool-size" sub="manual · main · detected" state="🔒 locked" kind="fixer" style="flex:1"><p style="margin:var(--sett-space-2) var(--sett-space-3);color:var(--sett-color-ink2)">a locked you session</p></sett-inspector>`, 'auto')}
   ${pane(html`<sett-inspector heading="finding" sub="api must not depend on store · blocks" state="new" tone="bad" style="flex:1"><p style="margin:var(--sett-space-2) var(--sett-space-3);color:var(--sett-color-ink2)">a new finding</p></sett-inspector>`, 'auto')}
 </div>` };
+
+// rule 13, the chat-end rule: holding a conversation, the body opens at its end; scrolled up, new entries wait under `n new · latest`
+const steps = ['Implementing refund() against the pool.', 'Adding a lifecycle test.', 'Running check on the diff: 0 findings.', 'tests/lifecycle.rs: 3 cases, 2 green.', 'The third needs a paid order in the fixture.', 'Fixture updated; 3 green.', 'Committing E2 on the session branch.', 'Waiting for the gate.', 'Gate passed: 41 tests green.', 'Group 2 starting: pay() calls refund().'];
+const longConversation = (n = steps.length) => html`<sett-inspector heading="a2" sub="refund flow · group 1 · E2" state="writing" session="yk" style="flex:1">
+  ${steps.slice(0, n).map((t, i) => html`<sett-msg from="sub" author="a2 · E2" time=${`12:${String(40 + i).padStart(2, '0')}`} session="yk">${t}</sett-msg>`)}
+  <sett-button slot="verbs">pause a2</sett-button>
+  <sett-composer slot="composer" placeholder="reply to a2…"></sett-composer>
+</sett-inspector>`;
+export const ConversationAtEnd: Story = { name: 'conversation · opens at its end (rule 13)', render: () => pane(longConversation()) };
+export const ConversationScrolledUp: Story = {
+  name: 'conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)',
+  render: () => pane(longConversation(8)),
+  play: async ({ canvasElement }) => {
+    const p = canvasElement.querySelector('sett-inspector') as HTMLElement & { updateComplete: Promise<unknown> };
+    await p.updateComplete;
+    await new Promise((r) => setTimeout(r, 300)); // the entries have drawn themselves and the pane sits at its end, as when a reader arrives
+    const body = p.shadowRoot!.querySelector('.body') as HTMLElement;
+    body.scrollTop = 0;
+    body.dispatchEvent(new Event('scroll'));
+    for (const text of steps.slice(8)) p.append(Object.assign(document.createElement('sett-msg'), { textContent: text, author: 'a2 · E2', from: 'sub', session: 'yk' }));
+    await new Promise((r) => setTimeout(r, 50));
+  },
+};

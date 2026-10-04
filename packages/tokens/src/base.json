@@ -308,6 +308,17 @@
           "unit": "px"
         }
       }
+    },
+    "thread": {
+      "$description": "conversation panes (sett-thread, sett-inspector holding a conversation): rule 13, the chat-end rule (#129)",
+      "follow": {
+        "$type": "dimension",
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        },
+        "$description": "how close to the end of a conversation still counts as at the end: new messages are followed within it, and scrolling further up stops following"
+      }
     }
   },
   "pad": {

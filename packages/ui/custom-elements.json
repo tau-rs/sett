@@ -16120,7 +16120,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The inspector, the right pane: it is about the selection (DESIGN.md \"The\nshell\" rule 6). A header (heading, sub, state), a scrolling body, a fixed\nverbs bar with its small note, and a composer row shown only when one is\nslotted. The top border says who the pane is about, in the thread family's\nwords: a `session` takes the session colour; `kind` planner is amber, framer\nand fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with\nthe heading as its title. Width is the app's (`size.shell.inspector`).",
+          "description": "The inspector, the right pane: it is about the selection (DESIGN.md \"The\nshell\" rule 6). A header (heading, sub, state), a scrolling body, a fixed\nverbs bar with its small note, and a composer row shown only when one is\nslotted. The top border says who the pane is about, in the thread family's\nwords: a `session` takes the session colour; `kind` planner is amber, framer\nand fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with\nthe heading as its title. Width is the app's (`size.shell.inspector`).\nHolding a conversation (sett-msg, sett-question, sett-deviation, sett-ask),\nthe body is a `log` that opens at its end and follows new entries while you\nare there; scroll up and it stays put, and the verbs bar opens with\n`n new · latest` (rule 13). A form or a card opens at the top.",
           "name": "SettInspector",
           "cssParts": [
             {
@@ -16239,6 +16239,18 @@
               "kind": "field",
               "name": "has",
               "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "talk",
+              "privacy": "private",
+              "description": "the body is a conversation when it holds one of the thread's entries"
+            },
+            {
+              "kind": "field",
+              "name": "chat",
+              "privacy": "private",
+              "default": "new ChatEnd(this, () => this.renderRoot.querySelector<HTMLElement>('.body'), this.talk)"
             },
             {
               "kind": "field",
@@ -20278,11 +20290,174 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/thread/chat-end.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "FOLLOW",
+          "description": "how close to the end still counts as at the end (`size.thread.follow`)"
+        },
+        {
+          "kind": "class",
+          "description": "The chat-end rule (DESIGN.md rule 13). A conversation opens at its end and\nfollows new content while the reader is at the end; scrolling up stops it, and\nit never pulls the reader back. Their own send brings them to the end. While\nthey are up, `unseen` counts the entries that arrived below; the pane draws it\nas `n new · latest` in its fixed bar. Every jump is instant: § Motion lists no\nscroll animation.\n\n`scroller` returns the shadow scroll box holding the default slot; `active`\nsays whether the pane holds a conversation now (a scroller that comes back,\ne.g. on unfold, opens at the end again).",
+          "name": "ChatEnd",
+          "members": [
+            {
+              "kind": "field",
+              "name": "unseen",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "entries that arrived below while the reader was up"
+            },
+            {
+              "kind": "field",
+              "name": "atEnd",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "top",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0",
+              "description": "the last scroll position seen, to tell a move up from content growing"
+            },
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "slot",
+              "type": {
+                "text": "HTMLSlotElement | null | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "mo",
+              "type": {
+                "text": "MutationObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "ro",
+              "type": {
+                "text": "ResizeObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "hostConnected"
+            },
+            {
+              "kind": "method",
+              "name": "hostDisconnected"
+            },
+            {
+              "kind": "method",
+              "name": "hostUpdated"
+            },
+            {
+              "kind": "field",
+              "name": "jump",
+              "description": "go to the end now; the `latest` verb and your own send call this"
+            },
+            {
+              "kind": "method",
+              "name": "attach",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "el",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "detach",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "watchContent",
+              "privacy": "private",
+              "description": "the box and every entry in it: an entry that draws itself later, or a pane that shrinks, keeps the end"
+            },
+            {
+              "kind": "field",
+              "name": "keep",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "clear",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onScroll",
+              "privacy": "private",
+              "description": "Only the reader moving up stops following: content that grows under a pane at\nits end also fires `scroll` (the browser's anchoring), and must not read as a\nscroll up."
+            },
+            {
+              "kind": "field",
+              "name": "onMutate",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onSend",
+              "privacy": "private"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FOLLOW",
+          "declaration": {
+            "name": "FOLLOW",
+            "module": "src/thread/chat-end.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ChatEnd",
+          "declaration": {
+            "name": "ChatEnd",
+            "module": "src/thread/chat-end.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/thread/sett-thread.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "One pane shape for every conversation. The top border says who you talk to:\nthe session colour for a session, amber for the planner, blue for the framer\nand the fixer. Header, scrolling messages, fixed verbs bar, composer.",
+          "description": "One pane shape for every conversation. The top border says who you talk to:\nthe session colour for a session, amber for the planner, blue for the framer\nand the fixer. Header, scrolling messages, fixed verbs bar, composer.\nThe messages open at their end and follow new ones while you are there;\nscroll up and they stay put, and the slotted sett-verbs shows\n`n new · latest` (rule 13). The messages area is a `log`.",
           "name": "SettThread",
           "cssParts": [
             {
@@ -20339,6 +20514,18 @@
               },
               "attribute": "session",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "chat",
+              "privacy": "private",
+              "default": "new ChatEnd(this, () => this.renderRoot.querySelector<HTMLElement>('.msgs'))"
+            },
+            {
+              "kind": "field",
+              "name": "tell",
+              "privacy": "private",
+              "description": "the verbs bar draws the unseen count; the thread owns it"
             }
           ],
           "attributes": [
@@ -20746,7 +20933,7 @@
         },
         {
           "kind": "class",
-          "description": "The fixed bar above the composer. With a `state`, it draws the take-over\nverbs: running `pause · stop`, paused `resume · take over · stop`, taken\nover `stop` (hand back lives in the composer). Without one, the slots draw\nwhatever the identity needs.",
+          "description": "The fixed bar above the composer. With a `state`, it draws the take-over\nverbs: running `pause · stop`, paused `resume · take over · stop`, taken\nover `stop` (hand back lives in the composer). Without one, the slots draw\nwhatever the identity needs. While you are scrolled up in the thread and\nsomething new arrives, `unseen` is set by the thread and the bar opens its\nverbs with `n new · latest` (rule 13).",
           "name": "SettVerbs",
           "slots": [
             {
@@ -20798,6 +20985,16 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "unseen",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "entries that arrived below while you were scrolled up; set by the thread",
+              "attribute": "unseen"
+            },
+            {
               "kind": "method",
               "name": "verb",
               "privacy": "private",
@@ -20817,7 +21014,7 @@
               "type": {
                 "text": "CustomEvent"
               },
-              "description": "with `{ verb }`"
+              "description": "with `{ verb }`; `latest` asks the thread for its end"
             }
           ],
           "attributes": [
@@ -20851,6 +21048,15 @@
               },
               "default": "false",
               "fieldName": "still"
+            },
+            {
+              "name": "unseen",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "entries that arrived below while you were scrolled up; set by the thread",
+              "fieldName": "unseen"
             }
           ],
           "superclass": {

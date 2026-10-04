@@ -77,3 +77,28 @@ export const DeniedWrite: Story = { name: 'deviation · denied write: the check 
   <sett-option slot="way" value="update" label="update the plan">add mark_refunded to the OrderRepo port · +1 element in group 1</sett-option>
   <sett-option slot="way" value="carve" label="not this change">carve out as a follow-up intention</sett-option>
   <sett-option slot="way" value="discuss" label="discuss" quiet>not a decision · how you get to one</sett-option></sett-deviation></div>` };
+
+// rule 13, the chat-end rule: a long conversation opens at its end; scrolled up, new entries wait under `n new · latest`
+const said = ['Add refunds for paid orders. Keep the payments port.', 'Port done. Starting the Postgres adapter.', 'Spawning store, tests, migrations.', 'keep the retry policy out of the repo.', 'Understood, retry stays in the api layer.', 'store/pg.rs: refund() against the pool.', 'tests/refund.rs: 4 cases written, 3 green.', 'why is the fourth red?', 'The fixture has no paid order; adding one.', 'four green.', 'Running check on the diff: 0 findings.', 'go on with migrations.', 'Migration 0042 adds refunds.amount.', 'Group 1 done; the gate runs next.'];
+const longThread = (n = said.length) => html`<sett-thread identity="session" session="yk" style="flex:1">
+  <span slot="name">Yokohama</span><span slot="context">claude code · PgRefundRepo</span><span slot="role">session</span>
+  ${said.slice(0, n).map((t, i) => (i % 3 === 0 || i === 7 || i === 9 || i === 11
+    ? html`<sett-msg from="me" author="you" time=${`14:${String(2 + i).padStart(2, '0')}`}>${t}</sett-msg>`
+    : html`<sett-msg from="agent" author="Yokohama" time=${`14:${String(2 + i).padStart(2, '0')}`} session="yk">${t}</sett-msg>`))}
+  <sett-verbs slot="verbs" state="running" subject="PgRefundRepo" session="yk" still></sett-verbs><sett-composer slot="composer" placeholder="tell Yokohama…"></sett-composer></sett-thread>`;
+const tall = 'calc(var(--sett-space-6) * 18)';
+export const LongAtEnd: Story = { name: 'long · opens at its end (rule 13)', render: () => box(longThread(), tall) };
+export const LongScrolledUp: Story = {
+  name: 'long · scrolled up, 2 new below: n new · latest in the bar (rule 13)',
+  render: () => box(longThread(12), tall),
+  play: async ({ canvasElement }) => {
+    const t = canvasElement.querySelector('sett-thread') as HTMLElement & { updateComplete: Promise<unknown> };
+    await t.updateComplete;
+    await new Promise((r) => setTimeout(r, 300)); // the entries have drawn themselves and the pane sits at its end, as when a reader arrives
+    const msgs = t.shadowRoot!.querySelector('.msgs') as HTMLElement;
+    msgs.scrollTop = 0;
+    msgs.dispatchEvent(new Event('scroll'));
+    for (const text of said.slice(12)) t.append(Object.assign(document.createElement('sett-msg'), { textContent: text, author: 'Yokohama', from: 'agent', session: 'yk' }));
+    await new Promise((r) => setTimeout(r, 50));
+  },
+};

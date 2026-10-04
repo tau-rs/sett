@@ -69,6 +69,7 @@ Names never move, fade or resize. Life goes into what surrounds them: rings, a s
 10. Card rows lead somewhere as a whole: the row is the link, it lights on hover and ends with `›`; blue is left to buttons. A place in code (`service.rs:61`) is the small mono tag; a destination (pipeline, findings, why) is a grey word. A card heading carries a pill for a state and a tag for a count.
 11. Tabs: the map is pinned first and unclosable; file tabs are mono; an unsaved file carries an amber mark after its name and its close mark stays; a file tab is underlined in the colour of the scope it was opened in: the session's, or `sel` for you. Views are never disabled: a view with nothing in it stays clickable and opens to an empty state that names the two doors.
 12. The editor is Theia's; sett themes it, it does not redraw it. Information sits where IDEs put it: the gutter (change bars per line in the author's colour, glyphs), quiet hints in or after the line (counts on the declaration, inline blame on the caret line only, rust-analyzer's hints in the same pill), and underlines (a finding is an error-grade wavy underline on the span, a witness a highlighted span). No line is added to the code, no labelled chip sits in it, verbs never render in it. A planned element is a gutter glyph and a hint pill at its site, in `sug`, never an inserted line. Your own change bars are `sel`. A symbol from another repo is italic in secondary ink. Syntax colours are the `syntax.*` tokens: seven classes at one CIELAB lightness, 7:1 or better in both themes, hues in the gaps between the session colours; comments are mute. The Theia colour theme is generated from those tokens by the tokens build (`@tau-rs/sett-tokens/sett-theme.light.json` and `.dark.json`); the decoration classes are `@tau-rs/sett/editor.css`.
+13. A conversation opens at its end: the last message, or the open question with all its doors, in view. It follows what arrives while you are at the end (within `size.thread.follow`); scroll up and it stays where you are and never pulls you back; your own send brings you to the end. While you are up, the pane's fixed bar opens its verbs with `n new · latest`, a word verb in `sel` blue (something to go to), never a floating button. The jump is instant: nothing scrolls by animation. The messages area is a `log` for screen readers. This holds for every `sett-thread` and for the inspector when its body is a conversation (messages, a question, a deviation, an Ask answer); a form, a card or a checklist opens at its top.
 
 ### Glyph vocabulary
 
@@ -160,6 +161,8 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -256,6 +259,8 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -352,6 +357,8 @@ The agent strip: the session's path under the scope line when a session is the s
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -685,6 +692,8 @@ The Ask thread in the inspector (spec §6 Daily): your question on the right in 
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -1008,6 +1017,8 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -1380,6 +1391,8 @@ The line that ends every agent reply: `changed · what`, or `no change` with `no
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-changes-header>`
 
@@ -1445,6 +1458,8 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -1545,6 +1560,8 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -1640,6 +1657,8 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2234,6 +2253,8 @@ The ready commit in the inspector, one click from the `you` chip (spec §4, §6 
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2335,6 +2356,8 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -2395,6 +2418,8 @@ The composer. `send` is an input and a send button. `handback` turns it into the
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-contract-card>`
 
@@ -3087,6 +3112,8 @@ The agent left the plan. Reason, then the three ways back (and discuss). A denie
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-edge>`
 
@@ -3377,6 +3404,8 @@ A plan element under a group of a plan being shaped (`E1 · OrderRepo: add refun
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -3477,6 +3506,8 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -3579,6 +3610,8 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -3977,6 +4010,8 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -4327,6 +4362,8 @@ One hunk of a review, or the fix card's proposed change. Header: `file:line · i
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -4417,6 +4454,8 @@ One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the bad ti
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -4453,7 +4492,7 @@ One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the bad ti
 
 ### `<sett-inspector>`
 
-The inspector, the right pane: it is about the selection (DESIGN.md "The shell" rule 6). A header (heading, sub, state), a scrolling body, a fixed verbs bar with its small note, and a composer row shown only when one is slotted. The top border says who the pane is about, in the thread family's words: a `session` takes the session colour; `kind` planner is amber, framer and fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with the heading as its title. Width is the app's (`size.shell.inspector`).
+The inspector, the right pane: it is about the selection (DESIGN.md "The shell" rule 6). A header (heading, sub, state), a scrolling body, a fixed verbs bar with its small note, and a composer row shown only when one is slotted. The top border says who the pane is about, in the thread family's words: a `session` takes the session colour; `kind` planner is amber, framer and fixer blue. `folded`, it is the handle (`size.shell.handle` wide) with the heading as its title. Width is the app's (`size.shell.inspector`). Holding a conversation (sett-msg, sett-question, sett-deviation, sett-ask), the body is a `log` that opens at its end and follows new entries while you are there; scroll up and it stays put, and the verbs bar opens with `n new · latest` (rule 13). A form or a card opens at the top.
 
 - attrs:
   - `heading=string` — the heading, bold
@@ -4522,6 +4561,8 @@ The inspector, the right pane: it is about the selection (DESIGN.md "The shell" 
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -4618,6 +4659,8 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -5429,6 +5472,8 @@ The list under the scope selector: sessions grouped by what they need, `planning
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
 
 ### `<sett-menu-group>`
 
@@ -5526,6 +5571,8 @@ One row: dot, name in mono, pill when the row has a state, then who or how far o
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
 
 ### `<sett-minimap>`
 
@@ -5778,6 +5825,8 @@ A message. Yours sit on the right in the selection tint; an agent's on the left 
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-new-session-row>`
 
@@ -5833,6 +5882,8 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -6363,6 +6414,8 @@ One option in a question or a deviation: a row that reads left to right, with wh
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-overlay-toggles>`
 
@@ -6664,6 +6717,8 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -6752,6 +6807,8 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -6845,6 +6902,8 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -6940,6 +6999,8 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -7030,6 +7091,8 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -7860,6 +7923,8 @@ The agent asks. Each option says what it changes; `later` leaves it waiting. A g
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-rail>`
 
@@ -8144,6 +8209,8 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -8240,6 +8307,8 @@ The block under a hunk: an author line (dot and name, like a message), the text,
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -8333,6 +8402,8 @@ A resolve row of a judgement: `⇄` in amber (it needs a hand, not a fix), the f
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -8426,6 +8497,8 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -8662,6 +8735,8 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -8763,6 +8838,8 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -9109,6 +9186,8 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -9198,6 +9277,8 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -9294,6 +9375,8 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -9429,7 +9512,7 @@ Small badge: a kind label, a count, a glyph, or a mono identifier such as `servi
 
 ### `<sett-thread>`
 
-One pane shape for every conversation. The top border says who you talk to: the session colour for a session, amber for the planner, blue for the framer and the fixer. Header, scrolling messages, fixed verbs bar, composer.
+One pane shape for every conversation. The top border says who you talk to: the session colour for a session, amber for the planner, blue for the framer and the fixer. Header, scrolling messages, fixed verbs bar, composer. The messages open at their end and follow new ones while you are there; scroll up and they stay put, and the slotted sett-verbs shows `n new · latest` (rule 13). The messages area is a `log`.
 
 - attrs:
   - `identity=ThreadIdentity`
@@ -9458,6 +9541,8 @@ One pane shape for every conversation. The top border says who you talk to: the 
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-toggle>`
 
@@ -9498,6 +9583,8 @@ A tool block inside a message: mono, one line per call.
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-tree-row>`
 
@@ -9570,6 +9657,8 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds
@@ -9606,18 +9695,19 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
 
 ### `<sett-verbs>`
 
-The fixed bar above the composer. With a `state`, it draws the take-over verbs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop` (hand back lives in the composer). Without one, the slots draw whatever the identity needs.
+The fixed bar above the composer. With a `state`, it draws the take-over verbs: running `pause · stop`, paused `resume · take over · stop`, taken over `stop` (hand back lives in the composer). Without one, the slots draw whatever the identity needs. While you are scrolled up in the thread and something new arrives, `unseen` is set by the thread and the bar opens its verbs with `n new · latest` (rule 13).
 
 - attrs:
   - `state=VerbsState`
   - `subject=string` — what the session is on, e.g. `PgRefundRepo`
   - `session=SessionId`
   - `still=boolean`
+  - `unseen=number` — entries that arrived below while you were scrolled up; set by the thread
 - slots:
   - `(default)` — the status words on the left (used when no state)
   - `actions` — extra verbs on the right
 - events:
-  - `sett-verb` — with `{ verb }`
+  - `sett-verb` — with `{ verb }`; `latest` asks the thread for its end
 - stories:
   - `thread-thread--session` session · every content kind
   - `thread-thread--planner` planner · amber top
@@ -9632,6 +9722,8 @@ The fixed bar above the composer. With a `state`, it draws the take-over verbs: 
   - `thread-thread--hand-back-moment` hand back · before and after
   - `thread-thread--gate-failed` question · gate failed: four doors, a hint for one more round, later
   - `thread-thread--denied-write` deviation · denied write: the check id, the reason, three typologies, discuss
+  - `thread-thread--long-at-end` long · opens at its end (rule 13)
+  - `thread-thread--long-scrolled-up` long · scrolled up, 2 new below: n new · latest in the bar (rule 13)
 
 ### `<sett-view-section>`
 
@@ -9690,6 +9782,8 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
   - `shell-inspector--folded` folded · the handle, the heading as its title
   - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
   - `shell-intent-bar--default` Default
   - `shell-intent-bar--empty` empty · the placeholder asks what should change
   - `shell-intent-bar--filled` filled · the intention and what the plan holds

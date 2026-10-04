@@ -2,8 +2,9 @@
 // the resolved tokens: syntax.* and editor.* carry the editor, color.* the surfaces the
 // editor sits on (DESIGN.md rule 12: sett themes the editor, it does not redraw it).
 // Every value in the output is a token's hex; the tables below are the only place a Theia
-// colour id or a TextMate scope is named. Workbench chrome (sidebars, tabs, panels) is out
-// of scope: those are sett components in the Theia shell, not the editor.
+// colour id or a TextMate scope is named. WORKBENCH colours Theia's own chrome (activity bar,
+// side bar, tabs, panel, status bar, menus, title bar) with the tokens sett's shell components
+// use for the same part, so Theia's chrome and sett's read as one frame (arch-design#47).
 
 /** Theia / VS Code workbench colour id → token path in the theme set. */
 export const COLORS = {
@@ -68,6 +69,85 @@ export const COLORS = {
 };
 
 /**
+ * Theia workbench colour id → color.* token, each taken from the sett component that draws the
+ * same part. Ids as Theia 1.76 registers them (core common-frontend-contribution); an id left
+ * out keeps Theia's default, which derives from the ones here. Ids with no sett counterpart
+ * (drop targets, offline, prominent items, modified-tab borders) are left out on purpose.
+ */
+export const WORKBENCH = {
+  // sett-activity-rail: well, a line2 rule on its right; the active label is ink on paper with a sel bar
+  'activityBar.background': 'color.well',
+  'activityBar.foreground': 'color.ink',
+  'activityBar.inactiveForeground': 'color.ink2',
+  'activityBar.border': 'color.line2',
+  'activityBar.activeBackground': 'color.paper',
+  'activityBar.activeBorder': 'color.sel',
+  'activityBar.activeFocusBorder': 'color.sel',
+  // the rail badge (badge.ts): paper on amber, asks you
+  'activityBarBadge.background': 'color.sug',
+  'activityBarBadge.foreground': 'color.paper',
+  // sett-sessions-view and sett-files-view: paper, ink2; a files-view area head is well
+  'sideBar.background': 'color.paper',
+  'sideBar.foreground': 'color.ink2',
+  'sideBarSectionHeader.background': 'color.well',
+  'sideBarSectionHeader.foreground': 'color.ink2',
+  'sideBarSectionHeader.border': 'color.line2',
+  // sett-tabs: a well bar ruled in line2; a tab is ink2, the active one ink on paper with a sel bar on
+  // top. sett has no unfocused tab state, so unfocused reads as focused
+  'editorGroupHeader.tabsBackground': 'color.well',
+  'editorGroupHeader.tabsBorder': 'color.line2',
+  'tab.border': 'color.line2',
+  'tab.activeBackground': 'color.paper',
+  'tab.activeForeground': 'color.ink',
+  'tab.activeBorderTop': 'color.sel',
+  'tab.inactiveBackground': 'color.well',
+  'tab.inactiveForeground': 'color.ink2',
+  'tab.unfocusedActiveBackground': 'color.paper',
+  'tab.unfocusedActiveForeground': 'color.ink',
+  'tab.unfocusedActiveBorderTop': 'color.sel',
+  'tab.unfocusedInactiveForeground': 'color.ink2',
+  // sett-status-bar: bg, ink2, a line2 rule on top; error and warning items take the tint with the
+  // tone's ink, as sett tones a word, never a solid fill
+  'statusBar.background': 'color.bg',
+  'statusBar.foreground': 'color.ink2',
+  'statusBar.border': 'color.line2',
+  'statusBar.noFolderBackground': 'color.bg',
+  'statusBar.noFolderForeground': 'color.ink2',
+  'statusBar.noFolderBorder': 'color.line2',
+  'statusBarItem.hoverBackground': 'color.well',
+  'statusBarItem.hoverForeground': 'color.ink',
+  'statusBarItem.focusBorder': 'color.sel',
+  'statusBarItem.errorBackground': 'color.badBg',
+  'statusBarItem.errorForeground': 'color.bad',
+  'statusBarItem.warningBackground': 'color.sugBg',
+  'statusBarItem.warningForeground': 'color.sug',
+  'statusBarItem.remoteBackground': 'color.selBg',
+  'statusBarItem.remoteForeground': 'color.selInk',
+  // sett-bottom-panel: paper under a line rule; its tabs are ink2, the active one ink with a sel bar
+  'panel.background': 'color.paper',
+  'panel.border': 'color.line',
+  'panelTitle.activeForeground': 'color.ink',
+  'panelTitle.inactiveForeground': 'color.ink2',
+  'panelTitle.activeBorder': 'color.sel',
+  'panelInput.border': 'color.line',
+  // sett-bar: paper, ink, a line2 rule under it
+  'titleBar.activeBackground': 'color.paper',
+  'titleBar.activeForeground': 'color.ink',
+  'titleBar.inactiveBackground': 'color.paper',
+  'titleBar.inactiveForeground': 'color.ink2',
+  'titleBar.border': 'color.line2',
+  // sett-menu: paper in a line border, ink rows; the row under the pointer is well
+  'menu.background': 'color.paper',
+  'menu.foreground': 'color.ink',
+  'menu.border': 'color.line',
+  'menu.selectionBackground': 'color.well',
+  'menu.selectionForeground': 'color.ink',
+  'menu.separatorBackground': 'color.line2',
+  'menubar.selectionBackground': 'color.well',
+  'menubar.selectionForeground': 'color.ink',
+};
+
+/**
  * editor.* tokens with no Theia colour id: they are decoration classes in
  * packages/ui/src/editor/editor.css, applied through the decoration API.
  */
@@ -113,7 +193,7 @@ export function renderTheme(tokens, { name, type }) {
     if (t.type !== 'color') throw new Error(`theme: ${path} is a ${t.type}, not a color`);
     return themeHex(t.value);
   };
-  const colors = Object.fromEntries(Object.entries(COLORS).map(([id, path]) => [id, hex(path)]));
+  const colors = Object.fromEntries(Object.entries({ ...COLORS, ...WORKBENCH }).map(([id, path]) => [id, hex(path)]));
   const syntax = (cls) => hex(`syntax.${cls}`);
   const semanticTokenColors = {};
   for (const [cls, selectors] of Object.entries(SEMANTIC)) for (const s of selectors) semanticTokenColors[s] = syntax(cls);

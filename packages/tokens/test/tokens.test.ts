@@ -142,6 +142,64 @@ describe('sett-theme.{light,dark}.json (Theia colour theme)', () => {
       for (const p of mapped) expect(tokens[set].some((t: { path: string[] }) => t.path.join('.') === p), `${set} ${p}`).toBe(true);
     }
   });
+  it('every workbench id takes a color.* token, in the seven chrome groups of arch-design#47', async () => {
+    const { COLORS, WORKBENCH } = await import('../theme.mjs');
+    const groups = /^(activityBar|activityBarBadge|sideBar|sideBarSectionHeader|editorGroupHeader|tab|statusBar|statusBarItem|panel|panelTitle|panelInput|menu|menubar|titleBar)\./;
+    expect(Object.keys(WORKBENCH).length).toBeGreaterThan(40);
+    for (const [id, path] of Object.entries(WORKBENCH)) {
+      expect(id, id).toMatch(groups);
+      expect(path, id).toMatch(/^color\./);
+      expect(Object.keys(COLORS), id).not.toContain(id);
+      for (const set of ['light', 'dark'] as const) {
+        const t = tokens[set].find((t: { path: string[] }) => t.path.join('.') === path);
+        expect(t?.type, `${set} ${id} → ${path}`).toBe('color');
+        expect(themes[set].colors[id], `${set} ${id}`).toBe(t.css);
+      }
+    }
+  });
+  it('every workbench text id reads at 4.5:1 or better on its background, both themes', async () => {
+    const { WORKBENCH } = await import('../theme.mjs');
+    // text id → the id of the surface it sits on
+    const pairs: Record<string, string> = {
+      'activityBar.foreground': 'activityBar.activeBackground',
+      'activityBar.inactiveForeground': 'activityBar.background',
+      'activityBarBadge.foreground': 'activityBarBadge.background',
+      'sideBar.foreground': 'sideBar.background',
+      'sideBarSectionHeader.foreground': 'sideBarSectionHeader.background',
+      'tab.activeForeground': 'tab.activeBackground',
+      'tab.inactiveForeground': 'tab.inactiveBackground',
+      'tab.unfocusedActiveForeground': 'tab.unfocusedActiveBackground',
+      'tab.unfocusedInactiveForeground': 'tab.inactiveBackground',
+      'statusBar.foreground': 'statusBar.background',
+      'statusBar.noFolderForeground': 'statusBar.noFolderBackground',
+      'statusBarItem.hoverForeground': 'statusBarItem.hoverBackground',
+      'statusBarItem.errorForeground': 'statusBarItem.errorBackground',
+      'statusBarItem.warningForeground': 'statusBarItem.warningBackground',
+      'statusBarItem.remoteForeground': 'statusBarItem.remoteBackground',
+      'panelTitle.activeForeground': 'panel.background',
+      'panelTitle.inactiveForeground': 'panel.background',
+      'titleBar.activeForeground': 'titleBar.activeBackground',
+      'titleBar.inactiveForeground': 'titleBar.inactiveBackground',
+      'menu.foreground': 'menu.background',
+      'menu.selectionForeground': 'menu.selectionBackground',
+      'menubar.selectionForeground': 'menubar.selectionBackground',
+    };
+    const text = Object.keys(WORKBENCH).filter((id) => /[Ff]oreground$/.test(id));
+    expect(Object.keys(pairs).sort(), 'every text id has a pair, every pair is a text id').toEqual(text.sort());
+    const lum = (hex: string) => {
+      const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    const ratio = (a: string, b: string) => { const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x); return (hi + 0.05) / (lo + 0.05); };
+    for (const set of ['light', 'dark'] as const) {
+      const c = themes[set].colors;
+      for (const [fg, bg] of Object.entries(pairs)) {
+        expect(c[fg], `${set} ${fg} is opaque`).toMatch(/^#[0-9A-F]{6}$/);
+        expect(c[bg], `${set} ${bg} is opaque`).toMatch(/^#[0-9A-F]{6}$/);
+        expect(ratio(c[fg], c[bg]), `${set} ${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+  });
   it('light and dark map the same ids, scopes and selectors', () => {
     expect(Object.keys(themes.light.colors)).toEqual(Object.keys(themes.dark.colors));
     expect(Object.keys(themes.light.semanticTokenColors)).toEqual(Object.keys(themes.dark.semanticTokenColors));

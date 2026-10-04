@@ -26,11 +26,6 @@ interface Of { scope: Scope; session?: string }
 const css = html`<style>${unsafeStatic(editorCss)}
 .rx { box-sizing: border-box; width: calc(var(--sett-space-5) * 59); }
 .sh { height: calc(var(--sett-space-5) * 34); display: grid; grid-template-rows: var(--sett-size-shell-bar) minmax(0, 1fr) auto var(--sett-size-shell-status); background: var(--sett-color-bg); font-family: var(--sett-font-sans); font-size: var(--sett-font-size-base); color: var(--sett-color-ink); }
-.sh .bar { display: flex; align-items: center; gap: var(--sett-space-3); min-width: 0; padding: 0 var(--sett-space-3); background: var(--sett-color-paper); border-bottom: var(--sett-stroke-hair) solid var(--sett-color-line2); white-space: nowrap; }
-.sh .brand { font-size: var(--sett-font-size-xl); font-weight: var(--sett-font-weight-semibold); }
-.sh .repo { color: var(--sett-color-ink2); }
-.sh .chips { margin-left: auto; display: flex; align-items: center; gap: var(--sett-space-2); min-width: 0; }
-.sh .ask { color: var(--sett-color-mute); text-decoration: none; }
 .sh .body { display: grid; grid-template-columns: var(--sett-size-shell-rail) var(--sett-size-shell-pane-max) minmax(0, 1fr) var(--sett-size-shell-inspector); min-height: 0; }
 .sh .body > * { min-width: 0; min-height: 0; }
 .sh .left { display: flex; flex-direction: column; overflow: hidden; background: var(--sett-color-paper); border-right: var(--sett-stroke-hair) solid var(--sett-color-line2); }
@@ -59,7 +54,8 @@ const selector = (o: Of, state = 'main', count?: number) => html`<sett-selector 
 const scopeLine = (o: Of, sub: string, slot?: string) => html`<sett-scope-line slot=${ifDefined(slot)} scope=${o.scope.kind} session=${ifDefined(o.session)} scope-id=${ifDefined(o.scope.id)} name=${ifDefined(o.scope.name)} ?locked=${o.scope.locked} sub=${sub}></sett-scope-line>`;
 const scopeItem = (o: Of, state: unknown) => html`<sett-status-item scope=${o.scope.kind} session=${ifDefined(o.session)} scope-id=${ifDefined(o.scope.id)} name=${ifDefined(o.scope.name)} ?locked=${o.scope.locked}>${state}</sett-status-item>`;
 
-const bar = (sel: unknown, chips: unknown) => html`<div class="bar"><span class="brand">arch</span><span class="repo">orderly ›</span>${sel}<span class="chips">${chips}<a class="ask" href="#ask">Ask ⌘K</a></span></div>`;
+// the bar writes the › and its own Ask entry; each chip carries a verb (DESIGN.md "The shell" rule 1)
+const bar = (sel: unknown, chips: unknown) => html`<sett-bar shortcut="⌘K"><span slot="brand">arch</span><span slot="repo">orderly</span>${sel}${chips}</sett-bar>`;
 const rail = (o: Of, on: 'sessions' | 'files' | 'findings', asks = 0) => html`<sett-activity-rail aria-label="views" scope=${o.scope.kind} session=${ifDefined(o.session)}>
   <sett-rail-item value="sessions" ?active=${on === 'sessions'} badge=${ifDefined(asks || undefined)} badge-label=${ifDefined(asks ? `${asks} asks you` : undefined)}>${G.sessions}Sessions</sett-rail-item>
   <sett-rail-item value="files" ?active=${on === 'files'}>${G.files}Files</sett-rail-item>
@@ -111,7 +107,7 @@ const plan: Of = { scope: SCOPES.planShaping };
 const INTENT = 'Refunds: add refund() to the OrderRepo port and the Postgres impl, expose it on pay()/close()';
 export const PlanShaping: Story = { name: 'plan · shaping', render: () => shell({
   of: plan, frame: 'planning',
-  bar: bar(selector(plan), html`<sett-chip kind="plan">refund flow<span slot="count">· 5 elements</span><a slot="verb">open</a></sett-chip>`),
+  bar: bar(selector(plan), html`<sett-chip slot="chips" kind="plan">refund flow<span slot="count">· 5 elements</span><a slot="verb">open</a></sett-chip>`),
   rail: rail(plan, 'sessions'),
   left: html`${scopeLine(plan, 'from main')}<sett-sessions-view isolated count="5">
     <sett-session-row scope="plan" name="refund flow" state="shaping" tone="sug" open selected scoped>
@@ -160,8 +156,8 @@ const JUDGE = `judge · round 2 of 2 · gate ${GATE}
 export const SessionGateFailed: Story = { name: 'session · gate failed', render: () => shell({
   of: w1, frame: 'waiting',
   bar: bar(selector(w1, 'asks', 1), html`
-    <sett-chip kind="gate" state="blocking" session="yk">${GATE}<span slot="count">· failed 2/2</span><a slot="verb">open</a></sett-chip>
-    <sett-chip kind="agent" state="waiting" session="yk">refund flow asks<span slot="count">· 1</span><a slot="verb">answer</a></sett-chip>`),
+    <sett-chip slot="chips" kind="gate" state="blocking" session="yk">${GATE}<span slot="count">· failed 2/2</span><a slot="verb">open</a></sett-chip>
+    <sett-chip slot="chips" kind="agent" state="waiting" session="yk">refund flow asks<span slot="count">· 1</span><a slot="verb">answer</a></sett-chip>`),
   rail: rail(w1, 'sessions', 1),
   left: html`${scopeLine(w1, '4 changed')}<sett-sessions-view isolated count="5">
     <sett-session-row scope="session" session="yk" name="refund flow" state="gate failed · asks" tone="sug" open selected scoped>
@@ -215,7 +211,7 @@ export const SessionGateFailed: Story = { name: 'session · gate failed', render
 const w3: Of = { scope: SCOPES.reviewGlance, session: 'mg' };
 export const ReviewGlance: Story = { name: 'review · glance', render: () => shell({
   of: w3, frame: 'live',
-  bar: bar(selector(w3), html`<sett-chip kind="review">!44<span slot="count">· 1 remark</span><a slot="verb">open</a></sett-chip>`),
+  bar: bar(selector(w3), html`<sett-chip slot="chips" kind="review">!44<span slot="count">· 1 remark</span><a slot="verb">open</a></sett-chip>`),
   rail: rail(w3, 'sessions'),
   left: html`${scopeLine(w3, 'in review · !44')}<sett-sessions-view isolated count="5">
     <sett-session-row scope="session" session="mg" name="rate limits" state="review · 2/6 viewed" open selected scoped>
@@ -281,7 +277,7 @@ const poolRs = html`<div class="file" tabindex="0" role="group" aria-label="stor
 </div>`;
 export const DailyEditByHand: Story = { name: 'daily · edit by hand', render: () => shell({
   of: you, frame: 'editing',
-  bar: bar(selector(you, 'yours'), html`<sett-chip kind="detected">changes detected<span slot="count">· 2 files</span><a slot="agent">delegate the rest</a><a slot="manual">commit</a></sett-chip>`),
+  bar: bar(selector(you, 'yours'), html`<sett-chip slot="chips" kind="detected">changes detected<span slot="count">· 2 files</span><a slot="agent">delegate the rest</a><a slot="manual">commit</a></sett-chip>`),
   rail: rail(you, 'files'),
   left: html`<sett-files-view projection="directory" scoped>
     ${scopeLine(you, 'detected', 'scope')}<span slot="tools">filter · ⌘⇧F</span>

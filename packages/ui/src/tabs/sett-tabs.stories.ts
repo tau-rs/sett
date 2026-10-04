@@ -3,6 +3,7 @@ import { html } from 'lit';
 import './sett-tabs.js';
 import '../button/sett-button.js';
 import '../pill/sett-pill.js';
+import '../shell/sett-empty.js';
 
 const meta: Meta = { title: 'chrome/tabs and switches', component: 'sett-tabbar' };
 export default meta;
@@ -53,7 +54,7 @@ export const SegFill: Story = { name: 'seg · fill', render: () => html`<sett-se
 export const SegCount: Story = { name: 'seg · with a count', render: () => html`<sett-seg fill style="width:220px"><sett-seg-item value="files">files</sett-seg-item><sett-seg-item value="changes" active>changes · 3</sett-seg-item><sett-seg-item value="review">review</sett-seg-item></sett-seg>` };
 export const SegEmptyState: Story = { name: 'seg · a view with nothing in it is never disabled: empty state', render: () => html`<div style="width:260px;border:var(--sett-stroke-hair) solid var(--sett-color-line2);border-radius:var(--sett-radius-card);overflow:hidden">
   <div style="padding:var(--sett-space-1);background:var(--sett-color-well)"><sett-seg fill><sett-seg-item value="files">files</sett-seg-item><sett-seg-item value="changes">changes · 3</sett-seg-item><sett-seg-item value="review" active>review</sett-seg-item></sett-seg></div>
-  <div style="padding:var(--sett-space-4);text-align:center;color:var(--sett-color-ink2);font-size:var(--sett-font-size-md);display:grid;gap:var(--sett-space-2);justify-items:center">no review yet on feat/refund<div class="sett-row"><sett-button variant="primary" size="sm">with Yokohama</sett-button><sett-button size="sm">review it myself</sett-button></div></div></div>` };
+  <sett-empty>no review yet on feat/refund<sett-button slot="door" variant="primary" size="sm">with Yokohama</sett-button><sett-button slot="door" size="sm">review it myself</sett-button></sett-empty></div>` };
 export const SegInline: Story = { name: 'seg · inline (code · reach) and the reach bar', render: () => html`<div class="sett-row"><sett-seg><sett-seg-item value="code" active>code</sett-seg-item><sett-seg-item value="reach">reach</sett-seg-item></sett-seg>
   <sett-seg><sett-seg-item value="less">−</sett-seg-item><sett-seg-item value="depth" active style="font-family:var(--sett-font-mono)">depth 1</sett-seg-item><sett-seg-item value="more">+</sett-seg-item><sett-seg-item value="all" style="color:var(--sett-color-sel)">all</sett-seg-item></sett-seg><span style="color:var(--sett-color-mute)">4 reached</span>
   <sett-seg><sett-seg-item value="in" active>incoming</sett-seg-item><sett-seg-item value="out">outgoing</sett-seg-item></sett-seg></div>` };

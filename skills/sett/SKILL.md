@@ -123,6 +123,15 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -140,6 +149,12 @@ The activity rail: the always-visible column that picks what the left pane shows
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -221,6 +236,15 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -238,6 +262,12 @@ A sub-agent row under a group: a dot in the session's sub shade, the element it 
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -319,6 +349,15 @@ The agent strip: the session's path under the scope line when a session is the s
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -336,6 +375,12 @@ The agent strip: the session's path under the scope line when a session is the s
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -654,6 +699,15 @@ The Ask thread in the inspector (spec §6 Daily): your question on the right in 
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -671,6 +725,12 @@ The Ask thread in the inspector (spec §6 Daily): your question on the right in 
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -949,6 +1009,121 @@ The way back up, as a pill: `‹` and the place it leads to, with the key that d
   - `map-sheet--areas-folded` folded · every area at once
   - `map-sheet--agents-at-work` agents at work · two live, one touched, one folded area, a selection
 
+### `<sett-bar>`
+
+The bar: the one line on top of the shell (DESIGN.md "The shell" rule 1): brand, repo › scope selector, chips, Ask. The bar writes the `›` after the repo, so the consumer never does. A chip sits in the bar only if it carries a verb. The chips and the Ask entry hold the right end; when room runs out the chips give way and scroll sideways (a wheel, a trackpad, or focus brings a chip into view; while they scroll, their strip is a tab stop the arrow keys scroll), and nothing else wraps or shrinks. The bar never clips, so the selector's menu hangs under it. Without anything in the `ask` slot the bar shows its own Ask entry, a word door in mute ink followed by `shortcut`; choosing it fires `sett-ask`. The shortcut is only written here: binding the key is the host's.
+
+- attrs:
+  - `shortcut=string` — the shortcut written after the bar's own Ask entry: `⌘K`
+- slots:
+  - `brand` — the tool's name: `arch`
+  - `repo` — the repo's name: `orderly`; the bar writes the `›` after it
+  - `(default)` — the scope selector, a sett-selector
+  - `chips` — sett-chip elements, each carrying a verb
+  - `ask` — the Ask entry, when the host brings its own; the bar's own entry stands in while it is empty
+- parts:
+  - `ask` — the bar's own Ask entry
+- events:
+  - `sett-ask` — the bar's own Ask entry was chosen
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
+  - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
+  - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
+  - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-commit-form--clean` commit · message, description, files · pick hunks, checks, then stay on main
+  - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
+  - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
+  - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
 ### `<sett-bottom-panel>`
 
 The bottom panel, under the centre: it lists what already exists, Findings · Checks · Terminal · What's new, nothing else (DESIGN.md "The shell" rule 7). Open, it shows the body of the `active` tab; `closed`, it is a strip of its tabs with their counts. It reports and never changes `active` or `closed` itself; it only marks which of its tabs is the open one.
@@ -979,6 +1154,15 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -996,6 +1180,12 @@ The bottom panel, under the centre: it lists what already exists, Findings · Ch
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -1420,6 +1610,15 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -1437,6 +1636,12 @@ The header card of the Changes list: the branch in mono and its worktree, ahead 
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -1522,6 +1727,15 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -1539,6 +1753,12 @@ The Changes list of a session, laid out like Magit's status buffer (the sessions
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -1619,6 +1839,15 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -1636,6 +1865,12 @@ The Changes row of a session: `changes` and, at the right, what the branch holds
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2215,6 +2450,15 @@ The ready commit in the inspector, one click from the `you` chip (spec §4, §6 
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -2232,6 +2476,12 @@ The ready commit in the inspector, one click from the `you` chip (spec §4, §6 
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -2318,6 +2568,15 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -2335,6 +2594,12 @@ A commit ahead of main: its sha in mono, its message, the element it realises (`
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -3366,6 +3631,15 @@ A plan element under a group of a plan being shaped (`E1 · OrderRepo: add refun
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -3383,6 +3657,120 @@ A plan element under a group of a plan being shaped (`E1 · OrderRepo: add refun
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
+  - `shell-files-view--default` Default
+  - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
+  - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
+  - `shell-files-view--directory-scoped` directory scoped to w1 · tinted scope line, letters and writers, untouched files dim, the strip folded
+  - `shell-files-view--strip-open` the agent strip open · groups and sub-agents, a2 selected inks its files
+  - `shell-files-view--strip-other-agent` the strip on a3 · the ink moves to its files, the scope stays (LEFT-8)
+  - `shell-files-view--you-session` a you session · sel bars, you as the writer, the rest dim
+  - `shell-files-view--empty` empty · a worktree with nothing in it still has its seg
+  - `shell-hunk--unviewed` hunk · unviewed: v · viewed, r · remark, show on map
+  - `shell-hunk--viewed` hunk · viewed: the ok word
+  - `shell-hunk--remark` hunk · a remark under the flagged line, before the choice
+  - `shell-hunk--remark-asks` hunk · the remark asks for a change: pill and E7 · realized in the session
+  - `shell-hunk--remark-comment` hunk · the remark is a comment · no change needed
+  - `shell-hunk--proposed` hunk · proposed (the fix card's): verified, no review verbs
+  - `shell-hunk--lines` line kinds · add, del, ctx, flag
+  - `shell-hunk--review-tab` review · hunks in one scroll
+  - `shell-inspector--session-card` session card · pause · stop, a note, the composer
+  - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
+  - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
+  - `shell-inspector--folded` folded · the handle, the heading as its title
+  - `shell-inspector--states` states · running, draft, 🔒 locked, new in bad
+  - `shell-inspector--conversation-at-end` conversation · opens at its end (rule 13)
+  - `shell-inspector--conversation-scrolled-up` conversation · scrolled up, 2 new below: n new · latest in the verbs bar (rule 13)
+  - `shell-intent-bar--default` Default
+  - `shell-intent-bar--empty` empty · the placeholder asks what should change
+  - `shell-intent-bar--filled` filled · the intention and what the plan holds
+  - `shell-intent-bar--with-verb` filled with a verb · the app adds its button after the counts
+  - `shell-intent-bar--narrow` narrow · the field shrinks, the counts stay whole
+  - `shell-scope-line--default` Default
+  - `shell-scope-line--main` main · neutral, as on disk
+  - `shell-scope-line--session` session · its colour and tint: yk, tl
+  - `shell-scope-line--you` you · sel
+  - `shell-scope-line--you-locked` you locked · 🔒 after the words
+  - `shell-scope-line--plan` plan · sug
+  - `shell-scope-line--session-locked` session locked
+  - `shell-scope-line--every-session` every session colour · the note stays readable on each tint
+  - `shell-scope-line--long-name` a long name ends in an ellipsis; the note and the lock stay
+  - `shell-sessions-view--default` Default
+  - `shell-sessions-view--all-sessions` all sessions · planning, yours, needs you, running unfolded, in review, done, the door
+  - `shell-sessions-view--folded` all sessions · every session folded
+  - `shell-sessions-view--selected` selected session · the Focus button on the row, nothing else changes
+  - `shell-sessions-view--scoped` scoped session · a scope tag in the session's tint instead of the button
+  - `shell-sessions-view--agent-selected` a sub-agent selected · its thread is in the inspector
+  - `shell-sessions-view--isolated` isolated on a session · ‹ all sessions, the session unfolded, scoped
+  - `shell-sessions-view--isolated-you` isolated on a you session · locked, its files and changes
+  - `shell-sessions-view--group-states` group rows · rule 7's words: done, running, gate, failed n/m, waiting; a gate row judging
+  - `shell-sessions-view--file-rows` file rows · every letter, viewed, dim, selected, a writer, a verb
+  - `shell-sessions-view--plan-elements` a plan being shaped · its elements under their groups, one the planner asks about
+  - `shell-sessions-view--empty` empty · no session yet: the sections stay, the door names the way
+  - `shell-status-bar--default` Default
+  - `shell-status-bar--main` main · up to date
+  - `shell-status-bar--session` session · 2 behind main
+  - `shell-status-bar--you-locked` you locked · 2 changed
+  - `shell-status-bar--plan` plan
+  - `shell-status-bar--analysis` map · analysed · 1 crate guessed · 2 bins not analyzed (spec §13.7, §13.10)
+  - `shell-status-bar--links` items · the host is the link, or an anchor with href; a count is ink, a tone is its accent
+
+### `<sett-empty>`
+
+An empty state: what a view with nothing in it opens to. Views are never disabled (DESIGN.md rule 11): a tab body, a pane or a seg's view with nothing to list stays clickable and says so here, in a line of words in secondary ink, then the doors that lead out of it, agent door first and bold, manual door second and plain (P-1, rule 3). It is not a banner and not a status: nothing about it moves or is announced. Stacked by default, the words over the doors, centred, for a narrow pane; `inline` puts the words and the doors on one line, separated by `·`, for a wide and short body such as a bottom panel tab.
+
+- attrs:
+  - `inline=boolean` — the words and the doors on one line, separated by `·`
+- slots:
+  - `(default)` — the words: `no findings`, `no review yet on feat/refund`
+  - `door` — sett-button elements, the agent door first (`variant="primary"`), then the manual door; none, one or two
+- stories:
+  - `shell-activity-rail--default` Default
+  - `shell-activity-rail--active` active · Sessions, Files, Findings
+  - `shell-activity-rail--badge` badge · asks you on Sessions, a new blocking finding on Findings
+  - `shell-activity-rail--scoped` scoped · the active bar takes the scope colour: session yk, session tl, you, plan
+  - `shell-activity-rail--pane-closed` pane closed · the badges and the scope bar stay
+  - `shell-ask--answered` ask · question, ran, answer with items as tags and witnesses as links, make it so
+  - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
+  - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
+  - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
+  - `shell-bottom-panel--default` Default
+  - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
+  - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
+  - `shell-bottom-panel--checks` checks · passed, running, ok, pipeline green; the output below
+  - `shell-bottom-panel--terminal` terminal · the worktree name at the right of the strip
+  - `shell-bottom-panel--whats-new` what's new · each line a link, its time at the right
+  - `shell-bottom-panel--empty-findings` findings · empty: the state names the two doors
+  - `shell-changes-list--default` Default
+  - `shell-changes-list--changed` changed · the header card, three stages with folders, letters, writers, counts, a commit open with its files
+  - `shell-changes-list--all-files` all files · every file, the changed ones with a stage pill, untouched dim, folders say 1 of 3
+  - `shell-changes-list--review` review · viewed marks on files and progress in the stage headers
+  - `shell-changes-list--flat` flat · full paths instead of folders, the toggle pressed
+  - `shell-changes-list--you-session` a you session · no MR yet, nothing staged by anyone else
+  - `shell-commit-form--clean` commit · message, description, files · pick hunks, checks, then stay on main
+  - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
+  - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
+  - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -3468,6 +3856,15 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -3485,6 +3882,12 @@ A file row, shared by the Sessions view, the Files view and the Changes list: th
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -3572,6 +3975,15 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -3589,6 +4001,12 @@ The Files view: the focused worktree in two projections, directory and layers, u
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -3972,6 +4390,15 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -3989,6 +4416,12 @@ A group row: a lane of the plan with its gate, under a session. Its state is one
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -4324,6 +4757,15 @@ One hunk of a review, or the fix card's proposed change. Header: `file:line · i
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -4341,6 +4783,12 @@ One hunk of a review, or the fix card's proposed change. Header: `file:line · i
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -4416,6 +4864,15 @@ One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the bad ti
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -4433,6 +4890,12 @@ One line of a hunk, mono, spaces kept. `add` on the ok tint, `del` on the bad ti
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -4523,6 +4986,15 @@ The inspector, the right pane: it is about the selection (DESIGN.md "The shell" 
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -4540,6 +5012,12 @@ The inspector, the right pane: it is about the selection (DESIGN.md "The shell" 
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -4621,6 +5099,15 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -4638,6 +5125,12 @@ The intent bar: the plan's intention, above the Map in a plan scope (the plan on
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -5467,6 +5960,15 @@ The list under the scope selector: sessions grouped by what they need, `planning
   - `primitives-selector--menu-open` menu open · main, then planning / yours / needs you / running / in review / done
   - `primitives-selector--narrow-menu` menu · narrow, rows never wrap
   - `primitives-selector--reduced-motion` reduced motion · working dot still
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -5514,6 +6016,15 @@ A group in the menu: lowercase title in mute at 10.5 px, then rows. The groups s
   - `primitives-selector--menu-open` menu open · main, then planning / yours / needs you / running / in review / done
   - `primitives-selector--narrow-menu` menu · narrow, rows never wrap
   - `primitives-selector--reduced-motion` reduced motion · working dot still
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
 
 ### `<sett-menu-item>`
 
@@ -5566,6 +6077,15 @@ One row: dot, name in mono, pill when the row has a state, then who or how far o
   - `primitives-selector--menu-open` menu open · main, then planning / yours / needs you / running / in review / done
   - `primitives-selector--narrow-menu` menu · narrow, rows never wrap
   - `primitives-selector--reduced-motion` reduced motion · working dot still
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-inspector--session-card` session card · pause · stop, a note, the composer
   - `shell-inspector--sub-agent-thread` sub-agent thread · messages and tool lines
   - `shell-inspector--planner` planner · accept · delegate ▾, save plan, discard
@@ -5844,6 +6364,15 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -5861,6 +6390,12 @@ The door at the end of the Sessions view: `+ new session · delegate`, mute, the
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -6679,6 +7214,15 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -6696,6 +7240,12 @@ One line of What's new: what changed, and when. The whole line is the link to wh
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -6769,6 +7319,15 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -6786,6 +7345,12 @@ A block of output in the panel: a run's output or its witness under the Checks t
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -6864,6 +7429,15 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -6881,6 +7455,12 @@ A row of the panel's table: a leading dot for the level, then the cells. The row
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -6961,6 +7541,15 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -6978,6 +7567,12 @@ A tab of the bottom panel: a name and a count. The count stays when the panel is
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -7053,6 +7648,15 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -7070,6 +7674,12 @@ The table of the Findings and Checks tabs: a header row, then `sett-panel-row` c
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -8171,6 +8781,15 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -8188,6 +8807,12 @@ One view of the activity rail: a glyph over a horizontal label, never the glyph 
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -8269,6 +8894,15 @@ The block under a hunk: an author line (dot and name, like a message), the text,
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -8286,6 +8920,12 @@ The block under a hunk: an author line (dot and name, like a message), the text,
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -8364,6 +9004,15 @@ A resolve row of a judgement: `⇄` in amber (it needs a hand, not a fix), the f
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -8381,6 +9030,12 @@ A resolve row of a judgement: `⇄` in amber (it needs a hand, not a fix), the f
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -8459,6 +9114,15 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -8476,6 +9140,12 @@ The scope line: the first row of the left pane, saying what the shell is about (
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -8697,6 +9367,15 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -8714,6 +9393,12 @@ A session row: a dot in the session's colour (or `sel` for a you session), the n
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -8800,6 +9485,15 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -8817,6 +9511,12 @@ The Sessions view: every session, grouped by section, each unfolding into groups
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -9148,6 +9848,15 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -9165,6 +9874,12 @@ One stage of the Changes list: `not staged` · `next commit · E3` · `commits a
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -9239,6 +9954,15 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -9256,6 +9980,12 @@ The status bar: counts and states, each a link to the view that owns it, never a
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -9337,6 +10067,15 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -9354,6 +10093,12 @@ One item of the status bar: a count or a state, and a link to the view that owns
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -9619,6 +10364,15 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -9636,6 +10390,12 @@ A row of the Files view and of the Changes list's all-files mode: a folder or a 
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected
@@ -9744,6 +10504,15 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-ask--judgement` ask · a judgement labelled with facts and resolve rows
   - `shell-ask--cant-compute` ask · can't compute, the nearest queries as links
   - `shell-ask--alone` ask alone · no inspector, no composer
+  - `shell-bar--default` Default
+  - `shell-bar--main` main · no chip carries a verb, so none sits in the bar
+  - `shell-bar--session` session · the gate failed and the session asks: two chips with their verbs
+  - `shell-bar--you-locked` you locked · changes detected, the two doors on the chip
+  - `shell-bar--plan` plan · shaping, the plan chip
+  - `shell-bar--narrow` narrow · the chips give way and scroll, nothing wraps or shrinks
+  - `shell-bar--ask` ask · the bar's own entry, or the host's
+  - `shell-bar--no-repo` no repo · the › goes with the repo
+  - `shell-bar--menu-open` menu open · the selector's menu hangs under the bar, never clipped
   - `shell-bottom-panel--default` Default
   - `shell-bottom-panel--closed` closed · a strip of the tabs with their counts
   - `shell-bottom-panel--findings` findings · a blocking row selected, a warning row; every row names its origin
@@ -9761,6 +10530,12 @@ A section of the Sessions view: a lowercase label and a count on the right, then
   - `shell-commit-form--behind-main` commit · behind main: a line in amber with both doors, agent door first
   - `shell-commit-form--push-to-branch` commit · push to a branch · open MR chosen
   - `shell-commit-form--alone` form alone · no inspector
+  - `shell-empty--default` Default
+  - `shell-empty--two-doors` two doors · the agent door first and bold, the manual door plain
+  - `shell-empty--one-door` one door · nothing an agent could do
+  - `shell-empty--words-only` words only · nothing to do but wait
+  - `shell-empty--me-first` me first · the setting swaps order and weight
+  - `shell-empty--inline` inline · words · doors on one line, for a wide and short body
   - `shell-files-view--default` Default
   - `shell-files-view--directory-main` directory on main · a bar in the session's colour on files agents write, pg.rs selected
   - `shell-files-view--layers-main` layers on main · areas with counts, items with their file, OrderRepo selected

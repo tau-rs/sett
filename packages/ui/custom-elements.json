@@ -3479,6 +3479,22 @@
         },
         {
           "kind": "js",
+          "name": "SettBar",
+          "declaration": {
+            "name": "SettBar",
+            "module": "./shell/sett-bar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SettEmpty",
+          "declaration": {
+            "name": "SettEmpty",
+            "module": "./shell/sett-empty.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettInspector",
           "declaration": {
             "name": "SettInspector",
@@ -13349,6 +13365,142 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/shell/sett-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The bar: the one line on top of the shell (DESIGN.md \"The shell\" rule 1):\nbrand, repo › scope selector, chips, Ask. The bar writes the `›` after the\nrepo, so the consumer never does. A chip sits in the bar only if it carries\na verb. The chips and the Ask entry hold the right end; when room runs out\nthe chips give way and scroll sideways (a wheel, a trackpad, or focus brings\na chip into view; while they scroll, their strip is a tab stop the arrow keys\nscroll), and nothing else wraps or shrinks. The bar never clips,\nso the selector's menu hangs under it.\n\nWithout anything in the `ask` slot the bar shows its own Ask entry, a word\ndoor in mute ink followed by `shortcut`; choosing it fires `sett-ask`. The\nshortcut is only written here: binding the key is the host's.",
+          "name": "SettBar",
+          "cssParts": [
+            {
+              "description": "the bar's own Ask entry",
+              "name": "ask"
+            }
+          ],
+          "slots": [
+            {
+              "description": "the tool's name: `arch`",
+              "name": "brand"
+            },
+            {
+              "description": "the repo's name: `orderly`; the bar writes the `›` after it",
+              "name": "repo"
+            },
+            {
+              "description": "the scope selector, a sett-selector",
+              "name": ""
+            },
+            {
+              "description": "sett-chip elements, each carrying a verb",
+              "name": "chips"
+            },
+            {
+              "description": "the Ask entry, when the host brings its own; the bar's own entry stands in while it is empty",
+              "name": "ask"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "shortcut",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the shortcut written after the bar's own Ask entry: `⌘K`",
+              "attribute": "shortcut"
+            },
+            {
+              "kind": "field",
+              "name": "scrolls",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "description": "whether the chips overflow their strip, which then takes a tab stop so the keyboard can scroll it"
+            },
+            {
+              "kind": "field",
+              "name": "chips",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "type": {
+                "text": "ResizeObserver | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "hasRepo",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onSlot",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "measure",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "ask",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "the bar's own Ask entry was chosen",
+              "name": "sett-ask"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "shortcut",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "the shortcut written after the bar's own Ask entry: `⌘K`",
+              "fieldName": "shortcut"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettBar",
+          "declaration": {
+            "name": "SettBar",
+            "module": "src/shell/sett-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-bar",
+          "declaration": {
+            "name": "SettBar",
+            "module": "src/shell/sett-bar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/shell/sett-bottom-panel.ts",
       "declarations": [
         {
@@ -14971,6 +15123,85 @@
           "declaration": {
             "name": "SettCommitForm",
             "module": "src/shell/sett-commit-form.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-empty.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An empty state: what a view with nothing in it opens to. Views are never\ndisabled (DESIGN.md rule 11): a tab body, a pane or a seg's view with\nnothing to list stays clickable and says so here, in a line of words in\nsecondary ink, then the doors that lead out of it, agent door first and\nbold, manual door second and plain (P-1, rule 3). It is not a banner and\nnot a status: nothing about it moves or is announced.\n\nStacked by default, the words over the doors, centred, for a narrow pane;\n`inline` puts the words and the doors on one line, separated by `·`, for a\nwide and short body such as a bottom panel tab.",
+          "name": "SettEmpty",
+          "slots": [
+            {
+              "description": "the words: `no findings`, `no review yet on feat/refund`",
+              "name": ""
+            },
+            {
+              "description": "sett-button elements, the agent door first (`variant=\"primary\"`), then the manual door; none, one or two",
+              "name": "door"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the words and the doors on one line, separated by `·`",
+              "attribute": "inline",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasDoors",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onSlot",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the words and the doors on one line, separated by `·`",
+              "fieldName": "inline"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-empty",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettEmpty",
+          "declaration": {
+            "name": "SettEmpty",
+            "module": "src/shell/sett-empty.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-empty",
+          "declaration": {
+            "name": "SettEmpty",
+            "module": "src/shell/sett-empty.ts"
           }
         }
       ]

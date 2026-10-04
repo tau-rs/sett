@@ -43,6 +43,7 @@
   --sett-size-shell-scope-bar: 2px;
   --sett-size-shell-presence-bar: 3px;
   --sett-size-shell-row: 26px;
+  --sett-size-thread-follow: 48px;
   --sett-pad-pill: 7px;
   --sett-pad-tag: 5px;
   --sett-motion-frame-rotate: 6s;

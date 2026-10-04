@@ -83,6 +83,10 @@ describe('chat-end rule · thread (rule 13)', () => {
     expect(b.textContent!.trim()).toBe('2 new · latest');
     expect(verbs.shadowRoot.querySelector('.ac').firstElementChild).toBe(b);
   });
+  it('the verb is blue, like a link, in the thread and the inspector', () => {
+    expect(cssOf('sett-verbs')).toMatch(/button\.latest \{[^}]*color: var\(--sett-color-sel\)/);
+    expect(cssOf('sett-inspector')).toMatch(/\.latest::part\(button\) \{[^}]*color: var\(--sett-color-sel\)/);
+  });
   it('latest jumps to the end and the verb goes', async () => {
     const el = await mount(thread);
     const s = el.shadowRoot.querySelector('.msgs');

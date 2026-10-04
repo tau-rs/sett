@@ -87,6 +87,8 @@ export class SettInspector extends LitElement {
       .verbs { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sett-space-1); flex: none; padding: var(--sett-space-2) var(--sett-space-3); border-top: var(--sett-stroke-hair) solid var(--sett-color-line2); }
       .n { flex-basis: 100%; font-size: var(--sett-font-size-sm); color: var(--sett-color-mute); line-height: var(--sett-font-line-height-ui); }
       .comp { display: flex; flex-direction: column; flex: none; }
+      /* something new is waiting below: blue, like a link (rule 13) */
+      .latest::part(button) { color: var(--sett-color-sel); font-weight: var(--sett-font-weight-medium); }
     `,
   ];
 
@@ -114,7 +116,7 @@ export class SettInspector extends LitElement {
     return html`
       <div class="hd" part="header"><b>${this.heading}</b>${this.sub ? html`<span class="sub">${this.sub}</span>` : nothing}${this.state ? html`<span class="st">${this.state}</span>` : nothing}</div>
       <div class="body" part="body" tabindex="0" role=${ifDefined(talk ? 'log' : undefined)} aria-relevant=${ifDefined(talk ? 'additions' : undefined)} aria-label=${ifDefined(talk ? 'messages' : undefined)}><slot></slot></div>
-      ${this.has('verbs') || unseen ? html`<div class="verbs" part="verbs">${unseen ? html`<sett-button variant="quiet" @click=${this.chat.jump}>${unseen} new · latest</sett-button>` : nothing}<slot name="verbs"></slot>${this.has('note') ? html`<span class="n"><slot name="note"></slot></span>` : nothing}</div>` : nothing}
+      ${this.has('verbs') || unseen ? html`<div class="verbs" part="verbs">${unseen ? html`<sett-button class="latest" variant="quiet" @click=${this.chat.jump}>${unseen} new · latest</sett-button>` : nothing}<slot name="verbs"></slot>${this.has('note') ? html`<span class="n"><slot name="note"></slot></span>` : nothing}</div>` : nothing}
       ${this.has('composer') ? html`<div class="comp"><slot name="composer"></slot></div>` : nothing}`;
   }
 }

@@ -230,6 +230,8 @@ export class SettVerbs extends LitElement {
       .st { display: flex; align-items: center; gap: var(--sett-space-1); font-weight: var(--sett-font-weight-medium); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
       .ac { margin-left: auto; display: flex; gap: var(--sett-space-1); flex: none; }
       button { font-size: var(--sett-font-size-md); padding: 0 var(--sett-space-2); }
+      /* something new is waiting below: blue, like a link (rule 13) */
+      button.latest { color: var(--sett-color-sel); font-weight: var(--sett-font-weight-medium); }
     `,
   ];
   private verb(v: string) { this.dispatchEvent(new CustomEvent('sett-verb', { bubbles: true, composed: true, detail: { verb: v } })); }

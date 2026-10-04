@@ -3487,6 +3487,14 @@
         },
         {
           "kind": "js",
+          "name": "SettEmpty",
+          "declaration": {
+            "name": "SettEmpty",
+            "module": "./shell/sett-empty.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "SettInspector",
           "declaration": {
             "name": "SettInspector",
@@ -15115,6 +15123,85 @@
           "declaration": {
             "name": "SettCommitForm",
             "module": "src/shell/sett-commit-form.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shell/sett-empty.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An empty state: what a view with nothing in it opens to. Views are never\ndisabled (DESIGN.md rule 11): a tab body, a pane or a seg's view with\nnothing to list stays clickable and says so here, in a line of words in\nsecondary ink, then the doors that lead out of it, agent door first and\nbold, manual door second and plain (P-1, rule 3). It is not a banner and\nnot a status: nothing about it moves or is announced.\n\nStacked by default, the words over the doors, centred, for a narrow pane;\n`inline` puts the words and the doors on one line, separated by `·`, for a\nwide and short body such as a bottom panel tab.",
+          "name": "SettEmpty",
+          "slots": [
+            {
+              "description": "the words: `no findings`, `no review yet on feat/refund`",
+              "name": ""
+            },
+            {
+              "description": "sett-button elements, the agent door first (`variant=\"primary\"`), then the manual door; none, one or two",
+              "name": "door"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the words and the doors on one line, separated by `·`",
+              "attribute": "inline",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasDoors",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onSlot",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "the words and the doors on one line, separated by `·`",
+              "fieldName": "inline"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sett-empty",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SettEmpty",
+          "declaration": {
+            "name": "SettEmpty",
+            "module": "src/shell/sett-empty.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sett-empty",
+          "declaration": {
+            "name": "SettEmpty",
+            "module": "src/shell/sett-empty.ts"
           }
         }
       ]

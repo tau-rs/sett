@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, nothing } from 'lit';
 import './sett-bottom-panel.js';
 import '../button/sett-button.js';
+import './sett-empty.js';
 
 type Tab = 'findings' | 'checks' | 'terminal' | 'whatsnew';
 interface PanelOpts { active?: Tab; closed?: boolean; empty?: boolean }
@@ -14,9 +15,7 @@ const findings = html`<sett-panel-table slot="findings" kind="findings">
 </sett-panel-table>`;
 
 // rule 11: a view with nothing in it opens to an empty state that names the two doors, agent door first
-const noFindings = html`<div slot="findings" class="sett-row" style="justify-content:center;padding:var(--sett-space-6) var(--sett-space-3);color:var(--sett-color-ink2)">
-  no findings<span class="sett-sep">·</span><sett-button variant="primary" size="sm">ask Yokohama to check</sett-button><sett-button size="sm">run arch check</sett-button>
-</div>`;
+const noFindings = html`<sett-empty slot="findings" inline>no findings<sett-button slot="door" variant="primary" size="sm">ask Yokohama to check</sett-button><sett-button slot="door" size="sm">run arch check</sett-button></sett-empty>`;
 
 const checks = html`<sett-panel-table slot="checks" kind="checks">
   <sett-panel-row level="ok"><span>cargo nextest run · gate group 1 → group 2</span><span>refund flow · w1 · round 1 of 2</span><span data-mono data-tone="ok">41 passed</span><span data-mono>12:44</span></sett-panel-row>

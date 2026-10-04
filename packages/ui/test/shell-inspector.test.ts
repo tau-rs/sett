@@ -79,6 +79,40 @@ describe('inspector', () => {
     expect(el.folded).toBe(true);
     expect(cssOf('sett-inspector')).toMatch(/:host\(\[folded\]\) \{[^}]*width: var\(--sett-size-shell-handle\)/);
   });
+  it('the open header ends with the fold control: ›, labelled, after the state', async () => {
+    const el = await mount('<sett-inspector heading="refund flow" sub="claude code · w1" state="running"><p>body</p></sett-inspector>');
+    const hd = el.shadowRoot.querySelector('[part="header"]');
+    const fold = hd.querySelector('button.fold');
+    expect(fold).not.toBeNull();
+    expect(fold.getAttribute('type')).toBe('button');
+    expect(fold.textContent.trim()).toBe('›');
+    expect(fold.getAttribute('aria-label')).toBe('fold · refund flow');
+    expect(hd.lastElementChild).toBe(fold);
+    expect(fold.previousElementSibling.className).toBe('st');
+    const bare = await mount('<sett-inspector heading="ask"></sett-inspector>');
+    expect(bare.shadowRoot.querySelector('[part="header"] button.fold')).not.toBeNull();
+    const c = cssOf('sett-inspector');
+    expect(c).toMatch(/\.fold \{[^}]*margin-left: auto;[^}]*color: var\(--sett-color-mute\)/);
+    expect(c).toMatch(/\.st ~ \.fold \{ margin-left: calc\(-1 \* var\(--sett-space-1\)\)/);
+    expect(c).toMatch(/\.fold:hover \{ color: var\(--sett-color-ink\)/);
+    expect(c).toMatch(/\.fold:focus-visible[^{]*\{ outline: var\(--sett-stroke-lit\) solid var\(--sett-color-sel\)/);
+  });
+  it('the fold control fires sett-fold and never folds the pane itself; the app sets folded', async () => {
+    const el = await mount('<sett-inspector heading="refund flow"><p>body</p></sett-inspector>');
+    const events: Event[] = [];
+    document.addEventListener('sett-fold', (e) => events.push(e), { once: true });
+    el.shadowRoot.querySelector('button.fold').click();
+    expect(events.length).toBe(1);
+    expect(events[0].bubbles).toBe(true);
+    expect(events[0].composed).toBe(true);
+    await settle(el);
+    expect(el.folded).toBe(false);
+    expect(el.hasAttribute('folded')).toBe(false);
+    expect(el.shadowRoot.querySelector('[part="header"]')).not.toBeNull();
+    el.folded = true; await settle(el);
+    expect(el.shadowRoot.querySelector('button.fold')).toBeNull();
+    expect(el.shadowRoot.querySelector('.handle')).not.toBeNull();
+  });
   it('the body scrolls and the verbs bar is fixed under it', () => {
     const c = cssOf('sett-inspector');
     expect(c).toMatch(/\.body \{[^}]*flex: 1;[^}]*overflow: auto/);

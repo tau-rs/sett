@@ -68,6 +68,7 @@ sett styles developer tools that put a map or a document at the centre and keep 
 ## Type
 
 - Sans for UI and prose; mono for identifiers, code, branch names, counts, file:line, and map labels.
+- The faces are IBM Plex Sans and Mono, and they ship with the tokens: load `@tau-rs/sett-tokens/fonts.css` beside `sett.css` (Latin, every weight below, mono italic for the editor; SIL OFL 1.1, `fonts/OFL.txt`). Without it the text falls back to the system fonts.
 - Scale 10.5 / 11 / 11.5 / 12 / 12.5 / 13 / 14. Nothing on a screen is larger than 14; 14 is for pane headings only.
 - On the map, one text size per level, and it never scales: a name inside a unit is 12 px mono, the same size as the area header above it. Scale is handled by folding, never by shrinking; a name too long for its box ends in an ellipsis.
 - Weights: 400 body, 500 names and active tabs, 600 headings and primary links. No bold identifiers.

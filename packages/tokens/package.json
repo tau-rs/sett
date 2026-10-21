@@ -10,6 +10,7 @@
   "exports": {
     ".": { "types": "./dist/tokens.d.ts", "import": "./dist/tokens.js" },
     "./sett.css": "./dist/sett.css",
+    "./fonts.css": "./dist/fonts.css",
     "./tokens.json": "./dist/tokens.json",
     "./tokens.ts": "./dist/tokens.ts",
     "./sett-theme.light.json": "./dist/sett-theme.light.json",

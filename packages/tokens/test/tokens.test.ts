@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const dist = (f: string) => readFileSync(join(__dirname, '..', 'dist', f), 'utf8');
@@ -205,5 +205,39 @@ describe('sett-theme.{light,dark}.json (Theia colour theme)', () => {
     expect(Object.keys(themes.light.semanticTokenColors)).toEqual(Object.keys(themes.dark.semanticTokenColors));
     expect(themes.light.tokenColors.map((r: { scope: string[] }) => r.scope)).toEqual(themes.dark.tokenColors.map((r: { scope: string[] }) => r.scope));
     expect(themes.light.colors['editor.background']).not.toBe(themes.dark.colors['editor.background']);
+  });
+});
+
+describe('fonts.css (IBM Plex, arch-design#48)', () => {
+  const css = dist('fonts.css');
+  const base = JSON.parse(dist('tokens.json')).base as { path: string[]; value: unknown }[];
+  const at = (p: string) => base.find((t) => t.path.join('.') === p)!.value;
+  const faces = [...css.matchAll(/@font-face \{([^}]*)\}/g)].map(([, body]) => ({
+    family: /font-family: "([^"]+)"/.exec(body)![1],
+    style: /font-style: (\w+)/.exec(body)![1],
+    weight: Number(/font-weight: (\d+)/.exec(body)![1]),
+    url: /src: url\("\.\/fonts\/([^"]+)"\) format\("woff2"\)/.exec(body)![1],
+    display: /font-display: (\w+)/.exec(body)?.[1],
+  }));
+  const weights = ['normal', 'medium', 'semibold'].map((w) => at(`font.weight.${w}`));
+  const [sans, mono] = [(at('font.sans') as string[])[0], (at('font.mono') as string[])[0]];
+
+  it('names the families sett.css names, at every weight token, upright; mono also italic at body weight', () => {
+    expect([sans, mono]).toEqual(['IBM Plex Sans', 'IBM Plex Mono']);
+    const want = [
+      ...[sans, mono].flatMap((family) => weights.map((weight) => `${family} normal ${weight}`)),
+      `${mono} italic ${at('font.weight.normal')}`,
+    ];
+    expect(faces.map((f) => `${f.family} ${f.style} ${f.weight}`).sort()).toEqual(want.sort());
+    for (const f of faces) expect(f.display, f.url).toBe('swap');
+  });
+  it('every face points at a woff2 shipped beside it, with the OFL licence', () => {
+    for (const f of faces) expect(statSync(join(__dirname, '..', 'dist', 'fonts', f.url)).size, f.url).toBeGreaterThan(5000);
+    expect(dist('fonts/OFL.txt')).toMatch(/Copyright .*IBM Corp[\s\S]*SIL Open Font License, Version 1\.1/);
+  });
+  it('the package exports it and ships the files', () => {
+    const pkg = JSON.parse(readFileSync(join(__dirname, '..', 'package.json'), 'utf8'));
+    expect(pkg.exports['./fonts.css']).toBe('./dist/fonts.css');
+    expect(pkg.files).toContain('dist');
   });
 });

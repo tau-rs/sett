@@ -5,8 +5,9 @@
 //   dist/tokens.json  flat list per set, for docs pages
 //   dist/tokens.rs    pub const per token; colours [f32; 3], dimensions f32, strokes as dash arrays (empty = solid)
 //   dist/sett-theme.{light,dark}.json  Theia / VS Code colour theme, see theme.mjs
+//   dist/fonts.css + dist/fonts/  @font-face for the families and weights the tokens name, from fonts/
 import StyleDictionary from 'style-dictionary';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderTheme } from './theme.mjs';
@@ -152,6 +153,21 @@ function rust(sets) {
   ].join('\n');
 }
 
+// IBM Plex, Latin subset, woff2 only (Theia, Electron and Storybook are all Chromium). One upright face per
+// font.weight.* token and family; mono also italic at body weight, for the editor's other-repo symbols
+// (rule 12). The files are Fontsource's, unmodified, under the OFL beside them (fonts/OFL.txt).
+function fonts(base) {
+  const value = (p) => base.find((t) => t.path.join('.') === p).value;
+  const weights = base.filter((t) => t.path[0] === 'font' && t.path[1] === 'weight').map((t) => t.value);
+  const faces = [];
+  for (const family of [value('font.sans')[0], value('font.mono')[0]])
+    for (const weight of weights) faces.push({ family, weight, style: 'normal' });
+  faces.push({ family: value('font.mono')[0], weight: value('font.weight.normal'), style: 'italic' });
+  const file = (f) => `${f.family.toLowerCase().replace(/ /g, '-')}-latin-${f.weight}-${f.style}.woff2`;
+  const face = (f) => `@font-face {\n  font-family: "${f.family}";\n  font-style: ${f.style};\n  font-weight: ${f.weight};\n  font-display: swap;\n  src: url("./fonts/${file(f)}") format("woff2");\n}`;
+  return { files: [...faces.map(file), 'OFL.txt'], css: [`/* ${HEADER} IBM Plex, SIL Open Font License 1.1: fonts/OFL.txt */`, ...faces.map(face), ''].join('\n') };
+}
+
 // ---------- run ----------
 const sets = { base: await loadSet('base.json'), light: await loadSet('light.json'), dark: await loadSet('dark.json') };
 const lp = sets.light.map((t) => t.path.join('.')), dp = sets.dark.map((t) => t.path.join('.'));
@@ -163,6 +179,10 @@ await writeFile(join(dist, 'tokens.json'), json(sets));
 await writeFile(join(dist, 'tokens.rs'), rust(sets));
 for (const type of ['light', 'dark'])
   await writeFile(join(dist, `sett-theme.${type}.json`), JSON.stringify(renderTheme(sets[type], { name: `sett ${type}`, type }), null, 2) + '\n');
+const font = fonts(sets.base);
+await mkdir(join(dist, 'fonts'), { recursive: true });
+for (const f of font.files) await copyFile(join(here, 'fonts', f), join(dist, 'fonts', f));
+await writeFile(join(dist, 'fonts.css'), font.css);
 const report = { base: sets.base.length, light: sets.light.length, dark: sets.dark.length, unsupported: [...new Set(unsupported)] };
 await writeFile(join(dist, 'report.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(`sett-tokens: base ${report.base} · light ${report.light} · dark ${report.dark}${report.unsupported.length ? `\n  not expressed: ${report.unsupported.join('; ')}` : ''}`);

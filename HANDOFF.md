@@ -38,4 +38,4 @@ Generate `custom-elements.json` with `@custom-elements-manifest/analyzer` on eve
 Generate `packages/agent/llms.txt` and `skills/sett/SKILL.md` from `custom-elements.json` + the stories index at build. Consumers symlink the skill. Switch to `@storybook/addon-mcp` when it supports web-components.
 
 ## Consumers (arch first)
-`pnpm add @tau-rs/sett`; load `sett.css` + the element bundle in Theia; per-project overrides in `design/theme.json` (DTCG, semantic layer only) built with the same Style Dictionary config; Storybook composition `refs` to sett's Storybook; `.claude/skills/sett` symlink + one line in AGENTS.md.
+`pnpm add @tau-rs/sett`; load `sett.css`, `fonts.css` + the element bundle in Theia; per-project overrides in `design/theme.json` (DTCG, semantic layer only) built with the same Style Dictionary config; Storybook composition `refs` to sett's Storybook; `.claude/skills/sett` symlink + one line in AGENTS.md.
